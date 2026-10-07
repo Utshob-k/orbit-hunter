@@ -176,6 +176,28 @@ I then downloaded their big file (60digits.txt, 112 MB, 421,562 rows, T* up to 2
 So every zero angular momentum orbit I found, in both families, is already published. That includes the
 L = 0 one my perpendicular-start search stumbled on, which is a nice cross-check of the search but not a find.
 
+## Second big run, on worker threads (tools/hunt-all.mjs)
+
+The browser version of the hunt was too slow (11 workers on 8 cores, jobs killed at 130 s), so I moved it
+to Node worker threads: 8 threads, 5 minutes per hunt, every result appended to data/hunt-results.jsonl as
+it finishes. Input is the 319 symmetric orbits from the earlier scan (data/scan-rows-perp.json, 287 unique
+starts). It took about 1h50.
+
+- 287 hunts, 111 reached rotation 0 (the other failures: about 105 ran out of time, most of the rest
+  did not converge or lost the family while sliding lam).
+- `node tools/summarize-hunt.mjs data/hunt-results.jsonl data/perp-periodic-3.json` collapses that to
+  89 distinct orbits, minus 4 that are another orbit run 2 to 8 times, so 85 base orbits.
+- 2 of those have L = 0 and are in Hristov and Hristova's database (checked with
+  tools/compare-hristov-big.mjs). 2 are atlas orbits (Sheen's "Two ovals" and "Oval, catface and
+  starship"). 81 match nothing in the atlas, 16 of them closing to better than 1e-8 and never
+  coming closer than 0.2. About 10 of those 16 have L|E|^0.5 between 2.4 and 2.6, the band of the
+  BHH retrograde satellites, so most are probably more members of that family.
+- 8 of the 16 were re-checked with a 1e-15 integrator over one full period, they return to the start
+  within about 1e-9 (data/email-orbits.json, `node tools/check-perp-list.mjs data/email-orbits.json`).
+
+Same caveat as everywhere above: "not in the atlas" is not "new". I have asked (or am about to ask)
+the authors of the BHH satellite papers whether these are known.
+
 ## Run
 
     npm test                  # float64 checks, node 18+
