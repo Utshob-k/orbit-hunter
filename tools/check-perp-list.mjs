@@ -4,7 +4,7 @@ import fs from 'fs';
 import { dp45Step, phaseDistance } from '../src/physics.js';
 import { closePerp, perpInfo, perpInitial } from '../src/perp.js';
 
-const list = JSON.parse(fs.readFileSync(new URL('../data/perp-periodic.json', import.meta.url), 'utf8'));
+const list = JSON.parse(fs.readFileSync(process.argv[2] || new URL('../data/perp-periodic.json', import.meta.url), 'utf8'));
 for (const o of list) {
   // the numbers in the file are rounded to 10 digits, so polish them once first
   const c = closePerp(o.u1, o.u2, o.lam, o.t, { maxMs: 10000 });
