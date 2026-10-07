@@ -198,6 +198,39 @@ starts). It took about 1h50.
 Same caveat as everywhere above: "not in the atlas" is not "new". I could not get the Jankovic et al.
 satellite list, so I can't say whether any of these are known.
 
+## Linear stability (src/stability.js)
+
+For each periodic orbit I integrate the orbit together with its variational equations over one period, get
+the 12x12 monodromy matrix, restrict it to the 8 dimensional part with zero center of mass and momentum, and
+take the eigenvalues (a small complex shifted QR solver, no libraries). Four of the eight are exactly 1 in
+theory (time shift / energy and rotation / angular momentum, two Jordan blocks) and scatter by about sqrt(error)
+numerically, so the four closest to 1 are treated as trivial and stability is judged on the other four.
+"stable" = those four on the unit circle (to 1e-6), "unstable" = off it by more than 10 times the scatter,
+otherwise "uncertain".
+
+Checks (`node test/stability.test.js`): the solver gets known eigenvalues right, the figure-8 comes out stable
+(all 8 moduli 1.00000000), the matrix is symplectic (product of moduli 1 to 1e-12), butterfly I is unstable.
+Against the atlas (threebodyorbits.com), the three orbits my search re-found give the same |lambda|max as the atlas
+to 4 digits: Sheen's "Two ovals" 1.409, "Oval, catface and starship" 19.55, Suvakov SN.9 9.860.
+
+Results for the 85 base orbits of the Node run (`node tools/stability-list.mjs data/perp-periodic-3.json
+data/stability-perp-3.json`): 6 stable, 77 unstable, 2 uncertain (both have a closest approach under 0.005,
+so the numbers are not reliable). All 6 stable ones are among the 81 not in the atlas:
+
+| lam | T* | L* | closest approach |
+|---|---|---|---|
+| 0.86525 | 4.960 | 1.015 | 0.135 |
+| 0.49914 | 9.658 | 1.042 | 0.501 |
+| 0.49474 | 17.847 | 2.572 | 0.505 |
+| 0.50926 | 19.769 | 2.595 | 0.491 |
+| 0.52028 | 33.745 | 2.566 | 0.480 |
+| 0.70190 | 47.065 | 2.626 | 0.242 |
+
+Four have L* in the band of the BHH retrograde satellites (2.42 to 2.61 in the atlas) and two are near the
+A family band (0.76 to 1.13), and 14 of the 15 BHH satellites in the atlas are stable, so these are probably
+more members of those families. Stable orbits are rare in general (Hristov and Hristova found 7 stable among
+6,333 distinct orbits in the zero-L family), which is why they are interesting to ask about.
+
 ## Run
 
     npm test                  # float64 checks, node 18+
