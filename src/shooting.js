@@ -164,7 +164,7 @@ function thetaOf(sol) {
 // slide lam until the rotation angle is 0 (a truly periodic orbit). every step uses the tangent predictor
 // (stepInLam) and is solved with multiple shooting, warm started from the pieces of the previous step.
 // the step grows after a success and halves after a failure.
-export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 = 0.002, stepMax = 0.05 } = {}) {
+export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 = 0.002, stepMax = 0.05, thTol = 1e-9 } = {}) {
   const started = Date.now();
   const wrap = (x) => Math.atan2(Math.sin(x), Math.cos(x));
   const good = (from, sol) => sol && sol.res < 1e-9 && Math.abs(sol.t - from.t) < 0.3 * from.t;
@@ -173,7 +173,7 @@ export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 
   let a = { ...first, th: thetaOf(first) };
   if (a.th === null) return { ok: false, why: 'start orbit failed' };
   const finish = (p) => ({ ok: true, u1: p.u1, u2: p.u2, lam: p.lam, t: p.t, res: p.res, info: perpInfo(p.u1, p.u2, p.lam, p.t) });
-  if (Math.abs(a.th) < 1e-9) return finish(a);
+  if (Math.abs(a.th) < thTol) return finish(a);
   // first step: small, either direction
   let b = null, dir = 1, step = step0;
   for (const d of [1, -1]) {
@@ -188,7 +188,7 @@ export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 
   if (!b) return { ok: false, why: 'could not step in lam' };
   for (let k = 0; k < 400; k++) {
     if (Date.now() - started > maxMs) return { ok: false, why: 'out of time', lam: b.lam, th: b.th };
-    if (Math.abs(wrap(b.th)) < 1e-9) return finish(b);
+    if (Math.abs(wrap(b.th)) < thTol) return finish(b);
     const slope = (wrap(b.th) - wrap(a.th)) / (b.lam - a.lam);
     if (!Number.isFinite(slope) || Math.abs(slope) < 1e-9) return { ok: false, why: 'theta does not change with lam', lam: b.lam, th: b.th };
     const want = -wrap(b.th) / slope;

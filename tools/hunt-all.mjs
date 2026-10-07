@@ -1,11 +1,12 @@
 // hunt for truly periodic orbits from a list of symmetric orbits, on worker threads.
-// node tools/hunt-all.mjs rows.json out.jsonl [threads] [maxSeconds] [firstIndex]
+// node tools/hunt-all.mjs rows.json out.jsonl [threads] [maxSeconds] [firstIndex] [ms]
+// the last argument 'ms' uses multiple shooting with the tangent predictor (src/shooting.js)
 // rows.json is [[u1, u2, lam, t], ...]. every finished hunt is appended to out.jsonl right away,
 // so stopping it never loses work, and rerunning skips what is already in out.jsonl.
 import fs from 'fs';
 import { Worker } from 'worker_threads';
 
-const [rowsFile, outFile, threadsArg, secArg, firstArg] = process.argv.slice(2);
+const [rowsFile, outFile, threadsArg, secArg, firstArg, mode] = process.argv.slice(2);
 const threads = Number(threadsArg) || 8;
 const maxMs = (Number(secArg) || 300) * 1000;
 const first = Number(firstArg) || 0;
@@ -30,7 +31,7 @@ await new Promise((resolve) => {
   };
   let alive = threads;
   for (let i = 0; i < threads; i++) {
-    const w = new Worker(new URL('./hunt-worker.mjs', import.meta.url));
+    const w = new Worker(new URL(mode === 'ms' ? './hunt-worker-ms.mjs' : './hunt-worker.mjs', import.meta.url));
     w.on('message', (m) => {
       fs.appendFileSync(outFile, JSON.stringify(m) + '\n');
       finished++;

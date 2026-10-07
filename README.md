@@ -279,6 +279,34 @@ reached one, 1 of 55 with k >= 15 (which includes all of their satellites at L* 
 So the question "are the 81 new" is still open. What is settled: their satellites are in my family, the method reproduces
 their numbers, and one published orbit (SN.9) is connected to them.
 
+## Multiple shooting and the full continuation from their satellites (src/shooting.js)
+
+The old hunts failed for 55 of their 55 satellites with k >= 15. I first blamed the orbits being long, but they are not: even
+for k = 48 the full period is only about 10 time units, they are tight orbits winding around many times, and the solution is steep
+in lam (dt/dlam about -44 for k = 34). Two things were wrong: the predictor (the old code reused the last solution at the new lam,
+which already fails at a step of 3e-4) and, for the rest, my own success cutoff.
+
+- `closePerpMS` cuts the half orbit into m pieces whose start states are unknowns (the pieces must join up, the last one must end
+  collinear with all velocities perpendicular). `tangentInLam` gives how the whole solution moves with lam, `stepInLam` uses it as the
+  predictor, `huntPeriodicMS` slides lam with adaptive steps until the rotation is zero. `node test/shooting.test.js`: the same orbit as
+  single shooting for m = 1, 4, 8 from a 1% wrong guess, and the tangent equals a finite difference of two separate solves (dt/dlam
+  -22.4287 both ways).
+- Run over the 89 satellites the old method had failed on (`node tools/hunt-all.mjs data/cpc-rows.json data/hunt-cpc-ms.jsonl 8 600 0 ms`):
+  10 reached rotation < 1e-9. 33 ended "lost the family", and 21 of those had a rotation of 1e-8 to 1e-9, which is at the accuracy floor
+  of these long orbits, so my cutoff was too tight. Re-running those 21 with the cutoff at 5e-8 (`HUNT_THTOL=5e-8`, data/hunt-cpc-ms2.jsonl):
+  20 reached it (one still running when this was written).
+- Altogether 39 of their 98 satellites now lead to an exactly periodic orbit, up from 9 (data/hunt-cpc-all.jsonl, closure error median
+  6e-10, worst 7e-9). Their k reaches 48 and L* reaches 2.83, including the L* 2.4 to 2.7 band.
+
+Matching these against my 85 orbits (to 1e-5, allowing n-fold repeats): only two things match.
+- Suvakov's SN.9 (T* 11.8309, L* 1.1166), from their satellites with k = 3, 4, 4 (and a doubled one).
+- One of my 6 stable orbits: lam = 0.8653, T* = 4.9598, L* = 1.0150. Their satellite N = 9 (k = 5) ends at T* = 24.7991, which is 5 times
+  4.9598, to 1.9e-12. So that stable orbit is the progenitor the k = 5 satellite branches off, a member of the BHH family.
+
+The other 5 stable orbits and the rest of the 81 are not reached by any satellite I could continue. That is still not evidence that they
+are new: there are 59 satellites that did not reach an exactly periodic orbit (out of time, no convergence, or a branch that turns back
+in lam, which would need continuation in arclength instead of lam).
+
 ## Run
 
     npm test                  # float64 checks, node 18+
