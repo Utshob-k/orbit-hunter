@@ -61,12 +61,30 @@ for the return time (so full periods up to 120 when a relabeled return is used).
 
 All five re-close to better than 1e-9 with a 100x tighter integrator. C, D and E each have a published orbit
 whose fingerprint is within 5e-5, so they are probably relatives of goggles, moth II and I.A9, not
-unrelated orbits. A and B have nothing close in the table. They are short orbits with close approaches
+unrelated orbits. A and B have nothing close in the Li-Liao table (but see the literature check below). They are short orbits with close approaches
 (about 0.04), so their basins are narrow, which is a believable way for a 4000x4000 grid to miss them.
 The figure is figures/five-candidates.svg.
 
 Still not proof of anything: I only compared against the one table, and a miss in that table is not
 the same as a miss in the literature (butterfly II is also not in it).
+
+## Literature check (this changes things)
+
+Found while checking A to E: Hristov and Hristova (arXiv 2404.16526, Astronomy and Computing 49, 2024)
+searched exactly this family (bodies at (-1,0), (1,0) and the origin, equal parallel velocities for 1 and 2,
+zero angular momentum) with T|E|^1.5 < 70 and periods up to 1000. They report 12,431 initial conditions =
+6,333 distinct orbits, and they published the data (100 digits, columns vx, vy, T, T*, T* = T|E|^1.5):
+http://db2.fmi.uni-sofia.bg/3bodyeuler/ . There is also a 421,562 entry file with T* < 200 on that page.
+
+So the Li and Liao table (695 orbits) was never the full picture, and my comparison against it was too weak.
+A to D have T* of 24.3, 35.1, 39.6 and 42.8, so they are inside the range that paper covers and are most
+likely in their database. E has T* = 79.3, outside the 12,431 file but inside the T* < 200 file. I have not
+downloaded either file yet, so none of A to E is confirmed either way. Treat all five as "probably already
+published" until that comparison is done.
+
+The scan of the rest of the plane (v1 0.05-0.6 with v2 0.7-1, and v1 0.6-1 with v2 0.05-1) closed only 2
+more unlisted orbits, (0.3418, 0.7113) T = 106.1 T* = 53.26 and (0.6981, 0.3285) T = 100.8 T* = 60.89.
+Same caveat, both are inside T* < 70.
 
 ## Angular momentum
 
@@ -86,5 +104,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-Henon style perpendicular-crossing family, checking A and B against other catalogs, a finer scan of the rest of the plane,
+comparing A to E and the two extra orbits with the Hristov and Hristova files, Henon style perpendicular-crossing family,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
