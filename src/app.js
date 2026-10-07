@@ -1,5 +1,5 @@
 import { createScreener } from './gpu.js';
-import { refine, sdInitial, sampleOrbit } from './physics.js';
+import { sdInitial, sampleOrbit } from './physics.js';
 
 const $ = (id) => document.getElementById(id);
 const mapCv = $('map');
@@ -95,30 +95,36 @@ function pointFromEvent(ev) {
   };
 }
 
+const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
+let jobId = 0;
+
 function refineAt(v1, v2) {
   const tMax = parseFloat($('tmax').value) || 12;
-  log(`refining near v1=${v1.toFixed(5)} v2=${v2.toFixed(5)} (float64)...`);
-  // let the log text paint before we block the thread
-  setTimeout(() => {
-    const r = refine(v1, v2, tMax, { iters: 120 });
-    const period = r.perm === 0 ? r.t : r.t * 3;
-    const ok = r.d < 1e-6;
-    log(
-      `v1 = ${r.v1.toFixed(12)}\nv2 = ${r.v2.toFixed(12)}\n` +
-      `return distance ${r.d.toExponential(2)} at t=${r.t.toFixed(6)} (perm ${r.perm})\n` +
-      (ok ? `looks periodic, full period ~ ${period.toFixed(6)}` : 'did not converge to a closed orbit')
-    );
-    if (ok) {
-      const c = { v1: r.v1, v2: r.v2, period, d: r.d, perm: r.perm };
-      const dup = candidates.find((o) => Math.abs(o.v1 - c.v1) < 1e-6 && Math.abs(o.v2 - c.v2) < 1e-6);
-      if (!dup) {
-        candidates.push(c);
-        renderCandidates();
-      }
-      showOrbit(c);
-    }
-  }, 20);
+  log(`refining near v1=${v1.toFixed(5)} v2=${v2.toFixed(5)} (float64, in a worker)...`);
+  worker.postMessage({ id: ++jobId, v1, v2, tMax });
 }
+
+worker.onmessage = (ev) => {
+  const r = ev.data;
+  if (r.id !== jobId) return; // a newer click superseded this one
+  const ok = r.res < 1e-9;
+  log(
+    `v1 = ${r.v1.toFixed(12)}
+v2 = ${r.v2.toFixed(12)}
+` +
+    `closing residual ${r.res.toExponential(2)}, T=${r.period.toFixed(8)}
+` +
+    (ok ? `periodic. scale-free fingerprint T|E|^1.5 = ${r.fp.toFixed(6)}` : 'did not converge to a closed orbit')
+  );
+  if (!ok) return;
+  const c = { v1: r.v1, v2: r.v2, period: r.period, res: r.res, fp: r.fp, perm: r.perm };
+  const dup = candidates.find((o) => Math.abs(o.fp - c.fp) < 1e-5);
+  if (!dup) {
+    candidates.push(c);
+    renderCandidates();
+  }
+  showOrbit(c);
+};
 
 function renderCandidates() {
   const box = $('cands');
