@@ -23,9 +23,10 @@ export function deriv(s, out) {
 }
 
 // start like Suvakov-Dmitrasinovic: bodies 1,2 at (-1,0),(1,0), 3 in the middle.
-// 1 and 2 get (v1,v2), body 3 gets -2x that so total momentum is 0
-export function sdInitial(v1, v2) {
-  return Float64Array.from([-1, 0, 1, 0, 0, 0, v1, v2, v1, v2, -2 * v1, -2 * v2]);
+// body 1 gets (v1,v2), body 2 gets (v1,v2+ell), body 3 gets minus the sum so momentum is 0.
+// total angular momentum works out to ell, so ell = 0 is the old zero-L plane
+export function sdInitial(v1, v2, ell = 0) {
+  return Float64Array.from([-1, 0, 1, 0, 0, 0, v1, v2, v1, v2 + ell, -2 * v1, -2 * v2 - ell]);
 }
 
 // Dormand-Prince 5(4) coefficients
@@ -162,8 +163,8 @@ export function refine(v1, v2, tMax, opts = {}) {
 }
 
 function refineOnce(v1, v2, tMax, opts = {}) {
-  const { iters = 80, step = 2e-3, tol = 1e-10 } = opts;
-  const f = (p) => bestReturn(sdInitial(p[0], p[1]), tMax, opts);
+  const { iters = 80, step = 2e-3, tol = 1e-10, ell = 0 } = opts;
+  const f = (p) => bestReturn(sdInitial(p[0], p[1], ell), tMax, opts);
   let simplex = [
     [v1, v2],
     [v1 + step, v2],

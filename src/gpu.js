@@ -10,6 +10,7 @@ struct Params {
   v1Lo: f32, v1Hi: f32,
   v2Lo: f32, v2Hi: f32,
   maxSteps: u32,
+  ell: f32,
 };
 @group(0) @binding(0) var<uniform> P: Params;
 @group(0) @binding(1) var<storage, read_write> outD: array<f32>;
@@ -55,7 +56,7 @@ fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
   var p: array<vec2<f32>, 3>;
   var v: array<vec2<f32>, 3>;
   p[0] = vec2<f32>(-1.0, 0.0); p[1] = vec2<f32>(1.0, 0.0); p[2] = vec2<f32>(0.0, 0.0);
-  v[0] = u; v[1] = u; v[2] = -2.0 * u;
+  v[0] = u; v[1] = u + vec2<f32>(0.0, P.ell); v[2] = -(v[0] + v[1]);
   let p0 = p; let v0 = v;
 
   var t = 0.0;
@@ -103,7 +104,7 @@ export async function createScreener() {
   if (errs.length) throw new Error('WGSL: ' + errs.map((m) => `${m.lineNum}: ${m.message}`).join('; '));
   const pipeline = device.createComputePipeline({ layout: 'auto', compute: { module, entryPoint: 'main' } });
 
-  async function run({ n, v1Lo, v1Hi, v2Lo, v2Hi, tMax = 12, tMin = 1, eta = 0.02, maxSteps = 60000 }) {
+  async function run({ n, v1Lo, v1Hi, v2Lo, v2Hi, tMax = 12, tMin = 1, eta = 0.02, maxSteps = 60000, ell = 0 }) {
     const bytes = n * n * 4;
     const ub = new ArrayBuffer(48);
     const dv = new DataView(ub);
@@ -116,6 +117,7 @@ export async function createScreener() {
     dv.setFloat32(24, v2Lo, true);
     dv.setFloat32(28, v2Hi, true);
     dv.setUint32(32, maxSteps, true);
+    dv.setFloat32(36, ell, true);
     const uniform = device.createBuffer({ size: 48, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
     device.queue.writeBuffer(uniform, 0, ub);
     const mk = () => device.createBuffer({ size: bytes, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
