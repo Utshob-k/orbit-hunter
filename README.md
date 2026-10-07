@@ -163,8 +163,18 @@ published non-zero-L orbits. The other 16 match nothing in the atlas, with the s
 One of the 19 has L = 0 (to 1e-13): lam = 0.14505, T = 20.026, T|E|^1.5 = 79.2469. I checked whether it
 is in the zero-L search space of the big databases: at exactly T/4 and 3T/4 it is collinear, the middle
 body is at the midpoint and the outer two have equal velocities, all to about 1e-10. So it is an orbit
-of the Suvakov / Li-Liao / Hristov family. Its T|E|^1.5 is above the 74.07 end of the 12,431 file I
-checked, so it needs the 109 MB file, same as orbit E (T|E|^1.5 = 79.27). Neither is checked.
+of the Suvakov / Li-Liao / Hristov family.
+
+I then downloaded their big file (60digits.txt, 112 MB, 421,562 rows, T* up to 211) and compared with
+`tools/compare-hristov-big.mjs`. Both orbits are in it:
+
+- orbit E (T* = 79.27361): T* agrees to 5e-9 and the file's (vx, vy) = (0.251733034, 0.294190156) is the same
+  starting point I had.
+- the L = 0 orbit (T* = 79.246922): T* agrees to 3e-9, at a different crossing of the same orbit
+  (their (vx, vy) = (0.1137, 0.1013), T = 20.91).
+
+So every zero angular momentum orbit I found, in both families, is already published. That includes the
+L = 0 one my perpendicular-start search stumbled on, which is a nice cross-check of the search but not a find.
 
 ## Run
 
@@ -175,5 +185,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-checking E against the 109 MB file, downloading the 109 MB Hristov file to settle orbit E and the L = 0 orbit, getting the Jankovic et al. satellite list (ask the authors?), rerunning the failed hunts with fewer workers and longer limits,
+checking E against the 109 MB file, getting the Jankovic et al. satellite list (ask the authors?), rerunning the failed hunts with fewer workers and longer limits,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
