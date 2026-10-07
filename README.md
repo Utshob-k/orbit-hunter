@@ -76,15 +76,25 @@ zero angular momentum) with T|E|^1.5 < 70 and periods up to 1000. They report 12
 6,333 distinct orbits, and they published the data (100 digits, columns vx, vy, T, T*, T* = T|E|^1.5):
 http://db2.fmi.uni-sofia.bg/3bodyeuler/ . There is also a 421,562 entry file with T* < 200 on that page.
 
-So the Li and Liao table (695 orbits) was never the full picture, and my comparison against it was too weak.
-A to D have T* of 24.3, 35.1, 39.6 and 42.8, so they are inside the range that paper covers and are most
-likely in their database. E has T* = 79.3, outside the 12,431 file but inside the T* < 200 file. I have not
-downloaded either file yet, so none of A to E is confirmed either way. Treat all five as "probably already
-published" until that comparison is done.
+So the Li and Liao table (695 orbits) was never the full picture, and my first comparison was too weak.
+
+I downloaded their 12,431 row file (5.3 MB, T* from 9.24 to 74.07) and compared with
+`tools/compare-hristov.mjs`:
+
+- A, B, C and D are all in it. T* agrees to 1e-10 or better, and for B, C and D the velocities agree to 1e-11
+  too (A matches at a different crossing of the same orbit, so its velocities are different but T* is not).
+- The two extra orbits from the scan of the rest of the plane (F and G below) are in it as well, T* agrees to
+  1e-12 once I re-closed them at full precision.
+- Every orbit in known.js is in it.
+- E has T* = 79.27, above the 74.07 end of this file. Not checked, it would need their 109 MB file
+  (60digits.txt, 421,562 entries, T* < 200).
+
+So 6 of my 7 "unlisted" orbits were already published and none of them is new. Their file also shows what a
+careful search of this plane looks like: it has 12,431 starts, I found 46 + 2.
 
 The scan of the rest of the plane (v1 0.05-0.6 with v2 0.7-1, and v1 0.6-1 with v2 0.05-1) closed only 2
 more unlisted orbits, (0.3418, 0.7113) T = 106.1 T* = 53.26 and (0.6981, 0.3285) T = 100.8 T* = 60.89.
-Same caveat, both are inside T* < 70.
+F and G, see above, are both in the Hristov file.
 
 ## Angular momentum
 
@@ -104,5 +114,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-comparing A to E and the two extra orbits with the Hristov and Hristova files, Henon style perpendicular-crossing family,
+checking E against the 109 MB file, Henon style perpendicular-crossing family or other starts,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
