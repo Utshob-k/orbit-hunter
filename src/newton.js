@@ -49,7 +49,7 @@ function residual(p, perm) {
 const norm = (r) => Math.sqrt(r.reduce((a, b) => a + b * b, 0));
 
 // gaussian elimination, n x n
-function solve(A, b) {
+export function solve(A, b) {
   const n = b.length;
   const M = A.map((row, i) => [...row, b[i]]);
   for (let c = 0; c < n; c++) {

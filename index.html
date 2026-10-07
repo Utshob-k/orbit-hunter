@@ -64,12 +64,19 @@ Single precision is only used to choose candidates and never to claim a result.
 <tr>
   <td>v<sub>1</sub> from <input type="text" id="v1lo" value="0"> to <input type="text" id="v1hi" value="1"></td>
   <td>v<sub>2</sub> from <input type="text" id="v2lo" value="0"> to <input type="text" id="v2hi" value="1"></td>
-  <td>&#8467; <input type="text" id="ell" value="0"></td>
+  <td>&#8467; (or &lambda;) <input type="text" id="ell" value="0"></td>
 </tr>
 <tr>
   <td>cells per tile <select id="n"><option>256</option><option selected>512</option><option>1024</option></select></td>
   <td>tiles per side <input type="text" id="tiles" value="2"></td>
   <td>t<sub>max</sub> <input type="text" id="tmax" value="15"></td>
+</tr>
+<tr>
+  <td colspan="3">family
+    <select id="family">
+      <option value="sd" selected>collinear start, equal parallel velocities (v<sub>1</sub>, v<sub>2</sub>), &#8467; = angular momentum</option>
+      <option value="perp">collinear start, all velocities perpendicular (u<sub>1</sub>, u<sub>2</sub> in the v<sub>1</sub>, v<sub>2</sub> boxes), &lambda; = position of the middle body</option>
+    </select></td>
 </tr>
 <tr>
   <td>candidate threshold <input type="text" id="thr" value="0.03"></td>

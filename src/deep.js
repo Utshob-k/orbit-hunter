@@ -89,7 +89,7 @@ export function classify(fp) {
 }
 
 // splits region into tiles x tiles squares, each n x n cells
-export async function deepScan({ screener, region, ell = 0, tiles = 1, n = 512, tMax = 30, thr = 0.1, maxPerTile = 300, maxSteps = 15000, skip = 0, workers = 6, log = () => {}, onTile = () => {}, onUpdate = () => {}, state }) {
+export async function deepScan({ screener, region, family = 'sd', ell = 0, tiles = 1, n = 512, tMax = 30, thr = 0.1, maxPerTile = 300, maxSteps = 15000, skip = 0, workers = 6, log = () => {}, onTile = () => {}, onUpdate = () => {}, state }) {
   await loadCatalog();
   const pool = makePool(workers);
   const st = state || { found: [], stats: { cells: 0, cands: 0, closed: 0, failed: 0, ms: 0 } };
@@ -102,15 +102,28 @@ export async function deepScan({ screener, region, ell = 0, tiles = 1, n = 512, 
       if (st.stop) break;
       if (tileNo++ < skip) continue; // resuming an earlier run
       const reg = { v1Lo: region.v1Lo + tx * dv1, v1Hi: region.v1Lo + (tx + 1) * dv1, v2Lo: region.v2Lo + ty * dv2, v2Hi: region.v2Lo + (ty + 1) * dv2 };
-      const res = await screener.run({ n, ...reg, tMax, tMin: 1, maxSteps, ell });
+      const perp = family === 'perp';
+      const res = await screener.run({ n, ...reg, tMax, tMin: 1, maxSteps, ell, mode: perp ? 1 : 0 });
       st.stats.cells += n * n;
       onTile(res, reg, n);
       const cands = findCandidates({ ...res, n, region: reg, thr, max: maxPerTile });
       st.stats.cands += cands.length;
       const out = await Promise.all(
-        cands.map((c) => pool.run({ kind: 'close', v1: c.v1, v2: c.v2, T: c.T, perm: c.perm, ell }))
+        cands.map((c) => pool.run(perp
+          ? { kind: 'perp', v1: c.v1, v2: c.v2, T: c.T, ell }
+          : { kind: 'close', v1: c.v1, v2: c.v2, T: c.T, perm: c.perm, ell }))
       );
       for (const r of out) {
+        if (perp) {
+          if (!r.ok) { st.stats.failed++; continue; }
+          st.stats.closed++;
+          const i = r.info;
+          // mirror images have the opposite L, so compare |L|
+          if (st.found.some((f) => Math.abs(f.fp - i.ts) < 1e-6 * i.ts && Math.abs(Math.abs(f.ls) - Math.abs(i.ls)) < 1e-6)) continue;
+          st.found.push({ family: 'perp', v1: r.u1, v2: r.u2, ell: r.lam, t: r.t, period: i.T, E: i.E, L: i.L, ls: i.ls, theta: i.theta,
+            repeatErr: i.repeatErr, fp: i.ts, minDist: i.minDist, res: r.res, known: null });
+          continue;
+        }
         if (!r.ok) { st.stats.failed++; continue; }
         st.stats.closed++;
         if (st.found.some((f) => sameFp(f.fp, r.fp))) continue;
@@ -123,6 +136,32 @@ export async function deepScan({ screener, region, ell = 0, tiles = 1, n = 512, 
       log(`tile ${tx},${ty}: ${cands.length} candidates, ${st.found.length} distinct orbits so far (${st.found.filter((f) => !f.known).length} not in the known list)`);
     }
   }
+  pool.close();
+  return st;
+}
+
+// take symmetric (perp family) orbits and slide lam until each one is truly periodic (rotation 0)
+export async function huntAll({ rows, workers = 8, jobMs = 90000, target = 0, log = () => {}, state }) {
+  const pool = makePool(workers, jobMs);
+  const st = state || { found: [], tried: 0, ok: 0, why: {} };
+  let done = 0;
+  await Promise.all(rows.map(async (r) => {
+    const out = await pool.run({ kind: 'perpHunt', v1: r.v1, v2: r.v2, ell: r.ell, T: r.t, tMax: target });
+    done++;
+    st.tried++;
+    if (!out.ok) {
+      const why = out.timeout ? 'timed out' : (out.why || 'failed').replace(/[0-9.\-]+/g, '#');
+      st.why[why] = (st.why[why] || 0) + 1;
+    } else {
+      const i = out.info;
+      st.ok++;
+      // same orbit shows up from several starting points, and as its mirror image (L -> -L)
+      const dup = st.found.some((f) => Math.abs(f.fp - i.ts) < 1e-7 * i.ts && Math.abs(Math.abs(f.ls) - Math.abs(i.ls)) < 1e-6);
+      if (!dup) st.found.push({ family: 'perp', v1: out.u1, v2: out.u2, ell: out.lam, t: out.t, period: i.T, E: i.E, L: i.L, ls: i.ls,
+        theta: i.theta, repeatErr: i.repeatErr, fp: i.ts, minDist: i.minDist, res: out.res, known: null });
+    }
+    log(`${done}/${rows.length} done, ${st.ok} reached rotation ${target}, ${st.found.length} distinct`);
+  }));
   pool.close();
   return st;
 }

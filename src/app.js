@@ -1,5 +1,6 @@
 import { createScreener } from './gpu.js';
 import { sdInitial, sampleOrbit } from './physics.js';
+import { perpInitial } from './perp.js';
 
 const $ = (id) => document.getElementById(id);
 const mapCv = $('map');
@@ -101,6 +102,7 @@ function readOpts() {
   return {
     region: view,
     ell,
+    family: $('family').value,
     n: parseInt($('n').value, 10),
     tiles: Math.max(1, parseInt($('tiles').value, 10) || 1),
     tMax: num('tmax') || 15,
@@ -128,7 +130,7 @@ async function scanOnce() {
   log(`scanning ${o.n}x${o.n} cells...`);
   const t0 = performance.now();
   try {
-    const res = await screener.run({ n: o.n, ...view, tMax: o.tMax, ell: o.ell, maxSteps: 250000 });
+    const res = await screener.run({ n: o.n, ...view, tMax: o.tMax, ell: o.ell, maxSteps: 15000, mode: o.family === 'perp' ? 1 : 0 });
     drawTile(res.d, o.n, view);
     let best = Infinity;
     for (const v of res.d) if (v < best) best = v;
@@ -166,6 +168,7 @@ async function deepRun() {
 }
 
 function statusOf(r) {
+  if (r.family === 'perp') return `symmetric, rotates ${r.theta.toFixed(4)} rad per period, L = ${r.L.toFixed(4)}`;
   if (r.ell !== 0) return 'L not 0, nothing to compare with';
   return r.known ? `known: ${r.known}` : 'not in my list';
 }
@@ -234,7 +237,8 @@ const COLS = ['#000000', '#1f4e9c', '#b22222'];
 
 function showOrbit(r) {
   const frames = 600;
-  const path = sampleOrbit(sdInitial(r.v1, r.v2, r.ell || 0), r.period, frames);
+  const start = r.family === 'perp' ? perpInitial(r.v1, r.v2, r.ell) : sdInitial(r.v1, r.v2, r.ell || 0);
+  const path = sampleOrbit(start, r.period, frames);
   let ext = 0;
   for (let i = 0; i < path.length; i++) ext = Math.max(ext, Math.abs(path[i]));
   anim = { path, frames, ext: ext * 1.1 || 1, frame: 0 };

@@ -11,6 +11,7 @@ struct Params {
   v2Lo: f32, v2Hi: f32,
   maxSteps: u32,
   ell: f32,
+  mode: u32,
 };
 @group(0) @binding(0) var<uniform> P: Params;
 @group(0) @binding(1) var<storage, read_write> outD: array<f32>;
@@ -30,6 +31,26 @@ fn acc(p: array<vec2<f32>, 3>) -> array<vec2<f32>, 3> {
     }
   }
   return a;
+}
+
+// perpendicular family: how far from "all three collinear, velocities perpendicular to the line"
+fn gfun(p: array<vec2<f32>, 3>, v: array<vec2<f32>, 3>) -> f32 {
+  var best = 0.0;
+  var d = vec2<f32>(1.0, 0.0);
+  for (var i = 0u; i < 3u; i++) {
+    for (var j = i + 1u; j < 3u; j++) {
+      let r = p[j] - p[i];
+      let l = dot(r, r);
+      if (l > best) { best = l; d = r / sqrt(l); }
+    }
+  }
+  let a = p[1] - p[0];
+  let b = p[2] - p[0];
+  let c = (a.x * b.y - a.y * b.x) / best;
+  let q0 = dot(v[0], d);
+  let q1 = dot(v[1], d);
+  let q2 = dot(v[2], d);
+  return c * c + q0 * q0 + q1 * q1 + q2 * q2;
 }
 
 fn pdist(p: array<vec2<f32>, 3>, v: array<vec2<f32>, 3>,
@@ -57,6 +78,12 @@ fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
   var v: array<vec2<f32>, 3>;
   p[0] = vec2<f32>(-1.0, 0.0); p[1] = vec2<f32>(1.0, 0.0); p[2] = vec2<f32>(0.0, 0.0);
   v[0] = u; v[1] = u + vec2<f32>(0.0, P.ell); v[2] = -(v[0] + v[1]);
+  if (P.mode == 1u) {
+    // perpendicular family: x axis at -1, lam, 1 (lam is in P.ell), velocities only in y
+    let cm = P.ell / 3.0;
+    p[0] = vec2<f32>(-1.0 - cm, 0.0); p[1] = vec2<f32>(P.ell - cm, 0.0); p[2] = vec2<f32>(1.0 - cm, 0.0);
+    v[0] = vec2<f32>(0.0, v1); v[1] = vec2<f32>(0.0, v2); v[2] = vec2<f32>(0.0, -v1 - v2);
+  }
   let p0 = p; let v0 = v;
 
   var t = 0.0;
@@ -77,7 +104,10 @@ fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
     for (var i = 0u; i < 3u; i++) { v[i] += 0.5 * dt * a[i]; }
     t += dt;
     steps++;
-    if (t > P.tMin) {
+    if (t > P.tMin && P.mode == 1u) {
+      let g = gfun(p, v);
+      if (g < best) { best = g; bestT = t; }
+    } else if (t > P.tMin) {
       for (var sh = 0u; sh < 3u; sh++) {
         let d = pdist(p, v, p0, v0, sh);
         if (d < best) { best = d; bestT = t; bestS = f32(sh); }
@@ -104,7 +134,7 @@ export async function createScreener() {
   if (errs.length) throw new Error('WGSL: ' + errs.map((m) => `${m.lineNum}: ${m.message}`).join('; '));
   const pipeline = device.createComputePipeline({ layout: 'auto', compute: { module, entryPoint: 'main' } });
 
-  async function run({ n, v1Lo, v1Hi, v2Lo, v2Hi, tMax = 12, tMin = 1, eta = 0.02, maxSteps = 60000, ell = 0 }) {
+  async function run({ n, v1Lo, v1Hi, v2Lo, v2Hi, tMax = 12, tMin = 1, eta = 0.02, maxSteps = 60000, ell = 0, mode = 0 }) {
     const bytes = n * n * 4;
     const ub = new ArrayBuffer(48);
     const dv = new DataView(ub);
@@ -118,6 +148,7 @@ export async function createScreener() {
     dv.setFloat32(28, v2Hi, true);
     dv.setUint32(32, maxSteps, true);
     dv.setFloat32(36, ell, true);
+    dv.setUint32(40, mode, true);
     const uniform = device.createBuffer({ size: 48, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
     device.queue.writeBuffer(uniform, 0, ub);
     const mk = () => device.createBuffer({ size: bytes, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
