@@ -2,7 +2,7 @@
   "name": "orbit-hunter",
   "version": "0.1.0",
   "type": "module",
-  "description": "Search for new periodic three-body orbits: WebGPU screening, float64 verification",
-  "scripts": { "test": "node test/figure8.test.js && node test/known.test.js" },
+  "description": "Search for periodic three-body orbits: WebGPU screening, float64 verification",
+  "scripts": { "test": "node test/figure8.test.js && node test/known.test.js && node test/stability.test.js && node test/shooting.test.js" },
   "license": "CC-BY-4.0"
 }

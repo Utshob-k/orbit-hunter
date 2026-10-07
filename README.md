@@ -1,221 +1,28 @@
 # Orbit Hunter
 
-A search for periodic orbits of the planar three-body problem (equal masses).
+A search for periodic orbits of the planar three-body problem with equal masses. A GPU does the rough search in
+the browser (WebGPU), double precision code on the CPU closes and checks every candidate.
 
-How it works:
+**Where it stands.** The code reproduces published orbits to about nine digits. Every orbit it found with zero
+angular momentum was already published. For non-zero angular momentum it found 81 exactly periodic orbits that I
+could not match to the one catalog I could get, and 6 of them are linearly stable. I do not know if any of those
+is new, and nothing here should be read as a discovery.
 
-- Screening (WebGPU, float32). One GPU thread per (v1, v2) starting condition in the
-  Suvakov-Dmitrasinovic family integrates the orbit and records how close it ever comes back to its
-  starting phase-space point. 512x512 orbits take about half a second.
-- Verification (float64, CPU). Candidates are closed with a Levenberg-Marquardt solver on
-  (v1, v2, period). float32 is only used to pick candidates, never to claim anything.
-- Fingerprint. `T * |E|^1.5` doesn't change when you rescale an orbit, so it's used to tell orbits
-  apart and to spot a known orbit run N times.
+## Results
 
-## What works
-
-- All 11 orbits in known.js close from their published start values, residual 1e-10 or better. `npm test`
-- A blind scan of the whole plane (1024x1024, tmax 15) finds the figure-8, butterfly I and III,
-  goggles, yin-yang I, moth I and repeats of the figure-8 without being told where to look.
-- The GPU scan gets blurry for long orbits (bumblebee, T ~ 63), so it only picks candidates.
-
-## Not in known.js
-
-The scan also closed two orbits that are not in known.js. Checked with a much tighter integrator, they
-still return to the start within 2e-10, and the closest approach is 0.34:
-
-    v1 = 0.209661505, v2 = 0.525702389, T = 33.8615
-    v1 = 0.255430936, v2 = 0.516385839, T = 35.0431
-
-I compared them with the full table from Li and Liao (arXiv 1705.00527, `tools/compare-liliao.mjs`).
-The table parses to exactly 695 orbits, and my solver reproduces their values to about 9 digits for
-the figure-8, butterfly I, moth I and II, dragonfly, butterfly III, goggles, bumblebee and yin-yang.
-Neither of the two orbits is in it (closest T|E|^1.5 is 3e-3 away, a match needs about 1e-5).
-
-Plot (figures/two-orbits.svg, made with tools/plot-orbits.mjs): both are figure-8 shapes wound
-about 7 times with a slow wobble, next to the real figure-8.
-
-What that does and doesn't mean:
-
-- Butterfly II is a published Suvakov-Dmitrasinovic orbit and it is also missing from their table, so
-  "not in that table" is not the same as "never published".
-- Both orbits have T|E|^1.5 within 2e-4 of 7x the figure-8 (64.66), so they are probably
-  figure-8 like orbits, not something exotic.
-- I did not check other catalogs (Suvakov's own list, later papers). Not claiming these are new.
-
-## Finer scan (v1 0.05-0.6, v2 0.05-0.7)
-
-6x6 tiles of 1024x1024 cells (about 38M orbits, cells roughly 3x finer than Li and Liao's grid), tmax 40
-for the return time (so full periods up to 120 when a relabeled return is used). 46 distinct orbits closed:
-
-- 8 from my known list, 6 from the Li-Liao table
-- 22 figure-8 relatives (n-times wound figure-8s, including some with n = 17, 19, 22 and T up to ~100)
-- 10 not in either list. 5 of those are not figure-8 relatives:
-
-        v1            v2            T          T|E|^1.5   closest published (rel diff)
-    A   0.0880054619  0.4212710769   8.97545    24.33439   I.B1  5.3e-3
-    B   0.0620144090  0.2547876725  10.09007    35.05118   I.B2  7.1e-3
-    C   0.0560050559  0.1398707263  10.45366    39.64485   I.B3  3.0e-5
-    D   0.3827414123  0.4589771182  25.05730    42.78349   I.B5  3.3e-5
-    E   0.2517330337  0.2941901556  27.00344    79.27361   I.A9  4.8e-5
-
-All five re-close to better than 1e-9 with a 100x tighter integrator. C, D and E each have a published orbit
-whose fingerprint is within 5e-5, so they are probably relatives of goggles, moth II and I.A9, not
-unrelated orbits. A and B have nothing close in the Li-Liao table (but see the literature check below). They are short orbits with close approaches
-(about 0.04), so their basins are narrow, which is a believable way for a 4000x4000 grid to miss them.
-The figure is figures/five-candidates.svg.
-
-Still not proof of anything: I only compared against the one table, and a miss in that table is not
-the same as a miss in the literature (butterfly II is also not in it).
-
-## Literature check (this changes things)
-
-Found while checking A to E: Hristov and Hristova (arXiv 2404.16526, Astronomy and Computing 49, 2024)
-searched exactly this family (bodies at (-1,0), (1,0) and the origin, equal parallel velocities for 1 and 2,
-zero angular momentum) with T|E|^1.5 < 70 and periods up to 1000. They report 12,431 initial conditions =
-6,333 distinct orbits, and they published the data (100 digits, columns vx, vy, T, T*, T* = T|E|^1.5):
-http://db2.fmi.uni-sofia.bg/3bodyeuler/ . There is also a 421,562 entry file with T* < 200 on that page.
-
-So the Li and Liao table (695 orbits) was never the full picture, and my first comparison was too weak.
-
-I downloaded their 12,431 row file (5.3 MB, T* from 9.24 to 74.07) and compared with
-`tools/compare-hristov.mjs`:
-
-- A, B, C and D are all in it. T* agrees to 1e-10 or better, and for B, C and D the velocities agree to 1e-11
-  too (A matches at a different crossing of the same orbit, so its velocities are different but T* is not).
-- The two extra orbits from the scan of the rest of the plane (F and G below) are in it as well, T* agrees to
-  1e-12 once I re-closed them at full precision.
-- Every orbit in known.js is in it.
-- E has T* = 79.27, above the 74.07 end of this file. Not checked, it would need their 109 MB file
-  (60digits.txt, 421,562 entries, T* < 200).
-
-So 6 of my 7 "unlisted" orbits were already published and none of them is new. Their file also shows what a
-careful search of this plane looks like: it has 12,431 starts, I found 46 + 2.
-
-The scan of the rest of the plane (v1 0.05-0.6 with v2 0.7-1, and v1 0.6-1 with v2 0.05-1) closed only 2
-more unlisted orbits, (0.3418, 0.7113) T = 106.1 T* = 53.26 and (0.6981, 0.3285) T = 100.8 T* = 60.89.
-F and G, see above, are both in the Hristov file.
-
-## Angular momentum, version 2: perpendicular start (src/perp.js)
-
-The first try (the `ell` knob) found nothing. The zero-L family only closes because of a symmetry, so
-I started over with one that keeps a symmetry: bodies on the x axis at -1, lam, 1 (center of mass shifted
-to 0), all velocities along y, (u1, u2, -u1-u2). If the system is ever collinear again with every velocity
-perpendicular to the line, the orbit is mirror symmetric in time, so it repeats after twice that time,
-rotated by some angle theta. This is the Henon style start. It has total L != 0.
-
-- GPU mode 1 looks for "collinear and perpendicular" instead of "back at the start". At fixed lam,
-  the solutions are isolated points of (u1, u2) and close easily (80 of the first 150 candidates in a tile).
-- Every one of those is only relative periodic (rotation theta != 0). To get a truly periodic orbit I
-  slide lam, re-closing at every step (`huntPeriodic`), until theta = 0.
-- From 54 symmetric orbits at lam = 0.5 (half plane u1 <= 0, mirror images are the same orbit),
-  11 distinct truly periodic orbits came out, listed in data/perp-periodic.json. `node tools/check-perp-list.mjs`
-  re-checks them: one full period with a 1e-15 integrator returns to the start within 3e-8 or better.
-  Most of the other 43 hunts just ran out of the 60 s budget, so that rate is a lower bound.
-  Plot of two of them: figures/perp-periodic.svg.
-
-| lam | T | L | closest approach |
-|---|---|---|---|
-| 0.17838 | 6.934 | 1.5919 | 0.0104 |
-| 0.51987 | 7.116 | 0.2673 | 0.0045 |
-| 0.44218 | 8.112 | 2.0626 | 0.558 |
-| 0.53938 | 8.464 | 1.4836 | 0.090 |
-| 0.54204 | 8.495 | 2.0266 | 0.458 |
-| 0.49474 | 10.652 | 2.1656 | 0.505 |
-| 0.55295 | 14.900 | 1.9469 | 0.435 |
-| 0.49623 | 16.637 | 2.0433 | 0.504 |
-| 0.48484 | 19.244 | 2.1202 | 0.515 |
-| 0.53631 | 20.716 | 1.8516 | 0.298 |
-| 0.75014 | 23.929 | 2.2535 | 0.072 |
-
-Comparison with what is catalogued (tools/compare-threebodyorbits.mjs): the Three Body Orbits atlas
-(threebodyorbits.com, 3,942 orbits) lists 37 equal-mass orbits with non-zero angular momentum that are not
-choreographies: Suvakov's other orbits (13), Sheen's (11) and the equal-mass BHH satellites (14). I copied
-their period, energy and L from the orbit pages into data/threebodyorbits-equalmass-L.json and compared the
-scale free numbers T|E|^1.5 and |L||E|^0.5 (also allowing an orbit run n times). None of my 11 matches any of
-them; the closest is off by about 0.5% in L|E|^0.5, which is far more than the numerical noise (1e-8).
-
-Not the same as "new":
-
-- Their 14 BHH satellites are only the ones that atlas lists. Jankovic et al (CPC 2020) say they found
-  about 100 and I can't get that list, so I can't rule out a match there.
-- Five or six of mine sit at L|E|^0.5 between 2.4 and 2.6, right where the R-series BHH satellites of the atlas are
-  are (2.42 to 2.61), so they are probably more members of that same family, not a new kind of orbit.
-- Two of the 11 are near-twins (same T|E|^1.5 to 5e-9, L|E|^0.5 differing by 2e-5), probably two nearby
-  members of one family on either side of a turning point. They are kept as two.
-- Simo's choreographies (343 orbits, non-zero L) were not compared, my orbits are not choreographies.
-
-## Big run over 5 values of lam (stopped early)
-
-Scanned lam = 0.15, 0.3, 0.5, 0.7, 0.85 (half plane u1 <= 0, 1024x1024 cells x 4 tiles each): 319 symmetric
-orbits (117, 95, 85, 22, 0). Then hunted all of them for truly periodic ones, but stopped after 160 hunts:
-24 reached rotation 0 (20 distinct, one of those 20 is the same orbit run twice, so 19), 91 timed out,
-36 ran out of their own budget, 9 did not converge. Almost all failures are time-outs (11 workers on 8
-cores), so the yield is a lower bound, and the first ~90 hunts gave nearly all the successes.
-The 19 are in data/perp-periodic-2.json (the scan results themselves were not saved).
-
-Control test: three of the 19 match atlas orbits from threebodyorbits.com to within the rounding of the
-atlas numbers (L|E|^0.5 within 1e-5, T|E|^1.5 within 3e-6): Sheen's "Two ovals", Sheen's "Oval, catface and
-starship" and Suvakov SN.9. The search found them without being pointed at them, so it can re-find
-published non-zero-L orbits. The other 16 match nothing in the atlas, with the same caveats as above
-(the atlas list is short and incomplete).
-
-One of the 19 has L = 0 (to 1e-13): lam = 0.14505, T = 20.026, T|E|^1.5 = 79.2469. I checked whether it
-is in the zero-L search space of the big databases: at exactly T/4 and 3T/4 it is collinear, the middle
-body is at the midpoint and the outer two have equal velocities, all to about 1e-10. So it is an orbit
-of the Suvakov / Li-Liao / Hristov family.
-
-I then downloaded their big file (60digits.txt, 112 MB, 421,562 rows, T* up to 211) and compared with
-`tools/compare-hristov-big.mjs`. Both orbits are in it:
-
-- orbit E (T* = 79.27361): T* agrees to 5e-9 and the file's (vx, vy) = (0.251733034, 0.294190156) is the same
-  starting point I had.
-- the L = 0 orbit (T* = 79.246922): T* agrees to 3e-9, at a different crossing of the same orbit
-  (their (vx, vy) = (0.1137, 0.1013), T = 20.91).
-
-So every zero angular momentum orbit I found, in both families, is already published. That includes the
-L = 0 one my perpendicular-start search stumbled on, which is a nice cross-check of the search but not a find.
-
-## Second big run, on worker threads (tools/hunt-all.mjs)
-
-The browser version of the hunt was too slow (11 workers on 8 cores, jobs killed at 130 s), so I moved it
-to Node worker threads: 8 threads, 5 minutes per hunt, every result appended to data/hunt-results.jsonl as
-it finishes. Input is the 319 symmetric orbits from the earlier scan (data/scan-rows-perp.json, 287 unique
-starts). It took about 1h50.
-
-- 287 hunts, 111 reached rotation 0 (the 176 failures: 92 ran out of time, 52 did not converge,
-  31 lost the family while sliding lam).
-- `node tools/summarize-hunt.mjs data/hunt-results.jsonl data/perp-periodic-3.json` collapses that to
-  89 distinct orbits, minus 4 that are another orbit run 2 to 8 times, so 85 base orbits.
-- 2 of those have L = 0 and are in Hristov and Hristova's database (checked with
-  tools/compare-hristov-big.mjs). 2 are atlas orbits (Sheen's "Two ovals" and "Oval, catface and
-  starship"). 81 match nothing in the atlas, 16 of them closing to better than 1e-8 and never
-  coming closer than 0.2. About 10 of those 16 have L|E|^0.5 between 2.4 and 2.6, the band of the
-  R-series BHH satellites of the atlas, so some are probably more members of that family (not shown).
-- 8 of the 16 were re-checked with a 1e-15 integrator over one full period, they return to the start
-  within about 1e-9 (data/email-orbits.json, `node tools/check-perp-list.mjs data/email-orbits.json`).
-
-Same caveat as everywhere above: "not in the atlas" is not "new". I could not get the Jankovic et al.
-satellite list, so I can't say whether any of these are known.
-
-## Linear stability (src/stability.js)
-
-For each periodic orbit I integrate the orbit together with its variational equations over one period, get
-the 12x12 monodromy matrix, restrict it to the 8 dimensional part with zero center of mass and momentum, and
-take the eigenvalues (a small complex shifted QR solver, no libraries). Four of the eight are exactly 1 in
-theory (time shift / energy and rotation / angular momentum, two Jordan blocks) and scatter by about sqrt(error)
-numerically, so the four closest to 1 are treated as trivial and stability is judged on the other four.
-"stable" = those four on the unit circle (to 1e-6), "unstable" = off it by more than 10 times the scatter,
-otherwise "uncertain".
-
-Checks (`node test/stability.test.js`): the solver gets known eigenvalues right, the figure-8 comes out stable
-(all 8 moduli 1.00000000), the matrix is symplectic (product of moduli 1 to 1e-12), butterfly I is unstable.
-Against the atlas (threebodyorbits.com), the three orbits my search re-found give the same |lambda|max as the atlas
-to 4 digits: Sheen's "Two ovals" 1.409, "Oval, catface and starship" 19.55, Suvakov SN.9 9.860.
-
-Results for the 85 base orbits of the Node run (`node tools/stability-list.mjs data/perp-periodic-3.json
-data/stability-perp-3.json`): 6 stable, 77 unstable, 2 uncertain (both have a closest approach under 0.005,
-so the numbers are not reliable). All 6 stable ones are among the 81 not in the atlas:
+- All 11 orbits in `src/known.js` (figure-8, butterflies, moths, goggles, dragonfly, bumblebee, yin-yang) close from
+  their published start values with residual 1e-10 or better. `npm test` checks this.
+- **Zero angular momentum.** I scanned the Suvakov-Dmitrasinovic plane at a finer grid than Li and Liao used. Every orbit
+  I closed is in Hristov and Hristova's database (arXiv 2404.16526, 421,562 initial conditions): the eight that were
+  not in my own list (seven from the scans, one L = 0 orbit found by the perpendicular search), including two with
+  T|E|^1.5 about 79, match to 1e-8 or better. Nothing new there.
+- **Non-zero angular momentum.** A Henon-style start (below) gives orbits with L != 0. From 287 starting points,
+  111 hunts reached an exactly periodic orbit, 85 distinct orbits after removing repeats:
+  2 have L = 0 (published), 2 are orbits of the Three Body Orbits atlas, **81 match nothing in the atlas**.
+- **A control.** The search found published L != 0 orbits without being pointed at them: Sheen's "Two ovals",
+  Sheen's "Oval, catface and starship", and Suvakov's SN.9 (matching the atlas to the rounding of its numbers).
+- **Linear stability.** 6 of the 85 are stable, 77 unstable, 2 uncertain (closest approach under 0.005). All 6 stable
+  ones are among the 81:
 
 | lam | T* | L* | closest approach |
 |---|---|---|---|
@@ -226,103 +33,98 @@ so the numbers are not reliable). All 6 stable ones are among the 81 not in the 
 | 0.52028 | 33.745 | 2.566 | 0.480 |
 | 0.70190 | 47.065 | 2.626 | 0.242 |
 
-Four have L* in the band of the R-series BHH satellites of the atlas (2.42 to 2.61) and two are in the band of the
-A-series ones (0.76 to 1.13), and 14 of the 15 BHH satellites in the atlas are stable, so these are probably
-more members of those families. Stable orbits are rare in general (Hristov and Hristova found 7 stable among
-6,333 distinct orbits in the zero-L family), which is why they are interesting to ask about.
+  (T* = T|E|^1.5 and L* = |L||E|^0.5 are unchanged when an orbit is rescaled; closest approach is in units where
+  the outer two bodies start at distance 2.)
+- **Connection to a published family.** The satellites of the BHH family (Jankovic, Dmitrasinovic and Suvakov,
+  CPC 2020, tables 3 to 6) are inside my search family. I converted all 99 (98 re-close, and my T* and L* reproduce
+  theirs, median relative difference 6e-10 and 1e-10) and continued each in lam to an exactly periodic orbit:
+  40 of 98 got there. Their k = 3 and 4 satellites end at SN.9. Their k = 5 satellite (N = 9) ends at exactly 5 times one of
+  my stable orbits (lam = 0.8653, T* = 4.9598, L* = 1.0150, agreement 2e-12), so that orbit is the progenitor of
+  that satellite and belongs to the BHH family. The other 5 stable orbits, and the rest of the 81, were not reached from
+  any satellite I could continue. That does not show they are new.
 
-## Where a list of the L != 0 orbits could be (search done after the stability run)
+## How it works
 
-- Jankovic, Dmitrasinovic and Suvakov, CPC 250 (2020) 107052: Tables 3 to 6 list 99 retrograde BHH satellites,
-  columns N, L, a, c, T, k, closest return. They are relative periodic orbits at the size b = 1 (see the update
-  below for how to read L, a, c), scanned at fixed L in {0.65, 0.7, 0.8, 0.85, 0.9, 0.935549, 1.0, 1.03, 1.07, 1.1},
-  k from 3 to 58. I extracted the text from the paper PDF (the minus signs show up as NUL characters).
-- Jankovic and Dmitrasinovic, PRL 116 (2016) 064301 / arXiv:1604.08358: Table 1, 57 satellites, (L, k, T) at E = -1/2.
-  The units of its L and T do not match mine, so no direct comparison yet.
-- The Three Body Orbits atlas: 14 equal-mass BHH satellites (A series L* 0.76 to 1.13; R series L* 2.42 to 2.61,
-  mostly T* > 100; I could not establish from the atlas pages which of them is retrograde or prograde), Sheen 11, Suvakov 13, Simo choreographies 343.
-- Li and Liao, arXiv:2008.13550: 598,996 BHH orbits and satellites, but for unequal masses (data in a supplement);
-  the equal-mass case only appears as a plot and the 58 satellites of the 2016 paper.
-- Not reachable: Suvakov's three-body.ipb.ac.rs / suki.ipb.ac.rs pages (certificate errors), pub.ipb.ac.rs
-  (expired certificate), a 2025 ScienceDirect paper on L != 0 orbits (403). I did not bypass any of those.
+1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how
+   close it ever gets back to its start. Float32 only picks candidates, it never decides anything.
+   512x512 orbits take about half a second.
+2. **Closing (`src/newton.js`).** Levenberg-Marquardt on (v1, v2, period) in float64, with the Dormand-Prince integrator in
+   `src/physics.js`. The fingerprint T|E|^1.5 tells orbits apart and spots an orbit run several times.
+3. **The zero-L family.** Bodies 1 and 2 start at (-1,0) and (1,0), body 3 at the origin, velocities (v1,v2) for
+   bodies 1 and 2 and minus twice that for body 3. Candidates come from a 2D scan of (v1, v2).
+4. **The perpendicular family (`src/perp.js`).** Bodies on the x axis at -1, lam, 1, all velocities along y. If the system is ever
+   collinear again with every velocity perpendicular to the line, the orbit is mirror symmetric, so it repeats after
+   twice that time rotated by an angle theta. That gives L != 0. To get a truly periodic orbit, slide lam until theta = 0.
+5. **Multiple shooting (`src/shooting.js`).** The half orbit is cut into pieces so a small error can't blow up over the
+   whole orbit, and a tangent predictor follows how the solution moves with lam. The old hunts failed on tight, many-winding
+   satellites (k = 15 to 48) mostly because the predictor was bad, not because the orbits are long (their full period is only
+   about 10 time units). With it, 40 of 98 satellites reach an exactly periodic orbit, up from 9.
+6. **Stability (`src/stability.js`).** The orbit is integrated together with its variational equations over one period, the
+   monodromy matrix is restricted to the 8 dimensional part with zero center of mass and momentum, and its eigenvalues
+   (own complex QR solver, no libraries) say stable or not. Four of the eight eigenvalues are 1 in theory and scatter
+   a little numerically, so the four closest to 1 count as trivial.
 
-Because their orbits are relative periodic (not exactly periodic) and sit at fixed round values of L, an
-exactly periodic orbit of mine will not match a row number for number even if it belongs to the same family.
+Checks: `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
+`test/stability.test.js` (known eigenvalues, figure-8 stable, matrix symplectic, butterfly I unstable) and
+`test/shooting.test.js` (multiple shooting gives the same orbit as single shooting; the tangent equals a finite
+difference). Against the atlas my stability numbers match to four digits for the three re-found orbits
+(|lambda|max 1.409, 19.55, 9.860).
 
-Update: I did the conversion (tools/convert-cpc.mjs, data/cpc2020-satellites.json holds their numbers, with the
-source). Their setup is Jacobi vectors xi = (a, 0), eta = (b, 0) with the size fixed by b = 1, velocities
-(0, c), (0, d) and d = L - a c, where L is the angular momentum at that size (so the L in their tables is not the
-scale free L*; I first read it as L* and that was wrong). 98 of the 99 satellites re-close in my setup, and my T* and L*
-reproduce theirs (median relative difference 6e-10 for the period, 1e-10 for the angular momentum), so their orbits
-are inside my search family and the conversion is right. Their scale free L* runs from 0.84 to 2.82 (k from 3 to 58),
-so their list covers both of my bands, including 2.3 to 2.7 (30 satellites). The rotation per period of their orbits is
-small (median 0.02 rad, 62 of 98 under 0.05), so a small change of lam makes each exactly periodic.
-A crude test (T*/k as a function of L*, k should come out near an integer for a satellite) gave nothing: 11 of 47
-orbits near integer k, chance level, but the relation is only approximate so this does not decide anything.
+## What is not proven
 
-Result of the continuation hunts from their satellites (`node tools/hunt-all.mjs data/cpc-rows.json data/hunt-cpc.jsonl 8 300 0`,
-all 98 finished): only 9 reached an exactly periodic orbit (5 distinct up to repeats), 43 ran out of the 5 minutes, 17 did not
-converge, 29 lost the family or could not step in lam. It worked for low k and failed for high k: 8 of 43 satellites with k < 15
-reached one, 1 of 55 with k >= 15 (which includes all of their satellites at L* 2.3 to 2.7). What came out:
+- "Not in the atlas" is not "new". The atlas lists only 14 equal-mass BHH satellites, and Jankovic et al. report about 100.
+  Their list is only in the paper's tables, and the paper does not cover everything. Butterfly II, a published orbit, is
+  also missing from the Li-Liao table.
+- 58 of the 98 satellites never reached an exactly periodic orbit (ran out of time, no convergence, or the branch turns
+  back in lam, which would need continuation in arclength instead of lam). My 81 are not reached by the 40 that did.
+- Some orbits close with a rotation of only 1e-8 to 1e-9 radians per period, which is at the accuracy floor of these
+  long orbits. Their closure error is at most 7e-9.
+- Several of my orbits are probably more members of known BHH families (L* 2.4 to 2.6 and about 1.0 are where the
+  atlas satellites are).
 
-- 4 of the 9 end at Suvakov's SN.9 exactly (T* = 11.8309, L* = 1.1166, to better than 1e-11): their satellites with k = 3, 4, 4
-  and, run twice, k = 10. So SN.9 is on their family. It is a published orbit and one I had re-found earlier (it is not
-  among the 81 unmatched ones).
-- 5 others (T*, L*): (12.3814, 1.1249), (19.7361, 1.0981), (19.7689, 1.4394), (26.6952, 0.8909), (46.7188, 2.1581). They match
-  nothing in my lists. (19.7689, 1.4394) is close to twice the atlas orbit "Oval, catface and starship" (19.7566, 1.4387) but
-  not equal (6e-4). These are exactly periodic orbits on their families that I had not found; they come from a published
-  list, so that says nothing about whether they are new.
-- None of my 81 unmatched orbits (including the 6 stable ones) was reached. That does NOT show they are new: the hunts
-  barely got into the region where most of them sit (L* 2.4 to 2.6, which their satellites reach only at high k), and all
-  the successes have L* below 2.2.
+## Dead ends and bugs (so I don't repeat them)
 
-So the question "are the 81 new" is still open. What is settled: their satellites are in my family, the method reproduces
-their numbers, and one published orbit (SN.9) is connected to them.
+- First try at L != 0: a knob `ell` in the zero-L family. Found nothing, and a "rotated return" solver didn't help; exact
+  closure in that family relies on a symmetry that only exists at L = 0.
+- The solver can "converge" to T -> 0 (state(0) = state(0) trivially). Fixed by keeping T near the guess.
+- Near-collision orbits made the integrator loop forever. Fixed with step caps and early exits.
+- Fingerprints have to be matched tightly: butterfly I and II differ by only 6e-5.
+- My first stability cutoff called a stable orbit unstable because of the scatter in the trivial eigenvalues.
+- Early hunts used a success cutoff of 1e-9 on the rotation, tighter than long orbits can reach.
+- A first reading of the paper's table took its L for the scale free one; it is the angular momentum at size b = 1.
 
-## Multiple shooting and the full continuation from their satellites (src/shooting.js)
+## Running it
 
-The old hunts failed for 55 of their 55 satellites with k >= 15. I first blamed the orbits being long, but they are not: even
-for k = 48 the full period is only about 10 time units, they are tight orbits winding around many times, and the solution is steep
-in lam (dt/dlam about -44 for k = 34). Two things were wrong: the predictor (the old code reused the last solution at the new lam,
-which already fails at a step of 3e-4) and, for the rest, my own success cutoff.
+```
+npm test                       # all four tests, a minute or two, node 18+
+python -m http.server          # then open http://localhost:8000 (needs WebGPU)
+```
 
-- `closePerpMS` cuts the half orbit into m pieces whose start states are unknowns (the pieces must join up, the last one must end
-  collinear with all velocities perpendicular). `tangentInLam` gives how the whole solution moves with lam, `stepInLam` uses it as the
-  predictor, `huntPeriodicMS` slides lam with adaptive steps until the rotation is zero. `node test/shooting.test.js`: the same orbit as
-  single shooting for m = 1, 4, 8 from a 1% wrong guess, and the tangent equals a finite difference of two separate solves (dt/dlam
-  -22.4287 both ways).
-- Run over the 89 satellites the old method had failed on (`node tools/hunt-all.mjs data/cpc-rows.json data/hunt-cpc-ms.jsonl 8 600 0 ms`):
-  10 reached rotation < 1e-9. 33 ended "lost the family", and 21 of those had a rotation of 1e-8 to 1e-9, which is at the accuracy floor
-  of these long orbits, so my cutoff was too tight. Re-running those 21 with the cutoff at 5e-8 (`HUNT_THTOL=5e-8`, data/hunt-cpc-ms2.jsonl):
-  all 21 reached it.
-- Altogether 40 of their 98 satellites now lead to an exactly periodic orbit, up from 9 (data/hunt-cpc-all.jsonl, closure error median
-  6e-10, worst 7e-9). Their k reaches 48 and L* reaches 2.83, including the L* 2.4 to 2.7 band.
+The page scans a region and draws the map. Click a light spot to refine it, or press "Deep scan" to run the whole pipeline.
+Both families are in the "family" menu.
 
-Matching these against my 85 orbits (to 1e-5, allowing n-fold repeats): only two things match.
-- Suvakov's SN.9 (T* 11.8309, L* 1.1166), from their satellites with k = 3, 4, 4 (and a doubled one).
-- One of my 6 stable orbits: lam = 0.8653, T* = 4.9598, L* = 1.0150. Their satellite N = 9 (k = 5) ends at T* = 24.7991, which is 5 times
-  4.9598, to 1.9e-12. So that stable orbit is the progenitor the k = 5 satellite branches off, a member of the BHH family.
+Useful scripts in `tools/` (all print what they do at the top):
 
-The other 5 stable orbits and the rest of the 81 are not reached by any satellite I could continue. That is still not evidence that they
-are new: there are 58 satellites that did not reach an exactly periodic orbit (out of time, no convergence, or a branch that turns back
-in lam, which would need continuation in arclength instead of lam).
+- `hunt-all.mjs` hunts truly periodic orbits from a list of starts on worker threads; add `ms` to use multiple shooting
+- `summarize-hunt.mjs` removes repeats and marks atlas matches; `stability-list.mjs` computes stability
+- `convert-cpc.mjs` turns the paper's satellite table into my start; `compare-*.mjs` compare orbits with the published lists
+- `plot-orbits.mjs`, `plot-perp.mjs` draw orbits as svg (figures/)
+
+## Data
+
+| file | what it is |
+|---|---|
+| `data/perp-periodic*.json`, `hunt-results.jsonl`, `stability-perp-3.json` | my orbits and their stability |
+| `data/hunt-cpc-*.jsonl`, `cpc-converted.json` | the continuation from the paper's satellites |
+| `data/cpc2020-satellites.json`, `liliao.json`, `threebodyorbits-equalmass-L.json` | **other people's numbers**, copied from Jankovic et al. 2020, Li and Liao 2017 and threebodyorbits.com |
 
 ## License
 
-Creative Commons Attribution 4.0 (CC BY 4.0), see LICENSE. You can use, copy and change the code, the results and the
-orbit lists, as long as you credit Utshob Kandel and link to https://github.com/Utshob-k/orbit-hunter (see CITATION.cff).
-Not covered: data/cpc2020-satellites.json, data/liliao.json and data/threebodyorbits-equalmass-L.json contain numbers copied from
-other people's papers and sites (Jankovic et al. 2020, Li and Liao 2017, threebodyorbits.com). Those belong to their
-authors, cite them if you use them.
-
-## Run
-
-    npm test                  # float64 checks, node 18+
-    python -m http.server     # open http://localhost:8000, needs a browser with WebGPU
-
-Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline over tiles.
+Creative Commons Attribution 4.0 (CC BY 4.0), see LICENSE. You can use, copy and change the code, the results and the orbit
+lists as long as you credit Utshob Kandel and link to https://github.com/Utshob-k/orbit-hunter (see CITATION.cff).
+The three files marked above belong to their authors, cite them if you use them.
 
 ## Next
 
-checking E against the 109 MB file, getting the Jankovic et al. satellite list (ask the authors?), rerunning the failed hunts with fewer workers and longer limits,
-volunteer compute (browser tabs donate GPU time), 4+ bodies.
+Hear back from the authors of the BHH papers about whether the L != 0 orbits are known. Continuation in arclength for the
+satellites whose branch turns back. Possibly 4 or more bodies, or volunteer compute.
