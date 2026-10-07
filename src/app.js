@@ -30,7 +30,7 @@ function writeRegion(r) {
   $('v2hi').value = +r.v2Hi.toPrecision(8);
 }
 
-// dark = far from returning, bright = comes back close. log scale between 1e-4 and 3.
+// bright = comes back close, log scale
 function colorFor(d) {
   const lo = Math.log10(1e-4), hi = Math.log10(3);
   const x = 1 - Math.min(1, Math.max(0, (Math.log10(Math.max(d, 1e-9)) - lo) / (hi - lo)));
@@ -47,7 +47,7 @@ function drawMap(d, n) {
   const img = ctx.createImageData(n, n);
   for (let y = 0; y < n; y++) {
     for (let x = 0; x < n; x++) {
-      // flip so v2 grows upward
+      // v2 goes up
       const val = d[(n - 1 - y) * n + x];
       const [r, g, b] = colorFor(val);
       const o = (y * n + x) * 4;
@@ -101,13 +101,13 @@ let jobId = 0;
 function refineAt(v1, v2) {
   const tMax = parseFloat($('tmax').value) || 12;
   log(`refining near v1=${v1.toFixed(5)} v2=${v2.toFixed(5)} (float64, in a worker)...`);
-  worker.postMessage({ id: ++jobId, v1, v2, tMax });
+  worker.postMessage({ id: ++jobId, kind: 'refine', v1, v2, tMax });
 }
 
 worker.onmessage = (ev) => {
   const r = ev.data;
-  if (r.id !== jobId) return; // a newer click superseded this one
-  const ok = r.res < 1e-9;
+  if (r.id !== jobId) return; // old click
+  const ok = r.ok;
   log(
     `v1 = ${r.v1.toFixed(12)}
 v2 = ${r.v2.toFixed(12)}
@@ -221,3 +221,15 @@ $('export').onclick = () => {
   }
   tick();
 })();
+
+// for running scans from the console
+import('./deep.js').then((m) => {
+  window.hunter = {
+    async run(opts) {
+      const state = { found: [], stats: { cells: 0, cands: 0, closed: 0, failed: 0, ms: 0 } };
+      window.hunter.state = state;
+      await m.deepScan({ screener, state, log, ...opts });
+      return state;
+    },
+  };
+});

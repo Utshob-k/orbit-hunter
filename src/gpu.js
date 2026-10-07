@@ -1,7 +1,5 @@
-// WebGPU screening: one thread per (v1,v2) cell integrates the Suvakov-Dmitrasinovic initial
-// condition with an adaptive-step kick-drift-kick leapfrog in float32 and records the closest
-// return to the starting phase-space point (over identity + both cyclic body relabelings).
-// float32 is only a *filter*; every candidate is re-verified in float64 on the CPU (physics.js).
+// one thread per (v1,v2) cell, leapfrog in float32 with a variable step.
+// keeps the closest return to the start state. only a filter, the f64 code checks the hits.
 
 const WGSL = /* wgsl */ `
 struct Params {
@@ -16,6 +14,7 @@ struct Params {
 @group(0) @binding(0) var<uniform> P: Params;
 @group(0) @binding(1) var<storage, read_write> outD: array<f32>;
 @group(0) @binding(2) var<storage, read_write> outT: array<f32>;
+@group(0) @binding(3) var<storage, read_write> outP: array<f32>;
 
 fn acc(p: array<vec2<f32>, 3>) -> array<vec2<f32>, 3> {
   var a: array<vec2<f32>, 3>;
@@ -62,10 +61,11 @@ fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
   var t = 0.0;
   var best = 1e30;
   var bestT = 0.0;
+  var bestS = 0.0;
   var steps = 0u;
   loop {
     if (t >= P.tMax || steps >= P.maxSteps) { break; }
-    // adaptive step from the closest pair: dt ~ eta * r^(3/2) / sqrt(M)
+    // smaller step when two bodies are close
     var rmin = 1e30;
     for (var i = 0u; i < 3u; i++) { for (var j = i + 1u; j < 3u; j++) {
       rmin = min(rmin, length(p[j] - p[i])); } }
@@ -79,15 +79,16 @@ fn main(@builtin(global_invocation_id) gid: vec3<u32>) {
     if (t > P.tMin) {
       for (var sh = 0u; sh < 3u; sh++) {
         let d = pdist(p, v, p0, v0, sh);
-        if (d < best) { best = d; bestT = t; }
+        if (d < best) { best = d; bestT = t; bestS = f32(sh); }
       }
     }
-    // escape: ejected bodies never return
+    // flew off, won't come back
     if (length(p[0]) > 40.0) { break; }
   }
   let idx = gid.y * P.n + gid.x;
   outD[idx] = sqrt(best);
   outT[idx] = bestT;
+  outP[idx] = bestS;
 }
 `;
 
@@ -120,15 +121,18 @@ export async function createScreener() {
     const mk = () => device.createBuffer({ size: bytes, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
     const bD = mk();
     const bT = mk();
+    const bP = mk();
     const rd = () => device.createBuffer({ size: bytes, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
     const rD = rd();
     const rT = rd();
+    const rP = rd();
     const bind = device.createBindGroup({
       layout: pipeline.getBindGroupLayout(0),
       entries: [
         { binding: 0, resource: { buffer: uniform } },
         { binding: 1, resource: { buffer: bD } },
         { binding: 2, resource: { buffer: bT } },
+        { binding: 3, resource: { buffer: bP } },
       ],
     });
     const enc = device.createCommandEncoder();
@@ -139,12 +143,14 @@ export async function createScreener() {
     pass.end();
     enc.copyBufferToBuffer(bD, 0, rD, 0, bytes);
     enc.copyBufferToBuffer(bT, 0, rT, 0, bytes);
+    enc.copyBufferToBuffer(bP, 0, rP, 0, bytes);
     device.queue.submit([enc.finish()]);
-    await Promise.all([rD.mapAsync(GPUMapMode.READ), rT.mapAsync(GPUMapMode.READ)]);
+    await Promise.all([rD.mapAsync(GPUMapMode.READ), rT.mapAsync(GPUMapMode.READ), rP.mapAsync(GPUMapMode.READ)]);
     const d = new Float32Array(rD.getMappedRange().slice(0));
     const t = new Float32Array(rT.getMappedRange().slice(0));
-    [uniform, bD, bT, rD, rT].forEach((b) => b.destroy());
-    return { d, t };
+    const p = new Float32Array(rP.getMappedRange().slice(0));
+    [uniform, bD, bT, bP, rD, rT, rP].forEach((b) => b.destroy());
+    return { d, t, p };
   }
   return { run, adapterInfo: adapter.info || {} };
 }

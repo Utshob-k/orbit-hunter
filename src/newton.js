@@ -1,6 +1,5 @@
-// Closes a near-periodic orbit: solves state(T) = state(0) (bodies relabeled by perm) for
-// (v1, v2, T) with Levenberg-Marquardt and a finite-difference Jacobian, all in float64.
-// If the orbit isn't really periodic inside the (v1,v2) family the residual stays > 0 and we say so.
+// closes a near periodic orbit: solve state(T) = state(0) for (v1, v2, T)
+// levenberg-marquardt, jacobian by finite differences. if it's not really periodic res stays > 0
 import { sdInitial, dp45Step } from './physics.js';
 
 const PERMS = [
@@ -9,11 +8,14 @@ const PERMS = [
   [2, 0, 1],
 ];
 
+// returns null on a near collision (step size collapses)
 function stateAt(v1, v2, T) {
   const s = sdInitial(v1, v2);
   let t = 0;
   let h = 1e-3;
-  while (t < T - 1e-15) {
+  const maxSteps = 4000 + 3000 * Math.max(T, 1);
+  for (let n = 0; t < T - 1e-15; n++) {
+    if (n > maxSteps || !(T > 0) || !Number.isFinite(T)) return null;
     const [dt, hn] = dp45Step(s, Math.min(h, T - t), 1e-13, 1e-14, 0.01);
     t += dt;
     h = hn;
@@ -26,6 +28,7 @@ function residual(x, perm) {
   const s0 = sdInitial(v1, v2);
   const s = stateAt(v1, v2, T);
   const r = new Float64Array(12);
+  if (!s) return r.fill(1e6);
   const p = PERMS[perm];
   for (let i = 0; i < 3; i++) {
     const k = p[i];
@@ -39,7 +42,7 @@ function residual(x, perm) {
 
 const norm = (r) => Math.sqrt(r.reduce((a, b) => a + b * b, 0));
 
-// solve 3x3 A x = b by gaussian elimination with partial pivoting
+// 3x3 solve
 function solve3(A, b) {
   const M = A.map((row, i) => [...row, b[i]]);
   for (let c = 0; c < 3; c++) {
@@ -61,13 +64,17 @@ function solve3(A, b) {
   return x;
 }
 
-export function closeOrbit(v1, v2, T, perm = 0, { maxIter = 60, fd = 1e-6 } = {}) {
+export function closeOrbit(v1, v2, T, perm = 0, { maxIter = 30, fd = 1e-6, maxMs = 3000 } = {}) {
+  const t0 = Date.now();
   let x = [v1, v2, T];
   let r = residual(x, perm);
   let res = norm(r);
   let lambda = 1e-3;
   for (let it = 0; it < maxIter && res > 1e-13; it++) {
-    // jacobian columns by central differences
+    // most candidates are junk, bail early
+    if (it >= 8 && res > 0.02) break;
+    if (Date.now() - t0 > maxMs && res > 1e-9) break;
+    // jacobian
     const J = [[], [], []];
     for (let j = 0; j < 3; j++) {
       const xp = [...x];
@@ -86,6 +93,11 @@ export function closeOrbit(v1, v2, T, perm = 0, { maxIter = 60, fd = 1e-6 } = {}
       const d = solve3(A, g.map((v) => -v));
       if (d) {
         const xn = x.map((v, i) => v + d[i]);
+        // T -> 0 trivially "solves" it, keep T near the guess
+        if (xn[2] < 0.6 * T || xn[2] > 1.6 * T || xn[0] < 0 || xn[1] < 0) {
+          lambda *= 8;
+          continue;
+        }
         const rn = residual(xn, perm);
         const rr = norm(rn);
         if (rr < res) {
@@ -113,7 +125,27 @@ export function energy(v1, v2) {
   return e;
 }
 
-// scale-free fingerprint: period * |E|^(3/2) is invariant under the three-body scaling symmetry
+// T * |E|^1.5 doesn't change when you rescale the orbit
 export function fingerprint(v1, v2, T) {
   return T * Math.abs(energy(v1, v2)) ** 1.5;
+}
+
+// closest two bodies get, and how far out it goes
+export function orbitStats(v1, v2, T) {
+  const s = sdInitial(v1, v2);
+  let t = 0;
+  let h = 1e-3;
+  let minDist = Infinity;
+  let extent = 0;
+  for (let n = 0; t < T - 1e-15; n++) {
+    if (n > 4000 + 3000 * T) return { minDist: NaN, extent: NaN };
+    const [dt, hn] = dp45Step(s, Math.min(h, T - t), 1e-11, 1e-12, 0.01);
+    t += dt;
+    h = hn;
+    for (let i = 0; i < 3; i++) {
+      extent = Math.max(extent, Math.hypot(s[2 * i], s[2 * i + 1]));
+      for (let j = i + 1; j < 3; j++) minDist = Math.min(minDist, Math.hypot(s[2 * i] - s[2 * j], s[2 * i + 1] - s[2 * j + 1]));
+    }
+  }
+  return { minDist, extent };
 }

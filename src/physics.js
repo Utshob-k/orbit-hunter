@@ -1,6 +1,5 @@
-// Orbit Hunter - float64 reference physics.
-// Planar equal-mass three-body problem, G = m = 1.
-// State layout: [x0,y0,x1,y1,x2,y2, vx0,vy0,vx1,vy1,vx2,vy2]
+// 3 body problem, equal masses, G = 1, 2d
+// state = [x0,y0,x1,y1,x2,y2, vx0,vy0,vx1,vy1,vx2,vy2]
 
 export const N_STATE = 12;
 
@@ -23,9 +22,8 @@ export function deriv(s, out) {
   }
 }
 
-// Suvakov-Dmitrasinovic family: bodies 1,2 at (-1,0),(1,0), body 3 at origin.
-// Bodies 1,2 share velocity (v1,v2); body 3 has (-2 v1, -2 v2). Zero momentum, zero total L is not
-// required by the ansatz but center of mass stays fixed.
+// start like Suvakov-Dmitrasinovic: bodies 1,2 at (-1,0),(1,0), 3 in the middle.
+// 1 and 2 get (v1,v2), body 3 gets -2x that so total momentum is 0
 export function sdInitial(v1, v2) {
   return Float64Array.from([-1, 0, 1, 0, 0, 0, v1, v2, v1, v2, -2 * v1, -2 * v2]);
 }
@@ -47,9 +45,11 @@ const B4 = [5179 / 57600, 0, 7571 / 16695, 393 / 640, -92097 / 339200, 187 / 210
 const K = Array.from({ length: 7 }, () => new Float64Array(N_STATE));
 const tmp = new Float64Array(N_STATE);
 
-// One adaptive step. Returns {h: accepted/next step info}; mutates s and returns [tAdvance, nextH].
+// one adaptive step, changes s in place, returns [dt taken, next h]
 export function dp45Step(s, h, rtol, atol, hMax) {
-  for (;;) {
+  for (let rej = 0; ; rej++) {
+    // blew up (nan / collision), give up so we dont loop forever
+    if (rej > 60 || !(h > 1e-14)) return [0, 1e-3];
     deriv(s, K[0]);
     for (let st = 1; st < 7; st++) {
       for (let i = 0; i < N_STATE; i++) {
@@ -74,6 +74,7 @@ export function dp45Step(s, h, rtol, atol, hMax) {
       tmp[i] = y5;
     }
     err = Math.sqrt(err / N_STATE);
+    if (!Number.isFinite(err)) { h *= 0.1; continue; }
     if (err <= 1) {
       for (let i = 0; i < N_STATE; i++) s[i] = tmp[i];
       const fac = err === 0 ? 5 : Math.min(5, Math.max(0.2, 0.9 * Math.pow(err, -0.2)));
@@ -89,7 +90,7 @@ const PERMS = [
   [2, 0, 1],
 ];
 
-// Phase-space distance between state a and b with bodies of b relabeled by perm.
+// distance between two states, bodies of b relabeled by perm
 export function phaseDistance(a, b, perm) {
   let d = 0;
   for (let i = 0; i < 3; i++) {
@@ -103,17 +104,17 @@ export function phaseDistance(a, b, perm) {
   return Math.sqrt(d);
 }
 
-// Find the best near-return of the orbit to its initial state in [tMin, tMax].
-// Returns { d, t, perm }. Uses a parabolic refinement around the discrete minimum.
+// closest the orbit gets back to its start between tMin and tMax -> {d, t, perm}
 export function bestReturn(s0, tMax, opts = {}) {
   const { tMin = 1, rtol = 1e-11, atol = 1e-12, hMax = 0.01 } = opts;
   const s = Float64Array.from(s0);
   let t = 0;
   let h = 1e-3;
   let best = { d: Infinity, t: 0, perm: 0 };
-  // keep last three samples per perm for parabolic refinement
+  // last 3 samples per perm for the parabola fit
   const hist = PERMS.map(() => []);
-  while (t < tMax) {
+  for (let n = 0; t < tMax; n++) {
+    if (n > 3e6) break;
     const [dt, hn] = dp45Step(s, Math.min(h, tMax - t), rtol, atol, hMax);
     t += dt;
     h = hn;
@@ -121,10 +122,10 @@ export function bestReturn(s0, tMax, opts = {}) {
     for (let p = 0; p < PERMS.length; p++) {
       const d = phaseDistance(s, s0, PERMS[p]);
       const hs = hist[p];
-      hs.push([t, d * d]); // fit d^2: smooth (quadratic) at the minimum, unlike the V-shaped d
+      hs.push([t, d * d]); // fit d^2, plain d is V shaped at the min
       if (hs.length > 3) hs.shift();
       if (hs.length === 3 && hs[1][1] <= hs[0][1] && hs[1][1] <= hs[2][1]) {
-        // parabola through three points, in time coordinates local to the middle sample
+        // parabola through the 3 points (time measured from the middle one)
         const u0 = hs[0][0] - hs[1][0];
         const u2 = hs[2][0] - hs[1][0];
         const f0 = hs[0][1];
@@ -148,10 +149,9 @@ export function bestReturn(s0, tMax, opts = {}) {
   return best;
 }
 
-// Nelder-Mead on (v1,v2) minimizing the best-return distance. Returns {v1,v2,d,t,perm}.
+// nelder-mead on (v1,v2) to minimize the return distance
 export function refine(v1, v2, tMax, opts = {}) {
-  // Nelder-Mead degenerates on the cone-shaped return-distance landscape, so restart with a
-  // shrinking simplex until the distance stops improving.
+  // NM stalls on this cone shaped landscape so restart it with a smaller simplex
   let best = refineOnce(v1, v2, tMax, { ...opts, step: opts.step ?? 2e-3 });
   let step = (opts.step ?? 2e-3) / 4;
   for (let r = 0; r < (opts.restarts ?? 8) && best.d > 1e-9; r++, step /= 4) {
@@ -203,7 +203,7 @@ function refineOnce(v1, v2, tMax, opts = {}) {
   return { v1: best.p[0], v2: best.p[1], ...best.r };
 }
 
-// Sample the orbit for drawing: returns Float32Array of [x0,y0,x1,y1,x2,y2] per frame.
+// positions for drawing, 6 floats per frame
 export function sampleOrbit(s0, duration, frames) {
   const s = Float64Array.from(s0);
   const out = new Float32Array(frames * 6);

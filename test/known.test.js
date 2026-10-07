@@ -1,12 +1,11 @@
-// Tries to close every catalogue orbit from its (rounded) published start values.
-// Prints one line per orbit. Orbits that don't converge are reported, not hidden.
+// try to close every orbit in known.js
 import { KNOWN } from '../src/known.js';
 import { closeOrbit, fingerprint } from '../src/newton.js';
 import { bestReturn, sdInitial } from '../src/physics.js';
 
 let ok = 0;
 for (const k of KNOWN) {
-  // the catalogue period may be for a cyclic relabeling, so try all three
+  // catalogue T might be for a relabeled return, so try all 3
   let best = null;
   for (const perm of [0, 1, 2]) {
     const Tguess = perm === 0 ? k.T : k.T / 3;
@@ -14,7 +13,7 @@ for (const k of KNOWN) {
     if (!best || r.res < best.res) best = r;
     if (best.res < 1e-9) break;
   }
-  // a solve that wandered off to a different orbit (usually the figure-8) is not a confirmation
+  // if it wandered off to another orbit (usually the figure-8) that doesn't count
   const drift = Math.hypot(best.v1 - k.v1, best.v2 - k.v2);
   const good = best.res < 1e-9 && drift < 0.01;
   if (good) ok++;

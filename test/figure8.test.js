@@ -1,6 +1,4 @@
-// Validates the f64 integrator + refiner against the famous figure-8 orbit (Moore 1993,
-// Chenciner-Montgomery 2000). In the Suvakov-Dmitrasinovic frame its velocities are
-// v1~0.347, v2~0.533 with period ~6.3259.
+// sanity check against the figure-8 (v1~0.347, v2~0.533, T~6.3259)
 import { sdInitial, bestReturn, refine } from '../src/physics.js';
 
 let fail = 0;
@@ -16,13 +14,11 @@ check('figure-8 guess returns close to start', rough.d < 1e-3, `d=${rough.d.toEx
 const r = refine(0.347, 0.533, 12, { iters: 120 });
 console.log('refined ->', r);
 check('refined return distance < 1e-6', r.d < 1e-6, `d=${r.d.toExponential(2)}`);
-// Each body is at the origin of the SD frame at different times; the closed orbit period is the
-// first return time, or 3x the choreography time if the cyclic permutation matched.
-const T = r.perm === 0 ? r.t : r.t * 3; // cyclic-permutation return => 3t is a full-period multiple
+const T = r.perm === 0 ? r.t : r.t * 3; // relabeled return, so 3t
 const periods = T / 6.32591398;
 check('period ~ 6.3259 (Chenciner-Montgomery scaled)', Math.abs(periods - Math.round(periods)) < 0.01, `T=${T.toFixed(5)} perm=${r.perm} t=${r.t.toFixed(5)}`);
 
-// Energy conservation sanity (the integrator itself).
+// energy drift
 const s0 = sdInitial(0.347, 0.533);
 const energy = (s) => {
   let e = 0;

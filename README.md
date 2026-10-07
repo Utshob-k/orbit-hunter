@@ -11,23 +11,21 @@ How it works:
   Levenberg-Marquardt solver on (v1, v2, period). float32 is only ever a filter, never the answer.
 - Fingerprint. `T * |E|^1.5` doesn't change when you rescale an orbit, so it's used to tell orbits apart.
 
-## What's checked so far
+## What works so far
 
-- The solver reproduces the figure-8 (T = 6.325914, published 6.32591398).
-- It also closes butterfly I/II/III, goggles, bumblebee and yin-yang I b from their published
-  starting values, residual around 1e-11 or better (`npm test`).
-- The GPU scan shows a dip at every one of those orbits, but for long, sensitive orbits (bumblebee,
-  T ~ 63) the dip is blurry: the best float32 cell can sit a few 1e-3 away from the true point.
-  So it shortlists candidates and the float64 step does the real work.
-- Moth I/II, dragonfly and yin-yang I a are NOT in the list yet. The starting values I had for
-  them were wrong (they converged to the figure-8) and need to be looked up properly.
+- Closes all 11 orbits in known.js (figure-8, butterflies, moths, goggles, dragonfly, bumblebee,
+  yin-yang) from their published start values, residual 1e-10 or better. `npm test`
+- Blind scan of the whole plane (1024x1024, tmax 15) gets the figure-8, butterfly II/III,
+  goggles, yin-yang I b and moth I back without being told where to look.
+- GPU scan is blurry for long orbits (bumblebee, T ~ 63), best cell can be a few 1e-3 off.
+  It only picks candidates, the float64 solver does the real work.
 
-## Honest caveat
+## Caveat
 
-This exact (v1, v2) plane has already been scanned by other people (Suvakov and Dmitrasinovic in
-2013, then Li and Liao with a much finer grid in 2017-2018), so the easy finds are probably gone.
-Realistic ways to find something new: longer periods, much finer grids, other slices
-(non-zero angular momentum, unequal masses) and more bodies.
+This exact (v1, v2) plane was already scanned by Suvakov and Dmitrasinovic (2013) and then by
+Li and Liao (2017-18) with a much finer grid, so most easy finds are taken. "Not in known.js" does
+not mean new, it has to be checked against their published lists. Other things to try: longer
+periods, finer grids, other slices (angular momentum, unequal masses), more bodies.
 
 ## Run
 
