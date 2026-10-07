@@ -32,6 +32,9 @@ The table parses to exactly 695 orbits, and my solver reproduces their values to
 the figure-8, butterfly I, moth I and II, dragonfly, butterfly III, goggles, bumblebee and yin-yang.
 Neither of the two orbits is in it (closest T|E|^1.5 is 3e-3 away, a match needs about 1e-5).
 
+Plot (figures/two-orbits.svg, made with tools/plot-orbits.mjs): both are figure-8 shapes wound
+about 7 times with a slow wobble, next to the real figure-8.
+
 What that does and doesn't mean:
 
 - Butterfly II is a published Suvakov-Dmitrasinovic orbit and it is also missing from their table, so
