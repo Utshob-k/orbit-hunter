@@ -80,6 +80,19 @@ export function closePerp(u1, u2, lam, t0, { maxIter = 30, maxMs = 3000 } = {}) 
   return { u1: x[0], u2: x[1], lam, t: x[2], res };
 }
 
+// rotation per full period, cheaply: the state at time t is collinear along a line at angle phi, the
+// mirror symmetry then gives a rotation of 2 phi after 2t. (sign doesnt matter when the target is 0)
+export function quickTheta(u1, u2, lam, t) {
+  const s = stateAt(u1, u2, lam, t);
+  if (!s) return null;
+  let best = 0, dx = 1, dy = 0;
+  for (let i = 0; i < 3; i++) for (let j = i + 1; j < 3; j++) {
+    const rx = s[2 * j] - s[2 * i], ry = s[2 * j + 1] - s[2 * i + 1], l = rx * rx + ry * ry;
+    if (l > best) { best = l; dx = rx; dy = ry; }
+  }
+  return Math.atan2(Math.sin(2 * Math.atan2(dy, dx)), Math.cos(2 * Math.atan2(dy, dx)));
+}
+
 // everything we want to know about a closed one: energy, angular momentum, rotation after a full
 // period, and an independent check that it really repeats (integrate 2t, compare with start)
 export function perpInfo(u1, u2, lam, t) {
@@ -142,16 +155,15 @@ export function huntPeriodic(u1, u2, lam0, t0, target = 0, { maxMs = 25000 } = {
     }
     const r = closePerp(g[0], g[1], lam, g[2], { maxMs: 4000 });
     if (r.res > 1e-9 || Math.abs(r.t - prev.t) > 0.3 * prev.t) return null;
-    const info = perpInfo(r.u1, r.u2, lam, r.t);
-    if (!info) return null;
-    return { ...r, info, th: info.theta };
+    const th = quickTheta(r.u1, r.u2, lam, r.t);
+    if (th === null) return null;
+    return { ...r, th };
   };
   const first = closePerp(u1, u2, lam0, t0, { maxMs: 4000 });
   if (first.res > 1e-9) return { ok: false, why: 'start did not close' };
-  const i0 = perpInfo(first.u1, first.u2, lam0, first.t);
-  let a = { ...first, info: i0, th: i0.theta };
+  let a = { ...first, th: quickTheta(first.u1, first.u2, lam0, first.t) };
   const f = (p) => wrap(p.th - target);
-  if (Math.abs(f(a)) < 1e-9) return { ok: true, ...a };
+  if (Math.abs(f(a)) < 1e-9) return { ok: true, ...a, info: perpInfo(a.u1, a.u2, a.lam, a.t) };
   // walk in the direction that reduces |theta - target|, shrinking the step when we lose the orbit
   let dir = 1, step = 0.02;
   let b = null;
@@ -163,7 +175,7 @@ export function huntPeriodic(u1, u2, lam0, t0, target = 0, { maxMs = 25000 } = {
   if (!b) return { ok: false, why: 'could not step in lam' };
   for (let k = 0; k < 80; k++) {
     if (Date.now() - started > maxMs) return { ok: false, why: 'out of time', lam: b.lam, th: b.th };
-    if (Math.abs(f(b)) < 1e-9) return { ok: true, ...b };
+    if (Math.abs(f(b)) < 1e-9) return { ok: true, ...b, info: perpInfo(b.u1, b.u2, b.lam, b.t) };
     const slope = (f(b) - f(a)) / (b.lam - a.lam);
     if (!Number.isFinite(slope) || Math.abs(slope) < 1e-9) return { ok: false, why: 'theta does not change with lam', lam: b.lam, th: b.th };
     let want = -f(b) / slope; // secant step

@@ -145,6 +145,27 @@ Not the same as "new":
   members of one family on either side of a turning point. They are kept as two.
 - Simo's choreographies (343 orbits, non-zero L) were not compared, my orbits are not choreographies.
 
+## Big run over 5 values of lam (stopped early)
+
+Scanned lam = 0.15, 0.3, 0.5, 0.7, 0.85 (half plane u1 <= 0, 1024x1024 cells x 4 tiles each): 319 symmetric
+orbits (117, 95, 85, 22, 0). Then hunted all of them for truly periodic ones, but stopped after 160 hunts:
+24 reached rotation 0 (20 distinct, one of those 20 is the same orbit run twice, so 19), 91 timed out,
+36 ran out of their own budget, 9 did not converge. Almost all failures are time-outs (11 workers on 8
+cores), so the yield is a lower bound, and the first ~90 hunts gave nearly all the successes.
+The 19 are in data/perp-periodic-2.json (the scan results themselves were not saved).
+
+Control test: three of the 19 match atlas orbits from threebodyorbits.com to within the rounding of the
+atlas numbers (L|E|^0.5 within 1e-5, T|E|^1.5 within 3e-6): Sheen's "Two ovals", Sheen's "Oval, catface and
+starship" and Suvakov SN.9. The search found them without being pointed at them, so it can re-find
+published non-zero-L orbits. The other 16 match nothing in the atlas, with the same caveats as above
+(the atlas list is short and incomplete).
+
+One of the 19 has L = 0 (to 1e-13): lam = 0.14505, T = 20.026, T|E|^1.5 = 79.2469. I checked whether it
+is in the zero-L search space of the big databases: at exactly T/4 and 3T/4 it is collinear, the middle
+body is at the midpoint and the outer two have equal velocities, all to about 1e-10. So it is an orbit
+of the Suvakov / Li-Liao / Hristov family. Its T|E|^1.5 is above the 74.07 end of the 12,431 file I
+checked, so it needs the 109 MB file, same as orbit E (T|E|^1.5 = 79.27). Neither is checked.
+
 ## Run
 
     npm test                  # float64 checks, node 18+
@@ -154,5 +175,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-checking E against the 109 MB file, getting the Jankovic et al. satellite list (ask the authors?), more lam slices and longer hunts, a look at which of my orbits are BHH R-family members,
+checking E against the 109 MB file, downloading the 109 MB Hristov file to settle orbit E and the L = 0 orbit, getting the Jankovic et al. satellite list (ask the authors?), rerunning the failed hunts with fewer workers and longer limits,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.

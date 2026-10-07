@@ -25,7 +25,7 @@ self.onmessage = (ev) => {
     return;
   }
   if (kind === 'perpHunt') {
-    const r = huntPeriodic(v1, v2, ell, T, tMax || 0, { maxMs: 60000 });
+    const r = huntPeriodic(v1, v2, ell, T, tMax || 0, { maxMs: 100000 });
     self.postMessage({ id, kind, ...r });
     return;
   }

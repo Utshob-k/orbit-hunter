@@ -6,7 +6,9 @@ import { closePerp, perpInfo } from '../src/perp.js';
 
 const cat = JSON.parse(fs.readFileSync(new URL('../data/threebodyorbits-equalmass-L.json', import.meta.url), 'utf8'))
   .map(([name, T, E, L]) => ({ name, ts: T * Math.abs(E) ** 1.5, ls: Math.abs(L) * Math.abs(E) ** 0.5 }));
-const mine = JSON.parse(fs.readFileSync(new URL('../data/perp-periodic.json', import.meta.url), 'utf8'));
+// optional first argument: another json list of {u1,u2,lam,t} (default is the 11 from data/perp-periodic.json)
+const file = process.argv[2] || new URL('../data/perp-periodic.json', import.meta.url);
+const mine = JSON.parse(fs.readFileSync(file, 'utf8'));
 
 for (const o of mine) {
   const c = closePerp(o.u1, o.u2, o.lam, o.t, { maxMs: 10000 });
