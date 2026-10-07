@@ -96,14 +96,43 @@ The scan of the rest of the plane (v1 0.05-0.6 with v2 0.7-1, and v1 0.6-1 with 
 more unlisted orbits, (0.3418, 0.7113) T = 106.1 T* = 53.26 and (0.6981, 0.3285) T = 100.8 T* = 60.89.
 F and G, see above, are both in the Hristov file.
 
-## Angular momentum
+## Angular momentum, version 2: perpendicular start (src/perp.js)
 
-The start state has a knob `ell` (total angular momentum, `ell = 0` is the usual plane). Scans at
-ell = 0.02 and ell = 0.1 (about a million orbits each) found no orbit that closes. My guess is that the closing in this
-family only works because of a symmetry at L = 0, but I haven't proven that. The rotated-return
-solver (`huntExact` in newton.js) doesn't get anywhere either, so treat this part as a dead end for
-now. A start with perpendicular crossings (Henon style) would keep a symmetry and is probably the
-better way to get to L != 0.
+The first try (the `ell` knob) found nothing. The zero-L family only closes because of a symmetry, so
+I started over with one that keeps a symmetry: bodies on the x axis at -1, lam, 1 (center of mass shifted
+to 0), all velocities along y, (u1, u2, -u1-u2). If the system is ever collinear again with every velocity
+perpendicular to the line, the orbit is mirror symmetric in time, so it repeats after twice that time,
+rotated by some angle theta. This is the Henon style start. It has total L != 0.
+
+- GPU mode 1 looks for "collinear and perpendicular" instead of "back at the start". At fixed lam,
+  the solutions are isolated points of (u1, u2) and close easily (80 of the first 150 candidates in a tile).
+- Every one of those is only relative periodic (rotation theta != 0). To get a truly periodic orbit I
+  slide lam, re-closing at every step (`huntPeriodic`), until theta = 0.
+- From 54 symmetric orbits at lam = 0.5 (half plane u1 <= 0, mirror images are the same orbit),
+  11 distinct truly periodic orbits came out, listed in data/perp-periodic.json. `node tools/check-perp-list.mjs`
+  re-checks them: one full period with a 1e-15 integrator returns to the start within 3e-8 or better.
+  Most of the other 43 hunts just ran out of the 60 s budget, so that rate is a lower bound.
+  Plot of two of them: figures/perp-periodic.svg.
+
+| lam | T | L | closest approach |
+|---|---|---|---|
+| 0.17838 | 6.934 | 1.5919 | 0.0104 |
+| 0.51987 | 7.116 | 0.2673 | 0.0045 |
+| 0.44218 | 8.112 | 2.0626 | 0.558 |
+| 0.53938 | 8.464 | 1.4836 | 0.090 |
+| 0.54204 | 8.495 | 2.0266 | 0.458 |
+| 0.49474 | 10.652 | 2.1656 | 0.505 |
+| 0.55295 | 14.900 | 1.9469 | 0.435 |
+| 0.49623 | 16.637 | 2.0433 | 0.504 |
+| 0.48484 | 19.244 | 2.1202 | 0.515 |
+| 0.53631 | 20.716 | 1.8516 | 0.298 |
+| 0.75014 | 23.929 | 2.2535 | 0.072 |
+
+What I know about novelty: not much. Non-zero L has been studied far less than the zero-L plane (Jankovic and
+Dmitrasinovic report 57 satellites of the Broucke-Hadjidemetriou-Henon family in 2016, and about 100 in a 2020
+paper, which also says there are infinitely many more), but I could not get a list to compare with, so I
+can't say if any of these 11 is new. Several of them (the ones with closest approach around 0.5 and L around
+2) look like a close pair orbiting inside a wide loop of the third body, which is a familiar kind of motion.
 
 ## Run
 
@@ -114,5 +143,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-checking E against the 109 MB file, Henon style perpendicular-crossing family or other starts,
+checking E against the 109 MB file, comparing the L != 0 orbits with the Jankovic et al. satellite lists (need the data), more lam slices and longer hunts,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
