@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this code or these orbits, please cite it like this."
+title: "Orbit Hunter: a search for periodic orbits of the planar three-body problem"
+authors:
+  - given-names: Utshob
+    family-names: Kandel
+repository-code: "https://github.com/Utshob-k/orbit-hunter"
+license: CC-BY-4.0
+date-released: 2026-10-07
+keywords:
+  - three-body problem
+  - periodic orbits
+  - WebGPU

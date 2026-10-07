@@ -307,6 +307,14 @@ The other 5 stable orbits and the rest of the 81 are not reached by any satellit
 are new: there are 59 satellites that did not reach an exactly periodic orbit (out of time, no convergence, or a branch that turns back
 in lam, which would need continuation in arclength instead of lam).
 
+## License
+
+Creative Commons Attribution 4.0 (CC BY 4.0), see LICENSE. You can use, copy and change the code, the results and the
+orbit lists, as long as you credit Utshob Kandel and link to https://github.com/Utshob-k/orbit-hunter (see CITATION.cff).
+Not covered: data/cpc2020-satellites.json, data/liliao.json and data/threebodyorbits-equalmass-L.json contain numbers copied from
+other people's papers and sites (Jankovic et al. 2020, Li and Liao 2017, threebodyorbits.com). Those belong to their
+authors, cite them if you use them.
+
 ## Run
 
     npm test                  # float64 checks, node 18+

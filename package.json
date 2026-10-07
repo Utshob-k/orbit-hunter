@@ -4,5 +4,5 @@
   "type": "module",
   "description": "Search for new periodic three-body orbits: WebGPU screening, float64 verification",
   "scripts": { "test": "node test/figure8.test.js && node test/known.test.js" },
-  "license": "MIT"
+  "license": "CC-BY-4.0"
 }
