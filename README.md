@@ -9,8 +9,8 @@ A search for new periodic orbits of the planar equal-mass three-body problem.
   Dormand–Prince 5(4) integrator. float32 is only ever a filter.
 - **Sanity check:** `npm test` reproduces the figure-8 orbit and checks energy conservation.
 
-Status: early. CPU reference + validation done; GPU screener and UI written, not yet validated.
-Planned: volunteer compute (browser tabs donate GPU time), a public catalog of verified orbits,
+Status: early. The GPU scan, click-to-refine and orbit viewer work, and it finds the figure-8.
+Next up: volunteer compute (browser tabs donate GPU time), a public catalog of verified orbits,
 stability classification, 4+ bodies.
 
 ## Run
