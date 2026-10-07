@@ -128,11 +128,22 @@ rotated by some angle theta. This is the Henon style start. It has total L != 0.
 | 0.53631 | 20.716 | 1.8516 | 0.298 |
 | 0.75014 | 23.929 | 2.2535 | 0.072 |
 
-What I know about novelty: not much. Non-zero L has been studied far less than the zero-L plane (Jankovic and
-Dmitrasinovic report 57 satellites of the Broucke-Hadjidemetriou-Henon family in 2016, and about 100 in a 2020
-paper, which also says there are infinitely many more), but I could not get a list to compare with, so I
-can't say if any of these 11 is new. Several of them (the ones with closest approach around 0.5 and L around
-2) look like a close pair orbiting inside a wide loop of the third body, which is a familiar kind of motion.
+Comparison with what is catalogued (tools/compare-threebodyorbits.mjs): the Three Body Orbits atlas
+(threebodyorbits.com, 3,942 orbits) lists 37 equal-mass orbits with non-zero angular momentum that are not
+choreographies: Suvakov's other orbits (13), Sheen's (11) and the equal-mass BHH satellites (14). I copied
+their period, energy and L from the orbit pages into data/threebodyorbits-equalmass-L.json and compared the
+scale free numbers T|E|^1.5 and |L||E|^0.5 (also allowing an orbit run n times). None of my 11 matches any of
+them; the closest is off by about 0.5% in L|E|^0.5, which is far more than the numerical noise (1e-8).
+
+Not the same as "new":
+
+- Their 14 BHH satellites are only the ones that atlas lists. Jankovic et al (CPC 2020) say they found
+  about 100 and I can't get that list, so I can't rule out a match there.
+- Five or six of mine sit at L|E|^0.5 between 2.4 and 2.6, right where the BHH retrograde (R) satellites
+  are (2.42 to 2.61), so they are probably more members of that same family, not a new kind of orbit.
+- Two of the 11 are near-twins (same T|E|^1.5 to 5e-9, L|E|^0.5 differing by 2e-5), probably two nearby
+  members of one family on either side of a turning point. They are kept as two.
+- Simo's choreographies (343 orbits, non-zero L) were not compared, my orbits are not choreographies.
 
 ## Run
 
@@ -143,5 +154,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-checking E against the 109 MB file, comparing the L != 0 orbits with the Jankovic et al. satellite lists (need the data), more lam slices and longer hunts,
+checking E against the 109 MB file, getting the Jankovic et al. satellite list (ask the authors?), more lam slices and longer hunts, a look at which of my orbits are BHH R-family members,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
