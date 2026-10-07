@@ -22,10 +22,12 @@ How it works:
 
 ## Caveat
 
-This exact (v1, v2) plane was already scanned by Suvakov and Dmitrasinovic (2013) and then by
-Li and Liao (2017-18) with a much finer grid, so most easy finds are taken. "Not in known.js" does
-not mean new, it has to be checked against their published lists. Other things to try: longer
-periods, finer grids, other slices (angular momentum, unequal masses), more bodies.
+This plane has been searched hard already. Suvakov and Dmitrasinovic (2013) found 13 families here, then
+Li and Liao (arXiv 1705.00527) used the same setup with grids up to 4000x4000 and periods up to
+T = 200 and found 695 families (229 with T <= 100). So "not in known.js" does not mean new, and a
+plain finer grid / longer period scan of this plane mostly repeats their work. Things that are less
+covered: other slices (non-zero angular momentum, other start configurations), more bodies,
+T > 200, and much finer grids around the long orbits.
 
 ## Run
 
