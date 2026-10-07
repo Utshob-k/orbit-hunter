@@ -183,8 +183,8 @@ to Node worker threads: 8 threads, 5 minutes per hunt, every result appended to 
 it finishes. Input is the 319 symmetric orbits from the earlier scan (data/scan-rows-perp.json, 287 unique
 starts). It took about 1h50.
 
-- 287 hunts, 111 reached rotation 0 (the other failures: about 105 ran out of time, most of the rest
-  did not converge or lost the family while sliding lam).
+- 287 hunts, 111 reached rotation 0 (the 176 failures: 92 ran out of time, 52 did not converge,
+  31 lost the family while sliding lam).
 - `node tools/summarize-hunt.mjs data/hunt-results.jsonl data/perp-periodic-3.json` collapses that to
   89 distinct orbits, minus 4 that are another orbit run 2 to 8 times, so 85 base orbits.
 - 2 of those have L = 0 and are in Hristov and Hristova's database (checked with
@@ -195,8 +195,8 @@ starts). It took about 1h50.
 - 8 of the 16 were re-checked with a 1e-15 integrator over one full period, they return to the start
   within about 1e-9 (data/email-orbits.json, `node tools/check-perp-list.mjs data/email-orbits.json`).
 
-Same caveat as everywhere above: "not in the atlas" is not "new". I have asked (or am about to ask)
-the authors of the BHH satellite papers whether these are known.
+Same caveat as everywhere above: "not in the atlas" is not "new". I could not get the Jankovic et al.
+satellite list, so I can't say whether any of these are known.
 
 ## Run
 
