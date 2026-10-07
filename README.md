@@ -37,11 +37,20 @@ is new, and nothing here should be read as a discovery.
   the outer two bodies start at distance 2.)
 - **Connection to a published family.** The satellites of the BHH family (Jankovic, Dmitrasinovic and Suvakov,
   CPC 2020, tables 3 to 6) are inside my search family. I converted all 99 (98 re-close, and my T* and L* reproduce
-  theirs, median relative difference 6e-10 and 1e-10) and continued each in lam to an exactly periodic orbit:
-  40 of 98 got there. Their k = 3 and 4 satellites end at SN.9. Their k = 5 satellite (N = 9) ends at exactly 5 times one of
-  my stable orbits (lam = 0.8653, T* = 4.9598, L* = 1.0150, agreement 2e-12), so that orbit is the progenitor of
-  that satellite and belongs to the BHH family. The other 5 stable orbits, and the rest of the 81, were not reached from
-  any satellite I could continue. That does not show they are new.
+  theirs, median relative difference 6e-10 and 1e-10) and followed each one in lam until the rotation angle theta is 0.
+  The first attempt (steps in lam, `huntPeriodicMS`) reported 40 of 98 reaching an exactly periodic orbit, but that
+  method can jump to another branch, so I redid it with continuation in arclength (below), which can't:
+  - Of those 40, arclength gives the same orbit for only 3, a different one for 11 and runs out of time for the
+    26 high-k ones, so the other 26 are unchecked. The orbits found the first way are still genuine periodic orbits (they
+    close to 1e-11), but I can no longer say they are on the satellite's branch. In particular my earlier statements that
+    the k = 3 and 4 satellites end at SN.9, and that satellite N = 9 (k = 5) is connected to 5 times the stable orbit at
+    lam = 0.8653, are not supported: theta along the N = 9 branch peaks at -0.07 and never reaches 0, it only passes close.
+  - On the 58 that failed before, 13 hunts reached an exactly periodic orbit, 30 ran out of time in both directions and
+    the rest lost the family near a close approach. Together with the checked ones that makes **17 distinct orbits**
+    reached by continuation (`data/perp-arc-orbits.json`). 3 of them are known or already mine (SN.9, Sheen's "Three
+    ovals", my stable orbit at T* = 9.658) and 14 match neither the atlas nor my first list. Two are linearly stable:
+    the T* = 9.658 one already in the table above, and **lam = 0.03231, T* = 29.310, L* = 0.7897** (not in the table).
+    The atlas has only 14 equal-mass satellites, so not matching it says very little.
 
 ## How it works
 
@@ -58,7 +67,11 @@ is new, and nothing here should be read as a discovery.
 5. **Multiple shooting (`src/shooting.js`).** The half orbit is cut into pieces so a small error can't blow up over the
    whole orbit, and a tangent predictor follows how the solution moves with lam. The old hunts failed on tight, many-winding
    satellites (k = 15 to 48) mostly because the predictor was bad, not because the orbits are long (their full period is only
-   about 10 time units). With it, 40 of 98 satellites reach an exactly periodic orbit, up from 9.
+   about 10 time units).
+   **Arclength continuation (`huntArclength`).** lam and the shooting unknowns are followed together as one curve (the next point
+   has to lie on the plane perpendicular to the tangent), so turning points are no problem, and a step is refused when theta
+   jumps by more than a few hundredths of a radian or the tangent turns too much, so no zero is skipped and the branch can't be
+   left by accident. When theta changes sign the zero is found by regula falsi along the curve.
 6. **Stability (`src/stability.js`).** The orbit is integrated together with its variational equations over one period, the
    monodromy matrix is restricted to the 8 dimensional part with zero center of mass and momentum, and its eigenvalues
    (own complex QR solver, no libraries) say stable or not. Four of the eight eigenvalues are 1 in theory and scatter
@@ -75,10 +88,13 @@ difference). Against the atlas my stability numbers match to four digits for the
 - "Not in the atlas" is not "new". The atlas lists only 14 equal-mass BHH satellites, and Jankovic et al. report about 100.
   Their list is only in the paper's tables, and the paper does not cover everything. Butterfly II, a published orbit, is
   also missing from the Li-Liao table.
-- 58 of the 98 satellites never reached an exactly periodic orbit (ran out of time, no convergence, or the branch turns
-  back in lam, which would need continuation in arclength instead of lam). My 81 are not reached by the 40 that did.
+- Following the high-k satellites (about 56 of the 98) to a zero of theta takes more than the 10 minutes
+  per start I gave each direction, so for those I do not know if they reach a periodic orbit. A few others lost the family
+  near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
 - Some orbits close with a rotation of only 1e-8 to 1e-9 radians per period, which is at the accuracy floor of these
   long orbits. Their closure error is at most 7e-9.
+- A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
+  branches, see above.
 - Several of my orbits are probably more members of known BHH families (L* 2.4 to 2.6 and about 1.0 are where the
   atlas satellites are).
 
@@ -105,7 +121,7 @@ Both families are in the "family" menu.
 
 Useful scripts in `tools/` (all print what they do at the top):
 
-- `hunt-all.mjs` hunts truly periodic orbits from a list of starts on worker threads; add `ms` to use multiple shooting
+- `hunt-all.mjs` hunts truly periodic orbits from a list of starts on worker threads; add `ms` to use multiple shooting or `arc` for arclength continuation (`HUNT_ONLY=list.json` picks starts)
 - `summarize-hunt.mjs` removes repeats and marks atlas matches; `stability-list.mjs` computes stability
 - `convert-cpc.mjs` turns the paper's satellite table into my start; `compare-*.mjs` compare orbits with the published lists
 - `plot-orbits.mjs`, `plot-perp.mjs` draw orbits as svg (figures/)
@@ -115,7 +131,8 @@ Useful scripts in `tools/` (all print what they do at the top):
 | file | what it is |
 |---|---|
 | `data/perp-periodic*.json`, `hunt-results.jsonl`, `stability-perp-3.json` | my orbits and their stability |
-| `data/hunt-cpc-*.jsonl`, `cpc-converted.json` | the continuation from the paper's satellites |
+| `data/hunt-cpc-*.jsonl`, `cpc-converted.json` | the continuation from the paper's satellites (`hunt-cpc-arc*.jsonl` is the arclength one) |
+| `data/perp-arc-orbits.json`, `stability-arc.json` | the 17 orbits reached by arclength continuation and their stability |
 | `data/cpc2020-satellites.json`, `liliao.json`, `threebodyorbits-equalmass-L.json` | **other people's numbers**, copied from Jankovic et al. 2020, Li and Liao 2017 and threebodyorbits.com |
 
 ## License
@@ -126,5 +143,5 @@ The three files marked above belong to their authors, cite them if you use them.
 
 ## Next
 
-Hear back from the authors of the BHH papers about whether the L != 0 orbits are known. Continuation in arclength for the
-satellites whose branch turns back. Possibly 4 or more bodies, or volunteer compute.
+Hear back from the authors of the BHH papers about whether the L != 0 orbits are known. Longer arclength runs for the high-k satellites,
+and following each branch past its first zero. Possibly 4 or more bodies, or volunteer compute.

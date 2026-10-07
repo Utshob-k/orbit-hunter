@@ -1,6 +1,6 @@
 // multiple shooting should give the same orbit as single shooting, from a rough guess
 import { closePerp } from '../src/perp.js';
-import { closePerpMS, stepInLam } from '../src/shooting.js';
+import { closePerpMS, stepInLam, huntArclength } from '../src/shooting.js';
 
 let fail = 0;
 const check = (name, ok, extra = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name} ${extra}`); if (!ok) fail++; };
@@ -28,4 +28,9 @@ check('tangent matches finite differences', Math.abs(tg.du1 - fd.u1) < 1e-4 && M
 // and a step along it closes
 const step = stepInLam(base, 0.003, { maxMs: 30000 }).sol;
 check('step of 0.003 in lam with the tangent predictor', step.res < 1e-10, `res=${step.res.toExponential(1)}`);
+
+// continuation in arclength from the paper's k = 3 satellite N = 2 (lam 0.539) walks down to the stable orbit at lam 0.49914
+const arc = huntArclength(-0.9082792465198175, 1.7254453207653662, 0.5393586724779005, 4.2842770176189475, { dir: -1, maxMs: 60000 });
+check('arclength continuation reaches a periodic orbit', arc.ok && Math.abs(arc.lam - 0.4991378) < 1e-5 && arc.info.repeatErr < 1e-9,
+  arc.ok ? `lam=${arc.lam.toFixed(6)} T*=${arc.info.ts.toFixed(4)}` : arc.why);
 process.exit(fail ? 1 : 0);

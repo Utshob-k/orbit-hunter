@@ -62,11 +62,16 @@ function residual(z, lam, m) {
   return F;
 }
 
-// residual and jacobian
+// d(start state)/d(lam): x1 = -1 - lam/3, x2 = 2 lam/3, x3 = 1 - lam/3
+const dLam = new Float64Array(N);
+dLam[0] = -1 / 3; dLam[2] = 2 / 3; dLam[4] = -1 / 3;
+
+// residual, jacobian wrt z, and dF/dlam
 function system(z, lam, m) {
   const n = 3 + N * (m - 1);
   const tau = z[2] / m;
   const F = new Float64Array(n);
+  const Flam = new Float64Array(n);
   const J = Array.from({ length: n }, () => new Float64Array(n));
   const f = new Float64Array(N);
   let end = null;
@@ -84,6 +89,8 @@ function system(z, lam, m) {
         J[row][2] = f[k] / m;             // d/dt
         if (i === 0) {
           for (let c = 0; c < 2; c++) { let v = 0; for (let q = 0; q < N; q++) v += M[k][q] * dS0[c][q]; J[row][c] = v; }
+          let w = 0; for (let q = 0; q < N; q++) w += M[k][q] * dLam[q];
+          Flam[row] = w;
         } else {
           for (let q = 0; q < N; q++) J[row][3 + N * (i - 1) + q] = M[k][q];
         }
@@ -106,13 +113,15 @@ function system(z, lam, m) {
         J[row][2] = dt / m;
         if (i === 0) {
           for (let c = 0; c < 2; c++) { let v = 0; for (let q = 0; q < N; q++) for (let p = 0; p < N; p++) v += D[r][q] * M[q][p] * dS0[c][p]; J[row][c] = v; }
+          let w = 0; for (let q = 0; q < N; q++) for (let p = 0; p < N; p++) w += D[r][q] * M[q][p] * dLam[p];
+          Flam[row] = w;
         } else {
           for (let p = 0; p < N; p++) { let v = 0; for (let q = 0; q < N; q++) v += D[r][q] * M[q][p]; J[row][3 + N * (i - 1) + p] = v; }
         }
       }
     }
   }
-  return { F, J, end };
+  return { F, J, Flam, end };
 }
 
 // close the symmetric half orbit with m pieces. pass the nodes of a nearby solution to warm start.
@@ -250,4 +259,161 @@ export function stepInLam(sol, d, opts = {}) {
   }
   const out = closePerpMS(guess.u1, guess.u2, sol.lam + d, guess.t, { m, nodes: guess.nodes, ...opts });
   return { sol: out, tangent: tg };
+}
+
+
+// ---- pseudo-arclength continuation ----
+// natural continuation in lam can't get around a turning point of the branch. here the unknowns are (z, lam) together
+// and the extra equation keeps us one step h further along the curve: tau . (Y - Y_predicted) = 0.
+
+const dot = (a, b) => { let v = 0; for (let i = 0; i < a.length; i++) v += a[i] * b[i]; return v; };
+const unit = (a) => { const n = Math.sqrt(dot(a, a)); return Float64Array.from(a, (v) => v / n); };
+
+function packZ(sol) {
+  const z = new Float64Array(3 + N * (sol.m - 1));
+  z[0] = sol.u1; z[1] = sol.u2; z[2] = sol.t;
+  sol.nodes.forEach((s, i) => z.set(s, 3 + N * i));
+  return z;
+}
+
+function solOf(Y, m) {
+  const n = Y.length - 1;
+  const nodes = [];
+  for (let i = 0; i < m - 1; i++) nodes.push(Float64Array.from(Y.subarray(3 + N * i, 3 + N * (i + 1))));
+  return { u1: Y[0], u2: Y[1], t: Y[2], lam: Y[n], m, nodes };
+}
+
+// tangent of the curve at a solution: null vector of [J | Flam], oriented like tauPrev
+function tangentAt(J, Flam, tauPrev) {
+  const n = Flam.length;
+  const A = J.map((row, i) => [...Array.from(row), Flam[i]]);
+  A.push(Array.from(tauPrev));
+  const rhs = new Array(n + 1).fill(0);
+  rhs[n] = 1;
+  const x = solve(A, rhs);
+  if (!x) return null;
+  const t = unit(x);
+  return dot(t, tauPrev) < 0 ? t.map((v) => -v) : t;
+}
+
+// newton on [F = 0, tau . (Y - Yp) = 0]. returns the solution with its jacobian so the next tangent is cheap.
+function correct(Yp, tau, m, t0) {
+  const n = Yp.length - 1;
+  let Y = Float64Array.from(Yp);
+  for (let it = 0; it < 12; it++) {
+    const sys = system(Float64Array.from(Y.subarray(0, n)), Y[n], m);
+    const Fn = sup(sys.F);
+    if (Fn < 1e-11) return { ok: true, Y, J: sys.J, Flam: sys.Flam, iters: it };
+    const A = sys.J.map((row, i) => [...Array.from(row), sys.Flam[i]]);
+    A.push(Array.from(tau));
+    const rhs = [...Array.from(sys.F, (v) => -v), -dot(tau, Y.map((v, i) => v - Yp[i]))];
+    const d = solve(A, rhs);
+    if (!d) return { ok: false };
+    let accepted = false;
+    for (let a = 1; a > 1 / 16; a /= 2) {
+      const Yn = Float64Array.from(Y, (v, i) => v + a * d[i]);
+      if (Yn[2] < 0.3 * t0 || Yn[2] > 3 * t0 || Math.abs(Yn[n]) > 1.2) continue;
+      const Fnew = residual(Yn.subarray(0, n), Yn[n], m);
+      if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; break; }
+    }
+    if (!accepted) return { ok: false };
+  }
+  return { ok: false };
+}
+
+// follow the family from a starting orbit until the rotation angle theta is 0.
+// dir = +1 or -1 picks which way along the curve to start.
+export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000, thTol = 2e-8, hMax = 0.15, maxSteps = 6000, all = false, trace = null } = {}) {
+  const started = Date.now();
+  const first = closePerpMS(u1, u2, lam0, t0, { m, maxMs: 120000 });
+  if (!(first.res < 1e-9)) return { ok: false, why: 'start did not close' };
+  const n = 3 + N * (m - 1);
+  const z0 = packZ(first);
+  const sys0 = system(z0, lam0, m);
+  const dz = solve(sys0.J.map((r) => Array.from(r)), Array.from(sys0.Flam, (v) => -v));
+  if (!dz) return { ok: false, why: 'singular at the start' };
+  let tau = unit([...dz, 1].map((v) => v * dir));
+  let Y = toY(z0, lam0);
+  let th = thetaOf({ ...first });
+  if (th === null) return { ok: false, why: 'start orbit failed' };
+  if (Math.abs(th) < thTol) return arcFinish(Y, m);
+  let h = Math.min(hMax, 0.002 / Math.max(Math.abs(tau[n]), 1e-6));
+  let steps = 0, lamMin = lam0, lamMax = lam0;
+  const found = [];
+  const end = (why) => (found.length ? { ok: true, orbits: found, why, steps, lamMin, lamMax } : { ok: false, why, lam: Y[n], th, steps, lamMin, lamMax });
+  while (steps++ < maxSteps) {
+    if (Date.now() - started > maxMs) return end('out of time');
+    const Yp = Float64Array.from(Y, (v, i) => v + h * tau[i]);
+    const c = correct(Yp, tau, m, t0);
+    let accept = false, tauNew = null;
+    if (c.ok) {
+      tauNew = tangentAt(c.J, c.Flam, tau);
+      accept = tauNew && dot(tauNew, tau) > Math.cos(0.35);   // don't jump to another branch
+    }
+    if (!accept) {
+      h /= 2;
+      if (h < 1e-9) return end('lost the family near lam=' + Y[n].toFixed(4));
+      continue;
+    }
+    const thNew = thetaOf(solOf(c.Y, m));
+    if (thNew === null) { h /= 2; continue; }
+    // theta must not jump, or two zeros could hide between the points (it wraps around at +-pi)
+    let dth = Math.abs(thNew - th);
+    if (dth > Math.PI) dth = 2 * Math.PI - dth;
+    if (dth > Math.max(0.03, 0.3 * Math.abs(th)) && h > 1e-6) { h /= 2; continue; }
+    if (Math.abs(thNew) < thTol) { const o = arcFinish(c.Y, m); if (o.ok) found.push(o); if (!all && o.ok) return o; }
+    else if (th * thNew < 0 && Math.abs(th) < 1 && Math.abs(thNew) < 1) {
+      const Yz = refineZero(Y, c.Y, th, thNew, m, t0, thTol);
+      if (!Yz) return { ok: false, why: 'zero of theta not refined', lam: Y[n], th, steps, lamMin, lamMax };
+      const o = arcFinish(Yz, m);
+      if (o.ok) found.push(o);
+      if (!all && o.ok) return o;
+    }
+    if (trace) trace(steps, c.Y[n], thNew, h, c.iters, c.Y);
+    // accept the step
+    Y = c.Y; tau = tauNew; th = thNew;
+    lamMin = Math.min(lamMin, Y[n]); lamMax = Math.max(lamMax, Y[n]);
+    h = Math.min(hMax, c.iters <= 3 ? h * 1.4 : h);
+  }
+  return end('no convergence');
+}
+
+// theta changes sign between A and B (points on the curve): illinois regula falsi along the chord,
+// with the constraint plane perpendicular to it. returns the point with |theta| < thTol or null
+function refineZero(A, B, thA, thB, m, t0, thTol) {
+  A = Float64Array.from(A); B = Float64Array.from(B);
+  let fA = thA, fB = thB, side = 0;
+  for (let k = 0; k < 60; k++) {
+    const frac = -fA / (fB - fA);
+    const chord = B.map((v, i) => v - A[i]);
+    const c = correct(Float64Array.from(A, (v, i) => v + frac * chord[i]), unit(chord), m, t0);
+    if (!c.ok) return null;
+    const tc = thetaOf(solOf(c.Y, m));
+    if (tc === null) return null;
+    if (Math.abs(tc) < thTol) return c.Y;
+    if (tc * thB > 0) {
+      B = Float64Array.from(c.Y); thB = tc; fB = tc;
+      if (side === -1) fA /= 2;
+      side = -1;
+    } else {
+      A = Float64Array.from(c.Y); fA = tc;
+      if (side === 1) fB /= 2;
+      side = 1;
+    }
+  }
+  return null;
+}
+
+function toY(z, lam) {
+  const Y = new Float64Array(z.length + 1);
+  Y.set(z);
+  Y[z.length] = lam;
+  return Y;
+}
+
+function arcFinish(Y, m) {
+  const sol = solOf(Y, m);
+  const info = perpInfo(sol.u1, sol.u2, sol.lam, sol.t);
+  if (!info) return { ok: false, why: 'zero found but the orbit does not integrate' };
+  return { ok: true, u1: sol.u1, u2: sol.u2, lam: sol.lam, t: sol.t, res: 0, info };
 }
