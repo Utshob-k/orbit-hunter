@@ -21,16 +21,24 @@ How it works:
 
 ## Not in known.js
 
-The same scan also closed two orbits that are not in known.js (checked with a much tighter integrator,
-they still return to the start within 2e-10, closest approach 0.34):
+The scan also closed two orbits that are not in known.js. Checked with a much tighter integrator, they
+still return to the start within 2e-10, and the closest approach is 0.34:
 
     v1 = 0.209661505, v2 = 0.525702389, T = 33.8615
     v1 = 0.255430936, v2 = 0.516385839, T = 35.0431
 
-I could not tell if these are new. This plane was already searched by Suvakov and Dmitrasinovic (2013)
-and by Li and Liao (arXiv 1705.00527, grids up to 4000x4000, T up to 200, 695 families). I only
-had a truncated copy of their tables, and neither orbit was in the part I could read. To really
-know, someone needs to compare against the full supplementary tables.
+I compared them with the full table from Li and Liao (arXiv 1705.00527, `tools/compare-liliao.mjs`).
+The table parses to exactly 695 orbits, and my solver reproduces their values to about 9 digits for
+the figure-8, butterfly I, moth I and II, dragonfly, butterfly III, goggles, bumblebee and yin-yang.
+Neither of the two orbits is in it (closest T|E|^1.5 is 3e-3 away, a match needs about 1e-5).
+
+What that does and doesn't mean:
+
+- Butterfly II is a published Suvakov-Dmitrasinovic orbit and it is also missing from their table, so
+  "not in that table" is not the same as "never published".
+- Both orbits have T|E|^1.5 within 2e-4 of 7x the figure-8 (64.66), so they are probably
+  figure-8 like orbits, not something exotic.
+- I did not check other catalogs (Suvakov's own list, later papers). Not claiming these are new.
 
 ## Angular momentum
 
@@ -50,5 +58,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-Henon style perpendicular-crossing family, a proper comparison against Li and Liao's full tables,
+Henon style perpendicular-crossing family, a look at the shapes of those two orbits, other catalogs,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
