@@ -1,6 +1,6 @@
-// closes a near periodic orbit: solve R(theta) state(T) = state(0) (bodies maybe relabeled)
-// levenberg-marquardt with finite difference jacobian. which of v1, v2, T, ell, theta are
-// unknowns is picked with a mask. if it's not really periodic the residual stays > 0
+// closing a near periodic orbit with levenberg-marquardt.
+// we want state(T) = state(0) (bodies maybe relabeled); v1, v2, T are the unknowns.
+// if the orbit isn't really periodic the residual just stays above zero.
 import { sdInitial, dp45Step } from './physics.js';
 
 const PERMS = [
@@ -9,7 +9,7 @@ const PERMS = [
   [2, 0, 1],
 ];
 
-// params p = [v1, v2, T, ell, theta]
+// p = [v1, v2, T, ell, theta]
 
 // returns null on a near collision (step size collapses)
 function stateAt(v1, v2, T, ell) {
@@ -71,7 +71,7 @@ export function solve(A, b) {
   return x;
 }
 
-// the general closer. p0 = [v1,v2,T,ell,theta], free = which entries may change
+// p0 = [v1, v2, T, ell, theta], free says which of them may change
 export function closeGeneral(p0, free, perm = 0, { maxIter = 30, fd = 1e-6, maxMs = 3000 } = {}) {
   const t0 = Date.now();
   const idx = [0, 1, 2, 3, 4].filter((i) => free[i]);
@@ -123,63 +123,9 @@ export function closeGeneral(p0, free, perm = 0, { maxIter = 30, fd = 1e-6, maxM
   return { v1: x[0], v2: x[1], T: x[2], ell: x[3], theta: x[4], res, perm };
 }
 
-// plain periodic orbit at fixed ell (theta = 0)
+// periodic orbit at fixed ell, no rotation
 export function closeOrbit(v1, v2, T, perm = 0, { ell = 0, ...opts } = {}) {
   return closeGeneral([v1, v2, T, ell, 0], [1, 1, 1, 0, 0], perm, opts);
-}
-
-// angle that best rotates the end state onto the start state (least squares)
-function bestTheta(v1, v2, T, ell, perm) {
-  const s0 = sdInitial(v1, v2, ell);
-  const s = stateAt(v1, v2, T, ell);
-  if (!s) return 0;
-  let C = 0, S = 0;
-  const pm = PERMS[perm];
-  for (let i = 0; i < 3; i++) {
-    for (const off of [0, 6]) {
-      const ax = s[off + 2 * i], ay = s[off + 2 * i + 1];
-      const bx = s0[off + 2 * pm[i]], by = s0[off + 2 * pm[i] + 1];
-      C += ax * bx + ay * by;
-      S += ax * by - ay * bx;
-    }
-  }
-  return Math.atan2(S, C);
-}
-
-// orbit that comes back rotated by theta (fixed ell)
-export function closeRelative(v1, v2, T, ell, perm = 0, opts = {}) {
-  const th = bestTheta(v1, v2, T, ell, perm);
-  return closeGeneral([v1, v2, T, ell, th], [1, 1, 1, 0, 1], perm, opts);
-}
-
-// start from a near return at ell0, close it as a rotated return, then slide ell with a secant
-// iteration until the rotation angle is zero. then it is a real periodic orbit with L = ell.
-export function huntExact(v1, v2, T, ell0, perm = 0, { maxMs = 8000 } = {}) {
-  const t0 = Date.now();
-  const first = closeRelative(v1, v2, T, ell0, perm, { maxMs: 3000 });
-  if (first.res > 1e-9) return { ok: false, why: 'rotated return did not close', res: first.res };
-  let a = first;
-  // second point, small step in ell (sign doesnt matter, secant sorts it out)
-  let b = closeRelative(a.v1, a.v2, a.T, ell0 + 0.01, perm, { maxMs: 3000 });
-  if (b.res > 1e-9) b = closeRelative(a.v1, a.v2, a.T, ell0 - 0.01, perm, { maxMs: 3000 });
-  if (b.res > 1e-9) return { ok: false, why: 'could not continue in ell', res: b.res };
-  for (let k = 0; k < 20; k++) {
-    if (Date.now() - t0 > maxMs) return { ok: false, why: 'ran out of time', res: b.res, theta: b.theta };
-    if (Math.abs(b.theta) < 1e-11) break;
-    const slope = (b.theta - a.theta) / (b.ell - a.ell);
-    if (!Number.isFinite(slope) || Math.abs(slope) < 1e-12) return { ok: false, why: 'theta does not depend on ell here', res: b.res, theta: b.theta };
-    const next = b.ell - b.theta / slope;
-    if (Math.abs(next - ell0) > 0.5) return { ok: false, why: 'ell ran away', res: b.res, theta: b.theta };
-    const c = closeRelative(b.v1, b.v2, b.T, next, perm, { maxMs: 3000 });
-    if (c.res > 1e-9) return { ok: false, why: 'lost the orbit while sliding ell', res: c.res, theta: b.theta };
-    a = b;
-    b = c;
-  }
-  if (Math.abs(b.theta) > 1e-9) return { ok: false, why: 'theta never reached 0', res: b.res, theta: b.theta };
-  // polish with ell free and theta = 0
-  const f = closeGeneral([b.v1, b.v2, b.T, b.ell, 0], [1, 1, 1, 1, 0], perm, { maxMs: 4000 });
-  if (f.res > 1e-9) return { ok: false, why: 'final polish failed', res: f.res, theta: b.theta };
-  return { ok: true, v1: f.v1, v2: f.v2, T: f.T, ell: f.ell, res: f.res, perm };
 }
 
 export function energy(v1, v2, ell = 0) {

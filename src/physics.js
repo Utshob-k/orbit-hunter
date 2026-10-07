@@ -1,7 +1,7 @@
 // 3 body problem, equal masses, G = 1, 2d
 // state = [x0,y0,x1,y1,x2,y2, vx0,vy0,vx1,vy1,vx2,vy2]
 
-export const N_STATE = 12;
+const N_STATE = 12;
 
 export function deriv(s, out) {
   for (let i = 0; i < 6; i++) out[i] = s[6 + i];
@@ -30,7 +30,6 @@ export function sdInitial(v1, v2, ell = 0) {
 }
 
 // Dormand-Prince 5(4) coefficients
-const C = [0, 1 / 5, 3 / 10, 4 / 5, 8 / 9, 1, 1];
 const A = [
   [],
   [1 / 5],

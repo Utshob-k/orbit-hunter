@@ -139,29 +139,3 @@ export async function deepScan({ screener, region, family = 'sd', ell = 0, tiles
   pool.close();
   return st;
 }
-
-// take symmetric (perp family) orbits and slide lam until each one is truly periodic (rotation 0)
-export async function huntAll({ rows, workers = 8, jobMs = 90000, target = 0, log = () => {}, state }) {
-  const pool = makePool(workers, jobMs);
-  const st = state || { found: [], tried: 0, ok: 0, why: {} };
-  let done = 0;
-  await Promise.all(rows.map(async (r) => {
-    const out = await pool.run({ kind: 'perpHunt', v1: r.v1, v2: r.v2, ell: r.ell, T: r.t, tMax: target });
-    done++;
-    st.tried++;
-    if (!out.ok) {
-      const why = out.timeout ? 'timed out' : (out.why || 'failed').replace(/[0-9.\-]+/g, '#');
-      st.why[why] = (st.why[why] || 0) + 1;
-    } else {
-      const i = out.info;
-      st.ok++;
-      // same orbit shows up from several starting points, and as its mirror image (L -> -L)
-      const dup = st.found.some((f) => Math.abs(f.fp - i.ts) < 1e-7 * i.ts && Math.abs(Math.abs(f.ls) - Math.abs(i.ls)) < 1e-6);
-      if (!dup) st.found.push({ family: 'perp', v1: out.u1, v2: out.u2, ell: out.lam, t: out.t, period: i.T, E: i.E, L: i.L, ls: i.ls,
-        theta: i.theta, repeatErr: i.repeatErr, fp: i.ts, minDist: i.minDist, res: out.res, known: null });
-    }
-    log(`${done}/${rows.length} done, ${st.ok} reached rotation ${target}, ${st.found.length} distinct`);
-  }));
-  pool.close();
-  return st;
-}
