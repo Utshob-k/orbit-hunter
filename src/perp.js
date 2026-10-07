@@ -1,8 +1,8 @@
-// the "perpendicular start" family (henon style), equal masses
-// bodies sit on the x axis at -1, lam, 1 (then shifted so the center of mass is 0), all velocities
-// point in y. u1, u2 are the y velocities of bodies 1 and 2, body 3 gets -u1-u2.
-// if the system is ever collinear again with all velocities perpendicular to the line, the orbit
-// is mirror symmetric in time and repeats after twice that time, rotated by some angle.
+// the perpendicular start family (henon style), equal masses.
+// bodies on the x axis at -1, lam, 1 (shifted so the center of mass is 0), all velocities along y:
+// u1, u2 for bodies 1 and 2, body 3 gets -u1-u2.
+// if the system is ever collinear again with all velocities perpendicular to the line, the orbit is
+// mirror symmetric and repeats after twice that time, rotated by some angle.
 import { dp45Step } from './physics.js';
 import { solve } from './newton.js';
 
@@ -165,12 +165,12 @@ export function huntPeriodic(u1, u2, lam0, t0, target = 0, { maxMs = 25000 } = {
   const f = (p) => wrap(p.th - target);
   if (Math.abs(f(a)) < 1e-9) return { ok: true, ...a, info: perpInfo(a.u1, a.u2, a.lam, a.t) };
   // walk in the direction that reduces |theta - target|, shrinking the step when we lose the orbit
-  let dir = 1, step = 0.02;
+  const step = 0.02;
   let b = null;
   for (const d of [1, -1]) {
-    let st = 0.02;
+    let st = step;
     while (!b && st > 1e-4) { b = at(lam0 + d * st, a, null); if (!b) st /= 2; }
-    if (b) { dir = d; break; }
+    if (b) break;
   }
   if (!b) return { ok: false, why: 'could not step in lam' };
   for (let k = 0; k < 80; k++) {
@@ -178,8 +178,7 @@ export function huntPeriodic(u1, u2, lam0, t0, target = 0, { maxMs = 25000 } = {
     if (Math.abs(f(b)) < 1e-9) return { ok: true, ...b, info: perpInfo(b.u1, b.u2, b.lam, b.t) };
     const slope = (f(b) - f(a)) / (b.lam - a.lam);
     if (!Number.isFinite(slope) || Math.abs(slope) < 1e-9) return { ok: false, why: 'theta does not change with lam', lam: b.lam, th: b.th };
-    let want = -f(b) / slope; // secant step
-    // if the angle is moving away from the target, we are walking the wrong way
+    const want = -f(b) / slope; // secant step
     let stepLam = Math.sign(want) * Math.min(Math.abs(want), step);
     let c = null;
     while (!c && Math.abs(stepLam) > 1e-11) {

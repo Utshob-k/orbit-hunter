@@ -1,11 +1,8 @@
 // multiple shooting for the perpendicular family.
-// single shooting integrates the whole half orbit from the start state, so for a long orbit a tiny error
-// in the start grows a lot and newton only converges from a very good guess. here the half orbit is cut
-// into m pieces, the state at the start of every piece is an unknown, and the pieces must join up.
-//
-// unknowns z = [u1, u2, t, s_1, ..., s_(m-1)]   (s_i is a 12 vector, s_0 comes from u1, u2, lam)
-// equations: flow(s_i, t/m) = s_(i+1) for every piece, and the last piece must end collinear with
-// all velocities perpendicular to the line (3 numbers). as many equations as unknowns.
+// the half orbit is cut into m pieces and the state at the start of each piece is an unknown,
+// so a small error in the start can't blow up over the whole orbit.
+// unknowns z = [u1, u2, t, s_1 .. s_(m-1)]  (s_0 comes from u1, u2, lam)
+// equations: flow(s_i, t/m) = s_(i+1) for each piece, and the last piece ends collinear + perpendicular
 import { deriv, dp45Step } from './physics.js';
 import { monodromy } from './stability.js';
 import { solve } from './newton.js';
@@ -161,9 +158,8 @@ function thetaOf(sol) {
   return Math.atan2(Math.sin(a), Math.cos(a));
 }
 
-// slide lam until the rotation angle is 0 (a truly periodic orbit). every step uses the tangent predictor
-// (stepInLam) and is solved with multiple shooting, warm started from the pieces of the previous step.
-// the step grows after a success and halves after a failure.
+// slide lam until the rotation angle is 0 (truly periodic). each step uses the tangent predictor and
+// starts from the pieces of the last step. the step grows after a success and halves after a failure.
 export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 = 0.002, stepMax = 0.05, thTol = 1e-9 } = {}) {
   const started = Date.now();
   const wrap = (x) => Math.atan2(Math.sin(x), Math.cos(x));
@@ -209,8 +205,7 @@ export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 
   return { ok: false, why: 'no convergence', lam: b.lam, th: b.th };
 }
 
-// how the solution moves with lam: solve J dz/dlam = -dF/dlam at a solution. only the first piece depends on lam
-// directly (the start positions shift with lam), the nodes are unknowns.
+// how the solution moves with lam: J dz/dlam = -dF/dlam. only the first piece depends on lam directly
 export function tangentInLam(sol) {
   const m = sol.m, lam = sol.lam;
   const z = new Float64Array(3 + N * (m - 1));

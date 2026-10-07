@@ -1,8 +1,6 @@
-// linear stability of a periodic orbit.
-// integrate the orbit together with its variational equations over one period, which gives the
-// monodromy matrix M. the orbit is linearly stable if all eigenvalues of M have modulus 1.
-// we only look at perturbations that keep the center of mass and total momentum at 0 (8 dimensions),
-// that part is invariant under the flow.
+// linear stability of a periodic orbit: integrate the orbit with its variational equations over one
+// period to get the monodromy matrix M. stable if all eigenvalues of M have modulus 1.
+// only perturbations with zero center of mass and momentum are used (8 dimensions)
 
 // state x = [x0,y0,x1,y1,x2,y2, vx0,vy0,vx1,vy1,vx2,vy2], G = m = 1
 const N = 12;
@@ -127,7 +125,7 @@ export function reducedMonodromy(M) {
   return out;
 }
 
-// ---- eigenvalues of a small real matrix, shifted QR iteration in complex arithmetic ----
+// eigenvalues of a small real matrix, shifted QR in complex arithmetic
 const cmul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
 const cabs = (a) => Math.hypot(a[0], a[1]);
 const cdiv = (a, b) => { const d = b[0] * b[0] + b[1] * b[1]; return [(a[0] * b[0] + a[1] * b[1]) / d, (a[1] * b[0] - a[0] * b[1]) / d]; };
