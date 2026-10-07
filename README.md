@@ -139,7 +139,7 @@ Not the same as "new":
 
 - Their 14 BHH satellites are only the ones that atlas lists. Jankovic et al (CPC 2020) say they found
   about 100 and I can't get that list, so I can't rule out a match there.
-- Five or six of mine sit at L|E|^0.5 between 2.4 and 2.6, right where the R-series BHH satellites of the atlas are (the atlas calls the R family the prograde one)
+- Five or six of mine sit at L|E|^0.5 between 2.4 and 2.6, right where the R-series BHH satellites of the atlas are
   are (2.42 to 2.61), so they are probably more members of that same family, not a new kind of orbit.
 - Two of the 11 are near-twins (same T|E|^1.5 to 5e-9, L|E|^0.5 differing by 2e-5), probably two nearby
   members of one family on either side of a turning point. They are kept as two.
@@ -191,7 +191,7 @@ starts). It took about 1h50.
   tools/compare-hristov-big.mjs). 2 are atlas orbits (Sheen's "Two ovals" and "Oval, catface and
   starship"). 81 match nothing in the atlas, 16 of them closing to better than 1e-8 and never
   coming closer than 0.2. About 10 of those 16 have L|E|^0.5 between 2.4 and 2.6, the band of the
-  R-series BHH satellites of the atlas, so most are probably more members of that family.
+  R-series BHH satellites of the atlas, so some are probably more members of that family (not shown).
 - 8 of the 16 were re-checked with a 1e-15 integrator over one full period, they return to the start
   within about 1e-9 (data/email-orbits.json, `node tools/check-perp-list.mjs data/email-orbits.json`).
 
@@ -226,32 +226,39 @@ so the numbers are not reliable). All 6 stable ones are among the 81 not in the 
 | 0.52028 | 33.745 | 2.566 | 0.480 |
 | 0.70190 | 47.065 | 2.626 | 0.242 |
 
-Four have L* in the band of the R-series BHH satellites (2.42 to 2.61 in the atlas; the atlas describes R as
-the prograde family) and two are in the A-series band (0.76 to 1.13, the retrograde family), and 14 of the 15 BHH satellites in the atlas are stable, so these are probably
+Four have L* in the band of the R-series BHH satellites of the atlas (2.42 to 2.61) and two are in the band of the
+A-series ones (0.76 to 1.13), and 14 of the 15 BHH satellites in the atlas are stable, so these are probably
 more members of those families. Stable orbits are rare in general (Hristov and Hristova found 7 stable among
 6,333 distinct orbits in the zero-L family), which is why they are interesting to ask about.
 
 ## Where a list of the L != 0 orbits could be (search done after the stability run)
 
-- Jankovic, Dmitrasinovic and Suvakov, CPC 250 (2020) 107052: Tables 3 to 6 list about 99 retrograde BHH satellites,
-  columns N, L_r = L|E|^(1/2), a, c (initial condition parameters in Jacobi coordinates), T, k, closest return.
-  They are relative periodic orbits scanned at fixed L_r in {0.65, 0.7, 0.8, 0.85, 0.9, 0.935549, 1.0, 1.03, 1.07, 1.1},
-  k from 3 to 58, E = -1/2. I extracted the text from the paper PDF and parsed 94 of the rows. Only 12 of my 81
-  unmatched orbits have L* in 0.6 to 1.15 (2 of them stable), so that list can only cover those.
+- Jankovic, Dmitrasinovic and Suvakov, CPC 250 (2020) 107052: Tables 3 to 6 list 99 retrograde BHH satellites,
+  columns N, L, a, c, T, k, closest return. They are relative periodic orbits at the size b = 1 (see the update
+  below for how to read L, a, c), scanned at fixed L in {0.65, 0.7, 0.8, 0.85, 0.9, 0.935549, 1.0, 1.03, 1.07, 1.1},
+  k from 3 to 58. I extracted the text from the paper PDF (the minus signs show up as NUL characters).
 - Jankovic and Dmitrasinovic, PRL 116 (2016) 064301 / arXiv:1604.08358: Table 1, 57 satellites, (L, k, T) at E = -1/2.
   The units of its L and T do not match mine, so no direct comparison yet.
-- The Three Body Orbits atlas: 14 equal-mass BHH satellites (A series are retrograde, L* 0.76 to 1.13; R series are
-  prograde, L* 2.42 to 2.61, mostly T* > 100), Sheen 11, Suvakov 13, Simo choreographies 343.
+- The Three Body Orbits atlas: 14 equal-mass BHH satellites (A series L* 0.76 to 1.13; R series L* 2.42 to 2.61,
+  mostly T* > 100; I could not establish from the atlas pages which of them is retrograde or prograde), Sheen 11, Suvakov 13, Simo choreographies 343.
 - Li and Liao, arXiv:2008.13550: 598,996 BHH orbits and satellites, but for unequal masses (data in a supplement);
   the equal-mass case only appears as a plot and the 58 satellites of the 2016 paper.
 - Not reachable: Suvakov's three-body.ipb.ac.rs / suki.ipb.ac.rs pages (certificate errors), pub.ipb.ac.rs
   (expired certificate), a 2025 ScienceDirect paper on L != 0 orbits (403). I did not bypass any of those.
 
-Because their orbits are relative periodic (not exactly periodic) and sit at fixed round values of L_r, an
+Because their orbits are relative periodic (not exactly periodic) and sit at fixed round values of L, an
 exactly periodic orbit of mine will not match a row number for number even if it belongs to the same family.
-A real comparison needs their parameters converted to my start (bodies at -1, lam, 1) and a continuation in lam.
-That is not done. Note the R-series band (L* 2.4 to 2.6, where 4 of my 6 stable orbits are) is not covered by
-the CPC tables at all, they only list the retrograde family.
+
+Update: I did the conversion (tools/convert-cpc.mjs, data/cpc2020-satellites.json holds their numbers, with the
+source). Their setup is Jacobi vectors xi = (a, 0), eta = (b, 0) with the size fixed by b = 1, velocities
+(0, c), (0, d) and d = L - a c, where L is the angular momentum at that size (so the L in their tables is not the
+scale free L*; I first read it as L* and that was wrong). 98 of the 99 satellites re-close in my setup, and my T* and L*
+reproduce theirs (median relative difference 6e-10 for the period, 1e-10 for the angular momentum), so their orbits
+are inside my search family and the conversion is right. Their scale free L* runs from 0.84 to 2.82 (k from 3 to 58),
+so their list covers both of my bands, including 2.3 to 2.7 (30 satellites). The rotation per period of their orbits is
+small (median 0.02 rad, 62 of 98 under 0.05), so a small change of lam makes each exactly periodic.
+A crude test (T*/k as a function of L*, k should come out near an integer for a satellite) gave nothing: 11 of 47
+orbits near integer k, chance level, but the relation is only approximate so this does not decide anything.
 
 ## Run
 
