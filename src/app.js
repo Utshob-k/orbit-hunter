@@ -303,8 +303,25 @@ $('csv').onclick = () => {
 };
 
 // so scans can also be run from the console
-window.hunter = { rows: () => rows, state: () => deepState };
+window.hunter = {
+  rows: () => rows,
+  state: () => deepState,
+  // continue a scan that died: skip the first few tiles and start from the orbits already found
+  async resume(skip, prior) {
+    const o = readOpts();
+    setBusy(true);
+    drawAxes();
+    deepState = { found: prior, stats: { cells: 0, cands: 0, closed: 0, failed: 0, ms: 0 }, stop: false };
+    rows = prior;
+    const { deepScan } = await import('./deep.js');
+    await deepScan({ screener, state: deepState, ...o, skip, log, onTile: (res, reg, n) => drawTile(res.d, n, reg),
+      onUpdate: () => { rows = deepState.found; renderRows(); } });
+    log('done');
+    setBusy(false);
+  },
+};
 
+import('./deep.js').then((m) => m.loadCatalog());
 drawAxes();
 loop();
 (async () => {

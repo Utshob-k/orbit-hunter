@@ -43,6 +43,31 @@ What that does and doesn't mean:
   figure-8 like orbits, not something exotic.
 - I did not check other catalogs (Suvakov's own list, later papers). Not claiming these are new.
 
+## Finer scan (v1 0.05-0.6, v2 0.05-0.7)
+
+6x6 tiles of 1024x1024 cells (about 38M orbits, cells roughly 3x finer than Li and Liao's grid), tmax 40
+for the return time (so full periods up to 120 when a relabeled return is used). 46 distinct orbits closed:
+
+- 8 from my known list, 6 from the Li-Liao table
+- 22 figure-8 relatives (n-times wound figure-8s, including some with n = 17, 19, 22 and T up to ~100)
+- 10 not in either list. 5 of those are not figure-8 relatives:
+
+        v1            v2            T          T|E|^1.5   closest published (rel diff)
+    A   0.0880054619  0.4212710769   8.97545    24.33439   I.B1  5.3e-3
+    B   0.0620144090  0.2547876725  10.09007    35.05118   I.B2  7.1e-3
+    C   0.0560050559  0.1398707263  10.45366    39.64485   I.B3  3.0e-5
+    D   0.3827414123  0.4589771182  25.05730    42.78349   I.B5  3.3e-5
+    E   0.2517330337  0.2941901556  27.00344    79.27361   I.A9  4.8e-5
+
+All five re-close to better than 1e-9 with a 100x tighter integrator. C, D and E each have a published orbit
+whose fingerprint is within 5e-5, so they are probably relatives of goggles, moth II and I.A9, not
+unrelated orbits. A and B have nothing close in the table. They are short orbits with close approaches
+(about 0.04), so their basins are narrow, which is a believable way for a 4000x4000 grid to miss them.
+The figure is figures/five-candidates.svg.
+
+Still not proof of anything: I only compared against the one table, and a miss in that table is not
+the same as a miss in the literature (butterfly II is also not in it).
+
 ## Angular momentum
 
 The start state has a knob `ell` (total angular momentum, `ell = 0` is the usual plane). Scans at
@@ -61,5 +86,5 @@ Click a light spot on the map to refine it. "Deep scan" runs the whole pipeline 
 
 ## Next
 
-Henon style perpendicular-crossing family, a look at the shapes of those two orbits, other catalogs,
+Henon style perpendicular-crossing family, checking A and B against other catalogs, a finer scan of the rest of the plane,
 volunteer compute (browser tabs donate GPU time), 4+ bodies.
