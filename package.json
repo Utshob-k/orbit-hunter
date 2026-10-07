@@ -1,0 +1,8 @@
+{
+  "name": "orbit-hunter",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Search for new periodic three-body orbits: WebGPU screening, float64 verification",
+  "scripts": { "test": "node test/figure8.test.js" },
+  "license": "MIT"
+}
