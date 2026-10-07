@@ -260,6 +260,25 @@ small (median 0.02 rad, 62 of 98 under 0.05), so a small change of lam makes eac
 A crude test (T*/k as a function of L*, k should come out near an integer for a satellite) gave nothing: 11 of 47
 orbits near integer k, chance level, but the relation is only approximate so this does not decide anything.
 
+Result of the continuation hunts from their satellites (`node tools/hunt-all.mjs data/cpc-rows.json data/hunt-cpc.jsonl 8 300 0`,
+all 98 finished): only 9 reached an exactly periodic orbit (5 distinct up to repeats), 43 ran out of the 5 minutes, 17 did not
+converge, 29 lost the family or could not step in lam. It worked for low k and failed for high k: 8 of 43 satellites with k < 15
+reached one, 1 of 55 with k >= 15 (which includes all of their satellites at L* 2.3 to 2.7). What came out:
+
+- 4 of the 9 end at Suvakov's SN.9 exactly (T* = 11.8309, L* = 1.1166, to better than 1e-11): their satellites with k = 3, 4, 4
+  and, run twice, k = 10. So SN.9 is on their family. It is a published orbit and one I had re-found earlier (it is not
+  among the 81 unmatched ones).
+- 5 others (T*, L*): (12.3814, 1.1249), (19.7361, 1.0981), (19.7689, 1.4394), (26.6952, 0.8909), (46.7188, 2.1581). They match
+  nothing in my lists. (19.7689, 1.4394) is close to twice the atlas orbit "Oval, catface and starship" (19.7566, 1.4387) but
+  not equal (6e-4). These are exactly periodic orbits on their families that I had not found; they come from a published
+  list, so that says nothing about whether they are new.
+- None of my 81 unmatched orbits (including the 6 stable ones) was reached. That does NOT show they are new: the hunts
+  barely got into the region where most of them sit (L* 2.4 to 2.6, which their satellites reach only at high k), and all
+  the successes have L* below 2.2.
+
+So the question "are the 81 new" is still open. What is settled: their satellites are in my family, the method reproduces
+their numbers, and one published orbit (SN.9) is connected to them.
+
 ## Run
 
     npm test                  # float64 checks, node 18+
