@@ -294,8 +294,8 @@ which already fails at a step of 3e-4) and, for the rest, my own success cutoff.
 - Run over the 89 satellites the old method had failed on (`node tools/hunt-all.mjs data/cpc-rows.json data/hunt-cpc-ms.jsonl 8 600 0 ms`):
   10 reached rotation < 1e-9. 33 ended "lost the family", and 21 of those had a rotation of 1e-8 to 1e-9, which is at the accuracy floor
   of these long orbits, so my cutoff was too tight. Re-running those 21 with the cutoff at 5e-8 (`HUNT_THTOL=5e-8`, data/hunt-cpc-ms2.jsonl):
-  20 reached it (one still running when this was written).
-- Altogether 39 of their 98 satellites now lead to an exactly periodic orbit, up from 9 (data/hunt-cpc-all.jsonl, closure error median
+  all 21 reached it.
+- Altogether 40 of their 98 satellites now lead to an exactly periodic orbit, up from 9 (data/hunt-cpc-all.jsonl, closure error median
   6e-10, worst 7e-9). Their k reaches 48 and L* reaches 2.83, including the L* 2.4 to 2.7 band.
 
 Matching these against my 85 orbits (to 1e-5, allowing n-fold repeats): only two things match.
@@ -304,7 +304,7 @@ Matching these against my 85 orbits (to 1e-5, allowing n-fold repeats): only two
   4.9598, to 1.9e-12. So that stable orbit is the progenitor the k = 5 satellite branches off, a member of the BHH family.
 
 The other 5 stable orbits and the rest of the 81 are not reached by any satellite I could continue. That is still not evidence that they
-are new: there are 59 satellites that did not reach an exactly periodic orbit (out of time, no convergence, or a branch that turns back
+are new: there are 58 satellites that did not reach an exactly periodic orbit (out of time, no convergence, or a branch that turns back
 in lam, which would need continuation in arclength instead of lam).
 
 ## License
