@@ -1,6 +1,7 @@
 // walk each stable orbit along lam in both directions, track the rotation numbers nu and write one job for every place where
 // a nu passes m/k (k up to kMax): the k fold repeat has a branch point there.
 // node tools/nu-crossings.mjs out-jobs.json [kMax] [step] [maxRange]
+// ORBITS=1,3,4 only scans those orbits of the list (numbered in the order printed)
 import fs from 'fs';
 import { closePerpMS, stepInLam } from '../src/shooting.js';
 import { relativeStability } from '../src/relative.js';
@@ -20,7 +21,9 @@ const fracs = [];
 for (let k = 2; k <= kMax; k++) for (let m = 1; 2 * m < k; m++) if (gcd(m, k) === 1) fracs.push({ m, k, f: m / k });
 
 const jobs = [];
+const only = process.env.ORBITS ? process.env.ORBITS.split(',').map(Number) : null;
 for (const [oi, o] of stable.entries()) {
+  if (only && !only.includes(oi)) continue;
   const start = closePerpMS(o.u1, o.u2, o.lam, o.t, { m: 8, maxMs: 60000 });
   if (!(start.res < 1e-9)) { console.log('orbit', oi, 'did not close'); continue; }
   for (const dir of [1, -1]) {

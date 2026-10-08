@@ -1,0 +1,2152 @@
+[
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 3,
+  "lamBP": 0.9142595025268526,
+  "repeat_ts": 14.972841893424382,
+  "repeat_ls": 0.9099866440761752,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   76,
+   121,
+   90,
+   119
+  ],
+  "hit": [
+   1,
+   0.0029597606245963517,
+   3
+  ]
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 4,
+  "lamBP": 0.8766705685518852,
+  "repeat_ts": 19.879906137796194,
+  "repeat_ls": 0.9993206694603186,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   79,
+   90,
+   276,
+   119
+  ],
+  "hit": [
+   6,
+   7.861534598438019e-06,
+   4
+  ]
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 5,
+  "lamBP": 0.8582926530308991,
+  "repeat_ts": 24.763810055647475,
+  "repeat_ls": 1.022290144415406,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   62,
+   55,
+   73,
+   245
+  ],
+  "hit": [
+   9,
+   2.499136135590518e-07,
+   5
+  ]
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 5,
+  "lamBP": 0.9499953487380759,
+  "repeat_ts": 24.976223932722707,
+  "repeat_ls": 0.7491317969404282,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   43,
+   36,
+   176,
+   285
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 6,
+  "lamBP": 0.8479365901818,
+  "repeat_ts": 29.64610976704468,
+  "repeat_ls": 1.0304044430522452,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   44,
+   73,
+   63,
+   266
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 7,
+  "lamBP": 0.8415285074677714,
+  "repeat_ts": 34.53122835369448,
+  "repeat_ls": 1.0338664729854081,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   107,
+   108,
+   117,
+   55
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 7,
+  "lamBP": 0.891758422029987,
+  "repeat_ts": 34.864437816688415,
+  "repeat_ls": 0.9710665281114997,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   41,
+   101
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 8,
+  "lamBP": 0.8372980306541489,
+  "repeat_ts": 39.419739464146595,
+  "repeat_ls": 1.0355426213735883,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   52,
+   59,
+   157,
+   154
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 8,
+  "lamBP": 0.9360538271039076,
+  "repeat_ts": 39.961214874904314,
+  "repeat_ls": 0.8234552123261831,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   24,
+   137
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 9,
+  "lamBP": 0.8343616196240472,
+  "repeat_ts": 44.311234076737406,
+  "repeat_ls": 1.0364339751027285,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   88,
+   81
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 9,
+  "lamBP": 0.8660545446354857,
+  "repeat_ts": 44.64542026963827,
+  "repeat_ls": 1.0140024309981832,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   34,
+   40
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 10,
+  "lamBP": 0.8322435353515668,
+  "repeat_ts": 49.205201488555886,
+  "repeat_ls": 1.036942954343387,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   51,
+   30
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 10,
+  "lamBP": 0.8982277666867445,
+  "repeat_ts": 49.84265467023364,
+  "repeat_ls": 0.9560056240479947,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   27,
+   27
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 11,
+  "lamBP": 0.830666315611943,
+  "repeat_ts": 54.10116006826354,
+  "repeat_ls": 1.0372507015130827,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   44,
+   26
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 11,
+  "lamBP": 0.8524455234830028,
+  "repeat_ts": 54.4094085940496,
+  "repeat_ls": 1.0272676965242724,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   26,
+   24
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 11,
+  "lamBP": 0.8860903037528979,
+  "repeat_ts": 54.746927144862184,
+  "repeat_ls": 0.982763932931849,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   27,
+   27
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 11,
+  "lamBP": 0.9299249236422518,
+  "repeat_ts": 54.93947765676635,
+  "repeat_ls": 0.8510203266193894,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   19,
+   19
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 12,
+  "lamBP": 0.829457979962906,
+  "repeat_ts": 58.99867289604398,
+  "repeat_ls": 1.0374460471218323,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   29,
+   49
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 13,
+  "lamBP": 0.8285155861379759,
+  "repeat_ts": 63.89751675524368,
+  "repeat_ls": 1.0375743878066876,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   24,
+   25
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 13,
+  "lamBP": 0.8443776721591906,
+  "repeat_ts": 64.1764490288738,
+  "repeat_ls": 1.0324677717276614,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25,
+   40
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 13,
+  "lamBP": 0.8692150501747455,
+  "repeat_ts": 64.52623002429769,
+  "repeat_ls": 1.0100494399547837,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   26,
+   22
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 13,
+  "lamBP": 0.8807392820895945,
+  "repeat_ts": 64.65103551491914,
+  "repeat_ls": 0.9925953538064979,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 13,
+  "lamBP": 0.9018125883794211,
+  "repeat_ts": 64.81854472175323,
+  "repeat_ls": 0.946831075007347,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   21,
+   21
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 14,
+  "lamBP": 0.8277629180556361,
+  "repeat_ts": 68.79736819689099,
+  "repeat_ls": 1.0376619371333538,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   54,
+   33
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 14,
+  "lamBP": 0.8632082805925934,
+  "repeat_ts": 69.40953223580844,
+  "repeat_ls": 1.0172716256259335,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   18,
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 14,
+  "lamBP": 0.926482058599023,
+  "repeat_ts": 69.91536881083738,
+  "repeat_ls": 0.865324690755846,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   17
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 15,
+  "lamBP": 0.8271543232473328,
+  "repeat_ts": 73.69810087715233,
+  "repeat_ls": 1.0377230965796973,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   21,
+   21
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 15,
+  "lamBP": 0.8392091665141602,
+  "repeat_ts": 73.95014890317094,
+  "repeat_ls": 1.03484370902437,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   47,
+   40
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 15,
+  "lamBP": 0.8835164882689897,
+  "repeat_ts": 74.62795075796586,
+  "repeat_ls": 0.9876356860434017,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   21,
+   19
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 16,
+  "lamBP": 0.8542235423383628,
+  "repeat_ts": 79.173137795819,
+  "repeat_ls": 1.0258649920881548,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   17,
+   15
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 16,
+  "lamBP": 0.9040852686489614,
+  "repeat_ts": 79.79331941805961,
+  "repeat_ls": 0.9406947713127903,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   14,
+   15
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 17,
+  "lamBP": 0.8262408580825893,
+  "repeat_ts": 83.50164428545249,
+  "repeat_ls": 1.0377988585606257,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   43
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 17,
+  "lamBP": 0.8357037410867587,
+  "repeat_ts": 83.7302861255938,
+  "repeat_ls": 1.0360536495904393,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   40,
+   23
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 17,
+  "lamBP": 0.8500071552659837,
+  "repeat_ts": 84.03918682647769,
+  "repeat_ls": 1.0290382246929692,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   14,
+   23,
+   40,
+   40
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 17,
+  "lamBP": 0.8955341679010291,
+  "repeat_ts": 84.70794941926758,
+  "repeat_ls": 0.9625051452792894,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   19,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 17,
+  "lamBP": 0.9242811167984939,
+  "repeat_ts": 84.8901701008613,
+  "repeat_ls": 0.8740521482143268,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   17,
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 17,
+  "lamBP": 0.9567632932871022,
+  "repeat_ts": 84.9090287991175,
+  "repeat_ls": 0.7059752536741833,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   12,
+   12
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 18,
+  "lamBP": 0.8258940432261477,
+  "repeat_ts": 88.40425752486517,
+  "repeat_ls": 1.0378226436751896,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25,
+   24
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 18,
+  "lamBP": 0.8882702494807894,
+  "repeat_ts": 89.61200595782645,
+  "repeat_ls": 0.9784252796179341,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   13
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 18,
+  "lamBP": 0.9437252636565008,
+  "repeat_ts": 89.91778815594301,
+  "repeat_ls": 0.7847458715635612,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   11,
+   10
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 19,
+  "lamBP": 0.8332201436361887,
+  "repeat_ts": 93.51585639875304,
+  "repeat_ls": 1.0367220655108516,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   28,
+   36
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 19,
+  "lamBP": 0.8618861209049979,
+  "repeat_ts": 94.17340417068736,
+  "repeat_ls": 1.0186986236808848,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 19,
+  "lamBP": 0.8820470432846242,
+  "repeat_ts": 94.50847716103026,
+  "repeat_ls": 0.9902979217061684,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   17,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 19,
+  "lamBP": 0.9056610693407688,
+  "repeat_ts": 94.76754256571787,
+  "repeat_ls": 0.9362901682009721,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   14
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 19,
+  "lamBP": 0.9324895754604663,
+  "repeat_ts": 94.90157128889007,
+  "repeat_ls": 0.8398241401033901,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   17
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 19,
+  "lamBP": 0.9621890092821394,
+  "repeat_ts": 94.88400546540576,
+  "repeat_ls": 0.6671961724468475,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   12,
+   19
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 20,
+  "lamBP": 0.8253487326653041,
+  "repeat_ts": 98.21074494083385,
+  "repeat_ls": 1.0378544958482385,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   22,
+   22
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 20,
+  "lamBP": 0.8433591827814756,
+  "repeat_ts": 98.70738235690735,
+  "repeat_ls": 1.0329931924317624,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   29,
+   23
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 0,
+  "progenitor_ts": 4.959828633501362,
+  "k": 20,
+  "lamBP": 0.9227502044635866,
+  "repeat_ts": 99.86436815984,
+  "repeat_ls": 0.8799378951555087,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   11,
+   11
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 4,
+  "lamBP": 0.4825098354567688,
+  "repeat_ts": 38.58138659802748,
+  "repeat_ls": 1.033214872198511,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   121,
+   121,
+   73,
+   104
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 5,
+  "lamBP": 0.44615051322426125,
+  "repeat_ts": 48.08948014568652,
+  "repeat_ls": 1.0161151690512762,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   121,
+   121,
+   86,
+   105
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 6,
+  "lamBP": 0.41996635085252687,
+  "repeat_ts": 57.59385095018913,
+  "repeat_ls": 1.0052667334233512,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   114,
+   109,
+   111,
+   91
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 7,
+  "lamBP": 0.4001331354462669,
+  "repeat_ts": 67.09549386132673,
+  "repeat_ls": 0.9978911199706842,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   46,
+   42,
+   120,
+   102
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 7,
+  "lamBP": 0.5066166495392301,
+  "repeat_ts": 67.65070620931097,
+  "repeat_ls": 1.0458271353707433,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   96,
+   97,
+   357,
+   77
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 8,
+  "lamBP": 0.38454654215953027,
+  "repeat_ts": 76.59506326359134,
+  "repeat_ls": 0.9926179938590101,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   33,
+   24,
+   117,
+   125
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 9,
+  "lamBP": 0.3719240962580402,
+  "repeat_ts": 86.09286179418825,
+  "repeat_ls": 0.9886934598638251,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   24,
+   21
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 9,
+  "lamBP": 0.46271080127806996,
+  "repeat_ts": 86.67198073773227,
+  "repeat_ls": 1.0236138058222932,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   44,
+   45
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 10,
+  "lamBP": 0.36148001727728374,
+  "repeat_ts": 95.58926926758264,
+  "repeat_ls": 0.985685359464557,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   18,
+   22
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 11,
+  "lamBP": 0.35267510556733345,
+  "repeat_ts": 105.08447796550809,
+  "repeat_ls": 0.9833208791260105,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   17,
+   19
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 11,
+  "lamBP": 0.4320783533175466,
+  "repeat_ts": 105.68408993626308,
+  "repeat_ls": 1.0101297711585622,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   63,
+   61
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 11,
+  "lamBP": 0.4980220671833778,
+  "repeat_ts": 106.23268240437031,
+  "repeat_ls": 1.0412151977447395,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   35,
+   35
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 12,
+  "lamBP": 0.3301059731037994,
+  "repeat_ts": 114.4624724260542,
+  "repeat_ls": 0.9779962791852358,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   22,
+   17
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 12,
+  "lamBP": 0.3451350624392495,
+  "repeat_ts": 114.57862417265511,
+  "repeat_ls": 0.9814228719126089,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 13,
+  "lamBP": 0.3386025444967414,
+  "repeat_ts": 124.07190137766082,
+  "repeat_ls": 0.9798745644622697,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 13,
+  "lamBP": 0.36388515455917525,
+  "repeat_ts": 124.28675184479471,
+  "repeat_ls": 0.9863587029300546,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   19,
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 13,
+  "lamBP": 0.40941131774530437,
+  "repeat_ts": 124.68990919959214,
+  "repeat_ls": 1.0012498017360587,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25,
+   23
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 13,
+  "lamBP": 0.4689074441140415,
+  "repeat_ts": 125.25379245427366,
+  "repeat_ls": 1.026544701551402,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   49,
+   48
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 14,
+  "lamBP": 0.3328790240794981,
+  "repeat_ts": 133.56439197628998,
+  "repeat_ls": 0.9785923036313557,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   13,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 14,
+  "lamBP": 0.39051846113652194,
+  "repeat_ts": 134.0983529416588,
+  "repeat_ls": 0.994583157767243,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   20,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 14,
+  "lamBP": 0.4568747832188642,
+  "repeat_ts": 134.76181493873855,
+  "repeat_ls": 1.0209155331991913,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25,
+   26
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 15,
+  "lamBP": 0.32780061332743893,
+  "repeat_ts": 143.05602170985708,
+  "repeat_ls": 0.9775133876151705,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   13
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 15,
+  "lamBP": 0.39189862103364703,
+  "repeat_ts": 143.69098135456645,
+  "repeat_ls": 0.9950470999734733,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   19
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 15,
+  "lamBP": 0.4113608170830175,
+  "repeat_ts": 143.8934807965693,
+  "repeat_ls": 1.0019760985669945,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   24,
+   21
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 15,
+  "lamBP": 0.4939398742406176,
+  "repeat_ts": 144.8142864161515,
+  "repeat_ls": 1.0390693740400503,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   37
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 16,
+  "lamBP": 0.3232812941768292,
+  "repeat_ts": 152.54710789395423,
+  "repeat_ls": 0.976600315020354,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   12
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 16,
+  "lamBP": 0.4276885524348537,
+  "repeat_ts": 153.67178167654373,
+  "repeat_ls": 1.0083361731065026,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   39,
+   24
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 16,
+  "lamBP": 0.43652902537819205,
+  "repeat_ts": 153.7738491154102,
+  "repeat_ls": 1.0119840557595328,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   33,
+   34
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 17,
+  "lamBP": 0.3192477214418924,
+  "repeat_ts": 162.03788893955854,
+  "repeat_ls": 0.9758231952402583,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   12
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 17,
+  "lamBP": 0.37791768831542205,
+  "repeat_ts": 162.6882711699679,
+  "repeat_ls": 0.9905179358540546,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   14,
+   11
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 17,
+  "lamBP": 0.4278449565363455,
+  "repeat_ts": 163.27817489276802,
+  "repeat_ls": 1.0083994513764485,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   37,
+   24
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 17,
+  "lamBP": 0.44057870254949655,
+  "repeat_ts": 163.43482817187635,
+  "repeat_ls": 1.013702515339424,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   28,
+   30
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 17,
+  "lamBP": 0.4721477864012522,
+  "repeat_ts": 163.835374660956,
+  "repeat_ls": 1.0281042510747733,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   37,
+   37
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 17,
+  "lamBP": 0.5120790171952199,
+  "repeat_ts": 164.36963182548976,
+  "repeat_ls": 1.048824492617469,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   21,
+   20
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 18,
+  "lamBP": 0.3155626091742698,
+  "repeat_ts": 171.52769687249827,
+  "repeat_ls": 0.9751446596170158,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   14
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 18,
+  "lamBP": 0.45087200270690997,
+  "repeat_ts": 173.18484830519284,
+  "repeat_ls": 1.0182032959830052,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   47,
+   48
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 18,
+  "lamBP": 0.5013833914873558,
+  "repeat_ts": 173.88346326485848,
+  "repeat_ls": 1.0430037562578514,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   21,
+   20
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 19,
+  "lamBP": 0.36646787561230765,
+  "repeat_ts": 181.68244903189708,
+  "repeat_ls": 0.9870947008405839,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   11,
+   11
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 19,
+  "lamBP": 0.4127753126782344,
+  "repeat_ts": 182.28396415624897,
+  "repeat_ls": 1.0025075047939092,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   33,
+   14
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 19,
+  "lamBP": 0.4540786595166032,
+  "repeat_ts": 182.85144251953793,
+  "repeat_ls": 1.0196441874543367,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   20,
+   21
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 19,
+  "lamBP": 0.45919762902721956,
+  "repeat_ts": 182.92404545936378,
+  "repeat_ls": 1.0219822644280825,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   34,
+   32
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 19,
+  "lamBP": 0.49156058517590956,
+  "repeat_ts": 183.39582922809436,
+  "repeat_ls": 1.0378319881482039,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   34,
+   34
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 20,
+  "lamBP": 0.40618967303254294,
+  "repeat_ts": 191.78558923845273,
+  "repeat_ls": 1.000065175341449,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   12
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 5,
+  "progenitor_ts": 9.658403183348069,
+  "k": 20,
+  "lamBP": 0.46601831727328885,
+  "repeat_ts": 192.65433137562624,
+  "repeat_ls": 1.025169765475881,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   43,
+   43
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 3,
+  "lamBP": 0.6629388934287987,
+  "repeat_ts": 52.959357291411536,
+  "repeat_ls": 2.5236799457917383,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   96,
+   76,
+   144,
+   86
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 4,
+  "lamBP": 0.6507718486779247,
+  "repeat_ts": 70.79724388175772,
+  "repeat_ls": 2.5354409940345928,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   57,
+   64,
+   75,
+   158
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 5,
+  "lamBP": 0.6403573771478329,
+  "repeat_ts": 88.68365278472186,
+  "repeat_ls": 2.544412465510076,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   50,
+   37,
+   88,
+   147
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 5,
+  "lamBP": 0.6689878721541641,
+  "repeat_ts": 88.14783161078647,
+  "repeat_ls": 2.517260758759465,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   54,
+   114
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 6,
+  "lamBP": 0.631396373799204,
+  "repeat_ts": 106.60001033556102,
+  "repeat_ls": 2.5514370882733863,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   43,
+   36,
+   154,
+   96
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 7,
+  "lamBP": 0.6232974116898343,
+  "repeat_ts": 124.54021672394934,
+  "repeat_ls": 2.5573164057189586,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   38,
+   53,
+   90,
+   199
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 7,
+  "lamBP": 0.6566685461158629,
+  "repeat_ts": 123.74024984484464,
+  "repeat_ls": 2.529924670025765,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   33,
+   42,
+   109,
+   168
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 7,
+  "lamBP": 0.6706477655033432,
+  "repeat_ts": 123.36147388747949,
+  "repeat_ls": 2.515428765876158,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   39,
+   36,
+   77,
+   100
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 8,
+  "lamBP": 0.6154778785175746,
+  "repeat_ts": 142.50380871403726,
+  "repeat_ls": 2.5626329020829246,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   23,
+   87
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 8,
+  "lamBP": 0.6670795609118637,
+  "repeat_ts": 141.0961819745163,
+  "repeat_ls": 2.519329137565938,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   34,
+   35,
+   107,
+   151
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 9,
+  "lamBP": 0.6072385439900426,
+  "repeat_ts": 160.49482460128638,
+  "repeat_ls": 2.567917608106485,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   30
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 9,
+  "lamBP": 0.6453464871932837,
+  "repeat_ts": 159.47197015528587,
+  "repeat_ls": 2.5402307655570273,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   35,
+   34
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 10,
+  "lamBP": 0.49550335573260224,
+  "repeat_ts": 178.52504990192674,
+  "repeat_ls": 2.5739929246680013,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 10,
+  "lamBP": 0.5971770594920968,
+  "repeat_ts": 178.52509560548438,
+  "repeat_ls": 2.5739944839180864,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   13,
+   25
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 10,
+  "lamBP": 0.6587310661575536,
+  "repeat_ts": 176.69316231586285,
+  "repeat_ls": 2.5279151443965127,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   28,
+   26
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 11,
+  "lamBP": 0.5035578943630787,
+  "repeat_ts": 196.62017750066488,
+  "repeat_ls": 2.583259231061388,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   15
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 11,
+  "lamBP": 0.5801766784509551,
+  "repeat_ts": 196.62066453293528,
+  "repeat_ls": 2.583283504560008,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   12,
+   20
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 11,
+  "lamBP": 0.6357337552650129,
+  "repeat_ts": 195.27723320855006,
+  "repeat_ls": 2.5481105001462985,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   24,
+   28
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 11,
+  "lamBP": 0.654651906936029,
+  "repeat_ts": 194.53290905971315,
+  "repeat_ls": 2.5318488928543754,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25,
+   25
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 11,
+  "lamBP": 0.666070469819007,
+  "repeat_ts": 194.05052032018133,
+  "repeat_ls": 2.520406420429173,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   17,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 13,
+  "lamBP": 0.627274218902852,
+  "repeat_ts": 231.13451814687292,
+  "repeat_ls": 2.5544798383930147,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   25,
+   23
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 13,
+  "lamBP": 0.6471036415352447,
+  "repeat_ts": 230.26592105745848,
+  "repeat_ls": 2.5387081334971144,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   14
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 13,
+  "lamBP": 0.6597750816817657,
+  "repeat_ts": 229.64909563351216,
+  "repeat_ls": 2.5268812751453638,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   14
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 13,
+  "lamBP": 0.6678644624108621,
+  "repeat_ts": 229.24147005602902,
+  "repeat_ls": 2.5184835742298164,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   14,
+   13
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 14,
+  "lamBP": 0.6436186329558546,
+  "repeat_ts": 248.15391201675922,
+  "repeat_ls": 2.541702358506554,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   19,
+   21
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 15,
+  "lamBP": 0.6193875700241309,
+  "repeat_ts": 267.0379677850285,
+  "repeat_ls": 2.560014118657681,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   19,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 16,
+  "lamBP": 0.6604063691434007,
+  "repeat_ts": 282.6062691764414,
+  "repeat_ls": 2.5262513020934323,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   18,
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 17,
+  "lamBP": 0.6114709978675292,
+  "repeat_ts": 302.9907253706654,
+  "repeat_ls": 2.5652397700961456,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   20,
+   18
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 17,
+  "lamBP": 0.6480009349410922,
+  "repeat_ts": 301.06143820144223,
+  "repeat_ls": 2.53791983915708,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   13,
+   15
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 17,
+  "lamBP": 0.6650390546847347,
+  "repeat_ts": 299.9645000575787,
+  "repeat_ls": 2.521496224811745,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   13
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 18,
+  "lamBP": 0.6554539045676961,
+  "repeat_ts": 318.27212578827624,
+  "repeat_ls": 2.531089083084002,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   17,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 18,
+  "lamBP": 0.6681927035407839,
+  "repeat_ts": 317.3881743826571,
+  "repeat_ls": 2.518127740308133,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 2,
+  "progenitor_ts": 17.846807645075046,
+  "k": 19,
+  "lamBP": 0.6428026690115699,
+  "repeat_ts": 336.8352335041923,
+  "repeat_ls": 2.5423887837717922,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 3,
+  "lamBP": 0.13362636662171784,
+  "repeat_ts": 88.51011170900816,
+  "repeat_ls": 0.7991435515362629,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   26,
+   21,
+   236,
+   395
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 4,
+  "lamBP": 0.10753970516469996,
+  "repeat_ts": 117.78221877891983,
+  "repeat_ls": 0.795880665657425,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   20,
+   20,
+   321,
+   400
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 5,
+  "lamBP": 0.08982446433931626,
+  "repeat_ts": 147.04586144292045,
+  "repeat_ls": 0.7940185470348062,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   20,
+   19,
+   235,
+   319
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 6,
+  "lamBP": 0.07690971109501678,
+  "repeat_ts": 176.30561416921265,
+  "repeat_ls": 0.7928307261388459,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   16,
+   13,
+   198,
+   256
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 7,
+  "lamBP": 0.06701693514008422,
+  "repeat_ts": 205.56324780354026,
+  "repeat_ls": 0.7920125815660163,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   13,
+   12,
+   157,
+   224
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 9,
+  "lamBP": 0.0527505690418803,
+  "repeat_ts": 264.0750937936894,
+  "repeat_ls": 0.7909651072707798,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   13,
+   10
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 14,
+  "lamBP": 0.0326037813576875,
+  "repeat_ts": 410.3463896963071,
+  "repeat_ls": 0.7897322961209818,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   12,
+   9
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 14,
+  "lamBP": 0.14041291551954968,
+  "repeat_ts": 413.26829300278865,
+  "repeat_ls": 0.8000984444497693,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   8
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 6,
+  "progenitor_ts": 29.310033967119317,
+  "k": 20,
+  "lamBP": 0.020215141040026263,
+  "repeat_ts": 585.8665496988926,
+  "repeat_ls": 0.789104886878249,
+  "file": "data\\satellite-results.jsonl",
+  "arms": [
+   15,
+   15
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 3,
+  "lamBP": 0.5380652407751363,
+  "repeat_ts": 97.22564363650433,
+  "repeat_ls": 2.589940099559733,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   206,
+   94
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 3,
+  "lamBP": 0.5566364556616841,
+  "repeat_ts": 93.35549667675458,
+  "repeat_ls": 2.6165140759892624,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   85,
+   87
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 4,
+  "lamBP": 0.5258224915384077,
+  "repeat_ts": 133.2668448793642,
+  "repeat_ls": 2.57327520203733,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   191,
+   250
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 4,
+  "lamBP": 0.546699769467807,
+  "repeat_ts": 127.18614007487207,
+  "repeat_ls": 2.6020853470337912,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   193,
+   245
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 5,
+  "lamBP": 0.5409754524745882,
+  "repeat_ts": 160.99902631597638,
+  "repeat_ls": 2.593994536400816,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   161,
+   203
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 5,
+  "lamBP": 0.5480743149356839,
+  "repeat_ts": 158.50556518232096,
+  "repeat_ls": 2.6040515796372263,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   160,
+   219
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 5,
+  "lamBP": 0.5649551775606255,
+  "repeat_ts": 152.85423559786963,
+  "repeat_ls": 2.628998456729252,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   128
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 5,
+  "lamBP": 0.5920247226639755,
+  "repeat_ts": 144.500916456802,
+  "repeat_ls": 2.6725445982417075,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   212
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 6,
+  "lamBP": 0.5372579188872109,
+  "repeat_ts": 194.8018414935017,
+  "repeat_ls": 2.5888210011420374,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   140
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 7,
+  "lamBP": 0.5310344629138013,
+  "repeat_ts": 230.46814878467816,
+  "repeat_ls": 2.5802943786413124,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   120,
+   159
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 7,
+  "lamBP": 0.5346546739910931,
+  "repeat_ts": 228.59642864281523,
+  "repeat_ls": 2.585234394848139,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   103,
+   105
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 7,
+  "lamBP": 0.5508961526228247,
+  "repeat_ts": 220.54821569208022,
+  "repeat_ls": 2.608117390075086,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   114,
+   145
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 7,
+  "lamBP": 0.5524373956906677,
+  "repeat_ts": 219.81207999173336,
+  "repeat_ls": 2.6103552559284124,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   169,
+   156
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 7,
+  "lamBP": 0.5748827884291028,
+  "repeat_ts": 209.5750449118501,
+  "repeat_ls": 2.6444230725573936,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   165
+  ],
+  "hit": null
+ },
+ {
+  "orbit": 1,
+  "progenitor_ts": 33.74508290504154,
+  "k": 8,
+  "lamBP": 0.5443005897379726,
+  "repeat_ts": 255.7151274431144,
+  "repeat_ls": 2.5986752958155757,
+  "file": "data\\satellite-results3.jsonl",
+  "arms": [
+   104,
+   143
+  ],
+  "hit": null
+ }
+]

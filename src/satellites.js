@@ -4,6 +4,7 @@
 // branch is followed from there.
 import { closePerpMS, system, correct, tangentAt, packZ, solOf, toY, unit, dot } from './shooting.js';
 import { perpInfo } from './perp.js';
+import { relativeStability } from './relative.js';
 import { solve } from './newton.js';
 
 function bordered(J, Flam, tau) {
@@ -78,7 +79,7 @@ function repeatOf(u1, u2, lam, t, k, m) {
 
 // look for branch points of the k fold repeat while lam moves from lamA to lamB.
 // returns the branches found: lam, scale free T* and L* along each of them
-export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, branchHMax = 0.05, branchMs = 120000 } = {}) {
+export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, branchHMax = 0.05, branchMs = 120000, stabEvery = 0 } = {}) {
   const rep = repeatOf(orbit.u1, orbit.u2, lamA, orbit.t, k, m);
   if (!rep) return { ok: false, why: 'repeat did not close at lamA' };
   const n = 3 + 12 * (m - 1);
@@ -112,13 +113,22 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
     const d = dot(phi, P.tau);
     phi = unit(phi.map((v, j) => v - d * P.tau[j]));
     const lamBP = P.Y[n];
-    const info = (Y) => { const s = solOf(Y, m); const pi = perpInfo(s.u1, s.u2, s.lam, s.t); return pi && { lam: s.lam, ts: pi.ts, ls: Math.abs(pi.ls), repeatErr: pi.repeatErr }; };
+    const info = (Y, withStab = false) => {
+      const s = solOf(Y, m);
+      const pi = perpInfo(s.u1, s.u2, s.lam, s.t);
+      if (!pi) return null;
+      const out = { lam: s.lam, ts: pi.ts, ls: Math.abs(pi.ls), repeatErr: pi.repeatErr };
+      if (withStab) {
+        try { const st = relativeStability(s.u1, s.u2, s.lam, s.t); out.maxMod = st.maxMod; out.scatter = st.scatter; } catch (e) { out.maxMod = null; }
+      }
+      return out;
+    };
     for (const sgn of [1, -1]) {
       const start = correct(Float64Array.from(P.Y, (v, j) => v + sgn * 0.004 * phi[j]), phi.map((v) => sgn * v), m, rep.t);
       if (!start.ok) { branches.push({ lamBP, sgn, ok: false }); continue; }
       const tauS = tangentAt(start.J, start.Flam, phi.map((v) => sgn * v));
       const along = trace(start.Y, tauS, m, rep.t, { maxSteps: branchSteps, hMax: branchHMax, maxMs: branchMs, onPoint: (p) => p.Y[n] < -0.5 || p.Y[n] > 1.05 });
-      const curve = [start, ...along].map((p) => info(p.Y)).filter(Boolean);
+      const curve = [start, ...along].map((p, i) => info(p.Y, stabEvery > 0 && i % stabEvery === 0)).filter(Boolean);
       branches.push({ lamBP, sgn, ok: true, repeatTs: info(P.Y), curve });
     }
   }
