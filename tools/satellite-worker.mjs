@@ -10,6 +10,6 @@ parentPort.on('message', (job) => {
   } catch (e) {
     r = { ok: false, why: 'error: ' + e.message };
   }
-  const branches = (r.branches || []).map((b) => ({ lamBP: b.lamBP, sgn: b.sgn, ok: b.ok, repeat: b.repeatTs || null, curve: (b.curve || []).map((p) => [p.lam, p.ts, p.ls, p.repeatErr, p.maxMod ?? null, p.u1, p.u2, p.t]) }));
+  const branches = (r.branches || []).map((b) => ({ lamBP: b.lamBP, sgn: b.sgn, ok: b.ok, bisected: b.bisected, width: b.width, nullSolved: b.nullSolved, repeat: b.repeatTs || null, curve: (b.curve || []).map((p) => [p.lam, p.ts, p.ls, p.repeatErr, p.maxMod ?? null, p.u1, p.u2, p.t]) }));
   parentPort.postMessage({ job: { orbit: job.orbit, k: job.k, m: job.m, lamA: job.lamA, lamB: job.lamB, ts0: job.ts0 }, secs: Math.round((Date.now() - t0) / 1000), ok: !!r.ok, reached: r.reached ?? null, why: r.why || null, signs: r.signs || null, branches });
 });

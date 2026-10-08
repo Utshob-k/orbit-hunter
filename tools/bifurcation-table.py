@@ -23,7 +23,7 @@ def segdist(p, a, b):
     return math.hypot(ax + t * dx - 1, ay + t * dy - 1)
 
 points = {}
-for f in sorted(glob.glob('data/satellite-results[1-4].jsonl')):
+for f in sorted(glob.glob('data/satellite-results.jsonl') + glob.glob('data/satellite-results[2-4].jsonl')):
     for line in open(f):
         r = json.loads(line); j = r['job']
         for b in r['branches']:
@@ -31,7 +31,10 @@ for f in sorted(glob.glob('data/satellite-results[1-4].jsonl')):
             key = (j['orbit'], j['k'], round(b['lamBP'], 3))
             kp = EXPONENT[round(seen[j['orbit']], 3) if round(seen[j['orbit']], 3) in EXPONENT else round(seen[j['orbit']], 2)] if (round(seen[j['orbit']], 3) in EXPONENT or round(seen[j['orbit']], 2) in EXPONENT) else None
             p = points.setdefault(key, dict(orbit=j['orbit'], progenitor_ts=seen[j['orbit']], k=j['k'], kp=kp, ktotal=(kp * j['k'] if kp else None), other_k_hit=None, lamBP=b['lamBP'], repeat_ts=b['repeat']['ts'], repeat_ls=b['repeat']['ls'], file=f, arms=[], hit=None))
-            c = [(q[1], q[2]) for q in b['curve'] if q[3] < 1e-7]
+            c = []
+            for q in b['curve']:
+                if q[3] >= 1e-7: break          # cut the arm at the first bad point, the same way as compare-satellites.py
+                c.append((q[1], q[2]))
             if len(c) < 3: continue
             p['arms'].append(len(c))
             for N, k, ts, ls in cpc:

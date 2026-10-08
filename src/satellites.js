@@ -37,12 +37,16 @@ function detOf(A) {
 function nullVector(A) {
   const n = A.length;
   let x = Float64Array.from({ length: n }, (_, i) => Math.sin(1 + 7 * i));
+  let solved = 0;
   for (let it = 0; it < 4; it++) {
     const B = A.map((r, i) => r.map((v, j) => (i === j ? v + 1e-13 : v)));
     const y = solve(B, Array.from(x));
     if (!y) break;
     x = unit(y);
+    solved++;
   }
+  // solved < 4: the direction is the starting vector or only partly converged, not a real null vector
+  x.solved = solved;
   return x;
 }
 
@@ -99,7 +103,7 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
     const a = pts[i - 1], b = pts[i];
     if (a.sign === 0 || b.sign === 0 || a.sign === b.sign) continue;
     // bisect along the chord to the point where the determinant changes sign
-    let P = a, Q = b;
+    let P = a, Q = b, bisected = 0;
     for (let it = 0; it < 30; it++) {
       const chord = Q.Y.map((v, j) => v - P.Y[j]);
       const mid = Float64Array.from(P.Y, (v, j) => v + 0.5 * chord[j]);
@@ -109,9 +113,13 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
       if (!tau) break;
       const R = { Y: c.Y, tau, sign: detOf(bordered(c.J, c.Flam, tau)).sign, J: c.J, Flam: c.Flam };
       if (R.sign === P.sign) P = R; else Q = R;
+      bisected++;
     }
+    // how well the branch point is located: number of successful halvings and the size of the bracket that is left
+    const width = Math.sqrt(dot(Q.Y.map((v, j) => v - P.Y[j]), Q.Y.map((v, j) => v - P.Y[j])));
     const A = bordered(P.J, P.Flam, P.tau);
     let phi = nullVector(A);
+    const nullSolved = phi.solved;
     const d = dot(phi, P.tau);
     phi = unit(phi.map((v, j) => v - d * P.tau[j]));
     const lamBP = P.Y[n];
@@ -127,11 +135,11 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
     };
     for (const sgn of [1, -1]) {
       const start = correct(Float64Array.from(P.Y, (v, j) => v + sgn * 0.004 * phi[j]), phi.map((v) => sgn * v), m, rep.t);
-      if (!start.ok) { branches.push({ lamBP, sgn, ok: false }); continue; }
+      if (!start.ok) { branches.push({ lamBP, sgn, ok: false, bisected, width, nullSolved }); continue; }
       const tauS = tangentAt(start.J, start.Flam, phi.map((v) => sgn * v));
       const along = trace(start.Y, tauS, m, rep.t, { maxSteps: branchSteps, hMax: branchHMax, maxMs: branchMs, onPoint: (p) => p.Y[n] < -0.5 || p.Y[n] > 1.05 });
       const curve = [start, ...along].map((p, i) => info(p.Y, stabEvery > 0 && i % stabEvery === 0)).filter(Boolean);
-      branches.push({ lamBP, sgn, ok: true, repeatTs: info(P.Y), curve });
+      branches.push({ lamBP, sgn, ok: true, repeatTs: info(P.Y), curve, bisected, width, nullSolved });
     }
   }
   return { ok: true, reached, k, lamA, lamB, steps: pts.length, signs: pts.map((p) => p.sign).join('').replace(/-1/g, '-').slice(0, 200), branches };

@@ -258,7 +258,7 @@ Found in a review of the code (an independent review of the code), not all fixed
   largest step between samples is 0.34 in (T*, L*)), and two of my scripts treat gaps differently (they disagree on 23 of the 56 arms of one file). Nothing checks
   that an arm is not just the repeat of a shorter branch. The same-k rule assumes the word does not change along the arm; I only check the word at three points.
 - **Branch points.** Two branch points closer than one step cancel in the sign test, a symmetric degenerate point gives no sign change, only mirror symmetric
-  branches can be found, and if bisection fails the branch direction can be a step away from the real branch point without any flag. The smoothness test cannot see a
+  branches can be found, and if bisection fails the branch direction can be a step away from the real branch point (new runs now store `bisected`, `width` and `nullSolved` for every branch, so that can be seen; the older results do not have them; on a test the bracket was 8e-6 after 11 halvings). The smoothness test cannot see a
   switch at a crossing (the one passing arm with a 104 degree turn, T* = 33.75, k = 3, lam = 0.5566, point 56, is a fold: lam turns back from 0.4409 while T* and L* continue smoothly), and its 50 times limit is arbitrary.
 - **Stability.** "The four eigenvalues closest to 1 are the trivial ones" is fragile for orbits with close approaches (at CPC N = 6 they drift 1.1e-2 from 1).
   `stability()` now also checks that the other four form reciprocal pairs (l, 1/l) and calls the orbit uncertain if not and max |l| is below 2; this changes no label
