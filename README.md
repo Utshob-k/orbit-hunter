@@ -183,8 +183,8 @@ difference). Against the atlas my stability numbers match to four digits for the
   per direction I gave each start, so for those I do not know if they reach a periodic orbit. A few others lost the family
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
 - **How well the orbits close.** The 7 stable orbits close to 5e-10 or better with two independent integrators (Dormand-Prince 5(4) and
-  Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 26 of the 85 close worse than 1e-9,
-  8 worse than 1e-8 and the worst is 1.1e-7; with Bulirsch-Stoer 11 are worse than 1e-7 and the worst is 3.5e-6 (columns `closureDP45` and `closureBS`
+  Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 23 of the 85 close worse than 1e-9,
+  6 worse than 1e-8 and the worst is 7.7e-8 (max norm, rotation removed); with Bulirsch-Stoer 11 are worse than 1e-7 and the worst is 3.5e-6 (columns `closureDP45` and `closureBS`
   in `data/orbit-table.csv`). For a strongly unstable orbit the instability multiplies the rounding error, so double precision cannot show that it
   is exactly periodic; those orbits need high precision arithmetic before anyone should call them that.
 - A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
@@ -236,13 +236,13 @@ The three files marked above belong to their authors, cite them if you use them.
 
 ## Known weaknesses
 
-Found in a review of the code (a second pass by someone, or something, else than me), not all fixed:
+Found in a review of the code (an independent review of the code), not all fixed:
 
-- **Closure cutoffs differ.** The 85 orbits of the perpendicular search were accepted without a closure threshold (8 are above 1e-8, the worst is 1.1e-7);
+- **Closure cutoffs differ.** The 85 orbits of the perpendicular search were accepted without a closure threshold (6 are above 1e-8, the worst is 7.7e-8);
   the arclength runs accepted only orbits closing to 1e-8, and two close ones were rejected (T* = 29.055 at 1.03e-8 and T* = 32.657 at 1.8e-8). With the
   same rule the list of 17 would have at least 19.
-- **Closure columns.** `closureDP45` is a 2-norm over the 12 state components, `closureBS` a max-norm, and both are measured after the best rotation is
-  removed, so the remaining rotation (up to 5e-8 rad) is not counted in them.
+- **Closure columns.** `closureDP45` and `closureBS` are now both the largest difference of a position or velocity component after one period (max norm) with the
+  best rotation removed, and the columns ending in `raw` leave the rotation in. The rotation that is removed is up to 5e-8 rad, so for the orbits that close worst the raw numbers are about the same.
 - **Matching with the CPC list.** The tolerance of 5e-3 is much looser than the real matches (7.9e-6 and 2.5e-7), curve points are sometimes far apart (the
   largest step between samples is 0.34 in (T*, L*)), and two of my scripts treat gaps differently (they disagree on 23 of the 56 arms of one file). Nothing checks
   that an arm is not just the repeat of a shorter branch. The same-k rule assumes the word does not change along the arm; I only check the word at three points.
