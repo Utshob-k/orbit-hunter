@@ -76,6 +76,15 @@ is new, and nothing here should be read as a discovery.
     The tables only go to T* about 90, only some of the arms were followed to the end, and nobody expert has looked at
     them, so I'd call them candidates.
 
+- **Where the stable orbits sit on the BHH curve.** The PRL says all published satellites lie on the same curve of L against T/k as
+  the BHH orbits themselves. In my units that curve has T*/k from 1.86 to 4.92 (the 99 satellites of CPC 2020). Four of my stable orbits
+  lie on it or close to it (T* = 4.96, 9.66, 29.31 and nearly so), but the stable orbits at L* about 2.57 to 2.63
+  (T* = 17.85, 19.77, 33.75, 47.07, words (01)^5, (01)^6, (01)^9, (01)^16) have T*/k between 2.9 and 3.75, far from any
+  CPC satellite (relative distance 0.35 to 0.48; the satellites near L* = 2.6 have T*/k about 1.95). So they are stable orbits with the
+  BHH word that are not on the published curve. I do not know if that is the "second stable region" the PRL says no satellites were found in.
+  The k = 1 orbit family seen through lam (`tools/progenitor-curve.mjs`, `data/progenitor-curve.json`) is stable from lam about 0.822 up to
+  at least 0.935 (L* from 1.04 down to 0.83) and unstable below, but this covers only part of the family.
+
 ## How it works
 
 1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how
