@@ -131,6 +131,18 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
     the branch point at lam = 0.6018 of the T* = 33.7 orbit (k = 3, exponent 27), T* from 77 to 93 and L* from 2.62 to 2.79, both arms, 10 of 10 samples.
   - **What this does not show:** nothing here is called new. I have not read the 2025 paper of Li, Tao, Li and Liao (New Astronomy 119, 102407), and nobody expert has looked at these.
 
+## Prior work I know of
+
+- Hénon 1976, Broucke 1975 and Hadjidemetriou 1975: the BHH family. Davoust and Broucke 1982 (Astronomy and Astrophysics 112, 305): "A manifold of periodic orbits
+  in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (I could not get the full text).
+- Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020): about 100 satellites of the BHH family by brute force search. Dr. Janković wrote to me that nobody continued
+  this path in Belgrade, and that the continuation of branches and the detection of new branches along them was an idea they never got to work.
+- Li and Liao and others: thousands of orbits since 2017, as far as I can see in their public data zero angular momentum or 3D, or unequal masses. Their 2025 paper on
+  finite angular momentum (New Astronomy 119, 102407) I have not read.
+
+So the continuation of satellite branches is not new as a method (Davoust and Broucke did it); what is done here is the systematic search for the places where branches leave the
+repeats of the stable orbits, with the checks described below.
+
 ## How it works
 
 1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how
