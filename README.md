@@ -208,8 +208,3 @@ Useful scripts in `tools/` (all print what they do at the top):
 Creative Commons Attribution 4.0 (CC BY 4.0), see LICENSE. You can use, copy and change the code, the results and the orbit
 lists as long as you credit Utshob Kandel and link to https://github.com/Utshob-k/orbit-hunter (see CITATION.cff).
 The three files marked above belong to their authors, cite them if you use them.
-
-## Next
-
-Hear back from the authors of the BHH papers about whether the L != 0 orbits are known. Longer arclength runs for the high-k satellites,
-and following each branch past its first zero. Possibly 4 or more bodies, or volunteer compute.
