@@ -99,9 +99,8 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
     is a 9 fold repeat of an orbit with T* = 3.7495, and T* = 47.065 a 2 fold repeat of one with T* = 23.53. None of the 9 shorter orbits is
     among the other 76, so the count of 85 different orbits does not change, but the real periods are the short ones, and the
     satellite branches of those two "parents" are branches of the 27 fold and the 2k fold repeats of the short orbits. T*/k, the quantity used for
-    the comparison with the BHH curve, does not change under repeats. None of the 17 orbits of the arclength list and none of the CPC satellites tested is a repeat.
-    Many orbits also return to their start after T/2 with two bodies swapped; for equal masses that is the same picture, but it is not counted as a repeat here
-    (the published periods count it that way too: the BHH orbit itself has this swap).
+    the comparison with the BHH curve, does not change under repeats. None of the 17 orbits of the arclength list is a repeat (I did not test the CPC satellites).
+    Many orbits also return to their start after T/2 with two bodies swapped; for equal masses that is the same picture, but it is not counted as a repeat here (I have not checked which convention the published periods use).
 
 - **Where the stable orbits sit on the BHH curve.** The PRL says all published satellites lie on the same curve of L against T/k as
   the BHH orbits themselves. In my units that curve has T*/k from 1.86 to 4.92 (the 99 satellites of CPC 2020). Four of my stable orbits
