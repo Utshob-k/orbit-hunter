@@ -417,3 +417,6 @@ function arcFinish(Y, m) {
   if (!info) return { ok: false, why: 'zero found but the orbit does not integrate' };
   return { ok: true, u1: sol.u1, u2: sol.u2, lam: sol.lam, t: sol.t, res: 0, info };
 }
+
+// pieces used by src/satellites.js
+export { system, correct, tangentAt, packZ, solOf, toY, unit, dot };

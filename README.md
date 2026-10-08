@@ -61,6 +61,21 @@ is new, and nothing here should be read as a discovery.
   (for example 000101), so they are not BHH satellites. That says nothing yet about whether they are new, it only says which
   tables could contain them.
 
+- **Satellite families by bifurcation (`src/relative.js`, `src/satellites.js`).** A satellite of order k branches off the k times
+  repeated orbit where a rotation number nu of the orbit is m/k. For each of my 7 stable orbits I follow lam (the orbit
+  then rotates a little each period), track nu, and at every crossing of m/k follow the k fold repeat until the bordered
+  determinant of the shooting system changes sign, then follow the new branch (`tools/nu-crossings.mjs`,
+  `tools/satellite-hunt.mjs`). All 7 stable orbits have the word (01)^k, with k = 1, 3, 5, 6, 8, 9, 16, so they are BHH
+  orbits (the T* = 4.96 one is the k = 1 BHH orbit itself, the others are satellites already).
+  - **Check:** from the T* = 4.96 orbit the branches for k = 4 and 5 pass through the published satellites N = 6 and N = 9
+    (T* and L* agree to 4 digits) and the k = 3 branch passes within 0.3 % of N = 1.
+  - 211 branch points were found on 4 of the 7 orbits (the 3 longest orbits did not step at my step size, so they are not
+    scanned), k up to 20. The 30 with k up to 8 were followed far (`tools/compare-satellites.py`). The branches of the
+    orbits at L* = 2.57, 1.04 and 0.79 (k = 5 to 8 repeats, T* from 38 to 207) pass close to no published satellite, nor do the
+    k >= 6 branches of the T* = 4.96 orbit. So these are families I can not find in the CPC tables.
+    The tables only go to T* about 90, only some of the arms were followed to the end, and nobody expert has looked at
+    them, so I'd call them candidates.
+
 ## How it works
 
 1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how
