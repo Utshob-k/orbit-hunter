@@ -10,6 +10,24 @@ is new, and nothing here should be read as a discovery.
 
 ## Results
 
+**Which catalogues contain orbits with L != 0.** Some catalogues only contain L = 0 orbits, so "matches none of them" means nothing for orbits with L != 0. This is what I actually compared against:
+
+| catalogue | orbits with L != 0? | what I did |
+|---|---|---|
+| Three Body Orbits atlas (threebodyorbits.com) | yes, 37 equal-mass entries (14 BHH, 13 Suvakov, 10 Sheen) | compared all 85 base orbits: 2 match, 81 do not |
+| Jankovic et al., CPC 2020 | yes, 99 BHH satellites | converted all, 98 close; used for the satellite runs |
+| Jankovic et al., PRL 2016 | yes, 57 satellites, all in the CPC list | consistency check only |
+| Li and Liao 2017 (695 orbits) | no, L = 0 | only my L = 0 orbits |
+| Hristov and Hristova 2024 (421,562 rows) | no, L = 0 | only my L = 0 orbits |
+| Suvakov gallery (three-body.ipb.ac.rs) | partly, pictures not numbers | not compared (its site certificate is broken for my tools) |
+| Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 | finite L | not read yet, asked the authors |
+
+So "81 match nothing" means: nothing among 37 atlas entries plus the 99 CPC satellites. It is a weak statement.
+
+**Counting.** The 85 orbits of the perpendicular search are 6 linearly stable, 77 unstable and 2 uncertain. The satellite work uses 7 stable parents:
+those 6 plus the orbit at T* = 29.31 that was found later by continuation (it is not one of the 85). Of the 85, 2 have L = 0 (members of the family
+that are also in the L = 0 catalogues) and 2 are atlas orbits.
+
 - All 11 orbits in `src/known.js` (figure-8, butterflies, moths, goggles, dragonfly, bumblebee, yin-yang) close from
   their published start values with residual 1e-10 or better. `npm test` checks this.
 - **Zero angular momentum.** I scanned the Suvakov-Dmitrasinovic plane at a finer grid than Li and Liao used. Every orbit
@@ -139,8 +157,11 @@ difference). Against the atlas my stability numbers match to four digits for the
 - Following the high-k satellites (about 56 of the 98) to a zero of theta takes more than the 10 minutes
   per start I gave each direction, so for those I do not know if they reach a periodic orbit. A few others lost the family
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
-- Some orbits close with a rotation of only 1e-8 to 1e-9 radians per period, which is at the accuracy floor of these
-  long orbits. Their closure error is at most 7e-9.
+- **How well the orbits close.** The 7 stable orbits close to 5e-10 or better with two independent integrators (Dormand-Prince 5(4) and
+  Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 26 of the 85 close worse than 1e-9,
+  8 worse than 1e-8 and the worst is 1.1e-7; with Bulirsch-Stoer 11 are worse than 1e-7 and the worst is 3.5e-6 (columns `closureDP45` and `closureBS`
+  in `data/orbit-table.csv`). For a strongly unstable orbit the instability multiplies the rounding error, so double precision cannot show that it
+  is exactly periodic; those orbits need high precision arithmetic before anyone should call them that.
 - A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
   branches, see above.
 - I used to think many of my orbits were probably more BHH family members. The syzygy words say that only 18 of the 85 are.

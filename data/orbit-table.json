@@ -13,7 +13,12 @@
   "syzygies": 2,
   "wordRoot": "01",
   "wordPower": 1,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 3.4760593380537082e-12,
+  "closureBS": 1.430199413841736e-11,
+  "rotation": -8.538211813959379e-13,
+  "distToBHHcurve": 0.08768470611658806,
+  "offBHHcurve": false
  },
  {
   "group": "atlas",
@@ -29,7 +34,12 @@
   "syzygies": 2,
   "wordRoot": "0",
   "wordPower": 2,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.210055861489362e-12,
+  "closureBS": 9.919842389130623e-12,
+  "rotation": 1.9847023029167765e-13,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -45,7 +55,12 @@
   "syzygies": 6,
   "wordRoot": "01",
   "wordPower": 3,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 1.070730003128809e-11,
+  "closureBS": 8.235225138110513e-12,
+  "rotation": 6.998543740362247e-11,
+  "distToBHHcurve": 0.02210756268750847,
+  "offBHHcurve": false
  },
  {
   "group": "atlas",
@@ -61,7 +76,12 @@
   "syzygies": 6,
   "wordRoot": "000111",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 6.00900061694505e-11,
+  "closureBS": 3.043367644958303e-9,
+  "rotation": 1.3724920177832302e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -77,7 +97,12 @@
   "syzygies": 4,
   "wordRoot": "0001",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.568640209437826e-11,
+  "closureBS": 9.136532075429703e-12,
+  "rotation": 1.7298498716578702e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -93,7 +118,12 @@
   "syzygies": 6,
   "wordRoot": "000101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.6254386739653587e-10,
+  "closureBS": 6.529818909695843e-10,
+  "rotation": 1.601561760631254e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -109,7 +139,12 @@
   "syzygies": 6,
   "wordRoot": "000101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 9.016323512527731e-10,
+  "closureBS": 5.607558954650881e-10,
+  "rotation": 5.5985382571164e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -125,7 +160,12 @@
   "syzygies": 6,
   "wordRoot": "01",
   "wordPower": 3,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 3.0454372440389383e-12,
+  "closureBS": 2.320598230086683e-12,
+  "rotation": -1.2737331365597576e-11,
+  "distToBHHcurve": 0.14589331423597335,
+  "offBHHcurve": false
  },
  {
   "group": "unmatched",
@@ -141,7 +181,12 @@
   "syzygies": 10,
   "wordRoot": "0001011101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.7052326864063937e-11,
+  "closureBS": 1.0035104893898793e-11,
+  "rotation": -6.739441856341391e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -157,7 +202,12 @@
   "syzygies": 8,
   "wordRoot": "00010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 7.41283946787489e-11,
+  "closureBS": 1.9525460744835027e-11,
+  "rotation": -1.2797393492093097e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -173,7 +223,12 @@
   "syzygies": 8,
   "wordRoot": "00010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.1442087091929286e-11,
+  "closureBS": 1.9802579022308713e-11,
+  "rotation": -3.900270290338389e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -189,7 +244,12 @@
   "syzygies": 8,
   "wordRoot": "01010102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.104456648182434e-12,
+  "closureBS": 7.321870732866494e-12,
+  "rotation": -1.3707894053088378e-12,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -205,7 +265,12 @@
   "syzygies": 6,
   "wordRoot": "000001",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.9006389119775722e-11,
+  "closureBS": 1.4686851087640244e-9,
+  "rotation": 1.3655846063332514e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -221,7 +286,12 @@
   "syzygies": 6,
   "wordRoot": "000001",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 7.200020625109165e-12,
+  "closureBS": 7.027809136917162e-11,
+  "rotation": 7.058391039723842e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -237,7 +307,12 @@
   "syzygies": 12,
   "wordRoot": "010102012102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 5.886307446886482e-11,
+  "closureBS": 8.576301030541445e-10,
+  "rotation": -3.128930969187508e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -253,7 +328,12 @@
   "syzygies": 10,
   "wordRoot": "01",
   "wordPower": 5,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 4.878157259463659e-11,
+  "closureBS": 3.1691639231559304e-11,
+  "rotation": -1.5373198201364025e-10,
+  "distToBHHcurve": 0.4572386121768109,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -269,7 +349,12 @@
   "syzygies": 14,
   "wordRoot": "00010101110101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.042125638683038e-10,
+  "closureBS": 2.7306480723202544e-11,
+  "rotation": 3.705967623055084e-14,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -285,7 +370,12 @@
   "syzygies": 12,
   "wordRoot": "000101010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 6.462953378165873e-11,
+  "closureBS": 1.297091345922254e-11,
+  "rotation": -1.3446166635934469e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -301,7 +391,12 @@
   "syzygies": 14,
   "wordRoot": "00121002121212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.2003667854714844e-8,
+  "closureBS": 2.649292249676694e-7,
+  "rotation": 1.8191510013346438e-8,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -317,7 +412,12 @@
   "syzygies": 12,
   "wordRoot": "01",
   "wordPower": 6,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 2.3326087452166364e-11,
+  "closureBS": 2.5456166613081964e-11,
+  "rotation": -1.2806878680401747e-11,
+  "distToBHHcurve": 0.02711652683071331,
+  "offBHHcurve": false
  },
  {
   "group": "unmatched",
@@ -333,7 +433,12 @@
   "syzygies": 6,
   "wordRoot": "000101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.265189986231712e-10,
+  "closureBS": 2.436383419334525e-9,
+  "rotation": 8.571269656138618e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -349,7 +454,12 @@
   "syzygies": 12,
   "wordRoot": "010101020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.2807507589018983e-11,
+  "closureBS": 3.99119239930596e-9,
+  "rotation": -4.5753562858844414e-12,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -365,7 +475,12 @@
   "syzygies": 12,
   "wordRoot": "01",
   "wordPower": 6,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 3.832982126214107e-10,
+  "closureBS": 1.4114669554433642e-10,
+  "rotation": -2.1442110386470798e-10,
+  "distToBHHcurve": 0.4137599615450648,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -381,7 +496,12 @@
   "syzygies": 18,
   "wordRoot": "000101010111010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 7.869711095181088e-10,
+  "closureBS": 8.376125795786506e-9,
+  "rotation": 4.0851304997282687e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -397,7 +517,12 @@
   "syzygies": 12,
   "wordRoot": "000100202001",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 5.363798568738285e-9,
+  "closureBS": 2.0929218769416474e-7,
+  "rotation": 1.1584840642720502e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -413,7 +538,12 @@
   "syzygies": 16,
   "wordRoot": "0101010101010102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 7.755302720725904e-11,
+  "closureBS": 1.8009690912844997e-11,
+  "rotation": 5.4158186833040486e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -429,7 +559,12 @@
   "syzygies": 16,
   "wordRoot": "0101010101010102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.1254974055078013e-10,
+  "closureBS": 6.65508023769968e-11,
+  "rotation": -6.357297260445471e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -445,7 +580,12 @@
   "syzygies": 16,
   "wordRoot": "0101010101010102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 5.421610150774224e-11,
+  "closureBS": 1.2703313372146341e-11,
+  "rotation": -2.7375556460082565e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -461,7 +601,12 @@
   "syzygies": 16,
   "wordRoot": "0001011100011101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.4532463192851473e-9,
+  "closureBS": 9.420158192476159e-8,
+  "rotation": 1.2284668877751613e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -477,7 +622,12 @@
   "syzygies": 20,
   "wordRoot": "01010101010102012102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.931212511389546e-11,
+  "closureBS": 9.38712461853033e-9,
+  "rotation": -4.220996601588682e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -493,7 +643,12 @@
   "syzygies": 22,
   "wordRoot": "0001010101011101010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.600048699621987e-9,
+  "closureBS": 4.059592316035221e-8,
+  "rotation": 6.0844037548571175e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -509,7 +664,12 @@
   "syzygies": 10,
   "wordRoot": "01",
   "wordPower": 5,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 1.1446846758698742e-9,
+  "closureBS": 9.640501120087964e-8,
+  "rotation": -1.0607611556486309e-10,
+  "distToBHHcurve": 0.572423226177004,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -525,7 +685,12 @@
   "syzygies": 14,
   "wordRoot": "00010020202001",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 6.100347013963591e-9,
+  "closureBS": 5.929697342747067e-7,
+  "rotation": 2.9228384538227045e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -541,7 +706,12 @@
   "syzygies": 18,
   "wordRoot": "010201202102010212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.0877347425506752e-10,
+  "closureBS": 6.037515549377138e-10,
+  "rotation": -4.458373447399865e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -557,7 +727,12 @@
   "syzygies": 20,
   "wordRoot": "00010101110001110101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 6.225492845987423e-10,
+  "closureBS": 8.61027776936296e-11,
+  "rotation": -2.2467710271245742e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -573,7 +748,12 @@
   "syzygies": 24,
   "wordRoot": "010101010101010102012102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.6100751158937805e-10,
+  "closureBS": 8.25022663311608e-9,
+  "rotation": -5.98677753328913e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -589,7 +769,12 @@
   "syzygies": 18,
   "wordRoot": "000001010101010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.3893922528027067e-9,
+  "closureBS": 2.29950774978289e-10,
+  "rotation": 6.528038986729549e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -605,7 +790,12 @@
   "syzygies": 14,
   "wordRoot": "01",
   "wordPower": 7,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 7.658413941269241e-11,
+  "closureBS": 7.360566441950604e-11,
+  "rotation": 2.6318134527076457e-11,
+  "distToBHHcurve": 0.5363824433911297,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -621,7 +811,12 @@
   "syzygies": 20,
   "wordRoot": "01021021021012012012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.917601645935558e-10,
+  "closureBS": 2.1832368985370234e-8,
+  "rotation": 2.4206531710726756e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -637,7 +832,12 @@
   "syzygies": 20,
   "wordRoot": "0001212121",
   "wordPower": 2,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.933530061203917e-10,
+  "closureBS": 4.816578865161503e-10,
+  "rotation": -4.430252957088132e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -653,7 +853,12 @@
   "syzygies": 22,
   "wordRoot": "01",
   "wordPower": 11,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 2.4896098312088917e-9,
+  "closureBS": 9.620643333843054e-9,
+  "rotation": 1.5060526537163999e-9,
+  "distToBHHcurve": 0.07863171709501114,
+  "offBHHcurve": false
  },
  {
   "group": "unmatched",
@@ -669,7 +874,12 @@
   "syzygies": 18,
   "wordRoot": "01",
   "wordPower": 9,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 1.4578611654349504e-10,
+  "closureBS": 9.609211018370654e-11,
+  "rotation": 5.259040040195493e-11,
+  "distToBHHcurve": 0.48287926713661233,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -685,7 +895,12 @@
   "syzygies": 18,
   "wordRoot": "01",
   "wordPower": 9,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 1.49926603525033e-10,
+  "closureBS": 1.0158170414723812e-10,
+  "rotation": -5.80412145492425e-10,
+  "distToBHHcurve": 0.4822290199888736,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -701,7 +916,12 @@
   "syzygies": 24,
   "wordRoot": "010102102012",
   "wordPower": 2,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 5.245252271079109e-11,
+  "closureBS": 7.675465659583254e-10,
+  "rotation": -1.797106677428747e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -717,7 +937,12 @@
   "syzygies": 28,
   "wordRoot": "0101010101010101021201010212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.5714282425614917e-9,
+  "closureBS": 2.8500824005824428e-9,
+  "rotation": -1.8961001127472616e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -733,7 +958,12 @@
   "syzygies": 18,
   "wordRoot": "010101010101021212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.5244652040248455e-11,
+  "closureBS": 7.263020007158633e-11,
+  "rotation": 1.2398640854220475e-13,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -749,7 +979,12 @@
   "syzygies": 28,
   "wordRoot": "0101010101010101010202020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.9647708571245603e-9,
+  "closureBS": 3.764937239244943e-8,
+  "rotation": -9.248683600752351e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -765,7 +1000,12 @@
   "syzygies": 26,
   "wordRoot": "01010101020120120102102102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.805325103034029e-9,
+  "closureBS": 8.599412857049796e-9,
+  "rotation": 5.72203582111937e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -781,7 +1021,12 @@
   "syzygies": 22,
   "wordRoot": "0101010121010101020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 5.288851820306422e-10,
+  "closureBS": 1.1537700645174358e-8,
+  "rotation": 1.7130780029449873e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -797,7 +1042,12 @@
   "syzygies": 26,
   "wordRoot": "01",
   "wordPower": 13,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 1.2783653621517223e-10,
+  "closureBS": 7.038697823445149e-7,
+  "rotation": 5.98110683744861e-11,
+  "distToBHHcurve": 0.08642879069577196,
+  "offBHHcurve": false
  },
  {
   "group": "unmatched",
@@ -813,7 +1063,12 @@
   "syzygies": 28,
   "wordRoot": "00010101010101",
   "wordPower": 2,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.014524907316183e-9,
+  "closureBS": 2.2360831074424848e-8,
+  "rotation": -2.214278415090958e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -829,7 +1084,12 @@
   "syzygies": 28,
   "wordRoot": "0101021020102102020120102012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.1974831067318005e-10,
+  "closureBS": 4.1203107592480137e-10,
+  "rotation": -3.5403112490306295e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "zeroL",
@@ -845,7 +1105,12 @@
   "syzygies": 28,
   "wordRoot": "0101021020102102020120102012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.0715575140299128e-10,
+  "closureBS": 3.663171987966507e-10,
+  "rotation": -2.1629513900372475e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -861,7 +1126,12 @@
   "syzygies": 24,
   "wordRoot": "010101010101010101020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.446309906460127e-9,
+  "closureBS": 1.279410053700973e-8,
+  "rotation": -3.7025743852938166e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -877,7 +1147,12 @@
   "syzygies": 16,
   "wordRoot": "0101010101021212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.42210988227218e-10,
+  "closureBS": 3.117711682575284e-9,
+  "rotation": -1.456438362418665e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -893,7 +1168,12 @@
   "syzygies": 18,
   "wordRoot": "000121212121212121",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.363562563145325e-9,
+  "closureBS": 6.095198735412085e-8,
+  "rotation": -8.272017429924941e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -909,7 +1189,12 @@
   "syzygies": 26,
   "wordRoot": "01010102120101202021010212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.393972617298003e-10,
+  "closureBS": 2.3109778869160305e-9,
+  "rotation": -1.2546776597395017e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -925,7 +1210,12 @@
   "syzygies": 20,
   "wordRoot": "01",
   "wordPower": 10,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 5.466770034678731e-11,
+  "closureBS": 7.094718422290367e-9,
+  "rotation": 5.444464970829219e-11,
+  "distToBHHcurve": 0.5312929497240688,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -941,7 +1231,12 @@
   "syzygies": 32,
   "wordRoot": "01010101010102101021020201201012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.0432977007254993e-10,
+  "closureBS": 3.3905726504469985e-8,
+  "rotation": 1.237883968497915e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -957,7 +1252,12 @@
   "syzygies": 20,
   "wordRoot": "01",
   "wordPower": 10,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 2.0650157405905356e-10,
+  "closureBS": 2.71850406315322e-10,
+  "rotation": 8.806547818882096e-11,
+  "distToBHHcurve": 0.5480793845858953,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -973,7 +1273,12 @@
   "syzygies": 26,
   "wordRoot": "01010101010121010101010102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.827808005357402e-10,
+  "closureBS": 1.412193235370929e-8,
+  "rotation": 3.622526294503673e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -989,7 +1294,12 @@
   "syzygies": 34,
   "wordRoot": "0001010111010001011101010001011101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.0877313242424703e-10,
+  "closureBS": 2.0838254253426587e-10,
+  "rotation": 3.581712404729737e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1005,7 +1315,12 @@
   "syzygies": 40,
   "wordRoot": "0101010101010101010101010101021201010212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.0464053204434844e-8,
+  "closureBS": 1.9039789960646793e-8,
+  "rotation": 1.4587558422785255e-8,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1021,7 +1336,12 @@
   "syzygies": 32,
   "wordRoot": "01",
   "wordPower": 16,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 4.956646917287946e-10,
+  "closureBS": 2.563322814666476e-10,
+  "rotation": 2.1922868624571434e-10,
+  "distToBHHcurve": 0.34675176886830167,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -1037,7 +1357,12 @@
   "syzygies": 24,
   "wordRoot": "01",
   "wordPower": 12,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 2.0006408225203265e-10,
+  "closureBS": 1.4742820126890845e-10,
+  "rotation": 3.966403262963232e-11,
+  "distToBHHcurve": 0.5020665623768179,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -1053,7 +1378,12 @@
   "syzygies": 34,
   "wordRoot": "0101010101010102020202101012020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.3350363611451704e-8,
+  "closureBS": 3.1125168739720473e-8,
+  "rotation": -4.581549065567733e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1069,7 +1399,12 @@
   "syzygies": 38,
   "wordRoot": "00101002020202020202020202020202020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.0976148501602136e-7,
+  "closureBS": 0.0000010582429762569419,
+  "rotation": 1.2096663867795617e-8,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1085,7 +1420,12 @@
   "syzygies": 46,
   "wordRoot": "0101010101010101010101010101010101021020202012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 5.294624908972931e-10,
+  "closureBS": 4.845790079724367e-10,
+  "rotation": -7.297882164595142e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1101,7 +1441,12 @@
   "syzygies": 36,
   "wordRoot": "010101010101010101010101010101020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 3.642884172950057e-8,
+  "closureBS": 0.0000017567566751935387,
+  "rotation": -1.3100569993372298e-8,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1117,7 +1462,12 @@
   "syzygies": 34,
   "wordRoot": "0101010101010121010101010101020202",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 7.524718014959513e-10,
+  "closureBS": 3.116930255195262e-7,
+  "rotation": -5.276897533284111e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1133,7 +1483,12 @@
   "syzygies": 32,
   "wordRoot": "01",
   "wordPower": 16,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 2.015502739620363e-9,
+  "closureBS": 1.1923325807886856e-8,
+  "rotation": -3.462117671828447e-10,
+  "distToBHHcurve": 0.40241709669862435,
+  "offBHHcurve": true
  },
  {
   "group": "unmatched",
@@ -1149,7 +1504,12 @@
   "syzygies": 32,
   "wordRoot": "00010112110101010101010101121101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.9030395166484085e-9,
+  "closureBS": 5.538953422519711e-7,
+  "rotation": 6.196432068857501e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1165,7 +1525,12 @@
   "syzygies": 52,
   "wordRoot": "0101010101010101010101010101010101010101021201010212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.787397016678143e-8,
+  "closureBS": 3.5845282572735216e-8,
+  "rotation": -2.1654306530802515e-8,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1181,7 +1546,12 @@
   "syzygies": 52,
   "wordRoot": "0101010101010101010101010101010101010212010101010212",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.8812580178422233e-9,
+  "closureBS": 5.646916828541371e-8,
+  "rotation": -1.5951939709542852e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1197,7 +1567,12 @@
   "syzygies": 38,
   "wordRoot": "00010101010101010101110101010101010101",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.1336277409625285e-9,
+  "closureBS": 1.1387424947454564e-8,
+  "rotation": 5.101354098025803e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1213,7 +1588,12 @@
   "syzygies": 42,
   "wordRoot": "010102102010210202012010102102020120102012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.4254832099145927e-10,
+  "closureBS": 2.262374516710707e-9,
+  "rotation": 3.399581025472032e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1229,7 +1609,12 @@
   "syzygies": 42,
   "wordRoot": "010102102010210202012010102102020120102012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.719011297463884e-10,
+  "closureBS": 1.5007388554089118e-8,
+  "rotation": -1.24062807176442e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1245,7 +1630,12 @@
   "syzygies": 42,
   "wordRoot": "01010210202012",
   "wordPower": 3,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.3582171201641264e-10,
+  "closureBS": 2.6367923722541143e-10,
+  "rotation": -5.701550354425158e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1261,7 +1651,12 @@
   "syzygies": 42,
   "wordRoot": "01010210202012",
   "wordPower": 3,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.1419461572258825e-10,
+  "closureBS": 6.59441862847649e-11,
+  "rotation": -4.639109540675363e-11,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1277,7 +1672,12 @@
   "syzygies": 36,
   "wordRoot": "010101010101010101010101010101010102",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.22731156491502e-8,
+  "closureBS": 0.0000035183152381450233,
+  "rotation": -2.417129876939444e-9,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1293,7 +1693,12 @@
   "syzygies": 56,
   "wordRoot": "01",
   "wordPower": 28,
-  "bhhType": true
+  "bhhType": true,
+  "closureDP45": 7.885149976693631e-10,
+  "closureBS": 1.0099500826959888e-8,
+  "rotation": -3.320551061182036e-10,
+  "distToBHHcurve": 0.09844359827529588,
+  "offBHHcurve": false
  },
  {
   "group": "unmatched",
@@ -1309,7 +1714,12 @@
   "syzygies": 44,
   "wordRoot": "01010101021020202102120102120102120120202012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 4.327468338493103e-8,
+  "closureBS": 9.679957659897153e-7,
+  "rotation": 3.616277367080327e-8,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1325,7 +1735,12 @@
   "syzygies": 48,
   "wordRoot": "010102102012",
   "wordPower": 4,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 1.522110807705847e-10,
+  "closureBS": 2.989882209791194e-9,
+  "rotation": 6.911319813998582e-12,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "unmatched",
@@ -1341,7 +1756,12 @@
   "syzygies": 48,
   "wordRoot": "01010212",
   "wordPower": 6,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 6.638300892175295e-10,
+  "closureBS": 1.9845938590552342e-7,
+  "rotation": -9.334451928200506e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  },
  {
   "group": "zeroL",
@@ -1357,6 +1777,11 @@
   "syzygies": 56,
   "wordRoot": "01010210201021020201201010210202012010201201010210202012",
   "wordPower": 1,
-  "bhhType": false
+  "bhhType": false,
+  "closureDP45": 2.253709126664358e-9,
+  "closureBS": 4.256536699310275e-8,
+  "rotation": -7.458098056788228e-10,
+  "distToBHHcurve": null,
+  "offBHHcurve": null
  }
 ]
