@@ -206,6 +206,17 @@ export function stability(x0, T) {
   let status = 'uncertain';
   if (maxNon <= 1 + 1e-6) status = 'stable';
   else if (maxNon - 1 > 10 * scatter) status = 'unstable';
+  // consistency check: for a symplectic map the nontrivial eigenvalues come in pairs l, 1/l. if they do not, one of the four that were taken
+  // as trivial is probably a real eigenvalue (or the other way round) and the call is not safe
+  let pairing = 0;
+  for (const e of non) {
+    const d = e.re * e.re + e.im * e.im, inv = { re: e.re / d, im: -e.im / d };
+    let best = Infinity;
+    for (const f of non) best = Math.min(best, Math.hypot(f.re - inv.re, f.im - inv.im));
+    pairing = Math.max(pairing, best / Math.max(1, Math.hypot(inv.re, inv.im)));
+  }
+  // (for a clearly unstable orbit, max |l| above 2, the small member of a pair is lost in rounding error, and the call cannot flip, so it stays)
+  if (pairing > 1e-2 && maxNon < 2) status = 'uncertain';
   ev.sort((a, b) => b.mod - a.mod);
-  return { eigenvalues: ev, maxMod: ev[0].mod, maxNontrivial: maxNon, scatter, status, stable: status === 'stable' };
+  return { eigenvalues: ev, maxMod: ev[0].mod, maxNontrivial: maxNon, scatter, pairing, status, stable: status === 'stable' };
 }

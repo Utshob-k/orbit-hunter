@@ -109,9 +109,10 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   lie on it or close to it (T* = 4.96, 9.66, 29.31), but the four stable orbits at L* about 2.57 to 2.63
   (T* = 17.85, 19.77, 33.75, 47.07, words (01)^5, (01)^6, (01)^9, (01)^16) have T*/k between 2.9 and 3.75, far from any
   CPC satellite (relative distance 0.35 to 0.48; the satellites near L* = 2.6 have T*/k about 1.95). So they are stable orbits with the
-  BHH word that are not on the published curve. Two of them (33.75 and 47.07) are repeats of shorter orbits; T*/k does not change under repeats, but
-  I have not checked whether the published periods count a return with swapped bodies the way I do, so this may be a convention difference and not a
-  new family. I do not know if it is the "second stable region" the PRL says no satellites were found in.
+  BHH word that are not on the published curve. Two of them (33.75 and 47.07) are repeats of shorter orbits; T*/k does not change under repeats. I compare
+  the period after which every body is back in its own place. Of 12 published satellites I tested only N = 2 also returns after T/2 with two bodies swapped, while the
+  T* = 4.96 orbit does, and its period in this convention (4.96, so T*/k = 4.96 for k = 1) fits the satellites of that type (N = 9: 4.84), so I think the convention is the same
+  and the four orbits really are away from the published points. That is not settled. I do not know if it is the "second stable region" the PRL says no satellites were found in.
   The k = 1 orbit family seen through lam (`tools/progenitor-curve.mjs`, `data/progenitor-curve.json`) is stable from lam about 0.822 up to
   at least 0.935 (L* from 1.04 down to 0.83) and unstable below, but this covers only part of the family.
 
@@ -235,8 +236,10 @@ Found in a review of the code (a second pass by someone, or something, else than
   that an arm is not just the repeat of a shorter branch. The same-k rule assumes the word does not change along the arm; I only check the word at three points.
 - **Branch points.** Two branch points closer than one step cancel in the sign test, a symmetric degenerate point gives no sign change, only mirror symmetric
   branches can be found, and if bisection fails the branch direction can be a step away from the real branch point without any flag. The smoothness test cannot see a
-  switch at a crossing (one passing arm has a 104 degree kink at point 56 of the arm T* = 33.75, k = 3, lam = 0.5566, that I have not looked at), and its 50 times limit is arbitrary.
+  switch at a crossing (the one passing arm with a 104 degree turn, T* = 33.75, k = 3, lam = 0.5566, point 56, is a fold: lam turns back from 0.4409 while T* and L* continue smoothly), and its 50 times limit is arbitrary.
 - **Stability.** "The four eigenvalues closest to 1 are the trivial ones" is fragile for orbits with close approaches (at CPC N = 6 they drift 1.1e-2 from 1).
+  `stability()` now also checks that the other four form reciprocal pairs (l, 1/l) and calls the orbit uncertain if not and max |l| is below 2; this changes no label
+  of the 85 (6 stable, 77 unstable, 2 uncertain before and after).
   The finite difference check uses the same reduction and eigenvalue solver, so it confirms the matrix and not the stable/unstable decision.
 - **Integrators.** When the step size collapses some loops return a result anyway; most now stop, a few older ones (`sampleOrbit`, `monodromy` near collisions) still can
   run for a very long time.
