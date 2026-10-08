@@ -79,7 +79,7 @@ function repeatOf(u1, u2, lam, t, k, m) {
 
 // look for branch points of the k fold repeat while lam moves from lamA to lamB.
 // returns the branches found: lam, scale free T* and L* along each of them
-export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, branchHMax = 0.05, branchMs = 120000, stabEvery = 0 } = {}) {
+export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, branchHMax = 0.05, branchMs = 120000, stabEvery = 0, traceMs = 120000 } = {}) {
   const rep = repeatOf(orbit.u1, orbit.u2, lamA, orbit.t, k, m);
   if (!rep) return { ok: false, why: 'repeat did not close at lamA' };
   const n = 3 + 12 * (m - 1);
@@ -91,7 +91,9 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
   const tau0 = unit([...dz, 1].map((v) => v * dir));
   const d0 = detOf(bordered(sys.J, sys.Flam, tau0));
   const first = { Y: Y0, tau: tau0, sign: d0.sign, J: sys.J, Flam: sys.Flam };
-  const pts = [first, ...trace(Y0, tau0, m, rep.t, { onPoint: (p) => (lamB - p.Y[n]) * dir <= 0 })];
+  const pts = [first, ...trace(Y0, tau0, m, rep.t, { maxMs: traceMs, onPoint: (p) => (lamB - p.Y[n]) * dir <= 0 })];
+  // did the trace get to lamB? if not (time out, lost the curve) a missing branch point means nothing
+  const reached = (lamB - pts[pts.length - 1].Y[n]) * dir <= 0;
   const branches = [];
   for (let i = 1; i < pts.length; i++) {
     const a = pts[i - 1], b = pts[i];
@@ -132,5 +134,5 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
       branches.push({ lamBP, sgn, ok: true, repeatTs: info(P.Y), curve });
     }
   }
-  return { ok: true, k, lamA, lamB, steps: pts.length, signs: pts.map((p) => p.sign).join('').replace(/-1/g, '-').slice(0, 200), branches };
+  return { ok: true, reached, k, lamA, lamB, steps: pts.length, signs: pts.map((p) => p.sign).join('').replace(/-1/g, '-').slice(0, 200), branches };
 }

@@ -39,7 +39,7 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   2 have L = 0 (published), 2 are orbits of the Three Body Orbits atlas, **81 match nothing in the atlas**.
 - **A control.** The search found published L != 0 orbits without being pointed at them: Sheen's "Two ovals",
   Sheen's "Oval, catface and starship", and Suvakov's SN.9 (matching the atlas to the rounding of its numbers).
-- **Linear stability.** 6 of the 85 are stable, 77 unstable, 2 uncertain (closest approach under 0.005). All 6 stable
+- **Linear stability.** 6 of the 85 are stable, 77 unstable, 2 uncertain (the eigenvalue excess is under 10 times the scatter of the trivial eigenvalues). All 6 stable
   ones are among the 81:
 
 | lam | T* | L* | closest approach |
@@ -58,8 +58,9 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   theirs, median relative difference 6e-10 and 1e-10) and followed each one in lam until the rotation angle theta is 0.
   The first attempt (steps in lam, `huntPeriodicMS`) reported 40 of 98 reaching an exactly periodic orbit, but that
   method can jump to another branch, so I redid it with continuation in arclength (below), which can't:
-  - Of those 40, arclength gives the same orbit for only 3, a different one for 11 and runs out of time for the
-    26 high-k ones, so the other 26 are unchecked. The orbits found the first way are still genuine periodic orbits (they
+  - Of those 40, arclength gives the same orbit for only 3, a different one for 11 and gets no zero for the
+    other 26 (7 ran out of time in both directions, 16 ran out of time one way and lost the family the other way, 2 lost it both ways, 1 found a zero
+    that was rejected for its closure error), so those 26 are unchecked. The orbits found the first way are still genuine periodic orbits (they
     close to 1e-11), but I can no longer say they are on the satellite's branch. In particular my earlier statements that
     the k = 3 and 4 satellites end at SN.9, and that satellite N = 9 (k = 5) is connected to 5 times the stable orbit at
     lam = 0.8653, are not supported: theta along the N = 9 branch peaks at -0.07 and never reaches 0, it only passes close.
@@ -84,13 +85,14 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   then rotates a little each period), track nu, and at every crossing of m/k follow the k fold repeat until the bordered
   determinant of the shooting system changes sign, then follow the new branch (`tools/nu-crossings.mjs`,
   `tools/satellite-hunt.mjs`). All 7 stable orbits have the word (01)^k, with k = 1, 3, 5, 6, 8, 9, 16, so they are BHH
-  orbits (the T* = 4.96 one is the k = 1 BHH orbit itself, the others are satellites already).
+  orbits (the T* = 4.96 one is the k = 1 BHH orbit itself; T* = 33.745 and 47.065 are repeats of shorter orbits, see below).
   - **Check:** from the T* = 4.96 orbit the branches for k = 4 and 5 pass through the published satellites N = 6 and N = 9
-    (T* and L* agree to 4 digits) and the k = 3 branch passes within 0.3 % of N = 1.
-  - 211 places where a rotation number crosses m/k were found on 4 of the 7 orbits, k up to 20; 136 of them have a branch point (the others have none
-    in the window I traced). The 3 longest orbits were scanned later with a smaller step (60 more jobs for k up to 8, then 21 verification jobs).
+    (T* and L* agree to 1e-5 or better) and the k = 3 branch passes within 3e-3 of N = 1, which I do not count as reproducing it.
+  - 211 places where a rotation number crosses m/k were found on 4 of the 7 orbits, k up to 20; 136 of them have a branch point. For the other 75 the trace of the repeat ran out of its 120 s
+    before it reached the end of the window (every one of them took 123 to 166 s), so I do not know if they have one; `satellites.js` now records
+    `reached` and the time limit is an option, and these jobs have to be redone. The other 3 stable orbits (T* = 19.8, 33.7, 47.1) were scanned later with a smaller step (60 more jobs for k up to 8, then 21 verification jobs).
     The 30 jobs with k up to 8 on the first 4 orbits were followed far (`tools/compare-satellites.py`). The branches of the
-    orbits at L* = 2.57, 1.04 and 0.79 (k = 5 to 8 repeats, T* from 38 to 207) pass close to no published satellite, nor do the
+    orbits at L* = 2.57, 1.04 and 0.79 (k = 3 to 8 repeats, T* from 38 to 207) pass close to no published satellite, nor do the
     k >= 6 branches of the T* = 4.96 orbit. So these are families I can not find in the CPC tables.
     The tables only go to T* about 90, only some of the arms were followed to the end, and nobody expert has looked at
     them, so I'd call them candidates.
@@ -103,11 +105,13 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
     Many orbits also return to their start after T/2 with two bodies swapped; for equal masses that is the same picture, but it is not counted as a repeat here (I have not checked which convention the published periods use).
 
 - **Where the stable orbits sit on the BHH curve.** The PRL says all published satellites lie on the same curve of L against T/k as
-  the BHH orbits themselves. In my units that curve has T*/k from 1.86 to 4.92 (the 99 satellites of CPC 2020). Four of my stable orbits
-  lie on it or close to it (T* = 4.96, 9.66, 29.31 and nearly so), but the stable orbits at L* about 2.57 to 2.63
+  the BHH orbits themselves. In my units that curve has T*/k from 1.86 to 4.92 (the 99 satellites of CPC 2020). Three of my stable orbits
+  lie on it or close to it (T* = 4.96, 9.66, 29.31), but the four stable orbits at L* about 2.57 to 2.63
   (T* = 17.85, 19.77, 33.75, 47.07, words (01)^5, (01)^6, (01)^9, (01)^16) have T*/k between 2.9 and 3.75, far from any
   CPC satellite (relative distance 0.35 to 0.48; the satellites near L* = 2.6 have T*/k about 1.95). So they are stable orbits with the
-  BHH word that are not on the published curve. I do not know if that is the "second stable region" the PRL says no satellites were found in.
+  BHH word that are not on the published curve. Two of them (33.75 and 47.07) are repeats of shorter orbits; T*/k does not change under repeats, but
+  I have not checked whether the published periods count a return with swapped bodies the way I do, so this may be a convention difference and not a
+  new family. I do not know if it is the "second stable region" the PRL says no satellites were found in.
   The k = 1 orbit family seen through lam (`tools/progenitor-curve.mjs`, `data/progenitor-curve.json`) is stable from lam about 0.822 up to
   at least 0.935 (L* from 1.04 down to 0.83) and unstable below, but this covers only part of the family.
 
@@ -116,7 +120,7 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   exactly 2K syzygies (K = exponent of the progenitor times k), the orbit must close to 1e-9 after re-solving with 16 pieces and a tighter tolerance
   (T* unchanged to 1e-8), and T* and L* must not jump. 30 of the 36 arms pass all three (17 branch points); the other 6 have a jump of more than
   50 times the median step and two of them also change their word, so I do not trust them (they probably run into a close approach).
-  Re-closing: all 108 points close to 1e-12. The stability code was also checked against a separate finite difference monodromy matrix on four orbits
+  Re-closing: all 108 points close to 6e-11 or better (47 of them are above 1e-12). The stability code was also checked against a separate finite difference monodromy matrix on four orbits
   (two of them rotating) and agrees to 1e-6 on three and 5e-4 on the fourth.
   - **None of these branches matches a CPC satellite of the same exponent** (the only matches are N = 1, 6, 9 from the T* = 4.96 orbit, checked before).
     More precisely: they do not pass within 0.5 % in T* and L* of any CPC satellite with the same k. Two passes within 0.5 % of satellites with a
@@ -152,8 +156,8 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
    a little numerically, so the four closest to 1 count as trivial.
 
 Checks: `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
-`test/stability.test.js` (known eigenvalues, figure-8 stable, matrix symplectic, butterfly I unstable) and
-`test/topology.test.js` (figure-8 and k = 3 satellite words) and `test/shooting.test.js` (multiple shooting gives the same orbit as single shooting; the tangent equals a finite
+`test/stability.test.js` (known eigenvalues, figure-8 stable, M^T J M = J, butterfly I unstable),
+`test/topology.test.js` (figure-8 and k = 3 satellite words), `test/covers.test.js` (repeats), `test/relative.test.js` (rotating orbit: trivial eigenvalues, agreement with finite differences) and `test/shooting.test.js` (multiple shooting gives the same orbit as single shooting; the tangent equals a finite
 difference). Against the atlas my stability numbers match to four digits for the three re-found orbits
 (|lambda|max 1.409, 19.55, 9.860).
 
@@ -162,8 +166,8 @@ difference). Against the atlas my stability numbers match to four digits for the
 - "Not in the atlas" is not "new". The atlas lists only 14 equal-mass BHH satellites, and Jankovic et al. report about 100.
   Their list is only in the paper's tables, and the paper does not cover everything. Butterfly II, a published orbit, is
   also missing from the Li-Liao table.
-- Following the high-k satellites (about 56 of the 98) to a zero of theta takes more than the 10 minutes
-  per start I gave each direction, so for those I do not know if they reach a periodic orbit. A few others lost the family
+- Following the high-k satellites (about 56 of the 98) to a zero of theta took more than the 5 minutes
+  per direction I gave each start, so for those I do not know if they reach a periodic orbit. A few others lost the family
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
 - **How well the orbits close.** The 7 stable orbits close to 5e-10 or better with two independent integrators (Dormand-Prince 5(4) and
   Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 26 of the 85 close worse than 1e-9,
@@ -188,7 +192,7 @@ difference). Against the atlas my stability numbers match to four digits for the
 ## Running it
 
 ```
-npm test                       # all four tests, a minute or two, node 18+
+npm test                       # all the tests, a few minutes, node 18+
 python -m http.server          # then open http://localhost:8000 (needs WebGPU)
 ```
 
@@ -216,3 +220,23 @@ Useful scripts in `tools/` (all print what they do at the top):
 Creative Commons Attribution 4.0 (CC BY 4.0), see LICENSE. You can use, copy and change the code, the results and the orbit
 lists as long as you credit Utshob Kandel and link to https://github.com/Utshob-k/orbit-hunter (see CITATION.cff).
 The three files marked above belong to their authors, cite them if you use them.
+
+## Known weaknesses
+
+Found in a review of the code (a second pass by someone, or something, else than me), not all fixed:
+
+- **Closure cutoffs differ.** The 85 orbits of the perpendicular search were accepted without a closure threshold (8 are above 1e-8, the worst is 1.1e-7);
+  the arclength runs accepted only orbits closing to 1e-8, and two close ones were rejected (T* = 29.055 at 1.03e-8 and T* = 32.657 at 1.8e-8). With the
+  same rule the list of 17 would have at least 19.
+- **Closure columns.** `closureDP45` is a 2-norm over the 12 state components, `closureBS` a max-norm, and both are measured after the best rotation is
+  removed, so the remaining rotation (up to 5e-8 rad) is not counted in them.
+- **Matching with the CPC list.** The tolerance of 5e-3 is much looser than the real matches (7.9e-6 and 2.5e-7), curve points are sometimes far apart (the
+  largest step between samples is 0.34 in (T*, L*)), and two of my scripts treat gaps differently (they disagree on 23 of the 56 arms of one file). Nothing checks
+  that an arm is not just the repeat of a shorter branch. The same-k rule assumes the word does not change along the arm; I only check the word at three points.
+- **Branch points.** Two branch points closer than one step cancel in the sign test, a symmetric degenerate point gives no sign change, only mirror symmetric
+  branches can be found, and if bisection fails the branch direction can be a step away from the real branch point without any flag. The smoothness test cannot see a
+  switch at a crossing (one passing arm has a 104 degree kink at point 56 of the arm T* = 33.75, k = 3, lam = 0.5566, that I have not looked at), and its 50 times limit is arbitrary.
+- **Stability.** "The four eigenvalues closest to 1 are the trivial ones" is fragile for orbits with close approaches (at CPC N = 6 they drift 1.1e-2 from 1).
+  The finite difference check uses the same reduction and eigenvalue solver, so it confirms the matrix and not the stable/unstable decision.
+- **Integrators.** When the step size collapses some loops return a result anyway; most now stop, a few older ones (`sampleOrbit`, `monodromy` near collisions) still can
+  run for a very long time.

@@ -24,4 +24,4 @@ for (const k of KNOWN) {
   );
 }
 console.log(`${ok}/${KNOWN.length} closed`);
-process.exit(ok >= 1 ? 0 : 1);
+process.exit(ok === KNOWN.length ? 0 : 1);

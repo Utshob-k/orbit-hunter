@@ -67,7 +67,7 @@ export function syzygyWord(x0, T) {
   const s = Float64Array.from(x0);
   const shift = 0.00123 * T;
   let t = 0, h = 1e-3;
-  while (t < shift - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, shift - t), 1e-12, 1e-13, 0.01); t += dt; h = hn; }
+  while (t < shift - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, shift - t), 1e-12, 1e-13, 0.01); if (dt === 0) return null; t += dt; h = hn; }
   const raw = rawWord(s, T);
   if (!raw || raw.length === 0) return null;
   const c = canonical(raw);

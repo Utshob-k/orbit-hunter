@@ -20,7 +20,7 @@ export function coverInfo(x0, T, nMax = 24, tol = 1e-5) {
   let t = 0, h = 1e-3, nRepeat = 1, nRelabel = 1;
   for (let n = nMax; n >= 2; n--) {
     const target = T / n;
-    while (t < target - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, target - t), 1e-13, 1e-14, 0.01); t += dt; h = hn; }
+    while (t < target - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, target - t), 1e-13, 1e-14, 0.01); if (dt === 0) return { nRepeat: 1, nRelabel: 1, failed: true }; t += dt; h = hn; }
     if (rotationError(s, x0) < tol) nRepeat = Math.max(nRepeat, n);
     if (PERMS.some((p) => rotationError(permute(s, p), x0) < tol)) nRelabel = Math.max(nRelabel, n);
   }

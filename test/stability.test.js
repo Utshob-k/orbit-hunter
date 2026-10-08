@@ -1,6 +1,6 @@
 // checks the eigenvalue solver on matrices where the answer is known, then the figure-8
 // (which is known to be linearly stable) and an orbit that is known to be unstable
-import { eigenvalues, stability } from '../src/stability.js';
+import { eigenvalues, stability, monodromy } from '../src/stability.js';
 import { sdInitial } from '../src/physics.js';
 
 let fail = 0;
@@ -43,8 +43,18 @@ check('figure-8 is linearly stable', f8.stable, `max |lambda| = ${f8.maxMod.toFi
 const b1 = stability(sdInitial(0.306893420490, 0.125506567011), 6.23467484);
 check('butterfly I comes out unstable', !b1.stable, `max |lambda| = ${b1.maxMod.toFixed(4)}`);
 
-// symplectic: eigenvalues come in pairs l, 1/l, so the product of all moduli is 1
-const prod = f8.eigenvalues.reduce((p, e) => p * e.mod, 1);
-check('product of moduli is 1 (symplectic)', Math.abs(prod - 1) < 1e-6, `product = ${prod}`);
+// symplectic: the monodromy matrix satisfies M^T J M = J (J = [[0, I], [-I, 0]] for unit masses, state = positions then velocities)
+const { M } = monodromy(sdInitial(0.347116888118926938, 0.532724945388030229), 6.32591398292621168);
+let worst = 0;
+for (let a = 0; a < 12; a++) for (let b = 0; b < 12; b++) {
+  let v = 0;
+  for (let i = 0; i < 12; i++) for (let j = 0; j < 12; j++) {
+    const Jij = i < 6 && j >= 6 && j - i === 6 ? 1 : i >= 6 && j < 6 && i - j === 6 ? -1 : 0;
+    if (Jij) v += M[i][a] * Jij * M[j][b];
+  }
+  const Jab = a < 6 && b >= 6 && b - a === 6 ? 1 : a >= 6 && b < 6 && a - b === 6 ? -1 : 0;
+  worst = Math.max(worst, Math.abs(v - Jab));
+}
+check('M^T J M = J (symplectic)', worst < 1e-7, `largest deviation ${worst.toExponential(1)}`);
 
 process.exit(fail ? 1 : 0);

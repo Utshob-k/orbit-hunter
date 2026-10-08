@@ -16,7 +16,8 @@ const out = [];
 for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
   if (!line.trim()) continue;
   const r = JSON.parse(line);
-  const kp = EXPONENT[Number(r.job.ts0.toFixed(r.job.ts0 < 10 ? 3 : 3)) ] ?? EXPONENT[Math.round(r.job.ts0 * 1000) / 1000];
+  const key = Object.keys(EXPONENT).find((x) => Math.abs(Number(x) - r.job.ts0) < 0.01);
+  const kp = key ? EXPONENT[key] : null;
   for (const b of r.branches) {
     if (!b.ok || b.curve.length < 6 || b.curve[0].length < 8) continue;
     if (out.length >= maxArms) break;

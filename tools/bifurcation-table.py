@@ -23,7 +23,7 @@ def segdist(p, a, b):
     return math.hypot(ax + t * dx - 1, ay + t * dy - 1)
 
 points = {}
-for f in sorted(glob.glob('data/satellite-results*.jsonl')):
+for f in sorted(glob.glob('data/satellite-results[1-4].jsonl')):
     for line in open(f):
         r = json.loads(line); j = r['job']
         for b in r['branches']:

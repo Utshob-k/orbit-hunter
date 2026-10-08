@@ -11,7 +11,7 @@ const T = 2 * t;
 function flow(x0) {
   const s = Float64Array.from(x0);
   let tt = 0, h = 1e-3;
-  while (tt < T - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, T - tt), 1e-13, 1e-14, 0.005); tt += dt; h = hn; }
+  while (tt < T - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, T - tt), 1e-13, 1e-14, 0.005); if (dt === 0) throw new Error('integrator gave up'); tt += dt; h = hn; }
   return s;
 }
 const x0 = perpInitial(u1, u2, lam);
