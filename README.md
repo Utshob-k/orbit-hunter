@@ -145,8 +145,8 @@ repeats of the stable orbits, with the checks described below.
 
 - **Families of Davoust and Broucke (1982).** I transcribed all their tables of initial conditions (Tables 2 to 7, 130 orbits of the families A1, A2, B, a to d, alpha, beta,
   D1 to D4, E, e to k, F, G, H, `data/db82-table*.json`), checked every row against the printed value of -27 C^2 H (which equals L*^2/9 in my units; the few misread
-  digits were repaired with `tools/check-db82.py`), converted them into my start (`tools/convert-db82.mjs`) and 126 of the 130 rows close to 1e-9 or better, with L* and the
-  rotation angle agreeing with the printed ones (4 near collision rows do not close). Nine of their orbits have a rotation angle that is exactly a multiple of 2 pi, so they are
+  digits were repaired with `tools/check-db82.py`), converted them into my start (`tools/convert-db82.mjs`) and 118 of the 130 rows close to 1e-9 or better, with L* and the
+  rotation angle agreeing with the printed ones (the other 12 are close encounters or still have a misread digit). Nine of their orbits have a rotation angle that is exactly a multiple of 2 pi, so they are
   exactly periodic (rows 9, 44, 45, 49, 52, 67, 91, 97, 115). Three of them are in my lists: row 9 and row 115 are the two atlas orbits, and **row 91 (T* = 9.6584,
   L* = 1.0418) is my stable orbit at lam = 0.49914**, which therefore was already published in 1982 (it is one of my 81 that match nothing in the atlas, so that number is at most 80).
   The other six are not in my lists, so my own search misses exactly periodic orbits that are known (`tools/compare-db82.py`, `data/db82-exactly-periodic.json`).
