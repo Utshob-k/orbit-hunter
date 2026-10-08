@@ -36,7 +36,7 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   T|E|^1.5 about 79, match to 1e-8 or better. Nothing new there.
 - **Non-zero angular momentum.** A Henon-style start (below) gives orbits with L != 0. From 287 starting points,
   111 hunts reached an exactly periodic orbit, 85 distinct orbits after removing repeats:
-  2 have L = 0 (published), 2 are orbits of the Three Body Orbits atlas, **81 match nothing in the atlas**.
+  2 have L = 0 (published), 2 are orbits of the Three Body Orbits atlas, **81 match nothing in the atlas**. Of the 85, 54 close to 1e-8 or better with two integrators (the 6 stable ones among them); the other 31 are weak (see Known weaknesses).
 - **A control.** The search found published L != 0 orbits without being pointed at them: Sheen's "Two ovals",
   Sheen's "Oval, catface and starship", and Suvakov's SN.9 (matching the atlas to the rounding of its numbers).
 - **Linear stability.** 6 of the 85 are stable, 77 unstable, 2 uncertain (the eigenvalue excess is under 10 times the scatter of the trivial eigenvalues). All 6 stable
@@ -247,22 +247,21 @@ The three files marked above belong to their authors, cite them if you use them.
 
 ## Known weaknesses
 
-Found in a review of the code (an independent review of the code), not all fixed:
+Found in an independent review of the code and in my own checks; what is fixed and what is not:
 
-- **Closure cutoffs differ.** The 85 orbits of the perpendicular search were accepted without a closure threshold (6 are above 1e-8, the worst is 7.7e-8);
-  the arclength runs accepted only orbits closing to 1e-8, and two close ones were rejected (T* = 29.055 at 1.03e-8 and T* = 32.657 at 1.8e-8). With the
-  same rule the list of 17 would have at least 19.
-- **Closure columns.** `closureDP45` and `closureBS` are now both the largest difference of a position or velocity component after one period (max norm) with the
-  best rotation removed, and the columns ending in `raw` leave the rotation in. The rotation that is removed is up to 5e-8 rad, so for the orbits that close worst the raw numbers are about the same.
-- **Matching with the CPC list.** The tolerance of 5e-3 is much looser than the real matches (7.9e-6 and 2.5e-7), curve points are sometimes far apart (the
-  largest step between samples is 0.34 in (T*, L*)), and two of my scripts treat gaps differently (they disagree on 23 of the 56 arms of one file). Nothing checks
-  that an arm is not just the repeat of a shorter branch. The same-k rule assumes the word does not change along the arm; I only check the word at three points.
-- **Branch points.** Two branch points closer than one step cancel in the sign test, a symmetric degenerate point gives no sign change, only mirror symmetric
-  branches can be found, and if bisection fails the branch direction can be a step away from the real branch point (new runs now store `bisected`, `width` and `nullSolved` for every branch, so that can be seen; the older results do not have them; on a test the bracket was 8e-6 after 11 halvings). The smoothness test cannot see a
-  switch at a crossing (the one passing arm with a 104 degree turn, T* = 33.75, k = 3, lam = 0.5566, point 56, is a fold: lam turns back from 0.4409 while T* and L* continue smoothly), and its 50 times limit is arbitrary.
-- **Stability.** "The four eigenvalues closest to 1 are the trivial ones" is fragile for orbits with close approaches (at CPC N = 6 they drift 1.1e-2 from 1).
-  `stability()` now also checks that the other four form reciprocal pairs (l, 1/l) and calls the orbit uncertain if not and max |l| is below 2; this changes no label
-  of the 85 (6 stable, 77 unstable, 2 uncertain before and after).
-  The finite difference check uses the same reduction and eigenvalue solver, so it confirms the matrix and not the stable/unstable decision.
-- **Integrators.** When the step size collapses some loops return a result anyway; most now stop, a few older ones (`sampleOrbit`, `monodromy` near collisions) still can
-  run for a very long time.
+- **Closure rule (fixed, with consequences).** One rule now decides every list (`src/closure.js`, `tools/closure-tiers.mjs`): an orbit is *reliable* when it closes to 1e-8 or better
+  (largest position or velocity difference after one period, best rotation removed) with both integrators, *weak* when it closes to 1e-6 with Dormand-Prince only. Of the 85 orbits of the
+  perpendicular search **54 are reliable and 31 are weak** (column `closureTier` of `data/orbit-table.csv`); the 6 stable ones are all reliable. Only reliable orbits should be called exactly periodic;
+  the weak ones need higher precision arithmetic. All 17 orbits of the arclength list are reliable.
+- **Closure columns (fixed).** `closureDP45` and `closureBS` are both max norms with the best rotation removed; the columns ending in `raw` leave the rotation in.
+- **Matching with the CPC list (partly fixed).** Both scripts now cut an arm at the first bad point. For the 116 branch points that have a published satellite with the same k to compare with,
+  the closest distance in (T*, L*) is 2.5e-7 (N = 9), 7.9e-6 (N = 6), 3.0e-3 (N = 1), and then 0.15 or more, with a median of 0.92 (`same_k_closest` in `data/bifurcation-points.json`),
+  so the tolerance of 5e-3 does not decide any match. Still open: nothing checks that an arm is not just the repeat of a shorter branch, and the matching compares curves sampled
+  with large gaps (the largest step between samples is 0.34).
+- **Branch points (partly fixed).** New runs store how well the branch point was located (`bisected`, `width`, `nullSolved`). Still open: two branch points closer than one step cancel in
+  the sign test, a symmetric degenerate point gives no sign change, and only mirror symmetric branches can be found. The word along an arm is now checked at up to 12 points (30 of the 36
+  verified arms still pass). The one arm with a 104 degree turn (T* = 33.75, k = 3, lam = 0.5566) is a fold: lam turns back while T* and L* continue smoothly.
+- **Stability (partly fixed).** "The four eigenvalues closest to 1 are the trivial ones" is checked in two ways now: the other four must form reciprocal pairs, and the fifth closest must be at least
+  10 times farther from 1 than the fourth; otherwise the orbit is called uncertain unless max |l| is above 2. This changes no label (85 orbits: 6 stable, 77 unstable, 2 uncertain; arclength list:
+  2 stable, 15 unstable). The finite difference check uses the same reduction and eigenvalue solver, so it confirms the matrix and not the stable/unstable decision.
+- **Integrators (mostly fixed).** `monodromy` and `sampleOrbit` now stop when a step produces nan or the step size collapses; a few other loops with step caps can still run for a long time near collisions.

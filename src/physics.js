@@ -213,6 +213,7 @@ export function sampleOrbit(s0, duration, frames) {
     const target = (duration * f) / (frames - 1);
     while (t < target - 1e-12) {
       const [dt, hn] = dp45Step(s, Math.min(h, target - t), 1e-10, 1e-12, 0.01);
+      if (dt === 0) return out.subarray(0, f * 6);   // gave up (collision): return the frames that exist
       t += dt;
       h = hn;
     }

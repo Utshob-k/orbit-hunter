@@ -28,14 +28,23 @@ for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
     for (let i = 1; i < c.length; i++) jumps.push(Math.hypot((c[i][1] - c[i - 1][1]) / c[i][1], (c[i][2] - c[i - 1][2]) / c[i][2]));
     const sorted = [...jumps].sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)] || 0;
     res.maxJumpOverMedian = med > 0 ? Math.max(...jumps) / med : null;
-    // word and re-close on first, middle, last point
+    // syzygy word at up to 12 points spread over the arm, re-closing at the first, middle and last one
     res.checks = [];
-    for (const i of [0, Math.floor(c.length / 2), c.length - 1]) {
+    const picks = new Set();
+    const nPick = Math.min(12, c.length);
+    for (let q = 0; q < nPick; q++) picks.add(Math.round((q * (c.length - 1)) / Math.max(1, nPick - 1)));
+    const reclose = new Set([0, Math.floor(c.length / 2), c.length - 1]);
+    for (const i of [...picks].sort((x, y) => x - y)) {
       const p = c[i];
       const w = syzygyWord(perpInitial(p[5], p[6], p[0]), 2 * p[7]);
-      const again = closePerpMS(p[5], p[6], p[0], p[7], { m: 16, tol: 1e-12, maxMs: 120000 });
-      const info = again.res < 1e-9 ? perpInfo(again.u1, again.u2, again.lam, again.t) : null;
-      res.checks.push({ lam: p[0], word: w ? `${w.root}^${w.power}` : null, syzygies: w?.length, expected: kp ? 2 * kp * r.job.k : null, reclosed: again.res, dTs: info ? Math.abs(info.ts - p[1]) / p[1] : null });
+      const chk = { lam: p[0], word: w ? `${w.root}^${w.power}` : null, syzygies: w?.length, expected: kp ? 2 * kp * r.job.k : null };
+      if (reclose.has(i)) {
+        const again = closePerpMS(p[5], p[6], p[0], p[7], { m: 16, tol: 1e-12, maxMs: 120000 });
+        const info = again.res < 1e-9 ? perpInfo(again.u1, again.u2, again.lam, again.t) : null;
+        chk.reclosed = again.res;
+        chk.dTs = info ? Math.abs(info.ts - p[1]) / p[1] : null;
+      }
+      res.checks.push(chk);
     }
     out.push(res);
     console.log(JSON.stringify(res));

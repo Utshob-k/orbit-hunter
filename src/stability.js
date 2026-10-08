@@ -88,6 +88,8 @@ export function monodromy(x0, T, { rtol = 1e-12, atol = 1e-13, hMax = 0.01 } = {
       err += e * e;
     }
     err = Math.sqrt(err / n);
+    // a step that produced nan or infinity (collision) is never accepted, the integration stops with an error instead of going on for millions of steps
+    if (!Number.isFinite(err)) { h *= 0.1; if (h < 1e-14) throw new Error('integrator failed (collision?)'); continue; }
     if (err <= 1 || h < 1e-12) {
       y.set(ynew);
       t += h;
@@ -217,6 +219,9 @@ export function stability(x0, T) {
   }
   // (for a clearly unstable orbit, max |l| above 2, the small member of a pair is lost in rounding error, and the call cannot flip, so it stays)
   if (pairing > 1e-2 && maxNon < 2) status = 'uncertain';
+  // the four trivial eigenvalues must be clearly closer to 1 than the next one; otherwise a nontrivial pair is hiding among them (or the other way round)
+  const gap = dev(byDev[4]) / Math.max(dev(byDev[3]), 1e-16);
+  if (gap < 10 && maxNon < 2) status = 'uncertain';
   ev.sort((a, b) => b.mod - a.mod);
-  return { eigenvalues: ev, maxMod: ev[0].mod, maxNontrivial: maxNon, scatter, pairing, status, stable: status === 'stable' };
+  return { eigenvalues: ev, maxMod: ev[0].mod, maxNontrivial: maxNon, scatter, pairing, gap, status, stable: status === 'stable' };
 }
