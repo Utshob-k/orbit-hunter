@@ -117,7 +117,7 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
       const s = solOf(Y, m);
       const pi = perpInfo(s.u1, s.u2, s.lam, s.t);
       if (!pi) return null;
-      const out = { lam: s.lam, ts: pi.ts, ls: Math.abs(pi.ls), repeatErr: pi.repeatErr };
+      const out = { lam: s.lam, ts: pi.ts, ls: Math.abs(pi.ls), repeatErr: pi.repeatErr, u1: s.u1, u2: s.u2, t: s.t };
       if (withStab) {
         try { const st = relativeStability(s.u1, s.u2, s.lam, s.t); out.maxMod = st.maxMod; out.scatter = st.scatter; } catch (e) { out.maxMod = null; }
       }
