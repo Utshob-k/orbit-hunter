@@ -193,6 +193,10 @@ difference). Against the atlas my stability numbers match to four digits for the
 - Following the high-k satellites (about 56 of the 98) to a zero of theta took more than the 5 minutes
   per direction I gave each start, so for those I do not know if they reach a periodic orbit. A few others lost the family
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
+- **The 7 stable orbits to 30 digits.** Each of them was refined with Newton's method and a multiple precision integrator (Gragg-Bulirsch-Stoer with 40 digit arithmetic,
+  `tools/refine-mp.py`) on the four symmetry conditions (back on the x axis with all velocities along y at the half period). The residual falls quadratically to 1e-31 or better, the double precision
+  start values were off by 1e-9 at most in any parameter (the time t 5e-9 at worst), and the full period closes to 6e-24 or better (limited by the integrator tolerance). So these are exactly periodic to the
+  precision I can test, not only close calls. The values are in `data/stable-orbits-30digits.json`. The 31 weak orbits of the 85 have not been refined.
 - **How well the orbits close.** The 7 stable orbits close to 5e-10 or better with two independent integrators (Dormand-Prince 5(4) and
   Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 23 of the 85 close worse than 1e-9,
   6 worse than 1e-8 and the worst is 7.7e-8 (max norm, rotation removed); with Bulirsch-Stoer 11 are worse than 1e-7 and the worst is 3.5e-6 (columns `closureDP45` and `closureBS`
