@@ -85,6 +85,21 @@ is new, and nothing here should be read as a discovery.
   The k = 1 orbit family seen through lam (`tools/progenitor-curve.mjs`, `data/progenitor-curve.json`) is stable from lam about 0.822 up to
   at least 0.935 (L* from 1.04 down to 0.83) and unstable below, but this covers only part of the family.
 
+- **Verification of the satellite branches (`tools/verify-branches.mjs`, `tools/check-stability-fd.mjs`).** 36 branch arms (3 branch points
+  for each of the 7 stable orbits) were stored with their states and checked at three points each: the syzygy word must be (01)^K with
+  exactly 2K syzygies (K = exponent of the progenitor times k), the orbit must close to 1e-9 after re-solving with 16 pieces and a tighter tolerance
+  (T* unchanged to 1e-8), and T* and L* must not jump. 30 of the 36 arms pass all three (17 branch points); the other 6 have a jump of more than
+  50 times the median step and two of them also change their word, so I do not trust them (they probably run into a close approach).
+  Re-closing: all 108 points close to 1e-12. The stability code was also checked against a separate finite difference monodromy matrix on four orbits
+  (two of them rotating) and agrees to 1e-6 on three and 5e-4 on the fourth.
+  - **None of these branches matches a CPC satellite of the same exponent** (the only matches are N = 1, 6, 9 from the T* = 4.96 orbit, checked before).
+    More precisely: they do not pass within 0.5 % in T* and L* of any CPC satellite with the same k. Two passes within 0.5 % of satellites with a
+    different k (N = 69 and N = 93) are coincidences. The CPC table only reaches T* of about 90, and most of my branches are above that.
+  - **Stability along the branches:** 23 of the 30 arms have at least one linearly stable sample, but at most of them it is the sample at
+    the branch point itself, where the repeat of a stable orbit is stable. The interesting ones are stable at every sample along the arm:
+    the branch point at lam = 0.6018 of the T* = 33.7 orbit (k = 3, exponent 27), T* from 77 to 93 and L* from 2.62 to 2.79, both arms, 10 of 10 samples.
+  - **What this does not show:** nothing here is called new. I have not read the 2025 paper of Li, Tao, Li and Liao (New Astronomy 119, 102407), and nobody expert has looked at these.
+
 ## How it works
 
 1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how
