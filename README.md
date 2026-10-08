@@ -143,6 +143,14 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
 So the continuation of satellite branches is not new as a method (Davoust and Broucke did it); what is done here is the systematic search for the places where branches leave the
 repeats of the stable orbits, with the checks described below.
 
+- **Families of Davoust and Broucke (1982).** I transcribed their Tables 2 and 3 (families A1, B and A2, `data/db82-table*.json`), checked every row against the printed value
+  of -27 C^2 H (which equals L*^2/9 in my units), converted them into my start (`tools/convert-db82.mjs`; they close to 4e-11 or better) and followed the families with the
+  continuation (`tools/trace-family.mjs`). Exactly periodic members (rotation angle 0): A1 has one (T* = 7.2177, L* = 1.7668, the atlas orbit that is also in my 85),
+  A2 has none, B has three (T* = 21.6615 with closure 5e-9, and two weak ones at 21.911 and 28.478, `data/db82-family-orbits.json`). None of them is among my 85 or my 17,
+  so my own search misses exactly periodic members of known families. The other families of that paper (tables 4 to 7) are not transcribed yet, so I do not know how
+  many of my 85 lie on a family they list. I think the honest reading is that my orbits are exactly periodic members of families known since 1982, which they did not
+  tabulate ("nearly periodic" is the most they say for a few), and not new families.
+
 ## How it works
 
 1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how

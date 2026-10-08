@@ -1,0 +1,10 @@
+{
+ "source": "exactly periodic orbits (rotation angle 0) found by following the families of Davoust and Broucke (1982) with tools/trace-family.mjs, from the rows of tables 2 and 3 (data/db82-*.json). closure = repeatErr of perpInfo. only the orbits with closure better than 1e-8 are reliable.",
+ "orbits": [
+  {"family":"A1","T*":7.2177,"L*":1.76680,"lam":0.67889,"closure":3.3e-11,"note":"row 9 of table 2; the atlas orbit already in the 85"},
+  {"family":"B","T*":21.6615,"L*":1.79836,"lam":0.76666,"closure":5.2e-9,"note":"not in the 85 or the 17"},
+  {"family":"B","T*":21.9110,"L*":2.11529,"lam":0.23143,"closure":5.4e-7,"note":"weak closure, not reliable"},
+  {"family":"B","T*":28.4783,"L*":1.88110,"lam":0.08276,"closure":5.5e-5,"note":"closure too poor"},
+  {"family":"A2","note":"no exactly periodic orbit (rotation angle never a multiple of 2 pi)"}
+ ]
+}
