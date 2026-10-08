@@ -143,13 +143,16 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
 So the continuation of satellite branches is not new as a method (Davoust and Broucke did it); what is done here is the systematic search for the places where branches leave the
 repeats of the stable orbits, with the checks described below.
 
-- **Families of Davoust and Broucke (1982).** I transcribed their Tables 2 and 3 (families A1, B and A2, `data/db82-table*.json`), checked every row against the printed value
-  of -27 C^2 H (which equals L*^2/9 in my units), converted them into my start (`tools/convert-db82.mjs`; they close to 4e-11 or better) and followed the families with the
-  continuation (`tools/trace-family.mjs`). Exactly periodic members (rotation angle 0): A1 has one (T* = 7.2177, L* = 1.7668, the atlas orbit that is also in my 85),
-  A2 has none, B has three (T* = 21.6615 with closure 5e-9, and two weak ones at 21.911 and 28.478, `data/db82-family-orbits.json`). None of them is among my 85 or my 17,
-  so my own search misses exactly periodic members of known families. The other families of that paper (tables 4 to 7) are not transcribed yet, so I do not know how
-  many of my 85 lie on a family they list. I think the honest reading is that my orbits are exactly periodic members of families known since 1982, which they did not
-  tabulate ("nearly periodic" is the most they say for a few), and not new families.
+- **Families of Davoust and Broucke (1982).** I transcribed all their tables of initial conditions (Tables 2 to 7, 130 orbits of the families A1, A2, B, a to d, alpha, beta,
+  D1 to D4, E, e to k, F, G, H, `data/db82-table*.json`), checked every row against the printed value of -27 C^2 H (which equals L*^2/9 in my units; the few misread
+  digits were repaired with `tools/check-db82.py`), converted them into my start (`tools/convert-db82.mjs`) and 126 of the 130 rows close to 1e-9 or better, with L* and the
+  rotation angle agreeing with the printed ones (4 near collision rows do not close). Nine of their orbits have a rotation angle that is exactly a multiple of 2 pi, so they are
+  exactly periodic (rows 9, 44, 45, 49, 52, 67, 91, 97, 115). Three of them are in my lists: row 9 and row 115 are the two atlas orbits, and **row 91 (T* = 9.6584,
+  L* = 1.0418) is my stable orbit at lam = 0.49914**, which therefore was already published in 1982 (it is one of my 81 that match nothing in the atlas, so that number is at most 80).
+  The other six are not in my lists, so my own search misses exactly periodic orbits that are known (`tools/compare-db82.py`, `data/db82-exactly-periodic.json`).
+  Following the families A1, A2 and B with the continuation (`tools/trace-family.mjs`): A1 has one exactly periodic orbit (the row 9 orbit), A2 none, B three (T* = 21.6615 with closure
+  5e-9, and two weak ones at 21.911 and 28.478, `data/db82-family-orbits.json`). I think the honest reading is that my orbits are exactly periodic members of families that were known
+  in 1982, and not new families; for most of the other 79 I do not yet know which family they lie on.
 
 ## How it works
 
