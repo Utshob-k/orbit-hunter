@@ -52,6 +52,15 @@ is new, and nothing here should be read as a discovery.
     the T* = 9.658 one already in the table above, and **lam = 0.03231, T* = 29.310, L* = 0.7897** (not in the table).
     The atlas has only 14 equal-mass satellites, so not matching it says very little.
 
+- **Topology (syzygy words, `src/topology.js`).** Every time the three bodies are on a line I write down which one is in the
+  middle; read around one period that is a cyclic word, and I bring it to a canonical form (relabeling, start point, time
+  reversal). Checks: the figure-8 is 012 twice; Butterfly I and II have the same word (so it is a coarse label, it can't tell
+  close variants apart); all 98 satellites of Jankovic et al. give the word (01)^k with exactly 2k syzygies, k being their
+  topological exponent. Results: all 17 orbits reached by arclength are (01)^k with k from 3 to 14, so they are of the BHH
+  satellite type. Of my 85 orbits from the perpendicular search, only 18 are (01)^k; the other 67 have other words
+  (for example 000101), so they are not BHH satellites. That says nothing yet about whether they are new, it only says which
+  tables could contain them.
+
 ## How it works
 
 1. **Screening (`src/gpu.js`).** One GPU thread per starting condition integrates the orbit in float32 and records how
@@ -79,7 +88,7 @@ is new, and nothing here should be read as a discovery.
 
 Checks: `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
 `test/stability.test.js` (known eigenvalues, figure-8 stable, matrix symplectic, butterfly I unstable) and
-`test/shooting.test.js` (multiple shooting gives the same orbit as single shooting; the tangent equals a finite
+`test/topology.test.js` (figure-8 and k = 3 satellite words) and `test/shooting.test.js` (multiple shooting gives the same orbit as single shooting; the tangent equals a finite
 difference). Against the atlas my stability numbers match to four digits for the three re-found orbits
 (|lambda|max 1.409, 19.55, 9.860).
 
@@ -95,8 +104,7 @@ difference). Against the atlas my stability numbers match to four digits for the
   long orbits. Their closure error is at most 7e-9.
 - A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
   branches, see above.
-- Several of my orbits are probably more members of known BHH families (L* 2.4 to 2.6 and about 1.0 are where the
-  atlas satellites are).
+- I used to think many of my orbits were probably more BHH family members. The syzygy words say that only 18 of the 85 are.
 
 ## Dead ends and bugs (so I don't repeat them)
 
