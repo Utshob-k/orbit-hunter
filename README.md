@@ -100,7 +100,7 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
     `data/orbit-table.csv`): they return to their own start, rotated, after T/n. Two of them are among the 6 stable orbits: T* = 33.745
     is a 9 fold repeat of an orbit with T* = 3.7495, and T* = 47.065 a 2 fold repeat of one with T* = 23.53. None of the 9 shorter orbits is
     among the other 76, so the count of 85 different orbits does not change, but the real periods are the short ones, and the
-    satellite branches of those two "parents" are branches of the 27 fold and the 2k fold repeats of the short orbits. T*/k, the quantity used for
+    satellite branches of those two "parents" are branches of repeats of the short orbits, and their own orbits can be repeats of shorter orbits again (see the stability paragraph below). T*/k, the quantity used for
     the comparison with the BHH curve, does not change under repeats. None of the 17 orbits of the arclength list is a repeat (I did not test the CPC satellites).
     Many orbits also return to their start after T/2 with two bodies swapped; for equal masses that is the same picture, but it is not counted as a repeat here (I have not checked which convention the published periods use).
 
@@ -127,8 +127,10 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
     More precisely: they do not pass within 0.5 % in T* and L* of any CPC satellite with the same k. Two passes within 0.5 % of satellites with a
     different k (N = 69 and N = 93) are coincidences. The CPC table only reaches T* of about 90, and most of my branches are above that.
   - **Stability along the branches:** 23 of the 30 arms have at least one linearly stable sample, but at most of them it is the sample at
-    the branch point itself, where the repeat of a stable orbit is stable. The interesting ones are stable at every sample along the arm:
-    the branch point at lam = 0.6018 of the T* = 33.7 orbit (k = 3, exponent 27), T* from 77 to 93 and L* from 2.62 to 2.79, both arms, 10 of 10 samples.
+    the branch point itself, where the repeat of a stable orbit is stable. One branch is stable at every sample along its arms: the branch point at lam = 0.6018 of the T* = 33.7 orbit.
+    I first described it by the period of a 9 fold repeat (T* = 77 to 93, exponent 27), and that was wrong: the T* = 33.745 parent is itself a 9 fold repeat of an orbit with T* = 3.7495, and every
+    sampled point of this branch is again a 9 fold repeat of a shorter orbit. The orbits of the branch have the primitive T* = 8.46 to 10.40, L* = 2.61 to 2.80 and the syzygy word (01)^3. It is a candidate only, more checks
+    are running and will be published when they are done.
   - **What this does not show:** nothing here is called new. I have not read the 2025 paper of Li, Tao, Li and Liao (New Astronomy 119, 102407), and nobody expert has looked at these.
 
 ## Prior work I know of
