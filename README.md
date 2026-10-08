@@ -87,12 +87,21 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   orbits (the T* = 4.96 one is the k = 1 BHH orbit itself, the others are satellites already).
   - **Check:** from the T* = 4.96 orbit the branches for k = 4 and 5 pass through the published satellites N = 6 and N = 9
     (T* and L* agree to 4 digits) and the k = 3 branch passes within 0.3 % of N = 1.
-  - 211 branch points were found on 4 of the 7 orbits (the 3 longest orbits did not step at my step size, so they are not
-    scanned), k up to 20. The 30 with k up to 8 were followed far (`tools/compare-satellites.py`). The branches of the
+  - 211 places where a rotation number crosses m/k were found on 4 of the 7 orbits, k up to 20; 136 of them have a branch point (the others have none
+    in the window I traced). The 3 longest orbits were scanned later with a smaller step (60 more jobs for k up to 8, then 21 verification jobs).
+    The 30 jobs with k up to 8 on the first 4 orbits were followed far (`tools/compare-satellites.py`). The branches of the
     orbits at L* = 2.57, 1.04 and 0.79 (k = 5 to 8 repeats, T* from 38 to 207) pass close to no published satellite, nor do the
     k >= 6 branches of the T* = 4.96 orbit. So these are families I can not find in the CPC tables.
     The tables only go to T* about 90, only some of the arms were followed to the end, and nobody expert has looked at
     them, so I'd call them candidates.
+  - **Repeats.** 9 of my 85 orbits are n fold repeats of shorter orbits (`src/covers.js`, columns `repeatOf` and `primitiveTstar` in
+    `data/orbit-table.csv`): they return to their own start, rotated, after T/n. Two of them are among the 6 stable orbits: T* = 33.745
+    is a 9 fold repeat of an orbit with T* = 3.7495, and T* = 47.065 a 2 fold repeat of one with T* = 23.53. None of the 9 shorter orbits is
+    among the other 76, so the count of 85 different orbits does not change, but the real periods are the short ones, and the
+    satellite branches of those two "parents" are branches of the 27 fold and the 2k fold repeats of the short orbits. T*/k, the quantity used for
+    the comparison with the BHH curve, does not change under repeats. None of the 17 orbits of the arclength list and none of the CPC satellites tested is a repeat.
+    Many orbits also return to their start after T/2 with two bodies swapped; for equal masses that is the same picture, but it is not counted as a repeat here
+    (the published periods count it that way too: the BHH orbit itself has this swap).
 
 - **Where the stable orbits sit on the BHH curve.** The PRL says all published satellites lie on the same curve of L against T/k as
   the BHH orbits themselves. In my units that curve has T*/k from 1.86 to 4.92 (the 99 satellites of CPC 2020). Four of my stable orbits
