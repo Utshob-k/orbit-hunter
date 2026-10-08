@@ -3,7 +3,7 @@
 # python tools/compare-satellites.py   (reads data/satellite-results2.jsonl)
 import json, math
 cpc=[(c['N'],c['k'],c['ts_theirs'],c['ls_theirs']) for c in json.load(open('data/cpc-converted.json'))]
-rs=[json.loads(l) for l in open('data/satellite-results2.jsonl')]
+rs=[json.loads(l) for l in open(__import__('sys').argv[1] if len(__import__('sys').argv) > 1 else 'data/satellite-results2.jsonl')]
 def segdist(p,a,b):
     ax,ay=a[0]/p[0],a[1]/p[1]; bx,by=b[0]/p[0],b[1]/p[1]
     dx,dy=bx-ax,by-ay; L=dx*dx+dy*dy
