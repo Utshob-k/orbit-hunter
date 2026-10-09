@@ -1,0 +1,382 @@
+{
+ "t01": {
+  "label": "db82-a-row42",
+  "mine": {
+   "u1": -0.62441474459533,
+   "u2": -1.3676235350501575,
+   "lam": 0.6788883683876953,
+   "t": 3.1471260373563754
+  },
+  "published": {
+   "u1": -0.7487630419318902,
+   "u2": -1.8803649233878699,
+   "lam": 0.812352797307641,
+   "t": 4.499770346104606
+  },
+  "m": 8,
+  "directions": [
+   {
+    "dir": 1,
+    "why": "lost the family near lam=0.9950",
+    "nSteps": 308,
+    "nearest": {
+     "index": 7,
+     "distance": 0.019096395570587187,
+     "segmentDistance": 0.01910150297579309,
+     "minDistOnCurve": 0.29418811742910034,
+     "minDistPublished": 0.1876472026925287,
+     "lam": 0.7054647867290741,
+     "Tstar": 7.38336158038686,
+     "Lstar": 1.7654811465621687,
+     "theta": 0.1876159406070548,
+     "resolvedAtPublishedLam": {
+      "res": 0.7061436093832124,
+      "du1": 0.10531371360592745,
+      "du2": 0.38277923789768464,
+      "dt": 1.0629179279633245,
+      "correctionFromStep": 0.20441651323155255
+     },
+     "pathSteps": 8,
+     "maxClosure": 1.0113640223887809e-10,
+     "maxNewtonIters": 4,
+     "largestJumpOverMedian": 1.3995347863777226,
+     "thetaFrom": 0.013880896155520153,
+     "thetaTo": 0.1876159406070548
+    }
+   },
+   {
+    "dir": -1,
+    "why": "lost the family near lam=-0.9951",
+    "nSteps": 491,
+    "nearest": {
+     "index": 83,
+     "distance": 0.021070653655561183,
+     "segmentDistance": 0.0191120452116118,
+     "minDistOnCurve": 0.2941905600526864,
+     "minDistPublished": 0.1876472026925287,
+     "lam": -0.702876554234488,
+     "Tstar": 7.366998731618668,
+     "Lstar": 1.7654611304771297,
+     "theta": 0.16907938987253537,
+     "resolvedAtPublishedLam": {
+      "res": 1.3390129474327428,
+      "du1": 0.9250409593391977,
+      "du2": 2.8059813580043036,
+      "dt": 1.4199819478179356,
+      "correctionFromStep": 0.659546685790119
+     },
+     "pathSteps": 84,
+     "maxClosure": 1.8730845026771e-10,
+     "maxNewtonIters": 3,
+     "largestJumpOverMedian": 1.6431731646329024,
+     "thetaFrom": -0.01387935865906911,
+     "thetaTo": 0.16907938987253537
+    }
+   }
+  ]
+ },
+ "t02": {
+  "label": "db82-D2-row92",
+  "mine": {
+   "u1": -0.9100666237659568,
+   "u2": 1.6543788196414073,
+   "lam": 0.4991377751153802,
+   "t": 4.163081501086229
+  },
+  "published": {
+   "u1": -0.9366585570113272,
+   "u2": 1.3284147921042126,
+   "lam": 0.24661899999999992,
+   "t": 3.469883560235494
+  },
+  "m": 8,
+  "directions": [
+   {
+    "dir": 1,
+    "why": "lost the family near lam=0.9910",
+    "nSteps": 255,
+    "nearest": {
+     "index": 10,
+     "distance": 0.15244497032156382,
+     "segmentDistance": 0.20336552454495174,
+     "minDistOnCurve": 0.34564972503104036,
+     "minDistPublished": 0.7533810000002892,
+     "lam": 0.6164789719297459,
+     "Tstar": 9.761791626453434,
+     "Lstar": 1.115985812406212,
+     "theta": 0.19185217856946338,
+     "resolvedAtPublishedLam": {
+      "res": 0.5530811032052153,
+      "du1": 0.04831378005997411,
+      "du2": 0.22253097779315523,
+      "dt": 1.839755440145976,
+      "correctionFromStep": 0.8489496115004725
+     },
+     "pathSteps": 11,
+     "maxClosure": 4.243690949552268e-10,
+     "maxNewtonIters": 4,
+     "largestJumpOverMedian": 2.36811339350237,
+     "thetaFrom": 0.0030573902978770174,
+     "thetaTo": 0.19185217856946338
+    }
+   },
+   {
+    "dir": -1,
+    "why": "stopped by the caller",
+    "nSteps": 42,
+    "nearest": {
+     "index": 16,
+     "distance": 0.004298455902367826,
+     "segmentDistance": 8.84032820868053e-05,
+     "minDistOnCurve": 0.7534049981282369,
+     "minDistPublished": 0.7533810000002892,
+     "lam": 0.2501325920196943,
+     "Tstar": 9.489370596126475,
+     "Lstar": 0.9684200976981688,
+     "theta": -0.3394066997368113,
+     "resolvedAtPublishedLam": {
+      "res": 2.7200464103316335e-14,
+      "du1": 1.2101430968414206e-14,
+      "du2": 2.531308496145357e-14,
+      "dt": 3.5793590313915047e-13,
+      "correctionFromStep": 0.009839837293128465
+     },
+     "pathSteps": 17,
+     "maxClosure": 7.954537758364565e-11,
+     "maxNewtonIters": 3,
+     "largestJumpOverMedian": 1.222100858145258,
+     "thetaFrom": -0.0030500778235291962,
+     "thetaTo": -0.3394066997368113
+    }
+   }
+  ]
+ },
+ "t05": {
+  "label": "db82-f-row84",
+  "mine": {
+   "u1": -0.9424531703914614,
+   "u2": -1.475198197288084,
+   "lam": 0.7501430315718163,
+   "t": 11.964608630996146
+  },
+  "published": {
+   "u1": -0.7456571009772288,
+   "u2": 0.016759707581485882,
+   "lam": -0.12608600000000003,
+   "t": 2.014927701301144
+  },
+  "m": 8,
+  "directions": [
+   {
+    "dir": 1,
+    "why": "lost the family near lam=0.8532",
+    "nSteps": 527,
+    "nearest": {
+     "index": 23,
+     "distance": 0.21473468263616993,
+     "segmentDistance": 0.29587851949324884,
+     "minDistOnCurve": 0.004613948846187722,
+     "minDistPublished": 0.11184063281783489,
+     "lam": 0.8262208103155595,
+     "Tstar": 11.780216139310593,
+     "Lstar": 1.6313155770775514,
+     "theta": 0.15047310743414435,
+     "resolvedAtPublishedLam": {
+      "res": 1.0547810220303653,
+      "du1": 0.5281576162680526,
+      "du2": 1.078978015316105,
+      "dt": 12.340662565786937,
+      "correctionFromStep": 1.7249936021271983
+     },
+     "pathSteps": 24,
+     "maxClosure": 6.655676370793235e-09,
+     "maxNewtonIters": 3,
+     "largestJumpOverMedian": 1.2239479214972369,
+     "thetaFrom": 0.0038651976564152654,
+     "thetaTo": 0.15047310743414435
+    }
+   },
+   {
+    "dir": -1,
+    "why": "stopped by the caller",
+    "nSteps": 58,
+    "nearest": {
+     "index": 32,
+     "distance": 0.003067306808217485,
+     "segmentDistance": 5.875440656649944e-06,
+     "minDistOnCurve": 0.2601780446687478,
+     "minDistPublished": 0.11184063281783489,
+     "lam": 0.5519419807313123,
+     "Tstar": 11.296974000933103,
+     "Lstar": 2.0787410448701085,
+     "theta": -0.36827509687853177,
+     "resolvedAtPublishedLam": {
+      "res": 0.6528615533384363,
+      "du1": 0.007758408482526291,
+      "du2": 0.7831006111285983,
+      "dt": 4.865225555355659,
+      "correctionFromStep": 0.335705651270041
+     },
+     "pathSteps": 33,
+     "maxClosure": 4.2103027681234805e-10,
+     "maxNewtonIters": 3,
+     "largestJumpOverMedian": 1.2956000464706097,
+     "thetaFrom": -0.0039025541159250178,
+     "thetaTo": -0.36827509687853177
+    }
+   }
+  ]
+ },
+ "t08": {
+  "label": "db82-gamma-row86",
+  "mine": {
+   "u1": -0.9764837375183213,
+   "u2": 0.3536430357992052,
+   "lam": 0.029875749714327538,
+   "t": 2.973327589208644
+  },
+  "published": {
+   "u1": -1.1857873294789816,
+   "u2": 0.3561091927592088,
+   "lam": -0.26756139999999995,
+   "t": 4.21177154267866
+  },
+  "m": 8,
+  "directions": [
+   {
+    "dir": 1,
+    "why": "lost the family near lam=0.9911",
+    "nSteps": 369,
+    "nearest": {
+     "index": 38,
+     "distance": 0.02130122465147788,
+     "segmentDistance": 0.02146251351858934,
+     "minDistOnCurve": 0.4209374576101222,
+     "minDistPublished": 0.39533227340661037,
+     "lam": 0.2814655279434428,
+     "Tstar": 16.128946199502742,
+     "Lstar": 2.3906734139193775,
+     "theta": 1.8479793638515454,
+     "resolvedAtPublishedLam": {
+      "res": 0.8263164711022382,
+      "du1": 0.3488627874949497,
+      "du2": 0.7388919949207586,
+      "dt": 0.15719154146830672,
+      "correctionFromStep": 0
+     },
+     "pathSteps": 39,
+     "maxClosure": 3.8676590347391873e-10,
+     "maxNewtonIters": 7,
+     "largestJumpOverMedian": 2.1620548352821745,
+     "thetaFrom": 0.027613837993016224,
+     "thetaTo": 1.8479793638515454
+    }
+   },
+   {
+    "dir": -1,
+    "why": "lost the family near lam=0.0214",
+    "nSteps": 23,
+    "nearest": {
+     "index": 22,
+     "distance": 1.6869732196345826,
+     "segmentDistance": 1.7033432095766992,
+     "minDistOnCurve": 0.0021721504647781637,
+     "minDistPublished": 0.39533227340661037,
+     "lam": 0.02139667393298344,
+     "Tstar": 13.79817023041821,
+     "Lstar": 1.9443047620954768,
+     "theta": -0.1823073688684407,
+     "resolvedAtPublishedLam": {
+      "res": 0.6108831788555862,
+      "du1": 0.167069508346692,
+      "du2": 0.15300594487765584,
+      "dt": 1.1115496508261749,
+      "correctionFromStep": 0.15522454626677476
+     },
+     "pathSteps": 23,
+     "maxClosure": 1.9021149880553164e-09,
+     "maxNewtonIters": 5,
+     "largestJumpOverMedian": 53.16840996292945,
+     "thetaFrom": -0.02644482055512334,
+     "thetaTo": -0.1823073688684407
+    }
+   }
+  ]
+ },
+ "a02": {
+  "label": "cpc-N3",
+  "mine": {
+   "u1": -0.3048446354275651,
+   "u2": -2.0714315759980484,
+   "lam": 0.8080350473795955,
+   "t": 4.444922461882509
+  },
+  "published": {
+   "u1": -0.05727802000424359,
+   "u2": -1.439450298336136,
+   "lam": 0.5369651085951574,
+   "t": 4.6730155701379585
+  },
+  "m": 8,
+  "directions": [
+   {
+    "dir": 1,
+    "why": "lost the family near lam=0.9974",
+    "nSteps": 343,
+    "nearest": {
+     "index": 50,
+     "distance": 0.6536585382944651,
+     "segmentDistance": 0.8036204944942908,
+     "minDistOnCurve": 0.0026371398778036285,
+     "minDistPublished": 0.46303489140294923,
+     "lam": 0.9868168820709439,
+     "Tstar": 13.015011030822407,
+     "Lstar": 1.2499029445080296,
+     "theta": 1.033965617019572,
+     "resolvedAtPublishedLam": {
+      "res": 1.1246407051637668,
+      "du1": 0.04994615582682725,
+      "du2": 0.5611001610535402,
+      "dt": 2.2265079858907746,
+      "correctionFromStep": 6.653613654008586
+     },
+     "pathSteps": 51,
+     "maxClosure": 1.3886165353908205e-08,
+     "maxNewtonIters": 6,
+     "largestJumpOverMedian": 6.375790036265094,
+     "thetaFrom": 0.01583620855347436,
+     "thetaTo": 1.033965617019572
+    }
+   },
+   {
+    "dir": -1,
+    "why": "stopped by the caller",
+    "nSteps": 54,
+    "nearest": {
+     "index": 28,
+     "distance": 0.0034573143498217718,
+     "segmentDistance": 9.040991415900223e-06,
+     "minDistOnCurve": 0.4630494609982083,
+     "minDistPublished": 0.46303489140294923,
+     "lam": 0.5361762355188968,
+     "Tstar": 11.56279310523344,
+     "Lstar": 0.8381324695863182,
+     "theta": -1.6910814696638587,
+     "resolvedAtPublishedLam": {
+      "res": 4.984901380566953e-14,
+      "du1": 3.4083846855992306e-14,
+      "du2": 6.927791673660977e-14,
+      "dt": 3.375077994860476e-13,
+      "correctionFromStep": 0.0009811107827967418
+     },
+     "pathSteps": 29,
+     "maxClosure": 8.76622840238711e-10,
+     "maxNewtonIters": 4,
+     "largestJumpOverMedian": 1.2921875204521138,
+     "thetaFrom": -0.015804599705474258,
+     "thetaTo": -1.6910814696638587
+    }
+   }
+  ]
+ }
+}
