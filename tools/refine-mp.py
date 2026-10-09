@@ -119,8 +119,11 @@ def main():
     mp.dps = digits + 10
     tol = mpf(10) ** (-(digits - 4))
     # the full period: integrate to 2t and compare with the start
-    x0 = start(p[0], p[1], p[2])
-    x = flow(x0, 2 * p[3], tol)
+    # the closure of the values that are written (rounded to `digits` digits), not of the unrounded solution: a strongly unstable orbit amplifies the rounding
+    # (before 2026-10-10 this was measured on the unrounded solution; the stored 30 digit values of data/refined close worse, see tools/closure-stored.py)
+    pr = [mpf(nstr(q, digits)) for q in p]
+    x0 = start(pr[0], pr[1], pr[2])
+    x = flow(x0, 2 * pr[3], tol)
     full = max(abs(a - b) for a, b in zip(x, x0))
     print('refined: u1 =', nstr(p[0], digits), '\n         u2 =', nstr(p[1], digits), '\n         lam =', nstr(p[2], digits), '\n         t =', nstr(p[3], digits))
     print('change from the double precision start: du1 %s du2 %s dlam %s dt %s' % (nstr(abs(p[0] - mpf(u1)), 2), nstr(abs(p[1] - mpf(u2)), 2), nstr(abs(p[2] - mpf(lam)), 2), nstr(abs(p[3] - mpf(t)), 2)))

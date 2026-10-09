@@ -41,7 +41,7 @@ check('figure-8 is linearly stable', f8.stable, `max |lambda| = ${f8.maxMod.toFi
 
 // butterfly I: the Suvakov-Dmitrasinovic butterfly I is unstable
 const b1 = stability(sdInitial(0.306893420490, 0.125506567011), 6.23467484);
-check('butterfly I comes out unstable', !b1.stable, `max |lambda| = ${b1.maxMod.toFixed(4)}`);
+check('butterfly I comes out unstable', !b1.stable && b1.maxMod > 1.5, `max |lambda| = ${b1.maxMod.toFixed(4)}`);
 
 // symplectic: the monodromy matrix satisfies M^T J M = J (J = [[0, I], [-I, 0]] for unit masses, state = positions then velocities)
 const { M } = monodromy(sdInitial(0.347116888118926938, 0.532724945388030229), 6.32591398292621168);

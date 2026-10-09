@@ -4,7 +4,7 @@
 //   any symmetry: the best over relabelling of the bodies, reflection (y -> -y) and reversal of the velocities (with the best rotation in every case)
 // a reflected or reversed return means a return at 2T/n in the first two ways, so nothing is lost by this being in the second list only.
 // whether an arclength orbit is an atlas orbit comes from the downloaded catalogue if its path is given (the list itself is not stored here),
-// otherwise from the groups stored in data/return-test.json (made with the catalogue of 2026-10-09; the README counts "of the 92" use them).
+// otherwise from the groups stored in data/return-test.json (made with the catalogue of 2026-10-09; the README counts "of the 91" use them).
 // node tools/return-test.mjs [path/to/catalogue.json] [--write]      prints the counts; data/return-test.json is only written with --write
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
@@ -76,6 +76,12 @@ const unm = out.filter((o) => o.group === 'unmatched');
 console.log(out.length, 'orbits tested (n = 2 to 12, mismatch below', TOL, ')');
 console.log('return in their own places:', out.filter((o) => o.ownPlaces).length, 'of', out.length, '; among the unmatched ones:', unm.filter((o) => o.ownPlaces).length, 'of', unm.length);
 console.log('return under any relabelling, reflection or reversal:', out.filter((o) => o.anySymmetry).length, '; among the unmatched ones:', unm.filter((o) => o.anySymmetry).length);
+// an arclength orbit that is the shortest orbit of a row of the table (same L*, T* of the row n times its T*) is the same orbit twice
+const dup = [];
+for (const a of out.filter((o) => o.name.startsWith('a'))) for (const t of out.filter((o) => o.name.startsWith('t')))
+  for (let n = 1; n <= NMAX; n++) if (Math.abs(t.Tstar / (n * a.Tstar) - 1) < TOL && Math.abs(t.Lstar / a.Lstar - 1) < TOL) dup.push(a.name + ' = ' + t.name + (n > 1 ? ' (' + n + ' fold repeat)' : ''));
+const dupNames = new Set(dup.map((d) => d.split(' ')[0]));
+console.log('the same orbit twice:', dup.join(', ') || 'none', '->', out.length - dupNames.size, 'distinct orbits; among the unmatched ones', unm.filter((o) => !dupNames.has(o.name)).length, 'distinct');
 const rest = out.filter((o) => !o.anySymmetry).sort((a, b) => a.bestMismatchAnySymmetry.mismatch - b.bestMismatchAnySymmetry.mismatch)[0];
 console.log('closest orbit that does not return:', rest.name, 'n =', rest.bestMismatchAnySymmetry.n, 'mismatch', rest.bestMismatchAnySymmetry.mismatch.toExponential(1));
 if (write) { fs.writeFileSync(outFile, JSON.stringify(out, null, 1)); console.log('written to data/return-test.json'); }

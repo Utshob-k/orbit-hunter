@@ -3,7 +3,7 @@
 # the closure is the one of the README: largest difference of a position or velocity component between the end state and the start state (max norm),
 # best rotation removed. the start is the double precision number itself (converted exactly), so this measures how well those doubles close,
 # not how well the orbit closes; for that see data/refined (30 digits).
-# python tools/closure-mp.py          prints the counts and the orbits above 1e-8      (about 10 minutes, uses 4 processes)
+# python tools/closure-mp.py          prints the counts and the orbits above 1e-8      (about 6 minutes, uses 4 processes)
 # python tools/closure-mp.py --write  also writes data/closure-mp.json
 import sys, os, json, importlib.util
 from multiprocessing import Pool

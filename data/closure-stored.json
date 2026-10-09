@@ -1,0 +1,521 @@
+{
+ "note": "closure after one period of the start values stored in data/refined/*.json, 50 digit Gragg-Bulirsch-Stoer (tools/closure-stored.py); row = index in data/orbit-table.json (null: the T* = 29.31 orbit of the arclength list); closureInFile is the number written by tools/refine-mp.py",
+ "orbits": [
+  {
+   "file": "data/refined/T17.847.json",
+   "row": 15,
+   "closureStored": 2.259851363246866e-26,
+   "closureInFile": 1.11e-26
+  },
+  {
+   "file": "data/refined/T19.769.json",
+   "row": 22,
+   "closureStored": 2.1093278707671307e-27,
+   "closureInFile": 1.11e-26
+  },
+  {
+   "file": "data/refined/T29.310.json",
+   "row": null,
+   "closureStored": 2.729482136279087e-24,
+   "closureInFile": 5.64e-24
+  },
+  {
+   "file": "data/refined/T33.745.json",
+   "row": 41,
+   "closureStored": 7.334361001778062e-26,
+   "closureInFile": 9.13e-26
+  },
+  {
+   "file": "data/refined/T4.960.json",
+   "row": 0,
+   "closureStored": 1.2358336185279515e-23,
+   "closureInFile": 4.73e-24
+  },
+  {
+   "file": "data/refined/T47.065.json",
+   "row": 63,
+   "closureStored": 9.36740769149107e-25,
+   "closureInFile": 1.8e-24
+  },
+  {
+   "file": "data/refined/T9.658.json",
+   "row": 2,
+   "closureStored": 2.9630978166100233e-25,
+   "closureInFile": 2.55e-24
+  },
+  {
+   "file": "data/refined/reliable/00_T7.218.json",
+   "row": 1,
+   "closureStored": 2.482010345595351e-24,
+   "closureInFile": 1.23e-24
+  },
+  {
+   "file": "data/refined/reliable/01_T9.878.json",
+   "row": 3,
+   "closureStored": 7.859989982648191e-23,
+   "closureInFile": 3.46e-24
+  },
+  {
+   "file": "data/refined/reliable/02_T9.918.json",
+   "row": 4,
+   "closureStored": 1.7912831841865306e-24,
+   "closureInFile": 3.63e-25
+  },
+  {
+   "file": "data/refined/reliable/03_T11.652.json",
+   "row": 5,
+   "closureStored": 4.5333518114839285e-23,
+   "closureInFile": 2.19e-23
+  },
+  {
+   "file": "data/refined/reliable/04_T12.097.json",
+   "row": 6,
+   "closureStored": 3.980853141030589e-24,
+   "closureInFile": 2.72e-23
+  },
+  {
+   "file": "data/refined/reliable/05_T12.170.json",
+   "row": 7,
+   "closureStored": 3.054453395492892e-24,
+   "closureInFile": 1.03e-24
+  },
+  {
+   "file": "data/refined/reliable/06_T13.986.json",
+   "row": 8,
+   "closureStored": 1.7780851579864135e-23,
+   "closureInFile": 6.75e-24
+  },
+  {
+   "file": "data/refined/reliable/07_T14.129.json",
+   "row": 9,
+   "closureStored": 6.256997795100145e-25,
+   "closureInFile": 3e-26
+  },
+  {
+   "file": "data/refined/reliable/08_T14.138.json",
+   "row": 10,
+   "closureStored": 1.337699755722118e-25,
+   "closureInFile": 1.09e-23
+  },
+  {
+   "file": "data/refined/reliable/09_T15.153.json",
+   "row": 11,
+   "closureStored": 2.0853670950578054e-23,
+   "closureInFile": 1.36e-24
+  },
+  {
+   "file": "data/refined/reliable/10_T16.969.json",
+   "row": 12,
+   "closureStored": 1.8126286637038767e-22,
+   "closureInFile": 5.3e-24
+  },
+  {
+   "file": "data/refined/reliable/11_T16.984.json",
+   "row": 13,
+   "closureStored": 8.36568050252976e-23,
+   "closureInFile": 1.41e-24
+  },
+  {
+   "file": "data/refined/reliable/12_T17.057.json",
+   "row": 14,
+   "closureStored": 1.0884123607851738e-22,
+   "closureInFile": 1.67e-23
+  },
+  {
+   "file": "data/refined/reliable/13_T17.895.json",
+   "row": 16,
+   "closureStored": 2.752496957648595e-23,
+   "closureInFile": 4.88e-24
+  },
+  {
+   "file": "data/refined/reliable/14_T18.080.json",
+   "row": 17,
+   "closureStored": 2.0621387351501418e-24,
+   "closureInFile": 5.79e-24
+  },
+  {
+   "file": "data/refined/reliable/15_T19.142.json",
+   "row": 19,
+   "closureStored": 4.869084806720944e-24,
+   "closureInFile": 9e-25
+  },
+  {
+   "file": "data/refined/reliable/16_T19.412.json",
+   "row": 20,
+   "closureStored": 7.948275204119117e-22,
+   "closureInFile": 8.21e-23
+  },
+  {
+   "file": "data/refined/reliable/17_T19.621.json",
+   "row": 21,
+   "closureStored": 9.009422347853224e-22,
+   "closureInFile": 7.29e-25
+  },
+  {
+   "file": "data/refined/reliable/18_T21.693.json",
+   "row": 23,
+   "closureStored": 9.532075590877033e-23,
+   "closureInFile": 8.18e-23
+  },
+  {
+   "file": "data/refined/reliable/19_T23.863.json",
+   "row": 25,
+   "closureStored": 5.447889933302286e-25,
+   "closureInFile": 7.41e-25
+  },
+  {
+   "file": "data/refined/reliable/20_T23.863.json",
+   "row": 26,
+   "closureStored": 2.5191061178445147e-23,
+   "closureInFile": 4.56e-24
+  },
+  {
+   "file": "data/refined/reliable/21_T23.864.json",
+   "row": 27,
+   "closureStored": 4.177779246360328e-24,
+   "closureInFile": 1.93e-24
+  },
+  {
+   "file": "data/refined/reliable/22_T25.219.json",
+   "row": 29,
+   "closureStored": 1.4487730599440723e-22,
+   "closureInFile": 1.29e-23
+  },
+  {
+   "file": "data/refined/reliable/23_T26.939.json",
+   "row": 33,
+   "closureStored": 1.6893972441708017e-23,
+   "closureInFile": 8.7e-24
+  },
+  {
+   "file": "data/refined/reliable/24_T27.983.json",
+   "row": 34,
+   "closureStored": 1.7698908450904252e-22,
+   "closureInFile": 2.12e-22
+  },
+  {
+   "file": "data/refined/reliable/25_T29.025.json",
+   "row": 35,
+   "closureStored": 1.3758789679293433e-21,
+   "closureInFile": 1.06e-23
+  },
+  {
+   "file": "data/refined/reliable/26_T29.569.json",
+   "row": 36,
+   "closureStored": 8.770091932900627e-23,
+   "closureInFile": 2.64e-22
+  },
+  {
+   "file": "data/refined/reliable/27_T29.777.json",
+   "row": 37,
+   "closureStored": 3.6982586753818448e-25,
+   "closureInFile": 9.02e-26
+  },
+  {
+   "file": "data/refined/reliable/28_T32.305.json",
+   "row": 39,
+   "closureStored": 2.17458972639863e-22,
+   "closureInFile": 2.81e-22
+  },
+  {
+   "file": "data/refined/reliable/29_T33.449.json",
+   "row": 40,
+   "closureStored": 5.1879235378996065e-20,
+   "closureInFile": 9.73e-22
+  },
+  {
+   "file": "data/refined/reliable/30_T33.745.json",
+   "row": 42,
+   "closureStored": 1.6203633602800893e-25,
+   "closureInFile": 6.9e-25
+  },
+  {
+   "file": "data/refined/reliable/31_T35.050.json",
+   "row": 43,
+   "closureStored": 1.8472565192284904e-22,
+   "closureInFile": 1.33e-23
+  },
+  {
+   "file": "data/refined/reliable/32_T35.301.json",
+   "row": 44,
+   "closureStored": 5.515676582931257e-22,
+   "closureInFile": 2.07e-22
+  },
+  {
+   "file": "data/refined/reliable/33_T35.693.json",
+   "row": 45,
+   "closureStored": 1.9015342229442127e-23,
+   "closureInFile": 9.15e-24
+  },
+  {
+   "file": "data/refined/reliable/34_T35.940.json",
+   "row": 47,
+   "closureStored": 4.386591398277136e-21,
+   "closureInFile": 8.15e-23
+  },
+  {
+   "file": "data/refined/reliable/35_T39.644.json",
+   "row": 51,
+   "closureStored": 1.6783474007335368e-23,
+   "closureInFile": 2.84e-23
+  },
+  {
+   "file": "data/refined/reliable/36_T39.645.json",
+   "row": 52,
+   "closureStored": 2.298385620546585e-22,
+   "closureInFile": 9.2e-24
+  },
+  {
+   "file": "data/refined/reliable/37_T41.848.json",
+   "row": 54,
+   "closureStored": 1.291045344941738e-21,
+   "closureInFile": 2.7e-22
+  },
+  {
+   "file": "data/refined/reliable/38_T42.877.json",
+   "row": 56,
+   "closureStored": 5.994461312933149e-22,
+   "closureInFile": 1.05e-23
+  },
+  {
+   "file": "data/refined/reliable/39_T43.456.json",
+   "row": 57,
+   "closureStored": 2.9810119405851484e-21,
+   "closureInFile": 2.38e-24
+  },
+  {
+   "file": "data/refined/reliable/40_T43.655.json",
+   "row": 59,
+   "closureStored": 3.315176019280243e-23,
+   "closureInFile": 3.06e-24
+  },
+  {
+   "file": "data/refined/reliable/41_T45.900.json",
+   "row": 61,
+   "closureStored": 1.810078285848366e-22,
+   "closureInFile": 1.03e-23
+  },
+  {
+   "file": "data/refined/reliable/42_T47.632.json",
+   "row": 64,
+   "closureStored": 3.2876198084983776e-24,
+   "closureInFile": 2.59e-25
+  },
+  {
+   "file": "data/refined/reliable/43_T50.345.json",
+   "row": 67,
+   "closureStored": 4.756392572951502e-22,
+   "closureInFile": 4.98e-24
+  },
+  {
+   "file": "data/refined/reliable/44_T59.440.json",
+   "row": 75,
+   "closureStored": 9.665971501936933e-22,
+   "closureInFile": 7.54e-23
+  },
+  {
+   "file": "data/refined/reliable/45_T59.719.json",
+   "row": 77,
+   "closureStored": 7.438194365359293e-23,
+   "closureInFile": 4.94e-24
+  },
+  {
+   "file": "data/refined/reliable/46_T59.721.json",
+   "row": 78,
+   "closureStored": 1.8917764075880028e-23,
+   "closureInFile": 9.9e-24
+  },
+  {
+   "file": "data/refined/reliable/47_T70.002.json",
+   "row": 82,
+   "closureStored": 1.984053705678119e-21,
+   "closureInFile": 3.39e-23
+  },
+  {
+   "file": "data/refined/weak/00_T19.091.json",
+   "row": 18,
+   "closureStored": 2.0766727405387e-20,
+   "closureInFile": 3.08e-22
+  },
+  {
+   "file": "data/refined/weak/01_T23.684.json",
+   "row": 24,
+   "closureStored": 2.1166159306675613e-21,
+   "closureInFile": 9e-22
+  },
+  {
+   "file": "data/refined/weak/02_T23.982.json",
+   "row": 28,
+   "closureStored": 6.548471225392476e-23,
+   "closureInFile": 2.89e-22
+  },
+  {
+   "file": "data/refined/weak/03_T25.405.json",
+   "row": 30,
+   "closureStored": 1.3209729225132413e-24,
+   "closureInFile": 8.82e-23
+  },
+  {
+   "file": "data/refined/weak/04_T25.708.json",
+   "row": 31,
+   "closureStored": 5.697378827372938e-20,
+   "closureInFile": 3.51e-22
+  },
+  {
+   "file": "data/refined/weak/05_T25.764.json",
+   "row": 32,
+   "closureStored": 4.8304789415940125e-21,
+   "closureInFile": 8.03e-21
+  },
+  {
+   "file": "data/refined/weak/06_T30.222.json",
+   "row": 38,
+   "closureStored": 2.2277145307380428e-21,
+   "closureInFile": 1.27e-22
+  },
+  {
+   "file": "data/refined/weak/07_T35.857.json",
+   "row": 46,
+   "closureStored": 3.779834499214419e-21,
+   "closureInFile": 2.66e-23
+  },
+  {
+   "file": "data/refined/weak/08_T37.295.json",
+   "row": 48,
+   "closureStored": 2.8682553228761548e-21,
+   "closureInFile": 5.83e-22
+  },
+  {
+   "file": "data/refined/weak/09_T37.668.json",
+   "row": 49,
+   "closureStored": 1.2625796928800477e-20,
+   "closureInFile": 1.09e-21
+  },
+  {
+   "file": "data/refined/weak/10_T39.613.json",
+   "row": 50,
+   "closureStored": 4.5897309620956325e-22,
+   "closureInFile": 5.47e-23
+  },
+  {
+   "file": "data/refined/weak/11_T41.166.json",
+   "row": 53,
+   "closureStored": 2.2113752721695116e-20,
+   "closureInFile": 3.67e-21
+  },
+  {
+   "file": "data/refined/weak/12_T41.917.json",
+   "row": 55,
+   "closureStored": 1.2830666617575348e-20,
+   "closureInFile": 2.27e-23
+  },
+  {
+   "file": "data/refined/weak/13_T43.494.json",
+   "row": 58,
+   "closureStored": 4.1421919734703066e-21,
+   "closureInFile": 1.98e-23
+  },
+  {
+   "file": "data/refined/weak/14_T43.828.json",
+   "row": 60,
+   "closureStored": 1.7735234563966764e-20,
+   "closureInFile": 1.32e-23
+  },
+  {
+   "file": "data/refined/weak/15_T46.245.json",
+   "row": 62,
+   "closureStored": 1.3836255669985418e-21,
+   "closureInFile": 2.41e-21
+  },
+  {
+   "file": "data/refined/weak/16_T49.608.json",
+   "row": 65,
+   "closureStored": 2.253759321251115e-20,
+   "closureInFile": 1.1e-22
+  },
+  {
+   "file": "data/refined/weak/17_T50.064.json",
+   "row": 66,
+   "closureStored": 2.6669181252888374e-19,
+   "closureInFile": 1.63e-22
+  },
+  {
+   "file": "data/refined/weak/18_T51.639.json",
+   "row": 68,
+   "closureStored": 1.455466518441501e-19,
+   "closureInFile": 2.34e-23
+  },
+  {
+   "file": "data/refined/weak/19_T52.208.json",
+   "row": 69,
+   "closureStored": 1.4102392252601313e-19,
+   "closureInFile": 2.66e-24
+  },
+  {
+   "file": "data/refined/weak/20_T54.302.json",
+   "row": 70,
+   "closureStored": 5.0124005458941704e-20,
+   "closureInFile": 8.06e-23
+  },
+  {
+   "file": "data/refined/weak/21_T55.785.json",
+   "row": 71,
+   "closureStored": 2.064651413365701e-20,
+   "closureInFile": 3.49e-23
+  },
+  {
+   "file": "data/refined/weak/22_T56.826.json",
+   "row": 72,
+   "closureStored": 3.1689760091504354e-21,
+   "closureInFile": 4.17e-21
+  },
+  {
+   "file": "data/refined/weak/23_T57.461.json",
+   "row": 73,
+   "closureStored": 6.590991312138467e-22,
+   "closureInFile": 1.19e-22
+  },
+  {
+   "file": "data/refined/weak/24_T57.517.json",
+   "row": 74,
+   "closureStored": 5.097897927835756e-22,
+   "closureInFile": 3e-23
+  },
+  {
+   "file": "data/refined/weak/25_T59.443.json",
+   "row": 76,
+   "closureStored": 1.8426962129167801e-22,
+   "closureInFile": 1.04e-22
+  },
+  {
+   "file": "data/refined/weak/26_T60.660.json",
+   "row": 79,
+   "closureStored": 2.693849828285105e-19,
+   "closureInFile": 1.51e-22
+  },
+  {
+   "file": "data/refined/weak/27_T61.723.json",
+   "row": 80,
+   "closureStored": 4.253986484457956e-22,
+   "closureInFile": 2.07e-22
+  },
+  {
+   "file": "data/refined/weak/28_T62.160.json",
+   "row": 81,
+   "closureStored": 2.8503328076847e-20,
+   "closureInFile": 2.26e-22
+  },
+  {
+   "file": "data/refined/weak/29_T72.465.json",
+   "row": 83,
+   "closureStored": 4.868256713774365e-20,
+   "closureInFile": 6.39e-22
+  },
+  {
+   "file": "data/refined/weak/30_T79.247.json",
+   "row": 84,
+   "closureStored": 5.579683863744391e-21,
+   "closureInFile": 3.26e-22
+  }
+ ]
+}
