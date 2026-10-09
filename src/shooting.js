@@ -125,7 +125,7 @@ function system(z, lam, m) {
 }
 
 // close the symmetric half orbit with m pieces. pass the nodes of a nearby solution to warm start.
-export function closePerpMS(u1, u2, lam, t0, { m = 6, nodes = null, maxIter = 30, tol = 1e-11, maxMs = 60000 } = {}) {
+export function closePerpMS(u1, u2, lam, t0, { m = 6, nodes = null, maxIter = 30, tol = 1e-11, maxMs = Infinity } = {}) {   // stops on iterations or tolerance; a time limit is optional
   const started = Date.now();
   let start = nodes || nodesFrom(u1, u2, lam, t0, m);
   if (!start) return { res: Infinity, why: 'guess orbit blew up' };
@@ -173,7 +173,7 @@ export function huntPeriodicMS(u1, u2, lam0, t0, { m = 8, maxMs = 600000, step0 
   const started = Date.now();
   const wrap = (x) => Math.atan2(Math.sin(x), Math.cos(x));
   const good = (from, sol) => sol && sol.res < 1e-9 && Math.abs(sol.t - from.t) < 0.3 * from.t;
-  const first = closePerpMS(u1, u2, lam0, t0, { m, maxMs: 120000 });
+  const first = closePerpMS(u1, u2, lam0, t0, { m });
   if (!(first.res < 1e-9)) return { ok: false, why: 'start did not close' };
   let a = { ...first, th: thetaOf(first) };
   if (a.th === null) return { ok: false, why: 'start orbit failed' };
@@ -323,9 +323,9 @@ function correct(Yp, tau, m, t0) {
 
 // follow the family from a starting orbit until the rotation angle theta is 0.
 // dir = +1 or -1 picks which way along the curve to start.
-export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000, thTol = 2e-8, hMax = 0.15, maxSteps = 6000, all = false, trace = null } = {}) {
+export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000, thTol = 2e-8, hMax = 0.15, maxSteps = 6000, all = false, trace = null, force = false } = {}) {   // force: follow the family even when the start has theta = 0
   const started = Date.now();
-  const first = closePerpMS(u1, u2, lam0, t0, { m, maxMs: 120000 });
+  const first = closePerpMS(u1, u2, lam0, t0, { m });
   if (!(first.res < 1e-9)) return { ok: false, why: 'start did not close' };
   const n = 3 + N * (m - 1);
   const z0 = packZ(first);
@@ -336,7 +336,7 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
   let Y = toY(z0, lam0);
   let th = thetaOf({ ...first });
   if (th === null) return { ok: false, why: 'start orbit failed' };
-  if (Math.abs(th) < thTol) return arcFinish(Y, m);
+  if (Math.abs(th) < thTol && !force) return arcFinish(Y, m);
   let h = Math.min(hMax, 0.002 / Math.max(Math.abs(tau[n]), 1e-6));
   let steps = 0, lamMin = lam0, lamMax = lam0;
   const found = [];
@@ -364,12 +364,14 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
     if (Math.abs(thNew) < thTol) { const o = arcFinish(c.Y, m); if (o.ok) found.push(o); if (!all && o.ok) return o; }
     else if (th * thNew < 0 && Math.abs(th) < 1 && Math.abs(thNew) < 1) {
       const Yz = refineZero(Y, c.Y, th, thNew, m, t0, thTol);
-      if (!Yz) return { ok: false, why: 'zero of theta not refined', lam: Y[n], th, steps, lamMin, lamMax };
-      const o = arcFinish(Yz, m);
-      if (o.ok) found.push(o);
-      if (!all && o.ok) return o;
+      if (!Yz && !all) return { ok: false, why: 'zero of theta not refined', lam: Y[n], th, steps, lamMin, lamMax };
+      if (Yz) {   // in all mode a zero that cannot be refined is skipped, the trace goes on
+        const o = arcFinish(Yz, m);
+        if (o.ok) found.push(o);
+        if (!all && o.ok) return o;
+      }
     }
-    if (trace) trace(steps, c.Y[n], thNew, h, c.iters, c.Y);
+    if (trace && trace(steps, c.Y[n], thNew, h, c.iters, c.Y) === true) return end('stopped by the caller');   // e.g. the curve is a closed loop
     // accept the step
     Y = c.Y; tau = tauNew; th = thNew;
     lamMin = Math.min(lamMin, Y[n]); lamMax = Math.max(lamMax, Y[n]);

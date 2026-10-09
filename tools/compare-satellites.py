@@ -28,6 +28,7 @@ for r in rs:
         T=[p[0] for p in c]; Lx=[p[1] for p in c]
         inwin=[(N,k) for N,k,ts,ls in cpc if min(T)<=ts<=max(T) and min(Lx)<=ls<=max(Lx)]
         arms.append(dict(orbit=j['orbit'],k=j['k'],lamBP=b['lamBP'],sgn=b['sgn'],pts=len(c),total=len(b['curve']),Trange=(min(T),max(T)),Lrange=(min(Lx),max(Lx)),lam=(c[0][3],c[-1][3]),best=res[0],inwin=inwin,close=[x for x in res if x[0]<5e-3]))
+if not arms: raise SystemExit('no arm with at least 3 good points: nothing was compared')
 print(len(arms),'arms with at least 3 good points')
 for a in sorted(arms,key=lambda a:(a['orbit'],a['k'],a['lamBP'],a['sgn'])):
     print('orb',a['orbit'],'k',a['k'],'bp %.4f'%a['lamBP'],'sgn',a['sgn'],'pts %d/%d'%(a['pts'],a['total']),'T* %.2f..%.2f'%a['Trange'],'L* %.3f..%.3f'%a['Lrange'],'lam %.3f..%.3f'%a['lam'],'| best CPC dist %.4f N=%d k=%d'%a['best'],'| CPC inside window:',a['inwin'],'| close<5e-3:',[(N,k) for d,N,k in a['close']])

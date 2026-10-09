@@ -28,6 +28,7 @@ for (const o of list) {
   const dp = closureError(x0, 2 * o.t, 'dp45');
   const bs = closureError(x0, 2 * o.t, 'bs');
   const cv = coverInfo(perpInitial(o.u1, o.u2, o.lam), 2 * o.t);
+  if (cv.failed) { console.error('the repeat count of the orbit with T* =', o.ts, 'could not be computed (the integration stopped): table not written'); process.exit(1); }
   const x = w && bhh ? o.ts / w.power : null;
   const distBHH = x ? Math.min(...cpc.map(([a, b]) => Math.hypot((a - x) / x, (b - Math.abs(o.ls)) / Math.abs(o.ls)))) : null;
   rows.push({ group: o.group, u1: o.u1, u2: o.u2, lam: o.lam, t: o.t, T: o.T, Tstar: o.ts, Lstar: Math.abs(o.ls), minDist: o.minD, status: o.status, syzygies: w?.length ?? null, wordRoot: w?.root ?? null, wordPower: w?.power ?? null, bhhType: bhh, closureDP45: dp?.errRot ?? null, closureBS: bs?.errRot ?? null, closureTier: closureTier(x0, 2 * o.t).tier, closureDP45raw: dp?.errRaw ?? null, closureBSraw: bs?.errRaw ?? null, repeatOf: cv.nRepeat, relabelReturnN: cv.nRelabel, primitiveTstar: o.ts / cv.nRepeat, rotation: info?.theta ?? null, distToBHHcurve: distBHH, offBHHcurve: distBHH === null ? null : distBHH > 0.2 });

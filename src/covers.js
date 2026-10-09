@@ -15,7 +15,9 @@ function rotationError(a, b) {
   return err;
 }
 
-export function coverInfo(x0, T, nMax = 24, tol = 1e-5) {
+// nMax has to be above the repeat count of the shortest orbit times the k of a branch (9 x 3 = 27 for one of the arms; a limit of 24 made a 27 fold repeat look like a 9 fold one).
+// failed: the integration stopped (step size 0); nRepeat and nRelabel are then 1 only as placeholders and must not be read as "not a repeat".
+export function coverInfo(x0, T, nMax = 200, tol = 1e-5) {
   const s = Float64Array.from(x0);
   let t = 0, h = 1e-3, nRepeat = 1, nRelabel = 1;
   for (let n = nMax; n >= 2; n--) {

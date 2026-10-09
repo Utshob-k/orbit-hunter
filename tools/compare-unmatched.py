@@ -14,6 +14,7 @@ for r in rows:
                 d = max(abs(a - b) / b, abs(ls - l) / l)
                 if best is None or d < best[0]: best = (d, N, k, n)
     res.append((best[0], r['Tstar'], r['Lstar'], best))
+if not res: raise SystemExit('no unmatched orbit in the table: nothing was compared')
 res.sort()
 print(len(res), 'unmatched orbits; closest to any CPC satellite (with repeats): relative distance %.2e (N = %d, k = %d, n = %d)' % res[0][3])
 print('number closer than 1e-3:', sum(1 for x in res if x[0] < 1e-3), ' closer than 1e-2:', sum(1 for x in res if x[0] < 1e-2))

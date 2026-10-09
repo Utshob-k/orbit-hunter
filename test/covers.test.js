@@ -15,4 +15,8 @@ const cc = coverInfo(perpInitial(c.u1, c.u2, c.lam), 2 * c.t, 12);
 check('T* = 47.065 is a 2 fold repeat', ca.nRepeat === 2, JSON.stringify(ca));
 check('T* = 17.847 is not a repeat', cb.nRepeat === 1, JSON.stringify(cb));
 check('the BHH orbit (T* = 4.96) is not a repeat but returns after T/2 with bodies swapped', cc.nRepeat === 1 && cc.nRelabel === 2, JSON.stringify(cc));
+// the default limit has to be above the repeat count of long repeats: 13 periods of the T* = 47.065 orbit are a 26 fold repeat of its shortest orbit (a limit of 24 sees only 13)
+const cl = coverInfo(perpInitial(a.u1, a.u2, a.lam), 13 * 2 * a.t), cl24 = coverInfo(perpInitial(a.u1, a.u2, a.lam), 13 * 2 * a.t, 24);
+check('a 26 fold repeat is found with the default limit', cl.nRepeat === 26 && !cl.failed, JSON.stringify(cl));
+check('a limit of 24 sees only 13 of them', cl24.nRepeat === 13, JSON.stringify(cl24));
 process.exit(fail ? 1 : 0);

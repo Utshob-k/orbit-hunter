@@ -77,13 +77,13 @@ function trace(Y0, tau0, m, t0, { h0 = 0.01, hMax = 0.08, maxSteps = 300, maxMs 
 
 // the k fold repeat of the orbit (u1, u2, lam, t) as a solution of the m piece system
 function repeatOf(u1, u2, lam, t, k, m) {
-  const s = closePerpMS(u1, u2, lam, k * t, { m, maxMs: 60000 });
+  const s = closePerpMS(u1, u2, lam, k * t, { m });
   return s.res < 1e-9 ? s : null;
 }
 
 // look for branch points of the k fold repeat while lam moves from lamA to lamB.
 // returns the branches found: lam, scale free T* and L* along each of them
-export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, branchHMax = 0.05, branchMs = 120000, stabEvery = 0, traceMs = 120000 } = {}) {
+export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, branchHMax = 0.05, branchMs = 120000, stabEvery = 0, traceMs = 120000, switchDelta = 0.004 } = {}) {
   const rep = repeatOf(orbit.u1, orbit.u2, lamA, orbit.t, k, m);
   if (!rep) return { ok: false, why: 'repeat did not close at lamA' };
   const n = 3 + 12 * (m - 1);
@@ -120,6 +120,7 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
     const A = bordered(P.J, P.Flam, P.tau);
     let phi = nullVector(A);
     const nullSolved = phi.solved;
+    const Aphi = Math.sqrt(A.reduce((acc, row) => acc + row.reduce((sum, v, j) => sum + v * phi[j], 0) ** 2, 0));   // how well phi is a null vector
     const d = dot(phi, P.tau);
     phi = unit(phi.map((v, j) => v - d * P.tau[j]));
     const lamBP = P.Y[n];
@@ -134,12 +135,12 @@ export function satellitesFrom(orbit, k, lamA, lamB, { m = 8, branchSteps = 40, 
       return out;
     };
     for (const sgn of [1, -1]) {
-      const start = correct(Float64Array.from(P.Y, (v, j) => v + sgn * 0.004 * phi[j]), phi.map((v) => sgn * v), m, rep.t);
+      const start = correct(Float64Array.from(P.Y, (v, j) => v + sgn * switchDelta * phi[j]), phi.map((v) => sgn * v), m, rep.t);
       if (!start.ok) { branches.push({ lamBP, sgn, ok: false, bisected, width, nullSolved }); continue; }
       const tauS = tangentAt(start.J, start.Flam, phi.map((v) => sgn * v));
       const along = trace(start.Y, tauS, m, rep.t, { maxSteps: branchSteps, hMax: branchHMax, maxMs: branchMs, onPoint: (p) => p.Y[n] < -0.5 || p.Y[n] > 1.05 });
       const curve = [start, ...along].map((p, i) => info(p.Y, stabEvery > 0 && i % stabEvery === 0)).filter(Boolean);
-      branches.push({ lamBP, sgn, ok: true, repeatTs: info(P.Y), curve, bisected, width, nullSolved });
+      branches.push({ lamBP, sgn, ok: true, repeatTs: info(P.Y), curve, bisected, width, nullSolved, diag: { dotTau: d, nullResidual: Aphi, startIters: start.iters, startDist: Math.sqrt(dot(start.Y.map((v, j) => v - P.Y[j]), start.Y.map((v, j) => v - P.Y[j]))) } });
     }
   }
   return { ok: true, reached, k, lamA, lamB, steps: pts.length, signs: pts.map((p) => p.sign).join('').replace(/-1/g, '-').slice(0, 200), branches };

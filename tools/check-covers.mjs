@@ -6,7 +6,7 @@ import { perpInitial } from '../src/perp.js';
 import { dp45Step } from '../src/physics.js';
 
 const [file, nArg] = process.argv.slice(2);
-const nMax = Number(nArg) || 24;
+const nMax = Number(nArg) || 200;
 const PERMS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
 const permute = (x, p) => { const o = new Float64Array(12); for (let off = 0; off < 12; off += 6) for (let i = 0; i < 3; i++) { o[off + 2 * i] = x[off + 2 * p[i]]; o[off + 2 * i + 1] = x[off + 2 * p[i] + 1]; } return o; };
 function bestRotationError(a, b) {
@@ -23,7 +23,7 @@ for (const o of JSON.parse(fs.readFileSync(file, 'utf8'))) {
   const s = Float64Array.from(x0); let t = 0, h = 1e-3, k = 0; const found = [];
   while (k < stops.length) {
     const target = stops[k].t;
-    while (t < target - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, target - t), 1e-13, 1e-14, 0.01); t += dt; h = hn; }
+    while (t < target - 1e-14) { const [dt, hn] = dp45Step(s, Math.min(h, target - t), 1e-13, 1e-14, 0.01); if (dt === 0) { console.error('the integration stopped (step size 0) for lam =', o.lam); process.exit(1); } t += dt; h = hn; }
     let best = Infinity, bp = null;
     for (const p of PERMS) { const e = bestRotationError(permute(s, p), x0); if (e < best) { best = e; bp = p; } }
     found.push({ n: stops[k].n, err: best, perm: bp.join(''), errId: bestRotationError(s, x0) });

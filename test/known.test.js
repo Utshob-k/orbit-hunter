@@ -9,8 +9,8 @@ for (const k of KNOWN) {
   let best = null;
   for (const perm of [0, 1, 2]) {
     const Tguess = perm === 0 ? k.T : k.T / 3;
-    // a generous time budget: the default of 3 s cuts newton off early on a busy machine and the result then depends on the load
-    const r = closeOrbit(k.v1, k.v2, Tguess, perm, { maxMs: 120000 });
+    // stops on iterations or tolerance, never on the clock, so the result does not depend on how busy the machine is
+    const r = closeOrbit(k.v1, k.v2, Tguess, perm);
     if (!best || r.res < best.res) best = r;
     if (best.res < 1e-9) break;
   }

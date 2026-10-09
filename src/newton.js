@@ -72,7 +72,7 @@ export function solve(A, b) {
 }
 
 // p0 = [v1, v2, T, ell, theta], free says which of them may change
-export function closeGeneral(p0, free, perm = 0, { maxIter = 30, fd = 1e-6, maxMs = 3000 } = {}) {
+export function closeGeneral(p0, free, perm = 0, { maxIter = 30, fd = 1e-6, maxMs = Infinity } = {}) {   // stops on iterations or tolerance; a time limit is optional
   const t0 = Date.now();
   const idx = [0, 1, 2, 3, 4].filter((i) => free[i]);
   const T0 = p0[2];

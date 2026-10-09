@@ -13,7 +13,8 @@ import { coverInfo } from '../src/covers.js';
 const table = JSON.parse(fs.readFileSync(new URL('../data/orbit-table.json', import.meta.url), 'utf8'));
 // the orbits of the arclength list are not in the table of the 85: add them with their word and repeat count computed here
 for (const a of JSON.parse(fs.readFileSync(new URL('../data/perp-arc-orbits.json', import.meta.url), 'utf8'))) {
-  const x0 = perpInitial(a.u1, a.u2, a.lam), w = syzygyWord(x0, 2 * a.t), cv = coverInfo(x0, 2 * a.t, 24);
+  const x0 = perpInitial(a.u1, a.u2, a.lam), w = syzygyWord(x0, 2 * a.t), cv = coverInfo(x0, 2 * a.t, 200);
+  if (cv.failed) { console.error('repeat count of an orbit of the arclength list could not be computed: nothing written'); process.exit(1); }
   table.push({ u1: a.u1, u2: a.u2, lam: a.lam, t: a.t, Tstar: a.ts, Lstar: Math.abs(a.ls), closureTier: 'reliable', status: 'arclength list', wordRoot: w.root, wordPower: w.power, repeatOf: cv.nRepeat });
 }
 const files = [];
@@ -32,13 +33,13 @@ for (const f of files.sort()) {
   const info = perpInfo(u1, u2, lam, t);
   const moved = Math.max(Math.abs(u1 - row.u1), Math.abs(u2 - row.u2), Math.abs(lam - row.lam), Math.abs(t - row.t));
   const w = syzygyWord(perpInitial(u1, u2, lam), 2 * t);
-  const cv = coverInfo(perpInitial(u1, u2, lam), 2 * t, 24);
+  const cv = coverInfo(perpInitial(u1, u2, lam), 2 * t, 200);
   const res = Number(r.residual), full = Number(r.closure_full_period);
   const converged = res < 1e-23 && full < 1e-20;   // the refinement itself stops at 1e-24
   const dT = info ? Math.abs(info.ts - row.Tstar) / row.Tstar : Infinity;
   const dL = info ? Math.abs(Math.abs(info.ls) - row.Lstar) / Math.max(row.Lstar, 1e-3) : Infinity;   // L* = 0 for the two L = 0 orbits
   const sameWord = !!w && w.root === row.wordRoot && w.power === row.wordPower;
-  const sameRepeat = cv.nRepeat === row.repeatOf;
+  const sameRepeat = !cv.failed && cv.nRepeat === row.repeatOf;   // a failed integration is not a repeat count of 1
   const same = dT < 1e-6 && dL < 1e-6 && sameWord && sameRepeat;
   const label = converged && same ? 'refined' : converged ? 'converged but different orbit?' : 'not converged';
   out.push({ file: f, Tstar: row.Tstar, tierBefore: row.closureTier, status: row.status, residual: res, closureFull: full, moved, dT, dL, sameWord, sameRepeat, label });

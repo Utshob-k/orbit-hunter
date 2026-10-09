@@ -45,7 +45,7 @@ const resOf = (x, lam) => {
 const nrm = (r) => Math.hypot(...r);
 
 // solve for (u1, u2, t) at fixed lam so the state at time t is collinear + perpendicular
-export function closePerp(u1, u2, lam, t0, { maxIter = 30, maxMs = 3000 } = {}) {
+export function closePerp(u1, u2, lam, t0, { maxIter = 30, maxMs = Infinity } = {}) {   // stops on iterations or tolerance; a time limit is optional
   const started = Date.now();
   let x = [u1, u2, t0];
   let r = resOf(x, lam);
