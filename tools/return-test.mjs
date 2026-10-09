@@ -3,8 +3,9 @@
 //   own places: the bodies are in their own places after T/n (the rotation angle is then the rotation angle of the relative period)
 //   any symmetry: the best over relabelling of the bodies, reflection (y -> -y) and reversal of the velocities (with the best rotation in every case)
 // a reflected or reversed return means a return at 2T/n in the first two ways, so nothing is lost by this being in the second list only.
-// the 17 arclength orbits are marked as matching the atlas only when the downloaded catalogue is given (the list itself is not stored here):
-// node tools/return-test.mjs [path/to/catalogue.json]      writes data/return-test.json
+// whether an arclength orbit is an atlas orbit comes from the downloaded catalogue if its path is given (the list itself is not stored here),
+// otherwise from the groups stored in data/return-test.json (made with the catalogue of 2026-10-09; the README counts "of the 92" use them).
+// node tools/return-test.mjs [path/to/catalogue.json] [--write]      prints the counts; data/return-test.json is only written with --write
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { dp45Step } from '../src/physics.js';
@@ -47,15 +48,18 @@ function returns(x0, T) {
 }
 const tab = JSON.parse(fs.readFileSync(new URL('../data/orbit-table.json', import.meta.url), 'utf8'));
 const arc = JSON.parse(fs.readFileSync(new URL('../data/perp-arc-orbits.json', import.meta.url), 'utf8'));
-let atlas = null;
-if (process.argv[2]) {
-  const cat = JSON.parse(fs.readFileSync(process.argv[2], 'utf8')).orbits.filter((x) => x.masses.every((m) => m === 1));
+const args = process.argv.slice(2), write = args.includes('--write'), catPath = args.find((a) => !a.startsWith('--'));
+const outFile = new URL('../data/return-test.json', import.meta.url);
+let atlas = null, stored = null;
+if (!catPath && fs.existsSync(outFile)) stored = new Map(JSON.parse(fs.readFileSync(outFile, 'utf8')).map((o) => [o.name, o.group]));
+if (catPath) {
+  const cat = JSON.parse(fs.readFileSync(catPath, 'utf8')).orbits.filter((x) => x.masses.every((m) => m === 1));
   atlas = cat.map((x) => ({ T: x.T * Math.abs(x.E) ** 1.5, L: Math.abs(x.L) * Math.abs(x.E) ** 0.5 })).filter((a) => a.L > 1e-7);
 }
 const inAtlas = (T, L) => atlas && atlas.some((a) => Math.abs(a.L / L - 1) < TOL && Array.from({ length: NMAX }, (_, i) => i + 1).some((n) => Math.abs(n * a.T / T - 1) < TOL || Math.abs(a.T / (n * T) - 1) < TOL));
 const list = [
   ...tab.map((o, i) => ({ name: 't' + String(i).padStart(2, '0'), group: o.group, u1: o.u1, u2: o.u2, lam: o.lam, t: o.t, Tstar: o.Tstar, Lstar: o.Lstar })),
-  ...arc.map((a, i) => ({ name: 'a' + String(i).padStart(2, '0'), group: atlas ? (inAtlas(a.ts, Math.abs(a.ls)) ? 'atlas' : 'unmatched') : 'arclength list (atlas not checked)', u1: a.u1, u2: a.u2, lam: a.lam, t: a.t, Tstar: a.ts, Lstar: Math.abs(a.ls) })),
+  ...arc.map((a, i) => ({ name: 'a' + String(i).padStart(2, '0'), group: atlas ? (inAtlas(a.ts, Math.abs(a.ls)) ? 'atlas' : 'unmatched') : (stored && stored.get('a' + String(i).padStart(2, '0'))) || 'arclength list (atlas not checked)', u1: a.u1, u2: a.u2, lam: a.lam, t: a.t, Tstar: a.ts, Lstar: Math.abs(a.ls) })),
 ];
 const out = [];
 for (const o of list) {
@@ -74,4 +78,6 @@ console.log('return in their own places:', out.filter((o) => o.ownPlaces).length
 console.log('return under any relabelling, reflection or reversal:', out.filter((o) => o.anySymmetry).length, '; among the unmatched ones:', unm.filter((o) => o.anySymmetry).length);
 const rest = out.filter((o) => !o.anySymmetry).sort((a, b) => a.bestMismatchAnySymmetry.mismatch - b.bestMismatchAnySymmetry.mismatch)[0];
 console.log('closest orbit that does not return:', rest.name, 'n =', rest.bestMismatchAnySymmetry.n, 'mismatch', rest.bestMismatchAnySymmetry.mismatch.toExponential(1));
-fs.writeFileSync(new URL('../data/return-test.json', import.meta.url), JSON.stringify(out, null, 1));
+if (write) { fs.writeFileSync(outFile, JSON.stringify(out, null, 1)); console.log('written to data/return-test.json'); }
+else console.log('data/return-test.json not changed (add --write to store this result)');
+if (!unm.some((o) => o.name.startsWith('a'))) console.log('note: the atlas status of the arclength orbits is unknown, so the counts "among the unmatched" cover the 77 of the table only');

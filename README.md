@@ -304,7 +304,7 @@ python tools/verify-summary.py        # 238 of 312 arms pass all checks, 139 bra
 python tools/cpc-coverage.py          # 31 of the 139 overlap the region of the CPC table, 1 has a satellite of its exponent to compare with
 python tools/match-start.py data/satellite-results7.jsonl 9 0 5 0.8583     # N = 9; N = 6 is: 6 0 4 0.87667
 python tools/liao-distance.py         # 16.5 % and 1.9 % from the rows of Li et al. 2025 (uses data/liao2025-scaled.json)
-node tools/return-test.mjs           # which orbits return rotated after T/n (n = 2 to 12): 9 of the 102 in their own places, 25 with some symmetry; add the path of the downloaded atlas catalogue to mark the arclength orbits that are atlas orbits
+node tools/return-test.mjs           # which orbits return rotated after T/n (n = 2 to 12): 9 of the 102 in their own places, 25 with some symmetry; the atlas status of the arclength orbits is read from the stored data/return-test.json (or from the downloaded catalogue if its path is given), and the file is only rewritten with --write
 python tools/henon-family-compare.py # the 8 + 9 unmatched orbits that return, against the family of Henon 1976
 ```
 
