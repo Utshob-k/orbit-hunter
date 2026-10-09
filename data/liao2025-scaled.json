@@ -1,0 +1,128 @@
+[
+ {
+  "family": "figure-eight",
+  "L_paper": 0.0,
+  "Tstar": 9.23768116,
+  "Lstar": 0.0,
+  "theta": 0.0
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.01,
+  "Tstar": 9.237206425,
+  "Lstar": 0.01150223548,
+  "theta": -0.16518342
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.011,
+  "Tstar": 9.237105274,
+  "Lstar": 0.01266977819,
+  "theta": -0.18194221
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.012,
+  "Tstar": 9.237015453,
+  "Lstar": 0.01362441141,
+  "theta": -0.19600066
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.02,
+  "Tstar": 9.235802446,
+  "Lstar": 0.02285150826,
+  "theta": -0.32895795
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.03,
+  "Tstar": 9.233400528,
+  "Lstar": 0.03442664359,
+  "theta": -0.49665367
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.04,
+  "Tstar": 9.230005759,
+  "Lstar": 0.04591126807,
+  "theta": -0.66559002
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.05,
+  "Tstar": 9.225604411,
+  "Lstar": 0.05713934243,
+  "theta": -0.83629084
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.06,
+  "Tstar": 9.220150865,
+  "Lstar": 0.06789971594,
+  "theta": -1.01053705
+ },
+ {
+  "family": "figure-eight",
+  "L_paper": 0.07,
+  "Tstar": 9.213532915,
+  "Lstar": 0.0778804507,
+  "theta": -1.19181397
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.0,
+  "Tstar": 15.04836632,
+  "Lstar": 0.0,
+  "theta": 0.0
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.05,
+  "Tstar": 15.04153459,
+  "Lstar": 0.04104040637,
+  "theta": -0.67584745
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.1,
+  "Tstar": 15.02134835,
+  "Lstar": 0.08800634533,
+  "theta": -1.31340055
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.15,
+  "Tstar": 14.99601054,
+  "Lstar": 0.1378811791,
+  "theta": -1.76999985
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.2,
+  "Tstar": 14.97292408,
+  "Lstar": 0.1896697678,
+  "theta": -2.05589095
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.25,
+  "Tstar": 14.95355553,
+  "Lstar": 0.2433248288,
+  "theta": -2.23645468
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.3,
+  "Tstar": 14.93590055,
+  "Lstar": 0.2991118509,
+  "theta": -2.36723332
+ },
+ {
+  "family": "IA-3",
+  "L_paper": 0.35,
+  "Tstar": 14.9164637,
+  "Lstar": 0.3575688313,
+  "theta": -2.48570526
+ }
+]
