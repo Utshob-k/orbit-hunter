@@ -1,0 +1,431 @@
+{
+ "what": "the choreographic branch of the planar figure-eight family traced with tools/rpo-trace.mjs (relative periodic orbits with a general start; T* and L* scale free, theta = rotation angle after one relative period; 6 syzygies per relative period, word (012)^2 at every checked point). Values at other L* are linear interpolations between the stored points (every third point of the trace), good to about 3e-6 in T*.",
+ "branch_C_choreographic": {
+  "trace_file": "data/rpo-trace-eightC.json",
+  "why_it_stopped": "step collapse (the arclength step stayed below 5e-5 for 150 steps) at L = 0.27289, L* = 0.41028, T* = 8.87138, theta = -4.30563, closest distance 0.0465",
+  "Lstar_max": 0.4102846026,
+  "theta_max_rad": 4.305632098,
+  "Tstar_range": [
+   8.871377518,
+   9.237681251
+  ],
+  "closest_distance_range": [
+   0.04653768717,
+   0.6905270369
+  ],
+  "folds_in_L": 0,
+  "steps": 741,
+  "words_checked": [
+   "012012 (6 syzygies)"
+  ]
+ },
+ "members_that_close_after_n_relative_periods": [
+  {
+   "n": 8,
+   "m": 1,
+   "Lstar": 0.05494925880378554,
+   "Tstar_rel": 9.226909203522826,
+   "n_times_Tstar_rel": 73.81527362818261,
+   "syzygies": 48
+  },
+  {
+   "n": 7,
+   "m": 1,
+   "Lstar": 0.06289881728390076,
+   "Tstar_rel": 9.223587122039854,
+   "n_times_Tstar_rel": 64.56510985427897,
+   "syzygies": 42
+  },
+  {
+   "n": 6,
+   "m": 1,
+   "Lstar": 0.07356255418647784,
+   "Tstar_rel": 9.218482244117205,
+   "n_times_Tstar_rel": 55.31089346470323,
+   "syzygies": 36
+  },
+  {
+   "n": 5,
+   "m": 1,
+   "Lstar": 0.08864328485088054,
+   "Tstar_rel": 9.210015536701762,
+   "n_times_Tstar_rel": 46.05007768350881,
+   "syzygies": 30
+  },
+  {
+   "n": 4,
+   "m": 1,
+   "Lstar": 0.11171727104476158,
+   "Tstar_rel": 9.194266375439971,
+   "n_times_Tstar_rel": 36.777065501759886,
+   "syzygies": 24
+  },
+  {
+   "n": 7,
+   "m": 2,
+   "Lstar": 0.12862948249159512,
+   "Tstar_rel": 9.18077989616789,
+   "n_times_Tstar_rel": 64.26545927317522,
+   "syzygies": 42
+  },
+  {
+   "n": 3,
+   "m": 1,
+   "Lstar": 0.15192767068950405,
+   "Tstar_rel": 9.15980702926595,
+   "n_times_Tstar_rel": 27.479421087797853,
+   "syzygies": 18
+  },
+  {
+   "n": 8,
+   "m": 3,
+   "Lstar": 0.1732409771881514,
+   "Tstar_rel": 9.138529761952862,
+   "n_times_Tstar_rel": 73.1082380956229,
+   "syzygies": 48
+  },
+  {
+   "n": 5,
+   "m": 2,
+   "Lstar": 0.18655561822234393,
+   "Tstar_rel": 9.124407146770306,
+   "n_times_Tstar_rel": 45.62203573385153,
+   "syzygies": 30
+  },
+  {
+   "n": 7,
+   "m": 3,
+   "Lstar": 0.2023700951912358,
+   "Tstar_rel": 9.106959414447735,
+   "n_times_Tstar_rel": 63.74871590113414,
+   "syzygies": 42
+  },
+  {
+   "n": 2,
+   "m": 1,
+   "Lstar": 0.24561573578149065,
+   "Tstar_rel": 9.05681218716369,
+   "n_times_Tstar_rel": 18.11362437432738,
+   "syzygies": 12
+  },
+  {
+   "n": 7,
+   "m": 4,
+   "Lstar": 0.29680832478989355,
+   "Tstar_rel": 8.996146186526065,
+   "n_times_Tstar_rel": 62.97302330568246,
+   "syzygies": 42
+  },
+  {
+   "n": 5,
+   "m": 3,
+   "Lstar": 0.32056973956511153,
+   "Tstar_rel": 8.96850300061073,
+   "n_times_Tstar_rel": 44.84251500305365,
+   "syzygies": 30
+  },
+  {
+   "n": 8,
+   "m": 5,
+   "Lstar": 0.3435469875844766,
+   "Tstar_rel": 8.942433693398273,
+   "n_times_Tstar_rel": 71.53946954718619,
+   "syzygies": 48
+  },
+  {
+   "n": 3,
+   "m": 2,
+   "Lstar": 0.3876180810413152,
+   "Tstar_rel": 8.894673684036391,
+   "n_times_Tstar_rel": 26.684021052109173,
+   "syzygies": 18
+  }
+ ],
+ "atlas_orbits_on_C": [
+  {
+   "key": "suvakovpc_sn_19",
+   "atlas_Tstar": 27.4795223,
+   "atlas_Lstar": 0.1519171,
+   "atlas_syzygies": 18,
+   "atlas_word": "(012)^6",
+   "n": 3,
+   "m": 1,
+   "C_Tstar_rel_at_that_Lstar": 9.15981705396993,
+   "n_times_that": 27.479451161909786,
+   "relative_difference": 2.5887673532518574e-06,
+   "n_theta_over_2pi": 0.9999363969992056,
+   "expected_whole_number": 1,
+   "syzygies_n_times_6": 18
+  },
+  {
+   "key": "suvakovpc_sn_20",
+   "atlas_Tstar": 45.6222311,
+   "atlas_Lstar": 0.1865377,
+   "atlas_syzygies": 30,
+   "atlas_word": "(012)^10",
+   "n": 5,
+   "m": 2,
+   "C_Tstar_rel_at_that_Lstar": 9.124426604964787,
+   "n_times_that": 45.62213302482394,
+   "relative_difference": 2.149723362875947e-06,
+   "n_theta_over_2pi": 1.9998352252311984,
+   "expected_whole_number": 2,
+   "syzygies_n_times_6": 30
+  },
+  {
+   "key": "suvakovpc_sn_21",
+   "atlas_Tstar": 18.1137081,
+   "atlas_Lstar": 0.2455844,
+   "atlas_syzygies": 12,
+   "atlas_word": "(012)^4",
+   "n": 2,
+   "m": 1,
+   "C_Tstar_rel_at_that_Lstar": 9.056849319152844,
+   "n_times_that": 18.11369863830569,
+   "relative_difference": 5.223499384754137e-07,
+   "n_theta_over_2pi": 0.9999044674366816,
+   "expected_whole_number": 1,
+   "syzygies_n_times_6": 12
+  }
+ ],
+ "my_77_unmatched_orbits": {
+  "orbit_numbers_refer_to": "data/orbit-table.json (index of the row)",
+  "ruled_out_syzygy_count_not_a_multiple_of_6": [
+   "t04",
+   "t09",
+   "t10",
+   "t11",
+   "t15",
+   "t16",
+   "t18",
+   "t25",
+   "t26",
+   "t27",
+   "t28",
+   "t29",
+   "t30",
+   "t31",
+   "t32",
+   "t34",
+   "t37",
+   "t38",
+   "t39",
+   "t40",
+   "t44",
+   "t46",
+   "t47",
+   "t48",
+   "t49",
+   "t50",
+   "t51",
+   "t54",
+   "t56",
+   "t57",
+   "t58",
+   "t59",
+   "t60",
+   "t61",
+   "t62",
+   "t63",
+   "t65",
+   "t66",
+   "t67",
+   "t69",
+   "t70",
+   "t71",
+   "t72",
+   "t73",
+   "t74",
+   "t80",
+   "t81"
+  ],
+  "tested": [
+   {
+    "orbit": "t33",
+    "n": 3,
+    "syzygies": 18,
+    "my_Tstar": 26.938962476690406,
+    "my_Lstar": 0.00791053197850822,
+    "branch_Tstar_rel": 9.237438783374197,
+    "branch_theta": 0.11361318025438863,
+    "Tstar_distance": 0.02870763393732586,
+    "n_theta_turns_from_a_whole_number": 0.05424629771362941
+   },
+   {
+    "orbit": "t78",
+    "n": 7,
+    "syzygies": 42,
+    "my_Tstar": 59.72102894262133,
+    "my_Lstar": 0.19424140844880539,
+    "branch_Tstar_rel": 9.116009982732123,
+    "branch_theta": 2.6015091175058767,
+    "Tstar_distance": 0.06850251927899828,
+    "n_theta_turns_from_a_whole_number": 0.10169875115213738
+   },
+   {
+    "orbit": "t77",
+    "n": 7,
+    "syzygies": 42,
+    "my_Tstar": 59.71912630367181,
+    "my_Lstar": 0.19323348026068035,
+    "branch_Tstar_rel": 9.117126393676683,
+    "branch_theta": 2.590111679540848,
+    "Tstar_distance": 0.06866742207869239,
+    "n_theta_turns_from_a_whole_number": 0.1143964612871601
+   },
+   {
+    "orbit": "t43",
+    "n": 4,
+    "syzygies": 24,
+    "my_Tstar": 35.05010294267887,
+    "my_Lstar": 0.013187574480108937,
+    "branch_Tstar_rel": 9.23704175957399,
+    "branch_theta": 0.18937027497827083,
+    "Tstar_distance": 0.05415288219612932,
+    "n_theta_turns_from_a_whole_number": 0.12055686134985306
+   },
+   {
+    "orbit": "t76",
+    "n": 7,
+    "syzygies": 42,
+    "my_Tstar": 59.44280628180689,
+    "my_Lstar": 0.014983711010336472,
+    "branch_Tstar_rel": 9.236868124963193,
+    "branch_theta": 0.2151466946392847,
+    "Tstar_distance": 0.08773594180952474,
+    "n_theta_turns_from_a_whole_number": 0.23969161959207322
+   },
+   {
+    "orbit": "t21",
+    "n": 2,
+    "syzygies": 12,
+    "my_Tstar": 19.62062625197859,
+    "my_Lstar": 0.3425682379494133,
+    "branch_Tstar_rel": 8.9435328704646,
+    "branch_theta": 3.92053305003272,
+    "Tstar_distance": 0.08835398466828111,
+    "n_theta_turns_from_a_whole_number": 0.24794442893570484
+   },
+   {
+    "orbit": "t83",
+    "n": 8,
+    "syzygies": 48,
+    "my_Tstar": 72.46515494895671,
+    "my_Lstar": 0.2789555525666474,
+    "branch_Tstar_rel": 9.017219851095973,
+    "branch_theta": 3.444033194764696,
+    "Tstar_distance": 0.00451798026816525,
+    "n_theta_turns_from_a_whole_number": 0.3850792569549896
+   },
+   {
+    "orbit": "t82",
+    "n": 8,
+    "syzygies": 48,
+    "my_Tstar": 70.00235484488385,
+    "my_Lstar": 0.07799721459132158,
+    "branch_Tstar_rel": 9.21614580594254,
+    "branch_theta": 1.1090688364420898,
+    "Tstar_distance": 0.05323837477917136,
+    "n_theta_turns_from_a_whole_number": 0.412110300391483
+   },
+   {
+    "orbit": "t75",
+    "n": 7,
+    "syzygies": 42,
+    "my_Tstar": 59.43961424425096,
+    "my_Lstar": 0.033262844682862454,
+    "branch_Tstar_rel": 9.233712180215171,
+    "branch_theta": 0.4769306268651893,
+    "Tstar_distance": 0.08742269079846574,
+    "n_theta_turns_from_a_whole_number": 0.4686589325574218
+   }
+  ],
+  "not_tested_Lstar_above_the_traced_range": [
+   {
+    "orbit": "t05",
+    "Lstar": 1.7728844095543712
+   },
+   {
+    "orbit": "t06",
+    "Lstar": 2.146233662337409
+   },
+   {
+    "orbit": "t12",
+    "Lstar": 1.3728869820963356
+   },
+   {
+    "orbit": "t13",
+    "Lstar": 1.598051330895474
+   },
+   {
+    "orbit": "t14",
+    "Lstar": 0.47779075421319617
+   },
+   {
+    "orbit": "t17",
+    "Lstar": 2.0071860348142714
+   },
+   {
+    "orbit": "t19",
+    "Lstar": 0.9081790929535781
+   },
+   {
+    "orbit": "t20",
+    "Lstar": 2.219933327269106
+   },
+   {
+    "orbit": "t22",
+    "Lstar": 2.5950349442513594
+   },
+   {
+    "orbit": "t23",
+    "Lstar": 2.2524869246367167
+   },
+   {
+    "orbit": "t24",
+    "Lstar": 1.6927695937175713
+   },
+   {
+    "orbit": "t35",
+    "Lstar": 0.5855372358252104
+   },
+   {
+    "orbit": "t36",
+    "Lstar": 2.4941586035695025
+   },
+   {
+    "orbit": "t41",
+    "Lstar": 2.5659195857271455
+   },
+   {
+    "orbit": "t42",
+    "Lstar": 2.5567403073190897
+   },
+   {
+    "orbit": "t45",
+    "Lstar": 2.3969070524737512
+   },
+   {
+    "orbit": "t53",
+    "Lstar": 0.7557195623511437
+   },
+   {
+    "orbit": "t55",
+    "Lstar": 2.259895126803469
+   },
+   {
+    "orbit": "t64",
+    "Lstar": 2.4439263123683768
+   },
+   {
+    "orbit": "t68",
+    "Lstar": 0.43161411104036673
+   },
+   {
+    "orbit": "t79",
+    "Lstar": 0.7411871190302488
+   }
+  ],
+  "traced_range_Lstar": 0.4102846026
+ }
+}
