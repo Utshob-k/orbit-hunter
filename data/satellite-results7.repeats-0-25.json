@@ -1,0 +1,1474 @@
+[
+ {
+  "job": 0,
+  "orbit": 0,
+  "k": 3,
+  "lamBP": 0.9142595025268526,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.95997945441503,
+    "Tstar": 14.982691513756,
+    "nRepeat": 3,
+    "nRelabel": 6,
+    "failed": false
+   },
+   {
+    "lam": 0.9839733296781,
+    "Tstar": 14.966120474317,
+    "nRepeat": 3,
+    "nRelabel": 6,
+    "failed": false
+   },
+   {
+    "lam": 0.99259459969207,
+    "Tstar": 14.957515398251,
+    "nRepeat": 3,
+    "nRelabel": 6,
+    "failed": false
+   }
+  ],
+  "anyRepeat": true,
+  "anyFailed": false
+ },
+ {
+  "job": 0,
+  "orbit": 0,
+  "k": 3,
+  "lamBP": 0.9142595025268526,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.66951398159396,
+    "Tstar": 13.810041806692,
+    "nRepeat": 3,
+    "nRelabel": 6,
+    "failed": false
+   },
+   {
+    "lam": 0.317295869775,
+    "Tstar": 11.969748734154,
+    "nRepeat": 3,
+    "nRelabel": 6,
+    "failed": false
+   },
+   {
+    "lam": -0.50310316707235,
+    "Tstar": 7.8517804352993,
+    "nRepeat": 3,
+    "nRelabel": 6,
+    "failed": false
+   }
+  ],
+  "anyRepeat": true,
+  "anyFailed": false
+ },
+ {
+  "job": 1,
+  "orbit": 0,
+  "k": 4,
+  "lamBP": 0.8766705685518852,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.83524219973967,
+    "Tstar": 19.606315902056,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.96383038129289,
+    "Tstar": 19.794715159252,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.70344568049806,
+    "Tstar": 19.768580271372,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 1,
+  "orbit": 0,
+  "k": 4,
+  "lamBP": 0.8766705685518852,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.88695484599332,
+    "Tstar": 19.877151083069,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.91574584186582,
+    "Tstar": 19.82699269863,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.78346643384053,
+    "Tstar": 19.678231125129,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 2,
+  "orbit": 0,
+  "k": 7,
+  "lamBP": 0.891758422029987,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.89619541686883,
+    "Tstar": 34.863534782497,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.90330222287014,
+    "Tstar": 34.858069866265,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.99322944481497,
+    "Tstar": 33.853807592381,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 3,
+  "orbit": 0,
+  "k": 7,
+  "lamBP": 0.8415285074677714,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.82104557812646,
+    "Tstar": 34.508349425541,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.74381820596158,
+    "Tstar": 34.028789342194,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.74099320934501,
+    "Tstar": 32.870527456959,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 3,
+  "orbit": 0,
+  "k": 7,
+  "lamBP": 0.8415285074677714,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.84763986065398,
+    "Tstar": 34.529199638472,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.86253433340148,
+    "Tstar": 34.507344996522,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.91701570434565,
+    "Tstar": 34.185023546107,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 4,
+  "orbit": 0,
+  "k": 5,
+  "lamBP": 0.8582926530308991,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.8742621878657,
+    "Tstar": 24.755278712154,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.92817136222643,
+    "Tstar": 24.569946088258,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.93598273964419,
+    "Tstar": 22.363051500457,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 4,
+  "orbit": 0,
+  "k": 5,
+  "lamBP": 0.8582926530308991,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.72653306187556,
+    "Tstar": 24.274398419099,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.64530959887153,
+    "Tstar": 23.638143003488,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.62553753796538,
+    "Tstar": 23.501354225226,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 5,
+  "orbit": 0,
+  "k": 8,
+  "lamBP": 0.9360538271039076,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.93486830815863,
+    "Tstar": 39.961128410687,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.93283470318629,
+    "Tstar": 39.960621942121,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.81055763759795,
+    "Tstar": 39.876267552952,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 6,
+  "orbit": 0,
+  "k": 6,
+  "lamBP": 0.8479365901818,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.85629030432799,
+    "Tstar": 29.643132106451,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.87389781994459,
+    "Tstar": 29.61686341227,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.94623767601638,
+    "Tstar": 27.297284270434,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 6,
+  "orbit": 0,
+  "k": 6,
+  "lamBP": 0.8479365901818,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.52361242690121,
+    "Tstar": 28.054461017701,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.33005224810156,
+    "Tstar": 27.308917260403,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.32669923948999,
+    "Tstar": 27.298480088248,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 7,
+  "orbit": 0,
+  "k": 5,
+  "lamBP": 0.9499953487380759,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.95048451545198,
+    "Tstar": 24.976211545578,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.95149781372692,
+    "Tstar": 24.976114571459,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.99106268503817,
+    "Tstar": 24.889737088436,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 7,
+  "orbit": 0,
+  "k": 5,
+  "lamBP": 0.9499953487380759,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.94877584327741,
+    "Tstar": 24.976148160308,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.90131516579689,
+    "Tstar": 24.649619212034,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.35286086866532,
+    "Tstar": 23.126806997043,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 8,
+  "orbit": 2,
+  "k": 8,
+  "lamBP": 0.6154778785175746,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.62812314846519,
+    "Tstar": 142.52821821959,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.64472460473193,
+    "Tstar": 142.62890008458,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.68169783129666,
+    "Tstar": 143.14199301112,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 9,
+  "orbit": 2,
+  "k": 4,
+  "lamBP": 0.6507718486779247,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.67196398789913,
+    "Tstar": 70.471628761008,
+    "nRepeat": 4,
+    "nRelabel": 4,
+    "failed": false
+   },
+   {
+    "lam": 0.70814261094015,
+    "Tstar": 69.920903639812,
+    "nRepeat": 4,
+    "nRelabel": 4,
+    "failed": false
+   },
+   {
+    "lam": 0.81048629748414,
+    "Tstar": 69.202024319532,
+    "nRepeat": 4,
+    "nRelabel": 4,
+    "failed": false
+   }
+  ],
+  "anyRepeat": true,
+  "anyFailed": false
+ },
+ {
+  "job": 9,
+  "orbit": 2,
+  "k": 4,
+  "lamBP": 0.6507718486779247,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.55451340638736,
+    "Tstar": 71.54952482656,
+    "nRepeat": 4,
+    "nRelabel": 4,
+    "failed": false
+   },
+   {
+    "lam": 0.5016510789389,
+    "Tstar": 70.824713818131,
+    "nRepeat": 4,
+    "nRelabel": 4,
+    "failed": false
+   },
+   {
+    "lam": 0.55116961240775,
+    "Tstar": 69.285749077648,
+    "nRepeat": 4,
+    "nRelabel": 4,
+    "failed": false
+   }
+  ],
+  "anyRepeat": true,
+  "anyFailed": false
+ },
+ {
+  "job": 10,
+  "orbit": 0,
+  "k": 8,
+  "lamBP": 0.8372980306541489,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.68643365039105,
+    "Tstar": 38.919828201927,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.62951451332715,
+    "Tstar": 39.370215942964,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.82240947737575,
+    "Tstar": 39.403947617672,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 10,
+  "orbit": 0,
+  "k": 8,
+  "lamBP": 0.8372980306541489,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.63869485449068,
+    "Tstar": 39.367344837483,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.62612031385858,
+    "Tstar": 39.369197450268,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.87145850992624,
+    "Tstar": 39.341906087213,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 11,
+  "orbit": 2,
+  "k": 3,
+  "lamBP": 0.6629388934287987,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.59429185091462,
+    "Tstar": 52.920835419432,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.59090032545647,
+    "Tstar": 53.943393758554,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.62690301522529,
+    "Tstar": 55.569811777177,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 11,
+  "orbit": 2,
+  "k": 3,
+  "lamBP": 0.6629388934287987,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.68379431313724,
+    "Tstar": 53.086980790617,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.70882215232987,
+    "Tstar": 53.480753477197,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.77062737023368,
+    "Tstar": 57.259315298003,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 12,
+  "orbit": 2,
+  "k": 7,
+  "lamBP": 0.6232974116898343,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.64491755524423,
+    "Tstar": 124.04452475732,
+    "nRepeat": 7,
+    "nRelabel": 7,
+    "failed": false
+   },
+   {
+    "lam": 0.65953154652539,
+    "Tstar": 123.6637459214,
+    "nRepeat": 7,
+    "nRelabel": 7,
+    "failed": false
+   },
+   {
+    "lam": 0.79255337408436,
+    "Tstar": 121.12109487965,
+    "nRepeat": 7,
+    "nRelabel": 7,
+    "failed": false
+   }
+  ],
+  "anyRepeat": true,
+  "anyFailed": false
+ },
+ {
+  "job": 12,
+  "orbit": 2,
+  "k": 7,
+  "lamBP": 0.6232974116898343,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.54883293677546,
+    "Tstar": 125.21772259981,
+    "nRepeat": 7,
+    "nRelabel": 7,
+    "failed": false
+   },
+   {
+    "lam": 0.49393178282764,
+    "Tstar": 124.63538526338,
+    "nRepeat": 7,
+    "nRelabel": 7,
+    "failed": false
+   },
+   {
+    "lam": 0.5187606031106,
+    "Tstar": 122.8772408517,
+    "nRepeat": 7,
+    "nRelabel": 7,
+    "failed": false
+   }
+  ],
+  "anyRepeat": true,
+  "anyFailed": false
+ },
+ {
+  "job": 13,
+  "orbit": 2,
+  "k": 6,
+  "lamBP": 0.631396373799204,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.64798970454233,
+    "Tstar": 106.64426501224,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.67000027937531,
+    "Tstar": 106.84105003346,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.71643030287797,
+    "Tstar": 108.02804044816,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 13,
+  "orbit": 2,
+  "k": 6,
+  "lamBP": 0.631396373799204,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.62196552481151,
+    "Tstar": 106.61570903232,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.602434299746,
+    "Tstar": 106.76876247124,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.55380680776153,
+    "Tstar": 108.31465559072,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 14,
+  "orbit": 2,
+  "k": 5,
+  "lamBP": 0.6403573771478329,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.62992929887486,
+    "Tstar": 88.700814688351,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.61179442735873,
+    "Tstar": 88.811290100908,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.56317003934245,
+    "Tstar": 89.879518317784,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 14,
+  "orbit": 2,
+  "k": 5,
+  "lamBP": 0.6403573771478329,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.6569295458943,
+    "Tstar": 88.729263074755,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.68395949247518,
+    "Tstar": 89.029839310069,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.7274770689351,
+    "Tstar": 90.420841303454,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 15,
+  "orbit": 2,
+  "k": 7,
+  "lamBP": 0.6566685461158629,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.67346345732849,
+    "Tstar": 123.8201130173,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.68966851143563,
+    "Tstar": 124.04450367227,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.71755733247915,
+    "Tstar": 124.98931260894,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 15,
+  "orbit": 2,
+  "k": 7,
+  "lamBP": 0.6566685461158629,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.64158992045449,
+    "Tstar": 123.84263554299,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.63809336140431,
+    "Tstar": 123.99480936019,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.63467415160853,
+    "Tstar": 124.53612190269,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 16,
+  "orbit": 2,
+  "k": 5,
+  "lamBP": 0.6689878721541641,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.68341030487311,
+    "Tstar": 88.16852824245,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.70268875291222,
+    "Tstar": 88.262314178596,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.76347142372692,
+    "Tstar": 90.854935868668,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 17,
+  "orbit": 5,
+  "k": 4,
+  "lamBP": 0.4825098354567688,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.47835697458374,
+    "Tstar": 38.577790075531,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.47286693877261,
+    "Tstar": 38.549533180678,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.59602207036285,
+    "Tstar": 38.119883801168,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 17,
+  "orbit": 5,
+  "k": 4,
+  "lamBP": 0.4825098354567688,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.49139168247823,
+    "Tstar": 38.571551647587,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.5170101983854,
+    "Tstar": 38.491478302294,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.72140705485994,
+    "Tstar": 38.119586941589,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 18,
+  "orbit": 5,
+  "k": 7,
+  "lamBP": 0.5066166495392301,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.53947344329446,
+    "Tstar": 66.561392000068,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.26815422454998,
+    "Tstar": 65.725785887085,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.022054455585169,
+    "Tstar": 66.224634945035,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 18,
+  "orbit": 5,
+  "k": 7,
+  "lamBP": 0.5066166495392301,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.51298066831498,
+    "Tstar": 67.639506171329,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.52687014638112,
+    "Tstar": 67.575772205018,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   },
+   {
+    "lam": 0.61887320367526,
+    "Tstar": 67.067520181129,
+    "nRepeat": 1,
+    "nRelabel": 2,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 19,
+  "orbit": 5,
+  "k": 6,
+  "lamBP": 0.41996635085252687,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.42895302141411,
+    "Tstar": 57.584116165454,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.45406946508055,
+    "Tstar": 57.496777147117,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.63563139556016,
+    "Tstar": 56.744033344089,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 19,
+  "orbit": 5,
+  "k": 6,
+  "lamBP": 0.41996635085252687,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.41364711995728,
+    "Tstar": 57.586269421673,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.4062532257619,
+    "Tstar": 57.525523366596,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.50085285536975,
+    "Tstar": 56.816621187216,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 20,
+  "orbit": 5,
+  "k": 5,
+  "lamBP": 0.44615051322426125,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.44045356840733,
+    "Tstar": 48.083097130763,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.43440332308057,
+    "Tstar": 48.028362311147,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.588853299565,
+    "Tstar": 47.36622560585,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 20,
+  "orbit": 5,
+  "k": 5,
+  "lamBP": 0.44615051322426125,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.45464274973717,
+    "Tstar": 48.080810068653,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.47748624114416,
+    "Tstar": 48.008120349057,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.68219277288974,
+    "Tstar": 47.328037584707,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 21,
+  "orbit": 2,
+  "k": 7,
+  "lamBP": 0.6706477655033432,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.67918469802286,
+    "Tstar": 123.37019371346,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.68737296236766,
+    "Tstar": 123.39221922178,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.70989460951041,
+    "Tstar": 123.44653074079,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 21,
+  "orbit": 2,
+  "k": 7,
+  "lamBP": 0.6706477655033432,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.65103445498518,
+    "Tstar": 123.37633970214,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.63150537108801,
+    "Tstar": 123.31033677073,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.59590336006066,
+    "Tstar": 123.04605607996,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 22,
+  "orbit": 5,
+  "k": 7,
+  "lamBP": 0.4001331354462669,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.4088761751817,
+    "Tstar": 67.085950424962,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.43433558941418,
+    "Tstar": 66.992811674155,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.61660191348908,
+    "Tstar": 66.085863397215,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 22,
+  "orbit": 5,
+  "k": 7,
+  "lamBP": 0.4001331354462669,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.39280817101643,
+    "Tstar": 67.085072709557,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.38475450279736,
+    "Tstar": 67.002935969452,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.49288231393701,
+    "Tstar": 66.208874713116,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 23,
+  "orbit": 2,
+  "k": 8,
+  "lamBP": 0.6670795609118637,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.67920279710017,
+    "Tstar": 141.10321584212,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.69078318997326,
+    "Tstar": 141.14227397333,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.74253956435044,
+    "Tstar": 143.41203754539,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 23,
+  "orbit": 2,
+  "k": 8,
+  "lamBP": 0.6670795609118637,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.64373679826743,
+    "Tstar": 141.1248523474,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.62459646876256,
+    "Tstar": 141.21657423943,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.5376180215732,
+    "Tstar": 143.38297445519,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 24,
+  "orbit": 5,
+  "k": 8,
+  "lamBP": 0.38454654215953027,
+  "sgn": 1,
+  "points": [
+   {
+    "lam": 0.37619968978238,
+    "Tstar": 76.580945391499,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.36761251108677,
+    "Tstar": 76.468931560557,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.45143516782789,
+    "Tstar": 75.610995491908,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ },
+ {
+  "job": 24,
+  "orbit": 5,
+  "k": 8,
+  "lamBP": 0.38454654215953027,
+  "sgn": -1,
+  "points": [
+   {
+    "lam": 0.39233516643779,
+    "Tstar": 76.587009005633,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.41594132897931,
+    "Tstar": 76.50087735679,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   },
+   {
+    "lam": 0.58156760308188,
+    "Tstar": 75.537908515208,
+    "nRepeat": 1,
+    "nRelabel": 1,
+    "failed": false
+   }
+  ],
+  "anyRepeat": false,
+  "anyFailed": false
+ }
+]
