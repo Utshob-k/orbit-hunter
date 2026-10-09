@@ -1,0 +1,770 @@
+{
+ "note": "closure after one period from the double precision start values of data/orbit-table.json, 40 digit Gragg-Bulirsch-Stoer (tools/closure-mp.py); row = index in orbit-table.json (the t.. of the README)",
+ "orbits": [
+  {
+   "row": 0,
+   "Tstar": 4.959828633501362,
+   "closureTier": "reliable",
+   "closureMP": 2.005235509294194e-11,
+   "rotation": 1.6066108375373617e-11,
+   "closureDP45": 2.390088127413037e-12,
+   "closureBS": 1.430199413841736e-11
+  },
+  {
+   "row": 1,
+   "Tstar": 7.217710530386222,
+   "closureTier": "reliable",
+   "closureMP": 1.1223396115135297e-11,
+   "rotation": -8.674066968535325e-12,
+   "closureDP45": 6.992184609089236e-13,
+   "closureBS": 9.919842389130623e-12
+  },
+  {
+   "row": 2,
+   "Tstar": 9.658403183348069,
+   "closureTier": "reliable",
+   "closureMP": 6.926241691115002e-12,
+   "rotation": 7.784919679354822e-11,
+   "closureDP45": 6.92997475486385e-12,
+   "closureBS": 8.235225138110513e-12
+  },
+  {
+   "row": 3,
+   "Tstar": 9.878335616123174,
+   "closureTier": "reliable",
+   "closureMP": 4.0515862451750994e-10,
+   "rotation": 4.3867886092016804e-10,
+   "closureDP45": 2.6855406787262837e-11,
+   "closureBS": 3.043367644958303e-09
+  },
+  {
+   "row": 4,
+   "Tstar": 9.917804789684297,
+   "closureTier": "reliable",
+   "closureMP": 1.1260075249190169e-11,
+   "rotation": 1.7261516353359408e-10,
+   "closureDP45": 1.7519325259338686e-11,
+   "closureBS": 9.136532075429703e-12
+  },
+  {
+   "row": 5,
+   "Tstar": 11.651987838286953,
+   "closureTier": "reliable",
+   "closureMP": 7.743228900657847e-11,
+   "rotation": 2.9783792487800496e-11,
+   "closureDP45": 2.0907089178453083e-10,
+   "closureBS": 6.529818909695843e-10
+  },
+  {
+   "row": 6,
+   "Tstar": 12.097417207845437,
+   "closureTier": "reliable",
+   "closureMP": 6.200876938317462e-10,
+   "rotation": 5.743306396903187e-10,
+   "closureDP45": 5.788834786439119e-10,
+   "closureBS": 5.607558954650881e-10
+  },
+  {
+   "row": 7,
+   "Tstar": 12.17032498327503,
+   "closureTier": "reliable",
+   "closureMP": 1.3177227268513868e-12,
+   "rotation": -9.414941155340508e-12,
+   "closureDP45": 1.8015231647625425e-12,
+   "closureBS": 2.320598230086683e-12
+  },
+  {
+   "row": 8,
+   "Tstar": 13.985925803870598,
+   "closureTier": "reliable",
+   "closureMP": 1.505661007351852e-11,
+   "rotation": -6.657377050485656e-10,
+   "closureDP45": 1.1856546645383537e-11,
+   "closureBS": 1.0035104893898793e-11
+  },
+  {
+   "row": 9,
+   "Tstar": 14.129134862604493,
+   "closureTier": "reliable",
+   "closureMP": 1.7435277214053945e-11,
+   "rotation": -1.7510970690060835e-12,
+   "closureDP45": 5.013320517686438e-11,
+   "closureBS": 1.9525460744835027e-11
+  },
+  {
+   "row": 10,
+   "Tstar": 14.137552714055383,
+   "closureTier": "reliable",
+   "closureMP": 2.380263579015736e-11,
+   "rotation": -2.5263640442961522e-11,
+   "closureDP45": 2.0873581639261492e-11,
+   "closureBS": 1.9802579022308713e-11
+  },
+  {
+   "row": 11,
+   "Tstar": 15.152759589587792,
+   "closureTier": "reliable",
+   "closureMP": 2.1903105610842728e-11,
+   "rotation": 3.6424851115829194e-11,
+   "closureDP45": 2.447697800710054e-12,
+   "closureBS": 7.321870732866494e-12
+  },
+  {
+   "row": 12,
+   "Tstar": 16.968674055777544,
+   "closureTier": "reliable",
+   "closureMP": 1.4295292860067941e-09,
+   "rotation": -8.140012807381648e-10,
+   "closureDP45": 1.5745460553238308e-11,
+   "closureBS": 1.4686851087640244e-09
+  },
+  {
+   "row": 13,
+   "Tstar": 16.98358767888562,
+   "closureTier": "reliable",
+   "closureMP": 7.968304844301598e-11,
+   "rotation": 1.514987920904581e-11,
+   "closureDP45": 4.746912238780047e-12,
+   "closureBS": 7.027809136917162e-11
+  },
+  {
+   "row": 14,
+   "Tstar": 17.057225610722607,
+   "closureTier": "reliable",
+   "closureMP": 2.2205832316285436e-10,
+   "rotation": 3.3238022100230187e-10,
+   "closureDP45": 3.163321231201349e-11,
+   "closureBS": 8.576301030541445e-10
+  },
+  {
+   "row": 15,
+   "Tstar": 17.846807645075046,
+   "closureTier": "reliable",
+   "closureMP": 3.18721714888505e-11,
+   "rotation": -1.867477074736929e-10,
+   "closureDP45": 3.319814856376424e-11,
+   "closureBS": 3.1691639231559304e-11
+  },
+  {
+   "row": 16,
+   "Tstar": 17.894747342039533,
+   "closureTier": "reliable",
+   "closureMP": 6.349593229466499e-11,
+   "rotation": 5.336394750774129e-12,
+   "closureDP45": 7.450899249066474e-11,
+   "closureBS": 2.7306480723202544e-11
+  },
+  {
+   "row": 17,
+   "Tstar": 18.079671782549784,
+   "closureTier": "reliable",
+   "closureMP": 2.065301117164355e-11,
+   "rotation": -2.6766081922071262e-12,
+   "closureDP45": 4.289579466920416e-11,
+   "closureBS": 1.297091345922254e-11
+  },
+  {
+   "row": 18,
+   "Tstar": 19.09104803170924,
+   "closureTier": "weak",
+   "closureMP": 2.0123264617285798e-07,
+   "rotation": -2.1184359821737372e-07,
+   "closureDP45": 1.2583906747927899e-08,
+   "closureBS": 2.649292249676694e-07
+  },
+  {
+   "row": 19,
+   "Tstar": 19.142144903469422,
+   "closureTier": "reliable",
+   "closureMP": 3.234091320094968e-11,
+   "rotation": -4.130596712609089e-11,
+   "closureDP45": 1.0637671326435783e-11,
+   "closureBS": 2.5456166613081964e-11
+  },
+  {
+   "row": 20,
+   "Tstar": 19.411657428515316,
+   "closureTier": "reliable",
+   "closureMP": 2.7860372248862192e-09,
+   "rotation": 1.0749766970018766e-09,
+   "closureDP45": 2.1131444848820916e-10,
+   "closureBS": 2.436383419334525e-09
+  },
+  {
+   "row": 21,
+   "Tstar": 19.62062625197859,
+   "closureTier": "reliable",
+   "closureMP": 3.2406473176571834e-09,
+   "rotation": -3.0717933672534325e-09,
+   "closureDP45": 7.392441172459188e-12,
+   "closureBS": 3.99119239930596e-09
+  },
+  {
+   "row": 22,
+   "Tstar": 19.769131529550314,
+   "closureTier": "reliable",
+   "closureMP": 1.3946455357039233e-10,
+   "rotation": -2.6554337296598e-10,
+   "closureDP45": 2.4225556375535487e-10,
+   "closureBS": 1.4114669554433642e-10
+  },
+  {
+   "row": 23,
+   "Tstar": 21.6932259817952,
+   "closureTier": "reliable",
+   "closureMP": 2.918000681547487e-10,
+   "rotation": 4.0600133831108487e-10,
+   "closureDP45": 5.722611351015718e-10,
+   "closureBS": 8.376125795786506e-09
+  },
+  {
+   "row": 24,
+   "Tstar": 23.684372827520107,
+   "closureTier": "weak",
+   "closureMP": 2.0164934225052845e-07,
+   "rotation": -1.3079717222500762e-07,
+   "closureDP45": 3.2686513624795915e-09,
+   "closureBS": 2.0929218769416474e-07
+  },
+  {
+   "row": 25,
+   "Tstar": 23.862645700042084,
+   "closureTier": "reliable",
+   "closureMP": 7.47442950937084e-12,
+   "rotation": -1.2734550170653587e-12,
+   "closureDP45": 4.770370948397158e-11,
+   "closureBS": 1.8009690912844997e-11
+  },
+  {
+   "row": 26,
+   "Tstar": 23.86289748767701,
+   "closureTier": "reliable",
+   "closureMP": 8.744875679653412e-12,
+   "rotation": -5.889817824183926e-10,
+   "closureDP45": 7.856747614509713e-11,
+   "closureBS": 6.65508023769968e-11
+  },
+  {
+   "row": 27,
+   "Tstar": 23.863616131909403,
+   "closureTier": "reliable",
+   "closureMP": 9.307963765369863e-12,
+   "rotation": 4.5708891149545785e-12,
+   "closureDP45": 3.574088419042025e-11,
+   "closureBS": 1.2703313372146341e-11
+  },
+  {
+   "row": 28,
+   "Tstar": 23.981824120845463,
+   "closureTier": "weak",
+   "closureMP": 4.6909937746063635e-09,
+   "rotation": 3.3576940774482096e-09,
+   "closureDP45": 1.8208132562510602e-09,
+   "closureBS": 9.420158192476159e-08
+  },
+  {
+   "row": 29,
+   "Tstar": 25.218731937311205,
+   "closureTier": "reliable",
+   "closureMP": 5.113579353644479e-10,
+   "rotation": 5.271680169508354e-10,
+   "closureDP45": 2.423950899434973e-11,
+   "closureBS": 9.38712461853033e-09
+  },
+  {
+   "row": 30,
+   "Tstar": 25.404852250157152,
+   "closureTier": "weak",
+   "closureMP": 2.648317477076878e-09,
+   "rotation": 6.0908292606056804e-09,
+   "closureDP45": 2.31205037949216e-09,
+   "closureBS": 4.059592316035221e-08
+  },
+  {
+   "row": 31,
+   "Tstar": 25.707858998008707,
+   "closureTier": "weak",
+   "closureMP": 1.0334746558176201e-07,
+   "rotation": 1.4608226100005304e-08,
+   "closureDP45": 7.938696284352231e-10,
+   "closureBS": 9.640501120087964e-08
+  },
+  {
+   "row": 32,
+   "Tstar": 25.76439971183463,
+   "closureTier": "weak",
+   "closureMP": 5.177279785333007e-07,
+   "rotation": -3.703630053804535e-07,
+   "closureDP45": 3.5892399436991675e-09,
+   "closureBS": 5.929697342747067e-07
+  },
+  {
+   "row": 33,
+   "Tstar": 26.938962476690406,
+   "closureTier": "reliable",
+   "closureMP": 5.652007780388628e-11,
+   "rotation": -9.6411018722923e-12,
+   "closureDP45": 6.214141873428259e-11,
+   "closureBS": 6.037515549377138e-10
+  },
+  {
+   "row": 34,
+   "Tstar": 27.983375122003768,
+   "closureTier": "reliable",
+   "closureMP": 1.5378052271768267e-10,
+   "rotation": -2.0284137436719915e-10,
+   "closureDP45": 4.365687837947899e-10,
+   "closureBS": 8.61027776936296e-11
+  },
+  {
+   "row": 35,
+   "Tstar": 29.025115679114215,
+   "closureTier": "reliable",
+   "closureMP": 7.800409367961922e-09,
+   "rotation": 4.5433052589965986e-09,
+   "closureDP45": 1.4877630729231647e-10,
+   "closureBS": 8.25022663311608e-09
+  },
+  {
+   "row": 36,
+   "Tstar": 29.569151975512753,
+   "closureTier": "reliable",
+   "closureMP": 1.599382867458681e-10,
+   "rotation": 5.70195651988572e-10,
+   "closureDP45": 1.0220622162906114e-09,
+   "closureBS": 2.29950774978289e-10
+  },
+  {
+   "row": 37,
+   "Tstar": 29.77652296826154,
+   "closureTier": "reliable",
+   "closureMP": 7.598934626276964e-11,
+   "rotation": -1.2401322803947747e-11,
+   "closureDP45": 4.7146509036573785e-11,
+   "closureBS": 7.360566441950604e-11
+  },
+  {
+   "row": 38,
+   "Tstar": 30.221785160336744,
+   "closureTier": "weak",
+   "closureMP": 3.4768099531977588e-09,
+   "rotation": 2.820787922624253e-09,
+   "closureDP45": 1.4916394241520165e-10,
+   "closureBS": 2.1832368985370234e-08
+  },
+  {
+   "row": 39,
+   "Tstar": 32.30518620745946,
+   "closureTier": "reliable",
+   "closureMP": 4.007871678398487e-10,
+   "rotation": 2.738842318223009e-09,
+   "closureDP45": 2.5368511353876946e-10,
+   "closureBS": 4.816578865161503e-10
+  },
+  {
+   "row": 40,
+   "Tstar": 33.4486095123205,
+   "closureTier": "reliable",
+   "closureMP": 6.650432250596415e-08,
+   "rotation": 6.616409238566325e-08,
+   "closureDP45": 1.5200724978814567e-09,
+   "closureBS": 9.620643333843054e-09
+  },
+  {
+   "row": 41,
+   "Tstar": 33.74508290504154,
+   "closureTier": "reliable",
+   "closureMP": 9.805435442498343e-11,
+   "rotation": -5.168774649828804e-11,
+   "closureDP45": 9.879293772035966e-11,
+   "closureBS": 9.609211018370654e-11
+  },
+  {
+   "row": 42,
+   "Tstar": 33.74514967510186,
+   "closureTier": "reliable",
+   "closureMP": 9.968021293758515e-11,
+   "rotation": -6.83754861031432e-10,
+   "closureDP45": 1.0185205562416187e-10,
+   "closureBS": 1.0158170414723812e-10
+  },
+  {
+   "row": 43,
+   "Tstar": 35.05010294267887,
+   "closureTier": "reliable",
+   "closureMP": 2.3295692890597175e-09,
+   "rotation": 7.395182081867842e-11,
+   "closureDP45": 3.647543419013339e-11,
+   "closureBS": 7.675465659583254e-10
+  },
+  {
+   "row": 44,
+   "Tstar": 35.300760532172845,
+   "closureTier": "reliable",
+   "closureMP": 3.177652591142866e-09,
+   "rotation": 3.06320784172678e-09,
+   "closureDP45": 2.1884843825986503e-09,
+   "closureBS": 2.8500824005824428e-09
+  },
+  {
+   "row": 45,
+   "Tstar": 35.693314975272834,
+   "closureTier": "reliable",
+   "closureMP": 6.077122085561039e-11,
+   "rotation": -2.2588931491967588e-11,
+   "closureDP45": 1.777876089283992e-11,
+   "closureBS": 7.263020007158633e-11
+  },
+  {
+   "row": 46,
+   "Tstar": 35.85690067734009,
+   "closureTier": "weak",
+   "closureMP": 6.234783816270848e-08,
+   "rotation": -4.78724610691625e-08,
+   "closureDP45": 1.1924814737214535e-09,
+   "closureBS": 3.764937239244943e-08
+  },
+  {
+   "row": 47,
+   "Tstar": 35.9396847214177,
+   "closureTier": "reliable",
+   "closureMP": 1.2429147377539916e-08,
+   "rotation": -3.5928522983119464e-09,
+   "closureDP45": 1.9010234087540205e-09,
+   "closureBS": 8.599412857049796e-09
+  },
+  {
+   "row": 48,
+   "Tstar": 37.29460400113803,
+   "closureTier": "weak",
+   "closureMP": 4.2933953479341556e-09,
+   "rotation": 1.965098231967917e-09,
+   "closureDP45": 3.896022166103144e-10,
+   "closureBS": 1.1537700645174358e-08
+  },
+  {
+   "row": 49,
+   "Tstar": 37.66803558605786,
+   "closureTier": "weak",
+   "closureMP": 1.5750560355616967e-07,
+   "rotation": 1.6986781475944446e-07,
+   "closureDP45": 7.81004352775575e-11,
+   "closureBS": 7.038697823445149e-07
+  },
+  {
+   "row": 50,
+   "Tstar": 39.6132260340322,
+   "closureTier": "weak",
+   "closureMP": 1.1591715626926757e-09,
+   "rotation": -2.022731356530567e-10,
+   "closureDP45": 7.254350607530566e-10,
+   "closureBS": 2.2360831074424848e-08
+  },
+  {
+   "row": 51,
+   "Tstar": 39.64372084960553,
+   "closureTier": "reliable",
+   "closureMP": 7.65377429019039e-11,
+   "rotation": -5.992006794768663e-11,
+   "closureDP45": 9.100277640831819e-11,
+   "closureBS": 4.1203107592480137e-10
+  },
+  {
+   "row": 52,
+   "Tstar": 39.64484929920434,
+   "closureTier": "reliable",
+   "closureMP": 7.016984736806019e-11,
+   "rotation": 1.6853636903705077e-10,
+   "closureDP45": 7.824550851323725e-11,
+   "closureBS": 3.663171987966507e-10
+  },
+  {
+   "row": 53,
+   "Tstar": 41.16625571774484,
+   "closureTier": "weak",
+   "closureMP": 5.4724793209006775e-08,
+   "rotation": 7.910483854540433e-08,
+   "closureDP45": 2.619523763160841e-09,
+   "closureBS": 1.279410053700973e-08
+  },
+  {
+   "row": 54,
+   "Tstar": 41.84792568368846,
+   "closureTier": "reliable",
+   "closureMP": 2.8078862756543325e-09,
+   "rotation": 2.469048215201266e-10,
+   "closureDP45": 3.2743476477284034e-10,
+   "closureBS": 3.117711682575284e-09
+  },
+  {
+   "row": 55,
+   "Tstar": 41.91689580479158,
+   "closureTier": "weak",
+   "closureMP": 6.602625590907394e-08,
+   "rotation": 2.209242626111615e-08,
+   "closureDP45": 3.064142837451694e-09,
+   "closureBS": 6.095198735412085e-08
+  },
+  {
+   "row": 56,
+   "Tstar": 42.87717106568037,
+   "closureTier": "reliable",
+   "closureMP": 6.299034593167448e-10,
+   "rotation": 4.6059376246113664e-10,
+   "closureDP45": 7.03532214668735e-11,
+   "closureBS": 2.3109778869160305e-09
+  },
+  {
+   "row": 57,
+   "Tstar": 43.455639062950596,
+   "closureTier": "reliable",
+   "closureMP": 1.963251520554304e-08,
+   "rotation": -5.175342780647812e-10,
+   "closureDP45": 3.366606602486182e-11,
+   "closureBS": 7.094718422290367e-09
+  },
+  {
+   "row": 58,
+   "Tstar": 43.493656546960594,
+   "closureTier": "weak",
+   "closureMP": 1.94121565469678e-08,
+   "rotation": 1.2288945178989602e-08,
+   "closureDP45": 1.200443939891061e-10,
+   "closureBS": 3.3905726504469985e-08
+  },
+  {
+   "row": 59,
+   "Tstar": 43.65505271495971,
+   "closureTier": "reliable",
+   "closureMP": 2.764050895492448e-10,
+   "rotation": -1.6691880926718038e-10,
+   "closureDP45": 1.396006826612029e-10,
+   "closureBS": 2.71850406315322e-10
+  },
+  {
+   "row": 60,
+   "Tstar": 43.82755256323463,
+   "closureTier": "weak",
+   "closureMP": 4.0829557436850385e-09,
+   "rotation": -4.659912656840344e-09,
+   "closureDP45": 3.084019317256775e-10,
+   "closureBS": 1.412193235370929e-08
+  },
+  {
+   "row": 61,
+   "Tstar": 45.900154862639425,
+   "closureTier": "reliable",
+   "closureMP": 1.68875035152762e-09,
+   "rotation": 8.311317915554408e-10,
+   "closureDP45": 2.909626022721518e-10,
+   "closureBS": 2.0838254253426587e-10
+  },
+  {
+   "row": 62,
+   "Tstar": 46.24533699424374,
+   "closureTier": "weak",
+   "closureMP": 1.5499339014466576e-08,
+   "rotation": 8.22234035309305e-09,
+   "closureDP45": 2.025037248166948e-08,
+   "closureBS": 1.9039789960646793e-08
+  },
+  {
+   "row": 63,
+   "Tstar": 47.065414291895074,
+   "closureTier": "reliable",
+   "closureMP": 2.5605891478918523e-10,
+   "rotation": -1.7546591321202917e-10,
+   "closureDP45": 3.131016143631142e-10,
+   "closureBS": 2.563322814666476e-10
+  },
+  {
+   "row": 64,
+   "Tstar": 47.631952317968484,
+   "closureTier": "reliable",
+   "closureMP": 1.410328469628236e-10,
+   "rotation": -2.4009186728146585e-10,
+   "closureDP45": 1.3231224148609015e-10,
+   "closureBS": 1.4742820126890845e-10
+  },
+  {
+   "row": 65,
+   "Tstar": 49.60818052510352,
+   "closureTier": "weak",
+   "closureMP": 6.963745887344821e-08,
+   "rotation": -4.188743036605627e-08,
+   "closureDP45": 9.743361003422229e-09,
+   "closureBS": 3.1125168739720473e-08
+  },
+  {
+   "row": 66,
+   "Tstar": 50.06353524651093,
+   "closureTier": "weak",
+   "closureMP": 8.486140197050466e-07,
+   "rotation": -1.1821015626013756e-07,
+   "closureDP45": 7.721671452120256e-08,
+   "closureBS": 1.0582429762569419e-06
+  },
+  {
+   "row": 67,
+   "Tstar": 50.34473046927835,
+   "closureTier": "reliable",
+   "closureMP": 1.0518136165542176e-10,
+   "rotation": 2.817907466151627e-10,
+   "closureDP45": 2.8758078110240905e-10,
+   "closureBS": 4.845790079724367e-10
+  },
+  {
+   "row": 68,
+   "Tstar": 51.6387854483869,
+   "closureTier": "weak",
+   "closureMP": 1.5166108135978805e-06,
+   "rotation": -9.293858014483678e-07,
+   "closureDP45": 2.1509235471411372e-08,
+   "closureBS": 1.7567566751935387e-06
+  },
+  {
+   "row": 69,
+   "Tstar": 52.20832604075492,
+   "closureTier": "weak",
+   "closureMP": 5.115701017818754e-08,
+   "rotation": -5.909641282278508e-08,
+   "closureDP45": 4.5630075170160916e-10,
+   "closureBS": 3.116930255195262e-07
+  },
+  {
+   "row": 70,
+   "Tstar": 54.301601273281754,
+   "closureTier": "weak",
+   "closureMP": 1.3777586821505179e-08,
+   "rotation": -4.520503417165807e-09,
+   "closureDP45": 1.1876709081370464e-09,
+   "closureBS": 1.1923325807886856e-08
+  },
+  {
+   "row": 71,
+   "Tstar": 55.78522164939995,
+   "closureTier": "weak",
+   "closureMP": 8.376836147195957e-08,
+   "rotation": 3.1141035146418944e-08,
+   "closureDP45": 1.2787223480162282e-09,
+   "closureBS": 5.538953422519711e-07
+  },
+  {
+   "row": 72,
+   "Tstar": 56.82578463551072,
+   "closureTier": "weak",
+   "closureMP": 4.470972676752147e-08,
+   "rotation": -7.096522387453586e-08,
+   "closureDP45": 1.6090519408347775e-08,
+   "closureBS": 3.5845282572735216e-08
+  },
+  {
+   "row": 73,
+   "Tstar": 57.46128442157317,
+   "closureTier": "weak",
+   "closureMP": 6.973637138268054e-09,
+   "rotation": 8.703475023096912e-09,
+   "closureDP45": 1.1975915697350292e-09,
+   "closureBS": 5.646916828541371e-08
+  },
+  {
+   "row": 74,
+   "Tstar": 57.51685937516007,
+   "closureTier": "weak",
+   "closureMP": 1.1350191527809819e-09,
+   "rotation": 1.056059637117603e-11,
+   "closureDP45": 8.060203653158157e-10,
+   "closureBS": 1.1387424947454564e-08
+  },
+  {
+   "row": 75,
+   "Tstar": 59.43961424425096,
+   "closureTier": "reliable",
+   "closureMP": 2.8719099015620947e-10,
+   "rotation": 9.221729955073198e-11,
+   "closureDP45": 1.7737673160722307e-10,
+   "closureBS": 2.262374516710707e-09
+  },
+  {
+   "row": 76,
+   "Tstar": 59.44280628180689,
+   "closureTier": "weak",
+   "closureMP": 2.9083762791282838e-09,
+   "rotation": -6.376228999022253e-09,
+   "closureDP45": 2.0314559753644082e-10,
+   "closureBS": 1.5007388554089118e-08
+  },
+  {
+   "row": 77,
+   "Tstar": 59.71912630367181,
+   "closureTier": "reliable",
+   "closureMP": 2.6403878077458195e-10,
+   "rotation": 1.5781710449780118e-10,
+   "closureDP45": 8.597645626103739e-11,
+   "closureBS": 2.6367923722541143e-10
+  },
+  {
+   "row": 78,
+   "Tstar": 59.72102894262133,
+   "closureTier": "reliable",
+   "closureMP": 6.80059149877454e-11,
+   "rotation": 2.7900055565346692e-11,
+   "closureDP45": 7.510032282214656e-11,
+   "closureBS": 6.59441862847649e-11
+  },
+  {
+   "row": 79,
+   "Tstar": 60.65967204295983,
+   "closureTier": "weak",
+   "closureMP": 4.6285249964894704e-07,
+   "rotation": -7.753767621247377e-08,
+   "closureDP45": 9.394410181897688e-09,
+   "closureBS": 3.5183152381450233e-06
+  },
+  {
+   "row": 80,
+   "Tstar": 61.723129249603836,
+   "closureTier": "weak",
+   "closureMP": 2.2804432347982832e-08,
+   "rotation": 1.377486219641206e-08,
+   "closureDP45": 4.710685465986179e-10,
+   "closureBS": 1.0099500826959888e-08
+  },
+  {
+   "row": 81,
+   "Tstar": 62.15957996011888,
+   "closureTier": "weak",
+   "closureMP": 1.0873466674333705e-07,
+   "rotation": 1.8141146371113966e-07,
+   "closureDP45": 2.1917799702313798e-08,
+   "closureBS": 9.679957659897153e-07
+  },
+  {
+   "row": 82,
+   "Tstar": 70.00235484488385,
+   "closureTier": "reliable",
+   "closureMP": 1.7071605112708155e-10,
+   "rotation": -1.366453320809688e-10,
+   "closureDP45": 1.0946088849962813e-10,
+   "closureBS": 2.989882209791194e-09
+  },
+  {
+   "row": 83,
+   "Tstar": 72.46515494895671,
+   "closureTier": "weak",
+   "closureMP": 5.716151100334522e-08,
+   "rotation": 7.23318395609961e-08,
+   "closureDP45": 4.2178939626007343e-10,
+   "closureBS": 1.9845938590552342e-07
+  },
+  {
+   "row": 84,
+   "Tstar": 79.2469222324199,
+   "closureTier": "weak",
+   "closureMP": 2.7719068338233863e-09,
+   "rotation": 1.3851049267937048e-09,
+   "closureDP45": 1.5256753965058162e-09,
+   "closureBS": 4.256536699310275e-08
+  }
+ ]
+}
