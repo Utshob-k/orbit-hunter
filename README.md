@@ -411,6 +411,10 @@ difference). Against the atlas my stability numbers match to four digits for the
 
 Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
 
+- **2026-10-10, `tools/orbit-table.mjs` overwrote the atlas groups.** Run from a clean clone it replaced the group column of `data/orbit-table.json`
+  and `.csv` by the one in `data/stability-perp-3.json` (the first, small atlas comparison): 81 orbits unmatched instead of 77, with 4 atlas orbits
+  among them. The published tables were not affected. The script now keeps the group of the existing table, and a rerun gives the published files
+  again. Found while removing unused code.
 - **2026-10-10, from an independent bug check of v0.2.10.** The points below were checked against the data here before this entry; the numbers are
   recomputed. (1) *The refined values are periodic to 2.7e-19, not to 1e-20.* The intro, the refinement paragraph and the entry of 2026-10-09 below
   say that all 85 are periodic to better than 1e-20 from the refined start values. Integrated from the 30 digit values as they are stored in
@@ -643,8 +647,8 @@ path):
 - `closure-mp.py` integrates the double precision starts of the 85 orbits for one period in 40 digits (about 6 minutes; `--write` stores
   `data/closure-mp.json`)
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
-  `data/closure-stored.json`), `stable-samples.py` counts the stable samples on the branch arms; `check-refined.mjs`, `arm-repeat-check.mjs` and
-  `verify-branches.mjs` write their result files, so tracked files change when they run
+  `data/closure-stored.json`), `stable-samples.py` counts the stable samples on the branch arms; `orbit-table.mjs`, `check-refined.mjs`,
+  `arm-repeat-check.mjs` and `verify-branches.mjs` write their result files, so tracked files change when they run
 - `rebound-check.py` closes the orbits and computes the monodromy matrix of the stable ones with REBOUND (`pip install rebound numpy`; a plain run
   prints the result, `--write` stores `data/rebound-check.json`)
 - `family-one.mjs` follows the family through one start in both directions (`run-jobs.mjs` runs a list of them), `published-hits.mjs` lists which of

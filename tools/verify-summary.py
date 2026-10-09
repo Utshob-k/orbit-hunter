@@ -5,7 +5,7 @@
 #   3. no jump of T*, L* between neighbouring points is more than 50 times the median jump,
 #   4. it is not the repeat curve of the parent (data/arm-repeats.json)
 # several files can hold the same arm (a rerun): the last file in the order of the arguments wins.   python tools/verify-summary.py
-import json, glob, collections, sys
+import json, collections, sys
 FILES = ['data/satellite-results%d.verified.json' % n for n in (4, 5, 6, 7)]
 rep = json.load(open('data/arm-repeats.json'))
 arms = {}

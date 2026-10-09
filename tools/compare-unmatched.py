@@ -1,6 +1,6 @@
 # the orbits of the perpendicular search that are not in the atlas, against the 99 satellites of Jankovic et al. (CPC 2020):
 # smallest relative distance of (T*, L*) to a satellite, allowing n fold repeats of either one (n = 1..8). python tools/compare-unmatched.py
-import json, math
+import json
 rows = json.load(open('data/orbit-table.json'))
 cpc = [(c['N'], c['k'], c['ts_theirs'], c['ls_theirs']) for c in json.load(open('data/cpc-converted.json'))]
 res = []

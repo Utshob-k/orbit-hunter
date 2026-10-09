@@ -17,7 +17,6 @@ ev = eigenvalues([[Math.cos(a), -Math.sin(a)], [Math.sin(a), Math.cos(a)]]);
 check('rotation', ev.every((e) => Math.abs(Math.hypot(e[0], e[1]) - 1) < 1e-10) && Math.abs(Math.abs(ev[0][1]) - Math.sin(a)) < 1e-10);
 
 // companion matrix of (x-1)(x-2)(x-3)(x+4)
-const poly = [1, -2 + 0, 0, 0];
 const roots = [1, 2, 3, -4];
 // build coefficients of prod (x - r)
 let co = [1];

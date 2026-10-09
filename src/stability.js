@@ -52,7 +52,6 @@ function rhs(y, out) {
 }
 
 // dormand prince 5(4), fixed size arrays
-const C = [0, 1 / 5, 3 / 10, 4 / 5, 8 / 9, 1, 1];
 const A = [[], [1 / 5], [3 / 40, 9 / 40], [44 / 45, -56 / 15, 32 / 9], [19372 / 6561, -25360 / 2187, 64448 / 6561, -212 / 729],
   [9017 / 3168, -355 / 33, 46732 / 5247, 49 / 176, -5103 / 18656], [35 / 384, 0, 500 / 1113, 125 / 192, -2187 / 6784, 11 / 84]];
 const B5 = [35 / 384, 0, 500 / 1113, 125 / 192, -2187 / 6784, 11 / 84, 0];
@@ -130,7 +129,6 @@ export function reducedMonodromy(M) {
 // eigenvalues of a small real matrix, shifted QR in complex arithmetic
 const cmul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
 const cabs = (a) => Math.hypot(a[0], a[1]);
-const cdiv = (a, b) => { const d = b[0] * b[0] + b[1] * b[1]; return [(a[0] * b[0] + a[1] * b[1]) / d, (a[1] * b[0] - a[0] * b[1]) / d]; };
 const csqrt = (a) => { const r = cabs(a); const re = Math.sqrt((r + a[0]) / 2); const im = Math.sqrt(Math.max(0, (r - a[0]) / 2)); return [re, a[1] < 0 ? -im : im]; };
 
 export function eigenvalues(Areal) {

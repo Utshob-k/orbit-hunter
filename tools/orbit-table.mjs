@@ -10,13 +10,17 @@ import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';
 import { perpInfo } from '../src/perp.js';
-import { bsIntegrate } from '../src/bs.js';
 import { coverInfo } from '../src/covers.js';
 import { closureError, closureTier } from '../src/closure.js';
 
 // published satellites (T*/k, L*) for the distance to the BHH curve
 const cpc = JSON.parse(fs.readFileSync(new URL('../data/cpc-converted.json', import.meta.url), 'utf8')).map((c) => [c.ts_theirs / c.k, c.ls_theirs]);
 
+// the group (atlas / unmatched / L = 0) in stability-perp-3.json is from the first, small atlas comparison. the table keeps the group of the existing
+// data/orbit-table.json, which has the comparison with all 415 atlas entries (tools/compare-atlas-all.py)
+const oldFile = new URL('../data/orbit-table.json', import.meta.url);
+const old = fs.existsSync(oldFile) ? JSON.parse(fs.readFileSync(oldFile, 'utf8')) : [];
+const groupOf = (o) => (old.find((r) => Math.abs(r.u1 - o.u1) + Math.abs(r.lam - o.lam) < 1e-9) || o).group;
 
 const list = JSON.parse(fs.readFileSync(new URL('../data/stability-perp-3.json', import.meta.url), 'utf8'));
 const rows = [];
@@ -31,7 +35,7 @@ for (const o of list) {
   if (cv.failed) { console.error('the repeat count of the orbit with T* =', o.ts, 'could not be computed (the integration stopped): table not written'); process.exit(1); }
   const x = w && bhh ? o.ts / w.power : null;
   const distBHH = x ? Math.min(...cpc.map(([a, b]) => Math.hypot((a - x) / x, (b - Math.abs(o.ls)) / Math.abs(o.ls)))) : null;
-  rows.push({ group: o.group, u1: o.u1, u2: o.u2, lam: o.lam, t: o.t, T: o.T, Tstar: o.ts, Lstar: Math.abs(o.ls), minDist: o.minD, status: o.status, syzygies: w?.length ?? null, wordRoot: w?.root ?? null, wordPower: w?.power ?? null, bhhType: bhh, closureDP45: dp?.errRot ?? null, closureBS: bs?.errRot ?? null, closureTier: closureTier(x0, 2 * o.t).tier, closureDP45raw: dp?.errRaw ?? null, closureBSraw: bs?.errRaw ?? null, repeatOf: cv.nRepeat, relabelReturnN: cv.nRelabel, primitiveTstar: o.ts / cv.nRepeat, rotation: info?.theta ?? null, distToBHHcurve: distBHH, offBHHcurve: distBHH === null ? null : distBHH > 0.2 });
+  rows.push({ group: groupOf(o), u1: o.u1, u2: o.u2, lam: o.lam, t: o.t, T: o.T, Tstar: o.ts, Lstar: Math.abs(o.ls), minDist: o.minD, status: o.status, syzygies: w?.length ?? null, wordRoot: w?.root ?? null, wordPower: w?.power ?? null, bhhType: bhh, closureDP45: dp?.errRot ?? null, closureBS: bs?.errRot ?? null, closureTier: closureTier(x0, 2 * o.t).tier, closureDP45raw: dp?.errRaw ?? null, closureBSraw: bs?.errRaw ?? null, repeatOf: cv.nRepeat, relabelReturnN: cv.nRelabel, primitiveTstar: o.ts / cv.nRepeat, rotation: info?.theta ?? null, distToBHHcurve: distBHH, offBHHcurve: distBHH === null ? null : distBHH > 0.2 });
 }
 rows.sort((a, b) => a.Tstar - b.Tstar);
 fs.writeFileSync(new URL('../data/orbit-table.json', import.meta.url), JSON.stringify(rows, null, 1));

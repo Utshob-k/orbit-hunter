@@ -1,7 +1,6 @@
 // try to close every orbit in known.js
 import { KNOWN } from '../src/known.js';
 import { closeOrbit, fingerprint } from '../src/newton.js';
-import { bestReturn, sdInitial } from '../src/physics.js';
 
 let ok = 0;
 for (const k of KNOWN) {

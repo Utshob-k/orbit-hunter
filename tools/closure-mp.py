@@ -3,7 +3,7 @@
 # python tools/closure-mp.py [--write]    about 6 minutes, 4 processes; --write stores data/closure-mp.json
 import sys, os, json, importlib.util
 from multiprocessing import Pool
-from mpmath import mp, mpf, nstr, cos, sin, atan2
+from mpmath import mp, mpf, cos, sin, atan2
 
 here = os.path.dirname(os.path.abspath(__file__))
 root = os.path.dirname(here)
