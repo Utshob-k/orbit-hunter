@@ -1,9 +1,7 @@
-# closure after one period of the refined start values as they are STORED in data/refined (30 digits), integrated in multiple precision
-# (the Gragg-Bulirsch-Stoer code of tools/refine-mp.py, 50 digits, tolerance 1e-30). closure as in the README: largest difference of a position or velocity component
-# between the end state and the start state (max norm), best rotation removed. the number closure_full_period inside the files is not this one: before 2026-10-10
-# tools/refine-mp.py measured it on its unrounded solution and wrote the start values rounded to 30 digits, and for strongly unstable orbits the rounding is amplified.
-# python tools/closure-stored.py          prints the counts (about 6 minutes, uses 4 processes)
-# python tools/closure-stored.py --write  also writes data/closure-stored.json
+# closure of the refined start values as they are stored in data/refined (30 digits): one period, 50 digits, the gbs code of refine-mp.py.
+# same closure as the readme (max norm, best rotation removed). the number inside the files is not this one: refine-mp.py used to measure it on its
+# unrounded solution and then write the rounded values, and for unstable orbits the rounding gets amplified.
+# python tools/closure-stored.py [--write]    about 6 minutes, 4 processes; --write stores data/closure-stored.json
 import sys, os, json, glob, importlib.util
 from multiprocessing import Pool
 from mpmath import mp, mpf, cos, sin, atan2

@@ -1,7 +1,6 @@
-# stability along the branch arms of the first verified run (data/satellite-results4.jsonl, the 36 arms of tools/verify-branches.mjs, 30 of which pass the checks of tools/verify-summary.py):
-# for the arms that pass, how many have at least one linearly stable sample (largest multiplier modulus below 1 + 1e-6, column 4 of the points of the arm; null = not computed),
-# in how many of them the sample next to the branch point (the first point of the arm) is stable, and in how many it is the only stable one.
-# the same without the arms that are the repeat curve of their parent (data/satellite-results4.repeats-0-21.json).   python tools/stable-samples.py
+# stability along the arms of the first verified run (data/satellite-results4.jsonl): of the 30 arms that pass verify-summary.py, how many have a linearly stable
+# sample (largest multiplier below 1 + 1e-6, column 4 of the points, null = not computed), in how many the first sample (at the branch point) is stable, in how
+# many it is the only stable one. then the same without the 4 arms that are the repeat curve of their parent.   python tools/stable-samples.py
 import json, os
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def load(p): return json.load(open(os.path.join(root, p)))
