@@ -4,9 +4,12 @@ A search for periodic orbits of the planar three-body problem with equal masses.
 the browser (WebGPU), double precision code on the CPU closes and checks every candidate.
 
 **Where it stands.** The code reproduces published orbits to about nine digits. Every orbit it found with zero
-angular momentum was already published. For non-zero angular momentum it found 81 exactly periodic orbits that I
-could not match to the one catalog I could get, and 6 of them are linearly stable. I do not know if any of those
-is new, and nothing here should be read as a discovery.
+angular momentum was already published. For non-zero angular momentum it found 85 distinct orbits. 54 of them are
+periodic to 1e-8 or better with two integrators (among them the 6 linearly stable ones); the other 31 closed only to between 1e-8 and 1e-6 in double precision.
+Those 31 and the 6 stable ones (37 orbits) are refined, and are periodic to better than 1e-20 in the 30 digit refinement; the other 48 are not refined.
+At most 81 of the 85 are not in the one catalogue of orbits with non-zero angular momentum that I could compare with (the Three Body Orbits atlas;
+one of the 81 may be an atlas orbit, see below). One of the 81, a stable orbit, is listed in a 1982 paper (Davoust and Broucke, row 91), and for the others I do not know
+whether they are known. I do not know if any is new, and nothing here should be read as a discovery.
 
 ## Results
 
@@ -14,15 +17,19 @@ is new, and nothing here should be read as a discovery.
 
 | catalogue | orbits with L != 0? | what I did |
 |---|---|---|
-| Three Body Orbits atlas (threebodyorbits.com) | yes, 37 equal-mass entries (14 BHH, 13 Suvakov, 10 Sheen) | compared all 85 base orbits: 2 match, 81 do not |
+| Three Body Orbits atlas (threebodyorbits.com) | yes, 37 equal-mass entries (14 BHH, 13 Suvakov, 10 Sheen) | compared all 85 base orbits: 2 match, at most 81 do not (one, see below, is unresolved) |
 | Jankovic et al., CPC 2020 | yes, 99 BHH satellites | converted all, 98 close; used for the satellite runs |
 | Jankovic et al., PRL 2016 | yes, 57 satellites, all in the CPC list | consistency check only |
-| Li and Liao 2017 (695 orbits) | no, L = 0 | only my L = 0 orbits |
-| Hristov and Hristova 2024 (421,562 rows) | no, L = 0 | only my L = 0 orbits |
+| Li and Liao 2017 (695 families) | no, L = 0 | only my L = 0 orbits |
+| Hristov and Hristova 2024 (Astronomy and Computing 49, 100880; arXiv:2404.16526), Euler configuration | no, L = 0 | only my L = 0 orbits (the file `60digits.txt` has 421,562 rows of vx, vy, T, T*; I do not know what the rows count, the paper reports 12,431 initial conditions for 6,333 distinct solutions; the 12,409 distinct free-fall orbits that Li et al. 2025 cite are from another paper, Hristov et al., Celest. Mech. Dyn. Astron. 136, 7) |
 | Suvakov gallery (three-body.ipb.ac.rs) | partly, pictures not numbers | not compared (its site certificate is broken for my tools) |
-| Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 | finite L | not read yet, asked the authors |
+| Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 (doi:10.1016/j.newast.2025.102407) | equal mass, finite L, but only the figure-eight and IA-3 orbits continued in L from L = 0; 18 rows in the table (10 figure-eight, 8 IA-3), 16 of them relative periodic with rotation angle not 0 | read; not a catalogue; the closest of my orbits is 17 % away from any row in (T*, L*), see below |
+| Nauenberg 2001 (Phys. Lett. A 292, 93); Chenciner, Fejoz and Montgomery 2005 (Nonlinearity 18, 1407) | finite L, rotating eights | not read, not compared |
 
-So "81 match nothing" means: nothing among 37 atlas entries plus the 99 CPC satellites. It is a weak statement.
+So "81 match nothing" means: nothing among 37 atlas entries plus the 99 CPC satellites, with one case unresolved, so it is "at most 81": the primitive of my T* = 72.465 orbit (T* = 36.23, L* = 0.2790, syzygy word (01010212)^3, 24 syzygies per period) is 3.2e-3 away in (T*, L*) from twice the atlas orbit SN.13 (Suvakov's other orbits). SN.13 itself has T* = 18.06 (period 7.1716, E = -1.85094, L = -0.20452, L* = 0.2782, 12 alignments per period); my orbit is at about twice that period (T* = 36.23, ratio 2.006, L* = 0.2790, syzygy word (01010212)^3, 24 syzygies per period). So it may be a period doubled relative of SN.13 and not the same orbit; the atlas page gives no initial conditions, so I could not compare the syzygy words or follow one orbit to the other. It is a weak statement.
+It is weaker than it looks: the 99 CPC satellites have L* from 0.8385 (N = 3, the only one below 0.84) to 3.2626 and T* from 9.69 to 109.20, and L* does not change when an orbit is repeated. So the 36 of the 81 unmatched orbits with L* below 0.8385 are not close to any satellite or repeat of one (the closest is 0.11 away in relative terms): for them there was nothing to compare with. The other 45 have L* inside the range of the table; the closest of them to any satellite or repeat of one (n up to 8) is 1.0 % away in (T*, L*), the median is 3.7 %, and none is within 5e-3.
+
+**Li, Tao, Li and Liao 2025** (Xiaoming Li, Yueyan Tao, Xiaochen Li and Shijun Liao, "A numerical scheme to obtain periodic three-body orbits with finite angular momentum", New Astronomy 119 (2025) 102407, doi:10.1016/j.newast.2025.102407). The paper is about equal masses. It continues only two orbits of L = 0, the figure-eight and IA-3, in the angular momentum (L up to 0.07 and 0.35, which is L* up to about 0.08 and 0.36 and T* about 9.2 and 15), and lists relative periodic orbits, closed to 1e-6 in the rotating frame, in a table of 18 rows (the two L = 0 orbits and 16 with rotation angle not 0); the authors say that the full data can be had on request. They write that earlier work on L != 0 concentrated on the figure-eight and BHH families. It is not a catalogue of periodic orbits with L != 0, so it says nothing about most of my orbits. I converted the rows with T* = T |E|^1.5 and L* = |L| |E|^0.5 (check: the figure-eight at L = 0 gives T* = 9.238, IA-3 at L = 0 gives 15.048). I copied the 18 rows by hand and checked them against the text of the PDF (identical); with the formula of the paper, L = y1 y8 + y10, the figure-eight rows give the printed L to 1e-8, and the 7 IA-3 rows with L > 0 give 1.0e-4 more than the printed L (I use the L computed from the rows). Only the derived numbers (T*, L*, rotation angle) will be published, not the table. The rotation angle of my orbits is below 4e-8 (largest |theta| of the 85 and of the 17 of the arclength list: 3.6e-8), and the two orbits of the 85 with L = 0 (T* = 39.64 and 79.25) are not these two orbits. The closest of my 85 and 17 orbits (with T* of the shortest period) to any of the 18 rows is 17 % away in (T*, L*) (relative difference in T*, and in L* with a floor of 0.05 for the rows near L = 0).
 
 **Counting.** The 85 orbits of the perpendicular search are 6 linearly stable, 77 unstable and 2 uncertain. The satellite work uses 7 stable parents:
 those 6 plus the orbit at T* = 29.31 that was found later by continuation (it is not one of the 85). Of the 85, 2 have L = 0 (members of the family
@@ -31,11 +38,11 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
 - All 11 orbits in `src/known.js` (figure-8, butterflies, moths, goggles, dragonfly, bumblebee, yin-yang) close from
   their published start values with residual 1e-10 or better. `npm test` checks this.
 - **Zero angular momentum.** I scanned the Suvakov-Dmitrasinovic plane at a finer grid than Li and Liao used. Every orbit
-  I closed is in Hristov and Hristova's database (arXiv 2404.16526, 421,562 initial conditions): the eight that were
+  I closed is in Hristov and Hristova's database (arXiv 2404.16526, the 421,562 rows of `60digits.txt`): the eight that were
   not in my own list (seven from the scans, one L = 0 orbit found by the perpendicular search), including two with
   T|E|^1.5 about 79, match to 1e-8 or better. Nothing new there.
 - **Non-zero angular momentum.** A Henon-style start (below) gives orbits with L != 0. From 287 starting points,
-  111 hunts reached an exactly periodic orbit, 85 distinct orbits after removing repeats:
+  111 hunts reached a periodic orbit (rotation angle 0 to the tolerance of the hunt), 85 distinct orbits after removing repeats:
   2 have L = 0 (published), 2 are orbits of the Three Body Orbits atlas, **81 match nothing in the atlas**. Of the 85, 54 close to 1e-8 or better with two integrators (the 6 stable ones among them); the other 31 are weak (see Known weaknesses).
 - **A control.** The search found published L != 0 orbits without being pointed at them: Sheen's "Two ovals",
   Sheen's "Oval, catface and starship", and Suvakov's SN.9 (matching the atlas to the rounding of its numbers).
@@ -56,7 +63,7 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
 - **Connection to a published family.** The satellites of the BHH family (Jankovic, Dmitrasinovic and Suvakov,
   CPC 2020, tables 3 to 6) are inside my search family. I converted all 99 (98 re-close, and my T* and L* reproduce
   theirs, median relative difference 6e-10 and 1e-10) and followed each one in lam until the rotation angle theta is 0.
-  The first attempt (steps in lam, `huntPeriodicMS`) reported 40 of 98 reaching an exactly periodic orbit, but that
+  The first attempt (steps in lam, `huntPeriodicMS`) reported 40 of 98 reaching a periodic orbit, but that
   method can jump to another branch, so I redid it with continuation in arclength (below), which can't:
   - Of those 40, arclength gives the same orbit for only 3, a different one for 11 and gets no zero for the
     other 26 (7 ran out of time in both directions, 16 ran out of time one way and lost the family the other way, 2 lost it both ways, 1 found a zero
@@ -64,7 +71,7 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
     close to 1e-11), but I can no longer say they are on the satellite's branch. In particular my earlier statements that
     the k = 3 and 4 satellites end at SN.9, and that satellite N = 9 (k = 5) is connected to 5 times the stable orbit at
     lam = 0.8653, are not supported: theta along the N = 9 branch peaks at -0.07 and never reaches 0, it only passes close.
-  - On the 58 that failed before, 13 hunts reached an exactly periodic orbit, 30 ran out of time in both directions and
+  - On the 58 that failed before, 13 hunts reached a periodic orbit, 30 ran out of time in both directions and
     the rest lost the family near a close approach. Together with the checked ones that makes **17 distinct orbits**
     reached by continuation (`data/perp-arc-orbits.json`). 3 of them are known or already mine (SN.9, Sheen's "Three
     ovals", my stable orbit at T* = 9.658) and 14 match neither the atlas nor my first list. Two are linearly stable:
@@ -86,8 +93,13 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   determinant of the shooting system changes sign, then follow the new branch (`tools/nu-crossings.mjs`,
   `tools/satellite-hunt.mjs`). All 7 stable orbits have the word (01)^k, with k = 1, 3, 5, 6, 8, 9, 16, so they are BHH
   orbits (the T* = 4.96 one is the k = 1 BHH orbit itself; T* = 33.745 and 47.065 are repeats of shorter orbits, see below).
-  - **Check:** from the T* = 4.96 orbit the branches for k = 4 and 5 pass through the published satellites N = 6 and N = 9
-    (T* and L* agree to 1e-5 or better) and the k = 3 branch passes within 3e-3 of N = 1, which I do not count as reproducing it.
+  - **Check (recall):** from the T* = 4.96 orbit the branches for k = 4 and 5 pass close to the published satellites N = 6 and N = 9 in (T*, L*)
+    (relative distance of the arm to the satellite 7.9e-6 and 2.5e-7). I then compared more than (T*, L*), with the start of the published orbit converted into mine:
+    - **N = 9 is confirmed.** At lam = 0.71687 the arm has the published start: lam, |u1|, |u2| and t agree to about 1e-5 (the velocities are reversed, which is the same orbit), and the word is (01)^5 as published.
+    - **N = 6 is partial.** T* and L* agree to 8e-6 and the word is (01)^4 at the nearest point, but the start variables of the interpolated arm differ from the published ones by 3.6e-4 (u1), 3.2e-4 (u2) and 1.7e-4 (t, relative); the arm is sampled coarsely and the orbit is very unstable, so a Newton step from there does not converge. I have not continued from the published orbit to the arm yet.
+    - **N = 1 is not reproduced.** The k = 3 arms are not a satellite: both are the 3 fold repeat curve of the parent (the minimal period of their orbits, from `src/covers.js`, is 1/3 of the arm's), and that curve passes 3e-3 from N = 1. An earlier version listed N = 1 among the matches in the paragraph about the other branches below, and `data/bifurcation-points.json` showed it as a hit; both are corrected, see Corrections. I do not know why the branch switching ends up on the repeat curve for k = 3 and not for k = 4 and 5.
+    - **Counting, with one rule that I do not change:** a satellite is "tested" when its (T*, L*) lies inside the box (2 % margin) spanned by an arm of the same exponent k that I followed, and "found" when an arm passes within 5e-3.
+      5 of the 99 satellites are tested (N = 1, 2, 3 with k = 3, N = 6 with k = 4, N = 9 with k = 5) and 2 are found (N = 6 and N = 9), of which N = 9 is confirmed and N = 6 partial. N = 2 and N = 3 are 0.07 and 0.08 (relative, in T* and L*) from the nearest arm, so they are not found. The other 94 satellites are outside every box, there is nothing to compare with. (The scripts for the start comparison are not in the repository yet.)
   - 211 places where a rotation number crosses m/k were found on 4 of the 7 orbits, k up to 20; 136 of them have a branch point. For the other 75 the trace of the repeat ran out of its 120 s
     before it reached the end of the window (every one of them took 123 to 166 s), so I do not know if they have one; `satellites.js` now records
     `reached` and the time limit is an option, and these jobs have to be redone. The other 3 stable orbits (T* = 19.8, 33.7, 47.1) were scanned later with a smaller step (60 more jobs for k up to 8, then 21 verification jobs).
@@ -123,38 +135,39 @@ that are also in the L = 0 catalogues) and 2 are atlas orbits.
   50 times the median step and two of them also change their word, so I do not trust them (they probably run into a close approach).
   Re-closing: all 108 points close to 6e-11 or better (47 of them are above 1e-12). The stability code was also checked against a separate finite difference monodromy matrix on four orbits
   (two of them rotating) and agrees to 1e-6 on three and 5e-4 on the fourth.
-  - **None of these branches matches a CPC satellite of the same exponent** (the only matches are N = 1, 6, 9 from the T* = 4.96 orbit, checked before).
+  - **None of these branches matches a CPC satellite of the same exponent** (the only ones that pass close to a satellite are the arms through N = 6 and N = 9 from the T* = 4.96 orbit: N = 9 is confirmed and N = 6 partial, see the recall check above). That is mostly "nothing to compare with": only 5 of the 99 satellites lie in the (T*, L*) region of an arm that I followed (same exponent, see the recall check), and the others are not covered by any arm.
     More precisely: they do not pass within 0.5 % in T* and L* of any CPC satellite with the same k. Two passes within 0.5 % of satellites with a
-    different k (N = 69 and N = 93) are coincidences. The CPC table only reaches T* of about 90, and most of my branches are above that.
+    different k (N = 69 and N = 93) are coincidences. The CPC table covers T* from 9.69 to 109.20 and L* from 0.8385 to 3.2626. Comparisons with it use the primitive (minimal) period for the 85 orbits (`primitiveTstar`, repeats of a satellite up to n = 8 are allowed); the comparison of the branch arms in the table of this version does not reduce them to their primitive period yet, a rebuilt table that does is to follow.
   - **Stability along the branches:** 23 of the 30 arms have at least one linearly stable sample, but at most of them it is the sample at
     the branch point itself, where the repeat of a stable orbit is stable. One branch is stable at every sample along its arms: the branch point at lam = 0.6018 of the T* = 33.7 orbit.
     I first described it by the period of a 9 fold repeat (T* = 77 to 93, exponent 27), and that was wrong: the T* = 33.745 parent is itself a 9 fold repeat of an orbit with T* = 3.7495, and every
     sampled point of this branch is again a 9 fold repeat of a shorter orbit. The orbits of the branch have the primitive T* = 8.46 to 10.40, L* = 2.61 to 2.80 and the syzygy word (01)^3. It is a candidate only, more checks
     are running and will be published when they are done.
-  - **What this does not show:** nothing here is called new. I have not read the 2025 paper of Li, Tao, Li and Liao (New Astronomy 119, 102407), and nobody expert has looked at these.
+  - **What this does not show:** nothing here is called new. The 2025 paper of Li, Tao, Li and Liao (New Astronomy 119, 102407) continues only the figure-eight and IA-3 from L = 0 and lists relative periodic orbits, so it does not decide anything about mine, and nobody expert has looked at these.
 
 ## Prior work I know of
 
 - Hénon 1976, Broucke 1975 and Hadjidemetriou 1975: the BHH family. Davoust and Broucke 1982 (Astronomy and Astrophysics 112, 305): "A manifold of periodic orbits
-  in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (I could not get the full text).
-- Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020): about 100 satellites of the BHH family by brute force search. Dr. Janković wrote to me that nobody continued
-  this path in Belgrade, and that the continuation of branches and the detection of new branches along them was an idea they never got to work.
+  in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (I have the page scans from ADS, bibcode 1982A&A...112..305D, there is no text version, so I read the tables by eye from the scan images).
+- Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020): about 100 satellites of the BHH family by brute force search. I do not know of work that follows their
+  satellite branches by continuation from the stable BHH orbits, other than the first satellite and the families in Davoust and Broucke 1982.
 - Li and Liao and others: thousands of orbits since 2017, as far as I can see in their public data zero angular momentum or 3D, or unequal masses. Their 2025 paper on
-  finite angular momentum (New Astronomy 119, 102407) I have not read.
+  finite angular momentum (New Astronomy 119, 102407) continues the figure-eight and IA-3 orbits from L = 0 (18 rows in a table, the rest on request). In it they write that
+  work on L != 0 had so far concentrated on the figure-eight and BHH families. Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 (rotating eights) I have not read.
 
 So the continuation of satellite branches is not new as a method (Davoust and Broucke did it); what is done here is the systematic search for the places where branches leave the
 repeats of the stable orbits, with the checks described below.
 
-- **Families of Davoust and Broucke (1982).** I transcribed all their tables of initial conditions (Tables 2 to 7, 130 orbits of the families A1, A2, B, a to d, alpha, beta,
+- **Families of Davoust and Broucke (1982).** I transcribed all their tables of initial conditions from those ADS scans (Tables 2 to 7, 130 orbits of the families A1, A2, B, a to d, alpha, beta,
   D1 to D4, E, e to k, F, G, H, `data/db82-table*.json`), checked every row against the printed value of -27 C^2 H (which equals L*^2/9 in my units; the few misread
   digits were repaired with `tools/check-db82.py`), converted them into my start (`tools/convert-db82.mjs`) and 118 of the 130 rows close to 1e-9 or better, with L* and the
-  rotation angle agreeing with the printed ones (the other 12 are close encounters or still have a misread digit). Nine of their orbits have a rotation angle that is exactly a multiple of 2 pi, so they are
-  exactly periodic (rows 9, 44, 45, 49, 52, 67, 91, 97, 115). Three of them are in my lists: row 9 and row 115 are the two atlas orbits, and **row 91 (T* = 9.6584,
-  L* = 1.0418) is my stable orbit at lam = 0.49914**, which therefore was already published in 1982 (it is one of my 81 that match nothing in the atlas, so that number is at most 80).
-  The other six are not in my lists, so my own search misses exactly periodic orbits that are known (`tools/compare-db82.py`, `data/db82-exactly-periodic.json`).
-  Following the families A1, A2 and B with the continuation (`tools/trace-family.mjs`): A1 has one exactly periodic orbit (the row 9 orbit), A2 none, B three (T* = 21.6615 with closure
-  5e-9, and two weak ones at 21.911 and 28.478, `data/db82-family-orbits.json`). I think the honest reading is that my orbits are exactly periodic members of families that were known
-  in 1982, and not new families; for most of the other 79 I do not yet know which family they lie on.
+  rotation angle agreeing with the printed ones (the other 12 are close encounters or still have a misread digit). Nine of their orbits have a rotation angle that is a multiple of 2 pi to the printed digits, so they are
+  periodic (rows 9, 44, 45, 49, 52, 67, 91, 97, 115). Three of them are in my lists: row 9 and row 115 are the two atlas orbits, and **row 91 (T* = 9.6584,
+  L* = 1.0418) is my stable orbit at lam = 0.49914**, which therefore was already published in 1982 (it is one of my 81 that match nothing in the atlas, so at most 80 are in neither the atlas nor these tables).
+  The other six are not in my lists, so my own search misses periodic orbits that are known (`tools/compare-db82.py`, `data/db82-exactly-periodic.json`).
+  Following the families A1, A2 and B with the continuation (`tools/trace-family.mjs`): A1 has one periodic orbit (the row 9 orbit), A2 none, B three (T* = 21.6615 with closure
+  5e-9, and two weak ones at 21.911 and 28.478, `data/db82-family-orbits.json`). So one of my orbits (row 91) was already published in 1982. For the other 84 I do not know whether they lie on families of that paper: the traces of A1, A2 and B
+  contain none of them, but I followed only these three of its families, and my own search misses periodic orbits that are known (the other six rows above). It is undetermined.
 
 ## How it works
 
@@ -187,6 +200,15 @@ Checks: `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js`
 difference). Against the atlas my stability numbers match to four digits for the three re-found orbits
 (|lambda|max 1.409, 19.55, 9.860).
 
+## Corrections
+
+Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
+
+- **2026-10-09, "exactly periodic".** The first paragraph of this file said that the search found 81 exactly periodic orbits, which gave the 81 orbits that I could not match to the atlas as the number found (there are 85 distinct ones), and other places called the orbits exactly periodic. What the checks support: of the 85 distinct orbits, 54 close to 1e-8 or better with two integrators (the six linearly stable ones among them), and 31 close only to between 1e-8 and 1e-6 in double precision. These 31 and the 6 stable ones are refined, and are periodic to better than 1e-20 in the 30 digit refinement; the other 48 are not refined. I no longer use "exactly periodic" for any of them. The closure tiers were introduced on 2026-10-08 (commit 1e9c02a), the refinement of the 7 stable orbits on 2026-10-08 (commit b412011), the refinement of the 31 weak ones was done on 2026-10-08 and its files are added on 2026-10-09.
+- **2026-10-09, the N = 1 match.** A branch from the 3 fold repeat of the T* = 4.96 orbit passes 3e-3 from the published satellite N = 1 (CPC 2020), and I listed N = 1 among the matches (here, and as a hit in `data/bifurcation-points.json`, where the original value is still visible). Both arms of that branch point are the 3 fold repeat curve of the parent, not a satellite, so N = 1 is not reproduced.
+- **2026-10-08, a candidate branch.** I described the branch at lam = 0.6018 of the T* = 33.745 orbit by the period of a 9 fold repeat (T* = 77 to 93, exponent 27). Its orbits are 9 fold repeats of shorter orbits (primitive T* = 8.46 to 10.40, L* = 2.61 to 2.80, word (01)^3). Fixed in commit fff46ba.
+- **2026-10-07, SN.9 and N = 9.** I stated that the k = 3 and 4 satellites end at SN.9 and that satellite N = 9 (k = 5) is connected to 5 times the stable orbit at lam = 0.8653. The continuation I used could jump to another branch; redone in arclength, the claims are not supported (commit 117e23b).
+
 ## What is not proven
 
 - "Not in the atlas" is not "new". The atlas lists only 14 equal-mass BHH satellites, and Jankovic et al. report about 100.
@@ -195,15 +217,18 @@ difference). Against the atlas my stability numbers match to four digits for the
 - Following the high-k satellites (about 56 of the 98) to a zero of theta took more than the 5 minutes
   per direction I gave each start, so for those I do not know if they reach a periodic orbit. A few others lost the family
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
-- **The 7 stable orbits to 30 digits.** Each of them was refined with Newton's method and a multiple precision integrator (Gragg-Bulirsch-Stoer with 40 digit arithmetic,
-  `tools/refine-mp.py`) on the four symmetry conditions (back on the x axis with all velocities along y at the half period). The residual falls quadratically to 1e-31 or better, the double precision
-  start values were off by 1e-9 at most in any parameter (the time t 5e-9 at worst), and the full period closes to 6e-24 or better (limited by the integrator tolerance). So these are exactly periodic to the
-  precision I can test, not only close calls. The values are in `data/stable-orbits-30digits.json`. The 31 weak orbits of the 85 have not been refined.
+- **Refinement to 30 digits (`tools/refine-mp.py`, `tools/check-refined.mjs`, `data/refined/`).** Newton's method with a multiple precision integrator (Gragg-Bulirsch-Stoer, target accuracy 30 digits, working precision 40 digits) on the
+  four symmetry conditions (back on the x axis with all velocities along y at the half period), started from the double precision orbit. Done for the 6 stable orbits of the 85, the T* = 29.31 stable orbit of the arclength
+  list, and all 31 weak orbits of the 85. An orbit counts as refined when the final residual is below 1e-23, the full period closes to better than 1e-20 in the multiple precision integrator, and the refined orbit is
+  the same one (T* and L* agree to 1e-6, same syzygy word, same repeat count). **All 38 orbits pass: they are periodic to better than 1e-20 in the 30 digit refinement** (worst final residual 6.3e-25 at T* = 60.66, worst closure of the
+  full period 8e-21, largest change of a start value 7e-8). Of the 85: 6 stable and 31 weak orbits are refined (37 orbits), and 48 unstable orbits that already close to 1e-8 or better with two integrators were not refined (37 + 48 = 85); the 38th refined orbit is the T* = 29.31 one, which is not among the 85.
+  The threshold for the final residual was first 1e-25 in the checker; T* = 60.66 ended at 6.3e-25 and was flagged, and I raised the threshold to 1e-23 after seeing that (the refinement itself stops at 1e-24),
+  so that threshold was changed after the result. Values: `data/stable-orbits-30digits.json` (the stable ones), `data/refined/*.json` and `data/refined/weak/*.json`, summary in `data/refined/summary.json`.
 - **How well the orbits close.** The 7 stable orbits close to 5e-10 or better with two independent integrators (Dormand-Prince 5(4) and
   Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 23 of the 85 close worse than 1e-9,
   6 worse than 1e-8 and the worst is 7.7e-8 (max norm, rotation removed); with Bulirsch-Stoer 11 are worse than 1e-7 and the worst is 3.5e-6 (columns `closureDP45` and `closureBS`
   in `data/orbit-table.csv`). For a strongly unstable orbit the instability multiplies the rounding error, so double precision cannot show that it
-  is exactly periodic; those orbits need high precision arithmetic before anyone should call them that.
+  is periodic; those orbits need high precision arithmetic before anyone should call them that (the 31 weak ones are refined, see above).
 - A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
   branches, see above.
 - I used to think many of my orbits were probably more BHH family members. The syzygy words say that only 18 of the 85 are.
@@ -257,11 +282,11 @@ Found in an independent review of the code and in my own checks; what is fixed a
 
 - **Closure rule (fixed, with consequences).** One rule now decides every list (`src/closure.js`, `tools/closure-tiers.mjs`): an orbit is *reliable* when it closes to 1e-8 or better
   (largest position or velocity difference after one period, best rotation removed) with both integrators, *weak* when it closes to 1e-6 with Dormand-Prince only. Of the 85 orbits of the
-  perpendicular search **54 are reliable and 31 are weak** (column `closureTier` of `data/orbit-table.csv`); the 6 stable ones are all reliable. Only reliable orbits should be called exactly periodic;
-  the weak ones need higher precision arithmetic. All 17 orbits of the arclength list are reliable.
+  perpendicular search **54 are reliable and 31 are weak** (column `closureTier` of `data/orbit-table.csv`); the 6 stable ones are all reliable. Only reliable orbits should be called periodic to 1e-8;
+  the weak ones were refined to 30 digits (see the refinement above). All 17 orbits of the arclength list are reliable.
 - **Closure columns (fixed).** `closureDP45` and `closureBS` are both max norms with the best rotation removed; the columns ending in `raw` leave the rotation in.
 - **Matching with the CPC list (partly fixed).** Both scripts now cut an arm at the first bad point. For the 116 branch points that have a published satellite with the same k to compare with,
-  the closest distance in (T*, L*) is 2.5e-7 (N = 9), 7.9e-6 (N = 6), 3.0e-3 (N = 1), and then 0.15 or more, with a median of 0.92 (`same_k_closest` in `data/bifurcation-points.json`),
+  the closest distance in (T*, L*) is 2.5e-7 (N = 9), 7.9e-6 (N = 6), 3.0e-3 (N = 1, but that arm is the 3 fold repeat curve of the parent, not a satellite; the entry is marked in `data/bifurcation-points.json`), and then 0.15 or more, with a median of 0.92 (`same_k_closest` in `data/bifurcation-points.json`),
   so the tolerance of 5e-3 does not decide any match. Still open: nothing checks that an arm is not just the repeat of a shorter branch, and the matching compares curves sampled
   with large gaps (the largest step between samples is 0.34).
 - **Branch points (partly fixed).** New runs store how well the branch point was located (`bisected`, `width`, `nullSolved`). Still open: two branch points closer than one step cancel in
