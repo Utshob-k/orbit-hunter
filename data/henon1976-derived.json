@@ -1,0 +1,420 @@
+{
+ "what": "derived numbers of family m of Henon 1976 (Celest. Mech. 13, 267), Table I, orbits 1 to 46: L* = A |E|^0.5 and T* = T |E|^1.5 with the masses 1/3 and E = -1/6 converted to masses 1 (factor 3^2.5), the printed rotation angle Phi, the number of alignments (syzygies) of the relative period, and the checks. the printed start values are not stored.",
+ "checks_summary": "the printed x1, v1, x2, v2 give E = -1/6 and the printed A in all 45 rows 2 to 46 (largest difference 1.2e-8); my integration from them closes to 2.8e-9 at worst and reproduces the printed T to 6.2e-9 (relative) and the printed rotation angle (mod 2 pi, up to sign) to 6e-8 in 43 of 45 rows; row 2 differs by 2.4e-5; row 42 differs: the printed Phi = -6.09367502 is -2 pi plus half of the angle that the integration gives (0.37902), the other columns of that row agree, so that printed value looks like a misprint.",
+ "alignments_note": "every one of the orbits 2 to 46 has 2 alignments per relative period, word 01",
+ "rows": [
+  {
+   "orbit": 1,
+   "Lstar": 0.0,
+   "Tstar": 4.98307037,
+   "Phi": 0.0,
+   "alignments": null,
+   "note": "Schubart orbit, rectilinear with collisions: no rotation angle, no alignments in the sense used here"
+  },
+  {
+   "orbit": 2,
+   "Lstar": 0.318198052,
+   "Tstar": 4.98593915,
+   "Phi_printed": 0.03631227,
+   "alignments": 2,
+   "relDiffTstar": 1.4e-09,
+   "diffPhi": 2.4e-05
+  },
+  {
+   "orbit": 3,
+   "Lstar": 0.636396103,
+   "Tstar": 4.99320587,
+   "Phi_printed": 0.06738312,
+   "alignments": 2,
+   "relDiffTstar": 3.3e-10,
+   "diffPhi": 8.4e-10
+  },
+  {
+   "orbit": 4,
+   "Lstar": 0.763675324,
+   "Tstar": 4.99536229,
+   "Phi_printed": 0.07365142,
+   "alignments": 2,
+   "relDiffTstar": 9.2e-11,
+   "diffPhi": 3.7e-09
+  },
+  {
+   "orbit": 5,
+   "Lstar": 0.785176284,
+   "Tstar": 4.9954327,
+   "Phi_printed": 0.0738341,
+   "alignments": 2,
+   "relDiffTstar": 3.4e-10,
+   "diffPhi": 3.3e-09
+  },
+  {
+   "orbit": 6,
+   "Lstar": 0.827314934,
+   "Tstar": 4.9950869,
+   "Phi_printed": 0.07298416,
+   "alignments": 2,
+   "relDiffTstar": 9e-10,
+   "diffPhi": 7.9e-10
+  },
+  {
+   "orbit": 7,
+   "Lstar": 0.890954544,
+   "Tstar": 4.99251838,
+   "Phi_printed": 0.06704902,
+   "alignments": 2,
+   "relDiffTstar": 7.9e-10,
+   "diffPhi": 3.6e-09
+  },
+  {
+   "orbit": 8,
+   "Lstar": 0.954594155,
+   "Tstar": 4.98455768,
+   "Phi_printed": 0.04989195,
+   "alignments": 2,
+   "relDiffTstar": 1.3e-09,
+   "diffPhi": 6.2e-10
+  },
+  {
+   "orbit": 9,
+   "Lstar": 0.98641396,
+   "Tstar": 4.97566528,
+   "Phi_printed": 0.03159561,
+   "alignments": 2,
+   "relDiffTstar": 7.9e-10,
+   "diffPhi": 1.3e-09
+  },
+  {
+   "orbit": 10,
+   "Lstar": 1.00941408,
+   "Tstar": 4.96399586,
+   "Phi_printed": 0.00823345,
+   "alignments": 2,
+   "relDiffTstar": 9.9e-10,
+   "diffPhi": 2.8e-09
+  },
+  {
+   "orbit": 11,
+   "Lstar": 1.01495359,
+   "Tstar": 4.95982863,
+   "Phi_printed": 0,
+   "alignments": 2,
+   "relDiffTstar": 6.2e-09,
+   "diffPhi": 6.1e-08
+  },
+  {
+   "orbit": 12,
+   "Lstar": 1.01823376,
+   "Tstar": 4.9569364,
+   "Phi_printed": -0.00568985,
+   "alignments": 2,
+   "relDiffTstar": 2.8e-10,
+   "diffPhi": 2.8e-09
+  },
+  {
+   "orbit": 13,
+   "Lstar": 1.03096169,
+   "Tstar": 4.9399261,
+   "Phi_printed": -0.03886846,
+   "alignments": 2,
+   "relDiffTstar": 1.4e-09,
+   "diffPhi": 5.9e-09
+  },
+  {
+   "orbit": 14,
+   "Lstar": 1.03732565,
+   "Tstar": 4.91766082,
+   "Phi_printed": -0.08189978,
+   "alignments": 2,
+   "relDiffTstar": 1.4e-09,
+   "diffPhi": 2e-08
+  },
+  {
+   "orbit": 15,
+   "Lstar": 1.0379154,
+   "Tstar": 4.90701825,
+   "Phi_printed": -0.10241116,
+   "alignments": 2,
+   "relDiffTstar": 3.9e-10,
+   "diffPhi": 3.8e-09
+  },
+  {
+   "orbit": 16,
+   "Lstar": 1.03732565,
+   "Tstar": 4.89544135,
+   "Phi_printed": -0.12472344,
+   "alignments": 2,
+   "relDiffTstar": 7.8e-10,
+   "diffPhi": 1.3e-09
+  },
+  {
+   "orbit": 17,
+   "Lstar": 1.03096169,
+   "Tstar": 4.86307488,
+   "Phi_printed": -0.18729024,
+   "alignments": 2,
+   "relDiffTstar": 1.6e-09,
+   "diffPhi": 1.7e-09
+  },
+  {
+   "orbit": 18,
+   "Lstar": 1.01823376,
+   "Tstar": 4.82575166,
+   "Phi_printed": -0.26012016,
+   "alignments": 2,
+   "relDiffTstar": 1.9e-09,
+   "diffPhi": 7.2e-09
+  },
+  {
+   "orbit": 19,
+   "Lstar": 0.98641396,
+   "Tstar": 4.75544008,
+   "Phi_printed": -0.40034725,
+   "alignments": 2,
+   "relDiffTstar": 3.4e-11,
+   "diffPhi": 1.2e-08
+  },
+  {
+   "orbit": 20,
+   "Lstar": 0.954594155,
+   "Tstar": 4.69342149,
+   "Phi_printed": -0.52814537,
+   "alignments": 2,
+   "relDiffTstar": 3.1e-09,
+   "diffPhi": 2.6e-08
+  },
+  {
+   "orbit": 21,
+   "Lstar": 0.890954544,
+   "Tstar": 4.5716802,
+   "Phi_printed": -0.79216267,
+   "alignments": 2,
+   "relDiffTstar": 2.9e-09,
+   "diffPhi": 2.2e-08
+  },
+  {
+   "orbit": 22,
+   "Lstar": 0.859134739,
+   "Tstar": 4.50694227,
+   "Phi_printed": -0.94017559,
+   "alignments": 2,
+   "relDiffTstar": 2.4e-09,
+   "diffPhi": 1.8e-08
+  },
+  {
+   "orbit": 23,
+   "Lstar": 0.827314934,
+   "Tstar": 4.43593083,
+   "Phi_printed": -1.10868536,
+   "alignments": 2,
+   "relDiffTstar": 8.6e-10,
+   "diffPhi": 1.4e-08
+  },
+  {
+   "orbit": 24,
+   "Lstar": 0.795495129,
+   "Tstar": 4.35332207,
+   "Phi_printed": -1.31245819,
+   "alignments": 2,
+   "relDiffTstar": 4.7e-09,
+   "diffPhi": 3.5e-08
+  },
+  {
+   "orbit": 25,
+   "Lstar": 0.763675324,
+   "Tstar": 4.24482353,
+   "Phi_printed": -1.59120175,
+   "alignments": 2,
+   "relDiffTstar": 1.2e-09,
+   "diffPhi": 2.2e-08
+  },
+  {
+   "orbit": 26,
+   "Lstar": 0.750947402,
+   "Tstar": 4.18274845,
+   "Phi_printed": -1.7552141,
+   "alignments": 2,
+   "relDiffTstar": 1.3e-11,
+   "diffPhi": 7.1e-09
+  },
+  {
+   "orbit": 27,
+   "Lstar": 0.73821948,
+   "Tstar": 4.07237922,
+   "Phi_printed": -2.05209554,
+   "alignments": 2,
+   "relDiffTstar": 2e-09,
+   "diffPhi": 2.3e-08
+  },
+  {
+   "orbit": 28,
+   "Lstar": 0.736397859,
+   "Tstar": 4.0103492,
+   "Phi_printed": -2.22042634,
+   "alignments": 2,
+   "relDiffTstar": 2.1e-09,
+   "diffPhi": 5.6e-09
+  },
+  {
+   "orbit": 29,
+   "Lstar": 0.73821948,
+   "Tstar": 3.94676156,
+   "Phi_printed": -2.39298236,
+   "alignments": 2,
+   "relDiffTstar": 2.2e-09,
+   "diffPhi": 2e-08
+  },
+  {
+   "orbit": 30,
+   "Lstar": 0.750947402,
+   "Tstar": 3.82561546,
+   "Phi_printed": -2.71881258,
+   "alignments": 2,
+   "relDiffTstar": 2e-09,
+   "diffPhi": 2.3e-08
+  },
+  {
+   "orbit": 31,
+   "Lstar": 0.763675324,
+   "Tstar": 3.75296618,
+   "Phi_printed": -2.91075203,
+   "alignments": 2,
+   "relDiffTstar": 4e-10,
+   "diffPhi": 4.3e-09
+  },
+  {
+   "orbit": 32,
+   "Lstar": 0.795495129,
+   "Tstar": 3.61906653,
+   "Phi_printed": -3.25468418,
+   "alignments": 2,
+   "relDiffTstar": 8e-10,
+   "diffPhi": 1.4e-08
+  },
+  {
+   "orbit": 33,
+   "Lstar": 0.827314934,
+   "Tstar": 3.51282631,
+   "Phi_printed": -3.51672852,
+   "alignments": 2,
+   "relDiffTstar": 4.5e-09,
+   "diffPhi": 2.8e-08
+  },
+  {
+   "orbit": 34,
+   "Lstar": 0.859134739,
+   "Tstar": 3.42034736,
+   "Phi_printed": -3.73617969,
+   "alignments": 2,
+   "relDiffTstar": 5.5e-09,
+   "diffPhi": 3.7e-08
+  },
+  {
+   "orbit": 35,
+   "Lstar": 0.890954544,
+   "Tstar": 3.33676957,
+   "Phi_printed": -3.92727777,
+   "alignments": 2,
+   "relDiffTstar": 5.4e-09,
+   "diffPhi": 2.9e-08
+  },
+  {
+   "orbit": 36,
+   "Lstar": 0.922774349,
+   "Tstar": 3.25976825,
+   "Phi_printed": -4.09715142,
+   "alignments": 2,
+   "relDiffTstar": 2.7e-09,
+   "diffPhi": 2.8e-08
+  },
+  {
+   "orbit": 37,
+   "Lstar": 0.954594155,
+   "Tstar": 3.18803887,
+   "Phi_printed": -4.2500246,
+   "alignments": 2,
+   "relDiffTstar": 2.9e-09,
+   "diffPhi": 2.7e-08
+  },
+  {
+   "orbit": 38,
+   "Lstar": 1.01823376,
+   "Tstar": 3.05740871,
+   "Phi_printed": -4.51514602,
+   "alignments": 2,
+   "relDiffTstar": 2e-09,
+   "diffPhi": 1.6e-09
+  },
+  {
+   "orbit": 39,
+   "Lstar": 1.14551299,
+   "Tstar": 2.8363761,
+   "Phi_printed": -4.92509698,
+   "alignments": 2,
+   "relDiffTstar": 3.5e-09,
+   "diffPhi": 2e-08
+  },
+  {
+   "orbit": 40,
+   "Lstar": 1.27279221,
+   "Tstar": 2.65721125,
+   "Phi_printed": -5.22225314,
+   "alignments": 2,
+   "relDiffTstar": 1.4e-09,
+   "diffPhi": 4.2e-09
+  },
+  {
+   "orbit": 41,
+   "Lstar": 1.59099026,
+   "Tstar": 2.33846053,
+   "Phi_printed": -5.67335908,
+   "alignments": 2,
+   "relDiffTstar": 1.8e-09,
+   "diffPhi": 5.8e-09
+  },
+  {
+   "orbit": 42,
+   "Lstar": 1.90918831,
+   "Tstar": 2.13839476,
+   "Phi_printed": -6.09367502,
+   "alignments": 2,
+   "relDiffTstar": 1.9e-09,
+   "diffPhi": 0.19
+  },
+  {
+   "orbit": 43,
+   "Lstar": 2.54558441,
+   "Tstar": 1.91616133,
+   "Phi_printed": -6.10868563,
+   "alignments": 2,
+   "relDiffTstar": 2.8e-09,
+   "diffPhi": 9e-09
+  },
+  {
+   "orbit": 44,
+   "Lstar": 3.18198052,
+   "Tstar": 1.80321802,
+   "Phi_printed": -6.18877603,
+   "alignments": 2,
+   "relDiffTstar": 4.1e-09,
+   "diffPhi": 4.6e-09
+  },
+  {
+   "orbit": 45,
+   "Lstar": 3.81837662,
+   "Tstar": 1.73815312,
+   "Phi_printed": -6.22633996,
+   "alignments": 2,
+   "relDiffTstar": 6e-10,
+   "diffPhi": 1.5e-09
+  },
+  {
+   "orbit": 46,
+   "Lstar": 4.45477272,
+   "Tstar": 1.69721388,
+   "Phi_printed": -6.24628152,
+   "alignments": 2,
+   "relDiffTstar": 3.6e-10,
+   "diffPhi": 3.6e-10
+  }
+ ]
+}

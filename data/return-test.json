@@ -1,0 +1,1471 @@
+[
+ {
+  "name": "t00",
+  "group": "atlas",
+  "Tstar": 4.959828633501362,
+  "Lstar": 1.0149536144303843,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.6586731987899839e-12,
+   "perm": "102",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.49999999999999595,
+   "Tstar_relative": 2.479914316750681
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.6586731987899839e-12
+  }
+ },
+ {
+  "name": "t01",
+  "group": "atlas",
+  "Tstar": 7.217710530386222,
+  "Lstar": 1.7668030319418573,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 8.40949532232571e-12,
+   "perm": "210",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": -3.97636687350215e-15,
+   "Tstar_relative": 3.608855265193111
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 8.40949532232571e-12
+  }
+ },
+ {
+  "name": "t02",
+  "group": "atlas",
+  "Tstar": 9.658403183348069,
+  "Lstar": 1.0418066934798813,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.1333600724583448e-11,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.499999999994143,
+   "Tstar_relative": 4.8292015916740345
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.1333600724583448e-11
+  }
+ },
+ {
+  "name": "t03",
+  "group": "atlas",
+  "Tstar": 9.878335616123174,
+  "Lstar": 1.4387413771342668,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.8476428036599044
+  }
+ },
+ {
+  "name": "t04",
+  "group": "unmatched",
+  "Tstar": 9.917804789684297,
+  "Lstar": 2.277259944746693,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.25104198157793123
+  }
+ },
+ {
+  "name": "t05",
+  "group": "unmatched",
+  "Tstar": 11.651987838286953,
+  "Lstar": 1.7728844095543712,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 1.4076418698938487
+  }
+ },
+ {
+  "name": "t06",
+  "group": "unmatched",
+  "Tstar": 12.097417207845437,
+  "Lstar": 2.146233662337409,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 8,
+   "mismatch": 0.27718968907584723
+  }
+ },
+ {
+  "name": "t07",
+  "group": "atlas",
+  "Tstar": 12.17032498327503,
+  "Lstar": 0.7374125977235048,
+  "ownPlaces": {
+   "n": 3,
+   "mismatch": 4.2654768606098514e-13,
+   "turns": 0.3333333333339213,
+   "Tstar_relative": 4.05677499442501
+  },
+  "anySymmetry": {
+   "n": 6,
+   "mismatch": 4.770767114692376e-13,
+   "perm": "102",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": -0.3333333333330832,
+   "Tstar_relative": 2.028387497212505
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 2.6711965972481266e-13
+  }
+ },
+ {
+  "name": "t08",
+  "group": "atlas",
+  "Tstar": 13.985925803870598,
+  "Lstar": 2.14092917592387,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.7057466550340905e-12,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": -0.4999999999461864,
+   "Tstar_relative": 6.992962901935299
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.7057466550340905e-12
+  }
+ },
+ {
+  "name": "t09",
+  "group": "unmatched",
+  "Tstar": 14.129134862604493,
+  "Lstar": 2.105825759036037,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.4522339022510389
+  }
+ },
+ {
+  "name": "t10",
+  "group": "unmatched",
+  "Tstar": 14.137552714055383,
+  "Lstar": 2.0804024741603087,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.3435556987506617
+  }
+ },
+ {
+  "name": "t11",
+  "group": "unmatched",
+  "Tstar": 15.152759589587792,
+  "Lstar": 0.42046215727953234,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.34669465491005236
+  }
+ },
+ {
+  "name": "t12",
+  "group": "unmatched",
+  "Tstar": 16.968674055777544,
+  "Lstar": 1.3728869820963356,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.20806153149068995
+  }
+ },
+ {
+  "name": "t13",
+  "group": "unmatched",
+  "Tstar": 16.98358767888562,
+  "Lstar": 1.598051330895474,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.4783093233551718
+  }
+ },
+ {
+  "name": "t14",
+  "group": "unmatched",
+  "Tstar": 17.057225610722607,
+  "Lstar": 0.47779075421319617,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.5080213530788401
+  }
+ },
+ {
+  "name": "t15",
+  "group": "unmatched",
+  "Tstar": 17.846807645075046,
+  "Lstar": 2.572115883953267,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.1330187888738379
+  }
+ },
+ {
+  "name": "t16",
+  "group": "unmatched",
+  "Tstar": 17.894747342039533,
+  "Lstar": 2.183511091694487,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.144973005295924e-11,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": -0.4999999999997003,
+   "Tstar_relative": 8.947373671019767
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.144973005295924e-11
+  }
+ },
+ {
+  "name": "t17",
+  "group": "unmatched",
+  "Tstar": 18.079671782549784,
+  "Lstar": 2.0071860348142714,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.851441049684619
+  }
+ },
+ {
+  "name": "t18",
+  "group": "unmatched",
+  "Tstar": 19.09104803170924,
+  "Lstar": 0.5875252732937616,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.333101883203629
+  }
+ },
+ {
+  "name": "t19",
+  "group": "unmatched",
+  "Tstar": 19.142144903469422,
+  "Lstar": 0.9081790929535781,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.3681723921578095
+  }
+ },
+ {
+  "name": "t20",
+  "group": "unmatched",
+  "Tstar": 19.411657428515316,
+  "Lstar": 2.219933327269106,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 8,
+   "mismatch": 0.11698203005930491
+  }
+ },
+ {
+  "name": "t21",
+  "group": "unmatched",
+  "Tstar": 19.62062625197859,
+  "Lstar": 0.3425682379494133,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.41539593921217044
+  }
+ },
+ {
+  "name": "t22",
+  "group": "unmatched",
+  "Tstar": 19.769131529550314,
+  "Lstar": 2.5950349442513594,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 11,
+   "mismatch": 0.13018297361531728
+  }
+ },
+ {
+  "name": "t23",
+  "group": "unmatched",
+  "Tstar": 21.6932259817952,
+  "Lstar": 2.2524869246367167,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 4.38818981152167e-10,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.49999999997743805,
+   "Tstar_relative": 10.8466129908976
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 4.38818981152167e-10
+  }
+ },
+ {
+  "name": "t24",
+  "group": "unmatched",
+  "Tstar": 23.684372827520107,
+  "Lstar": 1.6927695937175713,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 11,
+   "mismatch": 0.31174222025165854
+  }
+ },
+ {
+  "name": "t25",
+  "group": "unmatched",
+  "Tstar": 23.862645700042084,
+  "Lstar": 0.6100542793248475,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 11,
+   "mismatch": 0.7213180011669248
+  }
+ },
+ {
+  "name": "t26",
+  "group": "unmatched",
+  "Tstar": 23.86289748767701,
+  "Lstar": 0.604356101836408,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.6849091701315236
+  }
+ },
+ {
+  "name": "t27",
+  "group": "unmatched",
+  "Tstar": 23.863616131909403,
+  "Lstar": 0.6587887998681069,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.6871636653859765
+  }
+ },
+ {
+  "name": "t28",
+  "group": "unmatched",
+  "Tstar": 23.981824120845463,
+  "Lstar": 1.520230093886576,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.2363110315761825
+  }
+ },
+ {
+  "name": "t29",
+  "group": "unmatched",
+  "Tstar": 25.218731937311205,
+  "Lstar": 0.5793645171161478,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.6113334461280365
+  }
+ },
+ {
+  "name": "t30",
+  "group": "unmatched",
+  "Tstar": 25.404852250157152,
+  "Lstar": 2.3302840639701694,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 3.2549545503357535e-8,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.4999999999745809,
+   "Tstar_relative": 12.702426125078576
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 3.2549545503357535e-8
+  }
+ },
+ {
+  "name": "t31",
+  "group": "unmatched",
+  "Tstar": 25.707858998008707,
+  "Lstar": 2.1583105157628406,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.9680778920931585e-12,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 1.5830160659510873e-13,
+   "Tstar_relative": 12.853929499004353
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.9680778920931585e-12
+  }
+ },
+ {
+  "name": "t32",
+  "group": "unmatched",
+  "Tstar": 25.76439971183463,
+  "Lstar": 1.6529338737625332,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.43953020607230026
+  }
+ },
+ {
+  "name": "t33",
+  "group": "unmatched",
+  "Tstar": 26.938962476690406,
+  "Lstar": 0.00791053197850822,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.5403636910340458
+  }
+ },
+ {
+  "name": "t34",
+  "group": "unmatched",
+  "Tstar": 27.983375122003768,
+  "Lstar": 2.2407502130614634,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.25343512669553386
+  }
+ },
+ {
+  "name": "t35",
+  "group": "unmatched",
+  "Tstar": 29.025115679114215,
+  "Lstar": 0.5855372358252104,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 11,
+   "mismatch": 0.23196275144167008
+  }
+ },
+ {
+  "name": "t36",
+  "group": "unmatched",
+  "Tstar": 29.569151975512753,
+  "Lstar": 2.4941586035695025,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.0602814875634719
+  }
+ },
+ {
+  "name": "t37",
+  "group": "unmatched",
+  "Tstar": 29.77652296826154,
+  "Lstar": 2.457500552269862,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 7.05546732149287e-13,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 1.0524053982079036e-14,
+   "Tstar_relative": 14.88826148413077
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 7.05546732149287e-13
+  }
+ },
+ {
+  "name": "t38",
+  "group": "unmatched",
+  "Tstar": 30.221785160336744,
+  "Lstar": 0.11831141887451319,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.10139577799922939
+  }
+ },
+ {
+  "name": "t39",
+  "group": "unmatched",
+  "Tstar": 32.30518620745946,
+  "Lstar": 0.6047140765676235,
+  "ownPlaces": {
+   "n": 2,
+   "mismatch": 3.8957323478250316e-11,
+   "turns": 0.49999999998840106,
+   "Tstar_relative": 16.15259310372973
+  },
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 3.8957323478250316e-11,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.49999999998840106,
+   "Tstar_relative": 16.15259310372973
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 3.8957323478250316e-11
+  }
+ },
+ {
+  "name": "t40",
+  "group": "unmatched",
+  "Tstar": 33.4486095123205,
+  "Lstar": 1.2254997403534833,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.7867725158601522
+  }
+ },
+ {
+  "name": "t41",
+  "group": "unmatched",
+  "Tstar": 33.74508290504154,
+  "Lstar": 2.5659195857271455,
+  "ownPlaces": {
+   "n": 9,
+   "mismatch": 8.431963460786562e-12,
+   "turns": 0.22222222222290075,
+   "Tstar_relative": 3.749453656115727
+  },
+  "anySymmetry": {
+   "n": 9,
+   "mismatch": 8.431963460786562e-12,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.22222222222290075,
+   "Tstar_relative": 3.749453656115727
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 2.982614155655483e-13
+  }
+ },
+ {
+  "name": "t42",
+  "group": "unmatched",
+  "Tstar": 33.74514967510186,
+  "Lstar": 2.5567403073190897,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 3.2107649872159527e-13,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 5.0313449474874915e-11,
+   "Tstar_relative": 16.87257483755093
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 3.2107649872159527e-13
+  }
+ },
+ {
+  "name": "t43",
+  "group": "unmatched",
+  "Tstar": 35.05010294267887,
+  "Lstar": 0.013187574480108937,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.37061001842420827
+  }
+ },
+ {
+  "name": "t44",
+  "group": "unmatched",
+  "Tstar": 35.300760532172845,
+  "Lstar": 0.5230981558270791,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.6220383300455097
+  }
+ },
+ {
+  "name": "t45",
+  "group": "unmatched",
+  "Tstar": 35.693314975272834,
+  "Lstar": 2.3969070524737512,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.14809911844566281
+  }
+ },
+ {
+  "name": "t46",
+  "group": "unmatched",
+  "Tstar": 35.85690067734009,
+  "Lstar": 0.3349989901704631,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 7,
+   "mismatch": 0.43258814957070846
+  }
+ },
+ {
+  "name": "t47",
+  "group": "unmatched",
+  "Tstar": 35.9396847214177,
+  "Lstar": 0.4586599941853516,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.4274790789110684
+  }
+ },
+ {
+  "name": "t48",
+  "group": "unmatched",
+  "Tstar": 37.29460400113803,
+  "Lstar": 0.5217111594490534,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.2791709965527438
+  }
+ },
+ {
+  "name": "t49",
+  "group": "unmatched",
+  "Tstar": 37.66803558605786,
+  "Lstar": 1.2906527291762304,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.7528418011479963
+  }
+ },
+ {
+  "name": "t50",
+  "group": "unmatched",
+  "Tstar": 39.6132260340322,
+  "Lstar": 2.215824033844564,
+  "ownPlaces": {
+   "n": 2,
+   "mismatch": 9.018065079540953e-10,
+   "turns": 1.2043186324472945e-11,
+   "Tstar_relative": 19.8066130170161
+  },
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 9.018065079540953e-10,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 1.2043186324472945e-11,
+   "Tstar_relative": 19.8066130170161
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 9.018065079540953e-10
+  }
+ },
+ {
+  "name": "t51",
+  "group": "unmatched",
+  "Tstar": 39.64372084960553,
+  "Lstar": 0.0034856500567287648,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.030982792780147317
+  }
+ },
+ {
+  "name": "t52",
+  "group": "zeroL",
+  "Tstar": 39.64484929920434,
+  "Lstar": 1.2105722466208196e-13,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.1046996650776464e-11,
+   "perm": "210",
+   "reflection": 0,
+   "reversal": 1,
+   "turns": 0.4999999999961812,
+   "Tstar_relative": 19.82242464960217
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.1046996650776464e-11
+  }
+ },
+ {
+  "name": "t53",
+  "group": "unmatched",
+  "Tstar": 41.16625571774484,
+  "Lstar": 0.7557195623511437,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 5,
+   "mismatch": 0.4586908170862568
+  }
+ },
+ {
+  "name": "t54",
+  "group": "unmatched",
+  "Tstar": 41.84792568368846,
+  "Lstar": 2.2600256759202826,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.089939704932544
+  }
+ },
+ {
+  "name": "t55",
+  "group": "unmatched",
+  "Tstar": 41.91689580479158,
+  "Lstar": 2.259895126803469,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.2839925929197651
+  }
+ },
+ {
+  "name": "t56",
+  "group": "unmatched",
+  "Tstar": 42.87717106568037,
+  "Lstar": 0.47893978051723013,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.417014647889342
+  }
+ },
+ {
+  "name": "t57",
+  "group": "unmatched",
+  "Tstar": 43.455639062950596,
+  "Lstar": 2.3120870073858795,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.1670375443247587
+  }
+ },
+ {
+  "name": "t58",
+  "group": "unmatched",
+  "Tstar": 43.493656546960594,
+  "Lstar": 0.005549095395041714,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.29288413068083363
+  }
+ },
+ {
+  "name": "t59",
+  "group": "unmatched",
+  "Tstar": 43.65505271495971,
+  "Lstar": 2.454631679318432,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.17482450948802308
+  }
+ },
+ {
+  "name": "t60",
+  "group": "unmatched",
+  "Tstar": 43.82755256323463,
+  "Lstar": 0.9131160582479662,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 6.6807703023273706e-12,
+   "perm": "210",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.49999999999886,
+   "Tstar_relative": 21.913776281617316
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 6.6807703023273706e-12
+  }
+ },
+ {
+  "name": "t61",
+  "group": "unmatched",
+  "Tstar": 45.900154862639425,
+  "Lstar": 2.154512572043212,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 4.705089237684576e-11,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.4999999999935852,
+   "Tstar_relative": 22.950077431319713
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 4.705089237684576e-11
+  }
+ },
+ {
+  "name": "t62",
+  "group": "unmatched",
+  "Tstar": 46.24533699424374,
+  "Lstar": 0.5116696686025758,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.5328862765806511
+  }
+ },
+ {
+  "name": "t63",
+  "group": "unmatched",
+  "Tstar": 47.065414291895074,
+  "Lstar": 2.6258810275531457,
+  "ownPlaces": {
+   "n": 2,
+   "mismatch": 5.5245807928372415e-12,
+   "turns": -7.061806342289175e-13,
+   "Tstar_relative": 23.532707145947537
+  },
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 5.5245807928372415e-12,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": -7.061806342289175e-13,
+   "Tstar_relative": 23.532707145947537
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 5.5245807928372415e-12
+  }
+ },
+ {
+  "name": "t64",
+  "group": "unmatched",
+  "Tstar": 47.631952317968484,
+  "Lstar": 2.4439263123683768,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.19411144869190688
+  }
+ },
+ {
+  "name": "t65",
+  "group": "unmatched",
+  "Tstar": 49.60818052510352,
+  "Lstar": 0.5440699630499459,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.5524774842672922
+  }
+ },
+ {
+  "name": "t66",
+  "group": "unmatched",
+  "Tstar": 50.06353524651093,
+  "Lstar": 2.1484064579923503,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.4972568931104344
+  }
+ },
+ {
+  "name": "t67",
+  "group": "unmatched",
+  "Tstar": 50.34473046927835,
+  "Lstar": 0.09378517217491444,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.8330206208803073
+  }
+ },
+ {
+  "name": "t68",
+  "group": "unmatched",
+  "Tstar": 51.6387854483869,
+  "Lstar": 0.43161411104036673,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.3953180808911355
+  }
+ },
+ {
+  "name": "t69",
+  "group": "unmatched",
+  "Tstar": 52.20832604075492,
+  "Lstar": 0.8396108063714277,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.28376476637962034
+  }
+ },
+ {
+  "name": "t70",
+  "group": "unmatched",
+  "Tstar": 54.301601273281754,
+  "Lstar": 2.2997733060648966,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.21371886964424247
+  }
+ },
+ {
+  "name": "t71",
+  "group": "unmatched",
+  "Tstar": 55.78522164939995,
+  "Lstar": 2.082770043515375,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.2560942132695969
+  }
+ },
+ {
+  "name": "t72",
+  "group": "unmatched",
+  "Tstar": 56.82578463551072,
+  "Lstar": 0.5024529066963669,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 5,
+   "mismatch": 0.5893553731725076
+  }
+ },
+ {
+  "name": "t73",
+  "group": "unmatched",
+  "Tstar": 57.46128442157317,
+  "Lstar": 0.49730907373681915,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 5,
+   "mismatch": 0.8514764479804026
+  }
+ },
+ {
+  "name": "t74",
+  "group": "unmatched",
+  "Tstar": 57.51685937516007,
+  "Lstar": 2.204464477993988,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 2.6757037031072867e-10,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.4999999999910974,
+   "Tstar_relative": 28.758429687580033
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 2.6757037031072867e-10
+  }
+ },
+ {
+  "name": "t75",
+  "group": "unmatched",
+  "Tstar": 59.43961424425096,
+  "Lstar": 0.033262844682862454,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.07446337127114702
+  }
+ },
+ {
+  "name": "t76",
+  "group": "unmatched",
+  "Tstar": 59.44280628180689,
+  "Lstar": 0.014983711010336472,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.1865893963607531
+  }
+ },
+ {
+  "name": "t77",
+  "group": "unmatched",
+  "Tstar": 59.71912630367181,
+  "Lstar": 0.19323348026068035,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.10404555279911909
+  }
+ },
+ {
+  "name": "t78",
+  "group": "unmatched",
+  "Tstar": 59.72102894262133,
+  "Lstar": 0.19424140844880539,
+  "ownPlaces": {
+   "n": 3,
+   "mismatch": 7.183198480475994e-12,
+   "turns": -0.33333333333424175,
+   "Tstar_relative": 19.907009647540445
+  },
+  "anySymmetry": {
+   "n": 6,
+   "mismatch": 8.051725952640254e-12,
+   "perm": "210",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.33333333333244536,
+   "Tstar_relative": 9.953504823770222
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 3.147926364022169e-12
+  }
+ },
+ {
+  "name": "t79",
+  "group": "unmatched",
+  "Tstar": 60.65967204295983,
+  "Lstar": 0.7411871190302488,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.642993288265739
+  }
+ },
+ {
+  "name": "t80",
+  "group": "unmatched",
+  "Tstar": 61.723129249603836,
+  "Lstar": 1.410012645176235,
+  "ownPlaces": {
+   "n": 2,
+   "mismatch": 3.658587069941309e-11,
+   "turns": 5.576235228696014e-11,
+   "Tstar_relative": 30.861564624801918
+  },
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 3.658587069941309e-11,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 5.576235228696014e-11,
+   "Tstar_relative": 30.861564624801918
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 3.658587069941309e-11
+  }
+ },
+ {
+  "name": "t81",
+  "group": "unmatched",
+  "Tstar": 62.15957996011888,
+  "Lstar": 0.17260139878951272,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.4162599989917084
+  }
+ },
+ {
+  "name": "t82",
+  "group": "unmatched",
+  "Tstar": 70.00235484488385,
+  "Lstar": 0.07799721459132158,
+  "ownPlaces": {
+   "n": 4,
+   "mismatch": 1.8563082922519357e-11,
+   "turns": -0.2499999999984194,
+   "Tstar_relative": 17.500588711220963
+  },
+  "anySymmetry": {
+   "n": 4,
+   "mismatch": 1.8563082922519357e-11,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": -0.2499999999984194,
+   "Tstar_relative": 17.500588711220963
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 5.898473178350453e-12
+  }
+ },
+ {
+  "name": "t83",
+  "group": "unmatched",
+  "Tstar": 72.46515494895671,
+  "Lstar": 0.2789555525666474,
+  "ownPlaces": {
+   "n": 2,
+   "mismatch": 1.3378690377763292e-9,
+   "turns": 0.499999999998782,
+   "Tstar_relative": 36.232577474478354
+  },
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 1.3378690377763292e-9,
+   "perm": "012",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.499999999998782,
+   "Tstar_relative": 36.232577474478354
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 1.3378690377763292e-9
+  }
+ },
+ {
+  "name": "t84",
+  "group": "zeroL",
+  "Tstar": 79.2469222324199,
+  "Lstar": 1.5383087415020512e-13,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 2.1780133252491396e-11,
+   "perm": "210",
+   "reflection": 0,
+   "reversal": 1,
+   "turns": -0.49999999999992284,
+   "Tstar_relative": 39.62346111620995
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 2.1780133252491396e-11
+  }
+ },
+ {
+  "name": "a00",
+  "group": "atlas",
+  "Tstar": 9.658403181970105,
+  "Lstar": 1.0418066925590157,
+  "ownPlaces": null,
+  "anySymmetry": {
+   "n": 2,
+   "mismatch": 4.565903211073419e-12,
+   "perm": "021",
+   "reflection": 0,
+   "reversal": 0,
+   "turns": 0.49999999978314136,
+   "Tstar_relative": 4.829201590985052
+  },
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 4.565903211073419e-12
+  }
+ },
+ {
+  "name": "a01",
+  "group": "atlas",
+  "Tstar": 11.830913469213618,
+  "Lstar": 1.1165540313326978,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.3510632625448593
+  }
+ },
+ {
+  "name": "a02",
+  "group": "unmatched",
+  "Tstar": 12.38142599870951,
+  "Lstar": 1.1249449154472668,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.8343674168113231
+  }
+ },
+ {
+  "name": "a03",
+  "group": "unmatched",
+  "Tstar": 13.903223805240895,
+  "Lstar": 1.1860065836588682,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.5146388143179894
+  }
+ },
+ {
+  "name": "a04",
+  "group": "unmatched",
+  "Tstar": 14.652418354879975,
+  "Lstar": 0.7797284147310082,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.11453251983881096
+  }
+ },
+ {
+  "name": "a05",
+  "group": "unmatched",
+  "Tstar": 15.909191575741461,
+  "Lstar": 1.2355173860985353,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.2592747631891088
+  }
+ },
+ {
+  "name": "a06",
+  "group": "unmatched",
+  "Tstar": 17.867358516214626,
+  "Lstar": 1.2732482937462948,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 6,
+   "mismatch": 0.33782459041987917
+  }
+ },
+ {
+  "name": "a07",
+  "group": "unmatched",
+  "Tstar": 19.7891709316677,
+  "Lstar": 1.3033908805611323,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 8,
+   "mismatch": 0.21809122960637928
+  }
+ },
+ {
+  "name": "a08",
+  "group": "unmatched",
+  "Tstar": 19.839912248632416,
+  "Lstar": 0.9864021575808288,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 8,
+   "mismatch": 0.6478771938240545
+  }
+ },
+ {
+  "name": "a09",
+  "group": "unmatched",
+  "Tstar": 21.682229249688532,
+  "Lstar": 1.3282821806473464,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 8,
+   "mismatch": 0.2597248588639455
+  }
+ },
+ {
+  "name": "a10",
+  "group": "unmatched",
+  "Tstar": 21.980673180519744,
+  "Lstar": 0.783555039109216,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 3,
+   "mismatch": 0.11498653511508095
+  }
+ },
+ {
+  "name": "a11",
+  "group": "unmatched",
+  "Tstar": 23.55186424878651,
+  "Lstar": 1.3493428493487998,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.1917465758314878
+  }
+ },
+ {
+  "name": "a12",
+  "group": "unmatched",
+  "Tstar": 25.401975816593346,
+  "Lstar": 1.3674971236000568,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 10,
+   "mismatch": 0.21322333405630453
+  }
+ },
+ {
+  "name": "a13",
+  "group": "unmatched",
+  "Tstar": 27.235513654430843,
+  "Lstar": 1.3833784845104777,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 12,
+   "mismatch": 0.1722922764104609
+  }
+ },
+ {
+  "name": "a14",
+  "group": "unmatched",
+  "Tstar": 27.722449937049333,
+  "Lstar": 1.2426097581146862,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 2,
+   "mismatch": 0.3801480952119727
+  }
+ },
+ {
+  "name": "a15",
+  "group": "unmatched",
+  "Tstar": 29.310033967119317,
+  "Lstar": 0.7897164038660015,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 4,
+   "mismatch": 0.11233029048602555
+  }
+ },
+ {
+  "name": "a16",
+  "group": "unmatched",
+  "Tstar": 30.86156462467456,
+  "Lstar": 1.4100126473843027,
+  "ownPlaces": null,
+  "anySymmetry": null,
+  "bestMismatchAnySymmetry": {
+   "n": 7,
+   "mismatch": 0.32949462286566966
+  }
+ }
+]
