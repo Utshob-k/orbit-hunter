@@ -1,4 +1,4 @@
-# the exactly periodic orbits (theta/2 a multiple of pi) among the rows of the Davoust and Broucke tables (converted with tools/convert-db82.mjs)
+# the orbits whose rotation angle is a multiple of 2 pi (theta/2 a multiple of pi) among the rows of the Davoust and Broucke tables (converted with tools/convert-db82.mjs)
 # against my 85 orbits and the 17 of the arclength list, allowing n fold repeats (n = 1..9). python tools/compare-db82.py
 import json, math
 conv = []
@@ -8,7 +8,7 @@ per = [c for c in conv if c['ts'] and c['thalfFromTheta'] is not None and (c['th
 rows = json.load(open('data/orbit-table.json')); arc = json.load(open('data/perp-arc-orbits.json'))
 mine = [(r['Tstar'], r['Lstar'], '85 (%s)' % r['group']) for r in rows] + [(r['primitiveTstar'], r['Lstar'], '85 primitive') for r in rows] + [(a['ts'], a['ls'], '17 arclength') for a in arc]
 out = []
-print(len(conv), 'rows converted,', len(per), 'exactly periodic')
+print(len(conv), 'rows converted,', len(per), 'with rotation angle a multiple of 2 pi')
 for c in sorted(per, key=lambda c: c['N']):
     best = None
     for t, l, tag in mine:
@@ -19,4 +19,4 @@ for c in sorted(per, key=lambda c: c['N']):
     same = best[0] < 1e-5
     out.append({'N': c['N'], 'Tstar': c['ts'], 'Lstar': c['ls'], 'closest': {'dist': best[0], 'list': best[1], 'Tstar': best[2], 'Lstar': best[3], 'n': best[4]}, 'in_my_lists': same})
     print('D&B row %3d  T*=%8.4f L*=%.5f  %s  (closest %.1e: %s T*=%.4f L*=%.4f n=%d)' % (c['N'], c['ts'], c['ls'], 'IN MY LISTS' if same else 'not in my lists', *best))
-json.dump(out, open('data/db82-exactly-periodic.json', 'w'), indent=1)
+json.dump(out, open('data/db82-rotation-multiple-2pi.json', 'w'), indent=1)

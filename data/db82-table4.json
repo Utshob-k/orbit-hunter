@@ -1,5 +1,5 @@
 {
- "source": "Davoust and Broucke, Astron. Astrophys. 112, 305 (1982), Table 4 (families a 40-46, b 47-50, c 51-54, d 55, alpha 56-59, beta 60) read by eye from the scan; same conventions as db82-table2-A1.json. rows with a value printed as 3.1415926 or 3.1415927 for theta/2 are exactly periodic.",
+ "source": "Davoust and Broucke, Astron. Astrophys. 112, 305 (1982), Table 4 (families a 40-46, b 47-50, c 51-54, d 55, alpha 56-59, beta 60) read by eye from the scan; same conventions as db82-table2-A1.json. rows with a value printed as 3.1415926 or 3.1415927 for theta/2 have a rotation angle that is a multiple of 2 pi.",
  "rows": [
   {
    "N": 40,
@@ -116,8 +116,7 @@
    "y2d": 1.8216153,
    "Thalf": 7.7952682,
    "thalf": 9.424778,
-   "c27": 0.3483874
-  },
+   "c27": 0.3483874, "note": "y1d last digit undecided between 3 and 5 in two readings of the ADS scan (effect 2e-7 on the printed invariant); the value is the first reading"},
   {
    "N": 53,
    "y1d": -0.4648406,

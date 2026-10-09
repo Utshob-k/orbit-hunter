@@ -33,7 +33,7 @@ export function closureError(x0, T, method = 'dp45') {
 }
 
 // one rule for every list: "reliable" when the orbit closes to 1e-8 or better (max norm, best rotation removed) with both integrators,
-// "weak" when it closes to 1e-6 with Dormand-Prince only, otherwise "failed". only reliable orbits are counted as exactly periodic.
+// "weak" when it closes to 1e-6 with Dormand-Prince only, otherwise "failed". only reliable orbits are counted as periodic to 1e-8.
 export function closureTier(x0, T) {
   const dp = closureError(x0, T, 'dp45');
   const bs = closureError(x0, T, 'bs');
