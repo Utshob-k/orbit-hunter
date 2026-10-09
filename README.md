@@ -6,7 +6,7 @@ the browser (WebGPU), double precision code on the CPU closes and checks every c
 **Where it stands.** The code reproduces published orbits to about nine digits. Every orbit it found with zero
 angular momentum was already published. For non-zero angular momentum it found 85 distinct orbits. 54 of them are
 periodic to 1e-8 or better with two integrators (among them the 6 linearly stable ones); the other 31 do not: with the worse of the two integrators 28 of them close to between 1e-8 and 1e-6 and 3 to between 1e-6 and 3.5e-6.
-Those 31 and the 6 stable ones (37 orbits) are refined, and are periodic to better than 1e-20 in the 30 digit refinement; the other 48 are not refined.
+All 85 are refined and periodic to better than 1e-20 in the 30 digit refinement: the 31 and the 6 stable ones on 2026-10-08 and 2026-10-09 (37 orbits), the other 48 on 2026-10-09 (the rule is in the refinement paragraph below).
 Among the sources checked so far (all 415 equal-mass orbits with L != 0 of the Three Body Orbits atlas, Davoust and Broucke 1982, the 99 satellites of Jankovic et al. 2020, the 18 rows of Li et al. 2025; the
 L = 0 catalogues of Li and Liao and of Hristov and Hristova cannot contain orbits with L != 0), 6 of my 85 orbits are atlas orbits (T* and L* equal to 1e-5 and the same number of alignments): the BHH orbit of Henon (Broucke A1),
 Sheen's "Two ovals" and "Oval, catface and starship", Broucke and Boggs' S4 and S122, and Broucke's A10 (in my table it returns rotated by a third of a turn after T/3, see Repeats). 2 have L = 0, and 77 match none of them. Three of the nine rows of Davoust and Broucke 1982
@@ -239,16 +239,18 @@ Statements of mine that were wrong, newest first. The dates are those of the com
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
 - **Refinement to 30 digits (`tools/refine-mp.py`, `tools/check-refined.mjs`, `data/refined/`).** Newton's method with a multiple precision integrator (Gragg-Bulirsch-Stoer, target accuracy 30 digits, working precision 40 digits) on the
   four symmetry conditions (back on the x axis with all velocities along y at the half period), started from the double precision orbit. Done for the 6 stable orbits of the 85, the T* = 29.31 stable orbit of the arclength
-  list, and all 31 weak orbits of the 85. An orbit counts as refined when the final residual is below 1e-23, the full period closes to better than 1e-20 in the multiple precision integrator, and the refined orbit is
-  the same one (T* and L* agree to 1e-6, same syzygy word, same repeat count). **All 38 orbits pass: they are periodic to better than 1e-20 in the 30 digit refinement** (worst final residual 6.3e-25 at T* = 60.66, worst closure of the
-  full period 8e-21, largest change of a start value 7e-8). Of the 85: 6 stable and 31 weak orbits are refined (37 orbits), and 48 unstable orbits that already close to 1e-8 or better with two integrators were not refined (37 + 48 = 85); the 38th refined orbit is the T* = 29.31 one, which is not among the 85.
+  list, all 31 weak orbits of the 85, and (2026-10-09) the other 48 unstable reliable orbits of the 85. An orbit counts as refined when the final residual is below 1e-23, the full period closes to better than 1e-20 in the multiple precision integrator, and the refined orbit is
+  the same one (T* and L* agree to 1e-6, same syzygy word, same repeat count). **All 86 orbits pass: they are periodic to better than 1e-20 in the 30 digit refinement** (worst final residual 6.3e-25 at T* = 60.66, worst closure of the
+  full period 8e-21, largest change of a start value 7e-8). Of the 85: all 85 are refined (6 stable, 31 weak and 48 unstable reliable orbits); the 86th is the T* = 29.31 one, which is not among the 85.
+  The 48 were added on 2026-10-09 with the thresholds above fixed before the run (the code of `tools/check-refined.mjs` was not changed): no failure, no timeout (limit 2 hours each, all 48 were done in about 16 minutes with 10 at a time, the longest one took 4 minutes), worst final residual 8.6e-30, worst closure of the full period 9.7e-22,
+  largest change of a start value 1.4e-8, T* and L* equal to the table to 4e-10 or better, the same word and repeat count for all 48.
   The threshold for the final residual was first 1e-25 in the checker; T* = 60.66 ended at 6.3e-25 and was flagged, and I raised the threshold to 1e-23 after seeing that (the refinement itself stops at 1e-24),
-  so that threshold was changed after the result. Values: `data/stable-orbits-30digits.json` (the stable ones), `data/refined/*.json` and `data/refined/weak/*.json`, summary in `data/refined/summary.json`.
+  so that threshold was changed after the result (for the 31 and the 6 and the T* = 29.31 orbit; not for the 48). Values: `data/stable-orbits-30digits.json` (the stable ones), `data/refined/*.json`, `data/refined/weak/*.json` and `data/refined/reliable/*.json`, summary in `data/refined/summary.json`.
 - **How well the orbits close.** The 7 stable orbits close to 5e-10 or better with two independent integrators (Dormand-Prince 5(4) and
   Gragg-Bulirsch-Stoer, `tools/check-closure-bs.mjs`). The unstable ones are much weaker. With Dormand-Prince 23 of the 85 close worse than 1e-9,
   6 worse than 1e-8 and the worst is 7.7e-8 (max norm, rotation removed); with Bulirsch-Stoer 11 are worse than 1e-7 and the worst is 3.5e-6 (columns `closureDP45` and `closureBS`
   in `data/orbit-table.csv`). For a strongly unstable orbit the instability multiplies the rounding error, so double precision cannot show that it
-  is periodic; those orbits need high precision arithmetic before anyone should call them that (the 31 weak ones are refined, see above).
+  is periodic; those orbits need high precision arithmetic before anyone should call them that (all 85 are refined, see above).
 - A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
   branches, see above.
 - I used to think many of my orbits were probably more BHH family members. The syzygy words say that only 18 of the 85 are.
@@ -304,7 +306,7 @@ Found in an independent review of the code and in my own checks; what is fixed a
 - **Closure rule (fixed, with consequences).** One rule now decides every list (`src/closure.js`, `tools/closure-tiers.mjs`): an orbit is *reliable* when it closes to 1e-8 or better
   (largest position or velocity difference after one period, best rotation removed) with both integrators, *weak* when it closes to 1e-6 with Dormand-Prince only. Of the 85 orbits of the
   perpendicular search **54 are reliable and 31 are weak** (column `closureTier` of `data/orbit-table.csv`); the 6 stable ones are all reliable. Only reliable orbits should be called periodic to 1e-8;
-  the weak ones were refined to 30 digits (see the refinement above). All 17 orbits of the arclength list are reliable.
+  all 85 were refined to 30 digits (see the refinement above). All 17 orbits of the arclength list are reliable.
 - **Closure columns (fixed).** `closureDP45` and `closureBS` are both max norms with the best rotation removed; the columns ending in `raw` leave the rotation in.
 - **Matching with the CPC list (partly fixed).** Both scripts now cut an arm at the first bad point. For the 116 branch points that have a published satellite with the same k to compare with,
   the closest distance in (T*, L*) is 2.5e-7 (N = 9), 7.9e-6 (N = 6), 3.0e-3 (N = 1, but that arm is the 3 fold repeat curve of the parent, not a satellite; the entry is marked in `data/bifurcation-points.json`), and then 0.15 or more, with a median of 0.92 (`same_k_closest` in `data/bifurcation-points.json`),

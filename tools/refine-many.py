@@ -1,11 +1,13 @@
 # runs tools/refine-mp.py on every orbit of data/orbit-table.json with a given closure tier, a few at a time, with a time limit each
 # python tools/refine-many.py weak [workers] [seconds] [digits]
+# python tools/refine-many.py reliable 10 7200 30 skipstable     the reliable tier without the stable orbits that are refined already (data/refined/T*.json)
 import json, os, subprocess, sys, time
 tier = sys.argv[1]
 workers = int(sys.argv[2]) if len(sys.argv) > 2 else 4
 limit = int(sys.argv[3]) if len(sys.argv) > 3 else 1500
 digits = sys.argv[4] if len(sys.argv) > 4 else '30'
-rows = [r for r in json.load(open('data/orbit-table.json')) if r['closureTier'] == tier]
+skipstable = len(sys.argv) > 5 and sys.argv[5] == 'skipstable'
+rows = [r for r in json.load(open('data/orbit-table.json')) if r['closureTier'] == tier and not (skipstable and r['status'] == 'stable')]
 os.makedirs('data/refined/' + tier, exist_ok=True)
 queue = list(enumerate(rows))
 running = []
