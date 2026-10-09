@@ -6,7 +6,7 @@ authors:
     family-names: Kandel
 repository-code: "https://github.com/Utshob-k/orbit-hunter"
 license: CC-BY-4.0
-version: 0.2.1
+version: 0.2.2
 date-released: 2026-10-09
 keywords:
   - three-body problem
