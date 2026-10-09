@@ -3,7 +3,7 @@
 //   1. newton converged: final residual below 1e-23 and the full period closes to 1e-20 (multiple precision integrator)
 //   2. it is the same orbit: T* and L* of the refined start agree with the table to 1e-6, the syzygy word is the same, and the repeat count is the same
 // the distance moved is reported but is not pass or fail (the start of a strongly unstable orbit is only known to the precision the instability allows)
-// node tools/check-refined.mjs [dir ...]      default: data/refined/weak data/refined/*.json
+// node tools/check-refined.mjs [dir ...]      default: data/refined data/refined/weak data/refined/reliable (the summary is written for the folders that are scanned)
 import fs from 'fs';
 import path from 'path';
 import { perpInitial, perpInfo } from '../src/perp.js';
@@ -18,7 +18,7 @@ for (const a of JSON.parse(fs.readFileSync(new URL('../data/perp-arc-orbits.json
 }
 const files = [];
 const args = process.argv.slice(2);
-const dirs = args.length ? args : ['data/refined', 'data/refined/weak'];
+const dirs = args.length ? args : ['data/refined', 'data/refined/weak', 'data/refined/reliable'];
 for (const d of dirs) if (fs.existsSync(d)) for (const f of fs.readdirSync(d)) if (f.endsWith('.json') && f !== 'summary.json') files.push(path.join(d, f));
 
 if (files.length === 0) { console.error('no refinement files found: nothing was checked'); process.exit(1); }
