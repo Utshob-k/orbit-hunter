@@ -657,17 +657,20 @@ last run was 5.3 MB; the repeat checks, the table, the recall count and the cove
 the verification of all 312 arms was run again on the rounded files with the same result for every check). From these:
 
 ```
-node tools/arm-repeat-check.mjs data/satellite-results7.jsonl 0 25    # also 25 50 and 50 73; results6: 0 40, 40 80, 80 121; results5: 0 44; results4: 0 21
+node tools/arm-repeat-check.mjs data/satellite-results7.jsonl 0 25    # also 25 50 and 50 73
+                                                                      # results6: 0 40, 40 80, 80 121; results5: 0 44; results4: 0 21
 python tools/arm-repeats-summary.py   # 312 arms with stored states, 54 of them on the repeat curve of their parent
 python tools/recall-cpc.py            # 99 satellites, 5 tested, 2 found (N = 6 and N = 9)
 python tools/bifurcation-table.py     # 276 branch points; keeps the retraction of N = 1
 python tools/branch-census.py         # branch points by what is known about their arms
-node tools/verify-branches.mjs data/satellite-results7.jsonl    # slow (about 30 minutes for results 7, 1.5 hours for results 6 on my machine); also results6, results5, results4
+node tools/verify-branches.mjs data/satellite-results7.jsonl    # slow: about 30 minutes for results7, 1.5 hours for results6 on my machine
+                                                                # same for results6, results5, results4
 python tools/verify-summary.py        # 238 of 312 arms pass all checks, 139 branch points with such an arm
 python tools/cpc-coverage.py          # 31 of the 139 overlap the region of the CPC table, 1 has a satellite of its exponent to compare with
 python tools/match-start.py data/satellite-results7.jsonl 9 0 5 0.8583     # N = 9; N = 6 is: 6 0 4 0.87667
 python tools/liao-distance.py         # 16.5 % and 1.9 % from the rows of Li et al. 2025 (uses data/liao2025-scaled.json)
-node tools/return-test.mjs           # which orbits return rotated after T/n (n = 2 to 12): 9 of the 102 entries (85 + 17, 100 distinct orbits: a00 = t02, a16 = t80) in their own places, 25 with some symmetry, and 8 of the 91 distinct unmatched orbits in their own places; the atlas status of the arclength orbits is read from the stored data/return-test.json (or from the downloaded catalogue if its path is given), and the file is only rewritten with --write
+node tools/return-test.mjs           # returns after T/n for the 102 entries (100 distinct orbits): 9 in their own places, 25 with some symmetry; of the 91 distinct unmatched ones 8 in their own places
+                                     # the atlas status of the arclength orbits comes from data/return-test.json (or from the downloaded catalogue if its path is given); --write stores the result
 python tools/henon-family-compare.py # the 8 + 9 unmatched orbits that return, against the family of Henon 1976
 ```
 
