@@ -2,7 +2,7 @@
 // double multiplier 1 and satellites can leave. the stable stretch of data/r-family-trace.json (both nu of a step have modulus 1) has two nu, the lower and the upper one; each
 // crossing of a level k/n is found between two accepted steps and theta, T* and L* are interpolated linearly between them, so they are good to a few 1e-3 (n = 3, 4) down to 1e-4.
 // followed = there is a file in data/branch-points/ made by tools/branch-point.mjs: <n>-<branch>.json for k = 1, <k>-<n>-<branch>-<theta>.json for k > 1 (theta as given to the tool, four digits).
-// node tools/nu-map.mjs [--write]        --write stores data/nu-map.json
+// node tools/nu-map.mjs [--max=N] [--write]        n up to N (12 unless --max is given: the upper nu crosses 1/n up to n = 58 on the stored trace); --write stores data/nu-map.json (for the default range only)
 import fs from 'fs';
 
 const read = (f) => JSON.parse(fs.readFileSync(new URL('../data/' + f, import.meta.url), 'utf8'));
@@ -12,12 +12,13 @@ const stable = (p) => p.nus && p.nus.length === 2 && p.nus.every((x) => Math.abs
 const files = fs.existsSync(new URL('../data/branch-points/', import.meta.url)) ? fs.readdirSync(new URL('../data/branch-points/', import.meta.url)) : [];
 const followed = (k, n, branch, theta) => files.includes(k === 1 ? `${n}-${branch}.json` : `${k}-${n}-${branch}-${theta.toFixed(4)}.json`);
 
+const maxN = Number((process.argv.find((a) => a.startsWith('--max=')) || '--max=12').slice(6));
 const rows = [];
 for (let i = 0; i < trace.length - 1; i++) {
   const a = trace[i], b = trace[i + 1];
   if (!stable(a) || !stable(b)) continue;
   const na = a.nus.map((x) => x[0]).sort((x, y) => x - y), nb = b.nus.map((x) => x[0]).sort((x, y) => x - y);
-  for (let n = 3; n <= 12; n++) for (let k = 1; 2 * k <= n; k++) {
+  for (let n = 3; n <= maxN; n++) for (let k = 1; 2 * k <= n; k++) {
     if (gcd(k, n) !== 1) continue;
     for (const j of [0, 1]) {
       const da = na[j] - k / n, db = nb[j] - k / n;
@@ -28,12 +29,13 @@ for (let i = 0; i < trace.length - 1; i++) {
   }
 }
 rows.sort((x, y) => x.n - y.n || x.k - y.k || (x.branch < y.branch ? 1 : -1));
-console.log(`the stable stretch has ${trace.filter(stable).length} of the ${trace.length} accepted steps; nu = k/n for n up to 12 is crossed ${rows.length} times`);
+console.log(`the stable stretch has ${trace.filter(stable).length} of the ${trace.length} accepted steps; nu = k/n for n up to ${maxN} is crossed ${rows.length} times`);
 for (const r of rows) console.log(`nu = ${r.k}/${r.n}  ${r.branch.padEnd(5)}  between steps ${r.step} and ${r.step + 1}  |theta| ${r.theta.toFixed(4)}  T* ${r.Tstar.toFixed(4)}  L* ${r.Lstar.toFixed(4)}  ${r.followed ? 'followed' : 'not followed'}`);
 const k1 = rows.filter((r) => r.k === 1);
 const k2 = rows.filter((r) => r.k > 1);
 console.log(`k = 1: ${k1.length} crossings, ${k1.filter((r) => r.followed).length} followed; k > 1: ${k2.length} crossings, ${k2.filter((r) => r.followed).length} followed`);
-if (process.argv.includes('--write')) {
+if (process.argv.includes('--write') && maxN !== 12) console.log('--write only stores the default range (n up to 12), nothing written');
+else if (process.argv.includes('--write')) {
   fs.writeFileSync(new URL('../data/nu-map.json', import.meta.url), JSON.stringify({ what: 'crossings of nu = k/n (n up to 12) on the stable stretch of the family of Broucke\'s R orbits, tools/nu-map.mjs: step = accepted step of data/r-family-trace.json before the crossing, theta, T*, L* interpolated linearly between the two steps, followed = data/branch-points/ has the entry', rows }));
   console.log('written to data/nu-map.json');
 }

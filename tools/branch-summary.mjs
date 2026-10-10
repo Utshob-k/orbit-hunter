@@ -51,6 +51,12 @@ for (const f of files) {
   }
   out.push(e);
 }
+const totals = (list, label) => {
+  const sat = list.flatMap((e) => e.satellite), z = sat.filter((x) => x.Tstar), ctl = list.flatMap((e) => e.control);
+  console.log(`${label}: ${list.length} branch points, ${sat.length} satellite continuations of which ${z.length} reach a rotation 0 (${z.filter((x) => x.tier === 'reliable').length} established), ${ctl.length} control continuations, ${ctl.filter((x) => x.primitiveCloses).length} end at a repeat whose primitive closes`);
+};
+totals(out.filter((e) => e.n <= 12), 'n up to 12');
+totals(out.filter((e) => e.n > 12), 'n from 13');
 const nSat = out.reduce((s, e) => s + e.satellite.length, 0), zero = out.reduce((s, e) => s + e.satellite.filter((x) => x.Tstar).length, 0);
 const established = out.reduce((n, e) => n + e.satellite.filter((x) => x.tier === 'reliable').length, 0);
 const nCtl = out.reduce((s, e) => s + e.control.length, 0), ctlOk = out.reduce((s, e) => s + e.control.filter((x) => x.primitiveCloses).length, 0);
