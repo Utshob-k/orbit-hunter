@@ -1,13 +1,14 @@
 // the branch point of a satellite on the family of Broucke's R orbits: the member of the family with rotation number nu = 1/n, where the n fold repeat of the orbit has a double multiplier 1.
-// 1. the member is found by bisection between the two accepted steps of data/r-family-trace.json where nu (the stored multiplier angle) crosses 1/n;
+// 1. the member is found by bisection between the two accepted steps of data/r-family-trace.json where nu (the stored multiplier angle) crosses 1/n; the stable stretch has two nu (the lower and
+//    the upper one), each crosses 1/n once, and the crossing nearest to the rotation asked for is taken;
 // 2. its n fold repeat is solved as an orbit of the shooting system of src/shooting.js (half period n t, 8 or more pieces); the matrix [J | dF/dlam] of that system has a one dimensional
 //    null space at an ordinary point of a curve and a two dimensional one at a branch point, so its smallest singular values are printed (one sided Jacobi, accurate for small ones);
 // 3. the two directions at the branch point come from the quadratic bifurcation equation g(a, b) = psi . F(Y0 + h (a v1 + b v2)) / h^2 = 0 on the null space (psi: left null vector); one root is the
 //    tangent of the repeat curve (the exact repeats of the neighbouring members, started cold), the other is the satellite;
 // 4. the satellite is followed in both senses with pseudo arclength (tangent turning < 0.35 rad, steps below 6 % of the distance from the branch point so that Newton cannot land on the repeat
 //    curve) until the rotation angle is 0: a periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
-// node tools/branch-point.mjs n theta [--control] [--write]      n = 5, 6 or 8; theta = rotation of the member in turns (0.2010, 0.1678, 0.1258): the crossing of nu = 1/n nearest to it
-//   --write stores the numbers in data/branch-points.json (the other entries are kept). a run takes a few minutes (n = 8 with --control about 20)
+// node tools/branch-point.mjs n theta [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
+//   --write stores the numbers in data/branch-points.json under the key 'n upper' or 'n lower' (the other entries are kept). a run takes a few minutes (n = 8 with --control about 20)
 import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';
@@ -19,24 +20,30 @@ const target = 1 / n;
 const trace = JSON.parse(fs.readFileSync(new URL('../data/r-family-trace.json', import.meta.url), 'utf8')).curve;
 
 // 1. the bracket and the member with nu = 1/n
-const nearest = (q) => q.nus.map((x) => x[0]).sort((a, b) => Math.abs(a - target) - Math.abs(b - target))[0];
+const stable = (p) => p.nus && p.nus.length === 2 && p.nus.every((x) => Math.abs(x[1] - 1) < 1e-6);
+const nuOf = (q, j) => q.nus.map((x) => x[0]).sort((a, b) => a - b)[j];      // j = 0: the lower of the two nu, j = 1: the upper one
 let br = null;
 for (let i = 0; i < trace.length - 1; i++) {
   const a = trace[i], b = trace[i + 1];
-  if (!a.nus || !b.nus || Math.abs(a.turns - b.turns) > 0.1) continue;
-  const na = nearest(a) - target, nb = nearest(b) - target;
-  if (na * nb < 0 && Math.abs(na - nb) < 0.05 && (!br || Math.abs(Math.abs(a.turns) - thetaWanted) < Math.abs(Math.abs(br.a.turns) - thetaWanted))) br = { i, a, b };
+  if (!stable(a) || !stable(b)) continue;
+  for (const j of [0, 1]) {
+    const na = nuOf(a, j) - target, nb = nuOf(b, j) - target;
+    if (na * nb >= 0) continue;
+    const th = Math.abs(a.turns) + (na / (na - nb)) * (Math.abs(b.turns) - Math.abs(a.turns));
+    if (!br || Math.abs(th - thetaWanted) < Math.abs(br.th - thetaWanted)) br = { i, j, a, b, th };
+  }
 }
 if (!br) { console.error('no crossing of nu = 1/' + n + ' in the stored trace'); process.exit(1); }
+const J = br.j, branchName = J ? 'upper' : 'lower';
 const start = (q) => [q.u1, q.u2, q.lam, q.t];
 function member(f) {
   const g = start(br.a).map((v, i) => v + f * (start(br.b)[i] - v));
   const s = closePerpMS(g[0], g[1], g[2], g[3], { m: 8 });
   if (!(s.res < 1e-11)) return null;
-  const nu = relativeStability(s.u1, s.u2, s.lam, s.t).nus.map((x) => x.nu).sort((p, q) => Math.abs(p - target) - Math.abs(q - target))[0];
+  const nu = relativeStability(s.u1, s.u2, s.lam, s.t).nus.map((x) => x.nu).sort((p, q) => p - q)[J];
   return { s, nu, info: perpInfo(s.u1, s.u2, s.lam, s.t) };
 }
-let lo = 0, hi = 1, nuLo = nearest(br.a) - target, R = null;
+let lo = 0, hi = 1, nuLo = nuOf(br.a, J) - target, R = null;
 for (let k = 0; k < 45; k++) {
   const f = (lo + hi) / 2, m = member(f);
   if (!m) { console.error('a member did not close at f = ' + f); process.exit(1); }
@@ -45,7 +52,7 @@ for (let k = 0; k < 45; k++) {
   if ((m.nu - target) * nuLo < 0) hi = f; else { lo = f; nuLo = m.nu - target; }
 }
 const Rinfo = { turns: R.info.theta / (2 * Math.PI), Tstar: R.info.ts, Lstar: Math.abs(R.info.ls), lam: R.s.lam, u1: R.s.u1, u2: R.s.u2, t: R.s.t, nuMinusTarget: R.nu - target };
-console.log(`n = ${n}: member with nu = 1/${n}: |theta| ${Math.abs(Rinfo.turns).toFixed(7)} turn, T* ${Rinfo.Tstar.toFixed(7)}, L* ${Rinfo.Lstar.toFixed(7)}, nu - 1/n = ${Rinfo.nuMinusTarget.toExponential(1)}`);
+console.log(`n = ${n} (${branchName} nu): member with nu = 1/${n}: |theta| ${Math.abs(Rinfo.turns).toFixed(7)} turn, T* ${Rinfo.Tstar.toFixed(7)}, L* ${Rinfo.Lstar.toFixed(7)}, nu - 1/n = ${Rinfo.nuMinusTarget.toExponential(1)}`);
 
 // 2. the n fold repeat as a solution of the shooting system and the matrix [J | dF/dlam]
 let rep = null, m = 0;
@@ -160,10 +167,10 @@ if (control) for (const sgn of [1, -1]) {
 }
 if (write) {
   const file = new URL('../data/branch-points.json', import.meta.url);
-  const all = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : { what: 'branch points of satellites on the family of Broucke\'s R orbits (tools/branch-point.mjs): the R member with rotation number nu = 1/n, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js', entries: {} };
+  const all = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : { what: 'branch points of satellites on the family of Broucke\'s R orbits (tools/branch-point.mjs): the R member with rotation number nu = 1/n, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js. Keys: n and the branch of nu (the stable stretch has two, the lower and the upper one, each crosses 1/n once).', entries: {} };
   const r6 = (x) => Number(x.toPrecision(10));
   for (const r of [...result.satellite, ...result.control]) r.curve = r.curve.map((p) => ({ s: r6(p.s), Tstar: r6(p.Tstar), Lstar: r6(p.Lstar), turns: r6(p.turns), lam: r6(p.lam), minDist: r6(p.minDist) }));
-  all.entries[n] = result;
+  all.entries[`${n} ${branchName}`] = result;
   fs.writeFileSync(file, JSON.stringify(all));
   console.log('   written to data/branch-points.json');
 }
