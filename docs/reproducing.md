@@ -29,12 +29,15 @@ path):
 - `branch-point.mjs` solves the branch point of a satellite on the family of Broucke's R orbits (the member with nu = 1/n, the two null vectors of its
   n fold repeat, the satellite followed to its periodic orbit; a few minutes, `--control` adds the repeat direction, `--write` stores
   `data/branch-points/<n>-upper.json` or `<n>-lower.json` (`<k>-<n>-<branch>-<theta>.json` for k > 1), theta chooses between the two nu of the stable
-  stretch); `nu-map.mjs` lists the 41 members of the family where a nu of the stable stretch is k/n (n up to 12) and which of them were followed;
-  `branch-summary.mjs` prints how every continuation of `data/branch-points/` ended (a rotation 0 reached, or the limit that stopped it) and checks
-  the ends of the control continuations (`--write` stores `data/branch-summary.json`); `db82-bifurcations.mjs` puts the bifurcation points of the
-  family D1 of Davoust and Broucke (rows 63 to 65 of their Table 5, branches e, f and E) next to the members with nu = 1/3 and their satellite curves;
-  `satellite-candidates.mjs` and `satellite-check.py` recompute the numbers of the ten orbits of the satellite curves of
-  `data/satellite-candidates.json` and compare them with other lists (the second needs `pip install rebound numpy`)
+  stretch, `--k=K` follows nu = K/n, `--repeat-tol=1e-8` relaxes the residual accepted for the n fold repeat (needed from n = 27), `--pieces=P` forces
+  the number of pieces of the repeat (16 from n = 29)); `nu-map.mjs` lists the 41 members of the family where a nu of the stable stretch is k/n (n up
+  to 12, `--max=N` goes further) and which of them were followed; `branch-summary.mjs` prints how every continuation of `data/branch-points/` ended (a
+  rotation 0 reached, or the limit that stopped it) and checks the ends of the control continuations (`--write` stores `data/branch-summary.json`);
+  `db82-bifurcations.mjs` puts the bifurcation points of the family D1 of Davoust and Broucke (rows 63 to 65 of their Table 5, branches e, f and E)
+  next to the members with nu = 1/3 and their satellite curves; `satellite-sequence.mjs` prints the table of the zeros of the upper branch (T*, L*,
+  largest multiplier, closure, closest approach, the prediction of T* from the R member); `satellite-candidates.mjs` and `satellite-check.py`
+  recompute the numbers of the 34 orbits of the satellite curves of `data/satellite-candidates.json` and compare them with other lists (the second
+  needs `pip install rebound numpy`)
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores

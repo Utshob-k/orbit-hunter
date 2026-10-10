@@ -1,0 +1,40 @@
+Copied from the local rules file of the run on 2026-10-10 (written before the first run of this search; the times are the clock of the machine). The runs used copies of tools/branch-point.mjs (branch-point-n.mjs and later copies) in which only the paths differ, plus the changes that are listed below as they were made; the tool in the repository has those changes as options (--repeat-tol, --pieces) and the caps of the integration steps in src/perp.js and src/shooting.js raised by 20. 'Folder' means the local folder of the run.
+
+SATELLITES OF THE R FAMILY WITH k = 1, n = 13 TO 20 (a bounded search). LOCAL ONLY: nothing in the repo, nothing pushed or sent. Written 2026-10-10 before the first run; nothing below may change after the run starts. A change that cannot be avoided goes into DEVIATIONS at the end with what and why.
+
+TIME. 4 hours of wall-clock time from the start time written at the end of this file; at the deadline everything still running is stopped and whatever is done is reported (jobs not finished are reported as not finished). Upper branches first (8 jobs, all at once). The lower branches (8 jobs) are started only when all upper jobs have ended and less than 3 hours have passed; they are stopped at the deadline.
+
+WHAT IS RUN. For n = 13 to 20: the member of the R family with nu = 1/n on the upper (and later the lower) nu of the stable stretch (crossings found in data/r-family-trace.json with the rule of tools/nu-map.mjs, extended to n = 20; the theta of each is given to the tool: upper 0.0772, 0.0717, 0.0669, 0.0627, 0.0590, 0.0557, 0.0528, 0.0501 for n = 13 to 20; lower 0.0788, 0.0730, 0.0680, 0.0637, 0.0599, 0.0565, 0.0534, 0.0507), then tools/branch-point.mjs with --control. The script is branch-point-n.mjs: a copy of the committed tools/branch-point.mjs in which only the paths differ (trace read from the repo, output written to this folder); the numbers are produced by the same code as for n <= 12.
+
+LIMITS, UNCHANGED FROM n <= 12. Member by bisection |nu - 1/n| < 1e-11, closes with residual < 1e-11 (8 pieces); the n fold repeat with 8, 16, 24, 32 or 40 pieces, residual < 1e-9; quadratic bifurcation equation h = 2e-3, 36 directions, two real roots needed; pseudo arclength, tangent turning < 0.35 rad per step, step <= 0.03 and <= 6 % of the distance from the branch point, at most 700 accepted steps, stop at a closest approach below 0.03, zero of theta |theta| < 1e-11 by bisection along the chord; both senses; control = the repeat direction. Every stop (closest approach limit, step collapse, 700 steps) is a limit of the continuation, not a result; a branch point with no rotation 0 in either sense is undecided.
+
+FOR EVERY ZERO WITH ROTATION 0. Refined to 30 digits with tools/refine-mp.py (closure of the full period measured on the rounded stored values), word, alignments, repeat test (n up to 200), double precision closure tier, largest nontrivial multiplier and stability (src/relative.js), REBOUND 5.2.2 (IAS15, default settings: closure from the double rounded values and the multipliers, as tools/satellite-check.py), and the comparison: the equal-mass atlas (catalogue.json of 2026-10-09), the 99 CPC satellites, my 102, the 9 periodic rows of Davoust and Broucke, Henon 1976, the 18 rows of Li et al.; a hit is T* and L* within 1e-5 with repeats up to 12 either way and the same alignments, near is 5e-3, and every pair at the same period is decided by the start values (src/identity.js: same orbit when they agree to 1e-6). A zero is established when its closure tier is reliable (closure below 1e-8 with two integrators).
+
+WHERE THINGS "CHANGE" (definitions fixed now). Stability changes at the first n whose zero has a largest nontrivial multiplier above 1 + 1e-6. Closest approach: the first n whose zero has a closest approach below 0.1, and below 0.05 (the closest approach of the orbit of the zero). Closure: the first n whose zero closes (double precision) worse than 1e-9, and worse than 1e-8 (tier no longer reliable). The sequence "stops" at the first n for which neither sense of the upper branch reaches a rotation 0; it "changes" where the zero is not stable, is a repeat, has another word than (01)^n, or has other alignments than 2n.
+
+PREDICTIONS (from data that exist before any run; T* of the zero of the upper branch).
+Observed zeros n = 5 to 12: T* 17.84681, 19.76913, 21.66265, 23.53271, 25.38320, 27.21709, 29.03666, 30.84374 (steps 1.922, 1.894, 1.870, 1.850, 1.834, 1.820, 1.807).
+Predictor A, the step: step(n) = T*(n) - T*(n-1) = 1.6947 + 1.3831/n (least squares on n = 6 to 12), added up from n = 12.
+Predictor B, the member: T*(n) = n T*_R(n) - delta(n), with T*_R(n) the T* of the R member with nu = 1/n interpolated from the trace (upper nu) and delta(n) = 0.0892 - 0.00433 n (least squares on n = 8 to 12; the observed delta for n = 5 to 12 is 0.042, 0.058, 0.058, 0.055, 0.050, 0.046, 0.042, 0.037).
+ n    A        B       n T*_R
+ 13   32.645   32.641  32.673
+ 14   34.438   34.427  34.456
+ 15   36.225   36.206  36.230
+ 16   38.006   37.980  38.000
+ 17   39.782   39.744  39.760
+ 18   41.554   41.502  41.514
+ 19   43.322   43.254  43.261
+ 20   45.085   45.001  45.004
+The prediction HOLDS for an n when the T* of the zero is within 0.05 of both A and B; it holds "in the sequence" when this is so for all n with a zero. (The two predictors differ by 0.004 at n = 13 and 0.084 at n = 20: if the observed T* is between them or nearer to B at large n, that is a statement about which of the two is the better model.)
+Further predictions:
+ - every zero is stable (largest nontrivial multiplier within 1 + 1e-6 of 1; all of n = 5 to 12 are), word (01)^n, 2n alignments, no repeat;
+ - closest approach of the zero: n times the closest approach (the smaller of the two senses) was 1.92, 1.90, 1.93, 1.94, 1.98, 1.98, 2.04, 2.03 for n = 5 to 12, so the primary prediction is closest approach = 2.0/n: 0.154 (13), 0.143, 0.133, 0.125, 0.118, 0.111, 0.105, 0.100 (20): it does not go below 0.1 within n <= 20 by this model. The alternative, a linear fit on n = 5 to 12 (0.4939 - 0.02882 n), gives 0.119 (13), 0.090 (14), 0.062, 0.033 (16) and below 0.03 from n = 17: on that model the continuation would be stopped at its closest approach limit from about n = 16 and there would be no zero. The outcome decides between the two;
+ - closure (double precision, the larger of the two senses): about 1e-10 to 4e-10 for n = 5 to 12 growing by about a factor 1.25 per n: first n above 1e-9 is predicted at n = 16 (+/- 2), none above 1e-8 up to n = 20;
+ - the continuation takes 150 to 450 accepted steps per sense (n = 12: 212 and 384), so a few of n = 18 to 20 may reach the 700 step limit (undecided);
+ - the lower branches: no rotation 0 (as for n = 5 to 12, apart from n = 3), stopped at the closest approach limit.
+
+REPORT AT THE END: does the sequence of stable orbits continue past n = 12; where A and B hold or fail (with the numbers); the first n where stability, closest approach or closure changes (by the definitions above); where the sequence stops or changes; what is undecided; the comparison results (atlas, CPC, my 102, the others, by start values).
+
+DEVIATIONS (filled in only if needed):
+(none so far)
+START: 2026-10-10 18:26:43 (epoch 1791636103); deadline = start + 4 h = 22:26:43

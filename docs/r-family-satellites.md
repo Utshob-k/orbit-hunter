@@ -70,11 +70,11 @@ crosses the same k/n twice for 3/7, 4/9, 5/11 and 5/12, so the theta is in the n
 reach a rotation angle 0 and 9 were stopped by a limit of the continuation, 5 at the closest approach limit and 4 at the step limit of 700 steps. For
 3/7 (theta 0.4302 and 0.3793), 4/9 (0.3872) and 4/11 (0.3409) neither sense reaches a rotation 0: these four are undecided. All 42 control
 continuations end at a repeat whose primitive closes. The zeros close worse than for k = 1 (7e-12 to 1.7e-5 in double precision): of the 33, 21 have
-the closure tier reliable, 7 weak and 5 failed, and the 12 weak or failed zeros are not established, whatever their T* and L*. Over all 41 branch
-points there are 82 satellite continuations, 50 of them reach a rotation 0 (38 established), 20 stopped at the closest approach limit, 2 by a collapse
-of the step and 10 at the step limit; 80 of the 82 control continuations end at a repeat whose primitive closes and 2 were stopped by a collapse of
-the step (`tools/branch-summary.mjs`, `data/branch-summary.json`). Six of the 77 unmatched orbits lie on satellites of R: the three stable orbits
-above and t37 (T* = 29.7765, nu = 2/7 upper branch), t42 (T* = 33.7451, nu = 2/9 upper) and t59 (T* = 43.6551, nu = 3/10 upper); a zero of the
+the closure tier reliable, 7 weak and 5 failed, and the 12 weak or failed zeros are not established, whatever their T* and L*. For n up to 12 (41
+branch points) there are 82 satellite continuations, 50 of them reach a rotation 0 (38 established), 20 stopped at the closest approach limit, 2 by a
+collapse of the step and 10 at the step limit; 80 of the 82 control continuations end at a repeat whose primitive closes and 2 were stopped by a
+collapse of the step (`tools/branch-summary.mjs`, `data/branch-summary.json`). Six of the 77 unmatched orbits lie on satellites of R: the three stable
+orbits above and t37 (T* = 29.7765, nu = 2/7 upper branch), t42 (T* = 33.7451, nu = 2/9 upper) and t59 (T* = 43.6551, nu = 3/10 upper); a zero of the
 satellite is the same orbit as each of them by the start values (`tools/branch-summary.mjs`). Three zeros are linearly stable and match nothing in the
 sources checked: T* = 33.745149 (nu = 2/9 upper branch, sense -), T* = 37.624249 (2/11 upper, sense -) and T* = 51.383330 (3/10 lower, sense +), with
 the words (01)^9, (01)^11 and (01)^10. They were refined to 30 digits (closure of the full period 7e-26, 9e-26 and 3e-25 on the stored values,
@@ -83,3 +83,41 @@ to 1.2e-5 (`data/satellite-check.json`). The first of them is 5e-9 in T* and 2e-
 (the normalised starts by 0.099), t42 is unstable (largest multiplier 1.027) and this one is linearly stable (`tools/satellite-candidates.mjs`); it
 may lie near a bifurcation of t42 (not shown). The other zeros with k > 1 are not refined. That these three match nothing in the sources checked so
 far is all that can be said (the review of Li and Liao could not be read).
+
+**The upper branch beyond n = 12 (2026-10-10).** The members with nu = 1/n for n = 13 to 20 were followed on both branches, with the control direction
+and the limits as for n <= 12 (`data/branch-points/<n>-upper.json` and `<n>-lower.json`); then the upper branch from n = 21 up. The rules, the
+predictions, the stop rule and the changes made during the runs were written down in `docs/rules/` (the rules and predictions before the first run,
+the changes in the second file as they were made). For every n from 13 to 36 the upper branch reaches a periodic orbit in at least one sense: for n =
+13, 14 and 15 in both senses, which reach the same orbit, from n = 16 in one sense, while the other is stopped by a collapse of the step after 505 to
+625 steps. Each zero has the word (01)^n, 2n alignments and no repeat. T* runs from 32.63981 (n = 13) through 44.98515 (n = 20) and 58.78013 (n = 28)
+to 72.37337 (n = 36); the table with L*, the multiplier, the closure and the closest approach of every n is the output of
+`tools/satellite-sequence.mjs`. THE ZEROS ARE NOT STABLE: the largest nontrivial multiplier (src/relative.js and REBOUND) is 1.712 for n = 13 and
+grows to 15.427 for n = 28 and 24.624 for n = 36 (by 0.90 to 1.22 per n, the increments themselves growing), while the orbits for n = 5 to 12 are
+stable. So the sequence of linearly stable orbits ends at n = 12. The closure of the double precision zeros is 6e-10 to 4.0e-9 (tier reliable for
+all); refined to 30 digits the closure of the full period on the stored values is 4e-25 to 1.6e-23 and REBOUND closes them to 1.6e-14 to 6e-13 from
+the double precision values (`data/satellite-candidates.json`, `data/satellite-check.json`). None of the 24 orbits matches the atlas, the CPC table,
+my 102, the periodic rows of Davoust and Broucke, Henon 1976 or the rows of Li et al. (hits at 1e-5 with the alignments, repeats up to 12, pairs at
+the same period by the start values, `tools/satellite-candidates.mjs`): not found in the sources checked, and the review of Li and Liao could not be
+read. The predictions written down before the runs: the T* of the zero from the member (T*(n) = n T*_R(n) - delta(n), delta = a + b / n fitted on n =
+8 to 20) holds to 0.0031 for all n = 13 to 36 (the differences are -0.0013 to +0.0031, for n = 21 to 36 +0.0011 to +0.0031; a version with delta
+linear in n is off by up to 0.02), while the extrapolation of the steps in T* of n = 5 to 12 fails from n = 18; the multiplier 7.621 + 0.85 (n - 20)
+holds within 5 % up to n = 26 and fails from n = 27 (+5.9 % at n = 27, +16 % at n = 36); the closest approach of the zero in the units of its start
+falls from 0.160 (n = 13) to 0.070 (n = 36), the scale free closest approach times |E| from 0.540 to 0.457, with no break. The lower branches (n = 13
+to 20) never reach a rotation 0: 16 continuations, all stopped by a limit (8 at the closest approach limit, 6 by a collapse of the step, 2 at the step
+limit); they are undecided.
+
+**Where the upper branch was stopped by the method (2026-10-10).** The stop rule written before the runs (three consecutive n undecided, an n is
+undecided when neither sense reaches a rotation 0) ended the sequence at n = 28 when the runs were done as planned: for n = 27 and n >= 29 the n fold
+repeat of the member did not close to the residual 1e-9 of the earlier runs (the system is singular at the branch point and the residual stalls near
+3.5e-11 n, 1.00e-9 at n = 29 for 8 to 48 pieces). Four changes of the method were then made, each written into the rules file before it was run: (1)
+the residual accepted for the repeat was relaxed to 1e-8 (`--repeat-tol=1e-8`), which decides n = 27 but not n >= 29, where the satellite curves
+advance with very small steps (a path length of 3 in 700 steps where n = 28 reaches its zero at 6.0 in 282) and stop at the step limit; (2) the repeat
+was solved with 16 pieces of the multiple shooting instead of 8 (`--pieces=16`), after which the steps are normal but the continuation ends just
+before the zero (n = 29: theta = -0.0005 at a path of 8.29, T* about 60.49), where the integration of the orbit gave up (a cap of 4000 + 3000 T steps
+in `src/perp.js`); (3) a point whose orbit cannot be integrated is rejected like a failed step; (4) the caps of the number of integration steps were
+raised by a factor 20 (`src/perp.js`, `src/shooting.js`). With these changes the zeros for n = 29 to 36 are reached in 358 to 386 steps (the other
+sense ends by a collapse of the step after 616 to 624 steps). So the stop of the sequence at n = 29 was the method and not the orbits. The files for n
+= 29 to 36 were made with `--repeat-tol=1e-8 --pieces=16`, the file for n = 27 with `--repeat-tol=1e-8`, the others with the defaults; the runs of the
+earlier attempts (8 pieces, the old caps) stopped at limits and are not kept. The sequence was not run beyond n = 36 (the time limit of 4 hours); the
+stored trace has crossings of nu = 1/n for the upper nu up to n = 58 and no further (its upper nu has the minimum 0.017034 at its end, and a longer
+trace of the same family would not give more unless the family continues beyond the end of the stored trace, which was not tested).
