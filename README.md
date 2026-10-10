@@ -124,7 +124,11 @@ are allowed (n up to 8) the closest is 1.9 %: my orbit with T* = 59.72 and L* = 
 0.190). `tools/liao-distance.py` prints both numbers. None of my orbits matches a printed row, and the 1.9 % is a near coincidence: the T* = 59.72
 orbit has 42 syzygies, a syzygy count does not change when an orbit is turned, so four relative periods of any orbit have a multiple of 4 syzygies,
 and it cannot be four relative periods of the IA-3 continuation; the IA-3 member with the same L* (0.193) has four times its rotation angle about 0.3
-turn from a whole number, so it does not close after four relative periods either.
+turn from a whole number, so it does not close after four relative periods either. More generally, IA-3 members with a rotation angle -p/q of a turn
+(q up to 12) close in the inertial frame after q relative periods, and so do their repeats (up to 4): in the range of the printed rows (L* up to 0.36)
+there are 68 such orbits (T* and theta fitted by polynomials through the 8 rows), and the closest of my 102 orbits is 6.8 % away in (T*, L*) (my T* =
+70.00 orbit against the member with theta = -1/5 turn at L* = 0.083), so none is one. None of my 85 has the syzygy word root of the IA-3 rows (01012).
+`tools/ia3-rational.py` prints this. Beyond L* = 0.36 the family was not followed.
 
 **Rotating figure-eights (2026-10-09).** I followed the choreographic branch of the planar figure-eight in the angular momentum with
 `tools/rpo-trace.mjs` (`data/rpo-trace-eightC.json`, results in `data/rpo-eight-results.json`). The trace reaches L* = 0.4103, where it stops by a
@@ -651,6 +655,7 @@ path):
 - `plot-orbits.mjs`, `plot-perp.mjs` draw orbits as svg (figures/)
 - `closure-mp.py` integrates the double precision starts of the 85 orbits for one period in 40 digits (about 6 minutes; `--write` stores
   `data/closure-mp.json`)
+- `ia3-rational.py` puts the IA-3 members with a rational rotation angle (q up to 12) next to my orbits, in the range of the printed rows
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
