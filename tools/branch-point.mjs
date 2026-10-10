@@ -8,7 +8,7 @@
 // 4. the satellite is followed in both senses with pseudo arclength (tangent turning < 0.35 rad, steps below 6 % of the distance from the branch point so that Newton cannot land on the repeat
 //    curve) until the rotation angle is 0: a periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
 // node tools/branch-point.mjs n theta [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
-//   --write stores the numbers in data/branch-points.json under the key 'n upper' or 'n lower' (the other entries are kept). a run takes a few minutes (n = 8 with --control about 20)
+//   --write stores the numbers in data/branch-points/n-upper.json or n-lower.json. a run takes a few minutes (n = 8 with --control about 20)
 import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';
@@ -166,11 +166,10 @@ if (control) for (const sgn of [1, -1]) {
   console.log(`   repeat direction (control), sense ${sgn}: ${r.why} after ${r.points} points` + (r.zero ? `: theta = 0 at T* ${r.zero.Tstar.toFixed(8)}, L* ${r.zero.Lstar.toFixed(8)}` : ''));
 }
 if (write) {
-  const file = new URL('../data/branch-points.json', import.meta.url);
-  const all = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : { what: 'branch points of satellites on the family of Broucke\'s R orbits (tools/branch-point.mjs): the R member with rotation number nu = 1/n, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js. Keys: n and the branch of nu (the stable stretch has two, the lower and the upper one, each crosses 1/n once).', entries: {} };
   const r6 = (x) => Number(x.toPrecision(10));
   for (const r of [...result.satellite, ...result.control]) r.curve = r.curve.map((p) => ({ s: r6(p.s), Tstar: r6(p.Tstar), Lstar: r6(p.Lstar), turns: r6(p.turns), lam: r6(p.lam), minDist: r6(p.minDist) }));
-  all.entries[`${n} ${branchName}`] = result;
-  fs.writeFileSync(file, JSON.stringify(all));
-  console.log('   written to data/branch-points.json');
+  const what = 'branch point of satellites on the family of Broucke R orbits (tools/branch-point.mjs): the R member with rotation number nu = 1/n on the upper or the lower nu of the stable stretch, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js. A sense ends at a zero of theta (a periodic orbit) or is stopped by a limit of the continuation: a closest approach below 0.03, a collapse of the step, or 700 accepted steps; such a stop says nothing about the curve beyond it.';
+  fs.mkdirSync(new URL('../data/branch-points/', import.meta.url), { recursive: true });
+  fs.writeFileSync(new URL(`../data/branch-points/${n}-${branchName}.json`, import.meta.url), JSON.stringify({ what, ...result, branch: branchName }));
+  console.log(`   written to data/branch-points/${n}-${branchName}.json`);
 }
