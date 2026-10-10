@@ -1,0 +1,59 @@
+{
+ "nmax": 60,
+ "tolerance": 0.00001,
+ "orbits": 102,
+ "controls": [
+  {
+   "Lstar": 0.0438,
+   "returnsAtN": [
+    3
+   ]
+  },
+  {
+   "Lstar": 0.252,
+   "returnsAtN": [
+    3
+   ]
+  },
+  {
+   "Lstar": 0.4074,
+   "returnsAtN": [
+    3
+   ]
+  },
+  {
+   "Lstar": 0.4099,
+   "returnsAtN": [
+    3
+   ]
+  }
+ ],
+ "withCyclicReturn": [],
+ "smallestMismatches": [
+  {
+   "name": "t54",
+   "n": 2,
+   "mismatch": 0.08993970493260772
+  },
+  {
+   "name": "t34",
+   "n": 10,
+   "mismatch": 0.2534351266955387
+  },
+  {
+   "name": "t11",
+   "n": 2,
+   "mismatch": 0.3466946549100556
+  },
+  {
+   "name": "t38",
+   "n": 2,
+   "mismatch": 0.36275316662336476
+  },
+  {
+   "name": "t55",
+   "n": 3,
+   "mismatch": 0.36553050832543765
+  }
+ ]
+}

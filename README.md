@@ -131,7 +131,12 @@ turn from a whole number, so it does not close after four relative periods eithe
 step collapse, and the syzygy word is (012)^2 at every checked point. At their L* the branch contains the atlas orbits SN.19, SN.20 and SN.21 as 3, 5
 and 2 relative periods (T* to 3e-6 or better from the stored points, n times theta a whole number of turns, 6n syzygies). None of my 77 unmatched
 orbits is n relative periods of a member of this branch in that range: 47 have a syzygy count that is not a multiple of 6, 9 are inside the range and
-none is close (best 2.9 % in T* and 0.054 turn in n times theta), and 21 have L* above 0.41 and are not tested. SN.19, SN.20 and SN.21 are atlas
+none is close (best 2.9 % in T* and 0.054 turn in n times theta), and 21 have L* above 0.41, outside the trace. For all of them there is a test that
+does not depend on the range: an orbit that is m relative periods of a rotating choreography returns after T/(3m) with the bodies renamed cyclically,
+up to a rotation (one relative period: T/3; checked with four members of the trace and with repeats of them). None of my 102 orbits (the 85 and the
+17 of the arclength list) has such a return for any n up to 60; the smallest mismatch is 9e-2, a member of the branch has 1e-6 or less
+(`tools/choreo-test.mjs`, `data/choreo-test.json`). So none of my orbits, the 21 above L* = 0.41 included, is a member of this branch or a repeat of
+one. SN.19, SN.20 and SN.21 are atlas
 orbits; the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) on rotating eights are not read yet.
 
 **Counting.** The 85 orbits of the perpendicular search are 6 linearly stable, 77 unstable and 2 uncertain. The satellite work uses 7 stable parents:
@@ -646,6 +651,8 @@ path):
 - `plot-orbits.mjs`, `plot-perp.mjs` draw orbits as svg (figures/)
 - `closure-mp.py` integrates the double precision starts of the 85 orbits for one period in 40 digits (about 6 minutes; `--write` stores
   `data/closure-mp.json`)
+- `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
+  counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
   `data/closure-stored.json`), `stable-samples.py` counts the stable samples on the branch arms; `orbit-table.mjs`, `check-refined.mjs`,
   `arm-repeat-check.mjs` and `verify-branches.mjs` write their result files, so tracked files change when they run
@@ -691,6 +698,7 @@ typed in by the reader; they say so and stop without it. `data/rpo-reproduce-*.j
 | `data/satellite-results*.jsonl`, `satellite-jobs*.json` | the branch arms followed from the repeats of the 7 stable orbits (results 5 to 7 rounded to 14 digits, see Running it); `*.repeats-*.json`, `arm-repeats.json` the minimal period of the arms, `*.verified.json`, `verified-branch-points.json` their checks, `bifurcation-points.json` the table of branch points |
 | `data/families85/*.json`, `family-pass-through.json` | traces of the families that start at six published orbits (from the exact start, not moved) and the check from my side; the starts are my conversions of rows of Davoust and Broucke 1982 and of the CPC satellite N = 3 |
 | `data/return-test.json`, `henon1976-derived.json`, `henon-family-curve.json` | the return test of my 102 entries (85 + 17, 100 distinct orbits; rotation, relabelling, reflection, reversal after T/n); **derived numbers** (L*, T*, alignments) and the printed rotation angle of the 46 tabulated orbits of Henon 1976 and points of the family traced from them; the printed start values are not stored |
+| `data/choreo-test.json` | the result of `tools/choreo-test.mjs`: no orbit has a cyclic return, the smallest mismatches, and the four members of the rotating eight branch used as a control |
 | `data/closure-stored.json` | the closure of the 30 digit start values as stored in `data/refined`, integrated in 50 digits (`tools/closure-stored.py`) next to the number written into the files |
 | `data/closure-mp.json` | the closure of the 85 orbits from their double precision start values in 40 digit arithmetic (`tools/closure-mp.py`) next to the columns `closureDP45` and `closureBS` |
 | `data/rebound-check.json` | the result of `tools/rebound-check.py`: closure of the 102 entries (100 distinct orbits) with REBOUND (IAS15) from the start values, and the multipliers of the 7 stable ones |
