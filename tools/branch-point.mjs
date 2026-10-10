@@ -5,7 +5,7 @@
 // 3. the two directions at the branch point come from the quadratic bifurcation equation g(a, b) = psi . F(Y0 + h (a v1 + b v2)) / h^2 = 0 on the null space (psi: left null vector); one root is the
 //    tangent of the repeat curve (the exact repeats of the neighbouring members, started cold), the other is the satellite;
 // 4. the satellite is followed in both senses with pseudo arclength (tangent turning < 0.35 rad, steps below 6 % of the distance from the branch point so that Newton cannot land on the repeat
-//    curve) until the rotation angle is 0: an exactly periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
+//    curve) until the rotation angle is 0: a periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
 // node tools/branch-point.mjs n theta [--control] [--write]      n = 5, 6 or 8; theta = rotation of the member in turns (0.2010, 0.1678, 0.1258): the crossing of nu = 1/n nearest to it
 //   --write stores the numbers in data/branch-points.json (the other entries are kept). a run takes a few minutes (n = 8 with --control about 20)
 import fs from 'fs';

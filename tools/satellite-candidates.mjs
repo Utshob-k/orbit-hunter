@@ -1,4 +1,4 @@
-// the two orbits of data/satellite-candidates.json (exactly periodic orbits on satellite curves of Broucke's R family, refined to 30 digits): recomputes from the values
+// the two orbits of data/satellite-candidates.json (periodic orbits on satellite curves of Broucke's R family, refined to 30 digits): recomputes from the values
 // T*, L*, rotation angle, closest approach, the syzygy word and the number of alignments, the repeat test (src/covers.js), the closure tiers (double precision) and the multipliers,
 // and compares them with my 85 + 17 orbits and, if the path of the atlas catalogue is given (https://data.threebodyorbits.com/catalogue.json, not stored here), with the equal mass
 // atlas entries: the rule of tools/compare-atlas-all.py (T* and L* to 1e-5, repeats up to 12 either way, same alignments), and "near" at 5e-3.

@@ -171,8 +171,8 @@ rotation 0.2240) that were not followed. In the literature checked (the papers n
 satellites of Broucke's family R were found; the review "A review on periodic orbits of the general planar three-body problem" (Sci. China Phys. Mech.
 Astron., 2024, doi 10.1007/s11433-024-2686-6) could not be read (the publisher redirected to a login page), so "not found" is all that can be said.
 
-The satellite curves of the T* = 17.847 and 19.769 orbits each have a second exactly periodic orbit, after the stable one, where the rotation angle
-comes back to 0 near a close approach: T* = 17.7208, L* = 1.6293 (word (01)^5, 10 alignments) and T* = 19.6472, L* = 1.5989 ((01)^6, 12 alignments).
+The satellite curves of the T* = 17.847 and 19.769 orbits each have a second orbit with rotation angle 0, after the stable one, near a close approach:
+T* = 17.7208, L* = 1.6293 (word (01)^5, 10 alignments) and T* = 19.6472, L* = 1.5989 ((01)^6, 12 alignments).
 They were refined to 30 digits (closure of the full period 1.2e-21 and 3.6e-21), have no repeat (the return test for n up to 200), are unstable
 (largest multiplier 210.11 and 253.24) and have a closest approach of 0.056 and 0.058. REBOUND (IAS15, default settings) closes them to 3.8e-12 and
 4.3e-12 from the double values and gives the multipliers 210.1089 and 253.2420 (`tools/satellite-check.py`). They match nothing in the sources checked
@@ -713,7 +713,7 @@ path):
   closure, word and stability at every step; `r-family.mjs` checks the members of the family of Broucke's R orbits through my T* = 33.745 orbit
   against the atlas (by key, give the path of `catalogue.json`) and against Table 5 of Davoust and Broucke 1982
 - `branch-point.mjs` solves the branch point of a satellite on the family of Broucke's R orbits (the member with nu = 1/n, the two null vectors of its
-  n fold repeat, the satellite followed to its exactly periodic orbit; a few minutes, `--control` adds the repeat direction, `--write` stores
+  n fold repeat, the satellite followed to its periodic orbit; a few minutes, `--control` adds the repeat direction, `--write` stores
   `data/branch-points.json`); `satellite-candidates.mjs` and `satellite-check.py` recompute the numbers of the two refined orbits of the satellite
   curves (the second needs `pip install rebound numpy`)
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
