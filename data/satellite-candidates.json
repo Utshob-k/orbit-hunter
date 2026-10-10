@@ -1,5 +1,5 @@
 {
- "what": "two periodic orbits (rotation angle 0) on the satellite curves of Broucke's R family, found by following the satellite of the T* = 17.847 and 19.769 orbits (tools/family-follow.mjs) to its second zero of theta, refined to 30 digits with tools/refine-mp.py (u1 u2 lam t 30; the closure of the full period is measured on the rounded values written here). tools/satellite-candidates.mjs recomputes T*, L*, word, alignments, repeats, stability and the comparison with the atlas and with my lists from them; tools/satellite-check.py checks the closure and the multiplier with REBOUND. These orbits match nothing in the sources checked so far; they are not claimed to be new.",
+ "what": "periodic orbits (rotation angle 0) on satellite curves of Broucke's R family, refined to 30 digits with tools/refine-mp.py (u1 u2 lam t 30; the closure of the full period is measured on the rounded values written here): the second zeros of theta on the satellite curves of the T* = 17.847 and 19.769 orbits (n = 5 and 6, tools/family-follow.mjs), and the zeros of theta on the upper branch for n = 7 and n = 9 to 12 (tools/branch-point.mjs). tools/satellite-candidates.mjs recomputes T*, L*, word, alignments, repeats, stability and the comparison with other lists from them; tools/satellite-check.py checks the closure and the multiplier with REBOUND. The n = 7 orbit is the atlas entry bhhsat_r7_1_1; the others match nothing in the sources checked so far (the review of Li and Liao 2025 could not be read), which says nothing about whether they are known.",
  "orbits": [
   {
    "label": "T* 17.7208, second zero of theta on the satellite curve of the T* = 17.847 orbit (n = 5)",
@@ -22,6 +22,61 @@
    "t": "33.8207160571911231269130921623",
    "residual": "6.91e-31",
    "closure_full_period": "3.6e-21"
+  },
+  {
+   "label": "T* 21.6627, zero of theta on the satellite curve of the member with nu = 1/7 (upper branch, n = 7)",
+   "n": 7,
+   "digits": 30,
+   "u1": "-0.716865904854038096090465279349",
+   "u2": "-0.990293085673096565961775096398",
+   "lam": "0.70724266051090886546137133101",
+   "t": "3.1111783722864895228610690586",
+   "residual": "3.92e-31",
+   "closure_full_period": "1.06e-25"
+  },
+  {
+   "label": "T* 25.3832, zero of theta on the satellite curve of the member with nu = 1/9 (upper branch, n = 9)",
+   "n": 9,
+   "digits": 30,
+   "u1": "-1.02417202116305450408701302504",
+   "u2": "-0.607838688599691827616127828725",
+   "lam": "0.540144316378986370442921140052",
+   "t": "8.73369499207754830077973612816",
+   "residual": "7.27e-33",
+   "closure_full_period": "1.16e-24"
+  },
+  {
+   "label": "T* 27.2171, zero of theta on the satellite curve of the member with nu = 1/10 (upper branch, n = 10)",
+   "n": 10,
+   "digits": 30,
+   "u1": "-1.03591925208339360656736221758",
+   "u2": "-0.614210642014044401418569865867",
+   "lam": "0.547013784846761292721153625368",
+   "t": "9.53851044419651902244262078335",
+   "residual": "3.12e-31",
+   "closure_full_period": "2.14e-24"
+  },
+  {
+   "label": "T* 29.0367, zero of theta on the satellite curve of the member with nu = 1/11 (upper branch, n = 11)",
+   "n": 11,
+   "digits": 30,
+   "u1": "-0.627119475497529288420651524079",
+   "u2": "-1.35483495798990282309162104461",
+   "lam": "0.802479143779873241369891669461",
+   "t": "2.74037735907563292659218958334",
+   "residual": "6.81e-30",
+   "closure_full_period": "7.94e-25"
+  },
+  {
+   "label": "T* 30.8437, zero of theta on the satellite curve of the member with nu = 1/12 (upper branch, n = 12)",
+   "n": 12,
+   "digits": 30,
+   "u1": "-0.614275535549816782640542256215",
+   "u2": "-1.10887145419115077323919314123",
+   "lam": "0.776184054942416015122916820199",
+   "t": "2.64083368467037277082405861433",
+   "residual": "4.9e-30",
+   "closure_full_period": "5.12e-25"
   }
  ]
 }

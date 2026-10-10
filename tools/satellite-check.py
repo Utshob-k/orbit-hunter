@@ -1,6 +1,6 @@
-# checks the two orbits of data/satellite-candidates.json with REBOUND (IAS15, default settings; nothing from src/ is used): the closure after one period (max norm, best rotation removed, from the
+# checks the orbits of data/satellite-candidates.json with REBOUND (IAS15, default settings; nothing from src/ is used): the closure after one period (max norm, best rotation removed, from the
 # start values rounded to double precision) and the largest nontrivial multiplier of the 12 x 12 monodromy matrix (the 8 multipliers closest to 1 are the trivial ones), next to the multiplier of src/relative.js
-# (210.109 and 253.242 in tools/satellite-candidates.mjs). the functions are the ones of tools/rebound-check.py.
+# (210.109, 253.242 and 1.000 for the five stable orbits in tools/satellite-candidates.mjs). the functions are the ones of tools/rebound-check.py.
 # pip install rebound numpy;  python tools/satellite-check.py [--write]      (data/satellite-check.json is only written with --write)
 import json, math, sys, time, os
 import numpy as np
@@ -65,7 +65,7 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 cands = json.load(open(os.path.join(root, 'data', 'satellite-candidates.json')))['orbits']
 _s = rebound.Simulation(); _s.integrator = 'ias15'
 print('REBOUND', rebound.__version__, '; IAS15 epsilon', _s.integrator.epsilon, '; numpy', np.__version__)
-MINE = [210.109, 253.242]      # tools/satellite-candidates.mjs
+MINE = [210.109, 253.242, 1.0, 1.0, 1.0, 1.0, 1.0]      # tools/satellite-candidates.mjs, in the order of the file
 out = []
 for c, mine in zip(cands, MINE):
     u1, u2, lam, t = (float(c[k]) for k in ('u1', 'u2', 'lam', 't'))
