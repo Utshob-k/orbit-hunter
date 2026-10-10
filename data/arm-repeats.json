@@ -1,6 +1,6 @@
 {
  "3|3|0.5194|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 3,
   "lamBP": 0.5194016697949618,
@@ -11,7 +11,7 @@
   "parentRepeat": 1
  },
  "0|7|0.8415|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 7,
   "lamBP": 0.8415285074677714,
@@ -22,7 +22,7 @@
   "parentRepeat": 1
  },
  "0|7|0.8415|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 7,
   "lamBP": 0.8415285074677714,
@@ -33,7 +33,7 @@
   "parentRepeat": 1
  },
  "0|6|0.8479|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 6,
   "lamBP": 0.8479365901818,
@@ -44,7 +44,7 @@
   "parentRepeat": 1
  },
  "0|6|0.8479|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 6,
   "lamBP": 0.8479365901818,
@@ -55,7 +55,7 @@
   "parentRepeat": 1
  },
  "0|5|0.9500|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 5,
   "lamBP": 0.9499953487380759,
@@ -66,7 +66,7 @@
   "parentRepeat": 1
  },
  "0|5|0.9500|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 5,
   "lamBP": 0.9499953487380759,
@@ -77,7 +77,7 @@
   "parentRepeat": 1
  },
  "2|4|0.6508|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 4,
   "lamBP": 0.6507718486779247,
@@ -88,7 +88,7 @@
   "parentRepeat": 1
  },
  "2|4|0.6508|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 4,
   "lamBP": 0.6507718486779247,
@@ -99,7 +99,7 @@
   "parentRepeat": 1
  },
  "2|3|0.6629|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 3,
   "lamBP": 0.6629388934287987,
@@ -110,7 +110,7 @@
   "parentRepeat": 1
  },
  "2|3|0.6629|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 3,
   "lamBP": 0.6629388934287987,
@@ -121,7 +121,7 @@
   "parentRepeat": 1
  },
  "1|3|0.5381|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 3,
   "lamBP": 0.5380652407751363,
@@ -132,7 +132,7 @@
   "parentRepeat": 9
  },
  "1|3|0.5381|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 3,
   "lamBP": 0.5380652407751363,
@@ -143,7 +143,7 @@
   "parentRepeat": 9
  },
  "1|3|0.6018|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 3,
   "lamBP": 0.601805897503908,
@@ -154,7 +154,7 @@
   "parentRepeat": 9
  },
  "1|3|0.6018|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 3,
   "lamBP": 0.601805897503908,
@@ -165,7 +165,7 @@
   "parentRepeat": 9
  },
  "1|3|0.5566|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 3,
   "lamBP": 0.5566364556616841,
@@ -176,7 +176,7 @@
   "parentRepeat": 9
  },
  "1|3|0.5566|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 3,
   "lamBP": 0.5566364556616841,
@@ -187,7 +187,7 @@
   "parentRepeat": 9
  },
  "5|4|0.4825|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 4,
   "lamBP": 0.4825098354567688,
@@ -198,7 +198,7 @@
   "parentRepeat": 1
  },
  "5|4|0.4825|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 4,
   "lamBP": 0.4825098354567688,
@@ -209,7 +209,7 @@
   "parentRepeat": 1
  },
  "2|5|0.6404|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 5,
   "lamBP": 0.6403573771478329,
@@ -220,7 +220,7 @@
   "parentRepeat": 1
  },
  "2|5|0.6404|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 5,
   "lamBP": 0.6403573771478329,
@@ -231,7 +231,7 @@
   "parentRepeat": 1
  },
  "5|5|0.4462|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 5,
   "lamBP": 0.44615051322426125,
@@ -242,7 +242,7 @@
   "parentRepeat": 1
  },
  "5|5|0.4462|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 5,
   "lamBP": 0.44615051322426125,
@@ -253,7 +253,7 @@
   "parentRepeat": 1
  },
  "5|6|0.4200|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 6,
   "lamBP": 0.41996635085252687,
@@ -264,7 +264,7 @@
   "parentRepeat": 1
  },
  "5|6|0.4200|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 6,
   "lamBP": 0.41996635085252687,
@@ -275,7 +275,7 @@
   "parentRepeat": 1
  },
  "3|4|0.5153|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 4,
   "lamBP": 0.5153368043458497,
@@ -286,7 +286,7 @@
   "parentRepeat": 1
  },
  "3|4|0.5153|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 4,
   "lamBP": 0.5153368043458497,
@@ -297,7 +297,7 @@
   "parentRepeat": 1
  },
  "4|5|0.7019|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 5,
   "lamBP": 0.7018588625378244,
@@ -308,7 +308,7 @@
   "parentRepeat": 2
  },
  "6|3|0.1336|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 3,
   "lamBP": 0.13362636662171784,
@@ -319,7 +319,7 @@
   "parentRepeat": 1
  },
  "6|3|0.1336|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 3,
   "lamBP": 0.13362636662171784,
@@ -330,7 +330,7 @@
   "parentRepeat": 1
  },
  "6|4|0.1075|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 4,
   "lamBP": 0.10753970516469996,
@@ -341,7 +341,7 @@
   "parentRepeat": 1
  },
  "6|4|0.1075|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 4,
   "lamBP": 0.10753970516469996,
@@ -352,7 +352,7 @@
   "parentRepeat": 1
  },
  "6|5|0.0898|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 5,
   "lamBP": 0.08982446433931626,
@@ -363,7 +363,7 @@
   "parentRepeat": 1
  },
  "6|5|0.0898|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 5,
   "lamBP": 0.08982446433931626,
@@ -374,7 +374,7 @@
   "parentRepeat": 1
  },
  "4|4|0.7000|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 4,
   "lamBP": 0.7000482314835783,
@@ -385,7 +385,7 @@
   "parentRepeat": 2
  },
  "4|4|0.7000|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 4,
   "lamBP": 0.7000482314835783,
@@ -396,7 +396,7 @@
   "parentRepeat": 2
  },
  "1|9|0.5435|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5434984901177808,
@@ -407,7 +407,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5843|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5843210224875405,
@@ -418,7 +418,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5973|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5973124811628667,
@@ -429,7 +429,7 @@
   "parentRepeat": 9
  },
  "1|10|0.6068|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.606842215477504,
@@ -440,7 +440,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5218|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5218018520673715,
@@ -451,7 +451,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5218|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5218018520673715,
@@ -462,7 +462,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5549|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5548761659020097,
@@ -473,7 +473,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5549|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5548761659020097,
@@ -484,7 +484,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5102|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5102274275256836,
@@ -495,7 +495,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5723|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5723254926984581,
@@ -506,7 +506,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5723|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5723254926984581,
@@ -517,7 +517,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5768|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5768070018703291,
@@ -528,7 +528,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5768|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5768070018703291,
@@ -539,7 +539,7 @@
   "parentRepeat": 9
  },
  "1|11|0.6008|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.6008161463028486,
@@ -550,7 +550,7 @@
   "parentRepeat": 9
  },
  "1|11|0.6008|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.6008161463028486,
@@ -561,7 +561,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5092|1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5091995535252944,
@@ -572,7 +572,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5092|-1": {
-  "file": "data\\satellite-results5",
+  "file": "satellite-results5",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5091995535252944,
@@ -583,7 +583,7 @@
   "parentRepeat": 9
  },
  "0|19|0.8455|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 19,
   "lamBP": 0.8454738082968093,
@@ -594,7 +594,7 @@
   "parentRepeat": 1
  },
  "0|19|0.8455|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 19,
   "lamBP": 0.8454738082968093,
@@ -605,7 +605,7 @@
   "parentRepeat": 1
  },
  "0|13|0.9364|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 13,
   "lamBP": 0.9363567796919369,
@@ -616,7 +616,7 @@
   "parentRepeat": 1
  },
  "0|13|0.9364|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 13,
   "lamBP": 0.9363567796919369,
@@ -627,7 +627,7 @@
   "parentRepeat": 1
  },
  "0|16|0.8267|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 16,
   "lamBP": 0.8266537317065497,
@@ -638,7 +638,7 @@
   "parentRepeat": 1
  },
  "0|16|0.8267|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 16,
   "lamBP": 0.8266537317065497,
@@ -649,7 +649,7 @@
   "parentRepeat": 1
  },
  "0|19|0.8256|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 19,
   "lamBP": 0.8255993172861684,
@@ -660,7 +660,7 @@
   "parentRepeat": 1
  },
  "0|19|0.8256|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 19,
   "lamBP": 0.8255993172861684,
@@ -671,7 +671,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6286|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6286241613094699,
@@ -682,7 +682,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6286|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6286241613094699,
@@ -693,7 +693,7 @@
   "parentRepeat": 1
  },
  "2|17|0.6343|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 17,
   "lamBP": 0.6342612343561563,
@@ -704,7 +704,7 @@
   "parentRepeat": 1
  },
  "2|17|0.6343|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 17,
   "lamBP": 0.6342612343561563,
@@ -715,7 +715,7 @@
   "parentRepeat": 1
  },
  "2|20|0.6259|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 20,
   "lamBP": 0.6259342964500929,
@@ -726,7 +726,7 @@
   "parentRepeat": 1
  },
  "2|20|0.6259|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 20,
   "lamBP": 0.6259342964500929,
@@ -737,7 +737,7 @@
   "parentRepeat": 1
  },
  "2|16|0.6372|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 16,
   "lamBP": 0.6372399452118565,
@@ -748,7 +748,7 @@
   "parentRepeat": 1
  },
  "2|16|0.6372|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 16,
   "lamBP": 0.6372399452118565,
@@ -759,7 +759,7 @@
   "parentRepeat": 1
  },
  "0|12|0.9596|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 12,
   "lamBP": 0.9596174750957401,
@@ -770,7 +770,7 @@
   "parentRepeat": 1
  },
  "0|12|0.9596|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 0,
   "k": 12,
   "lamBP": 0.9596174750957401,
@@ -781,7 +781,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6026|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6025920331237619,
@@ -792,7 +792,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6026|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6025920331237619,
@@ -803,7 +803,7 @@
   "parentRepeat": 1
  },
  "2|14|0.6655|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 14,
   "lamBP": 0.6654535767390226,
@@ -814,7 +814,7 @@
   "parentRepeat": 1
  },
  "2|14|0.6655|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 14,
   "lamBP": 0.6654535767390226,
@@ -825,7 +825,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6531|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6530743617373502,
@@ -836,7 +836,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6531|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6530743617373502,
@@ -847,7 +847,7 @@
   "parentRepeat": 1
  },
  "2|15|0.6537|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 15,
   "lamBP": 0.653661956432747,
@@ -858,7 +858,7 @@
   "parentRepeat": 1
  },
  "2|15|0.6537|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 15,
   "lamBP": 0.653661956432747,
@@ -869,7 +869,7 @@
   "parentRepeat": 1
  },
  "2|12|0.6700|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 12,
   "lamBP": 0.6700234979477988,
@@ -880,7 +880,7 @@
   "parentRepeat": 1
  },
  "2|12|0.6700|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 12,
   "lamBP": 0.6700234979477988,
@@ -891,7 +891,7 @@
   "parentRepeat": 1
  },
  "2|17|0.6579|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 17,
   "lamBP": 0.6579015496288522,
@@ -902,7 +902,7 @@
   "parentRepeat": 1
  },
  "2|17|0.6579|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 17,
   "lamBP": 0.6579015496288522,
@@ -913,7 +913,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6665|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6665063798421694,
@@ -924,7 +924,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6665|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6665063798421694,
@@ -935,7 +935,7 @@
   "parentRepeat": 1
  },
  "2|17|0.6697|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 17,
   "lamBP": 0.6697384644897723,
@@ -946,7 +946,7 @@
   "parentRepeat": 1
  },
  "2|17|0.6697|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 17,
   "lamBP": 0.6697384644897723,
@@ -957,7 +957,7 @@
   "parentRepeat": 1
  },
  "2|20|0.6647|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 20,
   "lamBP": 0.6647414319592869,
@@ -968,7 +968,7 @@
   "parentRepeat": 1
  },
  "2|20|0.6647|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 20,
   "lamBP": 0.6647414319592869,
@@ -979,7 +979,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6608|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6608271307575773,
@@ -990,7 +990,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6608|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6608271307575773,
@@ -1001,7 +1001,7 @@
   "parentRepeat": 1
  },
  "5|19|0.3122|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 5,
   "k": 19,
   "lamBP": 0.31222247729745956,
@@ -1012,7 +1012,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6703|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6702542456937293,
@@ -1023,7 +1023,7 @@
   "parentRepeat": 1
  },
  "2|19|0.6703|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 2,
   "k": 19,
   "lamBP": 0.6702542456937293,
@@ -1034,7 +1034,7 @@
   "parentRepeat": 1
  },
  "5|20|0.3092|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 5,
   "k": 20,
   "lamBP": 0.30918510263592364,
@@ -1045,7 +1045,7 @@
   "parentRepeat": 1
  },
  "6|12|0.0390|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 12,
   "lamBP": 0.038977164109692174,
@@ -1056,7 +1056,7 @@
   "parentRepeat": 1
  },
  "6|10|0.0474|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 10,
   "lamBP": 0.047406609331556944,
@@ -1067,7 +1067,7 @@
   "parentRepeat": 1
  },
  "6|10|0.0474|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 10,
   "lamBP": 0.047406609331556944,
@@ -1078,7 +1078,7 @@
   "parentRepeat": 1
  },
  "6|11|0.0429|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.042874752596374466,
@@ -1089,7 +1089,7 @@
   "parentRepeat": 1
  },
  "6|11|0.0429|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.042874752596374466,
@@ -1100,7 +1100,7 @@
   "parentRepeat": 1
  },
  "6|13|0.0356|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.035585145826794846,
@@ -1111,7 +1111,7 @@
   "parentRepeat": 1
  },
  "6|13|0.0356|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.035585145826794846,
@@ -1122,7 +1122,7 @@
   "parentRepeat": 1
  },
  "6|13|0.0717|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.07165948659874474,
@@ -1133,7 +1133,7 @@
   "parentRepeat": 1
  },
  "6|13|0.0717|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.07165948659874474,
@@ -1144,7 +1144,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0500|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.04996337439174793,
@@ -1155,7 +1155,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0500|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.04996337439174793,
@@ -1166,7 +1166,7 @@
   "parentRepeat": 1
  },
  "6|11|0.0829|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.08290395608300777,
@@ -1177,7 +1177,7 @@
   "parentRepeat": 1
  },
  "6|11|0.0829|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.08290395608300777,
@@ -1188,7 +1188,7 @@
   "parentRepeat": 1
  },
  "6|17|0.0558|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.05580253097937028,
@@ -1199,7 +1199,7 @@
   "parentRepeat": 1
  },
  "6|17|0.0558|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.05580253097937028,
@@ -1210,7 +1210,7 @@
   "parentRepeat": 1
  },
  "6|15|0.0629|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 15,
   "lamBP": 0.06287789399660915,
@@ -1221,7 +1221,7 @@
   "parentRepeat": 1
  },
  "6|15|0.0629|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 15,
   "lamBP": 0.06287789399660915,
@@ -1232,7 +1232,7 @@
   "parentRepeat": 1
  },
  "6|20|0.0701|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 20,
   "lamBP": 0.0700501635450812,
@@ -1243,7 +1243,7 @@
   "parentRepeat": 1
  },
  "6|20|0.0701|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 20,
   "lamBP": 0.0700501635450812,
@@ -1254,7 +1254,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0733|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.07333607345629556,
@@ -1265,7 +1265,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0733|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.07333607345629556,
@@ -1276,7 +1276,7 @@
   "parentRepeat": 1
  },
  "6|17|0.0808|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.08081303630960361,
@@ -1287,7 +1287,7 @@
   "parentRepeat": 1
  },
  "6|17|0.0808|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.08081303630960361,
@@ -1298,7 +1298,7 @@
   "parentRepeat": 1
  },
  "6|9|0.0979|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 9,
   "lamBP": 0.09791984505877448,
@@ -1309,7 +1309,7 @@
   "parentRepeat": 1
  },
  "6|9|0.0979|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 9,
   "lamBP": 0.09791984505877448,
@@ -1320,7 +1320,7 @@
   "parentRepeat": 1
  },
  "6|14|0.0951|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 14,
   "lamBP": 0.09507184163408236,
@@ -1331,7 +1331,7 @@
   "parentRepeat": 1
  },
  "6|14|0.0951|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 14,
   "lamBP": 0.09507184163408236,
@@ -1342,7 +1342,7 @@
   "parentRepeat": 1
  },
  "6|16|0.0851|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 16,
   "lamBP": 0.08509718622025403,
@@ -1353,7 +1353,7 @@
   "parentRepeat": 1
  },
  "6|16|0.0851|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 16,
   "lamBP": 0.08509718622025403,
@@ -1364,7 +1364,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0937|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.09370613235974723,
@@ -1375,7 +1375,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0937|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.09370613235974723,
@@ -1386,7 +1386,7 @@
   "parentRepeat": 1
  },
  "6|13|0.1009|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.10093607650037965,
@@ -1397,7 +1397,7 @@
   "parentRepeat": 1
  },
  "6|13|0.1009|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.10093607650037965,
@@ -1408,7 +1408,7 @@
   "parentRepeat": 1
  },
  "6|11|0.1150|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.1150424199773359,
@@ -1419,7 +1419,7 @@
   "parentRepeat": 1
  },
  "6|11|0.1150|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.1150424199773359,
@@ -1430,7 +1430,7 @@
   "parentRepeat": 1
  },
  "6|7|0.1192|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 7,
   "lamBP": 0.11919214256703582,
@@ -1441,7 +1441,7 @@
   "parentRepeat": 1
  },
  "6|7|0.1192|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 7,
   "lamBP": 0.11919214256703582,
@@ -1452,7 +1452,7 @@
   "parentRepeat": 1
  },
  "6|17|0.1025|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.10251221650240572,
@@ -1463,7 +1463,7 @@
   "parentRepeat": 1
  },
  "6|17|0.1025|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.10251221650240572,
@@ -1474,7 +1474,7 @@
   "parentRepeat": 1
  },
  "6|15|0.1131|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 15,
   "lamBP": 0.11307256933876808,
@@ -1485,7 +1485,7 @@
   "parentRepeat": 1
  },
  "6|15|0.1131|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 15,
   "lamBP": 0.11307256933876808,
@@ -1496,7 +1496,7 @@
   "parentRepeat": 1
  },
  "6|10|0.1236|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 10,
   "lamBP": 0.1236481641220895,
@@ -1507,7 +1507,7 @@
   "parentRepeat": 1
  },
  "6|10|0.1236|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 10,
   "lamBP": 0.1236481641220895,
@@ -1518,7 +1518,7 @@
   "parentRepeat": 1
  },
  "6|13|0.1260|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 13,
   "lamBP": 0.12600190932860164,
@@ -1529,7 +1529,7 @@
   "parentRepeat": 1
  },
  "6|5|0.1519|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 5,
   "lamBP": 0.15193030691864093,
@@ -1540,7 +1540,7 @@
   "parentRepeat": 1
  },
  "6|18|0.1167|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 18,
   "lamBP": 0.11666762122924446,
@@ -1551,7 +1551,7 @@
   "parentRepeat": 1
  },
  "6|18|0.1167|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 18,
   "lamBP": 0.11666762122924446,
@@ -1562,7 +1562,7 @@
   "parentRepeat": 1
  },
  "6|19|0.1284|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.12844602307418157,
@@ -1573,7 +1573,7 @@
   "parentRepeat": 1
  },
  "6|19|0.1284|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.12844602307418157,
@@ -1584,7 +1584,7 @@
   "parentRepeat": 1
  },
  "6|8|0.1453|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 8,
   "lamBP": 0.14532172628494675,
@@ -1595,7 +1595,7 @@
   "parentRepeat": 1
  },
  "6|8|0.1453|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 8,
   "lamBP": 0.14532172628494675,
@@ -1606,7 +1606,7 @@
   "parentRepeat": 1
  },
  "6|11|0.1422|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.1422156728346899,
@@ -1617,7 +1617,7 @@
   "parentRepeat": 1
  },
  "6|11|0.1422|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 11,
   "lamBP": 0.1422156728346899,
@@ -1628,7 +1628,7 @@
   "parentRepeat": 1
  },
  "6|18|0.1490|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 18,
   "lamBP": 0.14903185256810778,
@@ -1639,7 +1639,7 @@
   "parentRepeat": 1
  },
  "6|18|0.1490|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 18,
   "lamBP": 0.14903185256810778,
@@ -1650,7 +1650,7 @@
   "parentRepeat": 1
  },
  "6|9|0.1628|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 9,
   "lamBP": 0.16280541601534812,
@@ -1661,7 +1661,7 @@
   "parentRepeat": 1
  },
  "6|9|0.1628|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 9,
   "lamBP": 0.16280541601534812,
@@ -1672,7 +1672,7 @@
   "parentRepeat": 1
  },
  "6|16|0.1612|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 16,
   "lamBP": 0.16119783285613226,
@@ -1683,7 +1683,7 @@
   "parentRepeat": 1
  },
  "6|16|0.1612|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 16,
   "lamBP": 0.16119783285613226,
@@ -1694,7 +1694,7 @@
   "parentRepeat": 1
  },
  "6|15|0.0300|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 15,
   "lamBP": 0.029960604211767952,
@@ -1705,7 +1705,7 @@
   "parentRepeat": 1
  },
  "6|15|0.0300|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 15,
   "lamBP": 0.029960604211767952,
@@ -1716,7 +1716,7 @@
   "parentRepeat": 1
  },
  "6|16|0.0276|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 16,
   "lamBP": 0.027599338548348847,
@@ -1727,7 +1727,7 @@
   "parentRepeat": 1
  },
  "6|16|0.0276|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 16,
   "lamBP": 0.027599338548348847,
@@ -1738,7 +1738,7 @@
   "parentRepeat": 1
  },
  "6|17|0.0255|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.025476172778868485,
@@ -1749,7 +1749,7 @@
   "parentRepeat": 1
  },
  "6|17|0.0255|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 17,
   "lamBP": 0.025476172778868485,
@@ -1760,7 +1760,7 @@
   "parentRepeat": 1
  },
  "1|7|0.5986|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5985920937853609,
@@ -1771,7 +1771,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5986|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5985920937853609,
@@ -1782,7 +1782,7 @@
   "parentRepeat": 9
  },
  "1|6|0.5138|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 6,
   "lamBP": 0.5138488204370777,
@@ -1793,7 +1793,7 @@
   "parentRepeat": 9
  },
  "1|6|0.5138|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 6,
   "lamBP": 0.5138488204370777,
@@ -1804,7 +1804,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5105|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5104779429705489,
@@ -1815,7 +1815,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5105|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5104779429705489,
@@ -1826,7 +1826,7 @@
   "parentRepeat": 9
  },
  "4|8|0.6997|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 4,
   "k": 8,
   "lamBP": 0.6997078655761938,
@@ -1837,7 +1837,7 @@
   "parentRepeat": 2
  },
  "6|18|0.0236|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 18,
   "lamBP": 0.023555674628128225,
@@ -1848,7 +1848,7 @@
   "parentRepeat": 1
  },
  "6|18|0.0236|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 18,
   "lamBP": 0.023555674628128225,
@@ -1859,7 +1859,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0218|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.021809764825072173,
@@ -1870,7 +1870,7 @@
   "parentRepeat": 1
  },
  "6|19|0.0218|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 6,
   "k": 19,
   "lamBP": 0.021809764825072173,
@@ -1881,7 +1881,7 @@
   "parentRepeat": 1
  },
  "4|7|0.7017|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 4,
   "k": 7,
   "lamBP": 0.7017005769870022,
@@ -1892,7 +1892,7 @@
   "parentRepeat": 2
  },
  "4|7|0.7017|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 4,
   "k": 7,
   "lamBP": 0.7017005769870022,
@@ -1903,7 +1903,7 @@
   "parentRepeat": 2
  },
  "4|8|0.7020|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 4,
   "k": 8,
   "lamBP": 0.7019868116592792,
@@ -1914,7 +1914,7 @@
   "parentRepeat": 2
  },
  "4|8|0.7020|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 4,
   "k": 8,
   "lamBP": 0.7019868116592792,
@@ -1925,7 +1925,7 @@
   "parentRepeat": 2
  },
  "1|9|0.5312|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.531238798781267,
@@ -1936,7 +1936,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5312|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.531238798781267,
@@ -1947,7 +1947,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5426|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5425921846219421,
@@ -1958,7 +1958,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5426|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5425921846219421,
@@ -1969,7 +1969,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5291|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5291008238258813,
@@ -1980,7 +1980,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5291|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5291008238258813,
@@ -1991,7 +1991,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5301|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.530059473808975,
@@ -2002,7 +2002,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5301|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.530059473808975,
@@ -2013,7 +2013,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5331|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5331329560740354,
@@ -2024,7 +2024,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5331|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5331329560740354,
@@ -2035,7 +2035,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5604|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5603771902767527,
@@ -2046,7 +2046,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5707|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5707146464905408,
@@ -2057,7 +2057,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5707|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5706952599003848,
@@ -2068,7 +2068,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5707|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5706952599003848,
@@ -2079,7 +2079,7 @@
   "parentRepeat": 9
  },
  "1|9|0.5857|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.5857288202899514,
@@ -2090,7 +2090,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5564|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5564347187521282,
@@ -2101,7 +2101,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5564|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5564347187521282,
@@ -2112,7 +2112,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5720|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5720208185111922,
@@ -2123,7 +2123,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5720|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5720208185111922,
@@ -2134,7 +2134,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5855|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5854864341805363,
@@ -2145,7 +2145,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5855|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5854864341805363,
@@ -2156,7 +2156,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5671|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5670906411863571,
@@ -2167,7 +2167,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5671|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5670906411863571,
@@ -2178,7 +2178,7 @@
   "parentRepeat": 9
  },
  "1|9|0.6096|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.6096003765686163,
@@ -2189,7 +2189,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5896|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5896482722830027,
@@ -2200,7 +2200,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5896|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5896482722830027,
@@ -2211,7 +2211,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5962|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5961574621488755,
@@ -2222,7 +2222,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5962|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5961574621488755,
@@ -2233,7 +2233,7 @@
   "parentRepeat": 9
  },
  "1|11|0.6168|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.6167726354415828,
@@ -2244,7 +2244,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5160|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5160079104700388,
@@ -2255,7 +2255,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5160|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5160079104700388,
@@ -2266,7 +2266,7 @@
   "parentRepeat": 9
  },
  "1|12|0.5021|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 12,
   "lamBP": 0.5021074615145608,
@@ -2277,7 +2277,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5044|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5044385091382545,
@@ -2288,7 +2288,7 @@
   "parentRepeat": 9
  },
  "1|10|0.5044|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 10,
   "lamBP": 0.5044385091382545,
@@ -2299,7 +2299,7 @@
   "parentRepeat": 9
  },
  "1|9|0.4994|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.4993559310177295,
@@ -2310,7 +2310,7 @@
   "parentRepeat": 9
  },
  "1|9|0.4994|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 9,
   "lamBP": 0.4993559310177295,
@@ -2321,7 +2321,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5032|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5031662398971165,
@@ -2332,7 +2332,7 @@
   "parentRepeat": 9
  },
  "1|11|0.5032|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.5031662398971165,
@@ -2343,7 +2343,7 @@
   "parentRepeat": 9
  },
  "1|11|0.4951|1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.4951292350112119,
@@ -2354,7 +2354,7 @@
   "parentRepeat": 9
  },
  "1|11|0.4951|-1": {
-  "file": "data\\satellite-results6",
+  "file": "satellite-results6",
   "orbit": 1,
   "k": 11,
   "lamBP": 0.4951292350112119,
@@ -2365,7 +2365,7 @@
   "parentRepeat": 9
  },
  "0|3|0.9143|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 3,
   "lamBP": 0.9142595025268526,
@@ -2376,7 +2376,7 @@
   "parentRepeat": 1
  },
  "0|3|0.9143|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 3,
   "lamBP": 0.9142595025268526,
@@ -2387,7 +2387,7 @@
   "parentRepeat": 1
  },
  "0|4|0.8767|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 4,
   "lamBP": 0.8766705685518852,
@@ -2398,7 +2398,7 @@
   "parentRepeat": 1
  },
  "0|4|0.8767|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 4,
   "lamBP": 0.8766705685518852,
@@ -2409,7 +2409,7 @@
   "parentRepeat": 1
  },
  "0|7|0.8918|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 7,
   "lamBP": 0.891758422029987,
@@ -2420,7 +2420,7 @@
   "parentRepeat": 1
  },
  "0|5|0.8583|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 5,
   "lamBP": 0.8582926530308991,
@@ -2431,7 +2431,7 @@
   "parentRepeat": 1
  },
  "0|5|0.8583|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 5,
   "lamBP": 0.8582926530308991,
@@ -2442,7 +2442,7 @@
   "parentRepeat": 1
  },
  "0|8|0.9361|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 8,
   "lamBP": 0.9360538271039076,
@@ -2453,7 +2453,7 @@
   "parentRepeat": 1
  },
  "2|8|0.6155|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 8,
   "lamBP": 0.6154778785175746,
@@ -2464,7 +2464,7 @@
   "parentRepeat": 1
  },
  "0|8|0.8373|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 8,
   "lamBP": 0.8372980306541489,
@@ -2475,7 +2475,7 @@
   "parentRepeat": 1
  },
  "0|8|0.8373|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 0,
   "k": 8,
   "lamBP": 0.8372980306541489,
@@ -2486,7 +2486,7 @@
   "parentRepeat": 1
  },
  "2|7|0.6233|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 7,
   "lamBP": 0.6232974116898343,
@@ -2497,7 +2497,7 @@
   "parentRepeat": 1
  },
  "2|7|0.6233|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 7,
   "lamBP": 0.6232974116898343,
@@ -2508,7 +2508,7 @@
   "parentRepeat": 1
  },
  "2|6|0.6314|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 6,
   "lamBP": 0.631396373799204,
@@ -2519,7 +2519,7 @@
   "parentRepeat": 1
  },
  "2|6|0.6314|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 6,
   "lamBP": 0.631396373799204,
@@ -2530,7 +2530,7 @@
   "parentRepeat": 1
  },
  "2|7|0.6567|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 7,
   "lamBP": 0.6566685461158629,
@@ -2541,7 +2541,7 @@
   "parentRepeat": 1
  },
  "2|7|0.6567|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 7,
   "lamBP": 0.6566685461158629,
@@ -2552,7 +2552,7 @@
   "parentRepeat": 1
  },
  "2|5|0.6690|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 5,
   "lamBP": 0.6689878721541641,
@@ -2563,7 +2563,7 @@
   "parentRepeat": 1
  },
  "5|7|0.5066|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 7,
   "lamBP": 0.5066166495392301,
@@ -2574,7 +2574,7 @@
   "parentRepeat": 1
  },
  "5|7|0.5066|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 7,
   "lamBP": 0.5066166495392301,
@@ -2585,7 +2585,7 @@
   "parentRepeat": 1
  },
  "2|7|0.6706|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 7,
   "lamBP": 0.6706477655033432,
@@ -2596,7 +2596,7 @@
   "parentRepeat": 1
  },
  "2|7|0.6706|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 7,
   "lamBP": 0.6706477655033432,
@@ -2607,7 +2607,7 @@
   "parentRepeat": 1
  },
  "5|7|0.4001|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 7,
   "lamBP": 0.4001331354462669,
@@ -2618,7 +2618,7 @@
   "parentRepeat": 1
  },
  "5|7|0.4001|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 7,
   "lamBP": 0.4001331354462669,
@@ -2629,7 +2629,7 @@
   "parentRepeat": 1
  },
  "2|8|0.6671|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 8,
   "lamBP": 0.6670795609118637,
@@ -2640,7 +2640,7 @@
   "parentRepeat": 1
  },
  "2|8|0.6671|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 2,
   "k": 8,
   "lamBP": 0.6670795609118637,
@@ -2651,7 +2651,7 @@
   "parentRepeat": 1
  },
  "5|8|0.3845|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 8,
   "lamBP": 0.38454654215953027,
@@ -2662,7 +2662,7 @@
   "parentRepeat": 1
  },
  "5|8|0.3845|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 5,
   "k": 8,
   "lamBP": 0.38454654215953027,
@@ -2673,7 +2673,7 @@
   "parentRepeat": 1
  },
  "6|6|0.0769|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 6,
   "lamBP": 0.07690971109501678,
@@ -2684,7 +2684,7 @@
   "parentRepeat": 1
  },
  "6|6|0.0769|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 6,
   "lamBP": 0.07690971109501678,
@@ -2695,7 +2695,7 @@
   "parentRepeat": 1
  },
  "6|7|0.0670|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 7,
   "lamBP": 0.06701693514008422,
@@ -2706,7 +2706,7 @@
   "parentRepeat": 1
  },
  "6|7|0.0670|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 6,
   "k": 7,
   "lamBP": 0.06701693514008422,
@@ -2717,7 +2717,7 @@
   "parentRepeat": 1
  },
  "1|4|0.5258|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.5258224915384077,
@@ -2728,7 +2728,7 @@
   "parentRepeat": 9
  },
  "1|4|0.5258|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.5258224915384077,
@@ -2739,7 +2739,7 @@
   "parentRepeat": 9
  },
  "1|6|0.5373|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 6,
   "lamBP": 0.5372579188872109,
@@ -2750,7 +2750,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5310|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5310344629138013,
@@ -2761,7 +2761,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5310|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5310344629138013,
@@ -2772,7 +2772,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5347|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5346546739910931,
@@ -2783,7 +2783,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5347|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5346546739910931,
@@ -2794,7 +2794,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5410|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5409754524745882,
@@ -2805,7 +2805,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5410|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5409754524745882,
@@ -2816,7 +2816,7 @@
   "parentRepeat": 9
  },
  "1|8|0.5443|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 8,
   "lamBP": 0.5443005897379726,
@@ -2827,7 +2827,7 @@
   "parentRepeat": 9
  },
  "1|8|0.5443|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 8,
   "lamBP": 0.5443005897379726,
@@ -2838,7 +2838,7 @@
   "parentRepeat": 9
  },
  "1|4|0.5467|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.546699769467807,
@@ -2849,7 +2849,7 @@
   "parentRepeat": 9
  },
  "1|4|0.5467|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.546699769467807,
@@ -2860,7 +2860,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5481|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5480743149356839,
@@ -2871,7 +2871,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5481|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5480743149356839,
@@ -2882,7 +2882,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5509|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5508961526228247,
@@ -2893,7 +2893,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5509|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5508961526228247,
@@ -2904,7 +2904,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5650|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5649551775606255,
@@ -2915,7 +2915,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5524|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5524373956906677,
@@ -2926,7 +2926,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5524|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5524373956906677,
@@ -2937,7 +2937,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5749|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5748827884291028,
@@ -2948,7 +2948,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5686|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5686285068224652,
@@ -2959,7 +2959,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5686|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5686285068224652,
@@ -2970,7 +2970,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5920|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5920247226639755,
@@ -2981,7 +2981,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5795|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5795070909715319,
@@ -2992,7 +2992,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5795|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5795070909715319,
@@ -3003,7 +3003,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5880|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5879608215734782,
@@ -3014,7 +3014,7 @@
   "parentRepeat": 9
  },
  "1|7|0.5880|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.5879608215734782,
@@ -3025,7 +3025,7 @@
   "parentRepeat": 9
  },
  "1|8|0.5836|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 8,
   "lamBP": 0.5836067508475534,
@@ -3036,7 +3036,7 @@
   "parentRepeat": 9
  },
  "1|8|0.5836|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 8,
   "lamBP": 0.5836067508475534,
@@ -3047,7 +3047,7 @@
   "parentRepeat": 9
  },
  "1|7|0.6090|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 7,
   "lamBP": 0.6090289349212621,
@@ -3058,7 +3058,7 @@
   "parentRepeat": 9
  },
  "1|4|0.6047|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.6047377405601967,
@@ -3069,7 +3069,7 @@
   "parentRepeat": 9
  },
  "1|4|0.6047|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.6047377405601967,
@@ -3080,7 +3080,7 @@
   "parentRepeat": 9
  },
  "1|5|0.6135|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.6135287877550752,
@@ -3091,7 +3091,7 @@
   "parentRepeat": 9
  },
  "1|5|0.6135|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.6135287877550752,
@@ -3102,7 +3102,7 @@
   "parentRepeat": 9
  },
  "1|4|0.6146|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.6145946251370236,
@@ -3113,7 +3113,7 @@
   "parentRepeat": 9
  },
  "1|4|0.6146|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.6145946251370236,
@@ -3124,7 +3124,7 @@
   "parentRepeat": 9
  },
  "1|6|0.6195|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 6,
   "lamBP": 0.6194935369084945,
@@ -3135,7 +3135,7 @@
   "parentRepeat": 9
  },
  "1|6|0.6195|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 6,
   "lamBP": 0.6194935369084945,
@@ -3146,7 +3146,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5013|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5012642285029902,
@@ -3157,7 +3157,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5013|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5012642285029902,
@@ -3168,7 +3168,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5186|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5186084157799511,
@@ -3179,7 +3179,7 @@
   "parentRepeat": 9
  },
  "1|5|0.5186|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 5,
   "lamBP": 0.5186084157799511,
@@ -3190,7 +3190,7 @@
   "parentRepeat": 9
  },
  "1|4|0.4970|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.49701244091582025,
@@ -3201,7 +3201,7 @@
   "parentRepeat": 9
  },
  "1|4|0.4970|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 1,
   "k": 4,
   "lamBP": 0.49701244091582025,
@@ -3212,7 +3212,7 @@
   "parentRepeat": 9
  },
  "4|7|0.7009|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 7,
   "lamBP": 0.7008748521892415,
@@ -3223,7 +3223,7 @@
   "parentRepeat": 2
  },
  "3|7|0.5172|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 7,
   "lamBP": 0.5172205096061113,
@@ -3234,7 +3234,7 @@
   "parentRepeat": 1
  },
  "3|7|0.5172|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 7,
   "lamBP": 0.5172205096061113,
@@ -3245,7 +3245,7 @@
   "parentRepeat": 1
  },
  "3|5|0.5216|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 5,
   "lamBP": 0.5216392006517964,
@@ -3256,7 +3256,7 @@
   "parentRepeat": 1
  },
  "3|5|0.5216|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 5,
   "lamBP": 0.5216392006517964,
@@ -3267,7 +3267,7 @@
   "parentRepeat": 1
  },
  "3|8|0.5209|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 8,
   "lamBP": 0.5209216722965635,
@@ -3278,7 +3278,7 @@
   "parentRepeat": 1
  },
  "3|8|0.5209|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 8,
   "lamBP": 0.5209216722965635,
@@ -3289,7 +3289,7 @@
   "parentRepeat": 1
  },
  "3|7|0.5223|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 7,
   "lamBP": 0.5222715703564663,
@@ -3300,7 +3300,7 @@
   "parentRepeat": 1
  },
  "3|7|0.5223|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 3,
   "k": 7,
   "lamBP": 0.5222715703564663,
@@ -3311,7 +3311,7 @@
   "parentRepeat": 1
  },
  "4|5|0.7007|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 5,
   "lamBP": 0.7007222629263736,
@@ -3322,7 +3322,7 @@
   "parentRepeat": 2
  },
  "4|5|0.7007|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 5,
   "lamBP": 0.7007222629263736,
@@ -3333,7 +3333,7 @@
   "parentRepeat": 2
  },
  "4|7|0.7002|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 7,
   "lamBP": 0.7001842630788524,
@@ -3344,7 +3344,7 @@
   "parentRepeat": 2
  },
  "4|3|0.7004|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 3,
   "lamBP": 0.700398193372916,
@@ -3355,7 +3355,7 @@
   "parentRepeat": 2
  },
  "4|3|0.7004|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 3,
   "lamBP": 0.700398193372916,
@@ -3366,7 +3366,7 @@
   "parentRepeat": 2
  },
  "4|8|0.7006|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 8,
   "lamBP": 0.700594419454089,
@@ -3377,7 +3377,7 @@
   "parentRepeat": 2
  },
  "4|8|0.7006|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 8,
   "lamBP": 0.700594419454089,
@@ -3388,7 +3388,7 @@
   "parentRepeat": 2
  },
  "4|5|0.6999|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 5,
   "lamBP": 0.6998910557834102,
@@ -3399,7 +3399,7 @@
   "parentRepeat": 2
  },
  "4|5|0.6999|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 5,
   "lamBP": 0.6998910557834102,
@@ -3410,7 +3410,7 @@
   "parentRepeat": 2
  },
  "4|6|0.6998|1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 6,
   "lamBP": 0.699798193372916,
@@ -3421,7 +3421,7 @@
   "parentRepeat": 2
  },
  "4|6|0.6998|-1": {
-  "file": "data\\satellite-results7",
+  "file": "satellite-results7",
   "orbit": 4,
   "k": 6,
   "lamBP": 0.699798193372916,

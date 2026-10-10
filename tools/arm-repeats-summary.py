@@ -6,6 +6,7 @@ PARENTS = {0: (4.96, 1), 1: (33.745, 9), 2: (17.847, 1), 3: (19.769, 1), 4: (47.
 out = {}
 skipped = 0
 for f in sorted(glob.glob('data/satellite-results*.repeats-*.json')):
+    f = f.replace('\\', '/')   # glob gives backslashes on Windows
     src = f.split('.repeats')[0].split('/')[-1]
     for a in json.load(open(f)):
         if a['anyFailed']: skipped += 1; continue

@@ -28,6 +28,7 @@ import os
 REP = json.load(open('data/arm-repeats.json')) if os.path.exists('data/arm-repeats.json') else {}
 points = {}
 for f in sorted(glob.glob('data/satellite-results.jsonl') + glob.glob('data/satellite-results[2-9].jsonl')):
+    f = f.replace('\\', '/')   # glob gives backslashes on Windows
     for line in open(f):
         r = json.loads(line); j = r['job']
         for b in r['branches']:
