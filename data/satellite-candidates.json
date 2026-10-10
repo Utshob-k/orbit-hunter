@@ -1,5 +1,5 @@
 {
- "what": "periodic orbits (rotation angle 0) on satellite curves of Broucke's R family, refined to 30 digits with tools/refine-mp.py (u1 u2 lam t 30; the closure of the full period is measured on the rounded values written here): the second zeros of theta on the satellite curves of the T* = 17.847 and 19.769 orbits (n = 5 and 6, tools/family-follow.mjs), the zeros of theta on the upper branch for n = 7 and n = 9 to 12 (k = 1), and the three linearly stable zeros of the satellites with k > 1 (nu = 2/9 and 2/11 upper branch, nu = 3/10 lower branch; tools/branch-point.mjs with --k). tools/satellite-candidates.mjs recomputes T*, L*, word, alignments, repeats, stability and the comparison with other lists from them, and decides the pairs at the same period by the start values; tools/satellite-check.py checks the closure and the multiplier with REBOUND. The n = 7 orbit is the atlas entry bhhsat_r7_1_1; the others match nothing in the sources checked so far (the review of Li and Liao 2025 could not be read), which says nothing about whether they are known.",
+ "what": "periodic orbits (rotation angle 0) on satellite curves of Broucke's R family, refined to 30 digits with tools/refine-mp.py (u1 u2 lam t 30; the closure of the full period is measured on the rounded values written here): the second zeros of theta on the satellite curves of the T* = 17.847 and 19.769 orbits (n = 5 and 6, tools/family-follow.mjs), the zeros of theta on the upper branch for n = 7 and n = 9 to 12 (k = 1), the zeros of the upper branch for n = 13 to 36 (all unstable), and the three linearly stable zeros of the satellites with k > 1 (nu = 2/9 and 2/11 upper branch, nu = 3/10 lower branch; tools/branch-point.mjs with --k). tools/satellite-candidates.mjs recomputes T*, L*, word, alignments, repeats, stability and the comparison with other lists from them, and decides the pairs at the same period by the start values; tools/satellite-check.py checks the closure and the multiplier with REBOUND. The n = 7 orbit is the atlas entry bhhsat_r7_1_1; the others match nothing in the sources checked so far (the review of Li and Liao 2025 could not be read), which says nothing about whether they are known.",
  "orbits": [
   {
    "label": "T* 17.7208, second zero of theta on the satellite curve of the T* = 17.847 orbit (n = 5)",
@@ -10,7 +10,9 @@
    "lam": "0.78576863612156797186906720329",
    "t": "28.1294969213242585865519117041",
    "residual": "2.08e-29",
-   "closure_full_period": "1.19e-21"
+   "closure_full_period": "1.19e-21",
+   "multiplier": 210.1088938,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 19.6472, second zero of theta on the satellite curve of the T* = 19.769 orbit (n = 6)",
@@ -21,7 +23,9 @@
    "lam": "0.791017104023234769574734053423",
    "t": "33.8207160571911231269130921623",
    "residual": "6.91e-31",
-   "closure_full_period": "3.6e-21"
+   "closure_full_period": "3.6e-21",
+   "multiplier": 253.2419498,
+   "closureTier": "weak"
   },
   {
    "label": "T* 21.6627, zero of theta on the satellite curve of the member with nu = 1/7 (upper branch, n = 7)",
@@ -32,7 +36,9 @@
    "lam": "0.70724266051090886546137133101",
    "t": "3.1111783722864895228610690586",
    "residual": "3.92e-31",
-   "closure_full_period": "1.06e-25"
+   "closure_full_period": "1.06e-25",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 25.3832, zero of theta on the satellite curve of the member with nu = 1/9 (upper branch, n = 9)",
@@ -43,7 +49,9 @@
    "lam": "0.540144316378986370442921140052",
    "t": "8.73369499207754830077973612816",
    "residual": "7.27e-33",
-   "closure_full_period": "1.16e-24"
+   "closure_full_period": "1.16e-24",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 27.2171, zero of theta on the satellite curve of the member with nu = 1/10 (upper branch, n = 10)",
@@ -54,7 +62,9 @@
    "lam": "0.547013784846761292721153625368",
    "t": "9.53851044419651902244262078335",
    "residual": "3.12e-31",
-   "closure_full_period": "2.14e-24"
+   "closure_full_period": "2.14e-24",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 29.0367, zero of theta on the satellite curve of the member with nu = 1/11 (upper branch, n = 11)",
@@ -65,7 +75,9 @@
    "lam": "0.802479143779873241369891669461",
    "t": "2.74037735907563292659218958334",
    "residual": "6.81e-30",
-   "closure_full_period": "7.94e-25"
+   "closure_full_period": "7.94e-25",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 30.8437, zero of theta on the satellite curve of the member with nu = 1/12 (upper branch, n = 12)",
@@ -76,7 +88,9 @@
    "lam": "0.776184054942416015122916820199",
    "t": "2.64083368467037277082405861433",
    "residual": "4.9e-30",
-   "closure_full_period": "5.12e-25"
+   "closure_full_period": "5.12e-25",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 33.7451, zero of theta on the satellite curve of the member with nu = 2/9 (upper branch, sense -)",
@@ -88,7 +102,9 @@
    "lam": "0.552951869205165191133803454903",
    "t": "7.45002029738258243477833348593",
    "residual": "4.08e-34",
-   "closure_full_period": "7.18e-26"
+   "closure_full_period": "7.18e-26",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 37.6242, zero of theta on the satellite curve of the member with nu = 2/11 (upper branch, sense -)",
@@ -100,7 +116,9 @@
    "lam": "0.640475720142318394861241818948",
    "t": "6.48420874008595288621545283522",
    "residual": "6.35e-32",
-   "closure_full_period": "8.92e-26"
+   "closure_full_period": "8.92e-26",
+   "multiplier": 1,
+   "closureTier": "reliable"
   },
   {
    "label": "T* 51.3833, zero of theta on the satellite curve of the member with nu = 3/10 (lower branch, sense +)",
@@ -112,7 +130,321 @@
    "lam": "0.488191765251804171564382400651",
    "t": "17.1050555330917740186258836012",
    "residual": "8.63e-33",
-   "closure_full_period": "3.35e-25"
+   "closure_full_period": "3.35e-25",
+   "multiplier": 1,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 32.6398, zero of theta on the satellite curve of the member with nu = 1/13 (upper branch, sense +1)",
+   "n": 13,
+   "digits": 30,
+   "u1": "-0.596713862339415133458570110542",
+   "u2": "-1.49988370229475157580843357501",
+   "lam": "0.828390880818395192991414999443",
+   "t": "2.63399477618137185741346462845",
+   "residual": "7.92e-29",
+   "closure_full_period": "6.98e-25",
+   "multiplier": 1.712032927,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 34.4261, zero of theta on the satellite curve of the member with nu = 1/14 (upper branch, sense +1)",
+   "n": 14,
+   "digits": 30,
+   "u1": "-1.06911401627938881420163919673",
+   "u2": "-0.631804786197090968948572748287",
+   "lam": "0.565836795782737769786380974011",
+   "t": "12.7070569261996828357753596297",
+   "residual": "1.79e-30",
+   "closure_full_period": "4.66e-25",
+   "multiplier": 2.609027807,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 36.2036, zero of theta on the satellite curve of the member with nu = 1/15 (upper branch, sense +1)",
+   "n": 15,
+   "digits": 30,
+   "u1": "-0.571677786215606832137714075194",
+   "u2": "-1.62893074920442481638069708056",
+   "lam": "0.847581555325283863630707616925",
+   "t": "2.55306513666060204042949069737",
+   "residual": "9.07e-28",
+   "closure_full_period": "3.74e-25",
+   "multiplier": 3.425849608,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 37.9731, zero of theta on the satellite curve of the member with nu = 1/16 (upper branch, sense -1)",
+   "n": 16,
+   "digits": 30,
+   "u1": "-0.563399476118949384774957407354",
+   "u2": "-1.27203001954663217169986836179",
+   "lam": "0.817649826485445463421262371941",
+   "t": "2.48237409211152213167847694377",
+   "residual": "6.99e-29",
+   "closure_full_period": "1.35e-24",
+   "multiplier": 4.235236753,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 39.7355, zero of theta on the satellite curve of the member with nu = 1/17 (upper branch, sense -1)",
+   "n": 17,
+   "digits": 30,
+   "u1": "-0.550508067669296312781025098855",
+   "u2": "-1.74559529052600745199693161875",
+   "lam": "0.862413097463227645380802637749",
+   "t": "2.48911643005199927084685454249",
+   "residual": "4.27e-28",
+   "closure_full_period": "1.97e-24",
+   "multiplier": 5.054411379,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 41.4912, zero of theta on the satellite curve of the member with nu = 1/18 (upper branch, sense +1)",
+   "n": 18,
+   "digits": 30,
+   "u1": "-0.543581943433794615998198969449",
+   "u2": "-1.34319935134491740360034974406",
+   "lam": "0.832336649817530909364188103926",
+   "t": "2.42727227787788178956295253665",
+   "residual": "1.81e-28",
+   "closure_full_period": "6.98e-25",
+   "multiplier": 5.889979562,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 43.2410, zero of theta on the satellite curve of the member with nu = 1/19 (upper branch, sense -1)",
+   "n": 19,
+   "digits": 30,
+   "u1": "-0.532248396284135580947574716125",
+   "u2": "-1.85235937832923501936276161864",
+   "lam": "0.874250179567055529837983787566",
+   "t": "2.43712406507940746603611786793",
+   "residual": "1.88e-27",
+   "closure_full_period": "1.9e-24",
+   "multiplier": 6.744991687,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 44.9852, zero of theta on the satellite curve of the member with nu = 1/20 (upper branch, sense +1)",
+   "n": 20,
+   "digits": 30,
+   "u1": "-0.526342584325916817858389489009",
+   "u2": "-1.40907450209277566525491399418",
+   "lam": "0.844464769699091671148817071812",
+   "t": "2.38209070734914930666194181969",
+   "residual": "4.59e-28",
+   "closure_full_period": "1.01e-24",
+   "multiplier": 7.620985923,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 46.7242, zero of theta on the satellite curve of the member with nu = 1/21 (upper branch, sense -1)",
+   "n": 21,
+   "digits": 30,
+   "u1": "-0.516252711706871234365333773894",
+   "u2": "-1.9510053698264303887065054656",
+   "lam": "0.883937702027544276984382918826",
+   "t": "2.39389952242246767075792526816",
+   "residual": "8.83e-28",
+   "closure_full_period": "2.13e-24",
+   "multiplier": 8.518759907,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 48.4584, zero of theta on the satellite curve of the member with nu = 1/22 (upper branch, sense +1)",
+   "n": 22,
+   "digits": 30,
+   "u1": "-0.511140228898490434751413723835",
+   "u2": "-1.47050333772764754996912102614",
+   "lam": "0.854671059637656031516925043789",
+   "t": "2.34426490385691595771009368816",
+   "residual": "9.68e-28",
+   "closure_full_period": "1.67e-24",
+   "multiplier": 9.438715232,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 50.1883, zero of theta on the satellite curve of the member with nu = 1/23 (upper branch, sense -1)",
+   "n": 23,
+   "digits": 30,
+   "u1": "-0.502064512339614864326088867344",
+   "u2": "-2.0428596776759626950647453313",
+   "lam": "0.892027492558407624952484550906",
+   "t": "2.35731356056274215279864505057",
+   "residual": "8.7e-27",
+   "closure_full_period": "2.55e-24",
+   "multiplier": 10.38102582,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 51.9139, zero of theta on the satellite curve of the member with nu = 1/24 (upper branch, sense +1)",
+   "n": 24,
+   "digits": 30,
+   "u1": "-0.497583851520900612736004095021",
+   "u2": "-1.52813956220128858691140679609",
+   "lam": "0.863394607842833104565249659816",
+   "t": "2.31206006763447786346151768882",
+   "residual": "8.74e-34",
+   "closure_full_period": "1.79e-24",
+   "multiplier": 11.34573119,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 53.6357, zero of theta on the satellite curve of the member with nu = 1/25 (upper branch, sense -1)",
+   "n": 25,
+   "digits": 30,
+   "u1": "-0.489349713549909205382165975245",
+   "u2": "-2.1289380579321202169866242765",
+   "lam": "0.898895685223780746481983091773",
+   "t": "2.32588593594663161467739468622",
+   "residual": "1.24e-28",
+   "closure_full_period": "6.77e-24",
+   "multiplier": 12.33278585,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 55.3542, zero of theta on the satellite curve of the member with nu = 1/26 (upper branch, sense +1)",
+   "n": 26,
+   "digits": 30,
+   "u1": "-0.485382241581859097752549320103",
+   "u2": "-1.58249829992966789323105163767",
+   "lam": "0.870948423096621798037920736553",
+   "t": "2.28425709529472775525008221665",
+   "residual": "1.05e-27",
+   "closure_full_period": "3.79e-24",
+   "multiplier": 13.34209347,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 57.0686, zero of theta on the satellite curve of the member with nu = 1/27 (upper branch, sense +1)",
+   "n": 27,
+   "digits": 30,
+   "u1": "-0.477856793361354225434012979523",
+   "u2": "-2.21003686620686453822850947731",
+   "lam": "0.904807767749325502438414929857",
+   "t": "2.29855336395401488325416605028",
+   "residual": "2.98e-30",
+   "closure_full_period": "1.56e-23",
+   "multiplier": 14.3735224,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 58.7801, zero of theta on the satellite curve of the member with nu = 1/28 (upper branch, sense -1)",
+   "n": 28,
+   "digits": 30,
+   "u1": "-0.47431305730834868761278292297",
+   "u2": "-1.63399306478564235805231450373",
+   "lam": "0.877561950369871910321123289939",
+   "t": "2.25997219469761142868173928133",
+   "residual": "3.37e-30",
+   "closure_full_period": "1.27e-24",
+   "multiplier": 15.42692243,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 60.4883, zero of theta on the satellite curve of the member with nu = 1/29 (upper branch, sense -1)",
+   "n": 29,
+   "digits": 30,
+   "u1": "-0.467391901636647043495730174199",
+   "u2": "-2.28679285056796826268069812063",
+   "lam": "0.909956662789936906432622448288",
+   "t": "2.27453100895272123272826985644",
+   "residual": "2.72e-26",
+   "closure_full_period": "4.42e-24",
+   "multiplier": 16.50212766,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 62.1938, zero of theta on the satellite curve of the member with nu = 1/30 (upper branch, sense +1)",
+   "n": 30,
+   "digits": 30,
+   "u1": "-0.464202953423649174094785448319",
+   "u2": "-1.68296112905536922479030784693",
+   "lam": "0.883407407194375786874819535094",
+   "t": "2.23854780187817590016549286291",
+   "residual": "1.01e-26",
+   "closure_full_period": "2.58e-25",
+   "multiplier": 17.59896794,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 63.8965, zero of theta on the satellite curve of the member with nu = 1/31 (upper branch, sense +1)",
+   "n": 31,
+   "digits": 30,
+   "u1": "-0.457802661043749595324667009226",
+   "u2": "-2.35972372338834351208416009503",
+   "lam": "0.914486057753975773547001826587",
+   "t": "2.25322608229060260634626354802",
+   "residual": "1.14e-25",
+   "closure_full_period": "1.06e-24",
+   "multiplier": 18.71726552,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 65.5966, zero of theta on the satellite curve of the member with nu = 1/32 (upper branch, sense -1)",
+   "n": 32,
+   "digits": 30,
+   "u1": "-0.454914354047161119925436706403",
+   "u2": "-1.72968140624075126286157225502",
+   "lam": "0.888616711365524643426845507362",
+   "t": "2.21948377792203779797733783744",
+   "residual": "1.54e-26",
+   "closure_full_period": "1.27e-23",
+   "multiplier": 19.8568456,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 67.2943, zero of theta on the satellite curve of the member with nu = 1/33 (upper branch, sense -1)",
+   "n": 33,
+   "digits": 30,
+   "u1": "-0.448967258213485417067855253538",
+   "u2": "-2.42925651481040706455706734097",
+   "lam": "0.918505254302345566017440307874",
+   "t": "2.23418192571373767233529694099",
+   "residual": "1.49e-26",
+   "closure_full_period": "8.37e-24",
+   "multiplier": 21.01752887,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 68.9895, zero of theta on the satellite curve of the member with nu = 1/34 (upper branch, sense -1)",
+   "n": 34,
+   "digits": 30,
+   "u1": "-0.446336378525251865240224613012",
+   "u2": "-1.77438735484991179044601062603",
+   "lam": "0.893292710418768153908782204117",
+   "t": "2.20239245072692060511795708008",
+   "residual": "2.8e-26",
+   "closure_full_period": "1.07e-24",
+   "multiplier": 22.19914309,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 70.6825, zero of theta on the satellite curve of the member with nu = 1/35 (upper branch, sense -1)",
+   "n": 35,
+   "digits": 30,
+   "u1": "-0.440786882189494291424915879282",
+   "u2": "-2.4957478938584285523097938599",
+   "lam": "0.92209893378059006166344785591",
+   "t": "2.21704067434282847854621217673",
+   "residual": "6.05e-26",
+   "closure_full_period": "3.34e-24",
+   "multiplier": 23.40151221,
+   "closureTier": "reliable"
+  },
+  {
+   "label": "T* 72.3734, zero of theta on the satellite curve of the member with nu = 1/36 (upper branch, sense +1)",
+   "n": 36,
+   "digits": 30,
+   "u1": "-0.438378453082293331423072450506",
+   "u2": "-1.81727648235573150813555041658",
+   "lam": "0.897516837596118062275799021999",
+   "t": "2.18696833880202328103699000009",
+   "residual": "4.66e-26",
+   "closure_full_period": "2.7e-24",
+   "multiplier": 24.62446998,
+   "closureTier": "reliable"
   }
  ]
 }
