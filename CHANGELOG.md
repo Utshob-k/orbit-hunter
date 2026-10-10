@@ -4,6 +4,7 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 ## Versions
 
+- 0.2.20 (2026-10-10): small fixes in the README and docs (the 33.745149 orbit against t41 and t42, rows of the csv, REBOUND sentence, file names).
 - 0.2.19 (2026-10-10): the satellites with k > 1 followed (21 more members; six of the 77 lie on satellites of R, three more stable orbits), `branch-point.mjs --k=K`, the start value comparison of orbits (`src/identity.js`), the family of the T* = 29.310 orbit and the check of the Suvakov gallery as data, the paths in `data/refined/summary.json`, `arm-repeats.json` and `bifurcation-points.json` with forward slashes (only the `file` fields changed), two more known weaknesses, small fixes in the docs.
 - 0.2.18 (2026-10-10): the README split into README, `docs/`, `data/README.md` and this file; no change to the code or the numbers.
 - 0.2.17 (2026-10-10): all 20 crossings of the R family with nu = 1/n followed, one data file for each in `data/branch-points/`, `nu-map.mjs` and `branch-summary.mjs`, the orbits for n = 7 and 9 to 12 refined to 30 digits and checked in REBOUND.
