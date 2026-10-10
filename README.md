@@ -166,10 +166,12 @@ at its other collinear moment). (4) As a control the repeat direction was follow
 the member with rotation 1/8 (23.530644, 2.755713) and 2 times R4 (31.775888, 2.535118) for n = 8. Limits: all of it is double precision (the members
 next to the branch points are stable, so the matrices are well conditioned, but the zeros are good to about 8 digits, not 30). Close to a branch point
 the invariants (T*, L*, theta) of the satellite and of the repeat curve differ by only a few 1e-4, so they cannot tell the two apart, only the
-shooting system can. Only these three branch points were solved; the family has other members with a rotation number 1/n (for n = 5 also at the
-rotation 0.2240) that were not followed. In the literature checked (the papers named above, the atlas, Davoust and Broucke 1982 and Broucke 1975) no
-satellites of Broucke's family R were found; the review "A review on periodic orbits of the general planar three-body problem" (Sci. China Phys. Mech.
-Astron., 2024, doi 10.1007/s11433-024-2686-6) could not be read (the publisher redirected to a login page), so "not found" is all that can be said.
+shooting system can. Only these three branch points were solved; the family has other members with a rotation number k/n (for n = 5 also at the
+rotation 0.2240) that were not followed. Davoust and Broucke 1982 followed the satellites of R (their family D1) for the multiplicities 2 and 3
+(branches f, e and E, Corrections, 2026-10-10) and the atlas lists satellites of the BHH family coded R or A (family bhhsat). For n = 5, 6 and 8 none
+of the sources that could be read has these orbits (the papers named above, the atlas, Broucke 1975, Davoust and Broucke 1982). The review "A review
+on periodic orbits of the general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi
+10.1007/s11433-024-2686-6) could not be read (it is not open access and there is no preprint), so "not found" is all that can be said.
 
 The satellite curves of the T* = 17.847 and 19.769 orbits each have a second orbit with rotation angle 0, after the stable one, near a close approach:
 T* = 17.7208, L* = 1.6293 (word (01)^5, 10 alignments) and T* = 19.6472, L* = 1.5989 ((01)^6, 12 alignments).
@@ -366,7 +368,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
 - Hénon 1976, Broucke 1975 and Hadjidemetriou 1975: the BHH family. Davoust and Broucke 1982 (Astronomy and Astrophysics 112, 305): "A manifold of
   periodic orbits
   in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (I have the page
-  scans from ADS, bibcode 1982A&A...112..305D, there is no text version, so I read the tables by eye from the scan images).
+  scans from ADS, bibcode 1982A&A...112..305D, there is no text version, so I read the text and the tables by eye from the scan images).
 - Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020): about 100 satellites of the BHH family by brute force search. I do not know of work that
   follows their
   satellite branches by continuation from the stable BHH orbits, other than the first satellite and the families in Davoust and Broucke 1982.
@@ -457,6 +459,27 @@ difference). Against the atlas my stability numbers match to four digits for the
 
 Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
 
+- **2026-10-10, satellites of Broucke's R family are published, and R2 is on the curve.** The paragraph on the satellites of R said that no satellites
+  of the family were found in the literature checked, which included Davoust and Broucke 1982 and Broucke 1975. Of Davoust and Broucke only the tables
+  had been typed in from the ADS scans, and of Broucke 1975 pages 1 and 19 and the tables had been read. Both papers were read in full on 2026-10-10.
+  Broucke 1975 says that the characteristic exponents of his families A and R will be published later and has nothing on stability, bifurcations or
+  satellites. Davoust and Broucke study the stability and the bifurcations of their families up to the multiplicity three. Their family D1, the direct
+  revolution of a binary around a third mass, is R (rows N = 62 to 67 of their Table 5 are on the traced curve, see the entry below). On D1 they find
+  three bifurcations: point 1, in the stable region at the 3T line, the branch e (triple period); point 2, where the stability curve is tangent to the
+  2T line, the branch f (double period); point 3, at the 3T line again, the family E (triple period). Their Table 8 pairs the rows D1(63) with e(79),
+  D1(64) with f(83) and D1(65) with E(74). The rotation numbers nu of these rows are 0.3331, 0.4985 and 0.3329 in my code (the printed rows have seven
+  digits). The satellites followed from the two members of R with nu = 1/3 (`tools/branch-point.mjs 3 0.3194` and `3 0.4276`,
+  `data/branch-points.json`), without using the rows, pass through the rows 79 to 81 of e and the rows 71 to 78 of E, to 3e-6 or better in T* and L*
+  and with the same rotation angle (`tools/db82-bifurcations.mjs`); rows 70 and 82 do not close as converted. So the satellites of R with n = 2 and 3
+  were published in 1982; for n >= 4 that paper has nothing, its authors stopped at the multiplicity three. The atlas also lists satellites of the BHH
+  family coded by the branch (R prograde, A retrograde), the number of laps and the rotation per loop (family bhhsat, codes such as R7 1/1, R4 7/6 and
+  A7 4/1, 14 of them with equal masses). Their source tag is "bhh2026" and its families page describes them as the result of the atlas's own search of
+  September 2026 and cites no paper, so they are in a catalogue, not in a paper; the CPC 2020 and PRL 2016 papers do not use this naming. The sentence
+  on the literature in the paragraph on the satellites is replaced. R2 (rotation 1/2) is on the traced curve of the entry below as well: the largest
+  rotation of the accepted steps is 0.4946, but between the steps 120 and 121 the rotation of the family reaches 0.49995 (`tools/r-family.mjs`), and
+  R2 itself, found as the end of the repeat direction at the member with nu = 1/4, has the rotation 1/2, T* = 5.89038 and L* = 2.36212 (atlas: 5.89038
+  and 2.36212; `data/r-family-members.json`). So all 13 R orbits of the atlas are members of the curve, not 12. The review of Li and Liao is of 2025
+  (Sci. China Phys. Mech. Astron. 68(8), 289501), not 2024.
 - **2026-10-10, the T* = 33.745 orbit is on the family of Broucke's R orbits.** The paragraph on the 1970s papers ended with "these orbits are not
   rational members of Henon's family or of Broucke's families". Only Henon's family had been traced (`data/henon-family-curve.json`); for Broucke's
   families the test was the comparison with his 29 absolute orbits of the atlas, which cannot show that an orbit is another member of one of his
@@ -714,8 +737,10 @@ path):
   against the atlas (by key, give the path of `catalogue.json`) and against Table 5 of Davoust and Broucke 1982
 - `branch-point.mjs` solves the branch point of a satellite on the family of Broucke's R orbits (the member with nu = 1/n, the two null vectors of its
   n fold repeat, the satellite followed to its periodic orbit; a few minutes, `--control` adds the repeat direction, `--write` stores
-  `data/branch-points.json`); `satellite-candidates.mjs` and `satellite-check.py` recompute the numbers of the two refined orbits of the satellite
-  curves (the second needs `pip install rebound numpy`)
+  `data/branch-points.json`, theta chooses between the two nu of the stable stretch); `db82-bifurcations.mjs` puts the bifurcation points of the
+  family D1 of Davoust and Broucke (rows 63 to 65 of their Table 5, branches e, f and E) next to the members with nu = 1/3 and their satellite curves;
+  `satellite-candidates.mjs` and `satellite-check.py` recompute the numbers of the two refined orbits of the satellite curves (the second needs `pip
+  install rebound numpy`)
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
@@ -764,7 +789,7 @@ typed in by the reader; they say so and stop without it. `data/rpo-reproduce-*.j
 | `data/families85/*.json`, `family-pass-through.json` | traces of the families that start at six published orbits (from the exact start, not moved) and the check from my side; the starts are my conversions of rows of Davoust and Broucke 1982 and of the CPC satellite N = 3 |
 | `data/return-test.json`, `henon1976-derived.json`, `henon-family-curve.json` | the return test of my 102 entries (85 + 17, 100 distinct orbits; rotation, relabelling, reflection, reversal after T/n); **derived numbers** (L*, T*, alignments) and the printed rotation angle of the 46 tabulated orbits of Henon 1976 and points of the family traced from them; the printed start values are not stored |
 | `data/r-family-trace.json`, `r-family-members.json` | the family of relative periodic orbits through the shortest orbit of my T* = 33.745 orbit (T* = 3.7495, rotation 2/9 of a turn): 242 accepted steps of the trace (derived numbers of my own runs) and the 19 members solved at the rotation angles of the R orbits of the atlas and of rows of Davoust and Broucke 1982 (start values, my own numbers; the atlas and the rows are referred to by key and number) |
-| `data/branch-points.json`, `satellite-candidates.json`, `satellite-check.json` | the three branch points of satellites on the family R (members, singular values, directions, the satellite curves followed to their zeros of theta and the control, my own runs) and the two refined orbits on the satellite curves (30 digit start values) with the REBOUND check |
+| `data/branch-points.json`, `satellite-candidates.json`, `satellite-check.json` | the branch points of satellites on the family R (n = 5, 6, 8 and the two with n = 3) (members, singular values, directions, the satellite curves followed to their zeros of theta and the control, my own runs) and the two refined orbits on the satellite curves (30 digit start values) with the REBOUND check |
 | `data/choreo-test.json` | the result of `tools/choreo-test.mjs`: no orbit has a cyclic return, the smallest mismatches, and the four members of the rotating eight branch used as a control |
 | `data/closure-stored.json` | the closure of the 30 digit start values as stored in `data/refined`, integrated in 50 digits (`tools/closure-stored.py`) next to the number written into the files |
 | `data/closure-mp.json` | the closure of the 85 orbits from their double precision start values in 40 digit arithmetic (`tools/closure-mp.py`) next to the columns `closureDP45` and `closureBS` |
