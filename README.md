@@ -366,9 +366,8 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
 ## Prior work I know of
 
 - Hénon 1976, Broucke 1975 and Hadjidemetriou 1975: the BHH family. Davoust and Broucke 1982 (Astronomy and Astrophysics 112, 305): "A manifold of
-  periodic orbits
-  in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (I have the page
-  scans from ADS, bibcode 1982A&A...112..305D, there is no text version, so I read the text and the tables by eye from the scan images).
+  periodic orbits in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (the
+  page scans are from ADS, bibcode 1982A&A...112..305D, there is no text version, so the text and the tables were read from the scan images).
 - Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020): about 100 satellites of the BHH family by brute force search. I do not know of work that
   follows their
   satellite branches by continuation from the stable BHH orbits, other than the first satellite and the families in Davoust and Broucke 1982.
@@ -472,14 +471,14 @@ Statements of mine that were wrong, newest first. The dates are those of the com
   `data/branch-points.json`), without using the rows, pass through the rows 79 to 81 of e and the rows 71 to 78 of E, to 3e-6 or better in T* and L*
   and with the same rotation angle (`tools/db82-bifurcations.mjs`); rows 70 and 82 do not close as converted. So the satellites of R with n = 2 and 3
   were published in 1982; for n >= 4 that paper has nothing, its authors stopped at the multiplicity three. The atlas also lists satellites of the BHH
-  family coded by the branch (R prograde, A retrograde), the number of laps and the rotation per loop (family bhhsat, codes such as R7 1/1, R4 7/6 and
-  A7 4/1, 14 of them with equal masses). Their source tag is "bhh2026" and its families page describes them as the result of the atlas's own search of
-  September 2026 and cites no paper, so they are in a catalogue, not in a paper; the CPC 2020 and PRL 2016 papers do not use this naming. The sentence
-  on the literature in the paragraph on the satellites is replaced. R2 (rotation 1/2) is on the traced curve of the entry below as well: the largest
-  rotation of the accepted steps is 0.4946, but between the steps 120 and 121 the rotation of the family reaches 0.49995 (`tools/r-family.mjs`), and
-  R2 itself, found as the end of the repeat direction at the member with nu = 1/4, has the rotation 1/2, T* = 5.89038 and L* = 2.36212 (atlas: 5.89038
-  and 2.36212; `data/r-family-members.json`). So all 13 R orbits of the atlas are members of the curve, not 12. The review of Li and Liao is of 2025
-  (Sci. China Phys. Mech. Astron. 68(8), 289501), not 2024.
+  family coded by the branch (R the prograde, A the retrograde one, as its families page says), the number of laps and the rotation per loop (family
+  bhhsat, codes such as R7 1/1, R4 7/6 and A7 4/1, 14 of them with equal masses). Their source tag is "bhh2026" and its families page describes them
+  as the result of the atlas's own search of September 2026 and cites no paper, so they are in a catalogue, not in a paper; the CPC 2020 and PRL 2016
+  papers do not use this naming. The sentence on the literature in the paragraph on the satellites is replaced. R2 (rotation 1/2) is on the traced
+  curve of the entry below as well: the largest rotation of the accepted steps is 0.4946, but between the steps 120 and 121 the rotation of the family
+  reaches 0.49995 (`tools/r-family.mjs`), and R2 itself, found as the end of the repeat direction at the member with nu = 1/4, has the rotation 1/2,
+  T* = 5.89038 and L* = 2.36212 (atlas: 5.89038 and 2.36212; `data/r-family-members.json`). So all 13 R orbits of the atlas are members of the curve,
+  not 12. The review of Li and Liao is of 2025 (Sci. China Phys. Mech. Astron. 68(8), 289501), not 2024.
 - **2026-10-10, the T* = 33.745 orbit is on the family of Broucke's R orbits.** The paragraph on the 1970s papers ended with "these orbits are not
   rational members of Henon's family or of Broucke's families". Only Henon's family had been traced (`data/henon-family-curve.json`); for Broucke's
   families the test was the comparison with his 29 absolute orbits of the atlas, which cannot show that an orbit is another member of one of his
