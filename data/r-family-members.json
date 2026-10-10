@@ -1,5 +1,5 @@
 {
- "what": "members of the family of Broucke's R orbits through the shortest orbit of my T* = 33.745 orbit (T* 3.7495, rotation 2/9 turn), solved by multiple shooting at the rotation angle of the atlas entry or of the row of Davoust and Broucke 1982 (turns = rotation angle of one relative period in turns, src/perp.js sign); start values u1, u2, lam, t of the perpendicular start (src/perp.js), full period 2t, q relative periods give the absolute orbit. tools/r-family.mjs recomputes T*, L*, theta and the closure from them and compares with the atlas by key and with the rows of Davoust and Broucke 1982 by number.",
+ "what": "members of the family of Broucke's R orbits through the shortest orbit of my T* = 33.745 orbit (T* 3.7495, rotation 2/9 turn), solved by multiple shooting at the rotation angle of the atlas entry or of the row of Davoust and Broucke 1982 (turns = rotation angle of one relative period in turns, src/perp.js sign); start values u1, u2, lam, t of the perpendicular start (src/perp.js), full period 2t, q relative periods give the absolute orbit. tools/r-family.mjs recomputes T*, L*, theta and the closure from them and compares with the atlas by key and with the rows of Davoust and Broucke 1982 by number. R2 (rotation 1/2) lies between two accepted steps of the trace (120 and 121) where the rotation has its maximum; its start values come from the end of the repeat direction of tools/branch-point.mjs 4 0.3062 --control (a 4 fold repeat, its primitive closes to 2e-12).",
  "members": [
   {
    "kind": "atlas",
@@ -10,6 +10,16 @@
    "u2": -1.39430135880164,
    "lam": 0.7200037993139874,
    "t": 4.965369876419055
+  },
+  {
+   "kind": "atlas",
+   "key": "broucke_broucke_r_2",
+   "q": 2,
+   "turns": -0.499999999999,
+   "u1": -0.8630932816441304,
+   "u2": -0.5866221858776205,
+   "lam": 0.4040864817893923,
+   "t": 1.9986657115272974
   },
   {
    "kind": "atlas",
