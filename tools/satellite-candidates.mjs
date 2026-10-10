@@ -6,6 +6,8 @@
 //   rotation angle is a multiple of 2 pi (data/db82-rotation-multiple-2pi.json); the orbits 2 to 46 of Henon 1976 (data/henon1976-derived.json, relative periodic orbits: T* and L* only);
 //   the 18 rows of Li et al. 2025 (data/liao2025-scaled.json, the scale free numbers only); and, if the path of the atlas catalogue is given (https://data.threebodyorbits.com/catalogue.json,
 //   not stored here), the equal mass atlas entries: the rule of tools/compare-atlas-all.py.
+// a pair of orbits can agree in T* and L* to better than HIT and still be two orbits, so every orbit of my 102 within NEAR of a candidate at the same period (n = 1) is compared by its start values:
+// the configuration at the start and at the other collinear moment, scaled to the outer bodies at -1 and 1 (position of the middle body, the three velocities), up to the mirror and the sign of y.
 // node tools/satellite-candidates.mjs [catalogue.json]
 import fs from 'fs';
 import { perpInfo, perpInitial } from '../src/perp.js';
@@ -13,11 +15,13 @@ import { syzygyWord } from '../src/topology.js';
 import { coverInfo } from '../src/covers.js';
 import { relativeStability } from '../src/relative.js';
 import { closureTier } from '../src/closure.js';
+import { shapes, startDistance } from '../src/identity.js';
 
 const read = (f) => JSON.parse(fs.readFileSync(new URL('../data/' + f, import.meta.url), 'utf8'));
 const cands = read('satellite-candidates.json').orbits, tab = read('orbit-table.json'), arc = read('perp-arc-orbits.json');
 const mine = [...tab.map((o, i) => ({ name: 't' + String(i).padStart(2, '0'), T: o.primitiveTstar, L: o.Lstar, syz: o.wordRoot.length * o.wordPower / o.repeatOf })), ...arc.map((a, i) => ({ name: 'a' + String(i).padStart(2, '0'), T: a.ts, L: Math.abs(a.ls), syz: null }))];
 const HIT = 1e-5, NEAR = 5e-3;
+const same = [...tab.map((o, i) => ({ name: 't' + String(i).padStart(2, '0'), o, T: o.Tstar, L: o.Lstar })), ...arc.map((a, i) => ({ name: 'a' + String(i).padStart(2, '0'), o: a, T: a.ts, L: Math.abs(a.ls) }))];
 const others = [
   ['the 99 CPC satellites', read('cpc-converted.json').map((c) => ({ name: 'N = ' + c.N + ' (k = ' + c.k + ')', T: c.ts_theirs, L: c.ls_theirs, syz: null }))],
   ['the 9 periodic rows of Davoust and Broucke', read('db82-rotation-multiple-2pi.json').map((r) => ({ name: 'row ' + r.N, T: r.Tstar, L: r.Lstar, syz: null }))],
@@ -40,5 +44,7 @@ for (const c of cands) {
     const m1 = hits(list, HIT, true), m5 = hits(list, NEAR, false);
     console.log(`  ${who}: ${m1.length} within ${HIT.toExponential(0)} (with the alignments where known), ${m5.length} within ${NEAR.toExponential(0)}` + (m5.length ? ': ' + m5.slice(0, 3).map((h) => `${h.name} ${h.nm} n = ${h.n}, dT ${h.dT.toExponential(1)}, dL ${h.dL.toExponential(1)}`).join('; ') : ''));
   }
+  const pairs = same.filter((m) => Math.abs(m.T - T) / T < NEAR && Math.abs(m.L - L) / L < NEAR);
+  console.log('  my 102 at the same period within ' + NEAR.toExponential(0) + ': ' + (pairs.length ? pairs.map((m) => { const d = startDistance(shapes(c), shapes(m.o)); return `${m.name} (dT ${(Math.abs(m.T - T) / T).toExponential(1)}, dL ${(Math.abs(m.L - L) / L).toExponential(1)}): ` + (d < 1e-6 ? `the same orbit, the starts agree to ${d.toExponential(1)}` : `a different orbit, the starts differ by ${d.toExponential(1)}`); }).join('; ') : 'none'));
   if (!atlas) console.log('  (no catalogue given: the atlas was not compared)');
 }

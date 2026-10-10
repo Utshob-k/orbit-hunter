@@ -1,5 +1,5 @@
-// the branch point of a satellite on the family of Broucke's R orbits: the member of the family with rotation number nu = 1/n, where the n fold repeat of the orbit has a double multiplier 1.
-// 1. the member is found by bisection between the two accepted steps of data/r-family-trace.json where nu (the stored multiplier angle) crosses 1/n; the stable stretch has two nu (the lower and
+// the branch point of a satellite on the family of Broucke's R orbits: the member of the family with rotation number nu = k/n (k = 1 unless --k=K is given), where the n fold repeat of the orbit has a double multiplier 1.
+// 1. the member is found by bisection between the two accepted steps of data/r-family-trace.json where nu (the stored multiplier angle) crosses k/n; the stable stretch has two nu (the lower and
 //    the upper one), each crosses 1/n once, and the crossing nearest to the rotation asked for is taken;
 // 2. its n fold repeat is solved as an orbit of the shooting system of src/shooting.js (half period n t, 8 or more pieces); the matrix [J | dF/dlam] of that system has a one dimensional
 //    null space at an ordinary point of a curve and a two dimensional one at a branch point, so its smallest singular values are printed (one sided Jacobi, accurate for small ones);
@@ -7,8 +7,8 @@
 //    tangent of the repeat curve (the exact repeats of the neighbouring members, started cold), the other is the satellite;
 // 4. the satellite is followed in both senses with pseudo arclength (tangent turning < 0.35 rad, steps below 6 % of the distance from the branch point so that Newton cannot land on the repeat
 //    curve) until the rotation angle is 0: a periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
-// node tools/branch-point.mjs n theta [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
-//   --write stores the numbers in data/branch-points/n-upper.json or n-lower.json. a run takes a few minutes (n = 8 with --control about 20)
+// node tools/branch-point.mjs n theta [--k=K] [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
+//   --write stores the numbers in data/branch-points/n-upper.json or n-lower.json (k = 1), or k-n-upper-theta.json (k > 1: the upper nu can cross the same k/n twice, so the theta asked for is in the name). a run takes a few minutes (n = 8 with --control about 20)
 import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';
@@ -16,7 +16,7 @@ import { relativeStability } from '../src/relative.js';
 
 const n = Number(process.argv[2]), thetaWanted = Number(process.argv[3]), control = process.argv.includes('--control'), write = process.argv.includes('--write');
 if (!n || !thetaWanted) { console.error('usage: node tools/branch-point.mjs n theta [--control] [--write]'); process.exit(2); }
-const target = 1 / n;
+const kArg = process.argv.find((a) => a.startsWith('--k=')), kk = kArg ? Number(kArg.slice(4)) : 1, target = kk / n;
 const trace = JSON.parse(fs.readFileSync(new URL('../data/r-family-trace.json', import.meta.url), 'utf8')).curve;
 
 // 1. the bracket and the member with nu = 1/n
@@ -33,7 +33,7 @@ for (let i = 0; i < trace.length - 1; i++) {
     if (!br || Math.abs(th - thetaWanted) < Math.abs(br.th - thetaWanted)) br = { i, j, a, b, th };
   }
 }
-if (!br) { console.error('no crossing of nu = 1/' + n + ' in the stored trace'); process.exit(1); }
+if (!br) { console.error('no crossing of nu = ' + kk + '/' + n + ' in the stored trace'); process.exit(1); }
 const J = br.j, branchName = J ? 'upper' : 'lower';
 const start = (q) => [q.u1, q.u2, q.lam, q.t];
 function member(f) {
@@ -52,7 +52,7 @@ for (let k = 0; k < 45; k++) {
   if ((m.nu - target) * nuLo < 0) hi = f; else { lo = f; nuLo = m.nu - target; }
 }
 const Rinfo = { turns: R.info.theta / (2 * Math.PI), Tstar: R.info.ts, Lstar: Math.abs(R.info.ls), lam: R.s.lam, u1: R.s.u1, u2: R.s.u2, t: R.s.t, nuMinusTarget: R.nu - target };
-console.log(`n = ${n} (${branchName} nu): member with nu = 1/${n}: |theta| ${Math.abs(Rinfo.turns).toFixed(7)} turn, T* ${Rinfo.Tstar.toFixed(7)}, L* ${Rinfo.Lstar.toFixed(7)}, nu - 1/n = ${Rinfo.nuMinusTarget.toExponential(1)}`);
+console.log(`nu = ${kk}/${n} (${branchName} nu): member with nu = ${kk}/${n}: |theta| ${Math.abs(Rinfo.turns).toFixed(7)} turn, T* ${Rinfo.Tstar.toFixed(7)}, L* ${Rinfo.Lstar.toFixed(7)}, nu - k/n = ${Rinfo.nuMinusTarget.toExponential(1)}`);
 
 // 2. the n fold repeat as a solution of the shooting system and the matrix [J | dF/dlam]
 let rep = null, m = 0;
@@ -156,7 +156,7 @@ function follow(vDir, vOther, sgn) {
 const result = { n, member: Rinfo, repeat: { pieces: m, Tstar: repInfo.ts, Lstar: Math.abs(repInfo.ls), turns: repInfo.theta / (2 * Math.PI) },
   singularValues: { smallest: [sA, sB, sC], largest: Math.max(...svd.norms) }, bifurcationEquation: { coefficients: [c1, c2, c3], fitResidual: fitRes, angleDegrees: angle, cosRepeatRootWithRepeatTangent: Math.abs(dot(vR, tauR)) }, satellite: [], control: [] };
 result.offPoint = [0, 0.5, 1].map(smallestAt).filter(Boolean);
-console.log('   control, the same matrix at other members: ' + result.offPoint.map((o) => `nu - 1/n = ${o.nuMinusTarget.toExponential(1)}: smallest singular value ${o.smallest[1].toExponential(1)}`).join('; '));
+console.log('   control, the same matrix at other members: ' + result.offPoint.map((o) => `nu - k/n = ${o.nuMinusTarget.toExponential(1)}: smallest singular value ${o.smallest[1].toExponential(1)}`).join('; '));
 for (const sgn of [1, -1]) {
   const r = follow(vS, vR, sgn); result.satellite.push(r);
   console.log(`   satellite, sense ${sgn}: ${r.why} after ${r.points} points (path length ${r.pathLength.toFixed(3)})` + (r.zero ? `: theta = 0 at T* ${r.zero.Tstar.toFixed(8)}, L* ${r.zero.Lstar.toFixed(8)}, closure ${r.zero.closure.toExponential(1)}, closest approach ${r.zero.minDist.toFixed(3)}` : ''));
@@ -168,8 +168,9 @@ if (control) for (const sgn of [1, -1]) {
 if (write) {
   const r6 = (x) => Number(x.toPrecision(10));
   for (const r of [...result.satellite, ...result.control]) r.curve = r.curve.map((p) => ({ s: r6(p.s), Tstar: r6(p.Tstar), Lstar: r6(p.Lstar), turns: r6(p.turns), lam: r6(p.lam), minDist: r6(p.minDist) }));
-  const what = 'branch point of satellites on the family of Broucke R orbits (tools/branch-point.mjs): the R member with rotation number nu = 1/n on the upper or the lower nu of the stable stretch, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js. A sense ends at a zero of theta (a periodic orbit) or is stopped by a limit of the continuation: a closest approach below 0.03, a collapse of the step, or 700 accepted steps; such a stop says nothing about the curve beyond it.';
+  const what = 'branch point of satellites on the family of Broucke R orbits (tools/branch-point.mjs): the R member with rotation number nu = k/n on the upper or the lower nu of the stable stretch, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js. A sense ends at a zero of theta (a periodic orbit) or is stopped by a limit of the continuation: a closest approach below 0.03, a collapse of the step, or 700 accepted steps; such a stop says nothing about the curve beyond it.';
   fs.mkdirSync(new URL('../data/branch-points/', import.meta.url), { recursive: true });
-  fs.writeFileSync(new URL(`../data/branch-points/${n}-${branchName}.json`, import.meta.url), JSON.stringify({ what, ...result, branch: branchName }));
-  console.log(`   written to data/branch-points/${n}-${branchName}.json`);
+  const name = kk === 1 ? `${n}-${branchName}.json` : `${kk}-${n}-${branchName}-${thetaWanted.toFixed(4)}.json`;
+  fs.writeFileSync(new URL('../data/branch-points/' + name, import.meta.url), JSON.stringify({ what, k: kk, ...result, branch: branchName }));
+  console.log('   written to data/branch-points/' + name);
 }
