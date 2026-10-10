@@ -27,7 +27,7 @@ paper either. One of the 77 (T* = 11.652) lies on the continuous curve of relati
 the row's is 01^2): it is another member of that curve, 3.0 % and 17 % away from the row in T* and L*, so not a match (see Corrections, 2026-10-09).
 The T* = 33.745 orbit lies on the curve of Broucke's family R, as its member with rotation 2/9 of a turn (Corrections, 2026-10-10).
 For them I do not know whether they are known.
-Not yet checked: Suvakov's gallery, Nauenberg 2001, Chenciner, Fejoz and Montgomery 2005. 35 of the 77 have L* below the range of the CPC table, so
+Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 are not read; the rotating-eight branch of the figure-eight, which both papers are about, was traced and compared (the paragraph on the rotating figure-eights below). Suvakov's gallery: see the table. 35 of the 77 have L* below the range of the CPC table, so
 for them "no match" with its satellites means "nothing to compare with".
 I do not know if any is new, and nothing here should be read as a discovery.
 
@@ -43,7 +43,7 @@ I do not know if any is new, and nothing here should be read as a discovery.
 | Jankovic et al., PRL 2016 | yes, 57 satellites, all in the CPC list | consistency check only |
 | Li and Liao 2017 (695 families) | no, L = 0 | only my L = 0 orbits |
 | Hristov and Hristova 2024 (Astronomy and Computing 49, 100880; arXiv:2404.16526), Euler configuration | no, L = 0 | only my L = 0 orbits (abstract of arXiv:2404.16526: "12,431 initial conditions (i.c.s) corresponding to 6,333 distinct solutions"; the database page db2.fmi.uni-sofia.bg/3bodyeuler says "file with 60 digits data in the form (vx, vy, T, T*) ordered by T* for 421,562 i.c.s" and "421,562 Euler i.c.s with T* < 200" for the supplementary pdf; the 12,409 distinct free-fall solutions that Li et al. 2025 cite are from another paper, Hristov et al., Celest. Mech. Dyn. Astron. 136, 7, arXiv:2308.16159, whose abstract says "24,582 i.c.s of equal-mass periodic orbits with scale-invariant period T*<80, corresponding to 12,409 distinct solutions") |
-| Suvakov gallery (three-body.ipb.ac.rs) | partly, pictures not numbers | not compared (its site certificate is broken for my tools) |
+| Suvakov gallery (three-body.ipb.ac.rs, archived copies of 2019) | the 57 BHH satellite pages have numbers, the Henon pages are not archived | checked on 2026-10-10: all 57 satellite pages are rows of the CPC list (tolerance 1e-8, fixed before the comparison); the Henon detail pages are not archived, so there was nothing to compare there (Henon 1976 itself was compared). Snapshot URLs, rows and distances, without the page values: `data/suvakov-gallery-check.json` |
 | Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 (doi:10.1016/j.newast.2025.102407) | equal mass, finite L, but only the figure-eight and IA-3 orbits continued in L from L = 0; 18 rows in the table (10 figure-eight, 8 IA-3), 16 of them relative periodic with rotation angle not 0 | read; not a catalogue; none of my orbits matches a row; the closest is 16.5 % away in (T*, L*), or 1.9 % if repeats are allowed, see below |
 | Broucke and Boggs 1975 (Celest. Mech. 11, 13); Broucke 1975 (Celest. Mech. 12, 439); Hadjidemetriou 1975 (12, 155); Hadjidemetriou and Christides 1975 (12, 175); Henon 1976 (Celest. Mech. 13, 267) | the first, second and last have equal-mass orbits (5 of 27, 29 absolute periodic orbits of two families, one family of 46 orbits); the two Hadjidemetriou papers have none | transcribed from the ADS scans and compared, see the paragraph below; no hit |
 | Nauenberg 2001 (Phys. Lett. A 292, 93); Chenciner, Fejoz and Montgomery 2005 (Nonlinearity 18, 1407) | finite L, rotating eights | not read, not compared |
@@ -149,6 +149,16 @@ up to a rotation (one relative period: T/3; checked with four members of the tra
 (`tools/choreo-test.mjs`, `data/choreo-test.json`). So none of my orbits, the 21 above L* = 0.41 included, is a member of this branch or a repeat of
 one. SN.19, SN.20 and SN.21 are atlas
 orbits; the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) on rotating eights are not read yet.
+
+**The family of the T* = 29.310 orbit (2026-10-10).** The family of relative periodic orbits through the stable T* = 29.310 orbit of the arclength
+list was traced in both directions with `tools/family-follow.mjs` (`data/family-29.310-trace.json`: 115 stored points downwards, ending at a closest
+approach of 0.0279, and 280 upwards, ending at 0.0286; the rotation angle runs from about -0.49 to +0.49 of a turn). Along the family the orbits
+become very unstable (the largest multiplier is 5e4 to 2e5 after L* about 1.03 and reaches 3.8e6 and 1.4e6 at the ends), and the closure of the stored
+points gets worse than 1e-6 (up to 1.8e-4). Only the first stretch of each trace with closure below 1e-6 is used: L* 0.7878 to 1.074 downwards (87
+points) and 0.7898 to 1.029 upwards (72 points). That rule was added after this trace was seen, so it is a choice made on the data. The two members
+with rotation angle 0 found beyond it (T* = 29.5678, L* = 1.1626, closure 3.6e-5; T* = 32.2114, L* = 1.1228, closure 8.4e-6) are not results. In the
+usable part the family passes no published orbit: nothing is within 2e-3 of the CPC satellites, the rows of Davoust and Broucke, Henon 1976 or the
+rows of Li et al. at n = 1; the closest is Henon's orbit 17 at 6.1e-3 (6 fold, usable part only).
 
 **Counting.** The 85 orbits of the perpendicular search are 6 linearly stable, 77 unstable and 2 uncertain. The satellite work uses 7 stable parents:
 those 6 plus the orbit at T* = 29.31 that was found later by continuation (it is not one of the 85). Of the 85, 2 have L = 0 (members of the family

@@ -137,3 +137,12 @@ Found in an independent review of the code and in my own checks; what is fixed a
   stable/unstable decision.
 - **Integrators (mostly fixed).** `monodromy` and `sampleOrbit` now stop when a step produces nan or the step size collapses; a few other loops with
   step caps can still run for a long time near collisions.
+- **A match by T* and L* is not a proof of identity.** Two orbits can agree in T* and L* to 1e-5 or better, with the same number of alignments, and
+  still be different orbits. The two zeros of theta on the satellite curve of the member of R with nu = 2/9 (upper nu) are at T* = 33.745150 (L* =
+  2.556740) and T* = 33.745149 (L* = 2.556792), 5e-9 apart in T* and 2e-5 in L*; the first is t42 of my table (unstable, largest multiplier 1.0267),
+  the second has start values that differ from it (the normalised starts differ by 0.099) and is linearly stable, and both have the word (01)^9 and 18
+  alignments. The second may lie near a bifurcation of t42 (not shown). So the pairs of orbits at the same period that the comparison reports as a hit
+  or as near are decided by their start values (`tools/satellite-candidates.mjs` does it).
+- **Near never means the same orbit.** The comparison with repeats up to 12 uses the primitive T* of an orbit that returns rotated, also for numbers
+  of repeats that are not whole turns (for t41, rotation 2/9 of a turn, the 10 fold repeat does not close, but its T* is compared). A pair within 5e-3
+  says that the invariants are close and nothing more.

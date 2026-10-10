@@ -5,7 +5,7 @@ This file holds a part of the former README, moved here on 2026-10-10 without ch
 ## Running it
 
 ```
-npm test                       # all the tests, a few minutes, node 18+
+npm test                       # all the tests, about 10 seconds, node 18+
 python -m http.server          # then open http://localhost:8000 (needs WebGPU)
 ```
 

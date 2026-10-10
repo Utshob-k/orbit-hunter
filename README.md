@@ -28,7 +28,7 @@ was traced and compared (see [docs/results.md](docs/results.md)). The 2025 revie
 
 Since a16 is the shortest orbit of t80, the two lists hold 100 distinct orbits, 91 of them unmatched. Whether they are already published is open.
 
-Two of the 77 lie on published families (T* = 11.652 and 33.745) and three lie on satellites of Broucke's R family (see below). So "match none" means
+Two of the 77 lie on published families (T* = 11.652 and 33.745) and six lie on satellites of Broucke's R family (see below). So "match none" means
 not a listed orbit. It does not mean unrelated to published ones.
 
 Of the 85, 6 are linearly stable. 54 of the 85 close to 1e-8 or better in double precision with two integrators, and 51 of those 54 also in 40 digit
@@ -49,9 +49,11 @@ for n = 3 to 12.
 | 7 | T* = 21.663 | in the atlas (R7 1/1, from the atlas's own 2026 search, no paper) |
 | 9 to 12 | T* = 25.383, 27.217, 29.037, 30.844 | not found in the sources checked |
 
-The orbits for n = 5 to 12 are all linearly stable. The satellite curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined
-to 30 digits, unstable). "Not found in the sources checked" says nothing about whether an orbit is known. The 2025 review of Li and Liao could not be read. Several
-continuations stopped at a limit of the method (close approach, step size, step count); those are undecided, not results. Details:
+The orbits for n = 5 to 12 are all linearly stable. The satellite curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined to
+30 digits, unstable). "Not found in the sources checked" says nothing about whether an orbit is known. The 2025 review of Li and Liao could not be
+read. Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided, not results. Satellites
+with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, 37.624249, 51.383330) match
+nothing in the sources checked, three of the 77 (t37, t42, t59) lie on such satellites, and 12 of the zeros are not established. Details:
 [docs/r-family-satellites.md](docs/r-family-satellites.md).
 
 ## Install and reproduce

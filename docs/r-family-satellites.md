@@ -29,20 +29,20 @@ apart, only the shooting system can.
 The family has 41 members on its stable stretch where a rotation number nu is k/n with n up to 12 (`tools/nu-map.mjs`, `data/nu-map.json`; theta, T*
 and L* are interpolated between two accepted steps): 20 with k = 1, two for each n from 3 to 12 (one on the lower and one on the upper of the two nu),
 and 21 with k > 1. All 20 with k = 1 were followed in the way described above (`tools/branch-point.mjs`, one file for each in `data/branch-points/`;
-how every continuation ended: `tools/branch-summary.mjs`, `data/branch-summary.json`), the 21 with k > 1 were not. At all 20 the second smallest
-singular value of the matrix of the n fold repeat is 3.7e-13 to 2.0e-11 (6.6e-9 for n = 7 on the lower branch), against 9e-4 or more for the next one,
-and the bifurcation equation has two real roots, 51 to 58 degrees apart on the upper branch and 77 to 89 on the lower. Of the 40 satellite
-continuations 17 reach a rotation angle 0: both senses of the upper branch for n = 5 to 12 and one sense of the lower branch for n = 3. The other 23
-were stopped by a limit of the continuation, 15 at the closest approach limit of 0.03, 2 by a collapse of the step and 6 at the step limit of 700
-steps (the lower branch for n = 4, 6 and 8, both senses). A stop says nothing about the curve beyond it, so these 23 are undecided and not results. Of
-the 40 control continuations (the repeat direction) 38 end at an n fold repeat of an orbit with a rotation p/n of a turn whose primitive closes as a
-relative periodic orbit, among them R2 and the T* = 33.745 orbit as the 9 fold repeat of the member with rotation 2/9; 2 were stopped by a collapse of
-the step. All of this is double precision: the zeros of theta close to 6e-12 to 4e-10, not to 30 digits, and where a continuation stops depends on its
-step rules. Davoust and Broucke 1982 followed the satellites of R (their family D1) for the multiplicities 2 and 3 (branches f, e and E, Corrections,
-2026-10-10) and the atlas lists satellites of the BHH family coded R or A (family bhhsat). For n = 5, 6, 8 and 9 to 12 none of the sources that could
-be read has these orbits (the papers named above, the atlas, Broucke 1975, Davoust and Broucke 1982). The review "A review on periodic orbits of the
-general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi 10.1007/s11433-024-2686-6) could not be
-read (it is not open access and there is no preprint), so "not found" is all that can be said.
+how every continuation ended: `tools/branch-summary.mjs`, `data/branch-summary.json`), the 21 with k > 1 were followed as well (below). At all 20 the
+second smallest singular value of the matrix of the n fold repeat is 3.7e-13 to 2.0e-11 (6.6e-9 for n = 7 on the lower branch), against 9e-4 or more
+for the next one, and the bifurcation equation has two real roots, 51 to 58 degrees apart on the upper branch and 77 to 89 on the lower. Of the 40
+satellite continuations 17 reach a rotation angle 0: both senses of the upper branch for n = 5 to 12 and one sense of the lower branch for n = 3. The
+other 23 were stopped by a limit of the continuation, 15 at the closest approach limit of 0.03, 2 by a collapse of the step and 6 at the step limit of
+700 steps (the lower branch for n = 4, 6 and 8, both senses). A stop says nothing about the curve beyond it, so these 23 are undecided and not
+results. Of the 40 control continuations (the repeat direction) 38 end at an n fold repeat of an orbit with a rotation p/n of a turn whose primitive
+closes as a relative periodic orbit, among them R2 and the T* = 33.745 orbit as the 9 fold repeat of the member with rotation 2/9; 2 were stopped by a
+collapse of the step. All of this is double precision: the zeros of theta close to 6e-12 to 4e-10, not to 30 digits, and where a continuation stops
+depends on its step rules. Davoust and Broucke 1982 followed the satellites of R (their family D1) for the multiplicities 2 and 3 (branches f, e and
+E, Corrections, 2026-10-10) and the atlas lists satellites of the BHH family coded R or A (family bhhsat). For n = 5, 6, 8 and 9 to 12 none of the
+sources that could be read has these orbits (the papers named above, the atlas, Broucke 1975, Davoust and Broucke 1982). The review "A review on
+periodic orbits of the general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi
+10.1007/s11433-024-2686-6) could not be read (it is not open access and there is no preprint), so "not found" is all that can be said.
 
 The satellite curves of the T* = 17.847 and 19.769 orbits each have a second orbit with rotation angle 0, after the stable one, near a close approach:
 T* = 17.7208, L* = 1.6293 (word (01)^5, 10 alignments) and T* = 19.6472, L* = 1.5989 ((01)^6, 12 alignments).
@@ -63,3 +63,23 @@ paper. The orbits for n = 9, 10, 11 and 12 match nothing in the sources checked 
 9 rows of Davoust and Broucke with a rotation angle of 2 pi, the orbits of Henon 1976, the 18 rows of Li et al. 2025 or the atlas (T* and L* to 1e-5
 and to 5e-3, repeats up to 12 either way, the same alignments where the list has them; fixed before the comparison). The review of Li and Liao could
 not be read, and this says nothing about whether they are known.
+
+**Satellites with k > 1.** The 21 members with nu = k/n and k > 1 were followed in the same way (`tools/branch-point.mjs` with `--k=K`; the upper nu
+crosses the same k/n twice for 3/7, 4/9, 5/11 and 5/12, so the theta is in the name of the file). At all 21 the second smallest singular value is
+5.8e-13 to 1.0e-11, against 2.3e-4 to 7.3e-3 for the next one, and the two directions are 67 to 88 degrees apart. Of the 42 satellite continuations 33
+reach a rotation angle 0 and 9 were stopped by a limit of the continuation, 5 at the closest approach limit and 4 at the step limit of 700 steps. For
+3/7 (theta 0.4302 and 0.3793), 4/9 (0.3872) and 4/11 (0.3409) neither sense reaches a rotation 0: these four are undecided. All 42 control
+continuations end at a repeat whose primitive closes. The zeros close worse than for k = 1 (7e-12 to 1.7e-5 in double precision): of the 33, 21 have
+the closure tier reliable, 7 weak and 5 failed, and the 12 weak or failed zeros are not established, whatever their T* and L*. Over all 41 branch
+points there are 82 satellite continuations, 50 of them reach a rotation 0 (38 established), 20 stopped at the closest approach limit, 2 by a collapse
+of the step and 10 at the step limit; 80 of the 82 control continuations end at a repeat whose primitive closes and 2 were stopped by a collapse of
+the step (`tools/branch-summary.mjs`, `data/branch-summary.json`). Six of the 77 unmatched orbits lie on satellites of R: the three stable orbits
+above and t37 (T* = 29.7765, nu = 2/7 upper branch), t42 (T* = 33.7451, nu = 2/9 upper) and t59 (T* = 43.6551, nu = 3/10 upper); a zero of the
+satellite is the same orbit as each of them by the start values (`tools/branch-summary.mjs`). Three zeros are linearly stable and match nothing in the
+sources checked: T* = 33.745149 (nu = 2/9 upper branch, sense -), T* = 37.624249 (2/11 upper, sense -) and T* = 51.383330 (3/10 lower, sense +), with
+the words (01)^9, (01)^11 and (01)^10. They were refined to 30 digits (closure of the full period 7e-26, 9e-26 and 3e-25 on the stored values,
+`data/satellite-candidates.json`); REBOUND closes them to 3e-14 to 5e-14 from the double precision values and the multipliers are on the unit circle
+to 1.2e-5 (`data/satellite-check.json`). The first of them is 5e-9 in T* and 2e-5 in L* from t42 but it is a different orbit: the start values differ
+(the normalised starts by 0.099), t42 is unstable (largest multiplier 1.027) and this one is linearly stable (`tools/satellite-candidates.mjs`); it
+may lie near a bifurcation of t42 (not shown). The other zeros with k > 1 are not refined. That these three match nothing in the sources checked so
+far is all that can be said (the review of Li and Liao could not be read).
