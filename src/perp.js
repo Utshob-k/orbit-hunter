@@ -28,7 +28,7 @@ export function symResidual(s) {
 function stateAt(u1, u2, lam, t) {
   const s = perpInitial(u1, u2, lam);
   let tt = 0, h = 1e-3;
-  const maxSteps = 4000 + 3000 * Math.max(t, 1);
+  const maxSteps = 20 * (4000 + 3000 * Math.max(t, 1));   // generous: an orbit with n close passes (the satellites for n >= 29) needs far more than 4000 + 3000 t steps
   for (let n = 0; tt < t - 1e-15; n++) {
     if (n > maxSteps || !(t > 0) || !Number.isFinite(t)) return null;
     const [dt, hn] = dp45Step(s, Math.min(h, t - tt), 1e-13, 1e-14, 0.01);
@@ -101,7 +101,7 @@ export function perpInfo(u1, u2, lam, t) {
   const s = Float64Array.from(s0);
   let tt = 0, h = 1e-3, minDist = Infinity, extent = 0;
   for (let n = 0; tt < T - 1e-15; n++) {
-    if (n > 4000 + 3000 * T) return null;
+    if (n > 20 * (4000 + 3000 * T)) return null;
     const [dt, hn] = dp45Step(s, Math.min(h, T - tt), 1e-13, 1e-14, 0.01);
     tt += dt;
     h = hn;

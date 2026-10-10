@@ -7,7 +7,7 @@
 //    tangent of the repeat curve (the exact repeats of the neighbouring members, started cold), the other is the satellite;
 // 4. the satellite is followed in both senses with pseudo arclength (tangent turning < 0.35 rad, steps below 6 % of the distance from the branch point so that Newton cannot land on the repeat
 //    curve) until the rotation angle is 0: a periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
-// node tools/branch-point.mjs n theta [--k=K] [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
+// node tools/branch-point.mjs n theta [--k=K] [--repeat-tol=1e-8] [--pieces=P] [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
 //   --write stores the numbers in data/branch-points/n-upper.json or n-lower.json (k = 1), or k-n-upper-theta.json (k > 1: the upper nu can cross the same k/n twice, so the theta asked for is in the name). a run takes a few minutes (n = 8 with --control about 20)
 import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
@@ -17,6 +17,8 @@ import { relativeStability } from '../src/relative.js';
 const n = Number(process.argv[2]), thetaWanted = Number(process.argv[3]), control = process.argv.includes('--control'), write = process.argv.includes('--write');
 if (!n || !thetaWanted) { console.error('usage: node tools/branch-point.mjs n theta [--control] [--write]'); process.exit(2); }
 const kArg = process.argv.find((a) => a.startsWith('--k=')), kk = kArg ? Number(kArg.slice(4)) : 1, target = kk / n;
+const piecesArg = process.argv.find((a) => a.startsWith('--pieces='));      // force the number of pieces of the n fold repeat (16 from n = 29, where 8 give very short steps)
+const tolArg = process.argv.find((a) => a.startsWith('--repeat-tol=')), repTol = tolArg ? Number(tolArg.slice(13)) : 1e-9;   // residual accepted for the n fold repeat; the singular system stalls near 3.5e-11 n, so 1e-8 is needed from n = 29
 const trace = JSON.parse(fs.readFileSync(new URL('../data/r-family-trace.json', import.meta.url), 'utf8')).curve;
 
 // 1. the bracket and the member with nu = 1/n
@@ -56,7 +58,7 @@ console.log(`nu = ${kk}/${n} (${branchName} nu): member with nu = ${kk}/${n}: |t
 
 // 2. the n fold repeat as a solution of the shooting system and the matrix [J | dF/dlam]
 let rep = null, m = 0;
-for (const pieces of [8, 16, 24, 32, 40]) { const s = closePerpMS(R.s.u1, R.s.u2, R.s.lam, n * R.s.t, { m: pieces }); if (s.res < 1e-9) { rep = s; m = pieces; break; } }   // 1e-9: the system is singular here, Newton stalls a little above 1e-11
+for (const pieces of (piecesArg ? [Number(piecesArg.slice(9))] : [8, 16, 24, 32, 40])) { const s = closePerpMS(R.s.u1, R.s.u2, R.s.lam, n * R.s.t, { m: pieces }); if (s.res < repTol) { rep = s; m = pieces; break; } }   // 1e-9: the system is singular here, Newton stalls a little above 1e-11
 if (!rep) { console.error('the n fold repeat did not close'); process.exit(1); }
 const repInfo = perpInfo(rep.u1, rep.u2, rep.lam, rep.t), z = packZ(rep), nz = z.length, t0 = rep.t, Y0 = toY(z, rep.lam);
 const sys = system(z, rep.lam, m), A = sys.J.map((row, i) => [...Array.from(row), sys.Flam[i]]);
@@ -81,7 +83,7 @@ function jacobiSvd(M) {          // one sided Jacobi on the columns of M (rows x
 function smallestAt(f) {    // the same matrix at another member of the family (not the branch point): smallest singular values and nu - 1/n
   const mm = member(f); if (!mm) return null;
   let r = null, pieces = 0;
-  for (const p of [8, 16, 24]) { const q = closePerpMS(mm.s.u1, mm.s.u2, mm.s.lam, n * mm.s.t, { m: p }); if (q.res < 1e-9) { r = q; pieces = p; break; } }
+  for (const p of [8, 16, 24]) { const q = closePerpMS(mm.s.u1, mm.s.u2, mm.s.lam, n * mm.s.t, { m: p }); if (q.res < repTol) { r = q; pieces = p; break; } }
   if (!r) return null;
   const zz = packZ(r), ss = system(zz, r.lam, pieces), M = ss.J.map((row, i) => [...Array.from(row), ss.Flam[i]]);
   return { f, nuMinusTarget: mm.nu - target, smallest: jacobiSvd(M).order.slice(0, 3).map((o) => o[0]) };
@@ -94,7 +96,7 @@ const [k1, k2] = [svd.order[0][1], svd.order[1][1]], big = svd.norms[k1] > svd.n
 const v1 = Float64Array.from(svd.V[k1]), v2 = Float64Array.from(svd.V[k2]), psi = Float64Array.from(svd.W[big], (x) => x / svd.norms[big]);
 
 // 3. the repeat curve: the exact repeats of the neighbouring members, started cold
-function repeatAt(f) { const mm = member(f); if (!mm) return null; const s = closePerpMS(mm.s.u1, mm.s.u2, mm.s.lam, n * mm.s.t, { m }); return s.res < 1e-9 ? s : null; }
+function repeatAt(f) { const mm = member(f); if (!mm) return null; const s = closePerpMS(mm.s.u1, mm.s.u2, mm.s.lam, n * mm.s.t, { m }); return s.res < repTol ? s : null; }
 const up = repeatAt(Math.min(1, R.f + 1e-4)), dn = repeatAt(Math.max(0, R.f - 1e-4));
 const yu = toY(packZ(up), up.lam), yd = toY(packZ(dn), dn.lam), tauR = unit(Float64Array.from(yu, (v, i) => v - yd[i]));
 // the quadratic bifurcation equation on the null space
@@ -116,9 +118,10 @@ const angle = Math.acos(Math.abs(dot(vR, vS))) * 180 / Math.PI;
 console.log(`   bifurcation equation: fit residual ${fitRes.toExponential(1)}, two real directions, |cos| of the repeat root with the repeat tangent ${Math.abs(dot(vR, tauR)).toFixed(6)}, angle between the two ${angle.toFixed(1)} degrees`);
 
 // 4. following a direction in both senses until theta = 0
-const inv = (Y) => { const s = solOf(Y, m), i = perpInfo(s.u1, s.u2, s.lam, s.t); return { s, Tstar: i.ts, Lstar: Math.abs(i.ls), turns: i.theta / (2 * Math.PI), minDist: i.minDist, closure: i.repeatErr }; };
+const inv = (Y) => { const s = solOf(Y, m), i = perpInfo(s.u1, s.u2, s.lam, s.t); if (!i) return null; return { s, Tstar: i.ts, Lstar: Math.abs(i.ls), turns: i.theta / (2 * Math.PI), minDist: i.minDist, closure: i.repeatErr }; };
 function follow(vDir, vOther, sgn) {
   let tau = Float64Array.from(vDir, (v) => sgn * v), Y = Float64Array.from(Y0), step_h = 1e-3, s = 0, prev = inv(Y0), zero = null, why = 'step limit';
+  if (!prev) return { sense: sgn, why: 'integration of the orbit failed at the branch point', points: 0, pathLength: 0, zero: null, curve: [] };
   const pts = [{ s: 0, Tstar: prev.Tstar, Lstar: prev.Lstar, turns: prev.turns, lam: prev.s.lam, minDist: prev.minDist }];
   for (let step = 1; step <= 700; step++) {
     let c = null;
@@ -128,12 +131,14 @@ function follow(vDir, vOther, sgn) {
       c = correct(Float64Array.from(Y, (v, i) => v + step_h * tau[i]), nrm, m, t0);
       if (c.ok) {
         const tn = tangentAt(c.J, c.Flam, step === 1 ? unit(Float64Array.from(c.Y, (v, i) => v - Y[i])) : tau);
-        if (tn && (step === 1 || dot(tn, tau) > Math.cos(0.35))) { c.tn = tn; break; }
+        if (tn && (step === 1 || dot(tn, tau) > Math.cos(0.35)) && inv(c.Y)) { c.tn = tn; break; }      // a point whose orbit cannot be integrated is rejected like a failed step
       }
       c = null; step_h /= 2;
     }
     if (!c) { why = 'step collapse'; break; }
-    const cur = inv(c.Y), d = Math.hypot(...Array.from(c.Y, (v, i) => v - Y[i]));
+    const cur = inv(c.Y);
+    if (!cur) { why = 'integration of the orbit failed'; break; }
+    const d = Math.hypot(...Array.from(c.Y, (v, i) => v - Y[i]));
     if (cur.minDist < 0.03) { why = 'close approach ' + cur.minDist.toFixed(4); break; }
     if (step > 1 && prev.turns * cur.turns < 0 && Math.abs(prev.turns) < 0.05) {      // the zero of theta between the last two points: bisection along the chord, corrected onto the curve
       let a = Float64Array.from(Y), b = Float64Array.from(c.Y), ta = prev.turns, zz = null;
@@ -153,7 +158,7 @@ function follow(vDir, vOther, sgn) {
   }
   return { sense: sgn, why, points: pts.length, pathLength: s, zero: zero && { Tstar: zero.Tstar, Lstar: zero.Lstar, turns: zero.turns, closure: zero.closure, minDist: zero.minDist, u1: zero.s.u1, u2: zero.s.u2, lam: zero.s.lam, t: zero.s.t }, curve: pts };
 }
-const result = { n, member: Rinfo, repeat: { pieces: m, Tstar: repInfo.ts, Lstar: Math.abs(repInfo.ls), turns: repInfo.theta / (2 * Math.PI) },
+const result = { n, repeatTolerance: repTol, member: Rinfo, repeat: { pieces: m, Tstar: repInfo.ts, Lstar: Math.abs(repInfo.ls), turns: repInfo.theta / (2 * Math.PI) },
   singularValues: { smallest: [sA, sB, sC], largest: Math.max(...svd.norms) }, bifurcationEquation: { coefficients: [c1, c2, c3], fitResidual: fitRes, angleDegrees: angle, cosRepeatRootWithRepeatTangent: Math.abs(dot(vR, tauR)) }, satellite: [], control: [] };
 result.offPoint = [0, 0.5, 1].map(smallestAt).filter(Boolean);
 console.log('   control, the same matrix at other members: ' + result.offPoint.map((o) => `nu - k/n = ${o.nuMinusTarget.toExponential(1)}: smallest singular value ${o.smallest[1].toExponential(1)}`).join('; '));

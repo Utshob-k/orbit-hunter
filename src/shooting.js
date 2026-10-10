@@ -20,7 +20,7 @@ function flow(x0, tau) {
   const s = Float64Array.from(x0);
   let t = 0, h = 1e-3;
   for (let n = 0; t < tau - 1e-15; n++) {
-    if (n > 4000 + 3000 * Math.max(tau, 1)) return null;
+    if (n > 20 * (4000 + 3000 * Math.max(tau, 1))) return null;
     const [dt, hn] = dp45Step(s, Math.min(h, tau - t), 1e-13, 1e-14, 0.01);
     if (dt === 0) return null;
     t += dt;
