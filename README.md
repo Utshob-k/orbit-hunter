@@ -32,8 +32,9 @@ Two of the 77 lie on published families (T* = 11.652 and 33.745) and six lie on 
 not a listed orbit. It does not mean unrelated to published ones.
 
 Of the 85, 6 are linearly stable. 54 of the 85 close to 1e-8 or better in double precision with two integrators, and 51 of those 54 also in 40 digit
-arithmetic. All 85 are refined to 30 digits; the stored values close to 2.7e-19 or better. The details, and every correction made so far, are in the
-files below.
+arithmetic. An independent integrator (REBOUND) agrees, also on the three whose double precision start values close only to between 1e-8 and 7e-8
+(t40, t47, t57; see docs/methods-and-limits.md). All 85 are refined to 30 digits; the stored values close to 2.7e-19 or better. The details, and every
+correction made so far, are in the files below.
 
 ## Broucke's R family and its satellites
 
@@ -52,8 +53,9 @@ for n = 3 to 12.
 The orbits for n = 5 to 12 are all linearly stable. The satellite curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined to
 30 digits, unstable). "Not found in the sources checked" says nothing about whether an orbit is known. The 2025 review of Li and Liao could not be
 read. Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided, not results. Satellites
-with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, 37.624249, 51.383330) match
-nothing in the sources checked, three of the 77 (t37, t42, t59) lie on such satellites, and 12 of the zeros are not established. Details:
+with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, a different orbit from t41
+and t42, see docs; 37.624249; 51.383330) match nothing in the sources checked, three of the 77 (t37, t42, t59: rows 37, 42 and 59 of
+data/orbit-table.csv, counting from 0) lie on such satellites, and 12 of the zeros are not established. Details:
 [docs/r-family-satellites.md](docs/r-family-satellites.md).
 
 ## Install and reproduce
