@@ -1,0 +1,411 @@
+{
+ "what": "the archived pages of the BHH satellite gallery (three-body.ipb.ac.rs, Wayback Machine copies of 2019-10-21; the site is down) compared with the 99 rows of the CPC 2020 table (data/cpc2020-satellites.json) on 2026-10-10: for each of the 57 satellite pages (ssol.php?id=0..56) the row of the table with the smallest distance, distance = largest relative difference in L, a and c (tolerance 1e-8, fixed before the comparison). The page values are not stored here (derived numbers only). Not rerunnable offline: it needs the archived pages. The pages hsol.php?id=0..44 of the Henon 1976 section are not in the archive (only the empty template, snapshot 20190507221305, and the list henon.php, snapshot 20190507221249), so there was nothing to compare there; the list bhh.satellites.php is snapshot 20190507160941. All 57 distances are 0: the page values equal the table rows to all printed digits.",
+ "tolerance": 1e-08,
+ "pages": [
+  {
+   "id": 0,
+   "name": "RETROGRADE BHH SATELLITE 3b",
+   "snapshot": "https://web.archive.org/web/20191021022052/http://three-body.ipb.ac.rs/ssol.php?id=0",
+   "cpcRow": 1,
+   "distance": 0.0
+  },
+  {
+   "id": 1,
+   "name": "RETROGRADE BHH SATELLITE 3a",
+   "snapshot": "https://web.archive.org/web/20191021022213/http://three-body.ipb.ac.rs/ssol.php?id=1",
+   "cpcRow": 2,
+   "distance": 0.0
+  },
+  {
+   "id": 2,
+   "name": "RETROGRADE BHH SATELLITE 4a 1",
+   "snapshot": "https://web.archive.org/web/20191021022228/http://three-body.ipb.ac.rs/ssol.php?id=2",
+   "cpcRow": 4,
+   "distance": 0.0
+  },
+  {
+   "id": 3,
+   "name": "RETROGRADE BHH SATELLITE 4a 2",
+   "snapshot": "https://web.archive.org/web/20191021021957/http://three-body.ipb.ac.rs/ssol.php?id=3",
+   "cpcRow": 5,
+   "distance": 0.0
+  },
+  {
+   "id": 4,
+   "name": "RETROGRADE BHH SATELLITE 4d",
+   "snapshot": "https://web.archive.org/web/20191021022022/http://three-body.ipb.ac.rs/ssol.php?id=4",
+   "cpcRow": 6,
+   "distance": 0.0
+  },
+  {
+   "id": 5,
+   "name": "RETROGRADE BHH SATELLITE 5b",
+   "snapshot": "https://web.archive.org/web/20191021022408/http://three-body.ipb.ac.rs/ssol.php?id=5",
+   "cpcRow": 8,
+   "distance": 0.0
+  },
+  {
+   "id": 6,
+   "name": "RETROGRADE BHH SATELLITE 6b",
+   "snapshot": "https://web.archive.org/web/20191021022438/http://three-body.ipb.ac.rs/ssol.php?id=6",
+   "cpcRow": 10,
+   "distance": 0.0
+  },
+  {
+   "id": 7,
+   "name": "RETROGRADE BHH SATELLITE 6a",
+   "snapshot": "https://web.archive.org/web/20191021022318/http://three-body.ipb.ac.rs/ssol.php?id=7",
+   "cpcRow": 11,
+   "distance": 0.0
+  },
+  {
+   "id": 8,
+   "name": "RETROGRADE BHH SATELLITE 7b 1",
+   "snapshot": "https://web.archive.org/web/20191021022445/http://three-body.ipb.ac.rs/ssol.php?id=8",
+   "cpcRow": 13,
+   "distance": 0.0
+  },
+  {
+   "id": 9,
+   "name": "RETROGRADE BHH SATELLITE 7b 2",
+   "snapshot": "https://web.archive.org/web/20191021022449/http://three-body.ipb.ac.rs/ssol.php?id=9",
+   "cpcRow": 14,
+   "distance": 0.0
+  },
+  {
+   "id": 10,
+   "name": "RETROGRADE BHH SATELLITE 7a 2",
+   "snapshot": "https://web.archive.org/web/20191021022333/http://three-body.ipb.ac.rs/ssol.php?id=10",
+   "cpcRow": 15,
+   "distance": 0.0
+  },
+  {
+   "id": 11,
+   "name": "RETROGRADE BHH SATELLITE 7a 3",
+   "snapshot": "https://web.archive.org/web/20191021022057/http://three-body.ipb.ac.rs/ssol.php?id=11",
+   "cpcRow": 16,
+   "distance": 0.0
+  },
+  {
+   "id": 12,
+   "name": "RETROGRADE BHH SATELLITE 8b 1",
+   "snapshot": "https://web.archive.org/web/20191021021917/http://three-body.ipb.ac.rs/ssol.php?id=12",
+   "cpcRow": 17,
+   "distance": 0.0
+  },
+  {
+   "id": 13,
+   "name": "RETROGRADE BHH SATELLITE 8a 1",
+   "snapshot": "https://web.archive.org/web/20191021022218/http://three-body.ipb.ac.rs/ssol.php?id=13",
+   "cpcRow": 18,
+   "distance": 0.0
+  },
+  {
+   "id": 14,
+   "name": "RETROGRADE BHH SATELLITE 8c 1",
+   "snapshot": "https://web.archive.org/web/20191021022223/http://three-body.ipb.ac.rs/ssol.php?id=14",
+   "cpcRow": 19,
+   "distance": 0.0
+  },
+  {
+   "id": 15,
+   "name": "RETROGRADE BHH SATELLITE 8b 2",
+   "snapshot": "https://web.archive.org/web/20191021021921/http://three-body.ipb.ac.rs/ssol.php?id=15",
+   "cpcRow": 20,
+   "distance": 0.0
+  },
+  {
+   "id": 16,
+   "name": "RETROGRADE BHH SATELLITE 8b 3",
+   "snapshot": "https://web.archive.org/web/20191021021927/http://three-body.ipb.ac.rs/ssol.php?id=16",
+   "cpcRow": 21,
+   "distance": 0.0
+  },
+  {
+   "id": 17,
+   "name": "RETROGRADE BHH SATELLITE 8a 2",
+   "snapshot": "https://web.archive.org/web/20191021021931/http://three-body.ipb.ac.rs/ssol.php?id=17",
+   "cpcRow": 22,
+   "distance": 0.0
+  },
+  {
+   "id": 18,
+   "name": "RETROGRADE BHH SATELLITE 9b 1",
+   "snapshot": "https://web.archive.org/web/20191021022102/http://three-body.ipb.ac.rs/ssol.php?id=18",
+   "cpcRow": 23,
+   "distance": 0.0
+  },
+  {
+   "id": 19,
+   "name": "RETROGRADE BHH SATELLITE 9a 1",
+   "snapshot": "https://web.archive.org/web/20191021021936/http://three-body.ipb.ac.rs/ssol.php?id=19",
+   "cpcRow": 24,
+   "distance": 0.0
+  },
+  {
+   "id": 20,
+   "name": "RETROGRADE BHH SATELLITE 9b 2",
+   "snapshot": "https://web.archive.org/web/20191021021941/http://three-body.ipb.ac.rs/ssol.php?id=20",
+   "cpcRow": 25,
+   "distance": 0.0
+  },
+  {
+   "id": 21,
+   "name": "RETROGRADE BHH SATELLITE 9b 3",
+   "snapshot": "https://web.archive.org/web/20191021022338/http://three-body.ipb.ac.rs/ssol.php?id=21",
+   "cpcRow": 26,
+   "distance": 0.0
+  },
+  {
+   "id": 22,
+   "name": "RETROGRADE BHH SATELLITE 9a 2",
+   "snapshot": "https://web.archive.org/web/20191021022233/http://three-body.ipb.ac.rs/ssol.php?id=22",
+   "cpcRow": 27,
+   "distance": 0.0
+  },
+  {
+   "id": 23,
+   "name": "RETROGRADE BHH SATELLITE 9a 3",
+   "snapshot": "https://web.archive.org/web/20191021021946/http://three-body.ipb.ac.rs/ssol.php?id=23",
+   "cpcRow": 28,
+   "distance": 0.0
+  },
+  {
+   "id": 24,
+   "name": "RETROGRADE BHH SATELLITE 9b 4",
+   "snapshot": "https://web.archive.org/web/20191021022343/http://three-body.ipb.ac.rs/ssol.php?id=24",
+   "cpcRow": 29,
+   "distance": 0.0
+  },
+  {
+   "id": 25,
+   "name": "RETROGRADE BHH SATELLITE 10b 1",
+   "snapshot": "https://web.archive.org/web/20191021022107/http://three-body.ipb.ac.rs/ssol.php?id=25",
+   "cpcRow": 30,
+   "distance": 0.0
+  },
+  {
+   "id": 26,
+   "name": "RETROGRADE BHH SATELLITE 10b 2",
+   "snapshot": "https://web.archive.org/web/20191021022112/http://three-body.ipb.ac.rs/ssol.php?id=26",
+   "cpcRow": 31,
+   "distance": 0.0
+  },
+  {
+   "id": 27,
+   "name": "RETROGRADE BHH SATELLITE 10a 1",
+   "snapshot": "https://web.archive.org/web/20191021022118/http://three-body.ipb.ac.rs/ssol.php?id=27",
+   "cpcRow": 32,
+   "distance": 0.0
+  },
+  {
+   "id": 28,
+   "name": "RETROGRADE BHH SATELLITE 10c",
+   "snapshot": "https://web.archive.org/web/20191021022238/http://three-body.ipb.ac.rs/ssol.php?id=28",
+   "cpcRow": 33,
+   "distance": 0.0
+  },
+  {
+   "id": 29,
+   "name": "RETROGRADE BHH SATELLITE 11b",
+   "snapshot": "https://web.archive.org/web/20191021021952/http://three-body.ipb.ac.rs/ssol.php?id=29",
+   "cpcRow": 34,
+   "distance": 0.0
+  },
+  {
+   "id": 30,
+   "name": "RETROGRADE BHH SATELLITE 11a",
+   "snapshot": "https://web.archive.org/web/20191021022002/http://three-body.ipb.ac.rs/ssol.php?id=30",
+   "cpcRow": 35,
+   "distance": 0.0
+  },
+  {
+   "id": 31,
+   "name": "RETROGRADE BHH SATELLITE 12b 1",
+   "snapshot": "https://web.archive.org/web/20191021022243/http://three-body.ipb.ac.rs/ssol.php?id=31",
+   "cpcRow": 36,
+   "distance": 0.0
+  },
+  {
+   "id": 32,
+   "name": "RETROGRADE BHH SATELLITE 12b 2",
+   "snapshot": "https://web.archive.org/web/20191021022007/http://three-body.ipb.ac.rs/ssol.php?id=32",
+   "cpcRow": 37,
+   "distance": 0.0
+  },
+  {
+   "id": 33,
+   "name": "RETROGRADE BHH SATELLITE 12a",
+   "snapshot": "https://web.archive.org/web/20191021022012/http://three-body.ipb.ac.rs/ssol.php?id=33",
+   "cpcRow": 38,
+   "distance": 0.0
+  },
+  {
+   "id": 34,
+   "name": "RETROGRADE BHH SATELLITE 13b",
+   "snapshot": "https://web.archive.org/web/20191021022348/http://three-body.ipb.ac.rs/ssol.php?id=34",
+   "cpcRow": 39,
+   "distance": 0.0
+  },
+  {
+   "id": 35,
+   "name": "RETROGRADE BHH SATELLITE 13b",
+   "snapshot": "https://web.archive.org/web/20191021022123/http://three-body.ipb.ac.rs/ssol.php?id=35",
+   "cpcRow": 40,
+   "distance": 0.0
+  },
+  {
+   "id": 36,
+   "name": "RETROGRADE BHH SATELLITE 13a",
+   "snapshot": "https://web.archive.org/web/20191021022353/http://three-body.ipb.ac.rs/ssol.php?id=36",
+   "cpcRow": 41,
+   "distance": 0.0
+  },
+  {
+   "id": 37,
+   "name": "RETROGRADE BHH SATELLITE 14b 1",
+   "snapshot": "https://web.archive.org/web/20191021022358/http://three-body.ipb.ac.rs/ssol.php?id=37",
+   "cpcRow": 42,
+   "distance": 0.0
+  },
+  {
+   "id": 38,
+   "name": "RETROGRADE BHH SATELLITE 14b 2",
+   "snapshot": "https://web.archive.org/web/20191021022017/http://three-body.ipb.ac.rs/ssol.php?id=38",
+   "cpcRow": 43,
+   "distance": 0.0
+  },
+  {
+   "id": 39,
+   "name": "RETROGRADE BHH SATELLITE 15b 1",
+   "snapshot": "https://web.archive.org/web/20191021022248/http://three-body.ipb.ac.rs/ssol.php?id=39",
+   "cpcRow": 44,
+   "distance": 0.0
+  },
+  {
+   "id": 40,
+   "name": "RETROGRADE BHH SATELLITE 15b 2",
+   "snapshot": "https://web.archive.org/web/20191021022027/http://three-body.ipb.ac.rs/ssol.php?id=40",
+   "cpcRow": 45,
+   "distance": 0.0
+  },
+  {
+   "id": 41,
+   "name": "RETROGRADE BHH SATELLITE 15a",
+   "snapshot": "https://web.archive.org/web/20191021022032/http://three-body.ipb.ac.rs/ssol.php?id=41",
+   "cpcRow": 46,
+   "distance": 0.0
+  },
+  {
+   "id": 42,
+   "name": "RETROGRADE BHH SATELLITE 16b",
+   "snapshot": "https://web.archive.org/web/20191021022253/http://three-body.ipb.ac.rs/ssol.php?id=42",
+   "cpcRow": 47,
+   "distance": 0.0
+  },
+  {
+   "id": 43,
+   "name": "RETROGRADE BHH SATELLITE 17b",
+   "snapshot": "https://web.archive.org/web/20191021022037/http://three-body.ipb.ac.rs/ssol.php?id=43",
+   "cpcRow": 48,
+   "distance": 0.0
+  },
+  {
+   "id": 44,
+   "name": "RETROGRADE BHH SATELLITE 18b",
+   "snapshot": "https://web.archive.org/web/20191021022128/http://three-body.ipb.ac.rs/ssol.php?id=44",
+   "cpcRow": 49,
+   "distance": 0.0
+  },
+  {
+   "id": 45,
+   "name": "RETROGRADE BHH SATELLITE 19b",
+   "snapshot": "https://web.archive.org/web/20191021022258/http://three-body.ipb.ac.rs/ssol.php?id=45",
+   "cpcRow": 50,
+   "distance": 0.0
+  },
+  {
+   "id": 46,
+   "name": "RETROGRADE BHH SATELLITE 39b",
+   "snapshot": "https://web.archive.org/web/20191021022133/http://three-body.ipb.ac.rs/ssol.php?id=46",
+   "cpcRow": 81,
+   "distance": 0.0
+  },
+  {
+   "id": 47,
+   "name": "RETROGRADE BHH SATELLITE 40b",
+   "snapshot": "https://web.archive.org/web/20191021022403/http://three-body.ipb.ac.rs/ssol.php?id=47",
+   "cpcRow": 84,
+   "distance": 0.0
+  },
+  {
+   "id": 48,
+   "name": "RETROGRADE BHH SATELLITE 41b",
+   "snapshot": "https://web.archive.org/web/20191021022303/http://three-body.ipb.ac.rs/ssol.php?id=48",
+   "cpcRow": 86,
+   "distance": 0.0
+  },
+  {
+   "id": 49,
+   "name": "RETROGRADE BHH SATELLITE 42b",
+   "snapshot": "https://web.archive.org/web/20191021022138/http://three-body.ipb.ac.rs/ssol.php?id=49",
+   "cpcRow": 90,
+   "distance": 0.0
+  },
+  {
+   "id": 50,
+   "name": "RETROGRADE BHH SATELLITE 43b",
+   "snapshot": "https://web.archive.org/web/20191021022413/http://three-body.ipb.ac.rs/ssol.php?id=50",
+   "cpcRow": 92,
+   "distance": 0.0
+  },
+  {
+   "id": 51,
+   "name": "RETROGRADE BHH SATELLITE 44b",
+   "snapshot": "https://web.archive.org/web/20191021022308/http://three-body.ipb.ac.rs/ssol.php?id=51",
+   "cpcRow": 94,
+   "distance": 0.0
+  },
+  {
+   "id": 52,
+   "name": "RETROGRADE BHH SATELLITE 45b",
+   "snapshot": "https://web.archive.org/web/20191021022418/http://three-body.ipb.ac.rs/ssol.php?id=52",
+   "cpcRow": 95,
+   "distance": 0.0
+  },
+  {
+   "id": 53,
+   "name": "RETROGRADE BHH SATELLITE 46b",
+   "snapshot": "https://web.archive.org/web/20191021022423/http://three-body.ipb.ac.rs/ssol.php?id=53",
+   "cpcRow": 96,
+   "distance": 0.0
+  },
+  {
+   "id": 54,
+   "name": "RETROGRADE BHH SATELLITE 47b",
+   "snapshot": "https://web.archive.org/web/20191021022428/http://three-body.ipb.ac.rs/ssol.php?id=54",
+   "cpcRow": 97,
+   "distance": 0.0
+  },
+  {
+   "id": 55,
+   "name": "RETROGRADE BHH SATELLITE 48b",
+   "snapshot": "https://web.archive.org/web/20191021022313/http://three-body.ipb.ac.rs/ssol.php?id=55",
+   "cpcRow": 98,
+   "distance": 0.0
+  },
+  {
+   "id": 56,
+   "name": "RETROGRADE BHH SATELLITE 58b",
+   "snapshot": "https://web.archive.org/web/20191021022433/http://three-body.ipb.ac.rs/ssol.php?id=56",
+   "cpcRow": 99,
+   "distance": 0.0
+  }
+ ],
+ "summary": {
+  "pages": 57,
+  "matchingARow": 57,
+  "differentRows": 57,
+  "notInCpcList": 0
+ }
+}
