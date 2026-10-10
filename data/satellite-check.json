@@ -1,0 +1,21 @@
+{
+ "rebound": "5.2.2",
+ "orbits": [
+  {
+   "label": "T* 17.7208, second zero of theta on the satellite curve of the T* = 17.847 orbit (n = 5)",
+   "closure": 3.83449416807126e-12,
+   "closureEps1e12": 1.9760842460801638e-12,
+   "largestMultiplier": 210.10893031810213,
+   "largestMultiplierMine": 210.109,
+   "symplecticDeviation": 2.4658312782259747e-07
+  },
+  {
+   "label": "T* 19.6472, second zero of theta on the satellite curve of the T* = 19.769 orbit (n = 6)",
+   "closure": 4.2729106528352385e-12,
+   "closureEps1e12": 6.8900085206046765e-12,
+   "largestMultiplier": 253.24201802561845,
+   "largestMultiplierMine": 253.242,
+   "symplecticDeviation": 7.982234969378419e-07
+  }
+ ]
+}
