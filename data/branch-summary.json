@@ -1,0 +1,1059 @@
+{
+ "what": "how every continuation of data/branch-points/ ended (tools/branch-summary.mjs); a stop is a limit of the continuation, not a result",
+ "entries": [
+  {
+   "n": 3,
+   "branch": "upper",
+   "theta": 0.31938595663779096,
+   "Tstar": 4.517866563500228,
+   "Lstar": 2.476719455429673,
+   "singular": [
+    6.905349128146584e-13,
+    0.011046229945629144
+   ],
+   "angle": 51.1465038813102,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 365
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 477
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 94,
+     "Tstar": 13.878520509243733,
+     "Lstar": 2.4669624661773364,
+     "repeats": 3,
+     "primitiveCloses": true,
+     "primitiveResidual": 8.786860128395801e-13,
+     "primitiveTstar": 4.626173503081245,
+     "rotation": "1/3"
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 368
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "branch": "lower",
+   "theta": 0.4275646840066538,
+   "Tstar": 5.347561346001034,
+   "Lstar": 2.407851704922661,
+   "singular": [
+    2.5004501884974175e-12,
+    0.013018656981074028
+   ],
+   "angle": 81.95870930645269,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 300,
+     "Tstar": 13.98592580318166,
+     "Lstar": 2.140929175492877,
+     "closure": 1.2574849617018111e-11,
+     "minDist": 0.0365305807894215
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 344
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 341,
+     "Tstar": 21.281929441081555,
+     "Lstar": 2.2274332794174687,
+     "repeats": 3,
+     "primitiveCloses": true,
+     "primitiveResidual": 3.034905660115328e-12,
+     "primitiveTstar": 7.093976480360519,
+     "rotation": "1/3"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 182,
+     "Tstar": 13.87852050919271,
+     "Lstar": 2.4669624661788427,
+     "repeats": 3,
+     "primitiveCloses": true,
+     "primitiveResidual": 8.751332991607796e-13,
+     "primitiveTstar": 4.626173503064237,
+     "rotation": "1/3"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "branch": "upper",
+   "theta": 0.24903352206881524,
+   "Tstar": 3.964287148906698,
+   "Lstar": 2.5360968808393745,
+   "singular": [
+    8.819468908729943e-13,
+    0.007756578075326896
+   ],
+   "angle": 54.6907682312046,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 482
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 341
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 53,
+     "Tstar": 15.887943846292405,
+     "Lstar": 2.535118070904519,
+     "repeats": 4,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.661948356712628e-12,
+     "primitiveTstar": 3.9719859615731012,
+     "rotation": "1/4"
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 391
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "branch": "lower",
+   "theta": 0.3062359879873039,
+   "Tstar": 4.41535089552395,
+   "Lstar": 2.4863780541874965,
+   "singular": [
+    2.0432988581092775e-11,
+    0.008057802936392711
+   ],
+   "angle": 77.52156637983735,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 362,
+     "Tstar": 23.561520878718664,
+     "Lstar": 2.362120695060982,
+     "repeats": 4,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.974202658405309e-12,
+     "primitiveTstar": 5.890380219679666,
+     "rotation": "1/2"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 162,
+     "Tstar": 15.887943846357919,
+     "Lstar": 2.5351180709024446,
+     "repeats": 4,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.9117485372532883e-12,
+     "primitiveTstar": 3.9719859615894797,
+     "rotation": "1/4"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "branch": "upper",
+   "theta": 0.2010325349728856,
+   "Tstar": 3.577733227449542,
+   "Lstar": 2.593998585774656,
+   "singular": [
+    3.386751459547186e-12,
+    0.005499241337053193
+   ],
+   "angle": 55.90722347033083,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 124,
+     "Tstar": 17.84680764493647,
+     "Lstar": 2.572115883912511,
+     "closure": 1.1880058017887806e-10,
+     "minDist": 0.3841083205028078
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 136,
+     "Tstar": 17.84680764487157,
+     "Lstar": 2.5721158838834355,
+     "closure": 6.0404262473224234e-12,
+     "minDist": 0.5052635736354695
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 58,
+     "Tstar": 17.84658192458223,
+     "Lstar": 2.5954920665474046,
+     "repeats": 5,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.108047235718004e-12,
+     "primitiveTstar": 3.5693163849164464,
+     "rotation": "1/5"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 448,
+     "Tstar": 25.691626052419192,
+     "Lstar": 2.4245615334415973,
+     "repeats": 5,
+     "primitiveCloses": true,
+     "primitiveResidual": 3.649358593094121e-12,
+     "primitiveTstar": 5.138325210483838,
+     "rotation": "2/5"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "branch": "lower",
+   "theta": 0.22403111490466676,
+   "Tstar": 3.7640290297010086,
+   "Lstar": 2.5637267894197526,
+   "singular": [
+    3.672864422517611e-12,
+    0.00514176111223695
+   ],
+   "angle": 87.64526064144893,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 282
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 299
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 404,
+     "Tstar": 25.69162605244298,
+     "Lstar": 2.4245615334412154,
+     "repeats": 5,
+     "primitiveCloses": true,
+     "primitiveResidual": 3.651134949933521e-12,
+     "primitiveTstar": 5.138325210488596,
+     "rotation": "2/5"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 124,
+     "Tstar": 17.846581924515434,
+     "Lstar": 2.5954920665497796,
+     "repeats": 5,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.015787702371654e-12,
+     "primitiveTstar": 3.5693163849030864,
+     "rotation": "1/5"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "branch": "upper",
+   "theta": 0.16783863193385226,
+   "Tstar": 3.304476347669934,
+   "Lstar": 2.6495310575474624,
+   "singular": [
+    3.361479645375399e-12,
+    0.003808964423851249
+   ],
+   "angle": 56.527380840622975,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 177,
+     "Tstar": 19.769131529176263,
+     "Lstar": 2.5950349440203366,
+     "closure": 4.065225690802798e-11,
+     "minDist": 0.49073652573346777
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 148,
+     "Tstar": 19.76913152925973,
+     "Lstar": 2.5950349440599294,
+     "closure": 3.645914218947007e-11,
+     "minDist": 0.31697203770172283
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 454,
+     "Tstar": 27.757041018500775,
+     "Lstar": 2.466962466177771,
+     "repeats": 6,
+     "primitiveCloses": true,
+     "primitiveResidual": 5.63571411760222e-12,
+     "primitiveTstar": 4.6261735030834625,
+     "rotation": "1/3"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 64,
+     "Tstar": 19.768301935985765,
+     "Lstar": 2.651825457772633,
+     "repeats": 6,
+     "primitiveCloses": true,
+     "primitiveResidual": 6.75803857319579e-12,
+     "primitiveTstar": 3.2947169893309605,
+     "rotation": "1/6"
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "branch": "lower",
+   "theta": 0.18022737359738297,
+   "Tstar": 3.407146221862488,
+   "Lstar": 2.6268116604611547,
+   "singular": [
+    6.899022035504444e-12,
+    0.0036860577760104343
+   ],
+   "angle": 84.41884802750278,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 424,
+     "Tstar": 27.75704101853988,
+     "Lstar": 2.466962466177193,
+     "repeats": 6,
+     "primitiveCloses": true,
+     "primitiveResidual": 5.626388244195368e-12,
+     "primitiveTstar": 4.62617350308998,
+     "rotation": "1/3"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 110,
+     "Tstar": 19.768301936131714,
+     "Lstar": 2.6518254577668845,
+     "repeats": 6,
+     "primitiveCloses": true,
+     "primitiveResidual": 6.591505119502017e-12,
+     "primitiveTstar": 3.294716989355286,
+     "rotation": "1/6"
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "branch": "upper",
+   "theta": 0.1438628018468028,
+   "Tstar": 3.102996180885893,
+   "Lstar": 2.7025412997885976,
+   "singular": [
+    3.6727860921684834e-13,
+    0.0028390681394754153
+   ],
+   "angle": 56.92692388723608,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 163,
+     "Tstar": 21.662650428803218,
+     "Lstar": 2.612365771924172,
+     "closure": 8.589684066366392e-11,
+     "minDist": 0.2760900968720441
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 214,
+     "Tstar": 21.662650428661973,
+     "Lstar": 2.6123657718358726,
+     "closure": 4.868105363302613e-11,
+     "minDist": 0.47824336378194443
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 64,
+     "Tstar": 21.661176898470398,
+     "Lstar": 2.705083371695517,
+     "repeats": 7,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.521427924928048e-12,
+     "primitiveTstar": 3.0944538426386283,
+     "rotation": "1/7"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 460,
+     "Tstar": 29.781768573337658,
+     "Lstar": 2.5025631258656342,
+     "repeats": 7,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.138623026037294e-12,
+     "primitiveTstar": 4.2545383676196655,
+     "rotation": "2/7"
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "branch": "lower",
+   "theta": 0.1516241342884196,
+   "Tstar": 3.1686611049804974,
+   "Lstar": 2.683864459491122,
+   "singular": [
+    6.553344880265318e-9,
+    0.002808691868832798
+   ],
+   "angle": 86.53083402536707,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 378
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 402
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 103,
+     "Tstar": 21.661176898386884,
+     "Lstar": 2.705083371699082,
+     "repeats": 7,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.451150807469276e-12,
+     "primitiveTstar": 3.094453842626698,
+     "rotation": "1/7"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 438,
+     "Tstar": 29.781768573336976,
+     "Lstar": 2.502563125865645,
+     "repeats": 7,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.0454753142712434e-12,
+     "primitiveTstar": 4.254538367619568,
+     "rotation": "2/7"
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "branch": "upper",
+   "theta": 0.1258195184620915,
+   "Tstar": 2.9484220520782025,
+   "Lstar": 2.7531347347853234,
+   "singular": [
+    6.896705161461422e-13,
+    0.0021671284226575387
+   ],
+   "angle": 57.3939606218709,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 250,
+     "Tstar": 23.532707145967677,
+     "Lstar": 2.6258810275562583,
+     "closure": 2.184561395302074e-11,
+     "minDist": 0.4681251945730363
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 177,
+     "Tstar": 23.5327071459779,
+     "Lstar": 2.6258810275878637,
+     "closure": 6.915544091104105e-11,
+     "minDist": 0.24183812596276225
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 468,
+     "Tstar": 31.775887692744856,
+     "Lstar": 2.5351180709031675,
+     "repeats": 8,
+     "primitiveCloses": true,
+     "primitiveResidual": 8.844036614163997e-12,
+     "primitiveTstar": 3.971985961593107,
+     "rotation": "1/4"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 64,
+     "Tstar": 23.530644294382938,
+     "Lstar": 2.755713198743436,
+     "repeats": 8,
+     "primitiveCloses": true,
+     "primitiveResidual": 5.96189764223709e-14,
+     "primitiveTstar": 2.9413305368055895,
+     "rotation": "1/8"
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "branch": "lower",
+   "theta": 0.13115195812706223,
+   "Tstar": 2.9944068768794407,
+   "Lstar": 2.737001125285546,
+   "singular": [
+    1.4474194796168642e-12,
+    0.0022214428033363737
+   ],
+   "angle": 88.00196506641345,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 98,
+     "Tstar": 23.530644294432374,
+     "Lstar": 2.7557131987411654,
+     "repeats": 8,
+     "primitiveCloses": true,
+     "primitiveResidual": 5.96189764223709e-14,
+     "primitiveTstar": 2.9413305368118587,
+     "rotation": "1/8"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 450,
+     "Tstar": 31.77588769268216,
+     "Lstar": 2.53511807090416,
+     "repeats": 8,
+     "primitiveCloses": true,
+     "primitiveResidual": 9.204192963352398e-12,
+     "primitiveTstar": 3.97198596158527,
+     "rotation": "1/4"
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "branch": "upper",
+   "theta": 0.11177516044521624,
+   "Tstar": 2.8259164335258093,
+   "Lstar": 2.8014889870690713,
+   "singular": [
+    5.709637404431877e-12,
+    0.0016152838462704928
+   ],
+   "angle": 57.486415026654676,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 284,
+     "Tstar": 25.38320310590775,
+     "Lstar": 2.636716209337832,
+     "closure": 2.9356776537404415e-11,
+     "minDist": 0.45985568361843515
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 187,
+     "Tstar": 25.383203105944734,
+     "Lstar": 2.6367162094038847,
+     "closure": 1.9751398697118108e-10,
+     "minDist": 0.21989549381044377
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 470,
+     "Tstar": 33.74508290513603,
+     "Lstar": 2.5659195857267645,
+     "repeats": 9,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.582390022989102e-12,
+     "primitiveTstar": 3.749453656126226,
+     "rotation": "2/9"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 62,
+     "Tstar": 25.38062470359699,
+     "Lstar": 2.804016980256086,
+     "repeats": 9,
+     "primitiveCloses": true,
+     "primitiveResidual": 6.372680161348399e-14,
+     "primitiveTstar": 2.820069411503575,
+     "rotation": "1/9"
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "branch": "lower",
+   "theta": 0.11567382009755334,
+   "Tstar": 2.8601402644079053,
+   "Lstar": 2.7871193666896983,
+   "singular": [
+    2.094287850243869e-12,
+    0.0018357306963020933
+   ],
+   "angle": 84.93137827194742,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 294
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 295
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 95,
+     "Tstar": 25.38062470359595,
+     "Lstar": 2.8040169802561126,
+     "repeats": 9,
+     "primitiveCloses": true,
+     "primitiveResidual": 6.372680161348399e-14,
+     "primitiveTstar": 2.820069411503606,
+     "rotation": "1/9"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 456,
+     "Tstar": 33.74508290511279,
+     "Lstar": 2.5659195857271513,
+     "repeats": 9,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.776956608054661e-12,
+     "primitiveTstar": 3.7494536561236425,
+     "rotation": "2/9"
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "branch": "upper",
+   "theta": 0.10054199711610859,
+   "Tstar": 2.726257781496617,
+   "Lstar": 2.8477927541075565,
+   "singular": [
+    6.5518865075476195e-12,
+    0.0012938024588360338
+   ],
+   "angle": 57.69205389510617,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 318,
+     "Tstar": 27.21708995852642,
+     "Lstar": 2.6455991353977724,
+     "closure": 2.379151697230228e-10,
+     "minDist": 0.4529862151717137
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 197,
+     "Tstar": 27.217089958458207,
+     "Lstar": 2.645599135308705,
+     "closure": 1.4239942084907688e-10,
+     "minDist": 0.19829272645851106
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 475,
+     "Tstar": 35.693163849088734,
+     "Lstar": 2.595492066551005,
+     "repeats": 10,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.7628567756419216e-14,
+     "primitiveTstar": 3.569316384891111,
+     "rotation": "1/5"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 61,
+     "Tstar": 27.214066716510832,
+     "Lstar": 2.8502344982029797,
+     "repeats": 10,
+     "primitiveCloses": true,
+     "primitiveResidual": 6.59472476627343e-14,
+     "primitiveTstar": 2.7214066716583374,
+     "rotation": "1/10"
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "branch": "lower",
+   "theta": 0.10352246692935092,
+   "Tstar": 2.7528612357059274,
+   "Lstar": 2.8347294556471656,
+   "singular": [
+    3.0605273364464697e-12,
+    0.0015446340375707384
+   ],
+   "angle": 88.74894270322395,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 246
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 309
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 463,
+     "Tstar": 35.693163849109034,
+     "Lstar": 2.5954920665506434,
+     "repeats": 10,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.7628567756419216e-14,
+     "primitiveTstar": 3.569316384893131,
+     "rotation": "1/5"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 93,
+     "Tstar": 27.21406671654113,
+     "Lstar": 2.8502344982014853,
+     "repeats": 10,
+     "primitiveCloses": true,
+     "primitiveResidual": 6.583622536027178e-14,
+     "primitiveTstar": 2.721406671661304,
+     "rotation": "1/10"
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "branch": "upper",
+   "theta": 0.0913563451842083,
+   "Tstar": 2.6434524144853637,
+   "Lstar": 2.892225100440178,
+   "singular": [
+    6.028677845009039e-12,
+    0.0010739122988600576
+   ],
+   "angle": 57.905787078108695,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 204,
+     "Tstar": 29.036662509622584,
+     "Lstar": 2.653015585461073,
+     "closure": 3.794539304674871e-10,
+     "minDist": 0.1845450265637579
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 351,
+     "Tstar": 29.03666250959857,
+     "Lstar": 2.653015585401214,
+     "closure": 1.8412384550874528e-10,
+     "minDist": 0.44718878469732354
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 59,
+     "Tstar": 29.033256254412155,
+     "Lstar": 2.894567523656098,
+     "repeats": 11,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.072120666862247e-14,
+     "primitiveTstar": 2.6393869322100016,
+     "rotation": "1/11"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 480,
+     "Tstar": 37.62294059645736,
+     "Lstar": 2.624082476327251,
+     "repeats": 11,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.9182879990894435e-14,
+     "primitiveTstar": 3.4202673269413943,
+     "rotation": "2/11"
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "branch": "lower",
+   "theta": 0.09371256322405148,
+   "Tstar": 2.6648165726102584,
+   "Lstar": 2.880175615398604,
+   "singular": [
+    7.381324713771717e-13,
+    0.001327031726810026
+   ],
+   "angle": 82.52764382558564,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 357
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 339
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 91,
+     "Tstar": 29.033256254516107,
+     "Lstar": 2.8945675236506374,
+     "repeats": 11,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.16093850883226e-14,
+     "primitiveTstar": 2.6393869322193946,
+     "rotation": "1/11"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 469,
+     "Tstar": 37.62294059658818,
+     "Lstar": 2.624082476324786,
+     "repeats": 11,
+     "primitiveCloses": true,
+     "primitiveResidual": 4.951594689828198e-14,
+     "primitiveTstar": 3.420267326953048,
+     "rotation": "2/11"
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "branch": "upper",
+   "theta": 0.08370670354446302,
+   "Tstar": 2.573444597881452,
+   "Lstar": 2.9349489656361922,
+   "singular": [
+    6.052220568627474e-12,
+    0.000914152974203728
+   ],
+   "angle": 58.11350043527309,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 212,
+     "Tstar": 30.843744809565496,
+     "Lstar": 2.659302119292922,
+     "closure": 3.081661814758554e-10,
+     "minDist": 0.16948303633602244
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 384,
+     "Tstar": 30.843744809523077,
+     "Lstar": 2.659302119254434,
+     "closure": 3.6342807684985597e-10,
+     "minDist": 0.442226848137902
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 58,
+     "Tstar": 30.840007888407147,
+     "Lstar": 2.9371895553125147,
+     "repeats": 12,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.216449660063518e-14,
+     "primitiveTstar": 2.5700006573748593,
+     "rotation": "1/12"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 485,
+     "Tstar": 39.536603872190106,
+     "Lstar": 2.651825457771569,
+     "repeats": 12,
+     "primitiveCloses": true,
+     "primitiveResidual": 5.3179682879545e-14,
+     "primitiveTstar": 3.2947169893271524,
+     "rotation": "1/6"
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "branch": "lower",
+   "theta": 0.08561864284676134,
+   "Tstar": 2.591039531894555,
+   "Lstar": 2.9237143395105,
+   "singular": [
+    5.624008987660535e-13,
+    0.0011556496878712991
+   ],
+   "angle": 84.49885327975849,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 311
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the close approach limit (0.03)",
+     "points": 242
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 89,
+     "Tstar": 30.840007888343287,
+     "Lstar": 2.9371895553159675,
+     "repeats": 12,
+     "primitiveCloses": true,
+     "primitiveResidual": 7.260858581048524e-14,
+     "primitiveTstar": 2.5700006573697864,
+     "rotation": "1/12"
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 475,
+     "Tstar": 39.53660387223514,
+     "Lstar": 2.6518254577706823,
+     "repeats": 12,
+     "primitiveCloses": true,
+     "primitiveResidual": 5.295763827461997e-14,
+     "primitiveTstar": 3.294716989330964,
+     "rotation": "1/6"
+    }
+   ]
+  }
+ ]
+}
