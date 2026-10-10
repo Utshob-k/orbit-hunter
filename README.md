@@ -21,6 +21,7 @@ a turn after T/3, see Repeats). 2 have L = 0, and 77 match none of them. Three o
 with a rotation angle that is a multiple of 2 pi are in my lists (rows 9, 91, 115), and all three are atlas orbits, so the 77 are not at a row of that
 paper either. One of the 77 (T* = 11.652) lies on the continuous curve of relative periodic orbits through row 84 of that paper (my word is 000101,
 the row's is 01^2): it is another member of that curve, 3.0 % and 17 % away from the row in T* and L*, so not a match (see Corrections, 2026-10-09).
+The T* = 33.745 orbit lies on the curve of Broucke's family R, as its member with rotation 2/9 of a turn (Corrections, 2026-10-10).
 For them I do not know whether they are known.
 Not yet checked: Suvakov's gallery, Nauenberg 2001, Chenciner, Fejoz and Montgomery 2005. 35 of the 77 have L* below the range of the CPC table, so
 for them "no match" with its satellites means "nothing to compare with".
@@ -89,7 +90,9 @@ here) and covers L* 0.21 to 4.9, not the small L* near Schubart's orbit; two of 
 17.5), but the T* of the family is below 5 everywhere. The closest screening hit was the arclength orbit a03 (T* = 13.903, L* = 1.186, word (01)^5):
 it is not on the family, since it has no return after T/n under any rotation, relabelling, reflection or time reversal (best mismatch 0.5), and it
 differs from Broucke's A 1/5 (same word and 10 alignments, T* = 13.886, L* = 1.185, which does return after T/5) by 1.2e-3 in T*. This says that these
-orbits are not rational members of Henon's family or of Broucke's families, not that they are new.
+orbits are not rational members of Henon's family, not that they are new. For Broucke's families the comparison above is only with his 29 absolute
+orbits of the atlas, which cannot show that an orbit is another member of one of his families, and the T* = 33.745 orbit is one (Corrections,
+2026-10-10).
 
 **Li, Tao, Li and Liao 2025** (Xiaoming Li, Yueyan Tao, Xiaochen Li and Shijun Liao, "A numerical scheme to obtain periodic three-body orbits with
 finite angular momentum", New Astronomy 119 (2025) 102407, doi:10.1016/j.newast.2025.102407). The paper is about equal masses. It continues only two
@@ -381,7 +384,8 @@ repeats of the stable orbits, with the checks described below.
   error is at most 8e-11, 4e-10 and 9e-10. A curve through a published orbit is not that orbit: the T* and L* of mine differ from those of the row by
   1.8 % and 7.0 %, 3.0 % and 17 %, 6.6 % and 26 %, so none of the three is a match under the rule. For the other two (T* = 7.218 from row 42 and T* =
   13.986 from row 86) the check does not show it: the trace from the exact row does not reach my orbit and the trace from my orbit does not pass the
-  row (closest 1.9 % and 2.1 % in T*, L*, |theta|), see the correction of 2026-10-09.
+  row (closest 1.9 % and 2.1 % in T*, L*, |theta|), see the correction of 2026-10-09. A fourth one, the T* = 33.745 orbit (one of the 77), is on the
+  curve of Broucke's family R (Corrections, 2026-10-10): the curve was traced from my orbit and the published orbits were found on it.
 
 ## How it works
 
@@ -420,6 +424,22 @@ difference). Against the atlas my stability numbers match to four digits for the
 
 Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
 
+- **2026-10-10, the T* = 33.745 orbit is on the family of Broucke's R orbits.** The paragraph on the 1970s papers ended with "these orbits are not
+  rational members of Henon's family or of Broucke's families". Only Henon's family had been traced (`data/henon-family-curve.json`); for Broucke's
+  families the test was the comparison with his 29 absolute orbits of the atlas, which cannot show that an orbit is another member of one of his
+  families. The family of relative periodic orbits through the shortest orbit of my stable T* = 33.745 orbit (T* = 3.7495, rotation 2/9 of a turn: the
+  orbit that the return test found returning after T/9) was traced in both directions with `tools/family-follow.mjs` from the refined start values
+  (`data/r-family-trace.json`, 242 accepted steps, closure 1.3e-7 or better). The traces ended at a closest approach of 0.03 (once), in a closed loop
+  (once), and in two places where the step had collapsed and the trace was restarted from its last point with 24 instead of 8 pieces of the multiple
+  shooting. Twelve of the 13 R orbits of Broucke in the atlas (keys `broucke_broucke_r_1` and `r_3` to `r_13`) are members of this curve: solved at
+  their rotation angles (0, 1/3 twice, 1/4, 1/5, 1/6, 1/7, 2/5 twice, 2/7, 3/7 twice; the family has two members with the same angle on different
+  parts), q T* agrees with the atlas to 5e-7 and L* to 3e-6, and the number of alignments is the same (`tools/r-family.mjs`,
+  `data/r-family-members.json`). R2 (rotation 1/2) is not reached by the trace (largest rotation 0.4946). Rows N = 62 to 67 of Table 5 of Davoust and
+  Broucke 1982 are on the curve too: at the printed rotation angle T* and L* agree to 1e-9 (row N = 68 comes within 9e-5 along the curve, but the
+  member at its angle could not be solved). The T* = 33.745 orbit is the member with rotation 2/9 of a turn (q = 9, 18 alignments, T* = 33.7450829, L*
+  = 2.5659196); the R orbits of the atlas have q up to 7. So it is one of the 77 that match no atlas orbit and also another member of a published
+  family, as the T* = 11.652 orbit is of the curve through row 84; it is not a match, and this does not say whether the q = 9 member was known. The
+  sentence of the 1970s paragraph is changed to say that the test applies to Henon's family.
 - **2026-10-10, `tools/orbit-table.mjs` overwrote the atlas groups.** Run from a clean clone it replaced the group column of `data/orbit-table.json`
   and `.csv` by the one in `data/stability-perp-3.json` (the first, small atlas comparison): 81 orbits unmatched instead of 77, with 4 atlas orbits
   among them. The published tables were not affected. The script now keeps the group of the existing table, and a rerun gives the published files
@@ -656,6 +676,9 @@ path):
 - `closure-mp.py` integrates the double precision starts of the 85 orbits for one period in 40 digits (about 6 minutes; `--write` stores
   `data/closure-mp.json`)
 - `ia3-rational.py` puts the IA-3 members with a rational rotation angle (q up to 12) next to my orbits, in the range of the printed rows
+- `family-follow.mjs` follows the family of relative periodic orbits through one orbit in one direction and records T*, L*, theta, closest approach,
+  closure, word and stability at every step; `r-family.mjs` checks the members of the family of Broucke's R orbits through my T* = 33.745 orbit
+  against the atlas (by key, give the path of `catalogue.json`) and against Table 5 of Davoust and Broucke 1982
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
@@ -703,6 +726,7 @@ typed in by the reader; they say so and stop without it. `data/rpo-reproduce-*.j
 | `data/satellite-results*.jsonl`, `satellite-jobs*.json` | the branch arms followed from the repeats of the 7 stable orbits (results 5 to 7 rounded to 14 digits, see Running it); `*.repeats-*.json`, `arm-repeats.json` the minimal period of the arms, `*.verified.json`, `verified-branch-points.json` their checks, `bifurcation-points.json` the table of branch points |
 | `data/families85/*.json`, `family-pass-through.json` | traces of the families that start at six published orbits (from the exact start, not moved) and the check from my side; the starts are my conversions of rows of Davoust and Broucke 1982 and of the CPC satellite N = 3 |
 | `data/return-test.json`, `henon1976-derived.json`, `henon-family-curve.json` | the return test of my 102 entries (85 + 17, 100 distinct orbits; rotation, relabelling, reflection, reversal after T/n); **derived numbers** (L*, T*, alignments) and the printed rotation angle of the 46 tabulated orbits of Henon 1976 and points of the family traced from them; the printed start values are not stored |
+| `data/r-family-trace.json`, `r-family-members.json` | the family of relative periodic orbits through the shortest orbit of my T* = 33.745 orbit (T* = 3.7495, rotation 2/9 of a turn): 242 accepted steps of the trace (derived numbers of my own runs) and the 19 members solved at the rotation angles of the R orbits of the atlas and of rows of Davoust and Broucke 1982 (start values, my own numbers; the atlas and the rows are referred to by key and number) |
 | `data/choreo-test.json` | the result of `tools/choreo-test.mjs`: no orbit has a cyclic return, the smallest mismatches, and the four members of the rotating eight branch used as a control |
 | `data/closure-stored.json` | the closure of the 30 digit start values as stored in `data/refined`, integrated in 50 digits (`tools/closure-stored.py`) next to the number written into the files |
 | `data/closure-mp.json` | the closure of the 85 orbits from their double precision start values in 40 digit arithmetic (`tools/closure-mp.py`) next to the columns `closureDP45` and `closureBS` |
