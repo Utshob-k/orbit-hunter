@@ -34,10 +34,11 @@ path):
   to 12, `--max=N` goes further) and which of them were followed; `branch-summary.mjs` prints how every continuation of `data/branch-points/` ended (a
   rotation 0 reached, or the limit that stopped it) and checks the ends of the control continuations (`--write` stores `data/branch-summary.json`);
   `db82-bifurcations.mjs` puts the bifurcation points of the family D1 of Davoust and Broucke (rows 63 to 65 of their Table 5, branches e, f and E)
-  next to the members with nu = 1/3 and their satellite curves; `satellite-sequence.mjs` prints the table of the zeros of the upper branch (T*, L*,
-  largest multiplier, closure, closest approach, the prediction of T* from the R member); `satellite-candidates.mjs` and `satellite-check.py`
-  recompute the numbers of the 34 orbits of the satellite curves of `data/satellite-candidates.json` and compare them with other lists (the second
-  needs `pip install rebound numpy`)
+  next to the members with nu = 1/3 and their satellite curves; `satellite-sequence.mjs` prints the table of the zeros of the upper branch (T* and L*
+  of the 30 digit orbits where there are some, largest multiplier, closure, the rotation left at the stored zero, closest approach, the prediction of
+  T* from the R member); `satellite-relations.mjs` prints the empirical relations of `docs/r-family-satellites.md` (fits on n <= 20, tests on n > 20);
+  `satellite-candidates.mjs` and `satellite-check.py` recompute the numbers of the 34 orbits of the satellite curves of
+  `data/satellite-candidates.json` and compare them with other lists (the second needs `pip install rebound numpy`)
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores

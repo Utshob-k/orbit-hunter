@@ -146,3 +146,8 @@ Found in an independent review of the code and in my own checks; what is fixed a
 - **Near never means the same orbit.** The comparison with repeats up to 12 uses the primitive T* of an orbit that returns rotated, also for numbers
   of repeats that are not whole turns (for t41, rotation 2/9 of a turn, the 10 fold repeat does not close, but its T* is compared). A pair within 5e-3
   says that the invariants are close and nothing more.
+- **A zero of the continuation can be left unconverged.** The bisection for the zero of theta in `tools/branch-point.mjs` stops when the corrector
+  fails and keeps the last midpoint; four zeros (n = 24, 26, 27, 28 of the upper branch of the R satellites) were left at 4e-6 to 5e-5 turns of
+  rotation, which moves L* by up to 1e-3 and T* by up to 4e-4, while the closure of the stored zero is unchanged. The stored files were not rerun; the
+  tool prints the rotation left at a zero, and the orbits of `data/satellite-candidates.json` (refined to 30 digits) are not affected. A zero taken
+  from `data/branch-points/` should be checked for its rotation (`turns`) before its T* and L* are used to more than four digits.

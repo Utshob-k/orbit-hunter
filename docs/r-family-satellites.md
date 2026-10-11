@@ -89,7 +89,7 @@ and the limits as for n <= 12 (`data/branch-points/<n>-upper.json` and `<n>-lowe
 predictions, the stop rule and the changes made during the runs were written down in `docs/rules/` (the rules and predictions before the first run,
 the changes in the second file as they were made). For every n from 13 to 36 the upper branch reaches a periodic orbit in at least one sense: for n =
 13, 14 and 15 in both senses, which reach the same orbit, from n = 16 in one sense, while the other is stopped by a collapse of the step after 505 to
-625 steps. Each zero has the word (01)^n, 2n alignments and no repeat. T* runs from 32.63981 (n = 13) through 44.98515 (n = 20) and 58.78013 (n = 28)
+625 steps. Each zero has the word (01)^n, 2n alignments and no repeat. T* runs from 32.63981 (n = 13) through 44.98515 (n = 20) and 58.77994 (n = 28)
 to 72.37337 (n = 36); the table with L*, the multiplier, the closure and the closest approach of every n is the output of
 `tools/satellite-sequence.mjs`. THE ZEROS ARE NOT STABLE: the largest nontrivial multiplier (src/relative.js and REBOUND) is 1.712 for n = 13 and
 grows to 15.427 for n = 28 and 24.624 for n = 36 (by 0.90 to 1.22 per n, the increments themselves growing), while the orbits for n = 5 to 12 are
@@ -121,3 +121,53 @@ sense ends by a collapse of the step after 616 to 624 steps). So the stop of the
 earlier attempts (8 pieces, the old caps) stopped at limits and are not kept. The sequence was not run beyond n = 36 (the time limit of 4 hours); the
 stored trace has crossings of nu = 1/n for the upper nu up to n = 58 and no further (its upper nu has the minimum 0.017034 at its end, and a longer
 trace of the same family would not give more unless the family continues beyond the end of the stored trace, which was not tested).
+
+**The stored zeros of n = 24, 26, 27 and 28 (2026-10-11).** The zeros stored in `data/branch-points/<n>-upper.json` for n = 24, 26, 27 and 28 were
+left at a rotation of 3.6e-6, 5.0e-5, 1.4e-5 and 2.3e-5 turns instead of 1e-11 or less (all other k = 1 zeros of n = 5 to 36 are below 1e-11; three
+files with k > 1 have 3e-9 to 3e-8). The bisection for the zero of theta between the last two points of the curve (`follow` in
+`tools/branch-point.mjs`) ended early: the corrector (`correct` in `src/shooting.js`, Newton on the shooting system, accepted when the residual is
+below 1e-11) returned not ok at the 2nd midpoint for n = 26 and 28 and at the 4th for n = 24 and 27 (the four runs were repeated with the bisection
+logged), the loop stops at a failed corrector, and the last accepted midpoint was kept as the zero. For n = 26 and 28 (repeated with the residuals of
+the corrector logged) the residual at that midpoint stalls at 1.19e-11 and 1.64e-11, just above the limit; in the continuation a failed corrector
+halves the step and tries again, in the bisection it does not. Why these four and no other n of 5 to 36 was not traced further; the residual stalls
+near 1e-11 where it failed, so it is probably a matter of rounding at which midpoint it ends above the limit. A rotation of 5e-5 turns moves L* by
+1e-3 and T* by 4e-4 along the curve (L* changes by about 20 per turn there), and the closure of the stored zero (1e-9 to 2e-9, measured on the
+relative periodic orbit) does not show it. The 30 digit orbits of `data/satellite-candidates.json` were refined from these zeros and have rotation 0
+(2e-10 turns in double precision, residual below 1e-27), so everything computed from them is not affected: the comparisons with the other lists, the
+multipliers, the closure tiers and the REBOUND checks. The stored zeros were used in the table of `tools/satellite-sequence.mjs` of version 0.2.21
+(T*, L* and the scale free closest approach), in `data/branch-summary.json` (the output of the tool, unchanged) and for one number of this file (T* of
+n = 28, corrected above). The differences zero - B and the closest approach in the units of the start do not change in the digits quoted. The stored
+files were not rerun; the table now takes T* and L* from the refined orbits and prints the rotation left at each stored zero, and
+`tools/branch-point.mjs` prints it too.
+
+## Empirical relations
+
+Relations between the numbers of the zeros of the upper branch (k = 1) for n = 5 to 36, printed by `tools/satellite-relations.mjs`: fitted on n <= 20
+and tested on n = 21 to 36. The zeros are the 30 digit orbits of `data/satellite-candidates.json` (for n = 5, 6 and 8, which have none, the stored
+zero). They are empirical relations fitted to 32 numbers, not laws and not derived, and none was tested beyond n = 36.
+
+**T* (written down before the run for n >= 21).** Prediction B of `docs/rules/rules-n21-up.txt`: T*_n = n T*_R(n) - delta_n, where T*_R(n) is the T*
+of the member of the R family with the upper rotation number nu = 1/n and delta_n = a + b / n, a = -0.0033, b = 0.4633, fitted on n = 8 to 20 (fitted
+on n = 5 to 20 the test error is up to 0.014, which is why the fit starts at 8). The reason for this form is that the satellite curve leaves the n
+fold repeat of the member at the branch point, so the T* of its zero should be close to n T*_R(n), with a difference that gets small for large n. The
+differences zero - B are -0.0013 to +0.0031 for n = 13 to 36 and +0.0011 to +0.0031 for n = 21 to 36 (the test), growing with n. The data delta_n = n
+T*_R(n) - T* is 0.058 at n = 7 and 0.0064 at n = 36; the fitted one is 0.055 at n = 8 and 0.0095 at n = 36, and the growing difference is the error of
+B. A form with a c / n^2 term (fitted on n = 8 to 20, after the run) has a largest test error of 5.9e-4, so a + b / n is not the right form for
+delta_n; it is the one that was written down.
+
+**L* (fitted after the run).** L*_n = a + b / n + c / n^2 with a = 2.7344, b = -0.9649, c = 0.7684, fitted on n = 5 to 20: the largest error is 9.0e-5
+on n = 5 to 20 and 5.1e-4 on n = 21 to 36 (at n = 36); a + b / n alone has 4.9e-3. This relation was found after the zeros for n >= 21 were known and
+is not a prediction. The limit a depends on the window of the fit: 2.7344 for n = 5 to 20, 2.7351 for 8 to 20, 2.7358 for 12 to 36 and 2.7361 for 20
+to 36; so L* seems to tend to a value between 2.73 and 2.74, which is an extrapolation of a fit, not a result.
+
+**Stability (an observation).** The largest nontrivial multiplier is on the unit circle for n = 5 to 12 and 1.712 for n = 13; it then grows from 2.609
+(n = 14) to 24.624 (n = 36), by 0.8 to 0.9 per n at first and 1.2 per n at the end. The two trends written down before the run for n >= 21 fail: the
+linear one (0.85 per n from n = 20) is 14 % low at n = 36, the quadratic fit of n = 13 to 20 is 12 % low. So there is no relation for the multiplier
+here. Where the orbits become unstable is between n = 12 and 13, but n is discrete: the place of the change is not located, and whether it is a
+bifurcation of the sequence has not been examined.
+
+**Fits in n alone (found after the run, for comparison).** Largest error on n = 21 to 36 of T* fitted on n <= 20: a n + b + c / n 0.72 (fit on n = 5
+to 20) and 0.47 (n = 8 to 20); with a d / n^2 term 0.35 and 0.20; a n + b + c sqrt(n) 0.020 and 0.0024. The last form was tried after the others had
+failed, so it is a form chosen after the test; fitted on n = 8 to 20 it is as good as B (0.0031) with three parameters and without the parent family,
+and for n = 5 to 20 it is not (0.020). So the fits in n alone do not show that the relation to the parent family is needed: it is a reason for B that
+was given before the run, and the sqrt(n) form has none. Both are empirical.

@@ -4,6 +4,7 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 ## Versions
 
+- 0.2.22 (2026-10-11): empirical relations for the zeros of the upper branch (`docs/r-family-satellites.md`, `tools/satellite-relations.mjs`); the table of `tools/satellite-sequence.mjs` takes T* and L* from the refined orbits (it had L* wrong by up to 1e-3 for n = 24, 26, 27 and 28 in 0.2.21, see Corrections); `branch-point.mjs` prints the rotation left at a zero.
 - 0.2.21 (2026-10-10): the satellites of the R family with k = 1 for n = 13 to 20 (both branches) and the upper branch to n = 36 (not run beyond); the zeros are unstable from n = 13; the rules and predictions as written before the runs (`docs/rules/`); `tools/satellite-sequence.mjs`, `--repeat-tol` and `--pieces` of `branch-point.mjs`, the caps of the integration steps in `src/perp.js` and `src/shooting.js` raised by 20.
 - 0.2.20 (2026-10-10): small fixes in the README and docs (the 33.745149 orbit against t41 and t42, rows of the csv, REBOUND sentence, file names).
 - 0.2.19 (2026-10-10): the satellites with k > 1 followed (21 more members; six of the 77 lie on satellites of R, three more stable orbits), `branch-point.mjs --k=K`, the start value comparison of orbits (`src/identity.js`), the family of the T* = 29.310 orbit and the check of the Suvakov gallery as data, the paths in `data/refined/summary.json`, `arm-repeats.json` and `bifurcation-points.json` with forward slashes (only the `file` fields changed), two more known weaknesses, small fixes in the docs.
@@ -31,6 +32,12 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
 
+- **2026-10-11, the table of the zeros in 0.2.21.** The table printed by `tools/satellite-sequence.mjs` in version 0.2.21 took T* and L* of the zeros
+  from `data/branch-points/`, and for n = 24, 26, 27 and 28 these were off (L* by 7e-5, 1.0e-3, 3e-4 and 5e-4; T* by 3e-5, 4e-4, 1e-4 and 2e-4): the
+  bisection for the zero of theta stopped early because the corrector failed there, and the zeros were left at 3.6e-6 to 5e-5 turns of rotation
+  instead of 1e-11. It was found when a fit of L* against n had one point off by 1e-3. The 30 digit orbits, which the comparisons with the other
+  lists, the multipliers and the REBOUND checks use, were not affected. T* = 58.78013 for n = 28 in `docs/r-family-satellites.md` is 58.77994. The
+  table now takes T* and L* from the refined orbits and shows the rotation left at each stored zero; the stored files were not changed.
 - **2026-10-10, satellites of Broucke's R family are published, and R2 is on the curve.** The paragraph on the satellites of R said that no satellites
   of the family were found in the literature checked, which included Davoust and Broucke 1982 and Broucke 1975. Of Davoust and Broucke only the tables
   had been typed in from the ADS scans, and of Broucke 1975 pages 1 and 19 and the tables had been read. Both papers were read in full on 2026-10-10.
