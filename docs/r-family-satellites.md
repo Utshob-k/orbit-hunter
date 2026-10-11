@@ -249,3 +249,51 @@ and zeros of the same n have different T* (n = 9: 33.745 for k = 2 and 49.263 fo
 data were seen, holds for the three zeros with delta > 0 (relative errors 0.6 %, 1.7 % and 5.1 %) and not for the seven with delta < 0; |delta| /
 |eps| is 7.5 to 8.3 for all ten, and whether delta = C eps holds with eps signed has not been tested (the numbers that would test it have been looked
 at).
+
+**What the literature says about that curve.** Li and Liao (arXiv:2008.13550) report that the relation found by Jankovic and Dmitrasinovic for equal
+masses (at a fixed energy, the same curve of L against T/k for the BHH orbits and for their satellites) does not hold for unequal masses: for m1 =
+0.7, m2 = 0.9 and other mass pairs (m3 = 1) the satellites follow a different relation from the BHH orbits, and they conclude that in general it
+should be more complicated. All the orbits of that paper are retrograde (the binary and the third body move in opposite directions), and they start
+from Broucke's 16 A orbits, Henon's 45 orbits and the 58 satellites then known. So the departure of the R satellites from the curve of their parent is
+not by itself a difference between a prograde and a retrograde family: a departure from the BHH curve is also reported for the retrograde family once
+the masses are unequal. It is not only a matter of kind, though. For equal masses the CPC satellites are near the traced retrograde curve of Henon's
+family and not on it: at their L*, T*/k differs from the curve by less than 1e-3 for 12 of the 98 rows that have a curve at their L*, by less than
+1e-2 for 70, by less than 5e-2 for 96 and by 0.096 at most (`tools/cpc-rows.mjs`), against 0.04 (n = 5) to 0.53 (n = 36) for the R satellites and the
+curve of R. What "the same curve" means in the PRL was not checked (the curve used here is my own trace of Henon's family, L* 0.21 to 4.93).
+
+**The CPC rows are points of families (2026-10-11).** The 99 rows of the CPC tables are relatively periodic orbits with a rotation angle that is not 0
+(-0.38 rad for N = 1), so each is one point of a family of orbits and not an isolated orbit. Comparing their T* and L* with the zeros of my satellite
+curves (rotation 0), as done before, is therefore not enough, and the rows were also compared with the curves themselves (`tools/cpc-rows.mjs`; the
+rules, with the tolerances, were written before the test, `docs/rules/rules-cpc-curves.txt`). Each row was closed again as a relatively periodic orbit
+(multiple shooting; all 99 close, residual below 1e-8; N = 99 does not close by single shooting); at the L* of the row, the T*, the rotation and lam
+of every stored curve with n = k (every sense of every file of `data/branch-points/`) were compared with the row (hit: 1e-6 in T* and 1e-5 rad in the
+rotation; near: 1e-3 and 0.02 rad; on the curve if lam agrees to 1e-4). Only 6 rows (N = 93 to 98, k = 43 to 48, L* 2.73 to 2.82) have a stored curve
+at their L*, because the curves end at their first zero (L* 2.57 to 2.72) or at the limit that stopped them, and the other 93 are beyond the part that
+was computed; the 6 are 4 % away in T* and are not on a curve. For the rest a screen was used that does not need the curves: a point of a satellite
+curve of the member with nu = p/k has T* equal to k T*_member(p/k) up to a shift that is at most 0.3 % for p = 1 and 16 % for p >= 2 (the largest
+shift of the zeros of the stored k > 1 files), so T*/k of the row must be within 1.5 % (p = 1) or 16 % (p >= 2) of the T* of a member of the stored
+trace with nu = p/k. 95 of the 99 rows have no such member and cannot be points of a satellite curve of R of the stored kind. Four have one. N = 9 (k
+= 5) lies on the k = 5 branch of the T* = 4.96 orbit (A1) that was followed earlier (`tools/match-start.py`: the closest point of the arm is 2.5e-7
+from the row in T* and L*, and lam, |u1|, |u2| and t agree to 1e-5; see the count of the branches in `docs/results.md`), so it is a satellite on the A
+side and not of R. N = 19 (k = 8) and N = 33 (k = 10) are not on the stored arms of A1 either (their T*/k, 3.44 and 2.78, is far from the 4.96 of A1;
+the nearest points of the arms of A1 with the same k are 0.44 and 0.77 away in T* and L*), and they are near the traced retrograde curve of Henon's
+family, N = 19 to 2e-4 and N = 33 to 3 % in T*/k at their L*: satellites of other members of the retrograde family. N = 99 (k = 58, L* 3.26) is near
+the satellite curve of the R member nu = 1/58 and not on it (in a run for n = 58 that is not part of this repository, T* differs by 1.4e-4, the
+rotation by 7e-3 rad and lam by 0.046 on the first sense; the second sense stopped at L* 3.57, before the L* of the row), so it stays open. So no row
+of the CPC tables is shown to lie on one of my satellite curves, 95 of the 99 are excluded as points of one, N = 9 is on the A side, and N = 99 is the
+one row that remains open until the curves of n = 58 are continued; "not found in the sources checked" stands for the zeros and now also holds for the
+curves in the part that was computed. The same screen does not exclude the rows as points of other families of the retrograde branch, which is what
+almost all of them are.
+
+**Which CPC satellites are direct (2026-10-11).** The CPC paper says that four of its 99 satellites belong to direct (prograde) orbits and does not
+mark them. With the co-rotation share (`src/corotation.js`: the closest pair is taken as the inner binary, and the share is the part of the relative
+period in which the angular momenta of the inner binary and of the outer orbit have the same sign) three rows co-rotate all the time (N = 6, 9 and
+99), N = 3 for 40 % of the time and 95 rows counter-rotate (`tools/cpc-rows.mjs`); the fourth direct satellite of the paper is not identified (N = 3
+is the only candidate). The members of the R family that were tested co-rotate (all 242 points of the stored trace at the start, six over the whole
+orbit), and so does the BHH orbit A1 (T* 4.9598), which the papers call retrograde (Li and Liao for all their orbits). The reason, from
+`tools/corotation-trace.mjs` (`data/a1-family-corotation.json`): along the traced family through A1 the share is 1 for the stretch around A1 (in one
+direction, lam increasing, L* falls to 0.22 at T* 4.98 to 4.995; in the other T* falls from 4.96 to 4.29 while L* stays between 1.04 and 0.775) and
+falls to 0 between T* 4.29 and 4.23 (lam 0.50 to 0.47, L* 0.775 to 0.760), where it stays to the end of the trace (T* 2.32, L* 1.61, where the tracer
+lost the family). So the measure changes sign along the retrograde curve near L* 0.77, and the satellites N = 6 and N = 9, which branch from A1, are
+on the co-rotating stretch. That the rows the paper calls direct are the co-rotating ones is a reading of its words with a measure of my own, which
+the paper does not state; N = 99 (k = 58, L* 3.26) co-rotates too but is far from A1. None of these rows is an R satellite zero.

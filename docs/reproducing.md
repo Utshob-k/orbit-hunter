@@ -40,9 +40,11 @@ path):
   `satellite-test2.mjs` applies predictor B to the zeros with k > 1; `satellite-tests.mjs` prints their robustness (leave one out, trailing windows),
   the table of the heuristic delta_n = C eps_n and the comparison with the relation of the PRL type, with the rules in
   `docs/rules/rules-relation-tests.txt` (the rules of the out of sample run of n = 37 to 56 and of test 2 are in `docs/rules/rules-test1-test2.txt`;
-  the bisection for the zero of theta is `src/zero.js`, tested in `test/zero.test.js`); `satellite-candidates.mjs` and `satellite-check.py` recompute
-  the numbers of the 54 orbits of the satellite curves of `data/satellite-candidates.json` and compare them with other lists (the second needs `pip
-  install rebound numpy`)
+  the bisection for the zero of theta is `src/zero.js`, tested in `test/zero.test.js`); `cpc-rows.mjs` closes the 99 rows of the CPC tables again and
+  compares them with the traced curve of Henon's family, with the satellite curves of R (rules in `docs/rules/rules-cpc-curves.txt`) and by their
+  co-rotation share (about 20 seconds); `corotation-trace.mjs` follows the family through A1 and writes the share along it (about a minute; the output
+  file must be new); `satellite-candidates.mjs` and `satellite-check.py` recompute the numbers of the 54 orbits of the satellite curves of
+  `data/satellite-candidates.json` and compare them with other lists (the second needs `pip install rebound numpy`)
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
