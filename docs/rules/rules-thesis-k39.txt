@@ -1,0 +1,25 @@
+Rules for the test of the orbit k = 39 of the preliminary search at L = 1.5 of the master thesis of M. Jankovic (Belgrade 2016, appendix A, Table 3; the search is mentioned in section 4 of the CPC 2020 paper), copied from the local rules file (tools/thesis-orbit-test.mjs). They were written on 2026-10-11 before the runs; the changes made later are listed at the end, each with the time it was declared. The thesis is not part of this repository and, as far as I could find, not publicly available (no repository record), so the printed start values and the T*, L*, rotation of its orbits are not written down here: the script takes the printed values as arguments.
+
+QUESTION. Is that orbit on a satellite curve of the member of Broucke's R family with the rotation number nu = 1/39, and does the family of relatively periodic orbits through it reach the branch point of that member?
+
+FACTS KNOWN BEFORE THE RUN (from the stored trace of the R family, data/r-family-trace.json, by interpolation): the two members with nu = 1/39 (the lower and the upper of the two nu of the trace) are at L* near 3.74, about 5e-3 apart. The stored satellite curves 39-upper (branch point at the upper nu) pass near the orbit and not on it. There is no file for the lower nu of n = 39.
+
+PROCEDURE (in this order, one run each, a new output name for every run):
+ 1. close the orbit from the printed values (multiple shooting, 16 pieces).
+ 2. repeat test: does it return, up to a rotation and in its own places, after T/n for n = 2 to 78? If yes it is a repeat of a shorter orbit and not a satellite. The word of the syzygies must be (01)^39.
+ 3. the member with the lower nu = 1/39 as in tools/branch-point.mjs step 1 (bisection on the stored trace): its T*, L*, rotation in turns, and eps = 39 |theta| - 1 (a satellite curve begins at the rotation -eps with the invariants of the 39 fold repeat of the member).
+ 4. follow the family through the orbit in both directions (tools/family-follow.mjs, DIR = 1 and -1), 8 minutes each.
+
+HIT (fixed before the runs): the orbit is on the satellite curve of the member if (a) it has no repeat and the word is (01)^39, and (b) a step of the traced family has T* within 2e-4 (relative), L* within 2e-4 and |rotation| within 2e-4 turns of (39 T*_member, L*_member, eps). Not a hit: no step within these bounds in 8 minutes per direction (undecided, not "no"), or a repeat.
+TIME LIMIT: 40 minutes for k = 39. WORDING until decided: "on parts of the satellite curves not computed here"; the words "lower branch" are not used for this orbit.
+
+CHANGES (declared before the run they concern)
+ (1) Step 4 gave steps within 1e-7 of the branch point in T* and in rotation, but the member interpolated on the trace has L* about 3e-4 above the largest L* of the traced curve, so the bound of 2e-4 in L* was not met. Step 5 was added: the exact member from tools/branch-point.mjs (step 1 and 2 only, the continuation stopped), with the second smallest singular value of the matrix [J | dF/dlam] of the 39 fold repeat (a branch point if it is about 1e-11 against 1e-3 for the next one), and the HIT test repeated against the exact member with the same bounds. The time limit was extended by 20 minutes.
+ (2) Extension to the orbits k = 45 and k = 58 of the same search (k = 58 at L = 0.935549) with the same procedure, 8 minutes per direction, 30 minutes. For k = 58 the first traces (16 pieces forced) stopped at once with "could not move the start onto the family"; they were rerun with the default pieces (8 to 64) under new output names and stopped at once again ("lost the family", 0 points).
+
+RESULTS (no numbers of the thesis orbits)
+ k = 39: HIT. No repeat (smallest mismatch 1.5e-3, none below 1e-5), word (01)^39. The exact member (|theta| 0.0258 turn, found by node tools/branch-point.mjs 39 0.0258 --pieces=16 --repeat-tol=1e-8) has the second smallest singular value 4.3e-12 against 8.1e-5 for the next one, so it is a branch point, and two real directions of the bifurcation equation 88 degrees apart. The orbit is within 1e-7 of it in T* (relative), 3e-5 in L* and 3e-7 turns in rotation; its rotation is -eps to that accuracy. The traced family, in both senses, has steps within 4e-9, 4e-8 and 2.5e-7 turns of the branch point and then leaves it with L* and the rotation falling, as the two senses of a satellite curve do. The orbit is a rotating member (rotation not 0) of the satellite curve; the orbit of that curve with rotation 0 was not computed.
+ k = 45: not a satellite. It returns after T/45 (mismatch 1.7e-10, also for n = 15, 9, 5 and 3): a 45 fold repeat of an R orbit, with the T*/45 and lam of the stored trace at its L* to 1e-5.
+ k = 58 (the row N = 99 of the CPC tables, after refinement): no repeat, word (01)^58, far from the branch point of the member (about 0.85 in L*); the tracer could not follow the family from this start in either attempt: undecided.
+ k = 12 (11 loops per relative period, not near a branch point) and k = 84 (does not close from the printed digits): undecided.
+ Time used: about 70 minutes.
