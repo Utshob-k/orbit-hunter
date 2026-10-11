@@ -13,6 +13,7 @@ import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';
 import { relativeStability } from '../src/relative.js';
+import { locateZero } from '../src/zero.js';
 
 const n = Number(process.argv[2]), thetaWanted = Number(process.argv[3]), control = process.argv.includes('--control'), write = process.argv.includes('--write');
 if (!n || !thetaWanted) { console.error('usage: node tools/branch-point.mjs n theta [--control] [--write]'); process.exit(2); }
@@ -141,15 +142,9 @@ function follow(vDir, vOther, sgn) {
     const d = Math.hypot(...Array.from(c.Y, (v, i) => v - Y[i]));
     if (cur.minDist < 0.03) { why = 'close approach ' + cur.minDist.toFixed(4); break; }
     if (step > 1 && prev.turns * cur.turns < 0 && Math.abs(prev.turns) < 0.05) {      // the zero of theta between the last two points: bisection along the chord, corrected onto the curve
-      let a = Float64Array.from(Y), b = Float64Array.from(c.Y), ta = prev.turns, zz = null;
-      for (let k = 0; k < 60; k++) {
-        const mid = Float64Array.from(a, (v, i) => (v + b[i]) / 2), cm = correct(mid, unit(Float64Array.from(b, (v, i) => v - a[i])), m, t0);
-        if (!cm.ok) break;
-        const im = inv(cm.Y); zz = im;
-        if (Math.abs(im.turns) < 1e-11) break;
-        if (im.turns * ta > 0) { a = Float64Array.from(cm.Y); ta = im.turns; } else b = Float64Array.from(cm.Y);
-      }
-      zero = zz; why = 'zero of theta'; s += d; pts.push({ s, Tstar: cur.Tstar, Lstar: cur.Lstar, turns: cur.turns, lam: cur.s.lam, minDist: cur.minDist });
+      // (until version 0.2.23 the loop stopped for good when the corrector failed at a midpoint, which left four zeros of n <= 36 and 15 of n = 37 to 56 at a rotation of up to 5e-5 turns; src/zero.js retries at 1/4 and 3/4 of the chord)
+      const lz = locateZero({ a: Float64Array.from(Y), b: Float64Array.from(c.Y), ta: prev.turns, correct: (p, nrm) => correct(p, nrm, m, t0), info: inv, unit });
+      zero = lz.zero; why = lz.zero ? 'zero of theta' : 'zero of theta not located: the corrector failed'; s += d; pts.push({ s, Tstar: cur.Tstar, Lstar: cur.Lstar, turns: cur.turns, lam: cur.s.lam, minDist: cur.minDist });
       break;
     }
     Y = c.Y; tau = c.tn; s += d; prev = cur;
