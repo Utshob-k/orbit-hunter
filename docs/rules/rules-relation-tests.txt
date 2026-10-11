@@ -1,0 +1,43 @@
+Rules for the tests of the relations of the zeros of the upper branch of the R satellites (k = 1, n = 5 to 36), copied from the local rules file. They were written on 2026-10-11 before the numbers of these tests were computed; the script is tools/satellite-tests.mjs (it reads the data files of this repository). The numbers that existed before (tools/satellite-relations.mjs, version 0.2.22) are not changed by these tests. The times in the deviations are the clock of the machine.
+
+DATA. T*, L* of the zero of every n: the 30 digit orbits of data/satellite-candidates.json for n = 7 and 9 to 36 (so the zeros of n = 24, 26, 27, 28 are the refined ones), the stored zero of
+data/branch-points/<n>-upper.json for n = 5, 6, 8 (rotation left below 1e-11 turns there). n T*_R(n): the T* of the n fold repeat at the branch point (first point of the satellite curve), which
+is the same as n times the T* of the member of the R family with the upper nu = 1/n of the stored trace to the precision of the interpolation (checked in the script and reported).
+
+WHAT WAS WRITTEN DOWN BEFORE THE RUN. Only predictor B (docs/rules/rules-n21-up.txt: T*_n = n T*_R(n) - (a + b/n), fitted on n = 8 to 20; the multiplier trends also, not tested here). The L* fit
+(a + b/n + c/n^2) and the sqrt(n) form of T* were found after the zeros for n >= 21 were known, so no result on them below is out of sample in the sense of a prediction. This is said where the results are given (docs/r-family-satellites.md).
+
+TEST 3. Robustness of the k = 1 relations (B, the sqrt(n) form a n + b + c sqrt(n) for T*, and the L* fit a + b/n + c/n^2).
+ (3a) Leave-one-out over n = 8 to 36: for each n0 the relation is fitted on the other n of 8 to 36 and evaluated at n0. Reported: the largest and the rms error, the ranges of the coefficients, and for B
+      the range of the prediction at n0 compared with the fit on all 29 points. (This is interpolation and is said to be.)
+ (3b) Trailing windows: fit on n = 8 to m for m = 14 to 35, predict n = m + 1 to 36. Reported: the largest error for each m, the error at n = 36, the coefficients, for L* also the limit a.
+ (3c) Different windows: fits on [lo, hi] for lo in {5, 8, 10, 12}, hi in {20, 24, 28, 36}, evaluated on the points outside the window (reported where there are some) and on n = 36.
+ WHAT COUNTS AS HOLDING: for the T* relations (B and sqrt(n)) the largest error in (3a) and in every (3b) with m >= 14 is at most 0.005 (the largest error so far is 0.0031); for the L* fit it is at most
+ 1e-3 (so far 5.1e-4). The coefficients are called stable if the prediction at n = 36 (T* or L*) moves by less than the same bound between all the fits of (3a) to (3c) that include n = 36 in the fit,
+ and by less than twice the bound in the fits that do not. If a relation fails the bound it is reported with the case that breaks it. The bound is fixed here and not changed after the numbers are seen.
+
+TEST 5. The heuristic for the correction of B (suggested after the data were seen; a first-order heuristic, not a derivation): at the branch point the n fold repeat has
+ rotation n |theta_R| = 1 + eps_n and delta_n = C eps_n, C about 8, C = |dT*/dtheta| along the satellite curve near the branch point.
+ Computed from data/branch-points/<n>-upper.json for n = 5 to 36 (k = 1): eps_n = n |member.turns| - 1; the rotation of the first point of the satellite curve (checked: equal to -eps_n); delta_n = T* of the
+ first point of the curve minus T* of the zero (the refined zero where there is one); the ratio delta_n / eps_n; the local slope C_loc = |dT*/dturns| between the first point and the first point whose turns
+ differs by more than 1e-7 (the slope near the branch point); the mean slope along the curve is the same number as the ratio (an identity, said where the results are given). Also the position of the maximum of eps_n and of delta_n.
+ For k > 1: every file data/branch-points/<k>-<n>-<branch>-<theta>.json with a zero (stored zero; its rotation left is at most 3e-8 turns, checked), eps = the rotation of the first point of the curve
+ (the nearest whole number to n |member.turns| removed), delta = T* of the first point minus T* of the zero, ratio |delta| / |eps|, the closure tier of the zero from data/branch-summary.json.
+ WHAT COUNTS AS HOLDING: the ratio |delta| / |eps| is between 7 and 9 (that is C = 8 within about 12 %). For k = 1 the report gives the n for which it holds and the n where it does not; the local slope C_loc is
+ said to hold where it is within 12 % of the ratio. For k > 1 the files with a ratio outside 7 to 9 are listed as failures (four are expected from a first look at the data). A hold in this sense says that the correction has the size
+ and the shape of eps; it is not evidence for a derivation, and C is not predicted independently of the curves.
+
+TEST 4 (reduced: the Henon family and the A family are not traced). For the zeros of n = 5 to 36: whether the satellites follow (i) the relation of the PRL type, the satellite lies on the
+ same curve of T*/k against L* as the parent family (T*_zero / n = T*_R(L*_zero), the R family at the L* of the zero, from the stored trace data/r-family-trace.json, all crossings of L* listed), or (ii) the
+ relation with matching nu, T*_zero / n = T*(member with nu = 1/n) - delta_n / n, with L*_zero and L*_member far apart. Reported: for every n the T*/n of the zero, the T* of the R curve at the L* of the zero
+ (all crossings), the T*/n and L* of the member, the relative differences (i) and (ii). WHAT COUNTS: (i) is said to hold for an n if the relative difference to the nearest crossing is below 1e-3 (the size of
+ delta_n / (n T*_R)), and (ii) holds for the n where the relative difference is below 1e-3. The statement about the PRL curve is only about the R family; the BHH family (Broucke A1, Henon orbit 11) is not
+ traced here and nothing is said about the CPC satellites. This is not a reproduction of the result of Jankovic et al.
+
+
+DEVIATIONS (declared before the first run, 2026-10-11 10:20): (1) in test 3 the relation B is evaluated with n T*_R(n) from the interpolated crossing of nu = 1/n on the stored trace, as published in
+docs/r-family-satellites.md and tools/satellite-relations.mjs (not with the first point of the satellite curve, which the DATA paragraph above says); the two differ by up to 2.4e-3 (measured; 7e-4 was guessed when this was written) and the difference is
+reported; test 5 uses the first point of the curve, as written. (2) For k > 1 the closure tier is matched to the file by k, n, branch and the theta of the file name (4 digits).
+DEVIATION 3 (2026-10-11, after the first run, declared here): the matching of the closure tier of a k > 1 file to data/branch-summary.json by the theta of the file name failed for 8 of the 17 files (the
+name has the theta that was asked for, rounded to 4 digits, not the theta of the member, which differs by up to 9e-4). The match is now by k, n, branch and the theta of the member inside the file
+(|e.theta - |member.turns|| < 1e-9). Nothing else was changed; the numbers of the other tests did not depend on it.
