@@ -49,6 +49,11 @@ path):
   `data/satellite-candidates.json` and compare them with other lists (the second needs `pip install rebound numpy`) 
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
+- `compare-hristov.mjs path/to/100_12431.txt` compares the orbits with the database of Hristov and Hristova (arXiv 2404.16526; the file is not stored here)
+- `compare-hristov-big.mjs path/to/60digits.txt T* ...` lists the rows of their big file (421,562 rows) whose T* is closest to the given values
+- `compare-threebodyorbits.mjs` compares the 11 orbits of `data/perp-periodic.json` with equal mass L != 0 orbits copied by hand from threebodyorbits.com (the first atlas comparison)
+- `compare-unmatched.py` compares the unmatched orbits with the 99 CPC satellites, allowing n fold repeats of either one (n up to 8)
+- `make-catalog.mjs path/to/3-body-14.tex` builds `data/liliao.json` from the TeX source of arXiv 1705.00527
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
   `data/closure-stored.json`), `stable-samples.py` counts the stable samples on the branch arms; `orbit-table.mjs`, `check-refined.mjs`,
   `arm-repeat-check.mjs` and `verify-branches.mjs` write their result files, so tracked files change when they run
