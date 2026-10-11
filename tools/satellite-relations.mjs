@@ -95,3 +95,20 @@ console.log('   increments from n = 14: ' + ms.filter((r) => r.n >= 14).map((r) 
 const m20 = ms.find((r) => r.n === 20).mult;
 console.log('   deviation of the predictions written down before n >= 21 (prediction / data - 1): n | linear 7.621 + 0.85 (n - 20) | quadratic 4.6525 + 0.83637 x + 0.00172 x^2, x = n - 16.5');
 for (const r of ms.filter((q) => q.n >= 21 && (q.n - 21) % 3 === 0)) { const x = r.n - 16.5; console.log(`   ${r.n} | ${(100 * ((m20 + 0.85 * (r.n - 20)) / r.mult - 1)).toFixed(1)} % | ${(100 * ((4.6525 + 0.83637 * x + 0.00172 * x * x) / r.mult - 1)).toFixed(1)} %`); }
+
+// 5. out of sample: n = 37 to 56. the same three fits (on n <= 20 only, no refit) against the zeros of the run of 2026-10-11 (data/branch-points/<n>-upper.json, refined orbits of data/satellite-candidates.json). the rules were written
+// before the run (docs/rules/rules-test1-test2.txt): bounds 0.005 for T* and 1e-3 for L*; of the three only B was written down before the zeros for n >= 21 were known
+console.log('\n5. out of sample, n = 37 to 56: errors (prediction - data) of B, the sqrt(n) form and the L* fit, all fitted on n <= 20 only');
+{
+  const BX = fit('delta', [one, inv], 8).x, SX = fit('T', [nn, one, sq], 8).x, LX = fit('L', [one, inv, inv2], 5).x, ext = [];
+  for (let n = 37; n <= 58; n++) {
+    const c = cands.find((o) => o.n === n && o.label.includes(`nu = 1/${n} (upper branch`));
+    if (!c || !fs.existsSync(new URL(`../data/branch-points/${n}-upper.json`, import.meta.url))) continue;
+    const i = perpInfo(Number(c.u1), Number(c.u2), Number(c.lam), Number(c.t)), T = i.ts, L = Math.abs(i.ls), nT = memberT(n);
+    ext.push({ n, T, L, mult: c.multiplier, eB: (nT - val([one, inv], BX, n)) - T, eS: val([nn, one, sq], SX, n) - T, eL: val([one, inv, inv2], LX, n) - L });
+  }
+  console.log('n | T* | L* | largest multiplier | B error | sqrt error | L* error | holds B/sqrt/L*');
+  for (const r of ext) console.log([r.n, r.T.toFixed(5), r.L.toFixed(5), r.mult.toFixed(3), e1(r.eB), e1(r.eS), e1(r.eL), `${Math.abs(r.eB) <= 0.005 ? 'y' : 'N'}/${Math.abs(r.eS) <= 0.005 ? 'y' : 'N'}/${Math.abs(r.eL) <= 1e-3 ? 'y' : 'N'}`].join(' | '));
+  const upTo = (k, b) => { let u = null; for (const r of ext) { if (Math.abs(r[k]) <= b) u = r.n; else break; } return u; };
+  console.log(`${ext.length} zeros: B holds up to n = ${upTo('eB', 0.005)} (largest |error| ${e1(Math.max(...ext.map((r) => Math.abs(r.eB))))}), the sqrt(n) form up to n = ${upTo('eS', 0.005)} (largest ${e1(Math.max(...ext.map((r) => Math.abs(r.eS))))}), the L* fit up to n = ${upTo('eL', 1e-3)} (largest ${e1(Math.max(...ext.map((r) => Math.abs(r.eL))))})`);
+}

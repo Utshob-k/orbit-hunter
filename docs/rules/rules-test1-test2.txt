@@ -1,0 +1,79 @@
+Rules and predictions for test 2 (predictor B for the established k > 1 zeros) and test 1 (the upper branch of the satellites of Broucke's R family for n = 37 to 58, out of sample), copied from the local rules file. They were written on 2026-10-11 before any number of test 2 was computed and before any run of test 1 was started; any later change is declared in a section added below before it was run, with its results kept in separate files. The times are the clock of the machine. The results are in docs/r-family-satellites.md (the sections on the empirical relations and on n = 37 to 56); the scripts are tools/satellite-test2.mjs (test 2), tools/satellite-relations.mjs (section 5, the errors of test 1) and tools/satellite-sequence.mjs (the table). The runs of test 1 used a copy of tools/branch-point.mjs of the commit 41a074b in which only the paths differ (the imports of ../src, the trace file and the output folder); phase 2 (n = 57 and 58) is not reported here.
+
+------------------------------------------------------------------ TEST 2 (existing data)
+WHAT IS TESTED. Predictor B in the form T*_zero = n T*_R(nu = k/n) - delta_n for the k > 1 zeros of data/branch-points/<k>-<n>-<branch>-<theta>.json, with delta_n = a + b/n exactly as fitted on k = 1, n = 8 to 20
+ (a = -0.0033397, b = 0.463315; no refit), and n T*_R(nu = k/n) = n times the T* of the member of the file (= T* of the first point of the satellite curve, the n fold repeat of the member).
+WHICH ZEROS. The established ones: the zero reaches rotation 0 and its closure tier (data/branch-summary.json) is reliable: 2-5-upper-0.3636, 2-7-upper-0.2809, 2-9-upper-0.2227, 2-11-upper-0.1830,
+ 3-8-upper-0.3482, 3-10-lower-0.4021, 3-10-upper-0.2931, 3-11-upper-0.2696, 4-9-upper-0.4249, 5-12-upper-0.3728 (ten). Refined values (30 digits, data/satellite-candidates.json) where the zero has one
+ (2/9 upper, 2/11 upper, 3/10 lower); for the others the stored zero (its rotation left is at most 3e-8 turns, which changes T* by about 3e-7, far below the bound).
+HOLDING. A zero holds if |prediction - data| <= 0.005 (the bound of the test of robustness for T*). Reported per zero: prediction, data, error, holds or not.
+EXPECTATION, written before the computation: B will not hold for any of the ten. Reason: for k = 1 the correction delta_n is 0.006 to 0.06 and small because the rotation excess eps_n of the repeat is small by
+ construction (nu = 1/n); for k > 1 the excess is 0.0045 to 0.33 and delta is about 8 eps (0.036 to 2.4), while a + b/n is 0.03 to 0.09. The only zero with a delta near the fitted one is 2-9-upper (delta 0.036,
+ fitted 0.048, error 0.012), which also fails the bound.
+SEPARATE, DECLARED NOW AS A LABELLED VARIANT H (the heuristic delta = C eps found after seeing the data, so not a prediction; reported apart from B): T*_pred = n T*_member - 8 |eps|, with eps = the rotation of
+ the first point of the satellite curve (turns), C = 8 fixed. Holds if |delta_pred - delta| <= 10 % of delta (a relative bound, because eps is large).
+THE sqrt(n) FORM CANNOT BE APPLIED TO k > 1, to be shown with the numbers: it is a function of n alone fitted on the sequence nu = 1/n; at one n there are several k > 1 zeros (n = 11: k = 2, 3, 5) with different T*,
+ and the form gives one value for each n. The T* of the zeros of the same n are listed.
+
+------------------------------------------------------------------ TEST 1 (out of sample, n = 37 to 58)
+TIME LIMIT. 6 hours wall-clock from the launch of the runs (the launch time is written down); every job is started with `timeout` for the time that is left.
+METHOD SETTINGS, those of n = 29 to 36, unchanged: for every n the upper nu = 1/n member (theta of the crossing given with 6 digits, column 2 of the table below), `node bp-copy.mjs n theta --repeat-tol=1e-8 --pieces=16
+ --control --write` (bp-copy.mjs = tools/branch-point.mjs of the repository at commit 41a074b, paths differ only); the limits of the continuation as committed: closest approach 0.03, 700 accepted steps, step 0.03 and
+ 6 % of the distance from the branch point, tangent turning < 0.35 rad, residual of the repeat 1e-8, member 1e-11, caps of the integration steps of src/perp.js and src/shooting.js as committed. 10 jobs at a time, in the order of n.
+AN n IS DECIDED if at least one sense of the satellite curve reaches rotation 0. UNDECIDED if neither does (the limit that stopped each sense is reported: closest approach, collapse of the step, step limit, failure
+ of the repeat solve or of the integration). An undecided n is not a result about the orbit. No stop rule: all n from 37 to 58 are run within the time limit.
+FOR EVERY ZERO: refinement to 30 digits (tools/refine-mp.py, 30 digits); the refined values are used for everything below. Checks as for n = 13 to 36: T*, L*, rotation, closest approach, the syzygy word and the number
+ of alignments (expected: (01)^n and 2n), the repeat test, closure tiers in double precision, the largest multiplier (src/relative.js) and the REBOUND check (tools/satellite-check.py), the comparison with all lists by
+ T* and L* within 1e-5 (repeats up to 12, same alignments) and near 5e-3, and by start values for every orbit of my 102 at the same period within 5e-3 (tools/satellite-candidates.mjs, the atlas catalogue given).
+PREDICTIONS (fits on n <= 20 only, no refit; the three formulas):
+ B: T*_n = n T*_R(n) - delta_n, delta_n = -0.0033397 + 0.463315 / n (fit n = 8 to 20), n T*_R(n) from the stored trace (crossing of the upper nu = 1/n);
+ sqrt: T*_n = 1.537242 n + 6.06149 + 1.82889 sqrt(n) (fit n = 8 to 20);
+ L*: L*_n = 2.734438 - 0.964908 / n + 0.768383 / n^2 (fit n = 5 to 20, as published in docs/r-family-satellites.md).
+HOLDING, per n and per formula: |T* error| <= 0.005 for B and for the sqrt form, |L* error| <= 1e-3 for the L* fit (the bounds of the test of robustness). Reported per n: the error of B, of the sqrt form and of the L* fit
+ (prediction minus data), the multiplier, and for each formula the largest n up to which it holds at every decided n and the first n where it fails. A formula is judged only on decided n.
+EXPECTATIONS, written before the runs, from the linear trend of the errors on n = 28 to 36 (the known zeros): B: error (zero - B) +3.0e-3 at n = 37 growing to +5.0e-3 at n = 58, so B is expected to hold up to
+ n = 57 or 58 and to be at the bound at the end; sqrt: error (fit - zero) +2.4e-3 growing to +3.2e-3, so it is expected to hold for all n; L*: error (fit - zero) -5.4e-4 at n = 37 growing to -1.07e-3 at n = 58, so it is
+ expected to hold up to n = 55 and to fail from n = 56. The multiplier: not predicted here (the earlier trends failed); it is reported.
+ The table (predictor values and the expected errors); theta of the member with 6 digits:
+n | theta of the upper nu = 1/n member (turns, 6 digits) | n T*_R from the trace | predicted T* by B | predicted T* by the sqrt form | predicted L* | expected error B | expected error sqrt | expected error L*
+37 | 0.027057 | 74.0684 | 74.0592 | 74.0642 | 2.70892 | 3.1e-3 | 2.4e-3 | -5.4e-4
+38 | 0.026344 | 75.7545 | 75.7456 | 75.7507 | 2.70958 | 3.2e-3 | 2.5e-3 | -5.7e-4
+39 | 0.025668 | 77.4395 | 77.4309 | 77.4354 | 2.71020 | 3.3e-3 | 2.5e-3 | -5.9e-4
+40 | 0.025025 | 79.1217 | 79.1134 | 79.1181 | 2.71080 | 3.4e-3 | 2.5e-3 | -6.2e-4
+41 | 0.024414 | 80.8033 | 80.7953 | 80.7990 | 2.71136 | 3.5e-3 | 2.6e-3 | -6.4e-4
+42 | 0.023832 | 82.4820 | 82.4743 | 82.4782 | 2.71190 | 3.6e-3 | 2.6e-3 | -6.7e-4
+43 | 0.023277 | 84.1603 | 84.1529 | 84.1557 | 2.71241 | 3.7e-3 | 2.6e-3 | -6.9e-4
+44 | 0.022748 | 85.8359 | 85.8287 | 85.8316 | 2.71291 | 3.8e-3 | 2.7e-3 | -7.2e-4
+45 | 0.022242 | 87.5111 | 87.5041 | 87.5060 | 2.71338 | 3.9e-3 | 2.7e-3 | -7.4e-4
+46 | 0.021757 | 89.1839 | 89.1772 | 89.1788 | 2.71383 | 3.9e-3 | 2.7e-3 | -7.7e-4
+47 | 0.021294 | 90.8560 | 90.8495 | 90.8501 | 2.71426 | 4.0e-3 | 2.8e-3 | -7.9e-4
+48 | 0.020850 | 92.5263 | 92.5200 | 92.5200 | 2.71467 | 4.1e-3 | 2.8e-3 | -8.2e-4
+49 | 0.020424 | 94.1956 | 94.1895 | 94.1886 | 2.71507 | 4.2e-3 | 2.8e-3 | -8.4e-4
+50 | 0.020015 | 95.8637 | 95.8578 | 95.8558 | 2.71545 | 4.3e-3 | 2.9e-3 | -8.7e-4
+51 | 0.019622 | 97.5302 | 97.5244 | 97.5217 | 2.71581 | 4.4e-3 | 2.9e-3 | -8.9e-4
+52 | 0.019245 | 99.1963 | 99.1907 | 99.1864 | 2.71617 | 4.5e-3 | 3.0e-3 | -9.2e-4
+53 | 0.018881 | 100.8601 | 100.8547 | 100.8498 | 2.71651 | 4.6e-3 | 3.0e-3 | -9.4e-4
+54 | 0.018531 | 102.5239 | 102.5187 | 102.5121 | 2.71683 | 4.7e-3 | 3.0e-3 | -9.7e-4
+55 | 0.018194 | 104.1857 | 104.1806 | 104.1732 | 2.71715 | 4.8e-3 | 3.1e-3 | -9.9e-4
+56 | 0.017869 | 105.8470 | 105.8420 | 105.8332 | 2.71745 | 4.8e-3 | 3.1e-3 | -1.0e-3
+57 | 0.017555 | 107.5075 | 107.5028 | 107.4921 | 2.71775 | 4.9e-3 | 3.1e-3 | -1.0e-3
+58 | 0.017252 | 109.1669 | 109.1622 | 109.1499 | 2.71803 | 5.0e-3 | 3.2e-3 | -1.1e-3
+fits on n <= 20 only (no refit later): B: delta_n = -0.0033397 + 0.463315 / n (n = 8..20); sqrt: T* = 1.537242 n + 6.06149 + 1.82889 sqrt(n) (n = 8..20); L* = 2.734438 + -0.964908 / n + 0.768383 / n^2
+expected error of B (zero - B) from the trend of n = 28..36 (error = -2.284e-4 + 9.068e-5 n): n = 36 3.04e-3, n = 58 5.03e-3; first n above the bound 0.005: 58
+expected error of the sqrt form (fit - zero) from the trend of n = 28..36 (error = 1.079e-3 + 3.610e-5 n): n = 36 2.38e-3, n = 58 3.17e-3; first n above the bound 0.005: none up to 58
+
+(the three fit lines and the trend expectations above are the first three lines of predictions.txt)
+RULES frozen 2026-10-11 10:38:08 (no result of test 1 or 2 exists at this time)
+LAUNCH of test 1 (declared when it happened): the first launch at 10:38:16 stopped at once (job file with a missing theta, "usage" error, no run started, no output kept); relaunched at 10:38:32 with the corrected
+job file (jobs.txt: n and theta of the table above). The 6 hours count from 10:38:32.
+BUG FIX in test2.mjs (found when reading the first output, 2026-10-11 at about 10:39 (the first version of this line said 10:48, a wrong time), before test 1 had any result): the check of the variant H compared the SIGNED relative error with 10 %, so the seven zeros with a negative
+delta (the zero has a longer T* than the n fold repeat) passed although the prediction 8 |eps| has the wrong sign. The check is |8 |eps| - delta| <= 0.1 |delta| (as declared). The first output was kept; B was not affected (0 of 10 in both). Seen after the first output, reported apart and NOT declared in advance: the magnitude |delta| / |eps| (7.5 to 8.3 for all ten) holds for
+all ten, but delta has either sign, which the variant H as declared does not predict.
+OPERATIONAL NOTE (11:38, not a change of the method): the jobs n = 57 and 58 (n = 56 had just been started by the queue) were started by hand at once instead of waiting for a free slot of the 10, because the CPU was half idle; settings, command and limits are those
+above. runjob.sh was changed to skip a job whose log exists, so that the queue does not start them again.
+
+PHASE 2 (declared 2026-10-11 at about 13:07, BEFORE it is run; launched 13:07:48; results kept apart from the results of the frozen rules above, in out2/): test 1 ended at 13:07 (148 minutes) with n = 37 to 56 decided and n = 57 and 58 UNDECIDED:
+both senses of both stop at the step limit of 700 points with a path length of 3.9 to 8.0 (the small-step symptom of the method that n = 29 showed with 8 pieces; a limit of the method, not a property of the orbit).
+Change, for n = 57 and 58 only: the number of pieces of the n fold repeat 24 and 32 instead of 16 (`--pieces=24`, `--pieces=32`; one job each, four jobs), everything else unchanged (`--repeat-tol=1e-8 --control --write`,
+the same tool bp-copy.mjs with only the output folder changed to out2/). Time limit: the same 6 hours from the launch of test 1 (until 16:38). What counts: a zero in out2/ is refined and checked like the others; it is reported as
+"decided in phase 2 (pieces = P)" and does not enter the statements of the main results about which n decide; the predictions of the three formulas are the frozen ones.
