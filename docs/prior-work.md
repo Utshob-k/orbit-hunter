@@ -7,7 +7,7 @@ This file holds a part of the former README, moved here on 2026-10-10 without ch
 - Hénon 1976, Broucke 1975 and Hadjidemetriou 1975: the BHH family. Davoust and Broucke 1982 (Astronomy and Astrophysics 112, 305): "A manifold of
   periodic orbits in the planar general three-body problem with equal masses", the first satellite (k = 3) and families followed by continuation (the
   page scans are from ADS, bibcode 1982A&A...112..305D, there is no text version, so the text and the tables were read from the scan images).
-- Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020): about 100 satellites of the BHH family by brute force search. I do not know of work that
+- Janković and Dmitrašinović (PRL 2016), Janković, Dmitrašinović and Šuvakov (CPC 2020): about 100 satellites of the BHH family by brute force search. I do not know of work that
   follows their
   satellite branches by continuation from the stable BHH orbits, other than the first satellite and the families in Davoust and Broucke 1982.
 - Li and Liao and others: thousands of orbits since 2017, as far as I can see in their public data zero angular momentum or 3D, or unequal masses.

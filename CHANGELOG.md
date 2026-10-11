@@ -4,6 +4,7 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 ## Versions
 
+- 0.2.24 (2026-10-11): the upper branch of the R satellites for n = 37 to 56 as an out of sample test (rules and predictions written before the run, `docs/rules/rules-test1-test2.txt`): predictor B and the L* fit hold, the sqrt(n) form fails from n = 50, n = 57 and 58 undecided; the 20 zeros refined to 30 digits (`data/satellite-candidates.json` has 54 orbits, `data/branch-points/` 93 files); predictor B for k > 1 does not hold (`tools/satellite-test2.mjs`); the bisection for the zero of theta retries when the corrector fails (`src/zero.js`, `test/zero.test.js`; reruns of n = 13 and 21 reproduce the stored files); the authors of the PRL 2016 paper corrected.
 - 0.2.23 (2026-10-11): robustness of the empirical relations of the R satellites (leave one out, trailing windows), the heuristic delta_n = C eps_n found after the data were seen, and the R satellites against the relation of the PRL type (`docs/r-family-satellites.md`, `tools/satellite-tests.mjs`, `docs/rules/rules-relation-tests.txt`); no change to the data.
 - 0.2.22 (2026-10-11): empirical relations for the zeros of the upper branch (`docs/r-family-satellites.md`, `tools/satellite-relations.mjs`); the table of `tools/satellite-sequence.mjs` takes T* and L* from the refined orbits (it had L* wrong by up to 1e-3 for n = 24, 26, 27 and 28 in 0.2.21, see Corrections); `branch-point.mjs` prints the rotation left at a zero.
 - 0.2.21 (2026-10-10): the satellites of the R family with k = 1 for n = 13 to 20 (both branches) and the upper branch to n = 36 (not run beyond); the zeros are unstable from n = 13; the rules and predictions as written before the runs (`docs/rules/`); `tools/satellite-sequence.mjs`, `--repeat-tol` and `--pieces` of `branch-point.mjs`, the caps of the integration steps in `src/perp.js` and `src/shooting.js` raised by 20.
@@ -33,6 +34,12 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
 
+- **2026-10-11, the authors of the PRL 2016 paper.** `docs/prior-work.md` said "Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020)", and the
+  paragraph on the relation of the PRL type added in version 0.2.23 said "Jankovic, Dmitrasinovic and Suvakov (PRL 2016)". The PRL paper (Phys. Rev.
+  Lett. 116, 064301, 2016) has two authors, Janković and Dmitrašinović; Šuvakov is the third author of the CPC paper (250, 107052, 2020). It was found
+  when the citations were checked against Crossref: the review of Li and Liao, the New Astronomy paper of Li, Tao, Li and Liao, the CPC paper, Hénon
+  1976, Broucke 1975, Broucke and Boggs 1975 and Hadjidemetriou and Christides 1975 agree with the docs; Hadjidemetriou 1975 and Davoust and Broucke
+  1982 were not checked. Fixed in `docs/prior-work.md`, `docs/r-family-satellites.md` and `docs/results.md`.
 - **2026-10-11, the table of the zeros in 0.2.21.** The table printed by `tools/satellite-sequence.mjs` in version 0.2.21 took T* and L* of the zeros
   from `data/branch-points/`, and for n = 24, 26, 27 and 28 these were off (L* by 7e-5, 1.0e-3, 3e-4 and 5e-4; T* by 3e-5, 4e-4, 1e-4 and 2e-4): the
   bisection for the zero of theta stopped early because the corrector failed there, and the zeros were left at 3.6e-6 to 5e-5 turns of rotation

@@ -39,7 +39,7 @@ correction made so far, are in the files below.
 ## Broucke's R family and its satellites
 
 One of the 77 orbits (T* = 33.745) lies on Broucke's family R. Satellites leave this family where a rotation number is 1/n. They were followed for n =
-3 to 12, and on the upper branch up to n = 36.
+3 to 12, and on the upper branch up to n = 56 (n = 57 and 58 were not decided).
 
 | n | what was found | status |
 |---|---|---|
@@ -49,8 +49,9 @@ One of the 77 orbits (T* = 33.745) lies on Broucke's family R. Satellites leave 
 | 5, 6, 8 | the three stable orbits, T* = 17.847, 19.769, 23.533 (the shortest orbit of the T* = 47.065 orbit) | not found in the sources checked |
 | 7 | T* = 21.663 | in the atlas (R7 1/1, from the atlas's own 2026 search, no paper) |
 | 9 to 12 | T* = 25.383, 27.217, 29.037, 30.844 | not found in the sources checked |
-| 13 to 36 | T* = 32.640 to 72.373, all unstable (largest multiplier 1.71 to 24.6) | not found in the sources checked (n = 27 and 29 to 36 reached only after declared changes of the method, see docs) |
-| 37 and up | not run | the stored trace has crossings up to n = 58 |
+| 13 to 56 | T* = 32.640 to 105.846, all unstable (largest multiplier 1.71 to 53.2) | not found in the sources checked (n = 27 and 29 to 36 reached only after declared changes of the method, see docs) |
+| 57, 58 | undecided | both senses stopped at the step limit of the method |
+| 59 and up | not run | the stored trace has no crossings of nu = 1/n beyond n = 58 |
 
 The orbits for n = 5 to 12 are all linearly stable; from n = 13 on they are unstable, so the sequence of stable orbits ends at n = 12. The satellite
 curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined to 30 digits, unstable). "Not found in the sources checked" says

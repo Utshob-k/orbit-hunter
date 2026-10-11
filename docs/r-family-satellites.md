@@ -118,9 +118,23 @@ in `src/perp.js`); (3) a point whose orbit cannot be integrated is rejected like
 raised by a factor 20 (`src/perp.js`, `src/shooting.js`). With these changes the zeros for n = 29 to 36 are reached in 358 to 386 steps (the other
 sense ends by a collapse of the step after 616 to 624 steps). So the stop of the sequence at n = 29 was the method and not the orbits. The files for n
 = 29 to 36 were made with `--repeat-tol=1e-8 --pieces=16`, the file for n = 27 with `--repeat-tol=1e-8`, the others with the defaults; the runs of the
-earlier attempts (8 pieces, the old caps) stopped at limits and are not kept. The sequence was not run beyond n = 36 (the time limit of 4 hours); the
-stored trace has crossings of nu = 1/n for the upper nu up to n = 58 and no further (its upper nu has the minimum 0.017034 at its end, and a longer
+earlier attempts (8 pieces, the old caps) stopped at limits and are not kept. The run of that day ended at n = 36 (the time limit of 4 hours); n = 37 to 56 were run later (below). The stored trace has crossings of nu = 1/n for the upper nu up to n = 58 and no further (its upper nu has the minimum 0.017034 at its end, and a longer
 trace of the same family would not give more unless the family continues beyond the end of the stored trace, which was not tested).
+
+**The upper branch from n = 37 to 56 (2026-10-11).** Run as an out of sample test, with the rules and the predictions written before the first run
+(`docs/rules/rules-test1-test2.txt`): the upper branch for n = 37 to 58 with the settings of n = 29 to 36 unchanged (`--repeat-tol=1e-8 --pieces=16
+--control`), 22 jobs, 148 minutes. For every n = 37 to 56 the upper branch reaches a periodic orbit in one sense (the other sense ends by a collapse
+of the step or at the step limit, as before; the data are `data/branch-points/<n>-upper.json`). n = 57 and 58 are undecided: both senses of both stop
+at the step limit of 700 points after a path length of 3.9 to 8.0, the small step symptom that n = 29 had with 8 pieces, which is a limit of the
+method and says nothing about the orbits. The 20 zeros were refined to 30 digits (residual up to 3e-25, closure of the full period of the rounded
+values 2.4e-24 to 7.1e-23; `data/satellite-candidates.json` has 54 orbits now). All have the word (01)^n with 2n alignments and no repeat, closure
+tier reliable in double precision, and are unstable: the largest multiplier is 25.868 at n = 37 and 53.176 at n = 56 (REBOUND agrees to 2e-5, closure
+4e-14 to 1.5e-12). None is a hit in the lists checked (my 102, the atlas, the CPC rows, Davoust and Broucke, Henon 1976, Li et al. 2025; within
+1e-5 with the alignments). One near pair: the n = 41 zero (T* 80.79823, L* 2.71199, 41 loops) and the CPC rows N = 92 and 93 (43 loops; N = 92 has T*
+80.80025, L* 2.70889, dT 2.5e-5 and dL 1.1e-3), which are different orbits (the normalised starts differ by 1.55 and 1.82). 15 of the 20 stored double
+precision zeros (n = 42 to 56) were left by the bisection at a rotation above 1e-9 turns, up to 2.4e-5 at n = 42, against 4 of 32 for n <= 36 (the
+same cause as for n = 24, 26, 27 and 28, next paragraph); the numbers quoted here are those of the refined orbits, and `data/branch-points/` has the
+files as they were run. The table of `tools/satellite-sequence.mjs` goes to n = 56.
 
 **The stored zeros of n = 24, 26, 27 and 28 (2026-10-11).** The zeros stored in `data/branch-points/<n>-upper.json` for n = 24, 26, 27 and 28 were
 left at a rotation of 3.6e-6, 5.0e-5, 1.4e-5 and 2.3e-5 turns instead of 1e-11 or less (all other k = 1 zeros of n = 5 to 36 are below 1e-11; three
@@ -137,14 +151,26 @@ relative periodic orbit) does not show it. The 30 digit orbits of `data/satellit
 multipliers, the closure tiers and the REBOUND checks. The stored zeros were used in the table of `tools/satellite-sequence.mjs` of version 0.2.21
 (T*, L* and the scale free closest approach), in `data/branch-summary.json` (the output of the tool, unchanged) and for one number of this file (T* of
 n = 28, corrected above). The differences zero - B and the closest approach in the units of the start do not change in the digits quoted. The stored
-files were not rerun; the table now takes T* and L* from the refined orbits and prints the rotation left at each stored zero, and
-`tools/branch-point.mjs` prints it too.
+files were not rerun; the table now takes T* and L* from the refined orbits and prints the rotation left at each stored zero, and `tools/branch-point.mjs` prints it too. The same happened to 15 of the 20 zeros of n = 37 to 56 (the paragraph below).
+
+**The bisection retries (version 0.2.24).** `src/zero.js` (`locateZero`, tested in `test/zero.test.js`) replaces the loop of `tools/branch-point.mjs`:
+when the corrector fails at the midpoint it tries the points at 1/4 and 3/4 of the chord, then at 1/8 and 7/8 (shorter steps from a point known to be
+on the curve, as the continuation does after a failed step), and goes on with the bisection from the first that converges; it stops only if all five
+fail, and then says so. When the corrector does not fail at the midpoint the loop is the plain bisection, with the same floating point operations.
+Checked by rerunning with the changed tool (the committed tool with the paths changed, output outside the repository): n = 13 (7167 numbers) and n =
+21 (8178 numbers) are identical to the stored files number for number, apart from the field `repeatTolerance` that the older files do not have; n = 26
+(one of the four unconverged ones) and n = 42 (the first of the 15) differ from the stored files only in the zero of the satellite curve (and for n =
+26 in the zero of the control curve), nothing else (the curves, the other sense, the singular values): the zero is now at a rotation of 7.4e-12 turns
+(n = 26: T* 55.35381, L* 2.69872, the values of the refined orbit; stored 55.35424 and 2.69975) and 1.9e-12 turns (n = 42: T* 82.47787, L* 2.71254;
+stored 82.47767 at 2.4e-5 turns). The stored files of n = 24, 26 to 28 and 42 to 56 were not regenerated: they are the files as they were run, and the
+30 digit orbits are the values to use. The zeros of the control curves were affected in the same way (12 of 156 above 1e-9 turns, up to 1e-4, in the
+files of n = 25 to 28 and 49 to 56).
 
 ## Empirical relations
 
 Relations between the numbers of the zeros of the upper branch (k = 1) for n = 5 to 36, printed by `tools/satellite-relations.mjs`: fitted on n <= 20
 and tested on n = 21 to 36. The zeros are the 30 digit orbits of `data/satellite-candidates.json` (for n = 5, 6 and 8, which have none, the stored
-zero). They are empirical relations fitted to 32 numbers, not laws and not derived, and none was tested beyond n = 36.
+zero). They are empirical relations fitted to 32 numbers, not laws and not derived, and none was tested beyond n = 36 before the run of n = 37 to 56 described in the last paragraph of this section.
 
 **T* (written down before the run for n >= 21).** Prediction B of `docs/rules/rules-n21-up.txt`: T*_n = n T*_R(n) - delta_n, where T*_R(n) is the T*
 of the member of the R family with the upper rotation number nu = 1/n and delta_n = a + b / n, a = -0.0033, b = 0.4633, fitted on n = 8 to 20 (fitted
@@ -192,7 +218,7 @@ first-order heuristic, not a derivation and not a prediction (C is not known ind
 to 8.3 for all ten zeros with closure tier reliable, 7.1 to 7.5 for three zeros with tier weak, and 16.5 to 32.5 for four files (2-9-lower-0.2572,
 2-11-lower-0.1995, 5-11-upper-0.3916, 5-12-upper-0.4313), all four with tier weak or failed, which are zeros that are not established.
 
-**Not the relation of the PRL type (the R family only).** Jankovic, Dmitrasinovic and Suvakov (PRL 2016) say that the published BHH satellites lie on
+**Not the relation of the PRL type (the R family only).** Jankovic and Dmitrasinovic (PRL 2016) say that the published BHH satellites lie on
 the same curve of L against T/k as the BHH family itself (see "Where the stable orbits sit on the BHH curve" in `docs/results.md`). That was not
 tested here: the BHH family (Broucke's A1, orbit 11 of Henon 1976) was not traced, and nothing is said about the CPC satellites. For the R family: the
 zeros of n = 5 to 36 do not lie on the curve of T* against L* of the parent (the R family at the L* of the zero), 0 of 32 within 1e-3; the relative
@@ -201,3 +227,25 @@ instead the T* of the member with nu = 1/n minus delta_n / n: relative differenc
 for 23 of the 32 (n >= 14), while the L* of the zero is 0.02 to 0.96 below that of the member. So for the R satellites the period is that of the
 repeat at matching nu and not that of the family at matching L*; whether the BHH satellites behave like this was not tested, and this is not a test of
 the published statement.
+
+**Out of sample, n = 37 to 56 (2026-10-11).** The three formulas, fitted on n <= 20 only, against the 20 zeros of n = 37 to 56
+(`tools/satellite-relations.mjs`, section 5; the predictions for n = 37 to 58 and the expected errors, from the trend of the errors on n = 28 to 36,
+were written down before the run in `docs/rules/rules-test1-test2.txt`; bounds 0.005 for T* and 1e-3 for L*). Of the three only B had been written
+down before the zeros for n >= 21 were known, so this is the first out of sample test of the other two. B: the T* of the zero is 2.9e-3 to 3.9e-3
+above B, which holds for all 20 (largest 3.9e-3 at n = 53); the error grows by 3.8e-5 per n, about half of the trend of n = 28 to 36 (9e-5), and the
+expectation that B reaches the bound at the end was not met. The L* fit: error -5.4e-4 at n = 37 to -9.0e-4 at n = 56, holds (the expectation was a
+crossing of 1e-3 at n = 56; the trend now puts it near n = 61). The sqrt(n) form: error +2.0e-3 at n = 37, zero at n = 42 to 43, then negative and
+growing, -5.5e-3 at n = 50 and -1.3e-2 at n = 56: it holds up to n = 49 and fails from n = 50. The expectation written down for it (holds for all n)
+was wrong, and the form is not a law: a fit on n = 8 to 20 that was as good as B for n <= 49 leaves the data beyond. The largest multiplier grows by
+1.26 per n at n = 37 and by 1.60 per n at n = 56. So B and the L* fit survive an extension of 20 values of n beyond the data they were fitted on and
+compared with; whether they hold beyond n = 56 was not tested (n = 57 and 58 are undecided).
+
+**Predictor B for k > 1 (test 2 of the same rules).** B in the form T*_zero = n T*_member - delta_n, with delta_n = a + b / n exactly as fitted on k =
+1 (n = 8 to 20, no refit), applied to the ten zeros with k > 1 whose closure tier is reliable (`tools/satellite-test2.mjs`, bound 0.005): it holds for
+0 of 10, as expected in advance (errors from -0.012 for 2-9-upper to -4.0 for 5-12-upper). The reason is the size of the rotation excess: eps is
+0.0045 to 0.48 for these zeros (0.001 to 0.007 for k = 1), so delta is about 8 eps, 0.036 to 4.0 and of either sign (seven of the ten have delta < 0,
+the zero is longer than the n fold repeat), while a + b / n is 0.035 to 0.09. The sqrt(n) form cannot be applied to k > 1: it is a function of n alone
+and zeros of the same n have different T* (n = 9: 33.745 for k = 2 and 49.263 for k = 4). The heuristic delta = 8 |eps|, tried as a variant after the
+data were seen, holds for the three zeros with delta > 0 (relative errors 0.6 %, 1.7 % and 5.1 %) and not for the seven with delta < 0; |delta| /
+|eps| is 7.5 to 8.3 for all ten, and whether delta = C eps holds with eps signed has not been tested (the numbers that would test it have been looked
+at).

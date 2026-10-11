@@ -146,8 +146,10 @@ Found in an independent review of the code and in my own checks; what is fixed a
 - **Near never means the same orbit.** The comparison with repeats up to 12 uses the primitive T* of an orbit that returns rotated, also for numbers
   of repeats that are not whole turns (for t41, rotation 2/9 of a turn, the 10 fold repeat does not close, but its T* is compared). A pair within 5e-3
   says that the invariants are close and nothing more.
-- **A zero of the continuation can be left unconverged.** The bisection for the zero of theta in `tools/branch-point.mjs` stops when the corrector
-  fails and keeps the last midpoint; four zeros (n = 24, 26, 27, 28 of the upper branch of the R satellites) were left at 4e-6 to 5e-5 turns of
-  rotation, which moves L* by up to 1e-3 and T* by up to 4e-4, while the closure of the stored zero is unchanged. The stored files were not rerun; the
-  tool prints the rotation left at a zero, and the orbits of `data/satellite-candidates.json` (refined to 30 digits) are not affected. A zero taken
-  from `data/branch-points/` should be checked for its rotation (`turns`) before its T* and L* are used to more than four digits.
+- **A zero of the continuation can be left unconverged (fixed in 0.2.24 for new runs).** Until version 0.2.23 the bisection for the zero of theta in
+  `tools/branch-point.mjs` stopped when the corrector failed at a midpoint and kept the last midpoint: 4 of the 32 zeros of n <= 36 (n = 24, 26, 27,
+  28) and 15 of the 20 of n = 37 to 56 (n = 42 to 56) were left at a rotation above 1e-9 turns, up to 5e-5, which moves L*
+  by up to 1e-3 and T* by up to 4e-4, while the closure of the stored zero is unchanged. Since 0.2.24 the bisection retries at other points of the
+  chord (`src/zero.js`, `test/zero.test.js`); the stored files were not regenerated, the tool prints the rotation left at a zero, and the 30 digit
+  orbits of `data/satellite-candidates.json` are not affected. A zero taken from `data/branch-points/` should be checked for its rotation (`turns`)
+  before its T* and L* are used to more than four digits.

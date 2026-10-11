@@ -37,10 +37,12 @@ path):
   next to the members with nu = 1/3 and their satellite curves; `satellite-sequence.mjs` prints the table of the zeros of the upper branch (T* and L*
   of the 30 digit orbits where there are some, largest multiplier, closure, the rotation left at the stored zero, closest approach, the prediction of
   T* from the R member); `satellite-relations.mjs` prints the empirical relations of `docs/r-family-satellites.md` (fits on n <= 20, tests on n > 20);
-  `satellite-tests.mjs` prints their robustness (leave one out, trailing windows), the table of the heuristic delta_n = C eps_n and the comparison
-  with the relation of the PRL type, with the rules in `docs/rules/rules-relation-tests.txt`; `satellite-candidates.mjs` and `satellite-check.py`
-  recompute the numbers of the 34 orbits of the satellite curves of `data/satellite-candidates.json` and compare them with other lists (the second
-  needs `pip install rebound numpy`)
+  `satellite-test2.mjs` applies predictor B to the zeros with k > 1; `satellite-tests.mjs` prints their robustness (leave one out, trailing windows),
+  the table of the heuristic delta_n = C eps_n and the comparison with the relation of the PRL type, with the rules in
+  `docs/rules/rules-relation-tests.txt` (the rules of the out of sample run of n = 37 to 56 and of test 2 are in `docs/rules/rules-test1-test2.txt`;
+  the bisection for the zero of theta is `src/zero.js`, tested in `test/zero.test.js`); `satellite-candidates.mjs` and `satellite-check.py` recompute
+  the numbers of the 54 orbits of the satellite curves of `data/satellite-candidates.json` and compare them with other lists (the second needs `pip
+  install rebound numpy`)
 - `choreo-test.mjs` looks for a cyclic return after T/n (n up to 60) of the 102 orbits, a rotating choreography has one; a plain run prints the
   counts, `--write` stores `data/choreo-test.json`
 - `closure-stored.py` integrates the 30 digit start values stored in `data/refined` for one period (about 6 minutes; `--write` stores
