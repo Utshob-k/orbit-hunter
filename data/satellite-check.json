@@ -272,6 +272,166 @@
    "largestMultiplier": 24.624470337072033,
    "largestMultiplierMine": 24.62446998,
    "symplecticDeviation": 6.654808454673513e-10
+  },
+  {
+   "label": "T* 74.0621, zero of theta on the satellite curve of the member with nu = 1/37 (upper branch, sense +1)",
+   "closure": 2.847842560797499e-13,
+   "closureEps1e12": 1.0079193399948755e-12,
+   "largestMultiplier": 25.867847331658975,
+   "largestMultiplierMine": 25.86784579,
+   "symplecticDeviation": 2.1737185795262498e-09
+  },
+  {
+   "label": "T* 75.7489, zero of theta on the satellite curve of the member with nu = 1/38 (upper branch, sense +1)",
+   "closure": 1.2083570605048086e-13,
+   "closureEps1e12": 9.501989256902803e-14,
+   "largestMultiplier": 27.131481383414442,
+   "largestMultiplierMine": 27.13148099,
+   "symplecticDeviation": 1.0114188785774969e-09
+  },
+  {
+   "label": "T* 77.4338, zero of theta on the satellite curve of the member with nu = 1/39 (upper branch, sense +1)",
+   "closure": 2.468618661993033e-13,
+   "closureEps1e12": 3.713921071686359e-13,
+   "largestMultiplier": 28.415213025354216,
+   "largestMultiplierMine": 28.41521121,
+   "symplecticDeviation": 5.186678528570774e-09
+  },
+  {
+   "label": "T* 79.1169, zero of theta on the satellite curve of the member with nu = 1/40 (upper branch, sense -1)",
+   "closure": 4.106211141063676e-13,
+   "closureEps1e12": 1.6024384717070912e-13,
+   "largestMultiplier": 29.71888648107707,
+   "largestMultiplierMine": 29.71888605,
+   "symplecticDeviation": 5.086896240377837e-10
+  },
+  {
+   "label": "T* 80.7982, zero of theta on the satellite curve of the member with nu = 1/41 (upper branch, sense -1)",
+   "closure": 7.831174074009144e-13,
+   "closureEps1e12": 4.439255140004898e-13,
+   "largestMultiplier": 31.04234967302423,
+   "largestMultiplierMine": 31.04234759,
+   "symplecticDeviation": 2.557066827970005e-09
+  },
+  {
+   "label": "T* 82.4777, zero of theta on the satellite curve of the member with nu = 1/42 (upper branch, sense -1)",
+   "closure": 6.078968538656609e-14,
+   "closureEps1e12": 6.409123496730221e-14,
+   "largestMultiplier": 32.38545419743144,
+   "largestMultiplierMine": 32.38545374,
+   "symplecticDeviation": 1.147220447700095e-09
+  },
+  {
+   "label": "T* 84.1559, zero of theta on the satellite curve of the member with nu = 1/43 (upper branch, sense -1)",
+   "closure": 4.0297122900007144e-14,
+   "closureEps1e12": 5.851402433454966e-13,
+   "largestMultiplier": 33.748055260558054,
+   "largestMultiplierMine": 33.74805289,
+   "symplecticDeviation": 8.985238827796758e-10
+  },
+  {
+   "label": "T* 85.8324, zero of theta on the satellite curve of the member with nu = 1/44 (upper branch, sense +1)",
+   "closure": 7.603416159371561e-14,
+   "closureEps1e12": 2.7780381751203e-13,
+   "largestMultiplier": 35.13001162060262,
+   "largestMultiplierMine": 35.13001115,
+   "symplecticDeviation": 7.382022246215385e-10
+  },
+  {
+   "label": "T* 87.5073, zero of theta on the satellite curve of the member with nu = 1/45 (upper branch, sense -1)",
+   "closure": 7.467657628849138e-13,
+   "closureEps1e12": 1.2020975243695364e-12,
+   "largestMultiplier": 36.53118549471122,
+   "largestMultiplierMine": 36.53118282,
+   "symplecticDeviation": 2.402119441364393e-09
+  },
+  {
+   "label": "T* 89.1808, zero of theta on the satellite curve of the member with nu = 1/46 (upper branch, sense -1)",
+   "closure": 2.493743268604443e-13,
+   "closureEps1e12": 2.0658715458413603e-13,
+   "largestMultiplier": 37.95144247962376,
+   "largestMultiplierMine": 37.951442,
+   "symplecticDeviation": 1.134788905230584e-09
+  },
+  {
+   "label": "T* 90.8529, zero of theta on the satellite curve of the member with nu = 1/47 (upper branch, sense +1)",
+   "closure": 3.7862840238926607e-13,
+   "closureEps1e12": 8.193822046972523e-13,
+   "largestMultiplier": 39.39065143369862,
+   "largestMultiplierMine": 39.39064845,
+   "symplecticDeviation": 6.599976977751512e-09
+  },
+  {
+   "label": "T* 92.5236, zero of theta on the satellite curve of the member with nu = 1/48 (upper branch, sense +1)",
+   "closure": 6.391111774828918e-14,
+   "closureEps1e12": 5.05509609846066e-13,
+   "largestMultiplier": 40.84868439337451,
+   "largestMultiplierMine": 40.84868391,
+   "symplecticDeviation": 2.124865846313476e-09
+  },
+  {
+   "label": "T* 94.1931, zero of theta on the satellite curve of the member with nu = 1/49 (upper branch, sense -1)",
+   "closure": 7.89016519976099e-13,
+   "closureEps1e12": 8.527722694254031e-13,
+   "largestMultiplier": 42.325416471577974,
+   "largestMultiplierMine": 42.32541318,
+   "symplecticDeviation": 9.903273955892428e-10
+  },
+  {
+   "label": "T* 95.8613, zero of theta on the satellite curve of the member with nu = 1/50 (upper branch, sense -1)",
+   "closure": 6.039613253960852e-14,
+   "closureEps1e12": 1.8710464370278324e-13,
+   "largestMultiplier": 43.82072575851497,
+   "largestMultiplierMine": 43.8207253,
+   "symplecticDeviation": 9.777459906557784e-10
+  },
+  {
+   "label": "T* 97.5283, zero of theta on the satellite curve of the member with nu = 1/51 (upper branch, sense +1)",
+   "closure": 1.560555734217512e-13,
+   "closureEps1e12": 4.2801843695455783e-13,
+   "largestMultiplier": 45.33449320769148,
+   "largestMultiplierMine": 45.33448962,
+   "symplecticDeviation": 8.318075449370961e-09
+  },
+  {
+   "label": "T* 99.1939, zero of theta on the satellite curve of the member with nu = 1/52 (upper branch, sense +1)",
+   "closure": 1.0686443495818238e-13,
+   "closureEps1e12": 8.900103004417192e-14,
+   "largestMultiplier": 46.86660255425435,
+   "largestMultiplierMine": 46.86660212,
+   "symplecticDeviation": 1.3329532189325498e-09
+  },
+  {
+   "label": "T* 100.8586, zero of theta on the satellite curve of the member with nu = 1/53 (upper branch, sense -1)",
+   "closure": 1.4560075807518151e-12,
+   "closureEps1e12": 1.637971215029253e-12,
+   "largestMultiplier": 48.416940222358285,
+   "largestMultiplierMine": 48.4169364,
+   "symplecticDeviation": 1.529391623793878e-08
+  },
+  {
+   "label": "T* 102.5221, zero of theta on the satellite curve of the member with nu = 1/54 (upper branch, sense +1)",
+   "closure": 4.1581532905689744e-13,
+   "closureEps1e12": 4.506886302208253e-13,
+   "largestMultiplier": 49.98539520324948,
+   "largestMultiplierMine": 49.98539481,
+   "symplecticDeviation": 2.2057901639297514e-09
+  },
+  {
+   "label": "T* 104.1845, zero of theta on the satellite curve of the member with nu = 1/55 (upper branch, sense -1)",
+   "closure": 7.932497971661092e-13,
+   "closureEps1e12": 2.87866216003809e-13,
+   "largestMultiplier": 51.57185901887152,
+   "largestMultiplierMine": 51.57185493,
+   "symplecticDeviation": 7.22550137159121e-09
+  },
+  {
+   "label": "T* 105.8458, zero of theta on the satellite curve of the member with nu = 1/56 (upper branch, sense -1)",
+   "closure": 4.548312421899334e-13,
+   "closureEps1e12": 1.7836877010107264e-12,
+   "largestMultiplier": 53.17622559578566,
+   "largestMultiplierMine": 53.17622526,
+   "symplecticDeviation": 2.2492407200658397e-09
   }
  ]
 }

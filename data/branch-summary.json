@@ -4173,6 +4173,1006 @@
      "points": 701
     }
    ]
+  },
+  {
+   "k": 1,
+   "n": 37,
+   "branch": "upper",
+   "theta": 0.027057281142312258,
+   "Tstar": 2.0018603797515713,
+   "Lstar": 3.6944612182801135,
+   "singular": [
+    1.0722304189702803e-11,
+    0.00004817950558496253
+   ],
+   "angle": 65.76771958782462,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 388,
+     "Tstar": 74.06214062147171,
+     "Lstar": 2.7094571643760372,
+     "closure": 4.702064694657139e-9,
+     "minDist": 0.06940348992272377,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 620
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 44,
+     "Tstar": 74.05584002270669,
+     "Lstar": 3.6954246726033473,
+     "repeats": 37,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.318944953254686e-13,
+     "primitiveTstar": 2.0015091897651955,
+     "rotation": "1/37"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 38,
+   "branch": "upper",
+   "theta": 0.026344248032002537,
+   "Tstar": 1.9935588313482318,
+   "Lstar": 3.7175849478781884,
+   "singular": [
+    9.783293063813723e-12,
+    0.00004556460828199546
+   ],
+   "angle": 65.85860669870905,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 391,
+     "Tstar": 75.74893370093109,
+     "Lstar": 2.7101368954110865,
+     "closure": 3.58648426350771e-9,
+     "minDist": 0.06756720775269358,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 620
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 43,
+     "Tstar": 75.74260387800437,
+     "Lstar": 3.718526317699059,
+     "repeats": 38,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.3589129821411916e-13,
+     "primitiveTstar": 1.9932264178899537,
+     "rotation": "1/38"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 39,
+   "branch": "upper",
+   "theta": 0.025667836912212284,
+   "Tstar": 1.9856348840998739,
+   "Lstar": 3.7403593455587467,
+   "singular": [
+    1.2055408495476412e-11,
+    0.00004323853885837327
+   ],
+   "angle": 65.9475318274891,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 394,
+     "Tstar": 77.43382927671354,
+     "Lstar": 2.710783215860258,
+     "closure": 5.546430393912233e-9,
+     "minDist": 0.06667912190655588,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 631
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 43,
+     "Tstar": 77.42747198815819,
+     "Lstar": 3.741279616122189,
+     "repeats": 39,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.3655743202889425e-13,
+     "primitiveTstar": 1.985319794540928,
+     "rotation": "1/39"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 40,
+   "branch": "upper",
+   "theta": 0.025025296749675005,
+   "Tstar": 1.9780620859029074,
+   "Lstar": 3.7627974253559078,
+   "singular": [
+    1.0856259812620318e-11,
+    0.000041079628246432366
+   ],
+   "angle": 66.03468471365994,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 622
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 398,
+     "Tstar": 79.11690364674878,
+     "Lstar": 2.711398540825498,
+     "closure": 4.193350520693558e-9,
+     "minDist": 0.06499857916021778,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 42,
+     "Tstar": 79.11052051073801,
+     "Lstar": 3.763697518901477,
+     "repeats": 40,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.4033219031261979e-13,
+     "primitiveTstar": 1.9777630127226105,
+     "rotation": "1/40"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 41,
+   "branch": "upper",
+   "theta": 0.02441414533754676,
+   "Tstar": 1.970816451792255,
+   "Lstar": 3.784911441646499,
+   "singular": [
+    1.8838041614561474e-12,
+    0.00003912006425714352
+   ],
+   "angle": 66.11999107172127,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 631
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 399,
+     "Tstar": 80.79822830719877,
+     "Lstar": 2.711985090597365,
+     "closure": 6.36346065326466e-9,
+     "minDist": 0.06419942645503297,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 42,
+     "Tstar": 80.79182081926625,
+     "Lstar": 3.785792221483651,
+     "repeats": 41,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.4166445794216997e-13,
+     "primitiveTstar": 1.9705322150606652,
+     "rotation": "0.024390"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 42,
+   "branch": "upper",
+   "theta": 0.023832137209240534,
+   "Tstar": 1.9638761791151054,
+   "Lstar": 3.80671295000799,
+   "singular": [
+    9.784586951219997e-12,
+    0.00003728530046403803
+   ],
+   "angle": 66.20352924436482,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 618
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 403,
+     "Tstar": 82.47766527073756,
+     "Lstar": 2.7119030167254334,
+     "closure": 4.985962404674521e-9,
+     "minDist": 0.06259642909558717,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 41,
+     "Tstar": 82.47143988765761,
+     "Lstar": 3.8075752249314183,
+     "repeats": 42,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.41886502547095e-13,
+     "primitiveTstar": 1.9636057115959509,
+     "rotation": "0.023810"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 43,
+   "branch": "upper",
+   "theta": 0.02327723616508973,
+   "Tstar": 1.957221403079074,
+   "Lstar": 3.8282128571082255,
+   "singular": [
+    7.472357351097942e-12,
+    0.00003560294007964703
+   ],
+   "angle": 66.28533627145264,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 622
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 408,
+     "Tstar": 84.15589300301366,
+     "Lstar": 2.7130802527413707,
+     "closure": 7.412546747181308e-9,
+     "minDist": 0.06193137665223482,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 41,
+     "Tstar": 84.14944066743861,
+     "Lstar": 3.8290573878647702,
+     "repeats": 43,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.4455103780619538e-13,
+     "primitiveTstar": 1.9569637364088834,
+     "rotation": "0.023256"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 44,
+   "branch": "upper",
+   "theta": 0.02274759131058825,
+   "Tstar": 1.9508339819291207,
+   "Lstar": 3.8494214751441236,
+   "singular": [
+    4.536703105781609e-12,
+    0.0000340209439651451
+   ],
+   "angle": 66.36552339796766,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 473,
+     "Tstar": 85.83235517610466,
+     "Lstar": 2.713591528005685,
+     "closure": 5.860500727061324e-9,
+     "minDist": 0.060504891463883645,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 628
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 41,
+     "Tstar": 85.82588240487415,
+     "Lstar": 3.8502489755525393,
+     "repeats": 44,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.454392162258955e-13,
+     "primitiveTstar": 1.950588236397324,
+     "rotation": "0.022727"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 45,
+   "branch": "upper",
+   "theta": 0.022241516590735488,
+   "Tstar": 1.9446973136423573,
+   "Lstar": 3.8703485595172156,
+   "singular": [
+    3.245730749814652e-12,
+    0.000032560039825710865
+   ],
+   "angle": 66.44405927894937,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 629
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 488,
+     "Tstar": 87.5073128508912,
+     "Lstar": 2.714080364631516,
+     "closure": 8.582809891484523e-9,
+     "minDist": 0.05984794973529176,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 40,
+     "Tstar": 87.50082094491607,
+     "Lstar": 3.8711597025482836,
+     "repeats": 45,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.4810375148499588e-13,
+     "primitiveTstar": 1.9444626876139808,
+     "rotation": "0.022222"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 46,
+   "branch": "upper",
+   "theta": 0.021757472723558352,
+   "Tstar": 1.9387961726054128,
+   "Lstar": 3.891003354143982,
+   "singular": [
+    7.810695525576227e-12,
+    0.000031183118702469596
+   ],
+   "angle": 66.5210233178051,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 634
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 435,
+     "Tstar": 89.18081940406876,
+     "Lstar": 2.714550084528059,
+     "closure": 6.6762659850638934e-9,
+     "minDist": 0.05852597674551103,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 40,
+     "Tstar": 89.1743089854502,
+     "Lstar": 3.89179877340821,
+     "repeats": 46,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.496580637194711e-13,
+     "primitiveTstar": 1.9385719344719308,
+     "rotation": "0.021739"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 47,
+   "branch": "upper",
+   "theta": 0.021294051619677536,
+   "Tstar": 1.93311656880685,
+   "Lstar": 3.911394625277511,
+   "singular": [
+    2.154021035078384e-12,
+    0.000029865499803352872
+   ],
+   "angle": 66.59673280386932,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 422,
+     "Tstar": 90.85292444202084,
+     "Lstar": 2.715001146164136,
+     "closure": 8.671677063701867e-9,
+     "minDist": 0.05792663692498187,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 623
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 39,
+     "Tstar": 90.84639632577884,
+     "Lstar": 3.912174917824103,
+     "repeats": 47,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.5143442055887135e-13,
+     "primitiveTstar": 1.9329020494481886,
+     "rotation": "0.021277"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 48,
+   "branch": "upper",
+   "theta": 0.02084996270829595,
+   "Tstar": 1.9276456235302464,
+   "Lstar": 3.93153069461437,
+   "singular": [
+    9.451669665004603e-13,
+    0.00002873167904035164
+   ],
+   "angle": 66.67323873552176,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 447,
+     "Tstar": 92.52355700894232,
+     "Lstar": 2.7150433262985554,
+     "closure": 8.057848477570931e-9,
+     "minDist": 0.05666628146037424,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 644
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 39,
+     "Tstar": 92.51713006103809,
+     "Lstar": 3.932296425713852,
+     "repeats": 48,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.538769112130467e-13,
+     "primitiveTstar": 1.9274402095349976,
+     "rotation": "0.020833"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 49,
+   "branch": "upper",
+   "theta": 0.02042402090123615,
+   "Tstar": 1.9223714596185644,
+   "Lstar": 3.951419470261826,
+   "singular": [
+    7.582873337206854e-12,
+    0.00002757327877069103
+   ],
+   "angle": 66.7514602769565,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 655
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 443,
+     "Tstar": 94.19311496904119,
+     "Lstar": 2.715847912332305,
+     "closure": 1.1647674824360171e-8,
+     "minDist": 0.05614820342148697,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 39,
+     "Tstar": 94.18655582729633,
+     "Lstar": 3.9521710947227207,
+     "repeats": 49,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.56097357262297e-13,
+     "primitiveTstar": 1.922174608664949,
+     "rotation": "0.020408"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 50,
+   "branch": "upper",
+   "theta": 0.02001513601518387,
+   "Tstar": 1.9172831044708607,
+   "Lstar": 3.9710684757691648,
+   "singular": [
+    5.47227254321336e-12,
+    0.000026509909358896702
+   ],
+   "angle": 66.81846814693358,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 651
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 441,
+     "Tstar": 95.86128767705135,
+     "Lstar": 2.7162462892400514,
+     "closure": 9.260542035987322e-9,
+     "minDist": 0.05500120047552985,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 38,
+     "Tstar": 95.85471075313409,
+     "Lstar": 3.9718068224890395,
+     "repeats": 50,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.567634910770721e-13,
+     "primitiveTstar": 1.9170942150712358,
+     "rotation": "0.020000"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 51,
+   "branch": "upper",
+   "theta": 0.019622303527696908,
+   "Tstar": 1.9123704053181876,
+   "Lstar": 3.990484872108058,
+   "singular": [
+    5.7924732092190916e-12,
+    0.00002551547697090533
+   ],
+   "angle": 66.88779534768358,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 441,
+     "Tstar": 97.52832198653458,
+     "Lstar": 2.7169318621873715,
+     "closure": 1.3150465814513173e-8,
+     "minDist": 0.05451907702899969,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 669
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 38,
+     "Tstar": 97.52164517814586,
+     "Lstar": 3.9912099478016696,
+     "repeats": 51,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.5898393712632242e-13,
+     "primitiveTstar": 1.9121891210857505,
+     "rotation": "0.019608"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 52,
+   "branch": "upper",
+   "theta": 0.01924459625331024,
+   "Tstar": 1.9076239523626235,
+   "Lstar": 4.009675484034423,
+   "singular": [
+    9.296188678544214e-12,
+    0.000024576475286730115
+   ],
+   "angle": 66.95642163652586,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 441,
+     "Tstar": 99.19388942116191,
+     "Lstar": 2.716656720720729,
+     "closure": 1.0036030802139529e-8,
+     "minDist": 0.05339823284446468,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 674
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 37,
+     "Tstar": 99.18739014166465,
+     "Lstar": 4.010387825530216,
+     "repeats": 52,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.6187051699034782e-13,
+     "primitiveTstar": 1.9074498104066844,
+     "rotation": "0.019231"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 53,
+   "branch": "upper",
+   "theta": 0.01888115704451052,
+   "Tstar": 1.903035011063237,
+   "Lstar": 4.028646822172236,
+   "singular": [
+    4.6201113388069245e-12,
+    0.000023696442245114662
+   ],
+   "angle": 67.02398589877156,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 678
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 454,
+     "Tstar": 100.85862015445625,
+     "Lstar": 2.7174478901665258,
+     "closure": 1.5487900555031617e-8,
+     "minDist": 0.052964933776828385,
+     "tier": "weak",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 37,
+     "Tstar": 100.85198028437758,
+     "Lstar": 4.0293470714271,
+     "repeats": 53,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.6275869541004795e-13,
+     "primitiveTstar": 1.9028675524689327,
+     "rotation": "0.018868"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 54,
+   "branch": "upper",
+   "theta": 0.018531192369355357,
+   "Tstar": 1.8985954628192632,
+   "Lstar": 4.047405098500834,
+   "singular": [
+    9.14804610234433e-12,
+    0.000022867728519380055
+   ],
+   "angle": 67.090451728564,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 551,
+     "Tstar": 102.5220797353083,
+     "Lstar": 2.717701915433581,
+     "closure": 1.2194714288688427e-8,
+     "minDist": 0.05195178682376108,
+     "tier": "reliable",
+     "mine": []
+    },
+    {
+     "sense": -1,
+     "end": "stopped by a collapse of the step",
+     "points": 682
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "rotation 0 reached",
+     "points": 37,
+     "Tstar": 102.51545202496247,
+     "Lstar": 4.048093729562243,
+     "repeats": 54,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.6475709685437323e-13,
+     "primitiveTstar": 1.8984342967240206,
+     "rotation": "0.018519"
+    },
+    {
+     "sense": -1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 55,
+   "branch": "upper",
+   "theta": 0.018193966455969046,
+   "Tstar": 1.894297750137923,
+   "Lstar": 4.0659562482391705,
+   "singular": [
+    2.7564456106665056e-12,
+    0.000022092699656864483
+   ],
+   "angle": 67.15574548090831,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped by a collapse of the step",
+     "points": 644
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 433,
+     "Tstar": 104.18448026438344,
+     "Lstar": 2.718034312933894,
+     "closure": 1.514245292554798e-8,
+     "minDist": 0.051521675335782384,
+     "tier": "weak",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 36,
+     "Tstar": 104.17784081654156,
+     "Lstar": 4.066633512854217,
+     "repeats": 55,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.6986412276764895e-13,
+     "primitiveTstar": 1.8941425602558344,
+     "rotation": "0.018182"
+    }
+   ]
+  },
+  {
+   "k": 1,
+   "n": 56,
+   "branch": "upper",
+   "theta": 0.017868796121375763,
+   "Tstar": 1.8901348282563433,
+   "Lstar": 4.084305947058129,
+   "singular": [
+    4.233954858151584e-12,
+    0.00002137096247483096
+   ],
+   "angle": 67.22007006772579,
+   "satellite": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 467,
+     "Tstar": 105.84582654353753,
+     "Lstar": 2.7183539324310977,
+     "closure": 1.380262313744199e-8,
+     "minDist": 0.05057492169193254,
+     "tier": "reliable",
+     "mine": []
+    }
+   ],
+   "control": [
+    {
+     "sense": 1,
+     "end": "stopped at the step limit of 700 steps",
+     "points": 701
+    },
+    {
+     "sense": -1,
+     "end": "rotation 0 reached",
+     "points": 36,
+     "Tstar": 105.83917324923969,
+     "Lstar": 4.084972456724618,
+     "repeats": 56,
+     "primitiveCloses": true,
+     "primitiveResidual": 1.7141843500212417e-13,
+     "primitiveTstar": 1.8899852365063368,
+     "rotation": "0.017857"
+    }
+   ]
   }
  ]
 }
