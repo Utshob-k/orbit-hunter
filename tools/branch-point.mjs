@@ -164,7 +164,7 @@ result.offPoint = [0, 0.5, 1].map(smallestAt).filter(Boolean);
 console.log('   control, the same matrix at other members: ' + result.offPoint.map((o) => `nu - k/n = ${o.nuMinusTarget.toExponential(1)}: smallest singular value ${o.smallest[1].toExponential(1)}`).join('; '));
 for (const sgn of [1, -1]) {
   const r = follow(vS, vR, sgn); result.satellite.push(r);
-  console.log(`   satellite, sense ${sgn}: ${r.why} after ${r.points} points (path length ${r.pathLength.toFixed(3)})` + (r.zero ? `: theta = 0 at T* ${r.zero.Tstar.toFixed(8)}, L* ${r.zero.Lstar.toFixed(8)}, closure ${r.zero.closure.toExponential(1)}, closest approach ${r.zero.minDist.toFixed(3)}` : ''));
+  console.log(`   satellite, sense ${sgn}: ${r.why} after ${r.points} points (path length ${r.pathLength.toFixed(3)})` + (r.zero ? `: theta = 0 at T* ${r.zero.Tstar.toFixed(8)}, L* ${r.zero.Lstar.toFixed(8)}, closure ${r.zero.closure.toExponential(1)}, closest approach ${r.zero.minDist.toFixed(3)}, rotation left ${r.zero.turns.toExponential(1)} turns` + (Math.abs(r.zero.turns) > 1e-9 ? ' (the bisection stopped early: refine the orbit before using T*, L*)' : '') : ''));
 }
 if (control) for (const sgn of [1, -1]) {
   const r = follow(vR, vS, sgn); result.control.push(r);

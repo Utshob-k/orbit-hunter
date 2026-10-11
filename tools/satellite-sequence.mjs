@@ -7,7 +7,7 @@
 //   the largest multiplier from n = 20 on: m(n) = m(20) + 0.85 (n - 20)
 // node tools/satellite-sequence.mjs
 import fs from 'fs';
-import { perpInitial } from '../src/perp.js';
+import { perpInitial, perpInfo } from '../src/perp.js';
 
 const read = (f) => JSON.parse(fs.readFileSync(new URL('../data/' + f, import.meta.url), 'utf8'));
 const trace = read('r-family-trace.json').curve, cands = read('satellite-candidates.json').orbits;
@@ -29,9 +29,12 @@ for (let n = 5; n <= 80; n++) {
   const d = JSON.parse(fs.readFileSync(f, 'utf8')), zs = d.satellite.filter((s) => s.zero);
   const row = { n, reached: zs.length, senses: d.satellite.map((s) => s.why) };
   if (zs.length) {
-    const z = zs[0].zero, c = cands.find((o) => o.multiplier !== undefined && parseFloat(o.label.slice(3)) === Number(z.Tstar.toFixed(4)));      // the label starts with T* to 4 digits
-    Object.assign(row, { T: z.Tstar, L: z.Lstar, closure: Math.max(...zs.map((s) => s.zero.closure)), mult: c ? c.multiplier : null, minDistUnits: Math.min(...zs.map((s) => s.zero.minDist)), nT: memberT(n) });
-    row.scaleFree = z.minDist * Math.abs(energy(perpInitial(z.u1, z.u2, z.lam)));
+    const z = zs[0].zero, c = cands.find((o) => o.n === n && o.label.includes(`nu = 1/${n} (upper branch`));      // the orbit refined to 30 digits, where there is one (not for n = 5, 6, 8)
+    // T*, L* and the scale free closest approach come from the refined orbit: the stored zero of n = 24, 26, 27 and 28 was left at a rotation of 4e-6 to 5e-5 turns instead of 1e-11, which
+    // moves L* by up to 1e-3 and T* by up to 4e-4 (the other zeros are within 1e-8)
+    const i = c ? perpInfo(Number(c.u1), Number(c.u2), Number(c.lam), Number(c.t)) : null, T = i ? i.ts : z.Tstar, L = i ? Math.abs(i.ls) : z.Lstar, md = i ? i.minDist : z.minDist;
+    Object.assign(row, { T, L, closure: Math.max(...zs.map((s) => s.zero.closure)), rot: Math.max(...zs.map((s) => Math.abs(s.zero.turns))), mult: c ? c.multiplier : null, minDistUnits: Math.min(...zs.map((s) => s.zero.minDist)), nT: memberT(n) });
+    row.scaleFree = md * Math.abs(energy(c ? perpInitial(Number(c.u1), Number(c.u2), Number(c.lam)) : perpInitial(z.u1, z.u2, z.lam)));
   }
   rows.push(row);
 }
@@ -40,9 +43,9 @@ const dl = (r) => r.nT - r.T, X = fit.map((r) => 1 / r.n), Y = fit.map(dl), mx =
 const b1 = X.reduce((s, x, i) => s + (x - mx) * (Y[i] - my), 0) / X.reduce((s, x) => s + (x - mx) ** 2, 0), a1 = my - b1 * mx;
 const m20 = (rows.find((r) => r.n === 20) || {}).mult;
 console.log(`delta(n) = ${a1.toFixed(4)} + ${b1.toFixed(4)} / n (fit on n = 8 to 20), largest multiplier at n = 20: ${m20 && m20.toFixed(3)}`);
-console.log('n | zero reached in | T* | L* | B (T*) | zero - B | largest multiplier | linear from n = 20 | closure (double) | closest approach (start units) | closest approach x |E|');
+console.log('n | zero reached in | T* | L* | B (T*) | zero - B | largest multiplier | linear from n = 20 | closure (double) | closest approach (start units) | closest approach x |E| | rotation of the stored zero (turns)');
 for (const r of rows) {
   if (!r.T) { console.log(`${r.n} | no rotation 0 (${r.senses.join('; ')})`); continue; }
   const B = r.nT - (a1 + b1 / r.n);
-  console.log([r.n, r.reached + ' of 2 senses', r.T.toFixed(5), r.L.toFixed(5), B.toFixed(3), (r.T - B).toFixed(4), r.mult === null ? '?' : r.mult.toFixed(3), r.n >= 20 && m20 ? (m20 + 0.85 * (r.n - 20)).toFixed(2) : '', r.closure.toExponential(1), r.minDistUnits.toFixed(3), r.scaleFree.toFixed(4)].join(' | '));
+  console.log([r.n, r.reached + ' of 2 senses', r.T.toFixed(5), r.L.toFixed(5), B.toFixed(3), (r.T - B).toFixed(4), r.mult === null ? '?' : r.mult.toFixed(3), r.n >= 20 && m20 ? (m20 + 0.85 * (r.n - 20)).toFixed(2) : '', r.closure.toExponential(1), r.minDistUnits.toFixed(3), r.scaleFree.toFixed(4), r.rot.toExponential(1)].join(' | '));
 }
