@@ -1,14 +1,9 @@
-// the orbits of data/satellite-candidates.json (periodic orbits with rotation angle 0 on satellite curves of Broucke's R family, refined to 30 digits): recomputes from the values
-// T*, L*, rotation angle, closest approach, the syzygy word and the number of alignments, the repeat test (src/covers.js), the closure tiers (double precision) and the multipliers,
-// and compares them with other lists. a hit is T* and L* within HIT (relative), the candidate or the entry repeated up to 12 times (L* does not change, T* and the alignments are
-// multiplied), and the same number of alignments where the list has it; "near" is NEAR without the alignments. the tolerances were fixed before the comparison was run.
-//   my 85 and 17 (data/orbit-table.json, data/perp-arc-orbits.json); the 99 satellites of Jankovic et al. 2020 (data/cpc-converted.json); the 9 rows of Davoust and Broucke 1982 whose
-//   rotation angle is a multiple of 2 pi (data/db82-rotation-multiple-2pi.json); the orbits 2 to 46 of Henon 1976 (data/henon1976-derived.json, relative periodic orbits: T* and L* only);
-//   the 18 rows of Li et al. 2025 (data/liao2025-scaled.json, the scale free numbers only); and, if the path of the atlas catalogue is given (https://data.threebodyorbits.com/catalogue.json,
-//   not stored here), the equal mass atlas entries: the rule of tools/compare-atlas-all.py.
-// a pair of orbits can agree in T* and L* to better than HIT and still be two orbits, so every orbit of my 102 within NEAR of a candidate at the same period (n = 1) is compared by its start values:
-// the configuration at the start and at the other collinear moment, scaled to the outer bodies at -1 and 1 (position of the middle body, the three velocities), up to the mirror and the sign of y.
-// node tools/satellite-candidates.mjs [catalogue.json] [--write]      --write stores the largest nontrivial multiplier and the closure tier of every candidate in data/satellite-candidates.json (tools/satellite-check.py reads the multiplier)
+// recomputes the orbits of data/satellite-candidates.json (rotation 0 on satellite curves of R, 30 digits): T*, L*, word, repeat test,
+// closure tiers, multipliers, and compares them with my 102 orbits, the CPC rows, the Davoust-Broucke rows, Henon 1976, Li et al. 2025 and,
+// if given, the atlas catalogue (not stored here). hit: T*, L* within HIT (relative), either repeated up to 12 times, same alignments;
+// near: without them (tolerances fixed before the comparison); near orbits are then compared by start values.
+// node tools/satellite-candidates.mjs [catalogue.json] [--write] (--write stores the multiplier and closure tier in
+// data/satellite-candidates.json)
 import fs from 'fs';
 import { perpInfo, perpInitial } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';

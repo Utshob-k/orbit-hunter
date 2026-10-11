@@ -1,14 +1,8 @@
-// follows a family of relative periodic orbits of the equal mass planar three body problem by pseudo arclength continuation, with a general (not mirror symmetric) start.
-// unknowns u = (y1, v1x, v1y, v2x, v2y, T, theta): the bodies start on the x axis at (y1, 0), (1, 0), (0, 0) (this fixes the scale), v3 = -v1 - v2, and the state after T must equal
-// the start turned by theta about the centre of mass (12 numbers, 6 of them independent). the solutions form a curve in u-space; L = y1 v1y + v2y is a function of u.
-// every accepted point is stored with its start values u, T*, L*, theta, the closest approach of the orbit and the residual. L* = |L| |E|^0.5, T* = T |E|^1.5.
-// the trace stops on: L* above lstarMax, a close approach (closest distance below 0.03), a step collapse (the arclength step stays below 5e-5 for 150 steps in a row, or below 1e-6),
-// L turning negative when going down in L, or the step limit. folds in L (L turns back) are recorded and followed.
-//
-//   node tools/rpo-trace.mjs eight NAME DIR LSTARMAX         start from the figure-eight (built in), DIR = +1 or -1 in L
-//   node tools/rpo-trace.mjs resume NAME TRACE.json INDEX DIR LSTARMAX    start from point INDEX of a trace file written by this tool
-//   node tools/rpo-trace.mjs row NAME FAMILY L DIR LSTARMAX   start from a printed row of Li et al. 2025 (figure-eight or IA-3) in data/liao2025-table1.json, which is NOT in this repository
-// writes data/rpo-trace-NAME.json (thinned: every 3rd point plus the first and last) and prints one line every 20 points
+// follows a family of relative periodic orbits (general start) by pseudo arclength continuation: bodies at (y1,0), (1,0), (0,0), unknowns
+// (y1, v1x, v1y, v2x, v2y, T, theta). stores start values, T*, L*, theta, closest approach and residual of every accepted point; stops at
+// L* above lstarMax, a close approach (below 0.03), a step collapse or the step limit.
+// node tools/rpo-trace.mjs eight NAME DIR LSTARMAX | resume NAME TRACE.json INDEX DIR LSTARMAX | row NAME FAMILY L DIR LSTARMAX (needs
+// data/liao2025-table1.json, not in this repository); writes data/rpo-trace-NAME.json.
 import fs from 'fs';
 import { dp45Step } from '../src/physics.js';
 import { syzygyWord } from '../src/topology.js';

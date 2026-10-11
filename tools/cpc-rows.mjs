@@ -1,10 +1,7 @@
-// the 99 satellites of Jankovic, Dmitrasinovic and Suvakov (CPC 250, 2020, data/cpc-converted.json) against the curves of this repository. the rules (tolerances) were written before the test, docs/rules/rules-cpc-curves.txt.
-// the rows are relatively periodic orbits with a rotation angle theta that is not 0, so each is one point of a family and not an isolated orbit: a comparison of T* and L* with the zeros of the satellite curves (theta = 0) is not enough. node tools/cpc-rows.mjs
-//   1. every row is closed again as a relatively periodic orbit (multiple shooting, 16 pieces, then 32 and 64): T*, L*, rotation, lam of the closed orbit
-//   2. T*/k of the row against the traced curve of Henon's family (data/henon-family-curve.json) at the same L* (the retrograde family of the CPC paper): the numbers of the PRL type relation
-//   3. the rows against the satellite curves of the R family (data/branch-points, every sense of every file, n = k): at the L* of the row the T*, the rotation and lam of the curve; HIT 1e-6 in T* and 1e-5 rad, NEAR 1e-3 and 0.02 rad, on the curve if lam agrees to 1e-4
-//   5. the co-rotation share of every row (src/corotation.js): the rows whose binaries revolve in the same direction all the time are the "direct" ones of the CPC paper (it says that four of the 99 are satellites of direct orbits and does not mark them)
-//   4. the screen: T*/k of the row against T*_member at nu = p/k of the stored trace of the R family (1.5 % for p = 1, 16 % for p >= 2): a row with no such member cannot be a point of an R satellite curve of the stored kind
+// the 99 satellites of the CPC 2020 (data/cpc-converted.json) against the curves of this repository; rules (tolerances) written before the
+// test: docs/rules/rules-cpc-curves.txt. node tools/cpc-rows.mjs the rows are relatively periodic orbits with theta not 0. steps: 1 close
+// each row again; 2 T*/k against the traced Henon curve; 3 the rows against the stored satellite curves of R (n = k): HIT 1e-6 in T* and
+// 1e-5 rad, NEAR 1e-3 and 0.02 rad; 4 the screen on T*/k against T*_member at nu = p/k; 5 the co-rotation share (src/corotation.js).
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { closePerpMS } from '../src/shooting.js';

@@ -1,6 +1,6 @@
-// is an orbit an n fold repeat of a shorter one? the state at T/n is compared with the start state rotated by the best angle.
-// nRepeat: largest n for which the bodies are in their own places again (a true repeat).
-// nRelabel: largest n for which it is the same up to renaming the bodies (equal masses, so the picture repeats).
+// is an orbit an n fold repeat of a shorter one? the state at T/n is compared with the start state rotated by the best angle. nRepeat:
+// largest n for which the bodies are in their own places again; nRelabel: largest n for which it is the same up to renaming the bodies
+// (equal masses).
 import { dp45Step } from './physics.js';
 
 const PERMS = [[0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]];
@@ -15,7 +15,8 @@ function rotationError(a, b) {
   return err;
 }
 
-// nMax has to be above the repeat count of the shortest orbit times the k of a branch (9 x 3 = 27 for one of the arms; a limit of 24 made a 27 fold repeat look like a 9 fold one).
+// nMax has to be above the repeat count of the shortest orbit times the k of a branch (9 x 3 = 27 for one of the arms; a limit of 24 made a
+//   27 fold repeat look like a 9 fold one).
 // failed: the integration stopped (step size 0); nRepeat and nRelabel are then 1 only as placeholders and must not be read as "not a repeat".
 export function coverInfo(x0, T, nMax = 200, tol = 1e-5) {
   const s = Float64Array.from(x0);

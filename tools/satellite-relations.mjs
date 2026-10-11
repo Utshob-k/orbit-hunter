@@ -1,12 +1,7 @@
-// empirical relations for the zeros of the upper branch of the satellites of Broucke's R family (k = 1, n = 5 up to 36): the numbers quoted in docs/r-family-satellites.md.
-// T* and L* of the zero of every n are taken from the 30 digit orbits of data/satellite-candidates.json (n = 7 and 9 to 36); for n = 5, 6 and 8 there is no such entry and the zero
-// stored in data/branch-points/<n>-upper.json is used (its rotation is 1e-12 turns there, so T* and L* are good to about 1e-9). everything is fitted on n <= 20 and tested on n > 20.
-//   B (written down before the run for n >= 21, docs/rules/): T*_n = n T*_R(n) - delta_n, n T*_R(n) from the crossing of nu = 1/n (upper nu) on the stored trace of the R family,
-//       delta_n = a + b / n fitted on n = 8 to 20
-//   L*_n = a + b / n + c / n^2 fitted on n = 5 to 20: fitted after the run for n >= 21 was done, not predicted
-//   T*_n in n alone (a n + b + c / n, with d / n^2, with sqrt(n)): found after the run, for comparison with B; a n + b + c sqrt(n) was added after the other forms had failed
-//   the largest multiplier: the two predictions of docs/rules/rules-n13-20.txt (linear from n = 20; quadratic fit on n = 13 to 20), compared with the data
-// node tools/satellite-relations.mjs
+// empirical relations for the zeros of the upper branch of the R satellites (k = 1; n = 5 to 36, section 5: n = 37 to 56): the numbers
+// quoted in docs/r-family-satellites.md, fitted on n <= 20. B (written down before the run for n >= 21, docs/rules/): T*_n = n T*_R(n) -
+// delta_n, delta_n = a + b/n; the L* fit and the fits of T* in n alone were found after the run, for comparison. T*, L* from
+// data/satellite-candidates.json (the stored zero for n = 5, 6, 8). node tools/satellite-relations.mjs
 import fs from 'fs';
 import { perpInfo } from '../src/perp.js';
 
@@ -96,8 +91,10 @@ const m20 = ms.find((r) => r.n === 20).mult;
 console.log('   deviation of the predictions written down before n >= 21 (prediction / data - 1): n | linear 7.621 + 0.85 (n - 20) | quadratic 4.6525 + 0.83637 x + 0.00172 x^2, x = n - 16.5');
 for (const r of ms.filter((q) => q.n >= 21 && (q.n - 21) % 3 === 0)) { const x = r.n - 16.5; console.log(`   ${r.n} | ${(100 * ((m20 + 0.85 * (r.n - 20)) / r.mult - 1)).toFixed(1)} % | ${(100 * ((4.6525 + 0.83637 * x + 0.00172 * x * x) / r.mult - 1)).toFixed(1)} %`); }
 
-// 5. out of sample: n = 37 to 56. the same three fits (on n <= 20 only, no refit) against the zeros of the run of 2026-10-11 (data/branch-points/<n>-upper.json, refined orbits of data/satellite-candidates.json). the rules were written
-// before the run (docs/rules/rules-test1-test2.txt): bounds 0.005 for T* and 1e-3 for L*; of the three only B was written down before the zeros for n >= 21 were known
+// 5. out of sample: n = 37 to 56. the same three fits (on n <= 20 only, no refit) against the zeros of the run of 2026-10-11
+//   (data/branch-points/<n>-upper.json, refined orbits of data/satellite-candidates.json). the rules were written
+// before the run (docs/rules/rules-test1-test2.txt): bounds 0.005 for T* and 1e-3 for L*; of the three only B was written down before the
+//   zeros for n >= 21 were known
 console.log('\n5. out of sample, n = 37 to 56: errors (prediction - data) of B, the sqrt(n) form and the L* fit, all fitted on n <= 20 only');
 {
   const BX = fit('delta', [one, inv], 8).x, SX = fit('T', [nn, one, sq], 8).x, LX = fit('L', [one, inv, inv2], 5).x, ext = [];

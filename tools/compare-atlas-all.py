@@ -1,9 +1,8 @@
-# my 85 orbits and the 17 of the arclength list against ALL equal-mass orbits with L != 0 of the Three Body Orbits atlas (415 entries on 2026-10-09).
-# the atlas list is not stored in this repository: download https://data.threebodyorbits.com/catalogue.json and run  python tools/compare-atlas-all.py path/to/catalogue.json
-# entries used: masses 1, 1, 1 and L* above 1e-7 (the list of 2026-10-09 had 415; one more entry with L* of 1e-8 is left out), T* = T |E|^1.5, L* = |L| |E|^0.5, syz = number of alignments per period.
-# a match: L* equal to 1e-5 (relative), T* equal to 1e-5 when one of the two is run n times (n up to 12), and the number of syzygies of my orbit times n (or divided by n) equal to the alignments of the atlas orbit
-# "near": the same with 5e-3 (a different orbit of a neighbouring family, not a match).
-# the result of the run of 2026-10-09 is in data/atlas-comparison-all.json (keys as in the catalogue).
+# my 85 orbits and the 17 of the arclength list against ALL equal-mass orbits with L != 0 of the Three Body Orbits atlas (415 entries on
+# 2026-10-09; masses 1, 1, 1, L* above 1e-7). download https://data.threebodyorbits.com/catalogue.json (not stored here) and run python
+# tools/compare-atlas-all.py path/to/catalogue.json. a match: L* to 1e-5 (relative), T* to 1e-5 when one of the two is run n times (n up to
+# 12), and the alignments equal; 'near': the same with 5e-3 (a different orbit). the result of the run of 2026-10-09 is
+# data/atlas-comparison-all.json.
 import json, sys, hashlib
 if len(sys.argv) != 2: sys.exit('usage: python tools/compare-atlas-all.py catalogue.json')
 raw = open(sys.argv[1], 'rb').read()

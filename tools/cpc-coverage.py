@@ -1,7 +1,6 @@
-# where the verified branch points lie in (T*, L*) relative to the table of Jankovic et al. 2020 (CPC): for every branch point with at least one verified arm (tools/verify-summary.py)
-# (a) does the (T*, L*) range of an arm (reduced to the minimal period) overlap the region spanned by the 99 satellites,
-# (b) does the box of an arm contain a satellite with the same total exponent (the "tested" rule of tools/recall-cpc.py): only then a comparison was possible at all
-# python tools/cpc-coverage.py
+# where the verified branch points lie in (T*, L*) relative to the 99 satellites of the CPC 2020: (a) does the range of an arm (reduced to
+# the minimal period) overlap the region of the satellites, (b) does its box contain a satellite with the same total exponent (the 'tested'
+# rule of tools/recall-cpc.py), without which no comparison was possible. python tools/cpc-coverage.py
 import json, glob, collections, sys
 cpc = [(c['N'], c['k'], c['ts_theirs'], c['ls_theirs']) for c in json.load(open('data/cpc-converted.json'))]
 ver = set(tuple(x) for x in json.load(open('data/verified-branch-points.json')))

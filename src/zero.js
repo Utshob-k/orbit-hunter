@@ -1,8 +1,8 @@
-// the zero of the rotation angle between two points of a continuation curve (tools/branch-point.mjs): bisection along the chord, every new point corrected back onto the curve.
-// if the corrector fails at the midpoint (near the floor of its residual it can stall just above its limit) the point is moved to 1/4 and 3/4 of the chord, then 1/8 and 7/8, that is a
-// shorter step from a point that is known to be on the curve, like the continuation does when a step fails; the bisection goes on from whichever point converges. only when all of them
-// fail does it stop, and then it says so (stopped = true) and returns the last point that converged. with a corrector that never fails at the midpoint the result is the plain bisection.
-//   a, b: the two end points (arrays), ta: the rotation at a, correct(point, normal) -> { ok, Y }, info(Y) -> { turns, ... } or null, unit(v): the normalised chord
+// the zero of the rotation angle between two points of a continuation curve (tools/branch-point.mjs): bisection along the chord, every new
+// point corrected back onto the curve. if the corrector fails at the midpoint the points at 1/4 and 3/4, then 1/8 and 7/8 of the chord are
+// tried, and the bisection goes on from the first that converges; if all fail it stops (stopped = true) with the last converged point. a,
+// b: end points (arrays), ta: rotation at a, correct(point, normal) -> { ok, Y }, info(Y) -> { turns, ... } or null, unit(v): the
+// normalised chord
 export function locateZero({ a, b, ta, correct, info, unit, tol = 1e-11, maxIter = 60, fractions = [0.5, 0.25, 0.75, 0.125, 0.875] }) {
   let zero = null, retries = 0;
   for (let k = 0; k < maxIter; k++) {

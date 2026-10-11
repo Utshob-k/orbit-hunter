@@ -1,13 +1,8 @@
-# independent check of the closure and the stability of the orbits with REBOUND (IAS15), nothing from src/ is used.
-# reads only the start values: data/orbit-table.csv (the 85 orbits, the numbers have 12 digits there) and data/perp-arc-orbits.json (the 17 orbits of the arclength list).
-# the start is the perpendicular start of src/perp.js, written out again here: bodies on the x axis at -1, lam, 1 shifted so that the centre of mass is 0 (cm = lam / 3),
-# velocities along y: u1, u2 for bodies 1 and 2 and -u1 - u2 for body 3; G = 1, all masses 1; the full period is T = 2 t.
-# closure as the README defines it: largest difference of a position or velocity component between the end state and the start state (max norm),
-# with the best rotation removed (the rotation is the one that maximises the overlap of the two states) and without ("raw").
-# fixed before the first run: IAS15 with its default settings (epsilon 1e-9); the 54 reliable orbits must close to 1e-8; the 31 weak ones are reported next to my own closure.
-# stability: the 8 multipliers of the 12 x 12 monodromy matrix that are closest to 1 are the trivial ones (centre of mass 4, flow, energy, angular momentum, rotation); an orbit is called stable
-# when the 4 others have modulus below 1 + 1e-6. (my first rule, 'not within 1e-3 of 1', was dropped after the BHH orbit t00: its trivial pair splits by 2e-3 in double precision.)
-# pip install rebound numpy;  python tools/rebound-check.py [--write]      (the result file data/rebound-check.json is only written with --write)
+# independent check of closure and stability with REBOUND (IAS15), nothing from src/ is used; reads the start values of data/orbit-table.csv
+# and data/perp-arc-orbits.json. closure: largest difference between end and start state, best rotation removed and not (raw). stable: the 4
+# nontrivial multipliers have modulus below 1 + 1e-6. fixed before the first run: IAS15 defaults; the 54 reliable orbits must close to 1e-8;
+# the 31 weak ones are reported next to my closure.
+# pip install rebound numpy; python tools/rebound-check.py [--write] (data/rebound-check.json only with --write)
 import csv, json, math, sys, time
 import numpy as np
 import rebound
@@ -90,8 +85,10 @@ print('weak (%d): REBOUND closure max %.2e, median %.2e; my DP45 max %.2e, my BS
 print('arclength list (%d): REBOUND closure max %.2e' % (len(arcs), max(o['closure'] for o in arcs)))
 print('orbits that fail the rule (reliable or arclength orbit at or above 1e-8):', fails if fails else 'none')
 
-# after seeing the failures (not part of the rule fixed before the run): is it the start values (12 digits in the csv; double precision in data/orbit-table.json;
-# the 30 digit refinement of data/refined rounded to double) or the integrator (default epsilon 1e-9 of IAS15 against 1e-12)? only for the orbits that failed.
+# after seeing the failures (not part of the rule fixed before the run): is it the start values (12 digits in the csv; double precision in
+#   data/orbit-table.json;
+# the 30 digit refinement of data/refined rounded to double) or the integrator (default epsilon 1e-9 of IAS15 against 1e-12)? only for the
+#   orbits that failed.
 # (a start from the 30 digit values of the L = 0 orbit t52 makes IAS15 run for minutes, so the refined starts were not run for all 85 orbits.)
 if fails:
     import glob

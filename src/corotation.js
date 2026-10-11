@@ -1,7 +1,7 @@
-// do the binaries of a three-body orbit revolve in the same direction? along one relative period of an orbit of the perpendicular start the closest pair of bodies is taken as the inner binary and the third
-// body as the outer one; the angular momentum of the inner binary (about its centre of mass) and of the outer orbit (the centre of mass of the pair about the third body) have the same sign (the binaries
-// revolve in the same direction: "direct" in the sense of the paper of Jankovic, Dmitrasinovic and Suvakov 2020) or opposite signs ("retrograde"). the result is the share of the time at the same sign,
-// 1 for an orbit that co-rotates all the time, 0 for one that counter-rotates all the time. the positions are those of sampleOrbit (single precision), the velocities central differences.
+// do the binaries of an orbit of the perpendicular start revolve in the same direction? the closest pair is taken as the inner binary, the
+// third body as the outer one; the share of the relative period in which their angular momenta have the same sign is returned ('direct' in
+// the sense of the CPC 2020 paper: share 1; 'retrograde': 0). positions from sampleOrbit (single precision), velocities by central
+// differences.
 import { perpInitial } from './perp.js';
 import { sampleOrbit } from './physics.js';
 export function shareSame(u1, u2, lam, t, frames = 6000) {

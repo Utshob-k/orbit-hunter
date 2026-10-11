@@ -1,9 +1,7 @@
-// does the family that passes through one of my orbits (theta = 0) also pass through a published orbit (a row of a table, a relative periodic orbit with theta != 0)?
-// the family is followed from my orbit in both directions with huntArclength (every accepted step: Newton converged, the tangent turned by less than 0.35 rad, theta did not jump)
-// and every accepted step is kept. at the step nearest to the published start (in u1, u2, lam, t) the system is solved again at the lam of the published orbit,
-// starting from that step: if it lands on the published start, the published orbit is on the traced curve (this only works when my start and the published start describe the same
-// collinear moment of the orbit). the second test does not depend on that: the invariants T*, L*, |theta| and the smallest pairwise distance of the published orbit are compared with every
-// accepted step and with the straight pieces between neighbouring steps.
+// does the family through one of my orbits (theta = 0) also pass through a published orbit (a row of a table, theta != 0)? the family is
+// followed in both directions with huntArclength; at the step nearest to the published start the system is solved again at its lam (lands
+// on the published start: it is on the curve); second test: T*, L*, |theta|, smallest distance compared with every step and the pieces
+// between them.
 // node tools/family-pass-through.mjs out.json seconds myU1 myU2 myLam myT pubU1 pubU2 pubLam pubT [label]
 import fs from 'fs';
 import { huntArclength, closePerpMS } from '../src/shooting.js';

@@ -1,9 +1,6 @@
 # refines a symmetric periodic orbit of the perpendicular start to many digits (default 40) and checks the closure of the full period.
-# the orbit: bodies on the x axis at -1-lam/3, lam-lam/3, 1-lam/3 with velocities (0,u1), (0,u2), (0,-u1-u2); m = G = 1.
-# it repeats after 2t exactly when, at time t, all bodies are back on the x axis with all velocities along y (4 conditions:
-# y1 = y2 = 0, vx1 = vx2 = 0, the third follows from the center of mass), unknowns u1, u2, lam, t.
-# integrator: Gragg-Bulirsch-Stoer (modified midpoint with extrapolation) in multiple precision, a different method from the double
-# precision Dormand-Prince of the rest of the code.
+# bodies on the x axis at -1-lam/3, lam-lam/3, 1-lam/3, velocities (0,u1), (0,u2), (0,-u1-u2); it repeats after 2t when at time t all bodies
+# are on the x axis with velocities along y (unknowns u1, u2, lam, t). Gragg-Bulirsch-Stoer in multiple precision.
 # python tools/refine-mp.py u1 u2 lam t [digits [out.json]]
 import sys
 from mpmath import mp, mpf, sqrt, matrix, lu_solve, nstr
@@ -119,8 +116,10 @@ def main():
     mp.dps = digits + 10
     tol = mpf(10) ** (-(digits - 4))
     # the full period: integrate to 2t and compare with the start
-    # the closure of the values that are written (rounded to `digits` digits), not of the unrounded solution: a strongly unstable orbit amplifies the rounding
-    # (before 2026-10-10 this was measured on the unrounded solution; the stored 30 digit values of data/refined close worse, see tools/closure-stored.py)
+    # the closure of the values that are written (rounded to `digits` digits), not of the unrounded solution: a strongly unstable orbit
+    #   amplifies the rounding
+    # (before 2026-10-10 this was measured on the unrounded solution; the stored 30 digit values of data/refined close worse, see
+    #   tools/closure-stored.py)
     pr = [mpf(nstr(q, digits)) for q in p]
     x0 = start(pr[0], pr[1], pr[2])
     x = flow(x0, 2 * pr[3], tol)

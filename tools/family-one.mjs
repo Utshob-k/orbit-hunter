@@ -1,8 +1,7 @@
-// follows the family (relative periodic orbits, rotation angle theta not 0) that passes through one orbit of the perpendicular start, in both directions,
-// and writes the exactly periodic orbits found on it (theta = 0) and the curve (lam, T*, L*, theta every 4th step)
-// the family is followed from the orbit itself (huntArclength with force), also when its theta is 0; the zero at the start is then found as well
-// the trace stops when the curve returns to a point it has already visited (a closed loop), when the family is lost, or after the time limit
-// node tools/family-one.mjs out.json seconds u1 u2 lam t [label]
+// follows the family of relative periodic orbits through one orbit of the perpendicular start in both directions and writes the periodic
+// orbits found on it (theta = 0) and the curve (lam, T*, L*, theta every 4th step). starts from the orbit itself (huntArclength with
+// force), also when its theta is 0; stops at a closed loop, a lost family or the time limit. node tools/family-one.mjs out.json seconds u1
+// u2 lam t [label]
 import fs from 'fs';
 import { huntArclength, closePerpMS } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';

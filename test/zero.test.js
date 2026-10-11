@@ -1,4 +1,4 @@
-// the bisection for the zero of the rotation (src/zero.js) must go on when the corrector fails at a midpoint, and must be the plain bisection when it does not
+// the bisection for the zero of the rotation (src/zero.js) goes on when the corrector fails at a midpoint and is the plain bisection when it does not
 import { locateZero } from '../src/zero.js';
 
 let fail = 0;
@@ -18,7 +18,8 @@ for (let k = 0; k < 60; k++) {
 const r1 = locateZero({ ...start, correct: (p) => ({ ok: true, Y: p }) });
 check('a corrector that never fails gives the plain bisection', r1.zero.Y === plain && !r1.stopped && r1.retries === 0, `zero ${r1.zero.Y}`);
 
-// 2. the corrector fails at the first midpoint (as it did for n = 24, 26, 27 and 28 of the R satellites; the old loop stopped there, with a rotation of 0.2 here)
+// 2. the corrector fails at the first midpoint (as it did for n = 24, 26, 27 and 28 of the R satellites; the old loop stopped there, with a
+//   rotation of 0.2 here)
 let calls = 0;
 const r2 = locateZero({ ...start, correct: (p) => (calls++ === 0 ? { ok: false } : { ok: true, Y: p }) });
 check('a failure at the first midpoint is retried', Math.abs(r2.zero.turns) < 1e-11 && !r2.stopped && r2.retries === 1, `rotation left ${r2.zero.turns.toExponential(1)}, retries ${r2.retries}`);

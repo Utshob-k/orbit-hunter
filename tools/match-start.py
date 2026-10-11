@@ -1,6 +1,6 @@
-# for a published satellite (data/cpc-converted.json, in my start u1, u2, lam, t) and an arm of a results file: the point of the arm (interpolated between samples) closest to the
-# published (T*, L*), and there the differences of lam, u1, u2, t to the published start. an orbit with the velocities reversed is the same orbit, so |u1|, |u2| are compared.
-# python tools/match-start.py results.jsonl N orbit k lamBP
+# for a published satellite (data/cpc-converted.json, in my start) and an arm of a results file: the point of the arm closest to the
+# published (T*, L*) and there the differences of lam, u1, u2, t to the published start (an orbit with reversed velocities is the same
+# orbit, so |u1|, |u2| are compared). python tools/match-start.py results.jsonl N orbit k lamBP
 import json, sys, math
 f, N, orbit, k, bp = sys.argv[1], int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]), float(sys.argv[5])
 cp = [c for c in json.load(open('data/cpc-converted.json')) if c['N'] == N][0]

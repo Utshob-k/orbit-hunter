@@ -1,8 +1,6 @@
-// the perpendicular start family (henon style), equal masses.
-// bodies on the x axis at -1, lam, 1 (shifted so the center of mass is 0), all velocities along y:
-// u1, u2 for bodies 1 and 2, body 3 gets -u1-u2.
-// if the system is ever collinear again with all velocities perpendicular to the line, the orbit is
-// mirror symmetric and repeats after twice that time, rotated by some angle.
+// the perpendicular start family (Henon style), equal masses: bodies on the x axis at -1, lam, 1 (centre of mass shifted to 0), all
+// velocities along y: u1, u2 for bodies 1 and 2, -u1-u2 for body 3. if the system is collinear again with all velocities perpendicular to
+// the line, the orbit is mirror symmetric and repeats after twice that time, rotated by some angle.
 import { dp45Step } from './physics.js';
 import { solve } from './newton.js';
 

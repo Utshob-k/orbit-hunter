@@ -1,6 +1,6 @@
-# counts of the branch points of data/bifurcation-points.json by what is known about their arms (data/arm-repeats.json), and the table of the arms by parent orbit and repeat count
-# a branch point has two arms (sign + and -); an arm is only known when its states were stored (the reruns), the others are leads that I could not check
-# python tools/branch-census.py
+# counts of the branch points of data/bifurcation-points.json by what is known about their arms (data/arm-repeats.json) and the table of the
+# arms by parent orbit and repeat count; an arm is known only if its states were stored (the reruns), the others are leads that were not
+# checked. python tools/branch-census.py
 import json, collections, sys
 rows = json.load(open('data/bifurcation-points.json'))
 rep = json.load(open('data/arm-repeats.json'))

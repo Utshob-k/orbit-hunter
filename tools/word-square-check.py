@@ -1,6 +1,5 @@
-# could the syzygy word of my T* = 72.465 orbit (primitive word (01010212)^3, 24 letters) be an orbit with 12 alignments per period run twice (SN.13 of the atlas)?
-# the second period would repeat the first: word = B B with |B| = 12. the word is read as a cyclic sequence (any starting syzygy), also after relabelling the bodies
-# (a permutation of the letters 0, 1, 2) and after reversing the time (the word read backwards).
+# could the syzygy word of my T* = 72.465 orbit (primitive word (01010212)^3) be an orbit with 12 alignments per period run twice (SN.13 of
+# the atlas)? then word = B B with |B| = 12, read as a cyclic sequence, also after relabelling the bodies and after reversing the time.
 # python tools/word-square-check.py
 import itertools, sys
 w = '01010212' * 3

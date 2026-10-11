@@ -1,11 +1,9 @@
-// one table of the orbits in data/stability-perp-3.json with their syzygy word, for sharing
-// node tools/orbit-table.mjs   (writes data/orbit-table.json and data/orbit-table.csv)
-// start: bodies at (-1-lam/3, lam-lam/3, 1-lam/3) on the x axis, velocities (0,u1), (0,u2), (0,-u1-u2); period T = 2t, m = G = 1.
-// closureDP45 / closureBS: the largest position or velocity difference (max norm) between end and start state after one period, with the best rotation
-// removed, integrated with Dormand-Prince 5(4) (rtol 1e-13, atol 1e-14) and Gragg-Bulirsch-Stoer (tol 1e-13); the columns ending in raw do not remove the rotation. distToBHHcurve: relative distance of (T*/k, L*) to the nearest published
-// satellite (BHH type orbits only); offBHHcurve is true when it is above 0.2.
-// repeatOf = n when the orbit is an n fold repeat of a shorter orbit (primitiveTstar = T*/n); relabelReturnN = n when the picture repeats after T/n
-// with the bodies renamed (the 'orbit' of the same motion for equal masses).
+// one table of the orbits of data/stability-perp-3.json with their syzygy word, for sharing. node tools/orbit-table.mjs (writes
+// data/orbit-table.json and data/orbit-table.csv) start: bodies at (-1-lam/3, lam-lam/3, 1-lam/3), velocities (0,u1), (0,u2), (0,-u1-u2), T
+// = 2t, m = G = 1. closureDP45 / closureBS: largest difference between end and start state after one period (best rotation removed; columns
+// ending in raw: not removed) with Dormand-Prince 5(4) and Gragg-Bulirsch-Stoer. distToBHHcurve: relative distance of (T*/k, L*) to the
+// nearest published BHH satellite; repeatOf = n for an n fold repeat; relabelReturnN = n if the picture repeats after T/n with renamed
+// bodies.
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';

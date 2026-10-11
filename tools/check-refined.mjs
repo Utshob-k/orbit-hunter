@@ -1,10 +1,8 @@
-// checks the multiple precision refinements in data/refined/<name>.json (tools/refine-mp.py) against the double precision orbits of data/orbit-table.json
-// an orbit gets the label "refined" when
-//   1. newton converged: final residual below 1e-23 and the number closure_full_period in the file is below 1e-20. this script integrates nothing: it reads that number, which tools/refine-mp.py
-//      measured (until 2026-10-10) on its unrounded solution and not on the 30 digit values it stored; the closure of the stored values is tools/closure-stored.py (data/closure-stored.json)
-//   2. it is the same orbit: T* and L* of the refined start agree with the table to 1e-6, the syzygy word is the same, and the repeat count is the same
-// the distance moved is reported but is not pass or fail (the start of a strongly unstable orbit is only known to the precision the instability allows)
-// node tools/check-refined.mjs [dir ...]      default: data/refined data/refined/weak data/refined/reliable (the summary is written for the folders that are scanned)
+// checks the refinements data/refined/<name>.json (tools/refine-mp.py) against data/orbit-table.json. an orbit gets the label 'refined'
+// when (1) the final residual is below 1e-23 and closure_full_period in the file below 1e-20 (read from the file, nothing is integrated;
+// the closure of the stored 30 digit values is tools/closure-stored.py), and (2) it is the same orbit: T*, L* agree to 1e-6 with the table,
+// same word, same repeat count. the distance moved is reported, not pass or fail. node tools/check-refined.mjs [dir ...] (default:
+// data/refined data/refined/weak data/refined/reliable; the summary is written for the folders scanned)
 import fs from 'fs';
 import path from 'path';
 import { perpInitial, perpInfo } from '../src/perp.js';

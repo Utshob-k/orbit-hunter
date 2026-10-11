@@ -1,11 +1,9 @@
-// does an orbit return, after T/n (n = 2 to 12), to its start up to a rotation? it is then n relative periods of a shorter, rotating orbit.
-// checked for the 85 orbits of data/orbit-table.json and the 17 of data/perp-arc-orbits.json, in two ways:
-//   own places: the bodies are in their own places after T/n (the rotation angle is then the rotation angle of the relative period)
-//   any symmetry: the best over relabelling of the bodies, reflection (y -> -y) and reversal of the velocities (with the best rotation in every case)
-// a reflected or reversed return means a return at 2T/n in the first two ways, so nothing is lost by this being in the second list only.
-// whether an arclength orbit is an atlas orbit comes from the downloaded catalogue if its path is given (the list itself is not stored here),
-// otherwise from the groups stored in data/return-test.json (made with the catalogue of 2026-10-09; the README counts "of the 91" use them).
-// node tools/return-test.mjs [path/to/catalogue.json] [--write]      prints the counts; data/return-test.json is only written with --write
+// does an orbit return, after T/n (n = 2 to 12), to its start up to a rotation (then it is n relative periods of a shorter, rotating
+// orbit)? for the 85 orbits of data/orbit-table.json and the 17 of data/perp-arc-orbits.json, in their own places, and under any
+// relabelling, reflection (y -> -y) or reversal of the velocities (best rotation each time). atlas membership of an arclength orbit comes
+// from the catalogue if its path is given, otherwise from data/return-test.json (made with the catalogue of 2026-10-09; the README counts
+// 'of the 91' use it).
+// node tools/return-test.mjs [path/to/catalogue.json] [--write] (data/return-test.json only with --write)
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { dp45Step } from '../src/physics.js';

@@ -1,7 +1,6 @@
-# recall test: how many of the published satellites (CPC 2020) with exponent k lie on a branch arm of the same exponent that my search followed?
-# "tested": the (T*, L*) of the satellite is inside the box spanned by some arm with the same total exponent (also arms that turn out to be repeat curves of the parent);
-# "found": an arm that is not a repeat curve passes within 5e-3 of it. The rule is the one of the first version (5 tested); it is not changed after seeing the result.
-# python tools/recall-cpc.py
+# recall test: how many of the published satellites (CPC 2020) with exponent k lie on a branch arm of the same exponent that my search
+# followed? 'tested': (T*, L*) inside the box of some arm with the same total exponent; 'found': an arm that is not a repeat curve passes
+# within 5e-3. the rule is that of the first version (5 tested), not changed after seeing the result. python tools/recall-cpc.py
 import json, glob, math, collections
 cpc = [(c['N'], c['k'], c['ts_theirs'], c['ls_theirs']) for c in json.load(open('data/cpc-converted.json'))]
 seen = []

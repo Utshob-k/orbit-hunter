@@ -1,7 +1,6 @@
-// is a branch arm just a repeat of a shorter orbit (or of a shorter branch)? for sample points of every arm of a results file that stores the states:
-// the minimal period of the orbit (src/covers.js: does the state come back, rotated, after T/n with the bodies in their own places?) and the syzygy word of the
-// shortest orbit. an arm whose points are n fold repeats of shorter orbits is not a branch of its own.
-// node tools/arm-repeat-check.mjs results.jsonl [from] [to]     (job index range, to split the work)
+// is a branch arm just a repeat of a shorter orbit (or of a shorter branch)? for sample points of every arm of a results file with stored
+// states: the minimal period (src/covers.js) and the word of the shortest orbit.
+// node tools/arm-repeat-check.mjs results.jsonl [from] [to] (job index range, to split the work)
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { coverInfo } from '../src/covers.js';

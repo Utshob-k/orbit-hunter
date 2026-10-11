@@ -1,9 +1,7 @@
-// checks the branches in a results file written by satellite-worker.mjs (needs the state columns u1, u2, t).
-// for a sample of points of every branch arm:
-//   1. syzygy word: (01)^K with 2K syzygies, K = k times the exponent of the progenitor
-//   2. smoothness: jumps in T* and L* between neighbouring points compared with the median jump (a branch jump shows as a big outlier)
-//   3. re-close in double precision with more pieces and a tighter tolerance; lam, T* must not change
-// node tools/verify-branches.mjs results.jsonl [maxArms]     all arms of the file are checked unless maxArms is given; a cut is reported at the end
+// checks the branches in a results file of satellite-worker.mjs (needs the state columns u1, u2, t); for a sample of points of every arm:
+// (1) the word is (01)^K with 2K syzygies, K = k times the exponent of the progenitor, (2) jumps in T*, L* between neighbours against the
+// median jump, (3) re-closing in double precision with more pieces and a tighter tolerance must not change lam, T*.
+// node tools/verify-branches.mjs results.jsonl [maxArms] (all arms unless maxArms is given; a cut is reported at the end)
 import fs from 'fs';
 import { closePerpMS } from '../src/shooting.js';
 import { perpInfo, perpInitial } from '../src/perp.js';

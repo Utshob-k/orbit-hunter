@@ -1,5 +1,5 @@
-// is the figure-eight solution of my continuation (tools/rpo.mjs, steps of 0.002 in L from the L = 0 row) still choreographic (the three bodies on one curve) at L = 0.02 and 0.05?
-// the rows of Table 1 are choreographic up to L = 0.011 and not from L = 0.012 on (T/3 cyclic return, tools/liao-closure.mjs)
+// is the figure-eight of my continuation (tools/rpo.mjs, steps of 0.002 in L) still choreographic at L = 0.02 and 0.05? the rows of Table 1
+// are choreographic up to L = 0.011 and not from 0.012 on (T/3 cyclic return, tools/liao-closure.mjs).
 import fs from 'fs';
 import { continueL, newton, startState, scaleFree, flowTo } from './rpo.mjs';
 let rows;

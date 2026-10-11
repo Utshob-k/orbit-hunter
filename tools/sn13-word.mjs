@@ -1,8 +1,7 @@
-// syzygy word of an atlas orbit from its own data file (published start values), to compare with the words of my orbits.
-// download https://data.threebodyorbits.com/orbits/suvakovpc_sn_13.bin first, then
-//   node tools/sn13-word.mjs path/to/suvakovpc_sn_13.bin
-// layout of the file (from js/orbit-data.js of threebodyorbits.com): "TBO2"/"TBO3", u32 version, f64 period at byte 8, f64 masses[3],
-// f64 bbox[4], f64 published start values [12] at byte 72 (x1 y1 x2 y2 x3 y3 vx1 vy1 vx2 vy2 vx3 vy3), refined ones at byte 168.
+// syzygy word of an atlas orbit from its own data file (published start values): download
+// https://data.threebodyorbits.com/orbits/suvakovpc_sn_13.bin first, then
+// node tools/sn13-word.mjs path/to/suvakovpc_sn_13.bin. layout (js/orbit-data.js of the site): 'TBO2'/'TBO3', u32 version, f64 period at
+// byte 8, masses[3], bbox[4], published start values [12] at byte 72, refined ones at 168.
 import fs from 'fs';
 import { syzygyWord, canonical } from '../src/topology.js';
 

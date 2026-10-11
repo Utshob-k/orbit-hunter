@@ -1,7 +1,6 @@
-# converts the rows of Table 1 of Li, Tao, Li and Liao 2025 (data/liao2025-table1.json) to the scale free numbers T* = T |E|^1.5 and L* = |L| |E|^0.5
-# and checks the conversion against numbers that are known independently: the L = 0 figure-eight (T* = 9.238), the L of the paper against the L recomputed from the rows,
-# and the smooth run of T* along each family (the raw period of the paper jumps between L = 0.011 and 0.012 because the rows are scaled differently)
-# python tools/liao2025-scale.py      exits with 1 when a check fails or a list is empty
+# converts the rows of Table 1 of Li, Tao, Li and Liao 2025 (data/liao2025-table1.json) to T* = T |E|^1.5 and L* = |L| |E|^0.5 and checks it
+# against known numbers (the L = 0 figure-eight T* = 9.238, the L of the paper against L recomputed from the rows, the smooth run of T*
+# along each family). python tools/liao2025-scale.py (exits with 1 when a check fails or a list is empty)
 import json, math, sys
 try: rows = json.load(open('data/liao2025-table1.json'))['rows']
 except FileNotFoundError: sys.exit('this script needs data/liao2025-table1.json, the table of Li et al. 2025 typed in by the reader; it is not in this repository')
@@ -18,7 +17,8 @@ for r in rows:
     E = K + U
     L = sum(p[0] * v[1] - p[1] * v[0] for p, v in zip(pos, vel))
     out.append({'family': r['family'], 'L_paper': r['L'], 'L_formula': r['y1'] * r['y8'] + r['y10'], 'L_recomputed': L, 'E': E, 'Tstar': r['T'] * abs(E) ** 1.5, 'Lstar': abs(L) * abs(E) ** 0.5, 'theta': r['theta'], 'theta_over_2pi': r['theta'] / (2 * math.pi)})
-# only the derived scale free numbers are written, no start value and no printed period of the table; 'L_paper' is the printed L, used as the label of the row
+# only the derived scale free numbers are written, no start value and no printed period of the table; 'L_paper' is the printed L, used as
+#   the label of the row
 slim = [{'family': o['family'], 'L_paper': o['L_paper'], 'Tstar': float('%.10g' % o['Tstar']), 'Lstar': float('%.10g' % o['Lstar']), 'theta': float('%.10g' % o['theta'])} for o in out]
 json.dump(slim, open('data/liao2025-scaled.json', 'w'), indent=1)
 bad = 0

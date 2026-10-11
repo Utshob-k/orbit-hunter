@@ -1,11 +1,7 @@
-// the sequence of periodic orbits on the upper branch of the satellites of Broucke's R family, n = 5 up (data/branch-points/<n>-upper.json, k = 1): T* and L* of the zero of
-// theta, whether the satellite continuation reached it, the largest multiplier (data/satellite-candidates.json, tools/satellite-candidates.mjs --write), the closure of the double
-// precision zero, the closest approach of the zero in the units of its start and in a scale free form (closest approach times |E|, the same in both senses; the start units differ
-// between the senses because the two senses reach the same orbit at its two collinear moments), and two predictions that were written down before n = 13 to 20 were run:
-//   B:  T*(n) = n T*_R(n) - delta(n), n T*_R(n) from the crossing of nu = 1/n (upper nu) on the stored trace, delta(n) = a + b / n fitted on n = 8 to 20 (so the prediction is a fit
-//       there and a test only for n >= 21)
-//   the largest multiplier from n = 20 on: m(n) = m(20) + 0.85 (n - 20)
-// node tools/satellite-sequence.mjs
+// the sequence of periodic orbits on the upper branch of the R satellites, n = 5 up (data/branch-points/<n>-upper.json, k = 1): T*, L* of
+// the zero, whether the continuation reached it, the largest multiplier, the closure of the double precision zero, the closest approach,
+// the rotation left at the stored zero, and the predictions written down before n = 13 to 20: B (T*(n) = n T*_R(n) - delta(n), a test only
+// for n >= 21) and the multiplier m(n) = m(20) + 0.85 (n - 20). node tools/satellite-sequence.mjs
 import fs from 'fs';
 import { perpInitial, perpInfo } from '../src/perp.js';
 
@@ -30,7 +26,8 @@ for (let n = 5; n <= 80; n++) {
   const row = { n, reached: zs.length, senses: d.satellite.map((s) => s.why) };
   if (zs.length) {
     const z = zs[0].zero, c = cands.find((o) => o.n === n && o.label.includes(`nu = 1/${n} (upper branch`));      // the orbit refined to 30 digits, where there is one (not for n = 5, 6, 8)
-    // T*, L* and the scale free closest approach come from the refined orbit: the stored zero of n = 24, 26, 27 and 28 was left at a rotation of 4e-6 to 5e-5 turns instead of 1e-11, which
+    // T*, L* and the scale free closest approach come from the refined orbit: the stored zero of n = 24, 26, 27 and 28 was left at a
+    //   rotation of 4e-6 to 5e-5 turns instead of 1e-11, which
     // moves L* by up to 1e-3 and T* by up to 4e-4 (the other zeros are within 1e-8)
     const i = c ? perpInfo(Number(c.u1), Number(c.u2), Number(c.lam), Number(c.t)) : null, T = i ? i.ts : z.Tstar, L = i ? Math.abs(i.ls) : z.Lstar, md = i ? i.minDist : z.minDist;
     Object.assign(row, { T, L, closure: Math.max(...zs.map((s) => s.zero.closure)), rot: Math.max(...zs.map((s) => Math.abs(s.zero.turns))), mult: c ? c.multiplier : null, minDistUnits: Math.min(...zs.map((s) => s.zero.minDist)), nT: memberT(n) });

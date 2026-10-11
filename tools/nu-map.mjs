@@ -1,8 +1,8 @@
-// the members of the family of Broucke's R orbits where a rotation number nu of the stable stretch is k/n (n up to 12, k/n <= 1/2): the places where the n fold repeat has a
-// double multiplier 1 and satellites can leave. the stable stretch of data/r-family-trace.json (both nu of a step have modulus 1) has two nu, the lower and the upper one; each
-// crossing of a level k/n is found between two accepted steps and theta, T* and L* are interpolated linearly between them, so they are good to a few 1e-3 (n = 3, 4) down to 1e-4.
-// followed = there is a file in data/branch-points/ made by tools/branch-point.mjs: <n>-<branch>.json for k = 1, <k>-<n>-<branch>-<theta>.json for k > 1 (theta as given to the tool, four digits).
-// node tools/nu-map.mjs [--max=N] [--write]        n up to N (12 unless --max is given: the upper nu crosses 1/n up to n = 58 on the stored trace); --write stores data/nu-map.json (for the default range only)
+// the members of the R family where a rotation number nu of the stable stretch is k/n (n up to 12, k/n <= 1/2), i.e. where satellites can
+// leave. the stable stretch of data/r-family-trace.json has two nu (lower and upper); theta, T*, L* are interpolated between two accepted
+// steps (good to 1e-4 to a few 1e-3). followed = a file made by tools/branch-point.mjs exists in data/branch-points/.
+// node tools/nu-map.mjs [--max=N] [--write] (n up to N; the upper nu crosses 1/n up to n = 58 on the stored trace; --write stores
+// data/nu-map.json for the default range)
 import fs from 'fs';
 
 const read = (f) => JSON.parse(fs.readFileSync(new URL('../data/' + f, import.meta.url), 'utf8'));

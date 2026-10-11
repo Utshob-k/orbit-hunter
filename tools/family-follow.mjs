@@ -1,11 +1,8 @@
-// follows the family of relative periodic orbits through one orbit of the perpendicular start in ONE direction and records every accepted step:
-// lam, u1, u2, t, T*, L*, theta, closest approach, closure (the state after 2t against the start turned by theta, rms) and, every 5th step, the syzygy word and the largest nontrivial
-// multiplier of the relative monodromy matrix. the start is moved onto the family first (closePerpMS, as in family-one.mjs), the steps are the ones of huntArclength
-// (Newton converged, the tangent turned by less than 0.35 rad, theta did not jump).
-// the trace stops at: a close approach (closest distance below 0.03), L* below 1e-3, a closed loop, a step collapse or a lost family (huntArclength gives up), the step limit,
-// or the time limit. the reason is written to the file; a stopped trace is not a result, only the points before it are.
-// node tools/family-follow.mjs out.json DIR minutes u1 u2 lam t [label] [pieces]       (DIR = 1 or -1 in lam; the numbers are the start, t = half the period 2t;
-// pieces: use only this number of pieces of the multiple shooting instead of trying 8, 16, 24 ... until the start closes, for a restart from the last point of a stalled trace)
+// follows the family of relative periodic orbits through one orbit of the perpendicular start in ONE direction, recording every accepted
+// step (start values, T*, L*, theta, closest approach, closure). stops at a close approach (below 0.03), L* below 1e-3, a closed loop, a
+// step collapse, a lost family, the step limit or the time limit; the reason is in the file.
+// node tools/family-follow.mjs out.json DIR minutes u1 u2 lam t [label] [pieces] (DIR = 1 or -1 in lam, t = half the period; pieces: only
+// this many instead of trying 8, 16, 24 ...)
 import fs from 'fs';
 import { huntArclength, closePerpMS } from '../src/shooting.js';
 import { perpInfo, perpInitial } from '../src/perp.js';

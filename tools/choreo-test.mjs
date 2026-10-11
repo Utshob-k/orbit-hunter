@@ -1,7 +1,7 @@
-// is one of my orbits a rotating choreography, or m relative periods of one (the rotating figure-eight branch is one)? such an orbit returns after T/(3m)
-// with the bodies renamed cyclically (the next body is where the previous one was), up to a rotation. every n from 2 to 60 is checked, not only the multiples of 3,
-// for the 85 orbits of data/orbit-table.json and the 17 of data/perp-arc-orbits.json. the control: members of the branch in data/rpo-trace-eightC.json must return at n = 3.
-// node tools/choreo-test.mjs [--write]     prints the counts; data/choreo-test.json is only written with --write
+// is one of my orbits a rotating choreography, or m relative periods of one? such an orbit returns after T/(3m) with the bodies renamed
+// cyclically, up to a rotation; every n from 2 to 60 is checked for the 85 orbits of data/orbit-table.json and the 17 of
+// data/perp-arc-orbits.json. control: members of the branch in data/rpo-trace-eightC.json must return at n = 3. node tools/choreo-test.mjs
+// [--write]
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { dp45Step } from '../src/physics.js';

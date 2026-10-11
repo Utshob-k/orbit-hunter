@@ -1,6 +1,6 @@
-# one table of all the branch points found by tools/satellite-hunt.mjs (data/satellite-results*.jsonl):
-# progenitor orbit, k of the repeat, lam at the branch point, T* and L* of the repeat there, closest CPC satellite of the same
-# k to either arm. writes data/bifurcation-points.json and prints it.   python tools/bifurcation-table.py   (needs data/arm-repeats.json, see tools/arm-repeats-summary.py)
+# one table of all branch points of data/satellite-results*.jsonl: progenitor, k of the repeat, lam at the branch point, T* and L* of the
+# repeat, closest CPC satellite of the same k to either arm. writes data/bifurcation-points.json. python tools/bifurcation-table.py (needs
+# data/arm-repeats.json, see tools/arm-repeats-summary.py)
 import json, glob, math
 stable_ts = {}
 for f in ('data/stability-perp-3.json', 'data/stability-arc.json'):
@@ -23,7 +23,8 @@ def segdist(p, a, b):
     return math.hypot(ax + t * dx - 1, ay + t * dy - 1)
 
 import os
-# arms whose states were stored have been checked for repeats (tools/arm-repeat-check.mjs, tools/arm-repeats-summary.py): an arm that is only the k fold repeat
+# arms whose states were stored have been checked for repeats (tools/arm-repeat-check.mjs, tools/arm-repeats-summary.py): an arm that is
+#   only the k fold repeat
 # of its parent is not a branch and is dropped; any other arm is compared with the satellites after reducing it to its minimal period
 REP = json.load(open('data/arm-repeats.json')) if os.path.exists('data/arm-repeats.json') else {}
 points = {}
@@ -58,7 +59,8 @@ for f in sorted(glob.glob('data/satellite-results.jsonl') + glob.glob('data/sate
                         if p['hit'] is None or d < p['hit'][1]: p['hit'] = [N, d, k]
                     elif p['other_k_hit'] is None or d < p['other_k_hit'][1]: p['other_k_hit'] = [N, d, k]
 if not points: raise SystemExit('no branch point found in data/satellite-results*.jsonl: nothing was compared')
-# rows that carry a 'retracted' block in the existing table (the N = 1 entry of 2026-10-09) keep it, together with the values that were retracted, so that running this script
+# rows that carry a 'retracted' block in the existing table (the N = 1 entry of 2026-10-09) keep it, together with the values that were
+#   retracted, so that running this script
 # again does not erase the retraction. the old value stays visible next to it.
 if os.path.exists('data/bifurcation-points.json'):
     for old in json.load(open('data/bifurcation-points.json')):

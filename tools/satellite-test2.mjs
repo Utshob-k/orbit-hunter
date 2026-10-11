@@ -1,4 +1,6 @@
-// test 2 of docs/rules/rules-test1-test2.txt: predictor B for the ten established k > 1 zeros (closure tier reliable) of data/branch-points/<k>-<n>-<branch>-<theta>.json, delta_n = a + b/n exactly as fitted on k = 1, n = 8 to 20 (no refit), bound 0.005; the variant H (delta = 8 |eps|, found after the data) is reported apart. node tools/satellite-test2.mjs
+// test 2 of docs/rules/rules-test1-test2.txt: predictor B for the ten established k > 1 zeros
+// (data/branch-points/<k>-<n>-<branch>-<theta>.json), delta_n as fitted on k = 1 (n = 8 to 20, no refit), bound 0.005; the variant H (delta
+// = 8 |eps|, found after the data) is reported apart. node tools/satellite-test2.mjs
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { perpInfo } from '../src/perp.js';

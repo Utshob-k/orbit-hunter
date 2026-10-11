@@ -1,9 +1,7 @@
-// hunt for truly periodic orbits from a list of symmetric orbits, on worker threads.
-// node tools/hunt-all.mjs rows.json out.jsonl [threads] [maxSeconds] [firstIndex] [ms]
-// the last argument 'ms' uses multiple shooting with the tangent predictor, 'arc' follows the family in arclength
-// (both in src/shooting.js). HUNT_ONLY=file.json (a list of indexes) restricts the run to those starts.
-// rows.json is [[u1, u2, lam, t], ...]. every finished hunt is appended to out.jsonl right away,
-// so stopping it never loses work, and rerunning skips what is already in out.jsonl.
+// hunt for periodic orbits from a list of symmetric orbits, on worker threads. node tools/hunt-all.mjs rows.json out.jsonl [threads]
+// [maxSeconds] [firstIndex] [ms] 'ms' uses multiple shooting with the tangent predictor, 'arc' follows the family in arclength
+// (src/shooting.js); HUNT_ONLY=file.json (a list of indexes) restricts the run. rows.json is [[u1, u2, lam, t], ...]; every finished hunt
+// is appended to out.jsonl at once and a rerun skips what is already there.
 import fs from 'fs';
 import { Worker } from 'worker_threads';
 

@@ -1,6 +1,6 @@
-// are two periodic orbits of the perpendicular start the same orbit? the pair (T*, L*) is not enough, two different orbits can agree in both to 1e-5 or better.
-// the start is compared instead: the collinear configuration at t = 0 and at t = t (the other collinear moment), scaled so that the outer bodies are at -1 and 1, as
-// (position of the middle body, velocities of the left, middle and right body), up to the mirror image of the line and the sign of y.
+// are two periodic orbits of the perpendicular start the same orbit? (T*, L*) is not enough: the start is compared, the collinear
+// configuration at t = 0 and at t = t, scaled to the outer bodies at -1 and 1, as (position of the middle body, velocities of the left,
+// middle and right body), up to the mirror image and the sign of y.
 import { perpInitial } from './perp.js';
 import { dp45Step } from './physics.js';
 

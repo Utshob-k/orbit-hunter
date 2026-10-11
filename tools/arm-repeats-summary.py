@@ -1,6 +1,6 @@
-# combines the outputs of tools/arm-repeat-check.mjs (data/satellite-results*.repeats-*.json) into data/arm-repeats.json:
-# for every arm with stored states the number of times its orbits repeat a shorter orbit (minimum over the sampled points), the number that a pure k fold repeat
-# of the parent would have, and whether the arm is just the repeat curve of the parent (then it is not a branch). python tools/arm-repeats-summary.py
+# combines the outputs of tools/arm-repeat-check.mjs (data/satellite-results*.repeats-*.json) into data/arm-repeats.json: per arm the number
+# of times its orbits repeat a shorter orbit (minimum over the samples), the number a pure k fold repeat of the parent would have, and
+# whether the arm is just the repeat curve of the parent (then it is no branch). python tools/arm-repeats-summary.py
 import json, glob
 PARENTS = {0: (4.96, 1), 1: (33.745, 9), 2: (17.847, 1), 3: (19.769, 1), 4: (47.065, 2), 5: (9.658, 1), 6: (29.31, 1)}   # orbit index: (T*, repeat count of the parent)
 out = {}

@@ -1,14 +1,9 @@
-// is an orbit given by printed start values (Jacobi vectors xi = (a, 0), eta = (1, 0), velocities (0, c) and (0, d), d = L - a c, as in the tables of the CPC paper) a repeat of a shorter orbit,
-// or a point of a satellite curve of the member of Broucke's R family with the rotation number nu = 1/k? the rules (written before the runs): docs/rules/rules-thesis-k39.txt
-// the printed values are NOT stored in this repository, they are arguments; the output files are local.
-//   node tools/thesis-orbit-test.mjs close out.json k L a c T [pieces] [--nu=lower|upper]
-//       closes the orbit (multiple shooting, 16 pieces unless given), tests for a repeat (return after T/n, n = 2 to 2k, own places, up to a rotation), prints the word of the syzygies
-//       and the member of the R trace with nu = 1/k (interpolated between two accepted steps):
-//       its T*, L*, rotation, eps = k |theta| - 1 (a satellite curve starts at the rotation -eps with the invariants of the k fold repeat), and the distance of the orbit from that point
-//   node tools/family-follow.mjs follow-1.json 1 8 u1 u2 lam t      and      ... -1 ...      (the start values are in out.json; 8 minutes each)
-//   node tools/thesis-orbit-test.mjs hit out.json follow-1.json follow-2.json thetaMember TstarMember LstarMember
-//       the nearest step of each traced family to the branch point (k T*, L*, -eps) of the EXACT member (the first line of  node tools/branch-point.mjs k theta --pieces=16 --repeat-tol=1e-8,
-//       which can be stopped after its first lines); a hit if the three differences are below 2e-4 (T* relative, L*, rotation in turns)
+// tests an orbit given by printed start values (Jacobi vectors, as in the CPC tables) for a repeat and against the branch point of the R
+// member with nu = 1/k; rules: docs/rules/rules-thesis-k39.txt. the printed values are arguments and are not stored here. node
+// tools/thesis-orbit-test.mjs close out.json k L a c T [pieces] [--nu=lower|upper] (closes it, return test, word, member of the R trace)
+// then node tools/family-follow.mjs f1.json 1 8 u1 u2 lam t (and -1) with the start values of out.json, then
+// node tools/thesis-orbit-test.mjs hit out.json f1.json f2.json thetaMember TstarMember LstarMember (member: first line of
+// tools/branch-point.mjs k theta); hit if all differences < 2e-4.
 import fs from 'fs';
 import { perpInfo, perpInitial } from '../src/perp.js';
 import { closePerpMS } from '../src/shooting.js';

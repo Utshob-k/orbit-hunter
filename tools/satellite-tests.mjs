@@ -1,6 +1,7 @@
-// tests of the relations of the zeros of the upper branch of the R satellites (k = 1, n = 5 to 36): robustness of predictor B, the sqrt(n) form and the L* fit (leave one out, trailing windows, other windows), the heuristic
-// delta_n = C eps_n for the correction of B (found after the data were seen), and the comparison with the relation of the PRL type (same T*/k against L* as the parent). the rules, written before the numbers
-// were computed, are in docs/rules/rules-relation-tests.txt; the zeros are the refined orbits of data/satellite-candidates.json (stored zeros for n = 5, 6, 8). node tools/satellite-tests.mjs
+// tests of the relations of the zeros of the upper branch of the R satellites (k = 1, n = 5 to 36): robustness of B, the sqrt(n) form and
+// the L* fit (leave one out, trailing windows), the heuristic delta_n = C eps_n (found after the data) and the comparison with the relation
+// of the PRL type. rules, written before the numbers were computed: docs/rules/rules-relation-tests.txt; the zeros are the refined orbits
+// of data/satellite-candidates.json (stored zeros for n = 5, 6, 8). node tools/satellite-tests.mjs
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { perpInfo } from '../src/perp.js';

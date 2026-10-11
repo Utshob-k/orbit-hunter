@@ -1,11 +1,8 @@
-// do the printed start values of Table 1 of Li, Tao, Li and Liao 2025 return rotated by the printed theta after the printed period T?
-// each row is integrated with Dormand-Prince 5(4) and with Gragg-Bulirsch-Stoer (both with tolerance 1e-13) from the printed 8 digits, with no solver of mine in between.
-// the state is moved to the centre of mass frame first (the rotation of the paper is about the centre of mass). reported per row:
-//   dTheta: largest difference of a position or velocity component between the end state and the start rotated by the printed theta (the d of the paper, < 1e-6 is their criterion)
-//   dBest:  the same with the best rotation instead of the printed one, and that best angle
-//   T*, L*: from the printed numbers themselves
-//   choreography: does the state after T/3 equal the start rotated and relabelled by a cyclic permutation (the three bodies on one curve)?
-// node tools/liao-closure.mjs      exits with 1 when a list is empty
+// do the printed start values of Table 1 of Li, Tao, Li and Liao 2025 return rotated by the printed theta after the printed period T? each
+// row is integrated with Dormand-Prince 5(4) and Gragg-Bulirsch-Stoer (tolerance 1e-13) from the 8 printed digits. per row: dTheta (largest
+// difference between the end state and the start rotated by the printed theta; < 1e-6 is their criterion), dBest (with the best rotation),
+// T*, L*, and whether the state after T/3 is the start rotated and relabelled cyclically (choreography).
+// node tools/liao-closure.mjs (exits with 1 when a list is empty)
 import fs from 'fs';
 import { dp45Step } from '../src/physics.js';
 import { bsIntegrate } from '../src/bs.js';

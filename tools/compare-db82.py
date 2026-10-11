@@ -1,5 +1,6 @@
-# the orbits whose rotation angle is a multiple of 2 pi (theta/2 a multiple of pi) among the rows of the Davoust and Broucke tables (converted with tools/convert-db82.mjs)
-# against my 85 orbits and the 17 of the arclength list, allowing n fold repeats (n = 1..9). python tools/compare-db82.py
+# the rows of the Davoust and Broucke tables (tools/convert-db82.mjs) whose rotation angle is a multiple of 2 pi against my 85 orbits and
+# the 17 of the arclength list, allowing n fold repeats (n = 1..9).
+# python tools/compare-db82.py
 import json, math
 conv = []
 for f in ('db82-A1-converted', 'db82-table3-converted', 'db82-table4-converted', 'db82-table5-converted', 'db82-table6-converted', 'db82-table7-converted'):

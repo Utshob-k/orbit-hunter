@@ -1,9 +1,8 @@
-// relative periodic orbits with a general (not mirror symmetric) start, to reproduce Table 1 of Li, Tao, Li and Liao 2025 and to continue their IA-3 orbit in L.
-// start as in the paper: bodies on the x axis at (y1, 0), (1, 0), (0, 0), velocities (v1x, v1y), (v2x, v2y), v3 = -v1 - v2 (zero total momentum, so the centre of mass rests).
-// unknowns u = (y1, v1x, v1y, v2x, v2y, T, theta); conditions: the state after T equals the start rotated by theta about the centre of mass (12 numbers, 6 of them independent)
-// and L = y1 v1y + v2y has the wanted value (13 equations). Gauss-Newton with finite difference Jacobian (double precision), continuation in L.
-// node tools/rpo.mjs reproduce [fam]    the rows of Table 1 at L = 0.02, 0.05 (figure-eight) and 0.05, 0.10 (IA-3), only one family if given
-// node tools/rpo.mjs theta fam target   continue the family fam (figure-eight or IA-3) in L until theta = target (a rational multiple of 2 pi), write data/rpo-<fam>-<name>.json
+// relative periodic orbits with a general start, to reproduce Table 1 of Li, Tao, Li and Liao 2025 and to continue their IA-3 orbit in L.
+// bodies at (y1,0), (1,0), (0,0), v3 = -v1 - v2; unknowns (y1, v1x, v1y, v2x, v2y, T, theta); conditions: the state after T is the start
+// rotated by theta, and L has the wanted value (Gauss-Newton, finite difference Jacobian, continuation in L).
+// node tools/rpo.mjs reproduce [fam] rows of Table 1 (figure-eight L = 0.02, 0.05; IA-3 L = 0.05, 0.10); node tools/rpo.mjs theta fam
+// target continue fam in L until theta = target, write data/rpo-<fam>-<name>.json
 import fs from 'fs';
 import { dp45Step } from '../src/physics.js';
 
@@ -176,7 +175,8 @@ if (process.argv[1] && process.argv[1].endsWith('rpo.mjs')) {
     process.exit(close < 1e-6 ? 0 : 2);
   }
   if (mode === 'reproduce') {
-    // the rows are compared in scale free numbers (T*, L*, theta): the raw start (y1, T) depends on which collinear moment of the orbit is used and on the scale.
+    // the rows are compared in scale free numbers (T*, L*, theta): the raw start (y1, T) depends on which collinear moment of the orbit is
+    //   used and on the scale.
     // the L of the IA-3 rows is 1e-4 above the printed one (checked with the formula of the paper), so that L is the target there
     const scaled = JSON.parse(fs.readFileSync(new URL('../data/liao2025-scaled.json', import.meta.url), 'utf8'));
     let bad = 0, compared = 0;

@@ -1,4 +1,4 @@
-// the co-rotation share (src/corotation.js): 1 for the members of the R family (the prograde branch of the CPC paper), 1 for the satellites N = 6 and 9 of the CPC tables, 0 for N = 1
+// the co-rotation share (src/corotation.js): 1 for members of the R family and for the CPC satellites N = 6 and 9, 0 for N = 1
 import fs from 'fs';
 import { shareSame } from '../src/corotation.js';
 

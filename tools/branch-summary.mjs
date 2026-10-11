@@ -1,11 +1,8 @@
-// what became of every branch point stored in data/branch-points/ (tools/branch-point.mjs): the member of the family of Broucke's R orbits with nu = k/n, the second smallest singular value
-// of the matrix of its n fold repeat (about 1e-12 at a branch point, 1e-3 next to it), and how each of the four continuations ended.
-// a satellite sense ends at a zero of theta (a periodic orbit) or is stopped by a limit of the continuation (closest approach below 0.03, collapse of the step, 700 accepted steps); a stop
-// is a limit of the method and says nothing about the curve beyond it. the control (the repeat direction) must end at a repeat of an orbit of the family: its end is solved as an orbit,
-// its repeat count is taken from src/covers.js and the primitive orbit must close as a relative periodic orbit, with a rotation p/m of a turn.
-// a zero of theta is called established when its closure tier (src/closure.js, double precision, two integrators) is reliable; weak or failed zeros are not established.
-// every zero is also compared with my 102 orbits (data/orbit-table.json, data/perp-arc-orbits.json): an orbit with T* and L* within 5e-3 is the same orbit when the start values agree (src/identity.js), otherwise it is near and different.
-// node tools/branch-summary.mjs [--write]        --write stores data/branch-summary.json
+// what became of every branch point of data/branch-points/: member nu = k/n, second smallest singular value of its repeat matrix, how the
+// four continuations ended (a zero of theta, or a limit of the method, which says nothing about the curve beyond). a control must end at a
+// repeat whose primitive closes (src/covers.js); a zero is established when its closure tier is reliable (src/closure.js) and is compared
+// with my 102 orbits (T*, L* within 5e-3, then the start values, src/identity.js). node tools/branch-summary.mjs [--write] (--write stores
+// data/branch-summary.json)
 import fs from 'fs';
 import { perpInitial, perpInfo } from '../src/perp.js';
 import { coverInfo } from '../src/covers.js';

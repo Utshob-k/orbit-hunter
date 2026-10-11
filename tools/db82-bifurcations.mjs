@@ -1,10 +1,8 @@
-// Davoust and Broucke 1982 (Table 5, family D1 = Broucke's R) against my numbers:
-// 1. the rotation numbers nu of rows 62 to 66 (relative monodromy matrix, src/relative.js). Their bifurcation points of D1 are rows 63 (branch e, triple period), 64 (branch f, double
-//    period) and 65 (family E, triple period); the nu of rows 63 and 65 should be 1/3 and that of row 64 about 1/2 (the printed rows have seven digits, so only 3 or 4 digits agree).
-// 2. how far the rows of e (79 to 82) and E (70 to 78) are from the satellite curves of the two members of R with nu = 1/3 (data/branch-points/3-upper.json and 3-lower.json,
-//    from tools/branch-point.mjs 3 0.3194 --control --write and 3 0.4276 --control --write): relative distance in (T*, L*) to the nearest point of the polyline of the curve, and the rotation
-//    at that point next to the printed one. rows that do not close to 1e-9 as converted (data/db82-table5-converted.json) are skipped.
-// node tools/db82-bifurcations.mjs
+// Davoust and Broucke 1982 (Table 5, family D1 = Broucke's R) against my numbers: (1) the rotation numbers nu of rows 62 to 66
+// (src/relative.js); their bifurcations are rows 63 (e), 64 (f), 65 (E), nu of rows 63 and 65 about 1/3 and of row 64 about 1/2 (seven
+// printed digits, so 3 or 4 agree); (2) the distance of the rows of e (79 to
+// 82) and E (70 to 78) from the satellite curves of the two members with nu = 1/3 (data/branch-points/3-upper.json, 3-lower.json), and the
+// rotation there next to the printed one; rows that do not close as converted are skipped. node tools/db82-bifurcations.mjs
 import fs from 'fs';
 import { relativeStability } from '../src/relative.js';
 

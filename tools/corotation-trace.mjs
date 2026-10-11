@@ -1,7 +1,8 @@
-// the co-rotation share (src/corotation.js) along the family of relatively periodic orbits through the BHH orbit A1 (T* 4.9598, L* 1.0150, start values of data/orbit-table.json), followed in both directions with
-// the arclength tracer (the family of the traced curve data/henon-family-curve.json, the retrograde branch of the CPC paper). at every 2nd step: lam, T*, L*, rotation, closest approach and the share.
-// the output file must be new (an existing file is never overwritten). data/a1-family-corotation.json is the result of: node tools/corotation-trace.mjs data/a1-family-corotation.json 300
-// node tools/corotation-trace.mjs out.json [seconds per direction]
+// the co-rotation share (src/corotation.js) along the family of relatively periodic orbits through the BHH orbit A1 (T* 4.9598, L* 1.0150,
+// data/orbit-table.json), both directions, arclength tracer; at every 2nd step lam, T*, L*, rotation, closest approach and the share. the
+// output file must be new. data/a1-family-corotation.json is the result of:
+// node tools/corotation-trace.mjs data/a1-family-corotation.json 300 (usage: node tools/corotation-trace.mjs out.json [seconds per
+// direction])
 import fs from 'fs';
 import { huntArclength, closePerpMS } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';

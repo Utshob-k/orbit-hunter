@@ -1,14 +1,9 @@
-// the branch point of a satellite on the family of Broucke's R orbits: the member of the family with rotation number nu = k/n (k = 1 unless --k=K is given), where the n fold repeat of the orbit has a double multiplier 1.
-// 1. the member is found by bisection between the two accepted steps of data/r-family-trace.json where nu (the stored multiplier angle) crosses k/n; the stable stretch has two nu (the lower and
-//    the upper one), each crosses 1/n once, and the crossing nearest to the rotation asked for is taken;
-// 2. its n fold repeat is solved as an orbit of the shooting system of src/shooting.js (half period n t, 8 or more pieces); the matrix [J | dF/dlam] of that system has a one dimensional
-//    null space at an ordinary point of a curve and a two dimensional one at a branch point, so its smallest singular values are printed (one sided Jacobi, accurate for small ones);
-// 3. the two directions at the branch point come from the quadratic bifurcation equation g(a, b) = psi . F(Y0 + h (a v1 + b v2)) / h^2 = 0 on the null space (psi: left null vector); one root is the
-//    tangent of the repeat curve (the exact repeats of the neighbouring members, started cold), the other is the satellite;
-// 4. the satellite is followed in both senses with pseudo arclength (tangent turning < 0.35 rad, steps below 6 % of the distance from the branch point so that Newton cannot land on the repeat
-//    curve) until the rotation angle is 0: a periodic orbit. with --control the repeat direction is followed too, it must end at a repeat of an R orbit.
-// node tools/branch-point.mjs n theta [--k=K] [--repeat-tol=1e-8] [--pieces=P] [--control] [--write]      theta = rotation of the member in turns, e.g. n = 5, 0.2010 (the upper nu) or 0.2240 (the lower one), n = 6, 0.1678, n = 8, 0.1258
-//   --write stores the numbers in data/branch-points/n-upper.json or n-lower.json (k = 1), or k-n-upper-theta.json (k > 1: the upper nu can cross the same k/n twice, so the theta asked for is in the name). a run takes a few minutes (n = 8 with --control about 20)
+// branch point of a satellite on Broucke's R family: the member with rotation number nu = k/n (k = 1 unless --k=K), where the n fold repeat
+// has a double multiplier 1. prints the singular values of [J | dF/dlam] of the repeat (second smallest about 1e-12 at a branch point) and
+// follows the satellite to rotation 0 (--control: the repeat too).
+// node tools/branch-point.mjs n theta [--k=K] [--repeat-tol=1e-8] [--pieces=P] [--control] [--write] (theta: rotation of the member in
+// turns, n = 5: 0.2010 upper, 0.2240 lower nu)
+// --write stores data/branch-points/<n>-upper.json or -lower.json (k > 1: <k>-<n>-<branch>-<theta>.json).
 import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
 import { perpInfo } from '../src/perp.js';
@@ -142,7 +137,8 @@ function follow(vDir, vOther, sgn) {
     const d = Math.hypot(...Array.from(c.Y, (v, i) => v - Y[i]));
     if (cur.minDist < 0.03) { why = 'close approach ' + cur.minDist.toFixed(4); break; }
     if (step > 1 && prev.turns * cur.turns < 0 && Math.abs(prev.turns) < 0.05) {      // the zero of theta between the last two points: bisection along the chord, corrected onto the curve
-      // (until version 0.2.23 the loop stopped for good when the corrector failed at a midpoint, which left four zeros of n <= 36 and 15 of n = 37 to 56 at a rotation of up to 5e-5 turns; src/zero.js retries at 1/4 and 3/4 of the chord)
+      // (until version 0.2.23 the loop stopped for good when the corrector failed at a midpoint, which left four zeros of n <= 36 and 15 of
+      //   n = 37 to 56 at a rotation of up to 5e-5 turns; src/zero.js retries at 1/4 and 3/4 of the chord)
       const lz = locateZero({ a: Float64Array.from(Y), b: Float64Array.from(c.Y), ta: prev.turns, correct: (p, nrm) => correct(p, nrm, m, t0), info: inv, unit });
       zero = lz.zero; why = lz.zero ? 'zero of theta' : 'zero of theta not located: the corrector failed'; s += d; pts.push({ s, Tstar: cur.Tstar, Lstar: cur.Lstar, turns: cur.turns, lam: cur.s.lam, minDist: cur.minDist });
       break;

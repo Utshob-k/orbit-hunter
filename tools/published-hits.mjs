@@ -1,6 +1,6 @@
-// the orbits of my lists that lie on a family traced from a published orbit (data/families85/*.json):
-// my T*, L*, syzygy word; the theta = 0 orbit found on the trace (T*, L*, word) and its distance to mine; the published orbit the trace started from (T*, L*, word) and whether it is the same orbit
-// node tools/published-hits.mjs
+// the orbits of my lists that lie on a family traced from a published orbit (data/families85/*.json): my T*, L*, word; the theta = 0 orbit
+// on the trace and its distance to mine; the published orbit the trace started from and whether it is the same orbit. node
+// tools/published-hits.mjs
 import fs from 'fs';
 import { perpInitial } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';

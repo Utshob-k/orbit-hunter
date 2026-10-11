@@ -1,7 +1,5 @@
-# is one of my orbits n relative periods of a member of the family m of Henon 1976 (planar, equal masses)?
-# a member is a relative periodic orbit: after one relative period the bodies are in their own places, turned by a rotation angle. n of them make an orbit that returns
-# rotated after T/n (tools/return-test.mjs, data/return-test.json), so only orbits with such a return can be members' repeats.
-# reads data/henon-family-curve.json (derived points of the traced family), data/henon1976-derived.json (derived numbers of the tabulated orbits), data/return-test.json
+# is one of my orbits n relative periods of a member of Henon's 1976 family (planar, equal masses)? such an orbit returns rotated after T/n
+# (tools/return-test.mjs, data/return-test.json). reads data/henon-family-curve.json, data/henon1976-derived.json and data/return-test.json.
 # python tools/henon-family-compare.py
 import json, math, sys
 curve = json.load(open('data/henon-family-curve.json'))['segments']

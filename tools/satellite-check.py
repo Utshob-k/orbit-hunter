@@ -1,7 +1,7 @@
-# checks the orbits of data/satellite-candidates.json with REBOUND (IAS15, default settings; nothing from src/ is used): the closure after one period (max norm, best rotation removed, from the
-# start values rounded to double precision) and the largest nontrivial multiplier of the 12 x 12 monodromy matrix (the 8 multipliers closest to 1 are the trivial ones), next to the multiplier of src/relative.js
-# (the field multiplier of data/satellite-candidates.json, made by tools/satellite-candidates.mjs --write). the functions are the ones of tools/rebound-check.py.
-# pip install rebound numpy;  python tools/satellite-check.py [--write]      (data/satellite-check.json is only written with --write)
+# checks the orbits of data/satellite-candidates.json with REBOUND (IAS15, defaults; nothing from src/ is used): the closure after one
+# period (max norm, best rotation removed, start values rounded to double) and the largest nontrivial multiplier, next to that of
+# src/relative.js (field multiplier, made by tools/satellite-candidates.mjs --write); the functions are those of tools/rebound-check.py.
+# pip install rebound numpy; python tools/satellite-check.py [--write] (data/satellite-check.json only with --write)
 import json, math, sys, time, os
 import numpy as np
 import rebound
