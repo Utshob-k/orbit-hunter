@@ -4,6 +4,7 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 ## Versions
 
+- 0.2.23 (2026-10-11): robustness of the empirical relations of the R satellites (leave one out, trailing windows), the heuristic delta_n = C eps_n found after the data were seen, and the R satellites against the relation of the PRL type (`docs/r-family-satellites.md`, `tools/satellite-tests.mjs`, `docs/rules/rules-relation-tests.txt`); no change to the data.
 - 0.2.22 (2026-10-11): empirical relations for the zeros of the upper branch (`docs/r-family-satellites.md`, `tools/satellite-relations.mjs`); the table of `tools/satellite-sequence.mjs` takes T* and L* from the refined orbits (it had L* wrong by up to 1e-3 for n = 24, 26, 27 and 28 in 0.2.21, see Corrections); `branch-point.mjs` prints the rotation left at a zero.
 - 0.2.21 (2026-10-10): the satellites of the R family with k = 1 for n = 13 to 20 (both branches) and the upper branch to n = 36 (not run beyond); the zeros are unstable from n = 13; the rules and predictions as written before the runs (`docs/rules/`); `tools/satellite-sequence.mjs`, `--repeat-tol` and `--pieces` of `branch-point.mjs`, the caps of the integration steps in `src/perp.js` and `src/shooting.js` raised by 20.
 - 0.2.20 (2026-10-10): small fixes in the README and docs (the 33.745149 orbit against t41 and t42, rows of the csv, REBOUND sentence, file names).

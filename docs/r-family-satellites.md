@@ -171,3 +171,33 @@ to 20) and 0.47 (n = 8 to 20); with a d / n^2 term 0.35 and 0.20; a n + b + c sq
 failed, so it is a form chosen after the test; fitted on n = 8 to 20 it is as good as B (0.0031) with three parameters and without the parent family,
 and for n = 5 to 20 it is not (0.020). So the fits in n alone do not show that the relation to the parent family is needed: it is a reason for B that
 was given before the run, and the sqrt(n) form has none. Both are empirical.
+
+**Robustness (2026-10-11).** `tools/satellite-tests.mjs`; the rules, with the bounds, were written before the numbers were computed
+(`docs/rules/rules-relation-tests.txt`: 0.005 for T*, 1e-3 for L*). Only B was written down before the run for n >= 21; the sqrt(n) form and the L*
+fit were found after it, so a pass for them is not out of sample. Leave one out over n = 8 to 36 (interpolation): the largest error is 3.98e-3 for B
+(at n = 8), 8.8e-4 for the sqrt(n) form and 1.9e-4 for L*. Trailing windows (fit on n = 8 to m, predict m + 1 to 36): B is inside the bound from m =
+15 (3.8e-3; 5.18e-3 at m = 14, 4 % over), and its error at n = 36 has the same sign for every m (-5.2e-3 to -1.0e-3), with coefficients that drift
+with the window (a from -0.0005 to -0.0066, b from 0.435 to 0.500: the form a + b / n is not right); it is not inside the bound when n = 5 to 7 are in
+the fit (-0.014 at n = 36 for the window 5 to 20). The sqrt(n) form has very stable coefficients (a 1.5365 to 1.5397) but is inside the bound only for
+fits that reach n = 19 (3.7e-3; 5.6e-3 at m = 18, 1.99e-2 at m = 14). The L* fit stays within 4.5e-4 in every trailing window and every window tried,
+and its limit is 2.735 +- 0.001 (2.7344 to 2.7361 over the windows, 2.7347 to 2.7355 for fits on 8 to m).
+
+**A heuristic for the correction of B (suggested after the data were seen).** The rotation of the first point of every satellite curve is -eps_n, with
+eps_n = n |theta_R| - 1, the rotation of the n fold repeat of the member beyond one turn (equal to within 4e-10 for n = 5 to 36). eps_n has its maximum at n
+= 7 (7.04e-3), and so has delta_n (0.0583): the hump of delta that a + b / n cannot follow is the hump of eps. The ratio delta_n / eps_n is the mean
+of |dT*/dtheta| along the curve from the branch point to the zero, so it is an identity and not a test; it is 8.1 at n = 5, 8.4 at n = 11, 8.0 at n =
+20, 7.5 at n = 25, 6.95 at n = 30 and 6.13 at n = 36, inside 7 to 9 up to n = 29. The slope at the branch point is not the mean slope for the larger n
+(8.2 at n = 5, 10.1 at n = 20, 11.45 at n = 36; within 12 % of the mean only up to n = 12): the curve bends. So delta_n = C eps_n with C about 8 is a
+first-order heuristic, not a derivation and not a prediction (C is not known independently of the curves). For k > 1 the ratio |delta| / |eps| is 7.5
+to 8.3 for all ten zeros with closure tier reliable, 7.1 to 7.5 for three zeros with tier weak, and 16.5 to 32.5 for four files (2-9-lower-0.2572,
+2-11-lower-0.1995, 5-11-upper-0.3916, 5-12-upper-0.4313), all four with tier weak or failed, which are zeros that are not established.
+
+**Not the relation of the PRL type (the R family only).** Jankovic, Dmitrasinovic and Suvakov (PRL 2016) say that the published BHH satellites lie on
+the same curve of L against T/k as the BHH family itself (see "Where the stable orbits sit on the BHH curve" in `docs/results.md`). That was not
+tested here: the BHH family (Broucke's A1, orbit 11 of Henon 1976) was not traced, and nothing is said about the CPC satellites. For the R family: the
+zeros of n = 5 to 36 do not lie on the curve of T* against L* of the parent (the R family at the L* of the zero), 0 of 32 within 1e-3; the relative
+difference is 0.039 at n = 5 and 0.53 at n = 36 (the zero of n = 36 has T*/n = 2.010, the R family at its L* = 2.709 has T* = 3.084). They have
+instead the T* of the member with nu = 1/n minus delta_n / n: relative difference 2.3e-3 at n = 5, 1.1e-3 at n = 13 and 9.8e-5 at n = 36, inside 1e-3
+for 23 of the 32 (n >= 14), while the L* of the zero is 0.02 to 0.96 below that of the member. So for the R satellites the period is that of the
+repeat at matching nu and not that of the family at matching L*; whether the BHH satellites behave like this was not tested, and this is not a test of
+the published statement.
