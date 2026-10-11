@@ -4,6 +4,7 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 ## Versions
 
+- 0.2.26 (2026-10-11): correction: one rotating member of the satellite curve of R for n = 39 was found before (thesis of Jankovic 2016, preliminary search at L = 1.5, mentioned in the CPC 2020), the orbit k = 45 of that search is a 45 fold repeat of an R orbit, k = 12, 58, 84 undecided; the orbits with rotation 0 and the sequence for n >= 5 not found in the sources checked (`tools/thesis-orbit-test.mjs`, `docs/rules/rules-thesis-k39.txt`).
 - 0.2.25 (2026-10-11): the CPC rows against the satellite curves of the R family (`tools/cpc-rows.mjs`, `docs/rules/rules-cpc-curves.txt`): none is on a curve, 95 of 99 are excluded by a screen, N = 9 is on the A1 side, N = 99 stays open; the numbers of the PRL type relation for the CPC rows and the remark of Li and Liao (arXiv:2008.13550) on unequal masses; the co-rotation share (`src/corotation.js`, `test/corotation.test.js`) and its change along the family through A1 (`tools/corotation-trace.mjs`, `data/a1-family-corotation.json`): the "direct" satellites of the CPC paper.
 - 0.2.24 (2026-10-11): the upper branch of the R satellites for n = 37 to 56 as an out of sample test (rules and predictions written before the run, `docs/rules/rules-test1-test2.txt`): predictor B and the L* fit hold, the sqrt(n) form fails from n = 50, n = 57 and 58 undecided; the 20 zeros refined to 30 digits (`data/satellite-candidates.json` has 54 orbits, `data/branch-points/` 93 files); predictor B for k > 1 does not hold (`tools/satellite-test2.mjs`); the bisection for the zero of theta retries when the corrector fails (`src/zero.js`, `test/zero.test.js`; reruns of n = 13 and 21 reproduce the stored files); the authors of the PRL 2016 paper corrected.
 - 0.2.23 (2026-10-11): robustness of the empirical relations of the R satellites (leave one out, trailing windows), the heuristic delta_n = C eps_n found after the data were seen, and the R satellites against the relation of the PRL type (`docs/r-family-satellites.md`, `tools/satellite-tests.mjs`, `docs/rules/rules-relation-tests.txt`); no change to the data.
@@ -35,6 +36,18 @@ The README was split on 2026-10-10 (version 0.2.18). Its sections went to `docs/
 
 Statements of mine that were wrong, newest first. The dates are those of the commits or, for 2026-10-09, of the day of the change.
 
+- **2026-10-11, satellites of R with n >= 5 were partly found before.** The README and `docs/r-family-satellites.md` said that none of the sources
+  that could be read has the orbits of the satellites of R for n >= 5, and the paragraph on the direct satellites of the CPC 2020 said that the fourth
+  direct satellite of the paper was not identified (N = 3 the only candidate). The master thesis of M. Jankovic (Belgrade 2016) was not among the
+  sources. It has the six orbits of the preliminary search that the CPC 2020 mentions (section 4: k = 84, 12, 45, 39, 58, 13), four of them at L =
+  1.5, which are not in the CPC tables. Converted and tested on 2026-10-11 (`tools/thesis-orbit-test.mjs`, rules written before the runs in
+  `docs/rules/rules-thesis-k39.txt`): the orbit k = 39 is a rotating member (rotation angle not 0) of the satellite curve of the R member with the
+  lower nu = 1/39, within 3e-5 in L* of its branch point, the member having a second null vector of the shooting matrix of its 39 fold repeat; the
+  orbit k = 45 returns after T/45 and is a 45 fold repeat of an R orbit; k = 58 (the refined version is the row N = 99), k = 12 and k = 84 are
+  undecided (the family could not be followed, 11 loops per relative period, does not close). So the README table and the paragraph on the literature
+  are corrected: the orbits with rotation 0 and the sequence for n >= 5 were not found in the sources checked, a rotating member for n = 39 was. The
+  statement on the fourth direct satellite is replaced (the four direct ones are probably among the six orbits of the preliminary search). The thesis
+  is not part of this repository and I found no public copy, so the numbers of its orbits are not given here.
 - **2026-10-11, the authors of the PRL 2016 paper.** `docs/prior-work.md` said "Janković, Dmitrašinović and Šuvakov (PRL 2016, CPC 2020)", and the
   paragraph on the relation of the PRL type added in version 0.2.23 said "Jankovic, Dmitrasinovic and Suvakov (PRL 2016)". The PRL paper (Phys. Rev.
   Lett. 116, 064301, 2016) has two authors, Janković and Dmitrašinović; Šuvakov is the third author of the CPC paper (250, 107052, 2020). It was found

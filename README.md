@@ -12,7 +12,8 @@ The code reproduces published orbits to about nine digits. For non-zero angular 
 - all 415 equal-mass orbits with L != 0 of the Three Body Orbits atlas,
 - Davoust and Broucke 1982, Broucke and Boggs 1975, Broucke 1975, Hénon 1976,
 - the 99 satellites of Janković et al. 2020,
-- the 18 rows of Li et al. 2025.
+- the 18 rows of Li et al. 2025,
+- the preliminary search of the master thesis of Janković (2016, no public copy found; described, not reproduced here), added on 2026-10-11 (see below).
 
 Three families were tested as well: Hénon's family (the BHH family), the rotating eights (a choreography test) and IA-3 (in the range of the Li et al. rows).
 
@@ -50,16 +51,20 @@ One of the 77 orbits (T* = 33.745) lies on Broucke's family R. Satellites leave 
 | 7 | T* = 21.663 | in the atlas (R7 1/1, from the atlas's own 2026 search, no paper) |
 | 9 to 12 | T* = 25.383, 27.217, 29.037, 30.844 | not found in the sources checked |
 | 13 to 56 | T* = 32.640 to 105.846, all unstable (largest multiplier 1.71 to 53.2) | not found in the sources checked (n = 27 and 29 to 36 reached only after declared changes of the method, see docs) |
+| 39 | one rotating member (rotation angle not 0) of the satellite curve of the member with the lower nu = 1/39 | found before: preliminary search of the thesis of Janković 2016, mentioned in the CPC 2020 (version 0.2.26); the orbit with rotation 0 is not in the sources checked |
 | 57, 58 | undecided | both senses stopped at the step limit of the method |
 | 59 and up | not run | the stored trace has no crossings of nu = 1/n beyond n = 58 |
 
 The orbits for n = 5 to 12 are all linearly stable; from n = 13 on they are unstable, so the sequence of stable orbits ends at n = 12. The satellite
 curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined to 30 digits, unstable). "Not found in the sources checked" says
-nothing about whether an orbit is known. The 2025 review of Li and Liao could not be read. Several continuations stopped at a limit of the method
-(close approach, step size, step count); those are undecided, not results. Satellites with a rotation number k/n, k > 1, were followed too (21 more
-members): three more linearly stable orbits (T* = 33.745149, a different orbit from t41 and t42, see docs; 37.624249; 51.383330) match nothing in the
-sources checked, three of the 77 (t37, t42, t59: rows 37, 42 and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 of the
-zeros are not established. Details: [docs/r-family-satellites.md](docs/r-family-satellites.md).
+nothing about whether an orbit is known. The thesis of Janković (2016) has a rotating member of the satellite curve for n = 39 and, among the six
+orbits of its preliminary search, a 45 fold repeat of an R orbit; k = 12, 58 and 84 of that search are undecided (details in
+`docs/r-family-satellites.md`). The orbits with rotation 0 and the sequence for n = 5 to 56 were not found in the sources checked. The 2025 review of
+Li and Liao could not be read. Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided,
+not results. Satellites with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, a
+different orbit from t41 and t42, see docs; 37.624249; 51.383330) match nothing in the sources checked, three of the 77 (t37, t42, t59: rows 37, 42
+and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 of the zeros are not established. Details:
+[docs/r-family-satellites.md](docs/r-family-satellites.md).
 
 ## Install and reproduce
 

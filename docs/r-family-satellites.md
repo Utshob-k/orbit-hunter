@@ -40,9 +40,27 @@ closes as a relative periodic orbit, among them R2 and the T* = 33.745 orbit as 
 collapse of the step. All of this is double precision: the zeros of theta close to 6e-12 to 4e-10, not to 30 digits, and where a continuation stops
 depends on its step rules. Davoust and Broucke 1982 followed the satellites of R (their family D1) for the multiplicities 2 and 3 (branches f, e and
 E, Corrections, 2026-10-10) and the atlas lists satellites of the BHH family coded R or A (family bhhsat). For n = 5, 6, 8 and 9 to 12 none of the
-sources that could be read has these orbits (the papers named above, the atlas, Broucke 1975, Davoust and Broucke 1982). The review "A review on
-periodic orbits of the general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi
-10.1007/s11433-024-2686-6) could not be read (it is not open access and there is no preprint), so "not found" is all that can be said.
+sources that could be read has these orbits with rotation 0 (the papers named above, the atlas, Broucke 1975, Davoust and Broucke 1982); a rotating
+member of the satellite curve for n = 39 is in a source that was added later, see the paragraph below. The review "A review on periodic orbits of the
+general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi 10.1007/s11433-024-2686-6) could not be
+read (it is not open access and there is no preprint), so "not found" is all that can be said.
+
+**A rotating member of the satellite curve for n = 39 was found before (2026-10-11).** The sentence above was incomplete. The master thesis of M.
+Jankovic (Belgrade 2016, appendix A, Table 3; it is not part of this repository and I found no public copy) gives six orbits of a preliminary search,
+two at L = 0.935549 and four at L = 1.5, with the topological exponents k = 13, 58 and 12, 45, 39, 84. The CPC 2020 paper mentions that search and
+the six exponents (section 4, p. 8: "some of which are retrograde and others are direct") but does not tabulate the orbits at L = 1.5. I read the
+thesis on 2026-10-11, converted the orbits like the rows of the CPC tables, closed them again and tested them (`tools/thesis-orbit-test.mjs`; the
+rules, written before the runs, are in `docs/rules/rules-thesis-k39.txt`; the printed values are arguments of the script and are not stored here).
+Result: the orbit k = 39 is a rotating member (rotation angle not 0) of the satellite curve of the R member with the lower nu = 1/39. It has no repeat
+and the word (01)^39; the exact member has a second null vector of the shooting matrix of its 39 fold repeat (second smallest singular value 4.3e-12
+against 8.1e-5); the orbit is within 1e-7 of the branch point in T* (relative), 3e-5 in L* and 3e-7 turns in the rotation (its rotation is minus
+eps_39 to that accuracy), and the family through it, followed in both senses, passes within 4e-8 in L* and 3e-7 turns of the branch point and then
+leaves it as the two senses of a satellite curve do. The orbit with rotation 0 on that curve was not computed. The orbit k = 45 is a 45 fold repeat of
+an R orbit (it returns after T/45, mismatch 1.7e-10) and not a satellite. For k = 58, whose refined version is the row N = 99 of the CPC tables, the
+family could not be followed from the start and the orbit is far from the branch point of the member (about 0.85 in L*): undecided. k = 12 (11 loops
+per relative period) is undecided and k = 84 does not close from the printed digits. So satellites of R with n >= 5 were partly found before: one
+rotating member of the curve for n = 39 is in the thesis, and its search is mentioned in the CPC 2020, without being identified as a satellite of R.
+The orbits with rotation 0 and the sequence for n = 5 to 56 are not in the sources I could read.
 
 The satellite curves of the T* = 17.847 and 19.769 orbits each have a second orbit with rotation angle 0, after the stable one, near a close approach:
 T* = 17.7208, L* = 1.6293 (word (01)^5, 10 alignments) and T* = 19.6472, L* = 1.5989 ((01)^6, 12 alignments).
@@ -279,7 +297,7 @@ side and not of R. N = 19 (k = 8) and N = 33 (k = 10) are not on the stored arms
 the nearest points of the arms of A1 with the same k are 0.44 and 0.77 away in T* and L*), and they are near the traced retrograde curve of Henon's
 family, N = 19 to 2e-4 and N = 33 to 3 % in T*/k at their L*: satellites of other members of the retrograde family. N = 99 (k = 58, L* 3.26) is near
 the satellite curve of the R member nu = 1/58 and not on it (in a run for n = 58 that is not part of this repository, T* differs by 1.4e-4, the
-rotation by 7e-3 rad and lam by 0.046 on the first sense; the second sense stopped at L* 3.57, before the L* of the row), so it stays open. So no row
+rotation by 7e-3 rad and lam by 0.046 on the first sense; the second sense stopped at L* 3.57, before the L* of the row), so it stays open (N = 99 is the refined version of the orbit k = 58 of the preliminary search of the thesis of Jankovic, see the paragraph on the thesis above). So no row
 of the CPC tables is shown to lie on one of my satellite curves, 95 of the 99 are excluded as points of one, N = 9 is on the A side, and N = 99 is the
 one row that remains open until the curves of n = 58 are continued; "not found in the sources checked" stands for the zeros and now also holds for the
 curves in the part that was computed. The same screen does not exclude the rows as points of other families of the retrograde branch, which is what
@@ -288,12 +306,14 @@ almost all of them are.
 **Which CPC satellites are direct (2026-10-11).** The CPC paper says that four of its 99 satellites belong to direct (prograde) orbits and does not
 mark them. With the co-rotation share (`src/corotation.js`: the closest pair is taken as the inner binary, and the share is the part of the relative
 period in which the angular momenta of the inner binary and of the outer orbit have the same sign) three rows co-rotate all the time (N = 6, 9 and
-99), N = 3 for 40 % of the time and 95 rows counter-rotate (`tools/cpc-rows.mjs`); the fourth direct satellite of the paper is not identified (N = 3
-is the only candidate). The members of the R family that were tested co-rotate (all 242 points of the stored trace at the start, six over the whole
-orbit), and so does the BHH orbit A1 (T* 4.9598), which the papers call retrograde (Li and Liao for all their orbits). The reason, from
-`tools/corotation-trace.mjs` (`data/a1-family-corotation.json`): along the traced family through A1 the share is 1 for the stretch around A1 (in one
-direction, lam increasing, L* falls to 0.22 at T* 4.98 to 4.995; in the other T* falls from 4.96 to 4.29 while L* stays between 1.04 and 0.775) and
-falls to 0 between T* 4.29 and 4.23 (lam 0.50 to 0.47, L* 0.775 to 0.760), where it stays to the end of the trace (T* 2.32, L* 1.61, where the tracer
-lost the family). So the measure changes sign along the retrograde curve near L* 0.77, and the satellites N = 6 and N = 9, which branch from A1, are
-on the co-rotating stretch. That the rows the paper calls direct are the co-rotating ones is a reading of its words with a measure of my own, which
-the paper does not state; N = 99 (k = 58, L* 3.26) co-rotates too but is far from A1. None of these rows is an R satellite zero.
+99), N = 3 for 40 % of the time and 95 rows counter-rotate (`tools/cpc-rows.mjs`); the fourth direct satellite is not among the rows (the four direct
+ones of the paper are probably among the six orbits of the preliminary search, four of them at L = 1.5, which are not in the tables; see the paragraph
+on the thesis above, where k = 45 is a repeat of an R orbit; N = 3, with 40 %, is not one of them). The members of the R family that were tested
+co-rotate (all 242 points of the stored trace at the start, six over the whole orbit), and so does the BHH orbit A1 (T* 4.9598), which the papers call
+retrograde (Li and Liao for all their orbits). The reason, from `tools/corotation-trace.mjs` (`data/a1-family-corotation.json`): along the traced
+family through A1 the share is 1 for the stretch around A1 (in one direction, lam increasing, L* falls to 0.22 at T* 4.98 to 4.995; in the other T*
+falls from 4.96 to 4.29 while L* stays between 1.04 and 0.775) and falls to 0 between T* 4.29 and 4.23 (lam 0.50 to 0.47, L* 0.775 to 0.760), where it
+stays to the end of the trace (T* 2.32, L* 1.61, where the tracer lost the family). So the measure changes sign along the retrograde curve near L*
+0.77, and the satellites N = 6 and N = 9, which branch from A1, are on the co-rotating stretch. That the rows the paper calls direct are the
+co-rotating ones is a reading of its words with a measure of my own, which the paper does not state; N = 99 (k = 58, L* 3.26) co-rotates too but is
+far from A1. None of these rows is an R satellite zero.
