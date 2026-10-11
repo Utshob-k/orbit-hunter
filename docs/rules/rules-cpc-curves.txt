@@ -1,0 +1,42 @@
+Rules for the test of the 99 rows of the CPC 2020 tables against the satellite curves of Broucke's R family (tools/cpc-rows.mjs), copied from the local rules file. They were written on 2026-10-11 before the test was run; the two corrections of the screen that were made after the first runs were declared in the file before the screens were run again, and are kept below. The times are the clock of the machine. The data of phase 2 and 3 (n = 57 and 58) that the local runs used as extra curves are not part of this repository version.
+
+WHY. The CPC rows are relatively periodic orbits with a rotation angle theta that is not 0 (N = 1: -0.383 rad), so each is one point of a one parameter family, not an isolated orbit. "T* and L* equal to 1e-5" is a test for orbits with theta = 0 (the zeros of my satellite curves). A row that lies on one of my curves would be a point of the
+family of an R satellite, which a comparison with my zeros alone cannot show.
+
+DATA. (a) The curves: every file of data/branch-points/ (k = 1 and k > 1, upper and lower, both senses; each sense has a curve of points s, T*, L*, rotation in turns, lam, closest approach, from the branch point to the zero or to the limit that stopped it); (b) none other in this version of the repository (the local test also used the curves of n = 57 and 58 from later runs, which are not part of this version); (c) The rows: the 99 rows of data/cpc-converted.json, each CLOSED again as a relatively periodic orbit with multiple shooting (closePerpMS, 16 pieces, then 32 and 64 if the residual is above 1e-9; src/shooting.js)
+from the converted start values, because single shooting does not close some rows (N = 99 returns with an error of 1.7e6); T*, L*, rotation theta (rad, the absolute value is used: the sign is the mirror), lam of the closed orbit are taken from src/perp.js (perpInfo) and not from the printed digits. A row whose multiple shooting does not reach
+a residual below 1e-8 is reported as "does not close" and is not tested.
+
+THE TEST. A row with the word (01)^k (all CPC rows) can only lie on a curve of a branch point with n = k (the satellites of a member with nu = p/n have the word (01)^n). For each such curve and each sense, the curve is cut at the L* of the row (linear interpolation between the two points of the curve that enclose it; a curve that does not reach
+the L* of the row is skipped and listed) and the T*, the rotation (absolute value, in rad = 2 pi turns) and lam of the curve are compared with the row.
+ HIT:  |dT*| / T* <= 1e-6 and |d rotation| <= 1e-5 rad. (The printed digits of the rows are 8 for T and 12 for the parameters, the closure of the orbits is 1e-8 or better; two orbits of the same curve agree at 1e-7 or better in T* and in the rotation after the interpolation, the curves have a step of
+   about 1e-3 in L* and are smooth.)
+ NEAR: |dT*| / T* <= 1e-3 and |d rotation| <= 0.02 rad.
+ For every row the nearest curve (the smallest of |dT*| / T* + |d rotation| / 0.02) is reported also when it is neither HIT nor NEAR.
+ DECISION OF A CLOSE CASE (HIT or NEAR) by lam and the start: lam of the closed row (at t = 0) or of its other collinear moment (the shape of src/identity.js) against lam of the curve at that L*: the orbit is "on the curve" if |d lam| <= 1e-4 for one of the two moments; otherwise "near the curve, a different orbit". A row that is HIT in T*, rotation and
+ lam is called ON THE CURVE. (lam is the position of the middle body at the collinear start; the start of the curve points is not stored, so the full start comparison needs a re-solve: for the ON THE CURVE rows only, the orbit of the curve is re-solved by multiple shooting at the lam, the T* and the rotation of the curve point, and the normalised start of
+ src/identity.js is compared, identity needs 1e-6.)
+ The word along the curve: the zeros of all curves have the word (01)^n with 2n alignments (checked for the zeros in data/satellite-candidates.json); the points of the curves between the branch point and the zero are not checked one by one.
+
+WHAT IS REPORTED. For every row: closed or not, k, T*, L*, rotation, lam; the curves compared (number), the nearest curve and its differences, the class (ON THE CURVE, near, none, does not close, no curve with n = k). The list of the rows on a curve (if any) with the curve (file, sense), and what this means for the sentence "not found in the sources checked".
+ Expectations written down before running (for the record, not tolerances): from the earlier checks no row was expected on a curve (the rows with k >= 13 and L* 2.4 to 2.8 have T*/k below the R members' by 4 to 6 %, N = 99 was off the sense +1 curve by 0.0156 in T* and 1.2e-3 turns in the rotation); the rows with k <= 12 near L* 0.8 to 1.5 are
+ retrograde and far from R in L*.
+RULES written 2026-10-11 14:34:11 (before the script was written or run)
+
+RESULT OF THE FIRST RUN (cpc-on-curves-1.txt/.json, 14:39): 99 rows closed; 92 rows: no stored curve with n = k reaches the L* of the row (the curves end at the first zero of theta, L* 2.57 to 2.72, or at the limit that stopped them; the rows have L* 0.8 to 2.6), so the test is inconclusive for them and not a negative; 6 rows (N = 93 to 98, k 43 to 48) cross one curve and are
+4 % away in T*: none; N = 99 is NEAR (dT*/T* 1.4e-4, d rotation 7.3e-3 rad) but d lam = 0.046: not on the curve (sense +1 of a later run for n = 58). No row ON THE CURVE.
+
+SCREEN DECLARED AT 14:41 BEFORE IT IS RUN (a weaker test that does not need the curves to be extended; it can only exclude, not find): the satellite curves of the member with nu = p/k have T* equal to k T*_member(nu = p/k) up to the shift delta of the curve, which is 0.2 % at most for n >= 13 and 1 % for n = 5 (the n = 5 curve to its second zero:
+17.89 to 17.72). A row with k loops can therefore be on a satellite curve of R only if T*/k is within 1.5 % of T*_member at some nu = p/k (p = 1 .. k-1) of the stored trace data/r-family-trace.json (linear interpolation along the trace, both nu of the stable stretch). For every row: the list of (p, T*_member, relative difference) inside 1.5 %; rows with none are EXCLUDED as points of an R satellite curve
+(on this basis only); rows with a candidate are the ones for which the curve would have to be continued beyond its zero. Output file: screen-1.txt (new name).
+
+CORRECTION OF THE SCREEN, DECLARED AT 14:48 BEFORE THE SECOND RUN: the window of 1.5 % rested on the shift delta of the satellite curves of the members nu = 1/n (0.3 % at most for n >= 7). For nu = p/k with p >= 2 the zeros of the stored k > 1 files are shifted by up to 6.7 % (see the line printed above: delta / (n T*_member)). So screen 1 (screen-1.txt, kept as it was) can exclude a row only as a point of a curve with p = 1.
+Screen 2 (output screen-2.txt, new name): p = 1: window 1.5 % as before; p >= 2: window 8 % of T*/k. Same rule otherwise (the stable stretch of the trace, both nu, p / k <= 1/2). Rows with no candidate (p, k) are excluded as points of any R satellite curve of the stored kind; rows with a candidate are listed with their (p, k, member T*, L*).
+SECOND CORRECTION, DECLARED AT 14:51 BEFORE THE THIRD RUN: the line printed before screen 2 gave the largest shift delta / (n T*_member) of the 33 zeros of the stored k > 1 files as 15.8 % (median 4.2 %), not 6.7 %. Screen 3 (output screen-3.txt, new name): p = 1 window 1.5 %, p >= 2 window 16 %. Screens 1 and 2 are kept as they were; the statement about excluded rows rests on screen 3.
+
+ADDENDUM (written after the runs, 2026-10-11). The four rows left open by the screen were looked at afterwards with the stored branches of the BHH
+orbit A1 (tools/match-start.py, data/satellite-results*.jsonl): N = 9 (k = 5) is on the k = 5 arm of A1 (2.5e-7 in T* and L*, lam, |u1|, |u2|, t agree
+to 1e-5); N = 19 (k = 8) and N = 33 (k = 10) are not on the stored arms of A1 (0.44 and 0.77 from the nearest point of an arm with the same k). The
+co-rotation share (src/corotation.js, tools/corotation-trace.mjs) was added after N = 6 and 9 were found to co-rotate; its test, whether the share
+changes sign along the traced family through A1, was stated in the request and has no tolerances: the share is a time fraction between 0 and 1 and the
+change is from 1 to 0 within a few steps.
