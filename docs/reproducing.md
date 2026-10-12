@@ -88,3 +88,28 @@ python tools/henon-family-compare.py # the 8 + 9 unmatched orbits that return, a
 
 `tools/rpo.mjs reproduce IA-3` (about 10 minutes) and the other scripts on the printed rows of Li et al. need `data/liao2025-table1.json`, the table
 typed in by the reader; they say so and stop without it. `data/rpo-reproduce-*.json` has the numbers of my run.
+
+## The tables, figures and checks of the satellites (version 0.2.28)
+
+Commands from the top folder of the repository. They read the files of `data/`; nothing is written unless `--write`, `--out` or an output path is given, and an output file that exists is never overwritten. The short ones take seconds to a minute. The long computations (hours) are not repeated: their outputs are the data files in the last column. The checks made for the release, with the rules written before them, are in `docs/rules/rules-release-0.2.28.txt` and `docs/rules/results-release-0.2.28.txt`.
+
+| item | command | data |
+|---|---|---|
+| Table 1: T*, L*, nu1 and nu2 (n = 5 to 12) or the largest multiplier, senses with rotation 0, n = 5 to 56 | `node tools/tables.mjs 1` (runs `tools/satellite-sequence.mjs`) | `data/stability-mp/class-c/` |
+| Table 2: the end orbits of class I, n = 5 to 12, and their differences from the class C orbits | `node tools/tables.mjs 2` | `data/class-i/`, `data/stability-mp/class-c/` |
+| Table 3: the largest error of the three predictions of T* (no correction, the first order prediction of Henon's relation, B) by range of n | `node tools/relation-b-table.mjs` (the lines "largest \|e\|") | `data/branch-points/`, `data/satellite-candidates.json` |
+| B with the exact member instead of the interpolated one | `node tools/relation-b-exact-members.mjs` | |
+| the relations, their robustness, the tests on k > 1 (errors are data minus prediction, zero - B) | `node tools/satellite-relations.mjs`, `node tools/satellite-tests.mjs`, `node tools/satellite-test2.mjs` | |
+| Figures 1 to 3 (T*/n against L*; the two families for n = 5; the dip of the rotation) | `node tools/figures.mjs [1\|2\|3] [--out=DIR]` | `figures/satellites-period-vs-L.svg`, `class-i-pair-n5.svg`, `satellites-rotation-dip.svg` |
+| the supplement: start values of the 52 satellites and the 8 end orbits of class I | `node tools/supplement.mjs [--write]` | `data/supplement-initial-conditions.json` |
+| Henon's relation on the stored curves: the integral, the slope at the branch point, the signs, the dip | `node tools/henon-integral-check.mjs`, `henon-slope-check.mjs`, `henon-sign-check.mjs`, `henon-dip-check.mjs` | |
+| class I: the trace of R in the isosceles description and the check that it reproduces every member | `node tools/iso-trace.mjs [out.json]`, `node tools/iso-check-multipliers.mjs` | `data/r-family-trace-iso.json` |
+| class I: a branch point and its satellite curves, both senses (n = 5: about 40 seconds, n = 12: minutes) | `node tools/branch-point-iso.mjs 5 0.2010 --pieces=8 --out=out.json` (theta as for `branch-point.mjs`; `--out` writes the result, no `--write`) | `data/class-i/curves/` |
+| class I: refinement to 30 digits, REBOUND, the multipliers in multiple precision (about 6 minutes) | `python tools/iso-refine.py out.json refined.json 30`, `python tools/iso-rebound.py refined.json`, `python tools/iso-monodromy-mp.py refined.json stability.json` | `data/class-i/refined/`, `rebound/`, `stability/` |
+| class I: the curves of n = 5 against the stored curve of class C; the end orbits against the class C orbits, the atlas list and the CPC rows | `node tools/iso-compare-curves.mjs`, `node tools/iso-end-orbit-check.mjs refined.json orbit-c.json n --atlas=file` (the atlas list is not stored here) | `data/class-i/check/` |
+| class I: the eight end orbits in one file | `node tools/class-i-partners.mjs [--write]` | `data/class-i/partner-orbits.json` |
+| class C: the multipliers in multiple precision (cases 5 6 7 8s 8d 9 10 11 12, tiers A and B, 3 to 16 minutes per tier) | `python tools/monodromy-mp.py 5 A --out=DIR` | `data/stability-mp/class-c/` |
+| the extended trace of R: nu along the 109 new points and the crossings of 1/n for n >= 59 (the tracer is `tools/family-follow.mjs`, unchanged; the two commands are in the field `what` of the data file) | `node tools/r-trace-nus.mjs` | `data/r-family-trace-extended.json`, `data/r-family-trace-extended-nus.txt` |
+| the 19 regenerated zero files against the stored ones | `node tools/zero-regenerated-compare.mjs` | `data/branch-points-regenerated/` |
+
+The start formats: the perpendicular start (class C) has the bodies on the x axis at -1 - lam/3, lam - lam/3 and 1 - lam/3 with the velocities (0, u1), (0, u2) and (0, -u1 - u2); the isosceles start (class I) has body 0 at (1, 0), bodies 1 and 2 at (-1/2, h) and (-1/2, -h) and the velocities (0, w), (p, -w/2) and (-p, -w/2). G = m = 1, the relative period is 2t, and the values in the files are strings with 30 digits. `tools/refine-mp.py`, `tools/monodromy-mp.py` and `tools/iso-refine.py` need `mpmath`, `tools/iso-rebound.py` and `tools/rebound-check.py` need `rebound` and `numpy`.

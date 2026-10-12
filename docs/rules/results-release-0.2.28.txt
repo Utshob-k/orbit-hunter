@@ -1,0 +1,25 @@
+Results of the checks of release 0.2.28 (made on 2026-10-12 between 14:34 and 14:50 machine clock; the rules and the predictions are in rules-release-0.2.28.txt, written before). Every output of these runs was kept in a folder outside the repository.
+
+(A) QUICK SCRIPTS ON STORED DATA. Prediction: every number equals the number of the same script when it was run from the working copies before. RESULT: held for all.
+  henon-integral-check, henon-slope-check, henon-sign-check, henon-dip-check, relation-b-exact-members, zero-regenerated-compare, iso-compare-curves: the printed output equals the stored output line for line.
+  relation-b-table: equal except one heading (the old one said "CHECK OF THE REVIEW", the new one says "THE NULL MODEL").
+  iso-trace (242 members from the isosceles start, 4 seconds) and iso-check-multipliers: equal except the last line (the word PASSED has no run label any more).
+  tables (Table 1 and Table 2 rows): equal, byte for byte, to the stored rows. supplement: equal to the stored supplement apart from the missing newline at the end of the old file.
+  iso-end-orbit-check for n = 5, 6 and 7 (with the atlas list given as the argument --atlas, a file that is not in the repository): the output equals data/class-i/check/n5.txt, n6.txt and n7.txt, line for line.
+  figures (figures 1, 2 and 3): the three svg files are byte for byte equal to the stored ones. r-trace-nus (the table of nu along the extended trace, 2 seconds): the rows equal the stored table.
+  class-i-partners rebuilt data/class-i/partner-orbits.json from the files of data/class-i/, and the stored file equals the rebuild (apart from the final newline).
+  A first attempt to run six of the scripts (the three Henon checks, the dip check and the two relation B scripts) failed at once because I called the program "time" with a path that does not exist on this machine; the empty outputs of that attempt are kept (names with run1), the outputs used are those with run2.
+
+(B) SHORT CASES WITH THE PACKAGED CODE.
+  B1. monodromy-mp.py 5 A (class C, n = 5, 30 digit orbit, 50 digits): 302 seconds. The file equals data/stability-mp/class-c/class-c-5-A.json in every field except "seconds" and "total_seconds": held (all strings with 30 digits are equal).
+  B2. branch-point-iso.mjs 5 0.2010 --pieces=8 (class I, n = 5, both senses): 39 seconds. All 8388 numbers of the result equal those of data/class-i/curves/n5.json exactly (no difference in any digit), no other difference: held, also with the stricter equality than predicted (1e-12 relative).
+  B3. iso-refine.py on the result of B2 (30 digits): 26 seconds. p, w, h, t, T*, L*, the residual and the closure of the full period equal data/class-i/refined/n5.json in every digit: held.
+  B4. iso-monodromy-mp.py on the result of B3: 343 seconds. Equal to data/class-i/stability/n5-A.json except "orbit_src", "seconds" and "total_seconds": held.
+  B5. family-follow.mjs from the last stored point of the trace of R (first run of the extended trace): 7 seconds for the whole run (it ended by "lost the family near lam = 0.9496" at the limit of the step rule, before the minute). All 77 accepted points equal the stored ones in step, lam, u1, u2, t, T*, L*, theta, turns, closest approach, closure and the modulus: no difference.
+  B5b (declared in the rules before it was run): the second run from the last point of the first: 3 seconds, 32 points, ended by the close approach stop (0.03); all points equal the stored ones, no difference.
+  B6. branch-point.mjs 13 0.0772 --control --write in a copy outside the repository (the zero loop of the repaired src/zero.js): 7 minutes 49 seconds. All 7167 numbers equal those of data/branch-points/13-upper.json; the only difference is the field repeatTolerance, which the new file has and the older stored file does not have (the same as at the check of version 0.2.24 for n = 13): held.
+  No case went over the time limit of 40 minutes.
+
+NOT RERUN: the multiple precision stability of the other 8 cases (class C) and 7 cases (class I), the class I continuations for n = 6 to 12, the 19 regenerated zero files (54 to 119 minutes each under load), the multiple precision refinements and the REBOUND runs of the other n. For the regenerated zeros B6 is the only rerun (a short case of the same tool and loop; none of the 19 is short). For the extended trace the two runs are short and were both rerun (B5 and B5b).
+
+THE SIGN FIX (not a rerun): the outputs of satellite-tests.mjs, satellite-relations.mjs and satellite-test2.mjs before and after the change of the sign of the printed errors differ only in the signs of the printed numbers, in the order of the minimum and maximum in the ranges "from ... to" and in the column headings.

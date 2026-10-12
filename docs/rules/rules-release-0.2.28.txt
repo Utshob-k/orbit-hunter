@@ -1,0 +1,47 @@
+Rules for the checks of release 0.2.28 (written 2026-10-12, machine clock 14:34 (the first version of this line said 14:36, a guess; corrected from the time of the file before any script below was run from this folder)).
+
+WHAT THE RELEASE ADDS. Scripts and data of work that was run before and is described in docs/r-family-satellites.md: the search for the second family of satellites
+(class I, the isosceles start), the multiple precision stability of n = 5 to 12, the extended trace of R, 19 regenerated satellite zero files, the scripts of the
+tables and figures and the checks of Henon's relation. None of the long computations is run again (hours); their stored outputs are the data files. What is run
+here is (A) quick scripts on stored data and (B) one short case of each long computation with the code as it is in this folder.
+
+THE OUTPUTS go into a folder outside the repository (never into data/ or figures/ of a tracked file), with names that are used once. Nothing is overwritten.
+Tolerances and predictions below are fixed now. A change is written at the end of this file before the run it concerns, and the results stay in separate files.
+
+(A) QUICK SCRIPTS, plain runs from the top folder; prediction: every number they print equals the number printed by the same script when it was run from the working
+copies before (the stored outputs of those runs), to all printed digits.
+  henon-integral-check.mjs, henon-slope-check.mjs, henon-sign-check.mjs, henon-dip-check.mjs, relation-b-table.mjs, relation-b-exact-members.mjs,
+  r-trace-nus.mjs (a sum of 109 stability computations, minutes), zero-regenerated-compare.mjs, iso-trace.mjs (all 242 members from the isosceles start),
+  iso-check-multipliers.mjs, iso-compare-curves.mjs, tables.mjs (Tables 1 and 2), supplement.mjs, figures.mjs (Figures 1 to 3, the files must equal the stored svg files).
+  The check on the data files: tools/class-i-partners.mjs rebuilds data/class-i/partner-orbits.json from the files of data/class-i/ and the result must equal the stored file.
+  Not predicted: nothing is expected to differ; a difference is reported with the script and the line.
+
+(B) SHORT CASES WITH THE PACKAGED CODE, each into a new scratch folder:
+  B1. python tools/monodromy-mp.py 5 A --out=SCRATCH  (class C, n = 5, tier A: 30 digit orbit, 50 digits, about 3 to 10 minutes). Prediction: the file equals
+      data/stability-mp/class-c/class-c-5-A.json in every field except "seconds" and "total_seconds" (the arithmetic is deterministic).
+  B2. node tools/branch-point-iso.mjs 5 0.2010 --pieces=8 --out=SCRATCH/iso-n5.json  (class I, n = 5, both senses, about 2 to 10 minutes). Prediction: the singular values,
+      the bifurcation equation, the two zeros (T*, L*, start values) and every point of the two curves equal data/class-i/curves/n5.json to 1e-12 relative (same code, same
+      node version; a difference of the arithmetic of node itself would show up here and is reported).
+  B3. python tools/iso-refine.py SCRATCH/iso-n5.json SCRATCH/iso-n5-refined.json 30 (seconds to minutes). Prediction: the 30 digit values equal data/class-i/refined/n5.json
+      in the first 25 digits (the file has no timing fields).
+  B4. python tools/iso-monodromy-mp.py SCRATCH/iso-n5-refined.json SCRATCH/iso-n5-A.json (about 6 to 10 minutes). Prediction: equals data/class-i/stability/n5-A.json in
+      every field except "orbit_src", "seconds" and "total_seconds".
+  B5. the extended trace, the first points: node tools/family-follow.mjs SCRATCH/trace-first.json 1 1 -0.828364002627 -1.70386898541 0.888523722 0.0841108149865 first 24
+      (one minute allowed). Prediction: the accepted points of the file equal the first points of the first run in data/r-family-trace-extended.json (same step, lam, u1, u2,
+      t, T*, L*) to 1e-10 relative, as many as the minute gives (at least 3).
+  B6. the zero loop of the repaired src/zero.js on a short case: node tools/branch-point.mjs 13 0.0772 --control --write in a COPY of this folder (the copy is made
+      outside the repository, the tracked file data/branch-points/13-upper.json is not touched; 0.0772 is the rotation of the member in turns, 0.07724 in the file). Prediction: the file written in the copy equals data/branch-points/13-upper.json in every number
+      (the stored file was made by the same tool; the 19 regenerated files are the cases where the old zero loop stopped early, and none of them is short: 54 to 119 minutes each under load).
+  Time limit: 40 minutes for each of B1 to B6; a case that is not finished by then is stopped (only my own process, by its process id) and reported as not finished.
+
+NOT RERUN (hours): the multiple precision stability of the other cases, the class I continuations for n = 6 to 12, the 19 regenerated zeros, the extended trace beyond its
+first points. The packaged files are the outputs of the runs made before, with the file names changed (data/README.md says which).
+
+THE SCAN before the commits is not a run of the orbit code: the diff is searched for paths into private folders, for the numbers of the thesis of Jankovic, for words that are
+not to be used (new orbit, exactly periodic, discovery) and for traces of tools.
+
+DECLARED AFTER B5 AND BEFORE THE RUN IT CONCERNS (machine clock 14:42:57, written by the same command that started B5b; the first version of this line said 14:46, a guess): B5 gave all 77 points of the first run of the extended trace in 7 seconds and they equal the stored ones
+in every number (the run ended by "lost the family" at the limit of the step rule, as the stored run did, not by the minute). The second run of the extended trace is as short, so it is
+run too, as B5b: node tools/family-follow.mjs SCRATCH/trace-second-run1.json 1 1 -0.8217351612651205 -2.7400865897139832 0.9496391421083697 0.025232055338393934 second 24,
+started from the last point of the stored first run. Prediction: its 32 accepted points equal the stored points of the second run in data/r-family-trace-extended.json to 1e-10 relative and it
+ends by the close approach stop of the tool (0.03). B5b is an addition to the case B5, not a change of it.

@@ -13,7 +13,7 @@ The code reproduces published orbits to about nine digits. For non-zero angular 
 - Davoust and Broucke 1982, Broucke and Boggs 1975, Broucke 1975, Hénon 1976,
 - the 99 satellites of Janković et al. 2020,
 - the 18 rows of Li et al. 2025,
-- the preliminary search of the master thesis of Janković (2016, no public copy found; described, not reproduced here), added on 2026-10-11 (see below).
+- the preliminary search of the master thesis of Janković (2016; a copy was provided by the author and the thesis is cited with her permission; described, not reproduced here), added on 2026-10-11 (see below).
 
 Three families were tested as well: Hénon's family (the BHH family), the rotating eights (a choreography test) and IA-3 (in the range of the Li et al. rows).
 
@@ -53,7 +53,7 @@ One of the 77 orbits (T* = 33.745) lies on Broucke's family R. Satellites leave 
 | 13 to 56 | T* = 32.640 to 105.846, all unstable (largest multiplier 1.71 to 53.2) | not found in the sources checked (n = 27 and 29 to 36 reached only after declared changes of the method, see docs) |
 | 39 | one rotating member (rotation angle not 0) of the satellite curve of the member with the lower nu = 1/39 | found before: preliminary search of the thesis of Janković 2016, mentioned in the CPC 2020 (version 0.2.26); the orbit with rotation 0 is not in the sources checked |
 | 57, 58 | undecided | both senses stopped at the step limit of the method |
-| 59 and up | not run | the stored trace has no crossings of nu = 1/n beyond n = 58 |
+| 59 and up | not run | the stored trace has no crossings of nu = 1/n beyond n = 58; along the extended trace (version 0.2.28) 1/n is crossed for n = 59 to 439 only as a bracket between consecutive points, and no satellite was computed there |
 
 The orbits for n = 5 to 12 are all linearly stable; from n = 13 on they are unstable, so the sequence of stable orbits ends at n = 12. The satellite
 curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined to 30 digits, unstable). "Not found in the sources checked" says
@@ -66,6 +66,20 @@ different orbit from t41 and t42, see docs; 37.624249; 51.383330) match nothing 
 and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 of the zeros are not established. Details:
 [docs/r-family-satellites.md](docs/r-family-satellites.md).
 
+Since version 0.2.28: the linear stability of the satellites for n = 5 to 12 was computed again in multiple precision, with the time shift and the rotation taken
+out analytically (the four nontrivial multipliers are on the unit circle within 3.6e-24 for the 30 digit orbits); from n = 13 on the largest multiplier is
+real and negative and grows, so the second pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter). For n = 5 to 12 a second
+family of satellites leaves the same branch points on the same side, in the class of orbits that are symmetric under a second reversing symmetry of R (the
+isosceles class, `src/iso.js`). Its end orbits are unstable (a real pair of multipliers of 1.025 to 1.062) next to the stable orbit of the first class, so each
+n has a stable and an unstable orbit; T* of the unstable one is larger by 3e-7 to 1.1e-5 and L* smaller by 6e-5 to 1.7e-3. This is a numerical result. It
+looks like the pair of an elliptic and a hyperbolic orbit that a generic period-k bifurcation of a two dimensional area preserving map gives (Meyer 1970), but
+that theorem is for maps without symmetry on a two dimensional manifold and does not apply directly here (four dimensions, reversible). None of the eight orbits
+matches an entry of the atlas list (415 entries, the copy of 2026-10-09) or a row of the CPC tables at 1e-5: not found in the sources checked. The family R was
+also followed beyond the end of its stored trace (L* up to 7.25; the end of the stored trace was a limit of the tracing code); the crossings of nu = 1/n for n = 59
+to 439 along it are brackets between consecutive points and not computed branch points, and no satellite was computed beyond n = 56. The relation of Henon
+between the period and the angular momentum (dT* = -(L*/2) dtheta with theta = -Phi) is checked on the stored curves. Details, files and commands:
+[docs/r-family-satellites.md](docs/r-family-satellites.md), [docs/reproducing.md](docs/reproducing.md), [data/README.md](data/README.md).
+
 ## Install and reproduce
 
 Node 18 or newer, nothing to install for the JavaScript code. Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
@@ -76,6 +90,7 @@ python -m http.server                 # then open http://localhost:8000 (needs W
 node tools/nu-map.mjs                 # the 41 places where satellites can leave the R family
 node tools/branch-summary.mjs         # how every satellite continuation ended
 node tools/satellite-candidates.mjs   # the orbits with rotation 0, compared with the other lists
+node tools/tables.mjs                 # Tables 1 and 2 of the satellites of R (more commands: docs/reproducing.md)
 ```
 
 The scripts behind the numbers are in `tools/`. How to rerun them: [docs/reproducing.md](docs/reproducing.md).
