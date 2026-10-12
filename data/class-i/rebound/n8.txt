@@ -1,0 +1,4 @@
+start: E -1.527207172403646, L 2.124190224385742, T* 23.532713065533, L* 2.625079034057
+REBOUND, unperturbed: distance to the start state after k periods: k=1 2.26e-14, k=2 2.22e-14, k=5 2.03e-13, k=10 3.63e-13, k=20 2.36e-12
+   relative drift of E and L after 20 periods: 0.0e+00, 2.2e-16
+perturbation 1e-10: distance between the two runs after k periods: k=1 1.38e-09, k=5 8.17e-09, k=10 1.62e-08, k=15 2.43e-08, k=20 3.23e-08; growth factor per period between k = 10 and 20: 1.0712 (the real multiplier of the double precision run: 1.0276)
