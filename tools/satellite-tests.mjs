@@ -42,11 +42,11 @@ function lsq(basis, pts) {
 }
 const one = () => 1, nn = (n) => n, inv = (n) => 1 / n, inv2 = (n) => 1 / (n * n), sq = (n) => Math.sqrt(n);
 const val = (b, x, n) => b.reduce((s, g, i) => s + x[i] * g(n), 0);
-// each relation: the fitted quantity y, the basis, and the error of the prediction of the quantity that is quoted (T* or L*) at n
+// each relation: the fitted quantity y, the basis, and the error of the prediction of the quantity that is quoted (T* or L*) at n; error = data - prediction (zero - B)
 const REL = {
-  B: { y: 'delta', basis: [one, inv], err: (x, r) => (r.nT - val([one, inv], x, r.n)) - r.T, bound: 0.005, what: 'T* error' },
-  'sqrt(n)': { y: 'T', basis: [nn, one, sq], err: (x, r) => val([nn, one, sq], x, r.n) - r.T, bound: 0.005, what: 'T* error' },
-  'L* fit': { y: 'L', basis: [one, inv, inv2], err: (x, r) => val([one, inv, inv2], x, r.n) - r.L, bound: 1e-3, what: 'L* error' },
+  B: { y: 'delta', basis: [one, inv], err: (x, r) => r.T - (r.nT - val([one, inv], x, r.n)), bound: 0.005, what: 'T* error' },
+  'sqrt(n)': { y: 'T', basis: [nn, one, sq], err: (x, r) => r.T - val([nn, one, sq], x, r.n), bound: 0.005, what: 'T* error' },
+  'L* fit': { y: 'L', basis: [one, inv, inv2], err: (x, r) => r.L - val([one, inv, inv2], x, r.n), bound: 1e-3, what: 'L* error' },
 };
 const fitOn = (rel, pts) => lsq(rel.basis, pts.map((r) => ({ n: r.n, y: r[rel.y] })));
 const by = (n) => rows.find((r) => r.n === n);
