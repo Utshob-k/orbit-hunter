@@ -67,8 +67,9 @@ and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 
 [docs/r-family-satellites.md](docs/r-family-satellites.md).
 
 Since version 0.2.28: the linear stability of the satellites for n = 5 to 12 was computed again in multiple precision, with the time shift and the rotation taken
-out analytically (the four nontrivial multipliers are on the unit circle within 3.6e-24 for the 30 digit orbits); from n = 13 on the largest multiplier is
-real and negative and grows, so the second pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter). For n = 5 to 12 a second
+out analytically (the four nontrivial multipliers are on the unit circle within 3.6e-24 for the 30 digit orbits); from n = 13 on the orbits are unstable: the
+largest multiplier is real and negative for n = 13 to 16 (the sign was not computed beyond) and grows in modulus from 1.71 (n = 13) to 53.2 (n = 56). The second
+pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter). For n = 5 to 12 a second
 family of satellites leaves the same branch points on the same side, in the class of orbits that are symmetric under a second reversing symmetry of R (the
 isosceles class, `src/iso.js`). Its end orbits are unstable (a real pair of multipliers of 1.025 to 1.062) next to the stable orbit of the first class, so each
 n has a stable and an unstable orbit; T* of the unstable one is larger by 3e-7 to 1.1e-5 and L* smaller by 6e-5 to 1.7e-3. This is a numerical result. It
