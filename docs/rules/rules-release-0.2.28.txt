@@ -37,11 +37,4 @@ copies before (the stored outputs of those runs), to all printed digits.
 NOT RERUN (hours): the multiple precision stability of the other cases, the class I continuations for n = 6 to 12, the 19 regenerated zeros, the extended trace beyond its
 first points. The packaged files are the outputs of the runs made before, with the file names changed (data/README.md says which).
 
-THE SCAN before the commits is not a run of the orbit code: the diff is searched for paths into private folders, for the numbers of the thesis of Jankovic, for words that are
-not to be used (new orbit, exactly periodic, discovery) and for traces of tools.
-
-DECLARED AFTER B5 AND BEFORE THE RUN IT CONCERNS (machine clock 14:42:57, written by the same command that started B5b; the first version of this line said 14:46, a guess): B5 gave all 77 points of the first run of the extended trace in 7 seconds and they equal the stored ones
-in every number (the run ended by "lost the family" at the limit of the step rule, as the stored run did, not by the minute). The second run of the extended trace is as short, so it is
-run too, as B5b: node tools/family-follow.mjs SCRATCH/trace-second-run1.json 1 1 -0.8217351612651205 -2.7400865897139832 0.9496391421083697 0.025232055338393934 second 24,
-started from the last point of the stored first run. Prediction: its 32 accepted points equal the stored points of the second run in data/r-family-trace-extended.json to 1e-10 relative and it
-ends by the close approach stop of the tool (0.03). B5b is an addition to the case B5, not a change of it.
+THE SCAN before the commits is not a run of the orbit code: the diff is searched for paths into private folders, for numbers of the thesis of Jankovic, for wording that claims more than was shown and for traces of tools.
