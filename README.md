@@ -68,7 +68,7 @@ and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 
 
 Since version 0.2.28: the linear stability of the satellites for n = 5 to 12 was computed again in multiple precision, with the time shift and the rotation taken
 out analytically (the four nontrivial multipliers are on the unit circle within 3.6e-24 for the 30 digit orbits); from n = 13 on the orbits are unstable: the
-largest multiplier is real and negative for n = 13 to 16 (the sign was not computed beyond) and grows in modulus from 1.71 (n = 13) to 53.2 (n = 56). The second
+largest multiplier is real and negative for n = 13 to 20 (the sign was computed in multiple precision, tier A, in version 0.2.29, for these eight; not beyond n = 20) and grows in modulus from 1.71 (n = 13) to 53.2 (n = 56). The second
 pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter). For n = 5 to 12 a second
 family of satellites leaves the same branch points on the same side, in the class of orbits that are symmetric under a second reversing symmetry of R (the
 isosceles class, `src/iso.js`). Its end orbits are unstable (a real pair of multipliers of 1.025 to 1.062) next to the stable orbit of the first class, so each
@@ -80,6 +80,18 @@ also followed beyond the end of its stored trace (L* up to 7.25; the end of the 
 to 439 along it are brackets between consecutive points and not computed branch points, and no satellite was computed beyond n = 56. The relation of Henon
 between the period and the angular momentum (dT* = -(L*/2) dtheta with theta = -Phi) is checked on the stored curves. Details, files and commands:
 [docs/r-family-satellites.md](docs/r-family-satellites.md), [docs/reproducing.md](docs/reproducing.md), [data/README.md](data/README.md).
+
+Since version 0.2.29: the satellites of class I were followed for n = 13 to 20 as well, and the multipliers of the class C orbits for n = 13 to 20 were computed in multiple
+precision (tier A; rules and predictions written before the runs: `docs/rules/rules-class-i-13-20.txt`, results: `docs/rules/results-class-i-13-20.txt`). For every n the
+member is found, the matrix of the n fold repeat has a two dimensional null space and the bifurcation equation two real roots, as for n = 5 to 12; the curve of the other
+root reaches a rotation 0 in both senses for n = 13 and 14 and in one sense for n = 15 to 20 (the other sense stopped by a collapse of the step, not investigated). The 30
+digit end orbits are established (closure 5.7e-25 to 3.6e-24, REBOUND after one period 9e-15 to 3e-13), have an isosceles state and no collinear one (the class C orbit
+the reverse), and differ from the class C orbit of the same n by 3.3e-7 to 3.6e-7 in T* and 7.2e-4 to 1.07e-3 in L* (relative). For n >= 13 both orbits are unstable, so there is no
+pair of a stable and an unstable orbit there: the class C orbit has a real negative pair of multipliers (modulus 1.712 at n = 13 to 7.621 at n = 20) and an elliptic pair with a
+small angle (0.0082 to 0.0071 turns); the class I orbit has a real positive pair (1.053 to 1.046), a real negative pair (2.164 to 8.426) and no pair on the unit circle. None of the 16
+end orbits of class I (n = 5 to 20) matches an atlas entry or a CPC row at 1e-5: not found in the sources checked (for n = 17 two CPC rows are within 5e-3 in (T*, L*) at twice T*,
+a coincidence of two numbers, see the results file). The summary table is printed by `node tools/class-i-summary.mjs`; the supplement `data/supplement-initial-conditions.json`
+has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower nu, orbits without these symmetries.
 
 ## Install and reproduce
 
