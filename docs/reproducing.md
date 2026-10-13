@@ -68,14 +68,21 @@ Short checks of the symmetries of R, of the satellite curves and of the long run
 - `half-period-check.mjs` writes the state of R at the half period t again as a perpendicular start (`half-start.mjs`) for the 242 points of `data/r-family-trace.json`
   and gives the largest difference to the start (5e-10, 7e-8, 8e-10, 1e-8 in u1, u2, lam, t); it also lists which body is where at t (a few seconds)
 - `isosceles-check.mjs` tests whether the state at a quarter and at three quarters of the relative period is an isosceles state, with body 0 as the apex
-  (largest errors 1.2e-8 in the positions and 2.5e-9 in the velocities on the 242 points; bodies 0 or 1 as the apex are the control) (a few seconds)
+  (largest errors 1.2e-8 in the positions and 2.5e-9 in the velocities on the 242 points; the control tests body 1 as the apex, with bodies 0 and 2 as the mirrored pair,
+  and gives errors of 2.3e-4 and more over the 242 points; body 2 as the apex is not tested) (a few seconds)
 - `two-senses-check.mjs` takes the zero of one sense of the satellite curves of n = 5 to 15 to the half period and compares it with the zero of the other sense
   (largest difference 1.9e-9 in u1, u2, lam and 1.7e-9 relative in t; the half turn variant differs by more than 1.1) (a few seconds)
 - `long-run-rebound.py 1000 out-1000.json` (also 10000; `pip install rebound numpy`; the output file must be new) integrates the stable orbits n = 5 to 12
-  for K periods with REBOUND in double precision, as they are and with a perturbation of 1e-8 (largest distance to the start 1.1e-8, drift of the energy and
+  for K periods with REBOUND in double precision, as they are and with a perturbation (every component of the start state is multiplied by 1 + 1e-8 g, g standard normal, seeds 1 to 3, so the 6 components that are zero, y and vx of the three bodies, are not perturbed) (largest distance to the start 1.1e-8, drift of the energy and
   of the angular momentum at most 8.4e-14 and 4.3e-14 for 10000 periods; the perturbation grows linearly in the number of periods) (about 15 minutes for 10000 periods, 3 minutes for 1000)
 - `results-numbers.mjs` runs `satellite-sequence.mjs` and `satellite-candidates.mjs` and prints the ranges of T*, L*, the multipliers and the closures of the 52 end orbits, the
   end orbit against its member of R (T*/n lower by 2.34e-3 at n = 5, 1.63e-5 at n = 56; L* lower by 0.0219 and 1.3660) and the words of the 49 orbits (about 40 seconds)
+
+**Counting the regenerated zeros.** The rotation left at the zero of the 19 files of `data/branch-points-regenerated/` (the field `turns`; the label "zero of theta" in a file does not mean that 1e-11 was reached). The command prints the number of files, the number with more than 1e-9 turns and the number with more than 1e-10 turns (19 11 12):
+
+```
+node -e "const fs=require('fs');const t=fs.readdirSync('data/branch-points-regenerated').map(f=>Math.abs(JSON.parse(fs.readFileSync('data/branch-points-regenerated/'+f)).satellite.find(s=>s.zero).zero.turns));console.log(t.length,t.filter(x=>x>1e-9).length,t.filter(x=>x>1e-10).length)"
+```
 
 **Reproducing the branch counts.** The runs that follow the branches (`satellite-hunt.mjs`, hours) are not repeated here; their results are in
 `data/satellite-results*.jsonl` (results 5 to 7 have the numbers rounded to 14 significant digits by `tools/thin-results.py`, because the file of the
@@ -114,7 +121,7 @@ Commands from the top folder of the repository. They read the files of `data/`; 
 | Table 3: the largest error of the three predictions of T* (no correction, the first order prediction of Henon's relation, B) by range of n | `node tools/relation-b-table.mjs` (the lines "largest \|e\|") | `data/branch-points/`, `data/satellite-candidates.json` |
 | B with the exact member instead of the interpolated one | `node tools/relation-b-exact-members.mjs` | |
 | the relations, their robustness, the tests on k > 1 (errors are data minus prediction, zero - B) | `node tools/satellite-relations.mjs`, `node tools/satellite-tests.mjs`, `node tools/satellite-test2.mjs` | |
-| Figures 1 to 3 (T*/n against L*; the two families for n = 5; the dip of the rotation) | `node tools/figures.mjs [1\|2\|3] [--out=DIR]` | `figures/satellites-period-vs-L.svg`, `class-i-pair-n5.svg`, `satellites-rotation-dip.svg` |
+| Figures 1 to 3 (T*/n against L*; the two families for n = 5; the dip of the rotation) | `node tools/figures.mjs [1\|2\|3] [--out=DIR]` | written to `figures/` (or to DIR) as `satellites-period-vs-L.svg`, `class-i-pair-n5.svg` and `satellites-rotation-dip.svg`; these three files are not stored in the repository |
 | the supplement: start values of the 52 satellites and the 16 end orbits of class I (n = 5 to 20) | `node tools/supplement.mjs [--write] [--out=file]` | `data/supplement-initial-conditions.json` |
 | Henon's relation on the stored curves: the integral, the slope at the branch point, the signs, the dip | `node tools/henon-integral-check.mjs`, `henon-slope-check.mjs`, `henon-sign-check.mjs`, `henon-dip-check.mjs` | |
 | class I: the trace of R in the isosceles description and the check that it reproduces every member | `node tools/iso-trace.mjs [out.json]`, `node tools/iso-check-multipliers.mjs` | `data/r-family-trace-iso.json` |
