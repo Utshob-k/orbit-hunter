@@ -1,5 +1,5 @@
 {
- "what": "the end orbits of the satellite curves of class I (the isosceles start of src/iso.js: body 0 at (1, 0), bodies 1 and 2 at (-1/2, h) and (-1/2, -h), velocities (0, w), (p, -w/2), (-p, -w/2); G = m = 1, relative period 2t, rotation 0) for the upper nu = 1/n, n = 5 to 12: start values with 30 digits, T* and L*, the closure of the full period, the four nontrivial multipliers in multiple precision (a real pair mu, 1/mu and a pair exp(+-2 pi i nu) on the unit circle), REBOUND closures (IAS15, double precision) and the symmetry class. built by tools/class-i-partners.mjs from the files of data/class-i/.",
+ "what": "the end orbits of the satellite curves of class I (the isosceles start of src/iso.js: body 0 at (1, 0), bodies 1 and 2 at (-1/2, h) and (-1/2, -h), velocities (0, w), (p, -w/2), (-p, -w/2); G = m = 1, relative period 2t, rotation 0) for the upper nu = 1/n, n = 5 to 20: start values with 30 digits, T* and L*, the closure of the full period, the four nontrivial multipliers in multiple precision (a real pair mu, 1/mu and, for n = 5 to 12, a pair exp(+-2 pi i nu) on the unit circle; for n = 13 to 20 a second real pair, negative, and no pair on the unit circle), REBOUND closures (IAS15, double precision) and the symmetry class. built by tools/class-i-partners.mjs from the files of data/class-i/.",
  "orbits": [
   {
    "n": 5,
@@ -552,6 +552,598 @@
     "relative_drift_E_L_after_20_periods": [
      1.7e-15,
      2.2e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 13,
+   "start": {
+    "p": "-1.63669231778284117633852229353",
+    "w": "0.673248297349349810673979261861",
+    "h": "0.0833897521523067001115189219004",
+    "t": "1.82485059061955826890795250706"
+   },
+   "digits": 30,
+   "residual": "1.4e-29",
+   "closure_full_period": "6.8e-25",
+   "Tstar": "32.63982556618764123541991",
+   "Lstar": "2.662782673374444589907748",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "6.7626e-26",
+    "mu": [
+     {
+      "angle": "0.5",
+      "mod_minus_1": "1.16384894528",
+      "re": "-2.16384894528107978132714325588",
+      "im": "6.52530446799852452671029410926e-53"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.537860532187",
+      "re": "-0.462139467813037170875376964604",
+      "im": "-3.33469466349771651668392868746e-54"
+     },
+     {
+      "angle": "1.0",
+      "mod_minus_1": "0.0531317068389",
+      "re": "1.05313170683892193265078976869",
+      "im": "-1.75757476813437182468759751128e-52"
+     },
+     {
+      "angle": "1.0",
+      "mod_minus_1": "-0.0504511510706",
+      "re": "0.949548848929444960144213176636",
+      "im": "-3.23245217905807299884322460038e-53"
+     }
+    ],
+    "real_pair": [
+     1.0531317068389219,
+     0.9495488489294449
+    ],
+    "real_negative_pair": [
+     -2.16384894528108,
+     -0.46213946781303716
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "1.1638",
+    "invariance_defect": "7.6961e-26"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 1.16e-13,
+     "2": 5.58e-13,
+     "5": 1.48e-12,
+     "10": 1.65e-11,
+     "20": 4.16e-8
+    },
+    "relative_drift_E_L_after_20_periods": [
+     2e-15,
+     5.6e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 14,
+   "start": {
+    "p": "-0.913203566588893630564839854087",
+    "w": "1.17296090236099800602707044621",
+    "h": "0.250113021222986652282817381088",
+    "t": "9.87417947703787939656157703277"
+   },
+   "digits": 30,
+   "residual": "6.83e-30",
+   "closure_full_period": "5.74e-25",
+   "Tstar": "34.42609651199541944784506",
+   "Lstar": "2.667294188838364978647763",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "1.2635e-24",
+    "mu": [
+     {
+      "angle": "0.0",
+      "mod_minus_1": "-0.0492028135905",
+      "re": "0.950797186409529237155728258643",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.0",
+      "mod_minus_1": "0.051749010508",
+      "re": "1.05174901050798653714923010141",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "2.05344575175",
+      "re": "-3.05344575174548031743826432151",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.672501140907",
+      "re": "-0.327498859093323399464067687131",
+      "im": "0.0"
+     }
+    ],
+    "real_pair": [
+     1.0517490105079865,
+     0.9507971864095293
+    ],
+    "real_negative_pair": [
+     -3.0534457517454805,
+     -0.3274988590933234
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "2.0534",
+    "invariance_defect": "3.9895e-23"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 1.18e-13,
+     "2": 3.43e-13,
+     "5": 3.56e-12,
+     "10": 1.02e-9,
+     "20": 0.0000713
+    },
+    "relative_drift_E_L_after_20_periods": [
+     8.9e-16,
+     5.6e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 15,
+   "start": {
+    "p": "-1.71825084105230424468001046123",
+    "w": "0.646489786462490769287985088451",
+    "h": "0.074945435575865321110528640398",
+    "t": "1.75557359911934172742359452242"
+   },
+   "digits": 30,
+   "residual": "3.11e-29",
+   "closure_full_period": "3.48e-24",
+   "Tstar": "36.20358136727597480258917",
+   "Lstar": "2.671239652991133056594694",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "6.421e-25",
+    "mu": [
+     {
+      "angle": "4.63785597110798802548830477545e-53",
+      "mod_minus_1": "0.0505101651975",
+      "re": "1.05051016519752512812751820177",
+      "im": "3.0612400392476933723922398196e-52"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "2.91217649683",
+      "re": "-3.91217649683030481445921705738",
+      "im": "2.62944280589762419189992390517e-52"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.744387810517",
+      "re": "-0.255612189483325388404852131303",
+      "im": "-2.32824874919757903923718000614e-52"
+     },
+     {
+      "angle": "1.0",
+      "mod_minus_1": "-0.0480815577715",
+      "re": "0.951918442228469238783495323283",
+      "im": "-1.78733097395638191437466384373e-52"
+     }
+    ],
+    "real_pair": [
+     1.050510165197525,
+     0.9519184422284692
+    ],
+    "real_negative_pair": [
+     -3.912176496830305,
+     -0.25561218948332537
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "2.9122",
+    "invariance_defect": "2.1721e-24"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 7.94e-14,
+     "2": 5.46e-14,
+     "5": 3.65e-12,
+     "10": 2.59e-9,
+     "20": 0.00218
+    },
+    "relative_drift_E_L_after_20_periods": [
+     3.3e-16,
+     7.8e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 16,
+   "start": {
+    "p": "-2.2241458400893503352371052091",
+    "w": "0.634599260837402601282247841983",
+    "h": "0.0564298356962510229266029269643",
+    "t": "1.72709771284730472541939272438"
+   },
+   "digits": 30,
+   "residual": "1.14e-27",
+   "closure_full_period": "1.4e-24",
+   "Tstar": "37.97313436354886319162522",
+   "Lstar": "2.674719319971492101832567",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "2.1546e-24",
+    "mu": [
+     {
+      "angle": "0.0",
+      "mod_minus_1": "0.0493977767928",
+      "re": "1.04939777679282243856155748413",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.0",
+      "mod_minus_1": "-0.0470724999473",
+      "re": "0.952927500052656577800756292978",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "3.77591281607",
+      "re": "-4.77591281606896402333686529152",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.790615943274",
+      "re": "-0.209384056726373882999616915359",
+      "im": "0.0"
+     }
+    ],
+    "real_pair": [
+     1.0493977767928224,
+     0.9529275000526566
+    ],
+    "real_negative_pair": [
+     -4.775912816068964,
+     -0.2093840567263739
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "3.7759",
+    "invariance_defect": "1.7181e-23"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 2.93e-13,
+     "2": 8.53e-13,
+     "5": 3.14e-12,
+     "10": 2.36e-9,
+     "20": 0.0146
+    },
+    "relative_drift_E_L_after_20_periods": [
+     1.1e-15,
+     7.8e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 17,
+   "start": {
+    "p": "-1.7931011844199735526876542049",
+    "w": "0.62366119206004854019309856279",
+    "h": "0.0682940975804573528782383803793",
+    "t": "1.70178777288095219770646019668"
+   },
+   "digits": 30,
+   "residual": "8.88e-29",
+   "closure_full_period": "2.08e-24",
+   "Tstar": "39.73548355218005807750179",
+   "Lstar": "2.677811091314945168034701",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "5.3865e-24",
+    "mu": [
+     {
+      "angle": "2.79970044141286552030867071773e-53",
+      "mod_minus_1": "0.0483954620211",
+      "re": "1.04839546202113576559900911769",
+      "im": "1.8442363025451567342080635905e-52"
+     },
+     {
+      "angle": "7.99733421012079896662715109577e-53",
+      "mod_minus_1": "-0.0461614569829",
+      "re": "0.953838543017119519099454195196",
+      "im": "4.79291780877840617402306272602e-52"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.823186903494",
+      "re": "-0.176813096506025274074942704507",
+      "im": "2.43191011687439588471622483069e-52"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "4.6556896506",
+      "re": "-5.65568965060188807774374302993",
+      "im": "3.9718330291589847189973234525e-53"
+     }
+    ],
+    "real_pair": [
+     1.0483954620211358,
+     0.9538385430171196
+    ],
+    "real_negative_pair": [
+     -5.655689650601888,
+     -0.17681309650602528
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "4.6557",
+    "invariance_defect": "2.2857e-23"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 2.18e-13,
+     "2": 5.2e-13,
+     "5": 6.03e-11,
+     "10": 3.5e-7,
+     "20": 1.79
+    },
+    "relative_drift_E_L_after_20_periods": [
+     2.2e-15,
+     8.9e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 18,
+   "start": {
+    "p": "-2.34524815313801426800243416824",
+    "w": "0.613378940611753761210979064698",
+    "h": "0.0510505998674541431947457318674",
+    "t": "1.67910526046560304068572705916"
+   },
+   "digits": 30,
+   "residual": "2.18e-27",
+   "closure_full_period": "1.78e-24",
+   "Tstar": "41.49125514498225919085702",
+   "Lstar": "2.680576420396282125050503",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "1.3433e-24",
+    "mu": [
+     {
+      "angle": "0.0",
+      "mod_minus_1": "0.0474887230715",
+      "re": "1.04748872307154575223662310363",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.0",
+      "mod_minus_1": "-0.0453357845536",
+      "re": "0.954664215446353622054702832625",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "5.55608264078",
+      "re": "-6.55608264077551092927226420416",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.847469890971",
+      "re": "-0.152530109028904985463239215194",
+      "im": "0.0"
+     }
+    ],
+    "real_pair": [
+     1.0474887230715457,
+     0.9546642154463536
+    ],
+    "real_negative_pair": [
+     -6.556082640775511,
+     -0.152530109028905
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "5.5561",
+    "invariance_defect": "1.2729e-23"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 1.6e-13,
+     "2": 1.12e-12,
+     "5": 1.73e-11,
+     "10": 1.53e-7,
+     "20": 1.52
+    },
+    "relative_drift_E_L_after_20_periods": [
+     3.8e-15,
+     1.6e-15
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 19,
+   "start": {
+    "p": "-1.8624893627705837944823548786",
+    "w": "0.603834557392825567029479758228",
+    "h": "0.0629022706030736271507232878026",
+    "t": "1.6586590957676110523731311685"
+   },
+   "digits": 30,
+   "residual": "1.79e-28",
+   "closure_full_period": "3.59e-24",
+   "Tstar": "43.24099217073679874433071",
+   "Lstar": "2.683064437330503373476477",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "1.2916e-24",
+    "mu": [
+     {
+      "angle": "6.48145829929004848057949286962e-53",
+      "mod_minus_1": "0.0466650659866",
+      "re": "1.04666506598657806979051280595",
+      "im": "4.26246012013505017290433224997e-52"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.866296771461",
+      "re": "-0.13370322853902545496819760492",
+      "im": "6.02576246717707450648559979705e-52"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "6.47925095697",
+      "re": "-7.4792509569663744401135322106",
+      "im": "-2.06945944921821150624526398597e-52"
+     },
+     {
+      "angle": "1.0",
+      "mod_minus_1": "-0.0445845261326",
+      "re": "0.955415473867380914202893816397",
+      "im": "-4.32211795408105224253772729502e-52"
+     }
+    ],
+    "real_pair": [
+     1.0466650659865782,
+     0.9554154738673809
+    ],
+    "real_negative_pair": [
+     -7.479250956966374,
+     -0.13370322853902544
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "6.4793",
+    "invariance_defect": "5.4355e-24"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 9.05e-15,
+     "2": 8.65e-14,
+     "5": 1.55e-10,
+     "10": 0.00000355,
+     "20": 1.28
+    },
+    "relative_drift_E_L_after_20_periods": [
+     5.6e-15,
+     2.2e-16
+    ]
+   },
+   "symmetry_class": {
+    "end_orbit_isosceles_only": true,
+    "class_c_orbit_collinear_only": true,
+    "end_orbit_also_collinear_perpendicular": false,
+    "class_c_orbit_also_isosceles": false
+   }
+  },
+  {
+   "n": 20,
+   "start": {
+    "p": "-2.4570115933930887850657396956",
+    "w": "0.594809196400215906338234119968",
+    "h": "0.0467333702921596385783110656279",
+    "t": "1.64010925614020418832107707444"
+   },
+   "digits": 30,
+   "residual": "3.46e-27",
+   "closure_full_period": "2.08e-24",
+   "Tstar": "44.98516898353182008081269",
+   "Lstar": "2.685314890846833215236898",
+   "multipliers": {
+    "precision": "50 digits, tolerance 1.0e-36, h = 1.0e-10",
+    "mp_closure": "3.3108e-24",
+    "mu": [
+     {
+      "angle": "0.0",
+      "mod_minus_1": "0.0459138432633",
+      "re": "1.04591384326330566923075160624",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.0",
+      "mod_minus_1": "-0.0438983034397",
+      "re": "0.956101696560347564818033777162",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "7.42626552826",
+      "re": "-8.42626552825951638782681806705",
+      "im": "0.0"
+     },
+     {
+      "angle": "0.5",
+      "mod_minus_1": "-0.881323464512",
+      "re": "-0.118676535488498255901416265732",
+      "im": "0.0"
+     }
+    ],
+    "real_pair": [
+     1.0459138432633057,
+     0.9561016965603476
+    ],
+    "real_negative_pair": [
+     -8.426265528259517,
+     -0.11867653548849826
+    ],
+    "other_pair_angle_turns": null,
+    "max_mod_dev": "7.4263",
+    "invariance_defect": "3.3833e-23"
+   },
+   "rebound": {
+    "closure_after_k_periods": {
+     "1": 2.78e-13,
+     "2": 8.73e-13,
+     "5": 1.75e-10,
+     "10": 0.00000759,
+     "20": 0.682
+    },
+    "relative_drift_E_L_after_20_periods": [
+     4.4e-16,
+     6.7e-16
     ]
    },
    "symmetry_class": {
