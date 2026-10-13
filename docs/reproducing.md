@@ -63,6 +63,20 @@ path):
   my orbits are on the traces of `data/families85/`, `family-pass-through.mjs` follows the family from my orbit and asks whether it passes a published
   start
 
+Short checks of the symmetries of R, of the satellite curves and of the long runs (version 0.2.30; each prints its numbers, nothing is written to `data/`):
+
+- `half-period-check.mjs` writes the state of R at the half period t again as a perpendicular start (`half-start.mjs`) for the 242 points of `data/r-family-trace.json`
+  and gives the largest difference to the start (5e-10, 7e-8, 8e-10, 1e-8 in u1, u2, lam, t); it also lists which body is where at t (a few seconds)
+- `isosceles-check.mjs` tests whether the state at a quarter and at three quarters of the relative period is an isosceles state, with body 0 as the apex
+  (largest errors 1.2e-8 in the positions and 2.5e-9 in the velocities on the 242 points; bodies 0 or 1 as the apex are the control) (a few seconds)
+- `two-senses-check.mjs` takes the zero of one sense of the satellite curves of n = 5 to 15 to the half period and compares it with the zero of the other sense
+  (largest difference 1.9e-9 in u1, u2, lam and 1.7e-9 relative in t; the half turn variant differs by more than 1.1) (a few seconds)
+- `long-run-rebound.py 1000 out-1000.json` (also 10000; `pip install rebound numpy`; the output file must be new) integrates the stable orbits n = 5 to 12
+  for K periods with REBOUND in double precision, as they are and with a perturbation of 1e-8 (largest distance to the start 1.1e-8, drift of the energy and
+  of the angular momentum below 8e-14 for 10000 periods; the perturbation grows linearly in the number of periods) (about 3 minutes for 10000 periods)
+- `results-numbers.mjs` runs `satellite-sequence.mjs` and `satellite-candidates.mjs` and prints the ranges of T*, L*, the multipliers and the closures of the 52 end orbits, the
+  end orbit against its member of R (T*/n lower by 2.34e-3 at n = 5, 1.63e-5 at n = 56; L* lower by 0.0219 and 1.3660) and the words of the 49 orbits (about 40 seconds)
+
 **Reproducing the branch counts.** The runs that follow the branches (`satellite-hunt.mjs`, hours) are not repeated here; their results are in
 `data/satellite-results*.jsonl` (results 5 to 7 have the numbers rounded to 14 significant digits by `tools/thin-results.py`, because the file of the
 last run was 5.3 MB; the repeat checks, the table, the recall count and the coverage give the same numbers on the full and on the rounded files, and
