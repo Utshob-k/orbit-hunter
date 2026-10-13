@@ -7,7 +7,7 @@ browser (WebGPU). Double precision code on the CPU closes and checks every candi
 
 Nothing here is claimed as a discovery. No orbit has been shown to be unpublished.
 
-The code reproduces published orbits to about nine digits. For non-zero angular momentum it found 85 distinct orbits. They were compared with:
+The code reproduces published orbits to about nine digits. The perpendicular search found 85 distinct orbits, 83 with non-zero angular momentum and 2 with L = 0. They were compared with:
 
 - all 415 equal-mass orbits with L != 0 of the Three Body Orbits atlas,
 - Davoust and Broucke 1982, Broucke and Boggs 1975, Broucke 1975, Hénon 1976,

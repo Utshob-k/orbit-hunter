@@ -8,7 +8,7 @@ A search for periodic orbits of the planar three-body problem with equal masses.
 the browser (WebGPU), double precision code on the CPU closes and checks every candidate.
 
 **Where it stands.** The code reproduces published orbits to about nine digits. Every orbit it found with zero
-angular momentum was already published. For non-zero angular momentum it found 85 distinct orbits. 54 of them are
+angular momentum was already published. The perpendicular search found 85 distinct orbits, 83 with non-zero angular momentum and 2 with L = 0. 54 of them are
 close to 1e-8 or better with two double precision integrators (among them the 6 linearly stable ones); the other 31 do not: with the worse of the two
 integrators 28 of them close to between 1e-8 and 1e-6 and 3 to between 1e-6 and 3.5e-6. In 40 digit arithmetic, from the same double precision start
 values, 51 of the 54 close to 1e-8 (t40, t47 and t57 do not, at most 6.7e-8), and of the 31, 10 close to below 1e-8, 30 to below 1e-6 and one to
