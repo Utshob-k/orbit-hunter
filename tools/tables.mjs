@@ -1,7 +1,7 @@
 // Tables 1 and 2 of the satellites of R as markdown rows, from the stored data (nothing is computed again except by satellite-sequence.mjs, which this runs).
 //   Table 1: n = 5 to 56, class C: T*, L*, the nontrivial multipliers (angles nu1, nu2 in turns for n = 5 to 12 from data/stability-mp/class-c/, tier B; the largest
 //            multiplier for n >= 13) and the number of senses of the continuation that reach rotation 0.
-//   Table 2: the end orbits of class I, n = 5 to 12: T* and L*, their differences from the orbit of class C of the same n (absolute, relative in brackets), the real
+//   Table 2: the end orbits of class I, n = 5 to 12 (then a second block for n = 13 to 20, where both orbits are unstable): T* and L*, their differences from the orbit of class C of the same n (absolute, relative in brackets), the real
 //            pair of multipliers, the angle of the other pair, the closure of the 30 digit orbit.
 // node tools/tables.mjs [1|2]     (both by default)
 import { perpInfo } from '../src/perp.js';
@@ -37,5 +37,17 @@ if (which === 'all' || which === '2') {
     const ell = mu.filter((m) => Math.abs(+m.mod_minus_1) <= 1e-6).map((m) => +m.angle).map((a) => Math.min(a, 1 - a))[0];
     const TC = ik.ts, LC = Math.abs(ik.ls), TI = +ref.Tstar, LI = +ref.Lstar;
     console.log(`| ${n} | ${TI.toFixed(8)} | ${LI.toFixed(8)} | ${fmt(TI - TC)}<br>(${fmt((TI - TC) / TC)}) | ${fmt(LI - LC)}<br>(${fmt((LI - LC) / LC)}) | ${hyp[1].toFixed(6)} / ${hyp[0].toFixed(6)} | ${ell.toFixed(6)} | ${(+ref.closure_full_period).toExponential(1)} |`);
+  }
+  // n = 13 to 20: both orbits are unstable (class C: a real negative pair, tier A; class I: a positive and a negative real pair, no pair on the unit circle)
+  console.log('');
+  console.log('| n | T* | L* | T\\*(I) − T\\*(C) | L\\*(I) − L\\*(C) | class I: positive pair μ, 1/μ | class I: negative pair μ, 1/μ | class C: negative pair μ, 1/μ | closure (30 digits) |');
+  console.log('| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
+  for (let n = 13; n <= 20; n++) {
+    const ref = classIRefined(n), mu = classIStability(n).result.R.mu, muC = read(`stability-mp/class-c/class-c-${n}-A.json`).result.R.mu;
+    const k = classCOrbit(n), ik = perpInfo(+k.u1, +k.u2, +k.lam, +k.t);
+    const pair = (a, sign) => a.filter((m) => Math.abs(+m.mod_minus_1) > 1e-6 && Math.sign(+m.re) === sign).map((m) => +m.re).sort((x, y) => Math.abs(y) - Math.abs(x));
+    const pp = pair(mu, 1), np = pair(mu, -1), cn = pair(muC, -1);
+    const TC = ik.ts, LC = Math.abs(ik.ls), TI = +ref.Tstar, LI = +ref.Lstar;
+    console.log(`| ${n} | ${TI.toFixed(8)} | ${LI.toFixed(8)} | ${fmt(TI - TC)}<br>(${fmt((TI - TC) / TC)}) | ${fmt(LI - LC)}<br>(${fmt((LI - LC) / LC)}) | ${pp[0].toFixed(6)} / ${pp[1].toFixed(6)} | ${np[0].toFixed(6)} / ${np[1].toFixed(6)} | ${cn[0].toFixed(6)} / ${cn[1].toFixed(6)} | ${(+ref.closure_full_period).toExponential(1)} |`);
   }
 }

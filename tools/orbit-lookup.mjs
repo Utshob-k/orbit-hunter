@@ -16,7 +16,7 @@ export function classCOrbit(n) {
 }
 export const classCSource = (n) => (n === 5 || n === 6 ? 'data/refined' : n === 8 ? 'refined here from the stored zero (shortest orbit of data/refined/T47.065.json)' : 'data/satellite-candidates.json');
 
-// the end orbit of class I (isosceles start) of n = 5 to 12: the refined file and the multiple precision multipliers
+// the end orbit of class I (isosceles start) of n = 5 to 20: the refined file and the multiple precision multipliers
 export const classIRefined = (n) => read(`class-i/refined/n${n}.json`);
 export const classIStability = (n) => read(`class-i/stability/n${n}-A.json`);
 

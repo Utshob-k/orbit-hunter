@@ -1,9 +1,9 @@
-# multiple precision monodromy of the satellite orbits of class C, n = 5 to 12: the four nontrivial multipliers by reduction (the time shift and the rotation
+# multiple precision monodromy of the satellite orbits of class C, n = 5 to 20: the four nontrivial multipliers by reduction (the time shift and the rotation
 # are taken out analytically, no eigenvalue is picked "closest to 1"), tier A on the stored 30 digit orbit (50 digits, tolerance 1e-36, h = 1e-10), tier B on the
 # same orbit refined to 40 digits (60 digits, 1e-46, h = 1e-12). monodromy_block() also takes another start (iso-monodromy-mp.py uses it for class I).
-# python tools/monodromy-mp.py CASE [A] [B] [--out=DIR]    CASE in 5 6 7 8s 8d 9 10 11 12 (8s: the shortest orbit of the T* = 47.065 orbit refined here, 8d: data/refined/T47.065.json);
+# python tools/monodromy-mp.py CASE [A] [B] [--out=DIR]    CASE in 5 6 7 8s 8d 9 10 11 12 13 14 15 16 17 18 19 20 (8s: the shortest orbit of the T* = 47.065 orbit refined here, 8d: data/refined/T47.065.json);
 # the results go to DIR (default data/stability-mp/class-c/) as class-c-CASE-A.json, class-c-CASE-B.json and class-c-orbit-CASE-40.json; a file is never overwritten
-# (a case that was run is not run again into the same folder). a case takes about 3 to 16 minutes per tier.
+# (a case that was run is not run again into the same folder). a case takes about 3 to 16 minutes per tier for n = 5 to 12 (n = 13 to 20, tier A: 50 to 59 minutes each, 16 jobs at a time on 12 processors).
 import importlib.util, json, sys, time, os
 from mpmath import mp, mpf, matrix, lu_solve, nstr, det, eig, pi, arg, fabs
 
