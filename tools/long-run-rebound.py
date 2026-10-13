@@ -1,5 +1,5 @@
 # long time integration in double precision (REBOUND, IAS15, defaults) of the stable orbits n = 5 to 12 (30 digit start values of data/refined and data/satellite-candidates.json, rounded to double).
-# C1: the orbit as it is; C2: a perturbation of relative size 1e-8 of every component (seeds 1, 2, 3). for n = 8 the orbit is the double length one, one period here is two periods of the n = 8 orbit.
+# C1: the orbit as it is; C2: the start state S0 (3 bodies x x, y, vx, vy) multiplied by 1 + 1e-8 g with g standard normal (seeds 1, 2, 3), so the components that are zero in S0 (y and vx of the three bodies) are not perturbed. for n = 8 the orbit is the double length one, one period here is two periods of the n = 8 orbit.
 # pip install rebound numpy; python tools/long-run-rebound.py K out.json   (K periods, e.g. 1000 or 10000; out.json must be a new file; a single run is stopped after 10 minutes)
 import json, math, os, sys, time
 import numpy as np

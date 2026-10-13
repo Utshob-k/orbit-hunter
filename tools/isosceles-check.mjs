@@ -1,12 +1,12 @@
 // isosceles test of the stored trace of R (data/r-family-trace.json): is the state at a quarter and at three quarters of the relative period 2t a state of the reversing symmetry S' = G S
-// (reflect in the axis through body 0 and the centre of mass, exchange bodies 1 and 2, reverse the time)? the last two columns are the control with body 0 or body 1 as the apex. node tools/isosceles-check.mjs
+// (reflect in the axis through body 0 and the centre of mass, exchange bodies 1 and 2, reverse the time)? the last two columns are the control with body 1 as the apex (bodies 0 and 2 as the mirrored pair: position error and velocity error); body 2 as the apex is not tested. node tools/isosceles-check.mjs
 import fs from 'fs';
 import { fileURLToPath, pathToFileURL } from 'url';
 const PUB = fileURLToPath(new URL('../', import.meta.url));      // the top folder of the repository
 const { perpInitial } = await import(pathToFileURL(PUB + 'src/perp.js').href);
 const { bsIntegrate } = await import(pathToFileURL(PUB + 'src/bs.js').href);
 const a = JSON.parse(fs.readFileSync(PUB + 'data/r-family-trace.json', 'utf8')).curve;
-console.log('index | time fraction of 2t | position error of the isosceles test | velocity error (v2 = -Refl v1, v0 perpendicular to the axis) | the same for bodies 0 and 1 as apex (control)');
+console.log('index | time fraction of 2t | position error of the isosceles test | velocity error (v2 = -Refl v1, v0 perpendicular to the axis) | the same with body 1 as the apex (control: position error, velocity error)');
 function test(xe, apex, b1, b2) {
   const P = (k) => [xe[2 * k], xe[2 * k + 1]], V = (k) => [xe[6 + 2 * k], xe[7 + 2 * k]];
   const p0 = P(apex), n = Math.hypot(...p0); if (n < 1e-9) return NaN;

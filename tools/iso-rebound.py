@@ -1,5 +1,5 @@
 # an independent integration (REBOUND IAS15, double precision, default settings) of an orbit of class I (the 30 digit values rounded to double):
-# distance to the start state after 1, 2, 5, 10, 20 periods (no rotation: theta = 0), energy and angular momentum, and the same for a perturbation of 1e-10 (growth per period).
+# distance to the start state after 1, 2, 5, 10, 20 periods (no rotation: theta = 0), energy and angular momentum, and the same for a perturbation (the start state multiplied by 1 + 1e-10 g with g standard normal, so components that are zero are not perturbed; growth per period).
 # python tools/iso-rebound.py refined.json   (needs rebound and numpy)
 import json, math, sys
 import numpy as np, rebound

@@ -1,6 +1,6 @@
 # counts the arms of data/satellite-results*.verified.json (tools/verify-branches.mjs) by the checks they pass, and the branch points with
 # at least one arm that passes all: (1) the word is (01)^K with 2K syzygies, (2) re-closing three points with more pieces and a tighter
-# tolerance reproduces lam and T* (change below 1e-8, residual below 1e-9), (3) no jump of T*, L* above 50 times the median, (4) not the
+# tolerance (lam fixed) closes with a residual below 1e-9 and reproduces T* (change below 1e-8; lam is not tested), (3) no jump of T*, L* above 50 times the median, (4) not the
 # repeat curve of the parent (data/arm-repeats.json). several files can hold the same arm (a rerun): the last file in the order of the
 # arguments wins. python tools/verify-summary.py
 import json, collections, sys

@@ -1,6 +1,6 @@
 // checks the branches in a results file of satellite-worker.mjs (needs the state columns u1, u2, t); for a sample of points of every arm:
 // (1) the word is (01)^K with 2K syzygies, K = k times the exponent of the progenitor, (2) jumps in T*, L* between neighbours against the
-// median jump, (3) re-closing in double precision with more pieces and a tighter tolerance must not change lam, T*.
+// median jump, (3) re-closing in double precision with more pieces and a tighter tolerance (lam is kept fixed, u1, u2 and t are solved) must close to 1e-9 and must not change T*; the change of lam is not tested.
 // node tools/verify-branches.mjs results.jsonl [maxArms] (all arms unless maxArms is given; a cut is reported at the end)
 import fs from 'fs';
 import { closePerpMS } from '../src/shooting.js';
