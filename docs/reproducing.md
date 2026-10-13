@@ -73,7 +73,7 @@ Short checks of the symmetries of R, of the satellite curves and of the long run
   (largest difference 1.9e-9 in u1, u2, lam and 1.7e-9 relative in t; the half turn variant differs by more than 1.1) (a few seconds)
 - `long-run-rebound.py 1000 out-1000.json` (also 10000; `pip install rebound numpy`; the output file must be new) integrates the stable orbits n = 5 to 12
   for K periods with REBOUND in double precision, as they are and with a perturbation of 1e-8 (largest distance to the start 1.1e-8, drift of the energy and
-  of the angular momentum at most 8.4e-14 and 4.3e-14 for 10000 periods; the perturbation grows linearly in the number of periods) (about 3 minutes for 10000 periods)
+  of the angular momentum at most 8.4e-14 and 4.3e-14 for 10000 periods; the perturbation grows linearly in the number of periods) (about 15 minutes for 10000 periods, 3 minutes for 1000)
 - `results-numbers.mjs` runs `satellite-sequence.mjs` and `satellite-candidates.mjs` and prints the ranges of T*, L*, the multipliers and the closures of the 52 end orbits, the
   end orbit against its member of R (T*/n lower by 2.34e-3 at n = 5, 1.63e-5 at n = 56; L* lower by 0.0219 and 1.3660) and the words of the 49 orbits (about 40 seconds)
 
