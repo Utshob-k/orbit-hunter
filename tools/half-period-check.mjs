@@ -42,8 +42,8 @@ a.forEach((p, i) => {
   maxDev = Math.max(maxDev, dev);
   const key = `${ord0.join('')}->${ord.join('')}`; perms.set(key, (perms.get(key) || 0) + 1);
   if (i % 40 === 0 || i === a.length - 1) {
-    const info = perpInfo(p.u1, p.u2, p.lam, p.t), th = info.theta / (2 * Math.PI);
-    console.log([i, ord.join(''), ord0.join(''), ((phi / (2 * Math.PI)) % 0.5).toFixed(6), th.toFixed(6), (((2 * phi / (2 * Math.PI) - th) % 1 + 1.5) % 1 - 0.5).toExponential(2), dev.toExponential(2)].join(' | '));
+    const info = perpInfo(p.u1, p.u2, p.lam, p.t), th = info.theta / (2 * Math.PI);      // perpInfo().theta is the rotation that takes the end state back onto the start, minus the rotation of the orbit
+    console.log([i, ord.join(''), ord0.join(''), ((phi / (2 * Math.PI)) % 0.5).toFixed(6), (-th).toFixed(6), (((2 * phi / (2 * Math.PI) + th) % 1 + 1.5) % 1 - 0.5).toExponential(2), dev.toExponential(2)].join(' | '));
   }
 });
 console.log('\nmost deviation over all ' + a.length + ' points between state(t) turned onto the x axis (best of the two half turns, bodies matched by position) and the start state: ' + maxDev.toExponential(2));
