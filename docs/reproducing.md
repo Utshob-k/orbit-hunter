@@ -19,7 +19,7 @@ path):
   (`HUNT_ONLY=list.json` picks starts)
 - `summarize-hunt.mjs` removes repeats and marks atlas matches; `stability-list.mjs` computes stability
 - `convert-cpc.mjs` turns the paper's satellite table into my start; `compare-*.mjs` compare orbits with the published lists
-- `plot-orbits.mjs`, `plot-perp.mjs` draw orbits as svg (figures/)
+- `plot-orbits.mjs`, `plot-perp.mjs` draw orbits as svg (usage in the first line of each; `figures/two-orbits.svg` and `figures/five-candidates.svg` were drawn with `plot-orbits.mjs`)
 - `closure-mp.py` integrates the double precision starts of the 85 orbits for one period in 40 digits (about 6 minutes; `--write` stores
   `data/closure-mp.json`)
 - `ia3-rational.py` puts the IA-3 members with a rational rotation angle (q up to 12) next to my orbits, in the range of the printed rows
