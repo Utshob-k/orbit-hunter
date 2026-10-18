@@ -50,7 +50,7 @@ repeats of the stable orbits, with the checks described below.
   above). It is undetermined here, but part of it can be checked. I followed the families that start at six published orbits (five rows of this paper
   and the CPC satellite N = 3, `tools/family-one.mjs`, traces in `data/families85/`, `tools/published-hits.mjs`) and, from my side, the families
   through five of my orbits (`tools/family-pass-through.mjs`, `data/family-pass-through.json`). Three of my orbits lie on the same continuous curve of
-  relative periodic orbits as a published start: T* = 9.658 (row 92, the word is 01^3 for both; it is the atlas orbit S4), T* = 11.652 (row 84; my
+  relatively periodic orbits as a published start: T* = 9.658 (row 92, the word is 01^3 for both; it is the atlas orbit S4), T* = 11.652 (row 84; my
   word is 000101 and the row's is 01^2; it is one of the 77 unmatched) and the T* = 12.381 orbit of the arclength list (the CPC satellite N = 3, 01^3
   for both; it is not one of the 85). On the stretch between the published orbit and mine every accepted step converged, the tangent turned by less
   than 0.35 rad and theta did not jump (the largest jump in T*, L*, theta between neighbouring steps is 1.2 to 1.3 times the median), and the closure

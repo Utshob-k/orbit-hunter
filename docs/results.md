@@ -17,17 +17,17 @@ All 85 are refined: the stored 30 digit values close to 2.7e-19 or better (16 of
 solutions of the refinement close to better than 1e-20). The refinement dates: the 31 and the 6 stable ones on 2026-10-08 and 2026-10-09 (37 orbits),
 the other 48 on 2026-10-09 (the rule is in the refinement paragraph of [methods-and-limits.md](methods-and-limits.md), section "What is not proven").
 Among the sources checked so far (all 415 equal-mass orbits with L != 0 of the Three Body Orbits atlas, Davoust and Broucke 1982, Broucke and Boggs
-1975, Broucke 1975, Henon 1976, the 99 satellites of Jankovic et al. 2020, the 18 rows of Li et al. 2025; the
+1975, Broucke 1975, Hénon 1976, the 99 satellites of Janković et al. 2020, the 18 rows of Li et al. 2025; the
 L = 0 catalogues of Li and Liao and of Hristov and Hristova cannot contain orbits with L != 0), 6 of my 85 orbits are atlas orbits (T* and L* equal to
-1e-5 and the same number of alignments): the BHH orbit of Henon (Broucke A1),
+1e-5 and the same number of alignments): the BHH orbit of Hénon (Broucke A1),
 Sheen's "Two ovals" and "Oval, catface and starship", Broucke and Boggs' S4 and S122, and Broucke's A10 (in my table it returns rotated by a third of
 a turn after T/3, see Repeats). 2 have L = 0, and 77 match none of them. Three of the nine rows of Davoust and Broucke 1982
 with a rotation angle that is a multiple of 2 pi are in my lists (rows 9, 91, 115), and all three are atlas orbits, so the 77 are not at a row of that
-paper either. One of the 77 (T* = 11.652) lies on the continuous curve of relative periodic orbits through row 84 of that paper (my word is 000101,
+paper either. One of the 77 (T* = 11.652) lies on the continuous curve of relatively periodic orbits through row 84 of that paper (my word is 000101,
 the row's is 01^2): it is another member of that curve, 3.0 % and 17 % away from the row in T* and L*, so not a match (see Corrections, 2026-10-09).
 The T* = 33.745 orbit lies on the curve of Broucke's family R, as its member with rotation 2/9 of a turn (Corrections, 2026-10-10).
 For them I do not know whether they are known.
-Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 are not read; the rotating-eight branch of the figure-eight, which both papers are about, was traced and compared (the paragraph on the rotating figure-eights below). Suvakov's gallery: see the table. 35 of the 77 have L* below the range of the CPC table, so
+Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 are not read; the rotating-eight branch of the figure-eight, which both papers are about, was traced and compared (the paragraph on the rotating figure-eights below). Šuvakov's gallery: see the table. 35 of the 77 have L* below the range of the CPC table, so
 for them "no match" with its satellites means "nothing to compare with".
 I do not know if any is new, and nothing here should be read as a discovery.
 
@@ -38,22 +38,22 @@ I do not know if any is new, and nothing here should be read as a discovery.
 
 | catalogue | orbits with L != 0? | what I did |
 |---|---|---|
-| Three Body Orbits atlas (threebodyorbits.com) | yes, 415 equal-mass entries with L != 0 in `data.threebodyorbits.com/catalogue.json` on 2026-10-09 (Simo 344, Broucke A 16 and R 13, Broucke-Boggs 2, BHH satellites 14, Suvakov 13, Sheen 11, Rose 2; the list is not stored here, `tools/compare-atlas-all.py` reads the downloaded file; the first run (2026-10-09) was on a list typed from the atlas pages; re-run on `catalogue.json`, same result; that file was generated 2026-09-27, 1,772,587 bytes, sha256 `597c66bd937764825ccaa38da5372d2c71fc6490ab9b09a51902339e5e3c0eb0`) | compared the 85 base orbits and the 17 of the arclength list (`tools/compare-atlas-all.py`): 6 of the 85 match, 77 do not; before 2026-10-09 I had compared with only 37 of the 415 entries, see Corrections |
-| Jankovic et al., CPC 2020 | yes, 99 BHH satellites | converted all, 98 close (all but N = 99); used for the satellite runs |
-| Jankovic and Dmitrasinovic, PRL 2016 | yes, 57 satellites, all in the CPC list | consistency check only |
+| Three Body Orbits atlas (threebodyorbits.com) | yes, 415 equal-mass entries with L != 0 in `data.threebodyorbits.com/catalogue.json` on 2026-10-09 (Simo 344, Broucke A 16 and R 13, Broucke-Boggs 2, BHH satellites 14, Šuvakov 13, Sheen 11, Rose 2; the list is not stored here, `tools/compare-atlas-all.py` reads the downloaded file; the first run (2026-10-09) was on a list typed from the atlas pages; re-run on `catalogue.json`, same result; that file was generated 2026-09-27, 1,772,587 bytes, sha256 `597c66bd937764825ccaa38da5372d2c71fc6490ab9b09a51902339e5e3c0eb0`) | compared the 85 base orbits and the 17 of the arclength list (`tools/compare-atlas-all.py`): 6 of the 85 match, 77 do not; before 2026-10-09 I had compared with only 37 of the 415 entries, see Corrections |
+| Janković et al., CPC 2020 | yes, 99 BHH satellites | converted all, 98 close (all but N = 99); used for the satellite runs |
+| Janković and Dmitrašinović, PRL 2016 | yes, 57 satellites, all in the CPC list | consistency check only |
 | Li and Liao 2017 (695 families) | no, L = 0 | only my L = 0 orbits |
 | Hristov and Hristova 2024 (Astronomy and Computing 49, 100880; arXiv:2404.16526), Euler configuration | no, L = 0 | only my L = 0 orbits (abstract of arXiv:2404.16526: "12,431 initial conditions (i.c.s) corresponding to 6,333 distinct solutions"; the database page db2.fmi.uni-sofia.bg/3bodyeuler says "file with 60 digits data in the form (vx, vy, T, T*) ordered by T* for 421,562 i.c.s" and "421,562 Euler i.c.s with T* < 200" for the supplementary pdf; the 12,409 distinct free-fall solutions that Li et al. 2025 cite are from another paper, Hristov et al., Celest. Mech. Dyn. Astron. 136, 7, arXiv:2308.16159, whose abstract says "24,582 i.c.s of equal-mass periodic orbits with scale-invariant period T*<80, corresponding to 12,409 distinct solutions") |
-| Suvakov gallery (three-body.ipb.ac.rs, archived copies of 2019) | the 57 BHH satellite pages have numbers, the Henon pages are not archived | checked on 2026-10-10: all 57 satellite pages are rows of the CPC list (tolerance 1e-8, fixed before the comparison); the Henon detail pages are not archived, so there was nothing to compare there (Henon 1976 itself was compared). Snapshot URLs, rows and distances, without the page values: `data/suvakov-gallery-check.json` |
-| Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 (doi:10.1016/j.newast.2025.102407) | equal mass, finite L, but only the figure-eight and IA-3 orbits continued in L from L = 0; 18 rows in the table (10 figure-eight, 8 IA-3), 16 of them relative periodic with rotation angle not 0 | read; not a catalogue; none of my orbits matches a row; the closest is 16.5 % away in (T*, L*), or 1.9 % if repeats are allowed, see below |
-| Broucke and Boggs 1975 (Celest. Mech. 11, 13); Broucke 1975 (Celest. Mech. 12, 439); Hadjidemetriou 1975 (12, 155); Hadjidemetriou and Christides 1975 (12, 175); Henon 1976 (Celest. Mech. 13, 267) | the first, second and last have equal-mass orbits (5 of 27, 29 absolute periodic orbits of two families, one family of 46 orbits); the two Hadjidemetriou papers have none | transcribed from the ADS scans and compared, see the paragraph below; no hit |
+| Šuvakov gallery (three-body.ipb.ac.rs, archived copies of 2019) | the 57 BHH satellite pages have numbers, the Hénon pages are not archived | checked on 2026-10-10: all 57 satellite pages are rows of the CPC list (tolerance 1e-8, fixed before the comparison); the Hénon detail pages are not archived, so there was nothing to compare there (Hénon 1976 itself was compared). Snapshot URLs, rows and distances, without the page values: `data/suvakov-gallery-check.json` |
+| Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 (doi:10.1016/j.newast.2025.102407) | equal mass, finite L, but only the figure-eight and IA-3 orbits continued in L from L = 0; 18 rows in the table (10 figure-eight, 8 IA-3), 16 of them relatively periodic with rotation angle not 0 | read; not a catalogue; none of my orbits matches a row; the closest is 16.5 % away in (T*, L*), or 1.9 % if repeats are allowed, see below |
+| Broucke and Boggs 1975 (Celest. Mech. 11, 13); Broucke 1975 (Celest. Mech. 12, 439); Hadjidemetriou 1975 (12, 155); Hadjidemetriou and Christides 1975 (12, 175); Hénon 1976 (Celest. Mech. 13, 267) | the first, second and last have equal-mass orbits (5 of 27, 29 absolute periodic orbits of two families, one family of 46 orbits); the two Hadjidemetriou papers have none | transcribed from the ADS scans and compared, see the paragraph below; no hit |
 | Nauenberg 2001 (Phys. Lett. A 292, 93); Chenciner, Fejoz and Montgomery 2005 (Nonlinearity 18, 1407) | finite L, rotating eights | not read, not compared |
-| Jankovic, MSc thesis 2016 (Belgrade; copy provided by the author, cited with her permission, not public), the six orbits of the preliminary search mentioned in the CPC 2020 | finite L; four of the six at L = 1.5, not in the CPC tables | read on 2026-10-11, converted and tested (`tools/thesis-orbit-test.mjs`): k = 39 is a rotating member of an R satellite curve, k = 45 a repeat of an R orbit, k = 12, 58, 84 undecided, see `docs/r-family-satellites.md`; the numbers of its orbits are not reproduced here |
+| Janković, MSc thesis 2016 (Belgrade; copy provided by the author, cited with her permission, not public), the six orbits of the preliminary search mentioned in the CPC 2020 | finite L; four of the six at L = 1.5, not in the CPC tables | read on 2026-10-11, converted and tested (`tools/thesis-orbit-test.mjs`): k = 39 is a rotating member of an R satellite curve, k = 45 a repeat of an R orbit, k = 12, 58, 84 undecided, see `docs/r-family-satellites.md`; the numbers of its orbits are not reproduced here |
 
 So "77 match nothing" means: nothing among the 415 atlas entries (to 1e-5 in T* and L*, with the same number of alignments; repeats up to 12 times)
 plus the 99 CPC satellites plus the equal-mass orbits of the 1970s papers in the paragraph below. Two orbits come close without matching: the T* =
 19.41 orbit (L* = 2.22) is 8.5e-4 in T* and 1.0e-3 in L* from Simo's sc022 (three times its period is the period of sc022), and the relative period of
 my T* = 72.465 orbit (36.23: it returns rotated by half a turn after T/2) is 3.1e-3 and 2.5e-3 away in (T*, L*) from twice the atlas orbit SN.13
-(Suvakov's other orbits). SN.13 itself has T* = 18.06 (period 7.1716, E = -1.85094, L = -0.20452, L* = 0.2782, 12 alignments per period); the relative
+(Šuvakov's other orbits). SN.13 itself has T* = 18.06 (period 7.1716, E = -1.85094, L = -0.20452, L* = 0.2782, 12 alignments per period); the relative
 period of my orbit is about twice that (T* = 36.23, ratio 2.006, L* = 0.2790, syzygy word (01010212)^3, 24 syzygies per relative period and 48 per
 full period). It is not SN.13 run twice: T* and L* differ by 3e-3, far more than the accuracy of the atlas numbers (about 1e-5), and a syzygy word of
 24 letters with minimal period 8 cannot be a block of 12 letters followed by the same block, even relabelled or read backwards
@@ -71,40 +71,40 @@ does not change when an orbit is repeated. So the 35 of the 77 unmatched orbits 
 (the closest is 0.11 away in relative terms): for them there was nothing to compare with. The other 42 have L* inside the range of the table; the
 closest of them to any satellite or repeat of one (n up to 8) is 1.0 % away in (T*, L*), the median is 4.0 %, and none is within 5e-3.
 
-**The 1970s papers (2026-10-09).** Broucke and Boggs 1975, Broucke 1975, Hadjidemetriou 1975, Hadjidemetriou and Christides 1975 and Henon 1976 are
+**The 1970s papers (2026-10-09).** Broucke and Boggs 1975, Broucke 1975, Hadjidemetriou 1975, Hadjidemetriou and Christides 1975 and Hénon 1976 are
 the early papers with collinear starts and perpendicular velocities. The numbers needed were transcribed from the ADS scans (no scans and no tables of
 printed start values are in this repository) and checked: Broucke and Boggs against its printed energy E and angular momentum C (its row 6 is
 inconsistent with its printed E and C, so for that row the printed T/2, E and C were used), Broucke against the atlas, and the 45 rows 2 to 46 of
-Henon against his printed energy -1/6 and his printed A (to 1.2e-8) and then, by integration, against his printed T (to 6e-9) and rotation angle (to
+Hénon against his printed energy -1/6 and his printed A (to 1.2e-8) and then, by integration, against his printed T (to 6e-9) and rotation angle (to
 6e-8 in 43 of the 45 rows; row 2 differs by 2e-5 and the printed angle of row 42 looks like a misprint). Broucke and Boggs have 5 orbits with equal
 masses (N = 1, 4, 6, 40, 122; N = 4 and 122 are S4 and S122), Broucke has 29 absolute periodic orbits of his families A and R, which are the 16 + 13
-Broucke A and R entries of the atlas (T* and L* to 1e-5, same order), and Henon has one equal-mass family (orbits 1 to 46, E = -1/6, 2 alignments per
+Broucke A and R entries of the atlas (T* and L* to 1e-5, same order), and Hénon has one equal-mass family (orbits 1 to 46, E = -1/6, 2 alignments per
 relative period) whose only member with rotation angle 0 is orbit 11, the BHH orbit with T* = 4.9598 and L* = 1.0150: my T* = 4.960 orbit and the
 atlas orbit A 1/1. The two Hadjidemetriou papers have no orbit with equal masses. With the rule of the atlas comparison (1e-5 in T* and L*, repeats up
 to 12 times, the same number of alignments) none of my 77 unmatched orbits and none of the 15 unmatched orbits of the arclength list (the 14 and a08,
-see below; a16 is the shortest orbit of t80, so these are 91 distinct orbits) matches an orbit of these papers. The derived numbers of Henon's rows
+see below; a16 is the shortest orbit of t80, so these are 91 distinct orbits) matches an orbit of these papers. The derived numbers of Hénon's rows
 are in `data/henon1976-derived.json`.
-For Henon's family the question was whether one of my orbits is n relative periods of a member, so that it returns rotated after T/n. The family
+For Hénon's family the question was whether one of my orbits is n relative periods of a member, so that it returns rotated after T/n. The family
 returns after one relative period with the bodies in their own places (at all 420 traced points of `data/henon-family-curve.json` the mismatch is at
 most 1.6e-6, median 8.5e-9, with no relabelling), so the test is the return with the bodies in their own places (`tools/return-test.mjs`,
 `data/return-test.json`). Of the 91 distinct unmatched orbits 8 return like that (the T* = 32.3, 33.7, 39.6, 47.1, 59.7, 61.7, 70.0 and 72.5 orbits),
 and they are 0.5 to 1.9 away from the family in (T*, L*, turns) (`tools/henon-family-compare.py`). The 9 orbits that return only with the bodies
 relabelled (a swap at T/2) are 0.8 to 1.0 away when their half period is compared in the same way, and allowing reflection and time reversal adds no
-orbit (17 of the 91 return in some way, 8 + 9). The trace of the family starts from six of Henon's tabulated orbits (their start values are not stored
+orbit (17 of the 91 return in some way, 8 + 9). The trace of the family starts from six of Hénon's tabulated orbits (their start values are not stored
 here) and covers L* 0.21 to 4.9, not the small L* near Schubart's orbit; two of the 8 have small L* (T* = 59.7 and 70.0, primitive T* of 19.9 and
 17.5), but the T* of the family is below 5 everywhere. The closest screening hit was the arclength orbit a03 (T* = 13.903, L* = 1.186, word (01)^5):
 it is not on the family, since it has no return after T/n under any rotation, relabelling, reflection or time reversal (best mismatch 0.5), and it
 differs from Broucke's A 1/5 (same word and 10 alignments, T* = 13.886, L* = 1.185, which does return after T/5) by 1.2e-3 in T*. This says that these
-orbits are not rational members of Henon's family, not that they are new. For Broucke's families the comparison above is only with his 29 absolute
+orbits are not rational members of Hénon's family, not that they are new. For Broucke's families the comparison above is only with his 29 absolute
 orbits of the atlas, which cannot show that an orbit is another member of one of his families, and the T* = 33.745 orbit is one (Corrections,
 2026-10-10).
 
 **Li, Tao, Li and Liao 2025** (Xiaoming Li, Yueyan Tao, Xiaochen Li and Shijun Liao, "A numerical scheme to obtain periodic three-body orbits with
 finite angular momentum", New Astronomy 119 (2025) 102407, doi:10.1016/j.newast.2025.102407). The paper is about equal masses. It continues only two
 orbits of L = 0, the figure-eight and IA-3, in the angular momentum (L up to 0.07 and 0.35, which is L* up to about 0.08 and 0.36 and T* about 9.2 and
-15), and lists relative periodic orbits, closed to 1e-6 in the rotating frame, in a table of 18 rows (the two L = 0 orbits and 16 with rotation angle
+15), and lists relatively periodic orbits, closed to 1e-6 in the rotating frame, in a table of 18 rows (the two L = 0 orbits and 16 with rotation angle
 not 0); the authors say that the full data can be had on request. They write that earlier work on L != 0 concentrated on the figure-eight and BHH
-families. It is not a catalogue: it continues only two families from L = 0 (its 16 rows with rotation angle not 0 have L != 0 and are relative
+families. It is not a catalogue: it continues only two families from L = 0 (its 16 rows with rotation angle not 0 have L != 0 and are relatively
 periodic orbits), so it says nothing about most of my orbits. Integrating the printed start values of the rows (Dormand-Prince and Bulirsch-Stoer give
 the same; `tools/liao-closure.mjs`, which needs the table): the 10 figure-eight rows return rotated by the printed theta to between 6e-8 and 4e-7, as
 the paper claims (d < 1e-6). The 8 IA-3 rows return only to between 2e-6 and 1e-4 from the printed 8 digits. These orbits are very unstable (a
@@ -151,15 +151,15 @@ up to a rotation (one relative period: T/3; checked with four members of the tra
 one. SN.19, SN.20 and SN.21 are atlas
 orbits; the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) on rotating eights are not read yet.
 
-**The family of the T* = 29.310 orbit (2026-10-10).** The family of relative periodic orbits through the stable T* = 29.310 orbit of the arclength
+**The family of the T* = 29.310 orbit (2026-10-10).** The family of relatively periodic orbits through the stable T* = 29.310 orbit of the arclength
 list was traced in both directions with `tools/family-follow.mjs` (`data/family-29.310-trace.json`: 115 stored points downwards, ending at a closest
 approach of 0.0279, and 280 upwards, ending at 0.0286; the rotation angle runs from about -0.49 to +0.49 of a turn). Along the family the orbits
 become very unstable (the largest multiplier is 5e4 to 2e5 after L* about 1.03 and reaches 3.8e6 and 1.4e6 at the ends), and the closure of the stored
 points gets worse than 1e-6 (up to 1.8e-4). Only the first stretch of each trace with closure below 1e-6 is used: L* 0.7878 to 1.074 downwards (87
 points) and 0.7898 to 1.029 upwards (72 points). That rule was added after this trace was seen, so it is a choice made on the data. The two members
 with rotation angle 0 found beyond it (T* = 29.5678, L* = 1.1626, closure 3.6e-5; T* = 32.2114, L* = 1.1228, closure 8.4e-6) are not results. In the
-usable part the family passes no published orbit: nothing is within 2e-3 of the CPC satellites, the rows of Davoust and Broucke, Henon 1976 or the
-rows of Li et al. at n = 1; the closest is Henon's orbit 17 at 6.1e-3 (6 fold, usable part only).
+usable part the family passes no published orbit: nothing is within 2e-3 of the CPC satellites, the rows of Davoust and Broucke, Hénon 1976 or the
+rows of Li et al. at n = 1; the closest is Hénon's orbit 17 at 6.1e-3 (6 fold, usable part only).
 
 **Counting.** The 85 orbits of the perpendicular search are 6 linearly stable, 77 unstable and 2 uncertain. The satellite work uses 7 stable parents:
 those 6 plus the orbit at T* = 29.31 that was found later by continuation (it is not one of the 85). Of the 85, 2 have L = 0 (members of the family
@@ -168,11 +168,11 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
 - All 11 orbits in `src/known.js` (figure-8, butterflies, moths, goggles, dragonfly, bumblebee, yin-yang) close from
   their published start values with residual 1e-10 or better (5e-13 to 8.9e-11 here); `npm test` accepts a residual below 1e-9 and a start that moved
   by less than 0.01.
-- **Zero angular momentum.** I scanned the Suvakov-Dmitrasinovic plane at a finer grid than Li and Liao used. Every orbit
+- **Zero angular momentum.** I scanned the Šuvakov-Dmitrašinović plane at a finer grid than Li and Liao used. Every orbit
   I closed is in Hristov and Hristova's database (arXiv 2404.16526, the 421,562 initial conditions of `60digits.txt`): the eight that were
   not in my own list (seven from the scans, one L = 0 orbit found by the perpendicular search), including two with
   T|E|^1.5 about 79, match to 1e-8 or better. Nothing new there.
-- **Non-zero angular momentum.** A Henon-style start (below) gives orbits with L != 0. From 287 starting points (the 319 rows of
+- **Non-zero angular momentum.** A Hénon-style start (below) gives orbits with L != 0. From 287 starting points (the 319 rows of
   `data/scan-rows-perp.json` hunted once each when u1 and u2 agree to 5 decimals and lam is the same; each hunt had a limit of 300 s),
   111 hunts reached a periodic orbit (rotation angle 0 to the tolerance of the hunt) and 176 did not: 92 ran out of time, 52 did not converge, 16 lost
   the family near a close approach, 15 could not step in lam, 1 start did not close (`why` in `data/hunt-results.jsonl`). So the 85 are what these
@@ -182,7 +182,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
   weak (see "Known weaknesses" in [methods-and-limits.md](methods-and-limits.md)).
 - **A control.** The search found published L != 0 orbits without being pointed at them: Sheen's "Two ovals",
   and Sheen's "Oval, catface and starship" (matching the atlas to the rounding of its numbers); compared with all 415 atlas entries it also found the
-  BHH orbit of Henon (Broucke A1), Broucke A10, and Broucke and Boggs' S4 and S122. Suvakov's SN.9 is not part of this control: it is orbit a01 of the
+  BHH orbit of Hénon (Broucke A1), Broucke A10, and Broucke and Boggs' S4 and S122. Šuvakov's SN.9 is not part of this control: it is orbit a01 of the
   arclength list, reached by continuation from the satellites of the CPC table, that is from published orbits (Corrections, 2026-10-10).
 - **Linear stability.** 6 of the 85 are stable, 77 unstable, 2 uncertain (the eigenvalue excess is under 10 times the scatter of the trivial
   eigenvalues). All 6 stable
@@ -199,7 +199,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
 
   (T* = T|E|^1.5 and L* = |L||E|^0.5 are unchanged when an orbit is rescaled; closest approach is in units where
   the outer two bodies start at distance 2.)
-- **Connection to a published family.** The satellites of the BHH family (Jankovic, Dmitrasinovic and Suvakov,
+- **Connection to a published family.** The satellites of the BHH family (Janković, Dmitrašinović and Šuvakov,
   CPC 2020, tables 3 to 6) are inside my search family. I converted all 99 (98 re-close, the 99th row, N = 99 (k = 58), does not close from its printed digits (`data/cpc-converted.json`); for the 98, my T* and L* reproduce
   theirs, median relative difference 6e-10 and 1e-10) and followed each one in lam until the rotation angle theta is 0.
   The first attempt (steps in lam, `huntPeriodicMS`) reported 40 of 98 reaching a periodic orbit, but that
@@ -227,7 +227,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
 - **Topology (syzygy words, `src/topology.js`).** Every time the three bodies are on a line I write down which one is in the
   middle; read around one period that is a cyclic word, and I bring it to a canonical form (relabeling, start point, time
   reversal). Checks: the figure-8 is 012 twice; Butterfly I and II have the same word (so it is a coarse label, it can't tell
-  close variants apart); all 98 satellites of Jankovic et al. that re-close give the word (01)^k with exactly 2k syzygies, k being their
+  close variants apart); all 98 satellites of Janković et al. that re-close give the word (01)^k with exactly 2k syzygies, k being their
   topological exponent. Results: all 17 orbits reached by arclength are (01)^k with k from 3 to 14, so they are of the BHH
   satellite type. Of my 85 orbits from the perpendicular search, only 18 are (01)^k; the other 67 have other words
   (for example 000101), so they are not BHH satellites. That says nothing yet about whether they are new, it only says which
@@ -277,7 +277,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
     values in `data/refined/` or the double precision values of `data/orbit-table.json`), turned by an angle. For 3 of them (T* = 39.61, 47.07 and
     61.72, n = 2) the angle is 0: they are true repeats of a shorter periodic orbit.
     For the other 6 (T* = 12.17, 32.31, 33.75, 59.72, 70.00 and 72.47, with n = 3, 2, 9, 3, 4 and 2) the angle is 1/3, 1/2, 2/9, 1/3, 1/4 and 1/2 of a
-    turn: the short orbit is only relative periodic (its period `primitiveTstar` is a relative period)
+    turn: the short orbit is only relatively periodic (its period `primitiveTstar` is a relative period)
     and the real period is the T of the whole orbit. Two of the 9 are among the 6 stable orbits: T* = 33.745 returns after T/9 turned by 2/9 of a turn
     (relative period T* = 3.7495),
     and T* = 47.065 is a true 2 fold repeat of an orbit with T* = 23.53. None of the 9 shorter orbits is
@@ -335,12 +335,11 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
     repeats of a primitive orbit with the syzygy word 01
     (T* = 2.62 to 3.67, L* = 2.58 to 2.91 over the 797 stored points of its two arms), so the arms are the repeat curve of the parent (a 9 fold
     repeat, times k = 3) and not a branch, and the candidate is withdrawn.
-    The orbits along these arms are relative periodic, not periodic: the angle they are turned by after the full period is 0.08 rad at lam = 0.6026
+    The orbits along these arms are relatively periodic, not periodic: the angle they are turned by after the full period is 0.08 rad at lam = 0.6026
     (T* = 84.9), 1.11 rad at lam = 0.6478 and 2.51 rad at lam = 0.6977,
     equal in size to 27 times the turn after 1/27 of the period (to 1e-6), and it is a multiple of 2 pi only at isolated points. Details are in the
     Corrections of 2026-10-09.
   - **What this does not show:** nothing here is called new. The 2025 paper of Li, Tao, Li and Liao (New Astronomy 119, 102407) continues only the
-    figure-eight and IA-3 from L = 0 and lists relative periodic orbits, so it does not decide anything about mine, and nobody expert has looked at
-    these.
+    figure-eight and IA-3 from L = 0 and lists relatively periodic orbits, so it does not decide anything about mine.
 
-**Class I satellites, n = 5 to 20, and the class C multipliers for n = 13 to 20 (version 0.2.29).** For n = 5 to 12 the satellite curve of class I (the isosceles start) leaves each branch point on the same side as the class C curve and ends at an unstable orbit next to the stable class C orbit. For n = 13 to 20 the same search finds the class I family again at every branch point (a zero of theta in both senses for n = 13 and 14, in one sense for n = 15 to 20); its end orbits are established to 30 digits and differ from the class C orbit of the same n (by 3.3e-7 to 3.6e-7 in T* and 7.2e-4 to 1.07e-3 in L*, in another symmetry class), but now both orbits are unstable: the class C orbit has a real negative pair of multipliers (1.712 at n = 13 to 7.621 at n = 20, computed in multiple precision) and the class I orbit has a positive and a negative real pair, so the pair of a stable and an unstable orbit does not continue beyond n = 12. None of the 16 end orbits of class I (n = 5 to 20) is in the atlas list or in the CPC rows at 1e-5: not found in the sources checked, which says nothing about whether they are known. Nobody expert has looked at these. Details, files and the failed predictions: `docs/r-family-satellites.md` (last section), `docs/rules/rules-class-i-13-20.txt`, `docs/rules/results-class-i-13-20.txt`.
+**Class I satellites, n = 5 to 20, and the class C multipliers for n = 13 to 20 (version 0.2.29).** For n = 5 to 12 the satellite curve of class I (the isosceles start) leaves each branch point on the same side as the class C curve and ends at an unstable orbit next to the stable class C orbit. For n = 13 to 20 the same search finds the class I family again at every branch point (a zero of theta in both senses for n = 13 and 14, in one sense for n = 15 to 20); its end orbits are established to 30 digits and differ from the class C orbit of the same n (by 3.3e-7 to 3.6e-7 in T* and 7.2e-4 to 1.07e-3 in L*, in another symmetry class), but now both orbits are unstable: the class C orbit has a real negative pair of multipliers (1.712 at n = 13 to 7.621 at n = 20, computed in multiple precision) and the class I orbit has a positive and a negative real pair, so the pair of a stable and an unstable orbit does not continue beyond n = 12. None of the 16 end orbits of class I (n = 5 to 20) is in the atlas list or in the CPC rows at 1e-5: not found in the sources checked, which says nothing about whether they are known. Details, files and the failed predictions: `docs/r-family-satellites.md` (last section), `docs/rules/rules-class-i-13-20.txt`, `docs/rules/results-class-i-13-20.txt`.

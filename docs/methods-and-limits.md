@@ -39,7 +39,7 @@ on when the corrector fails at a midpoint). Against the atlas my stability numbe
 
 ## What is not proven
 
-- "Not in the atlas" is not "new". The atlas has 415 equal-mass orbits with L != 0 (344 of them Simo's), and Jankovic et al. report about 100
+- "Not in the atlas" is not "new". The atlas has 415 equal-mass orbits with L != 0 (344 of them Simo's), and Janković et al. report about 100
   satellites (99 rows in their tables).
   Their list is only in the paper's tables, and the paper does not cover everything. Butterfly II, a published orbit, is
   also missing from the Li-Liao table.

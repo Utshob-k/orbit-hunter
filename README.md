@@ -77,7 +77,7 @@ looks like the pair of an elliptic and a hyperbolic orbit that a generic period-
 that theorem is for maps without symmetry on a two dimensional manifold and does not apply directly here (four dimensions, reversible). None of the eight orbits
 matches an entry of the atlas list (415 entries, the copy of 2026-10-09) or a row of the CPC tables at 1e-5: not found in the sources checked. The family R was
 also followed beyond the end of its stored trace (L* up to 7.25; the end of the stored trace was a limit of the tracing code); the crossings of nu = 1/n for n = 59
-to 439 along it are brackets between consecutive points and not computed branch points, and no satellite was computed beyond n = 56. The relation of Henon
+to 439 along it are brackets between consecutive points and not computed branch points, and no satellite was computed beyond n = 56. The relation of Hénon
 between the period and the angular momentum (dT* = -(L*/2) dtheta with theta = -Phi) is checked on the stored curves. Details, files and commands:
 [docs/r-family-satellites.md](docs/r-family-satellites.md), [docs/reproducing.md](docs/reproducing.md), [data/README.md](data/README.md).
 

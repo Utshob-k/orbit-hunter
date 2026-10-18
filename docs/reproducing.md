@@ -23,7 +23,7 @@ path):
 - `closure-mp.py` integrates the double precision starts of the 85 orbits for one period in 40 digits (about 6 minutes; `--write` stores
   `data/closure-mp.json`)
 - `ia3-rational.py` puts the IA-3 members with a rational rotation angle (q up to 12) next to my orbits, in the range of the printed rows
-- `family-follow.mjs` follows the family of relative periodic orbits through one orbit in one direction and records T*, L*, theta, closest approach,
+- `family-follow.mjs` follows the family of relatively periodic orbits through one orbit in one direction and records T*, L*, theta, closest approach,
   closure, word and stability at every step; `r-family.mjs` checks the members of the family of Broucke's R orbits through my T* = 33.745 orbit
   against the atlas (by key, give the path of `catalogue.json`) and against Table 5 of Davoust and Broucke 1982
 - `branch-point.mjs` solves the branch point of a satellite on the family of Broucke's R orbits (the member with nu = 1/n, the two null vectors of its
@@ -41,7 +41,7 @@ path):
   the table of the heuristic delta_n = C eps_n and the comparison with the relation of the PRL type, with the rules in
   `docs/rules/rules-relation-tests.txt` (the rules of the out of sample run of n = 37 to 56 and of test 2 are in `docs/rules/rules-test1-test2.txt`;
   the bisection for the zero of theta is `src/zero.js`, tested in `test/zero.test.js`); `cpc-rows.mjs` closes the 99 rows of the CPC tables again and
-  compares them with the traced curve of Henon's family, with the satellite curves of R (rules in `docs/rules/rules-cpc-curves.txt`) and by their
+  compares them with the traced curve of Hénon's family, with the satellite curves of R (rules in `docs/rules/rules-cpc-curves.txt`) and by their
   co-rotation share (about 20 seconds); `thesis-orbit-test.mjs` takes the printed start values of an orbit as arguments, tests it for a repeat and
   compares it with the branch point of the R member with the same nu = 1/k (rules in `docs/rules/rules-thesis-k39.txt`; the traced families come from
   `family-follow.mjs`); `corotation-trace.mjs` follows the family through A1 and writes the share along it (about a minute; the output file must be
@@ -114,7 +114,7 @@ python tools/match-start.py data/satellite-results7.jsonl 9 0 5 0.8583     # N =
 python tools/liao-distance.py         # 16.5 % and 1.9 % from the rows of Li et al. 2025 (uses data/liao2025-scaled.json)
 node tools/return-test.mjs           # returns after T/n for the 102 entries (100 distinct orbits): 9 in their own places, 25 with some symmetry; of the 91 distinct unmatched ones 8 in their own places
                                      # the atlas status of the arclength orbits comes from data/return-test.json (or from the downloaded catalogue if its path is given); --write stores the result
-python tools/henon-family-compare.py # the 8 + 9 unmatched orbits that return, against the family of Henon 1976
+python tools/henon-family-compare.py # the 8 + 9 unmatched orbits that return, against the family of Hénon 1976
 ```
 
 `tools/rpo.mjs reproduce IA-3` (about 10 minutes) and the other scripts on the printed rows of Li et al. need `data/liao2025-table1.json`, the table
@@ -128,12 +128,12 @@ Commands from the top folder of the repository. They read the files of `data/`; 
 |---|---|---|
 | Table 1: T*, L*, nu1 and nu2 (n = 5 to 12) or the largest multiplier, senses with rotation 0, n = 5 to 56 | `node tools/tables.mjs 1` (runs `tools/satellite-sequence.mjs`) | `data/stability-mp/class-c/` |
 | Table 2: the end orbits of class I, n = 5 to 12, and their differences from the class C orbits (a second block for n = 13 to 20, where both orbits are unstable) | `node tools/tables.mjs 2` | `data/class-i/`, `data/stability-mp/class-c/` |
-| Table 3: the largest error of the three predictions of T* (no correction, the first order prediction of Henon's relation, B) by range of n | `node tools/relation-b-table.mjs` (the lines "largest \|e\|") | `data/branch-points/`, `data/satellite-candidates.json` |
+| Table 3: the largest error of the three predictions of T* (no correction, the first order prediction of Hénon's relation, B) by range of n | `node tools/relation-b-table.mjs` (the lines "largest \|e\|") | `data/branch-points/`, `data/satellite-candidates.json` |
 | B with the exact member instead of the interpolated one | `node tools/relation-b-exact-members.mjs` | |
 | the relations, their robustness, the tests on k > 1 (errors are data minus prediction, zero - B) | `node tools/satellite-relations.mjs`, `node tools/satellite-tests.mjs`, `node tools/satellite-test2.mjs` | |
 | Figures 1 to 3 (T*/n against L*; the two families for n = 5; the dip of the rotation) | `node tools/figures.mjs [1\|2\|3] [--out=DIR]` | written to `figures/` (or to DIR) as `satellites-period-vs-L.svg`, `class-i-pair-n5.svg` and `satellites-rotation-dip.svg`; these three files are not stored in the repository |
 | the supplement: start values of the 52 satellites and the 16 end orbits of class I (n = 5 to 20) | `node tools/supplement.mjs [--write] [--out=file]` | `data/supplement-initial-conditions.json` |
-| Henon's relation on the stored curves: the integral, the slope at the branch point, the signs, the dip | `node tools/henon-integral-check.mjs`, `henon-slope-check.mjs`, `henon-sign-check.mjs`, `henon-dip-check.mjs` | |
+| Hénon's relation on the stored curves: the integral, the slope at the branch point, the signs, the dip | `node tools/henon-integral-check.mjs`, `henon-slope-check.mjs`, `henon-sign-check.mjs`, `henon-dip-check.mjs` | |
 | class I: the trace of R in the isosceles description and the check that it reproduces every member | `node tools/iso-trace.mjs [out.json]`, `node tools/iso-check-multipliers.mjs` | `data/r-family-trace-iso.json` |
 | class I: a branch point and its satellite curves, both senses (n = 5: about 40 seconds, n = 12: minutes, n = 13 to 20: 24 to 47 minutes with 16 jobs running; theta of n = 13 to 20: 0.0772, 0.0717, 0.0669, 0.0627, 0.0590, 0.0557, 0.0528, 0.0501) | `node tools/branch-point-iso.mjs 5 0.2010 --pieces=8 --out=out.json` (theta as for `branch-point.mjs`; `--out` writes the result, no `--write`) | `data/class-i/curves/` |
 | class I: refinement to 30 digits, REBOUND, the multipliers in multiple precision (about 6 minutes) | `python tools/iso-refine.py out.json refined.json 30`, `python tools/iso-rebound.py refined.json`, `python tools/iso-monodromy-mp.py refined.json stability.json` | `data/class-i/refined/`, `rebound/`, `stability/` |
