@@ -1,3 +1,5 @@
+// worker thread of tools/satellite-hunt.mjs: takes one job of a file data/satellite-jobs*.json (an orbit, k, m and the interval lamA to lamB in lam) as a message,
+// follows the satellite branches from the k fold repeat with satellitesFrom (src/satellites.js) and posts the result; satellite-hunt.mjs appends it to the .jsonl file.
 import { parentPort } from 'worker_threads';
 import { satellitesFrom } from '../src/satellites.js';
 

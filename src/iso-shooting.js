@@ -1,7 +1,7 @@
 // the same as src/shooting.js for the isosceles start of src/iso.js: only the import line (aliases to src/iso.js), the derivative arrays of the start state and the angle in thetaOf differ. the unknowns keep the names u1 = p, u2 = w, lam = h.
-// multiple shooting for the perpendicular family: the half orbit is cut into m pieces, the state at the start of each piece is an unknown
-// (z = [u1, u2, t, s_1 .. s_(m-1)], s_0 comes from u1, u2, lam), equations flow(s_i, t/m) = s_(i+1) and the last piece ends collinear and
-// perpendicular.
+// multiple shooting for the isosceles family: the half orbit is cut into m pieces, the state at the start of each piece is an unknown
+// (z = [u1, u2, t, s_1 .. s_(m-1)], s_0 comes from u1 = p, u2 = w, lam = h), equations flow(s_i, t/m) = s_(i+1) and the last piece ends in an
+// isosceles state (the symmetric residual of src/iso.js).
 import { deriv, dp45Step } from './physics.js';
 import { monodromy } from './stability.js';
 import { solve } from './newton.js';

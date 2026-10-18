@@ -1,18 +1,13 @@
-// the four nontrivial multipliers along the satellite curves of the end orbits, class C and class I, n = 5 to 20 (data/curve-multipliers/class-c/ and class-i/, made by tools/branch-point-mult.mjs and tools/branch-point-iso.mjs):
-// per curve and pair (the resonant pair is the one at +1 at the branch point, the transverse pair the other) the type at every point, tracked by continuity, and the changes of type with their brackets.
-// each file has the points of the curve (s, T*, L*, rotation in turns, and the two coefficients a, b of the characteristic polynomial x^4 - a x^3 + b x^2 - a x + 1 of the 4 x 4 block) and the zero of the rotation (the end orbit, same coefficients).
-// the pairs are the roots y of y^2 - a y + (b - 2) = 0, a pair has the eigenvalues x of x^2 - y x + 1 = 0. type of a pair: elliptic if both moduli are within 1e-6 of 1; real positive or real negative if the eigenvalues are real and
-// the moduli differ from 1 by more than 1e-6; complex otherwise. a pair is classified only where |y - 2| >= 1e-6 and |y + 2| >= 1e-6 (the noise of y near the double multiplier is about 1e-7). a change of type counts if the new type holds
-// for at least 3 consecutive classified points; the zero is a point of the sequence (between the last point before it and the first point past it). the pairs are tracked by the continuity of y (the permutation of smallest total
-// change; a step is ambiguous if the other one costs less than 3 times as much), the resonant pair starting as the root nearer to 2.
-// the checks: the points equal the stored curves (data/branch-points/<n>-upper.json, data/class-i/curves/n<n>.json) and the zero agrees with the multiple precision values (tier A) to 1e-3 in y.
+// the types (elliptic, real positive or negative) of the two pairs of nontrivial multipliers along the 53 satellite curves of data/curve-multipliers/ (class C and class I, n = 5 to 20), tracked by the continuity of y = mu + 1/mu,
+// with the brackets of the changes of type; also the checks that the points equal the stored curves and that the zero agrees with the multiple precision values (tier A) to 1e-3 in y.
+// the thresholds, the rule of 3 consecutive points and the tracking are in docs/rules/rules-curve-multipliers.txt; a pair is classified only where |y - 2| and |y + 2| are at least 1e-6.
 // node tools/curve-multiplier-types.mjs [--write]     (--write stores data/curve-multipliers/summary.json, which must be new)
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 const D = fileURLToPath(new URL('../data/', import.meta.url));
 const read = (f) => JSON.parse(fs.readFileSync(D + f, 'utf8'));
 const TOL_CIRCLE = 1e-6, NEAR_Y = 1e-6, AMBIGUOUS_FACTOR = 3, NCONSEC = 3, TOL_G = 1e-7, TOL_TURNS = 1e-9, TOL_B = 1e-3;
-const cadd = (a, b) => [a[0] + b[0], a[1] + b[1]], csub = (a, b) => [a[0] - b[0], a[1] - b[1]], cmul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]], cabs = (a) => Math.hypot(a[0], a[1]);
+const csub = (a, b) => [a[0] - b[0], a[1] - b[1]], cmul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]], cabs = (a) => Math.hypot(a[0], a[1]);
 const csqrt = (a) => { const r = cabs(a); const re = Math.sqrt(Math.max(0, (r + a[0]) / 2)), im = Math.sqrt(Math.max(0, (r - a[0]) / 2)); return [re, a[1] < 0 ? -im : im]; };
 const rootsAB = (a, b) => { const Dd = a * a - 4 * (b - 2); if (Dd >= 0) { const q = Math.sqrt(Dd); return [[(a + q) / 2, 0], [(a - q) / 2, 0]]; } const q = Math.sqrt(-Dd); return [[a / 2, q / 2], [a / 2, -q / 2]]; };
 function abOfMu(mu) { let a = 0, b = 0; const L = mu.map((m) => [Number(m.re), Number(m.im)]); for (const l of L) a += l[0]; for (let j = 0; j < 4; j++) for (let k = j + 1; k < 4; k++) b += cmul(L[j], L[k])[0]; return [a, b]; }

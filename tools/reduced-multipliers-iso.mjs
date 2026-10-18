@@ -1,4 +1,4 @@
-// nontrivial multipliers of a relatively periodic orbit with the isosceles start of src/iso.js (arguments p, w, h, t) by reduction, in double precision
+// nontrivial multipliers of a relatively periodic orbit with the isosceles start of src/iso.js (arguments p, w, h, t) by reduction, in double precision (class C: the same in tools/reduced-multipliers.mjs)
 // (the method of tools/monodromy-mp.py without the multiple precision):
 // the 4 x 4 block of the monodromy on W / span{v, g}, W = {dE = 0, dL = 0}, v = vector field, g = rotation generator, inside the 8 dimensional space of zero centre of mass and momentum.
 // the rotation of the relative period is compensated as in src/relative.js. no eigenvalue is picked "closest to 1".
