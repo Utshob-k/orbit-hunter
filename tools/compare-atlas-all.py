@@ -44,7 +44,6 @@ print('matches (1e-5 and the number of syzygies agrees):', len(match))
 for k, v in match.items(): print('  %s T*=%.5f L*=%.5f  <->  %s (%s, n=%d)  dT %.1e dL %.1e syz-check %s' % (k, [m for m in mine if m[0] == k][0][1], [m for m in mine if m[0] == k][0][2], v[1], v[2], v[3], v[4], v[5], v[6]))
 print('near but not equal (5e-3, the number of syzygies agrees):', len(near))
 for k, v in near.items(): print('  %s  <->  %s (%s, n=%d)  dT %.1e dL %.1e' % (k, v[1], v[2], v[3], v[4], v[5]))
-t_match = [k for k in match if k[0] == 't']
 unm = [m for m in mine if m[0][0] == 't' and m[4] == 'unmatched']
 still = [m for m in unm if m[0] not in match]
 print('of the 81 that matched nothing in the old 37 entries: %d now match an atlas orbit, %d still match none' % (len(unm) - len(still), len(still)))

@@ -7,7 +7,6 @@ import csv, json, math, sys, time
 import numpy as np
 import rebound
 
-EPS = None   # None: the default of IAS15
 def start_state(u1, u2, lam):
     cm = lam / 3
     pos = [(-1 - cm, 0.0), (lam - cm, 0.0), (1 - cm, 0.0)]

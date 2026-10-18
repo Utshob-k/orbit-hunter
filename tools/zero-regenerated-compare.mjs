@@ -15,7 +15,6 @@ function flat(o, p = '', out = []) {
   else out.push([p, o]);
   return out;
 }
-const tstarOf = (z) => z.Tstar;
 for (const n of ns) {
   const f = dir + n + '-upper.json';
   if (!fs.existsSync(f)) { console.log(`n = ${n}: NO NEW FILE`); continue; }

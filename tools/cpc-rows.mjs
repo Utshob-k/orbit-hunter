@@ -29,7 +29,7 @@ const dev = rows.filter((r) => r.closed).map((r) => { const t = r.T / r.k, cs = 
 const cnt = (b) => dev.filter((x) => x < b).length;
 console.log(`2. T*/k of the rows against the traced curve of Henon's family (L* ${Math.min(...segs.flat().map((p) => p.L)).toFixed(2)} to ${Math.max(...segs.flat().map((p) => p.L)).toFixed(2)}) at the same L*: ${dev.length} rows have a curve at their L*; relative difference below 1e-3: ${cnt(1e-3)}, 1e-2: ${cnt(1e-2)}, 5e-2: ${cnt(5e-2)}, 0.1: ${cnt(0.1)}; largest ${Math.max(...dev).toFixed(3)}`);
 // ---- 3. the rows against the satellite curves
-let nOn = 0, nTest = 0; const cls = {}; const lines = [];
+let nTest = 0; const cls = {}; const lines = [];
 for (const r of rows) {
   if (!r.closed) continue;
   let best = null; const close = [];

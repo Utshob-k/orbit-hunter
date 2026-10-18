@@ -82,14 +82,6 @@ function jacobiSvd(M) {          // one sided Jacobi on the columns of M (rows x
   const norms = W.map((w) => Math.sqrt(dot(w, w))), order = norms.map((v, j) => [v, j]).sort((p, q) => p[0] - q[0]);
   return { norms, order, W, V, rows };
 }
-function smallestAt(f) {    // the same matrix at another member of the family (not the branch point): smallest singular values and nu - 1/n
-  const mm = member(f); if (!mm) return null;
-  let r = null, pieces = 0;
-  for (const p of [8, 16, 24]) { const q = closePerpMS(mm.s.u1, mm.s.u2, mm.s.lam, n * mm.s.t, { m: p }); if (q.res < repTol) { r = q; pieces = p; break; } }
-  if (!r) return null;
-  const zz = packZ(r), ss = system(zz, r.lam, pieces), M = ss.J.map((row, i) => [...Array.from(row), ss.Flam[i]]);
-  return { f, nuMinusTarget: mm.nu - target, smallest: jacobiSvd(M).order.slice(0, 3).map((o) => o[0]) };
-}
 const svd = jacobiSvd(A);
 const [sA, sB, sC] = svd.order.slice(0, 3).map((o) => o[0]);
 console.log(`   [J | dF/dlam] ${A.length} x ${A[0].length}: the three smallest singular values ${sA.toExponential(1)}, ${sB.toExponential(1)}, ${sC.toExponential(1)} (the first is zero by the shape of the matrix, one more column than rows), the largest ${Math.max(...svd.norms).toExponential(1)}`);

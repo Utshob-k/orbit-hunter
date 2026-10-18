@@ -2,9 +2,9 @@
 // the isosceles start reproduces every member: closes with the multiple shooting of src/iso-shooting.js, T*, L* and the rotation as in the trace.
 // node tools/iso-trace.mjs [out.json]   (a plain run only prints the check; the file out.json must be new; data/r-family-trace-iso.json is the stored result)
 import fs from 'fs';
-import { perpInitial, perpInfo } from '../src/perp.js';
+import { perpInitial } from '../src/perp.js';
 import { bsIntegrate } from '../src/bs.js';
-import { isoInitial, isoSymResidual, isoInfo } from '../src/iso.js';
+import { isoInitial, isoInfo } from '../src/iso.js';
 import { closePerpMS } from '../src/iso-shooting.js';
 
 const src = JSON.parse(fs.readFileSync('data/r-family-trace.json', 'utf8'));
