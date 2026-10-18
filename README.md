@@ -68,7 +68,7 @@ and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 
 
 Since version 0.2.28: the linear stability of the satellites for n = 5 to 12 was computed again in multiple precision, with the time shift and the rotation taken
 out analytically (the four nontrivial multipliers are on the unit circle within 3.6e-24 for the 30 digit orbits); from n = 13 on the orbits are unstable: the
-largest multiplier is real and negative for n = 13 to 20 (the sign was computed in multiple precision, tier A, in version 0.2.29, for these eight; not beyond n = 20) and grows in modulus from 1.71 (n = 13) to 53.2 (n = 56). The second
+largest multiplier is real and negative for n = 13 to 56 (the sign was computed in multiple precision, tier A, for n = 13 to 20 in version 0.2.29, and in double precision, by the reduction, for n = 21 to 56 in version 0.2.32) and grows in modulus from 1.71 (n = 13) to 53.2 (n = 56). The second
 pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter). For n = 5 to 12 a second
 family of satellites leaves the same branch points on the same side, in the class of orbits that are symmetric under a second reversing symmetry of R (the
 isosceles class, `src/iso.js`). Its end orbits are unstable (a real pair of multipliers of 1.025 to 1.062) next to the stable orbit of the first class, so each
@@ -98,7 +98,7 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 Node 18 or newer, nothing to install for the JavaScript code. Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
 
 ```
-npm test                              # all the tests, about 10 seconds
+npm test                              # all the tests, about 20 seconds
 python -m http.server                 # then open http://localhost:8000 (needs WebGPU)
 node tools/nu-map.mjs                 # the 41 places where satellites can leave the R family
 node tools/branch-summary.mjs         # how every satellite continuation ended

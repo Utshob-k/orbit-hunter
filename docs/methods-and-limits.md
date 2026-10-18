@@ -1,6 +1,6 @@
 # Methods and limits
 
-This file holds a part of the former README, moved here on 2026-10-10 without changing it (only headings were added). Paths such as `tools/...` and `data/...` are from the top folder of the repository. "Corrections" in the text means the log in [CHANGELOG.md](../CHANGELOG.md); the other sections of the former README are in this folder (see [README.md](../README.md)).
+This file holds a part of the former README, moved here on 2026-10-10 (only headings were added at the time; the text has been corrected and extended since). Paths such as `tools/...` and `data/...` are from the top folder of the repository. "Corrections" in the text means the log in [CHANGELOG.md](../CHANGELOG.md); the other sections of the former README are in this folder (see [README.md](../README.md)).
 
 ## How it works
 
@@ -27,21 +27,23 @@ This file holds a part of the former README, moved here on 2026-10-10 without ch
    (own complex QR solver, no libraries) say stable or not. Four of the eight eigenvalues are 1 in theory and scatter
    a little numerically, so the four closest to 1 count as trivial.
 
-Checks: `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
+Checks (the 11 files of `test/`, run by `npm test`): `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
 `test/stability.test.js` (known eigenvalues, figure-8 stable, M^T J M = J, butterfly I unstable),
 `test/topology.test.js` (figure-8 and k = 3 satellite words), `test/covers.test.js` (repeats), `test/relative.test.js` (rotating orbit: trivial
-eigenvalues, agreement with finite differences) and `test/closure.test.js` (the closure tiers) and `test/shooting.test.js` (multiple shooting gives
-the same orbit as single shooting; the tangent equals a finite
-difference). Against the atlas my stability numbers match to four digits for the three re-found orbits
+eigenvalues, agreement with finite differences), `test/closure.test.js` (the closure tiers), `test/shooting.test.js` (multiple shooting gives
+the same orbit as single shooting; the tangent equals a finite difference), `test/corotation.test.js` (the co-rotation share of `src/corotation.js`: 1 for
+members of the R family and for the CPC satellites N = 6 and 9, 0 for N = 1), `test/iso.test.js` (the isosceles start of `src/iso.js`: its symmetric
+residual, the end orbit of n = 5 of class I, the members of R written in it) and `test/zero.test.js` (the bisection for the zero of the rotation goes
+on when the corrector fails at a midpoint). Against the atlas my stability numbers match to four digits for the three re-found orbits
 (|lambda|max 1.409, 19.55, 9.860).
 
 ## What is not proven
 
 - "Not in the atlas" is not "new". The atlas has 415 equal-mass orbits with L != 0 (344 of them Simo's), and Jankovic et al. report about 100
-  satellites.
+  satellites (99 rows in their tables).
   Their list is only in the paper's tables, and the paper does not cover everything. Butterfly II, a published orbit, is
   also missing from the Li-Liao table.
-- Following the high-k satellites (about 56 of the 98) to a zero of theta took more than the 5 minutes
+- Following the high-k satellites (about 56 of the 98 rows that re-close) to a zero of theta took more than the 5 minutes
   per direction I gave each start, so for those I do not know if they reach a periodic orbit. A few others lost the family
   near a close approach (lam near 0.25 to 0.5 or near 1), which may be where the branch really ends.
 - **Class I for n = 13 to 20 (version 0.2.29).** The end orbits are closed to 30 digits and in REBOUND over one period, and the multipliers are computed in multiple precision in one tier only (tier A: no second precision for an error estimate; linear stability only). Only the upper nu, the apex body 0 and the one non-repeat root of each branch point (the null space is two dimensional) were searched; for n = 15 to 20 one sense of the curve stopped by a collapse of the step and was not investigated (the same happens to the class C curves for n >= 16); that the two senses end at the same orbit was checked only for n = 13 and 14. The REBOUND distance after 20 periods grows to the size of the orbit for n >= 17, because the orbits are unstable; it is not part of the threshold for "established" (one period). "Different from the class C orbit" means another symmetry class and other values and shows nothing about how the two families are related.
@@ -87,7 +89,7 @@ difference). Against the atlas my stability numbers match to four digits for the
   rule (not within 1e-3 of 1) took its trivial pair, which splits by 2e-3 in double precision, for a nontrivial one; the 8 multipliers closest to 1
   are now taken as the trivial ones.
 - A first version of this table said the satellites connect to my stable orbits. That came from a method that jumped
-  branches, see above.
+  branches (the entry "SN.9 and N = 9" of 2026-10-07 in [CHANGELOG.md](../CHANGELOG.md), and the continuation in arclength in [results.md](results.md)).
 - I used to think many of my orbits were probably more BHH family members. The syzygy words say that only 18 of the 85 are.
 
 ## Dead ends and bugs (so I don't repeat them)

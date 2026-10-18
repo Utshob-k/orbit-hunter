@@ -1,11 +1,11 @@
 # Reproducing the numbers
 
-This file holds a part of the former README, moved here on 2026-10-10 without changing it (only headings were added). Paths such as `tools/...` and `data/...` are from the top folder of the repository. "Corrections" in the text means the log in [CHANGELOG.md](../CHANGELOG.md); the other sections of the former README are in this folder (see [README.md](../README.md)).
+This file holds a part of the former README, moved here on 2026-10-10 (only headings were added at the time; the text has been corrected and extended since). Paths such as `tools/...` and `data/...` are from the top folder of the repository. "Corrections" in the text means the log in [CHANGELOG.md](../CHANGELOG.md); the other sections of the former README are in this folder (see [README.md](../README.md)).
 
 ## Running it
 
 ```
-npm test                       # all the tests, about 10 seconds, node 18+
+npm test                       # all the tests, about 20 seconds, node 18+
 python -m http.server          # then open http://localhost:8000 (needs WebGPU)
 ```
 

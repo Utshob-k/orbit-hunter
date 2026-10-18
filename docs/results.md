@@ -1,6 +1,6 @@
 # Results and comparisons
 
-This file holds a part of the former README, moved here on 2026-10-10 without changing it (only headings were added). Paths such as `tools/...` and `data/...` are from the top folder of the repository. "Corrections" in the text means the log in [CHANGELOG.md](../CHANGELOG.md); the other sections of the former README are in this folder (see [README.md](../README.md)).
+This file holds a part of the former README, moved here on 2026-10-10 (only headings were added at the time; the text has been corrected and extended since). Paths such as `tools/...` and `data/...` are from the top folder of the repository. "Corrections" in the text means the log in [CHANGELOG.md](../CHANGELOG.md); the other sections of the former README are in this folder (see [README.md](../README.md)).
 
 ## Where it stands, the full statement
 
@@ -15,7 +15,7 @@ values, 51 of the 54 close to 1e-8 (t40, t47 and t57 do not, at most 6.7e-8), an
 1.5e-6 (Corrections, 2026-10-09; `data/closure-mp.json`).
 All 85 are refined: the stored 30 digit values close to 2.7e-19 or better (16 of the 85 above 1e-20, see Corrections, 2026-10-10; the unrounded
 solutions of the refinement close to better than 1e-20). The refinement dates: the 31 and the 6 stable ones on 2026-10-08 and 2026-10-09 (37 orbits),
-the other 48 on 2026-10-09 (the rule is in the refinement paragraph below).
+the other 48 on 2026-10-09 (the rule is in the refinement paragraph of [methods-and-limits.md](methods-and-limits.md), section "What is not proven").
 Among the sources checked so far (all 415 equal-mass orbits with L != 0 of the Three Body Orbits atlas, Davoust and Broucke 1982, Broucke and Boggs
 1975, Broucke 1975, Henon 1976, the 99 satellites of Jankovic et al. 2020, the 18 rows of Li et al. 2025; the
 L = 0 catalogues of Li and Liao and of Hristov and Hristova cannot contain orbits with L != 0), 6 of my 85 orbits are atlas orbits (T* and L* equal to
@@ -39,7 +39,7 @@ I do not know if any is new, and nothing here should be read as a discovery.
 | catalogue | orbits with L != 0? | what I did |
 |---|---|---|
 | Three Body Orbits atlas (threebodyorbits.com) | yes, 415 equal-mass entries with L != 0 in `data.threebodyorbits.com/catalogue.json` on 2026-10-09 (Simo 344, Broucke A 16 and R 13, Broucke-Boggs 2, BHH satellites 14, Suvakov 13, Sheen 11, Rose 2; the list is not stored here, `tools/compare-atlas-all.py` reads the downloaded file; the first run (2026-10-09) was on a list typed from the atlas pages; re-run on `catalogue.json`, same result; that file was generated 2026-09-27, 1,772,587 bytes, sha256 `597c66bd937764825ccaa38da5372d2c71fc6490ab9b09a51902339e5e3c0eb0`) | compared the 85 base orbits and the 17 of the arclength list (`tools/compare-atlas-all.py`): 6 of the 85 match, 77 do not; before 2026-10-09 I had compared with only 37 of the 415 entries, see Corrections |
-| Jankovic et al., CPC 2020 | yes, 99 BHH satellites | converted all, 98 close; used for the satellite runs |
+| Jankovic et al., CPC 2020 | yes, 99 BHH satellites | converted all, 98 close (all but N = 99); used for the satellite runs |
 | Jankovic and Dmitrasinovic, PRL 2016 | yes, 57 satellites, all in the CPC list | consistency check only |
 | Li and Liao 2017 (695 families) | no, L = 0 | only my L = 0 orbits |
 | Hristov and Hristova 2024 (Astronomy and Computing 49, 100880; arXiv:2404.16526), Euler configuration | no, L = 0 | only my L = 0 orbits (abstract of arXiv:2404.16526: "12,431 initial conditions (i.c.s) corresponding to 6,333 distinct solutions"; the database page db2.fmi.uni-sofia.bg/3bodyeuler says "file with 60 digits data in the form (vx, vy, T, T*) ordered by T* for 421,562 i.c.s" and "421,562 Euler i.c.s with T* < 200" for the supplementary pdf; the 12,409 distinct free-fall solutions that Li et al. 2025 cite are from another paper, Hristov et al., Celest. Mech. Dyn. Astron. 136, 7, arXiv:2308.16159, whose abstract says "24,582 i.c.s of equal-mass periodic orbits with scale-invariant period T*<80, corresponding to 12,409 distinct solutions") |
@@ -179,7 +179,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
   hunts reached, not a count of all orbits of the family. 85 distinct orbits after removing repeats:
   2 have L = 0 (published), 6 are orbits of the Three Body Orbits atlas, **77 match nothing in the atlas**. Of the 85, 54 close to 1e-8 or better with
   two double precision integrators (the 6 stable ones among them; 51 of the 54 in 40 digit arithmetic, see Corrections, 2026-10-09); the other 31 are
-  weak (see Known weaknesses).
+  weak (see "Known weaknesses" in [methods-and-limits.md](methods-and-limits.md)).
 - **A control.** The search found published L != 0 orbits without being pointed at them: Sheen's "Two ovals",
   and Sheen's "Oval, catface and starship" (matching the atlas to the rounding of its numbers); compared with all 415 atlas entries it also found the
   BHH orbit of Henon (Broucke A1), Broucke A10, and Broucke and Boggs' S4 and S122. Suvakov's SN.9 is not part of this control: it is orbit a01 of the
@@ -200,7 +200,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
   (T* = T|E|^1.5 and L* = |L||E|^0.5 are unchanged when an orbit is rescaled; closest approach is in units where
   the outer two bodies start at distance 2.)
 - **Connection to a published family.** The satellites of the BHH family (Jankovic, Dmitrasinovic and Suvakov,
-  CPC 2020, tables 3 to 6) are inside my search family. I converted all 99 (98 re-close, and my T* and L* reproduce
+  CPC 2020, tables 3 to 6) are inside my search family. I converted all 99 (98 re-close, the 99th row, N = 99 (k = 58), does not close from its printed digits (`data/cpc-converted.json`); for the 98, my T* and L* reproduce
   theirs, median relative difference 6e-10 and 1e-10) and followed each one in lam until the rotation angle theta is 0.
   The first attempt (steps in lam, `huntPeriodicMS`) reported 40 of 98 reaching a periodic orbit, but that
   method can jump to another branch, so I redid it with continuation in arclength (below), which can't:
@@ -227,7 +227,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
 - **Topology (syzygy words, `src/topology.js`).** Every time the three bodies are on a line I write down which one is in the
   middle; read around one period that is a cyclic word, and I bring it to a canonical form (relabeling, start point, time
   reversal). Checks: the figure-8 is 012 twice; Butterfly I and II have the same word (so it is a coarse label, it can't tell
-  close variants apart); all 98 satellites of Jankovic et al. give the word (01)^k with exactly 2k syzygies, k being their
+  close variants apart); all 98 satellites of Jankovic et al. that re-close give the word (01)^k with exactly 2k syzygies, k being their
   topological exponent. Results: all 17 orbits reached by arclength are (01)^k with k from 3 to 14, so they are of the BHH
   satellite type. Of my 85 orbits from the perpendicular search, only 18 are (01)^k; the other 67 have other words
   (for example 000101), so they are not BHH satellites. That says nothing yet about whether they are new, it only says which
@@ -259,7 +259,7 @@ that are also in the L = 0 catalogues) and 6 are atlas orbits.
       not branches; if repeat-curve arms are dropped from both counts, the result is 2 tested and 2 found. N = 2 and N = 3 are 0.07 and 0.08
       (relative, in T* and L*) from the nearest arm, so they are not found. The other 94 satellites are outside every box, there is nothing to compare
       with. (`tools/recall-cpc.py` makes this count and `tools/match-start.py` the comparison of the start values above; the commands are under
-      "Reproducing the branch counts" in Running it.)
+      "Reproducing the branch counts" under "Running it" in [reproducing.md](reproducing.md).)
   - 211 places where a rotation number crosses m/k were found on 4 of the 7 orbits, k up to 20; 136 of them have a branch point. For the other 75 the
     trace of the repeat ran out of its 120 s
     before it reached the end of the window in 74 of them (they took 123 to 166 s), so I do not know if they have one; in the 75th (orbit 0, k = 13, m
