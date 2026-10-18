@@ -3,10 +3,13 @@
 //   figure 2: the two satellite families of n = 5 (class C, stored curve of data/branch-points/5-upper.json; class I, data/class-i/curves/n5.json): rotation against L*
 //             and the difference of their T* at equal L*
 //   figure 3: the rotation along the satellite curves of n = 20 and n = 36 against L*, with the dip below -eps
-// node tools/figures.mjs [1|2|3] [--out=DIR]     (all three by default; the files go to DIR, default figures/; a file that exists is only accepted if it is identical)
+//   figure 4: the end orbits (theta = 0) of class C for n = 5, 13 and 56 and of class I for n = 5 in the inertial frame, from the stored 30 digit starts, integrated over one relative period in double precision
+// node tools/figures.mjs [1|2|3|4] [--out=DIR]     (all three by default; the files go to DIR, default figures/; a file that exists is only accepted if it is identical)
 import fs from 'fs';
 import { panel, wrap } from './svg-helpers.mjs';
-import { perpInfo } from '../src/perp.js';
+import { perpInfo, perpInitial } from '../src/perp.js';
+import { isoInitial } from '../src/iso.js';
+import { dp45Step } from '../src/physics.js';
 import { ROOT, read, sequenceRows } from './orbit-lookup.mjs';
 
 const which = process.argv.slice(2).find((a) => !a.startsWith('--')) || 'all';
@@ -128,4 +131,57 @@ if (which === 'all' || which === '2') {
   const q = panel(530, 40, 340, 270, Lmin, Lmax, -1, 22, { xlabel: 'L*', ylabel: 'T*(isosceles) - T*(collinear) at equal L* (10^-5)', title: 'the difference of the two curves', xticks: 5 });
   q.line(dT.map((r) => [r[0], r[1] * 1e5]), '#444', 1.6); q.hline(0);
   writeNew('class-i-pair-n5.svg', wrap(W, H, p.svg() + q.svg(), 'the two satellite families at n = 5: rotation against L*, and the difference of their T* at equal L*'));
+}
+
+if (which === 'all' || which === '4') {
+  // figure 4: one relative period of the end orbit, positions of the three bodies in the inertial frame (centre of mass at the origin), equal axes
+  const cands = read('satellite-candidates.json').orbits;
+  const cstart = (n) => { const c = cands.find((o) => o.n === n && o.label.includes(`nu = 1/${n} (upper branch`)); return c ? [c.u1, c.u2, c.lam, c.t] : null; };
+  const rC5 = read('refined/T17.847.json'), rI5 = read('class-i/refined/n5.json');
+  const specs = [
+    { title: 'class C, n = 5', x0: perpInitial(Number(rC5.u1), Number(rC5.u2), Number(rC5.lam)), t: Number(rC5.t) },
+    { title: 'class I, n = 5', x0: isoInitial(Number(rI5.p), Number(rI5.w), Number(rI5.h)), t: Number(rI5.t) },
+    { title: 'class C, n = 13', x0: (([a, b, c]) => perpInitial(Number(a), Number(b), Number(c)))(cstart(13)), t: Number(cstart(13)[3]) },
+    { title: 'class C, n = 56', x0: (([a, b, c]) => perpInitial(Number(a), Number(b), Number(c)))(cstart(56)), t: Number(cstart(56)[3]) },
+  ];
+  const orbit = (x0, T) => {
+    const s = Float64Array.from(x0), pts = [[0, 1, 2].map((i) => [s[2 * i], s[2 * i + 1]])];
+    let tt = 0, h = 1e-3;
+    for (let k = 0; tt < T - 1e-15; k++) {
+      if (k > 20 * (4000 + 3000 * T)) throw new Error('too many steps');
+      const [dt, hn] = dp45Step(s, Math.min(h, T - tt), 1e-13, 1e-14, 0.01);
+      tt += dt; h = hn; pts.push([0, 1, 2].map((i) => [s[2 * i], s[2 * i + 1]]));
+    }
+    let err = 0; for (let k = 0; k < 12; k++) err = Math.max(err, Math.abs(s[k] - x0[k]));
+    return { pts, closure: err };
+  };
+  const thin = (line, eps) => {       // Ramer-Douglas-Peucker: the polyline deviates from the path by less than eps
+    const keep = new Uint8Array(line.length); keep[0] = keep[line.length - 1] = 1; const stack = [[0, line.length - 1]];
+    while (stack.length) {
+      const [a, b] = stack.pop(); if (b <= a + 1) continue;
+      const [ax, ay] = line[a], dx = line[b][0] - ax, dy = line[b][1] - ay, len = Math.hypot(dx, dy);
+      let md = -1, mi = -1;
+      for (let k = a + 1; k < b; k++) { const d = len > 0 ? Math.abs(dy * (line[k][0] - ax) - dx * (line[k][1] - ay)) / len : Math.hypot(line[k][0] - ax, line[k][1] - ay); if (d > md) { md = d; mi = k; } }
+      if (md > eps) { keep[mi] = 1; stack.push([a, mi], [mi, b]); }
+    }
+    return line.filter((_, k) => keep[k]);
+  };
+  const W = 920, H = 985, size = 380, pos = [[70, 50], [500, 50], [70, 520], [500, 520]], styles = [['#1f4e9e', 1.3, ''], ['#b2182b', 1.3, '7 3'], ['#2a7f3f', 1.7, '1.5 3.5']];
+  let inner = '';
+  specs.forEach((sp, k) => {
+    const o = orbit(sp.x0, 2 * sp.t);
+    let R = 0; for (const frame of o.pts) for (const b of frame) R = Math.max(R, Math.abs(b[0]), Math.abs(b[1]));
+    R *= 1.06;
+    const p = panel(pos[k][0], pos[k][1], size, size, -R, R, -R, R, { xlabel: 'x', ylabel: 'y', title: sp.title, xticks: 5, yticks: 5 });
+    const counts = [];
+    for (let b = 0; b < 3; b++) {
+      const line = thin(o.pts.map((fr) => fr[b]), 0.0006 * 2 * R); counts.push(line.length);
+      p.line(line, styles[b][0], styles[b][1], styles[b][2]);
+    }
+    p.dots([0, 1, 2].map((b) => o.pts[0][b]), '#111', 3.2, true);
+    inner += p.svg();
+    console.log(`figure 4 ${sp.title}: relative period ${(2 * sp.t).toFixed(5)}, steps ${o.pts.length - 1}, closure (end state against start state) ${o.closure.toExponential(2)}, half width of the box ${R.toFixed(4)}, points per body ${counts.join(', ')}${o.closure > 1e-6 ? ' CLOSURE ABOVE 1e-6' : ''}`);
+  });
+  inner += '<text x="460" y="962" font-size="13" text-anchor="middle" fill="#111">body 0: full line, body 1: dashed, body 2: dotted; circles mark the start state</text>';
+  writeNew('end-orbits.svg', wrap(W, H, inner, 'end orbits of the satellite curves in the inertial frame: class C n = 5, class I n = 5, class C n = 13 and n = 56'));
 }
