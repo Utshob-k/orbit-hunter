@@ -78,6 +78,16 @@ Short checks of the symmetries of R, of the satellite curves and of the long run
 - `results-numbers.mjs` runs `satellite-sequence.mjs` and `satellite-candidates.mjs` and prints the ranges of T*, L*, the multipliers and the closures of the 52 end orbits, the
   end orbit against its member of R (T*/n lower by 2.34e-3 at n = 5, 1.63e-5 at n = 56; L* lower by 0.0219 and 1.3660) and the words of the 49 orbits (about 40 seconds)
 
+The multipliers along the satellite curves, the signs of the largest multiplier and the figure of orbits (version 0.2.32; the rules and the results are in `docs/rules/rules-curve-multipliers.txt` and `results-curve-multipliers.txt`):
+
+- `reduced-multipliers.mjs` (class C) and `reduced-multipliers-iso.mjs` (class I) compute the four nontrivial multipliers of an orbit in double precision by reduction (library, used by the tools below)
+- `branch-point-mult.mjs n theta --sense=1|-1 --out=file.json` is `branch-point.mjs` for class C with one sense per run and the full start and the four multipliers at every accepted point (theta is the rotation of the member as for `branch-point.mjs`, e.g. `node tools/branch-point-mult.mjs 12 0.0837 --sense=1 --out=curve.json`; 1 to 6 minutes with ten jobs at a time); for class I `branch-point-iso.mjs n theta --out=file.json` stores the same
+- `curve-multiplier-types.mjs [--write]` reads `data/curve-multipliers/` (53 curves: the senses that reach rotation 0, n = 5 to 20, both classes; the points with the coefficients of the characteristic polynomial of the 4 x 4 block) and prints, for every curve, the type of the resonant and of the transverse pair along it (elliptic, real positive, real negative), the changes of type with their brackets, whether the points equal the stored curves and whether the zero agrees with the multiple precision values; `--write` stores `data/curve-multipliers/summary.json` (a few seconds)
+- `largest-multipliers.mjs [--write]` gives the modulus and the sign of the largest multiplier of the class C end orbits n = 13 to 56 (all real negative) and compares them with the stored values; `--write` stores `data/largest-multipliers-n13-56.json` (a few seconds)
+- `end-orbit-multiplier-check.mjs` compares the reduction at the stored 30 digit starts of the 32 end orbits (n = 5 to 20, both classes) with the multiple precision multipliers (a few seconds)
+- `trace-checks.mjs` prints the number of distinct points of `data/r-family-trace.json`, the closest approach at its first points and where the half period test deviates most (a few seconds)
+- `figures.mjs 4` makes figure 4, the end orbits of class C for n = 5, 13 and 56 and of class I for n = 5 in the inertial frame (`figures/end-orbits.svg`; the figures 1 to 3 are unchanged)
+
 **Counting the regenerated zeros.** The rotation left at the zero of the 19 files of `data/branch-points-regenerated/` (the field `turns`; the label "zero of theta" in a file does not mean that 1e-11 was reached). The command prints the number of files, the number with more than 1e-9 turns and the number with more than 1e-10 turns (19 11 12):
 
 ```
