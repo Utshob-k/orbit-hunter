@@ -1,4 +1,4 @@
-// settings of the integrators and of the multiple shooting. One mutable object; the values below are the ones used for every result in the repository.
+// settings of the integrators and of the multiple shooting. One mutable object; the values below are the defaults of this release. The stored traces of t35 - and t12 + were run with the guard ratio 400 (column guard_ratio of data/deep/traces-table.csv), the others with the 390 below.
 // integrator: 'dp45' (default, the Dormand-Prince code of physics.js) or 'ias' (REBOUND IAS15 through the Python process of src/ias/, with the
 // regularised integrator of src/ias/reg.js for the encounter pieces). The environment variable ORBIT_INTEGRATOR=ias selects it from the shell.
 const env = typeof process !== 'undefined' && process.env ? process.env : {};

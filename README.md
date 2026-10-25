@@ -98,7 +98,7 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 Node 18 or newer, nothing to install for the JavaScript code (the ias route below was run only with v24.15.0). Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
 
 ```
-npm test                              # all the tests, about 20 seconds
+npm test                              # the tests of the default route (Dormand-Prince), about 20 seconds
 python -m http.server                 # then open http://localhost:8000 (needs WebGPU)
 node tools/nu-map.mjs                 # the 41 places where satellites can leave the R family
 node tools/branch-summary.mjs         # how every satellite continuation ended
@@ -108,14 +108,20 @@ node tools/tables.mjs                 # Tables 1 and 2 of the satellites of R (m
 
 The scripts behind the numbers are in `tools/`. How to rerun them: [docs/reproducing.md](docs/reproducing.md).
 
-## The ias route (version 0.3.0)
+## The ias route (PeriCont, version 0.3.0)
 
-A second way to follow the families of the perpendicular start through close approaches of two bodies, down to a pair distance of about 1e-9, where the Dormand-Prince code of `src/physics.js` does not follow. Every piece of the multiple shooting is integrated with REBOUND IAS15, the pieces with a close pair are recomputed with the regularised integrator `src/ias/reg.js`, and the points of a trace are checked afterwards with a multiple precision flow (`tools/witness.py`) that uses none of this code. It is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`.
+This close-approach route is called PeriCont (version 0.3.0); in the code and in the settings it is the ias route. It follows the families of the perpendicular start through close approaches of two bodies, to witnessed pair distances of 7.320e-10, 1.907e-9, 8.573e-9 and 1.611e-8 on four families, where the Dormand-Prince code of `src/physics.js` does not follow.
+
+Which integrator gives which number: the corrector (the multiple shooting) takes the end state of every piece from REBOUND IAS15, and the pieces with a close pair are recomputed with the regularised integrator `src/ias/reg.js`; the rotation angle theta of a point is made from these end states. The numbers recorded for every point of a trace, T*, L*, the closest approach (`minDist`) and the closure, and for every fifth point the syzygy word and `maxMod`, come from the Dormand-Prince code (`perpInfo` integrates the whole orbit), and so do the 12 x 12 matrices of the pieces that are neither flagged nor replaced by the cross-check. An accepted step is unrecorded when that integration exceeds its step limit, which is why the recording can differ between machines. The points of a trace are checked afterwards with a multiple precision flow (`tools/witness.py`) that uses none of this code. The smallest witnessed value of the trace of t35 - is 7.320e-10 (accepted step 10); the re-closed midpoint between steps 10 and 11 gives 6.562e-11, which is below the range of the witness and is not witnessed.
+
+Two limits to read first: a stored point can be off the orbit by more than the corrector tolerance (piece 18 of an earlier point of t35 - was wrong by 1.18e-7 while the residual of the corrector was 6.7e-14), and 15 stored points of t28 - and t81 + fail the witness closure; both are described in the section "The ias route" of [docs/methods-and-limits.md](docs/methods-and-limits.md).
+
+The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`.
 
 ```
 pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
-npm run test:ias                      # about 4 minutes
-node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, about 6 minutes
+npm run test:ias                      # the tests of the ias route, 4 to 6 minutes
+node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, about 6 minutes (its PASS or FAIL compares text that depends on the machine, see docs/deep.md)
 ```
 
 The stored traces and witnesses of the families t35 -, t44 -, t62 - and t72 - and the table of the 19 traces that were started are in `data/deep/`. What the route does not cover is in [docs/methods-and-limits.md](docs/methods-and-limits.md) (section "The ias route"), the commands and run times in [docs/deep.md](docs/deep.md).
@@ -134,6 +140,6 @@ The stored traces and witnesses of the families t35 -, t44 -, t62 - and t72 - an
 ## Citation and license
 
 Cite it as in [CITATION.cff](CITATION.cff). The code (`src/`, `tools/`, `test/`, `index.html`, `archive/`) is under the MIT license, see [LICENSE](LICENSE). The data, results and orbit lists
-(`data/`, `docs/`, `figures/`) are under Creative Commons Attribution 4.0 (CC BY 4.0), see [LICENSE-DATA](LICENSE-DATA): you can use, copy and change them as long as you credit Utshob Kandel and link to
+(`data/`, `docs/`, `figures/`) are under Creative Commons Attribution 4.0 (CC BY 4.0), as are `README.md`, `CHANGELOG.md` and `CITATION.cff` (documents); `package.json` and `.github/` (the settings of the tests) are under the MIT license like the code. See [LICENSE-DATA](LICENSE-DATA): you can use, copy and change them as long as you credit Utshob Kandel and link to
 https://github.com/Utshob-k/orbit-hunter. Versions up to 0.2.33 were published with CC BY 4.0 for everything and keep that license. The files marked in
 [data/README.md](data/README.md) as other people's numbers (including the rows of Davoust and Broucke 1982) belong to their authors, cite them if you use them.

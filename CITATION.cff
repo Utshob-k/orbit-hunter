@@ -5,7 +5,9 @@ authors:
   - given-names: Utshob
     family-names: Kandel
 repository-code: "https://github.com/Utshob-k/orbit-hunter"
-license: MIT
+license:
+  - MIT
+  - CC-BY-4.0
 version: 0.3.0
 date-released: 2026-10-18
 keywords:

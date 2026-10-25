@@ -1,5 +1,5 @@
 {
- "what": "scan of the end states of 9016 pieces of the multiple shooting (24 pieces per orbit) against the multiple precision flow, and the one event with an error far above the corrector tolerance. groups, totals: the table of the scan (pieces, pieces with a loop error of 1e-9 or 1e-12 and more, largest loop error of IAS15 and of reg.js); loop error = max over the 12 components of |tool - multiple precision| / max(1, |value|) for the piece integrated from the tool's own start state. bins: the same pieces by the smallest pair minimum of the piece. erring_pieces: the 18 pieces with a loop error of 1e-12 or more, all not flagged as encounter pieces. point_11_event: three consecutive kept points of the first trace of t35 - (k10, k11, k12) and the refined orbit of k11 rounded to double (k11r): the error sits in piece 18 of k11 (IAS15, 1.18e-7), the piece after the encounter piece 17; chain_gap_abs: gap between the tool's node chain and the multiple precision chain after the pieces. kept_points: the 69 kept points of the scan (group, index, start values). The 7360 pieces of the groups called earlier iterates come from 320 iterates of earlier runs that are not stored here.",
+ "what": "scan of the end states of 9016 pieces of the multiple shooting (24 pieces per orbit) against the multiple precision flow, and the one event with an error far above the corrector tolerance. groups, totals: the table of the scan (pieces, pieces with a loop error of 1e-9 or 1e-12 and more, largest loop error of IAS15 and of reg.js); loop error = max over the 12 components of |tool - multiple precision| / max(1, |value|) for the piece integrated from the tool's own start state. bins: the same pieces by the smallest pair minimum of the piece. erring_pieces: the 18 pieces with a loop error of 1e-12 or more, all not flagged as encounter pieces. point_11_event: three consecutive kept points of the first trace of t35 - (k10, k11, k12) and the refined orbit of k11 rounded to double (k11r): the error sits in piece 18 of k11 (IAS15, 1.18e-7), the piece after the encounter piece 17; chain_gap_abs: gap between the tool's node chain and the multiple precision chain after the pieces. kept_points: the 69 kept points of the scan (group, index, start values). The 7360 pieces of the groups called earlier iterates come from 320 iterates of earlier runs that are not stored here. point_11_witness: the witness (preset w1) of the start values of k11.",
  "pieces_scanned": 9016,
  "groups": [
   {
@@ -803,6 +803,21 @@
    ]
   }
  ],
+ "point_11_witness": {
+  "id": "k11",
+  "what": "result of tools/witness.py with the preset w1 (40 digits, tolerance 1e-26, step floor 1e-14) for the start values of k11 above: the closure of the full period and of the half period, and the smallest pair distance. The closure is 1e-6 or more, so the witness rejects the point (CLOSURE FAILED), while the residual of the corrector at this point is tool_residual_sup. The raw output file is not in the repository.",
+  "start": {
+   "u1": 0.039679252002060544,
+   "u2": 0.647210338670614,
+   "lam": 0.6662349152661655,
+   "t": 2.0587490210030346
+  },
+  "w1_closure": 4.125447768507452e-06,
+  "w1_e_half": 5.112015069419908e-07,
+  "w1_dmin_parabolic": 6.781544292966632e-06,
+  "tool_residual_sup": 6.744604874597826e-14,
+  "status": "CLOSURE FAILED"
+ },
  "kept_points": [
   {
    "index": 0,
