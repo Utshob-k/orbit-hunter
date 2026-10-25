@@ -6,6 +6,7 @@ import sys
 from mpmath import mp, mpf, sqrt, matrix, lu_solve, nstr
 
 SEQ = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+STEP_FLOOR = mpf('1e-9')   # flow() gives up when the step falls below this; the scripts for deep encounters set a lower value
 
 
 def deriv(x):
@@ -62,7 +63,7 @@ def flow(x0, tmax, tol):
         r, order = bs_step(x, h, tol)
         if r is None:
             H = h / 2
-            if H < mpf('1e-9'):
+            if H < STEP_FLOOR:
                 raise RuntimeError('step size collapsed (close encounter?)')
             continue
         x = r
