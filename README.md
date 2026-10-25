@@ -95,7 +95,7 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 
 ## Install and reproduce
 
-Node 18 or newer, nothing to install for the JavaScript code. Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
+Node 18 or newer, nothing to install for the JavaScript code (the ias route below was run only with v24.15.0). Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
 
 ```
 npm test                              # all the tests, about 20 seconds
@@ -108,6 +108,18 @@ node tools/tables.mjs                 # Tables 1 and 2 of the satellites of R (m
 
 The scripts behind the numbers are in `tools/`. How to rerun them: [docs/reproducing.md](docs/reproducing.md).
 
+## The ias route (version 0.3.0)
+
+A second way to follow the families of the perpendicular start through close approaches of two bodies, down to a pair distance of about 1e-9, where the Dormand-Prince code of `src/physics.js` does not follow. Every piece of the multiple shooting is integrated with REBOUND IAS15, the pieces with a close pair are recomputed with the regularised integrator `src/ias/reg.js`, and the points of a trace are checked afterwards with a multiple precision flow (`tools/witness.py`) that uses none of this code. It is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`.
+
+```
+pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+npm run test:ias                      # about 4 minutes
+node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, about 6 minutes
+```
+
+The stored traces and witnesses of the families t35 -, t44 -, t62 - and t72 - and the table of the 19 traces that were started are in `data/deep/`. What the route does not cover is in [docs/methods-and-limits.md](docs/methods-and-limits.md) (section "The ias route"), the commands and run times in [docs/deep.md](docs/deep.md).
+
 ## More
 
 - [docs/results.md](docs/results.md): results and comparisons in full
@@ -115,11 +127,13 @@ The scripts behind the numbers are in `tools/`. How to rerun them: [docs/reprodu
 - [docs/methods-and-limits.md](docs/methods-and-limits.md): how it works, what is not proven, known weaknesses, dead ends
 - [docs/prior-work.md](docs/prior-work.md): the papers this builds on
 - [docs/reproducing.md](docs/reproducing.md): running the scripts
+- [docs/deep.md](docs/deep.md): the ias route, its commands and run times
 - [data/README.md](data/README.md): what each data file is
 - [CHANGELOG.md](CHANGELOG.md): versions, and the log of corrections (every statement that turned out wrong)
 
 ## Citation and license
 
-Cite it as in [CITATION.cff](CITATION.cff). Creative Commons Attribution 4.0 (CC BY 4.0), see [LICENSE](LICENSE). You can use, copy and change the code,
-the results and the orbit lists as long as you credit Utshob Kandel and link to https://github.com/Utshob-k/orbit-hunter. The files marked in
+Cite it as in [CITATION.cff](CITATION.cff). The code (`src/`, `tools/`, `test/`, `index.html`, `archive/`) is under the MIT license, see [LICENSE](LICENSE). The data, results and orbit lists
+(`data/`, `docs/`, `figures/`) are under Creative Commons Attribution 4.0 (CC BY 4.0), see [LICENSE-DATA](LICENSE-DATA): you can use, copy and change them as long as you credit Utshob Kandel and link to
+https://github.com/Utshob-k/orbit-hunter. Versions up to 0.2.33 were published with CC BY 4.0 for everything and keep that license. The files marked in
 [data/README.md](data/README.md) as other people's numbers (including the rows of Davoust and Broucke 1982) belong to their authors, cite them if you use them.
