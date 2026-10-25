@@ -1,0 +1,65 @@
+{
+ "what": "the multiple precision flow of tools/refine-mp.py with the settings of the preset w1 of tools/witness.py (40 digits, tolerance 1e-26, step floor 1e-14) against the exact Kepler flow of tools/kepler-ref.py: one nominal period of a near-radial pair with periapsis distance q, apocentre start with a = 1, e = 1 - q, third body of mass 1 at rest at (1e9, 0); error = |difference| / max(1, |exact|) over the four relative numbers of the pair; a row passes if the flow finishes (status done, no collapse of the step size) and the error is at most the limit. The rows q = 1e-6 and 1e-7 are the conditions for the range of w1 (minimum pair distance 1e-7 or more); the row q = 3e-8 is information only. The command of every row is in the field command (OUT.json is a new file).",
+ "limit": 1e-17,
+ "digits": 40,
+ "tol": 1e-26,
+ "floor": 1e-14,
+ "third": 1000000000.0,
+ "conditions_pass": true,
+ "rows": [
+  {
+   "q": "1e-6",
+   "command": "python tools/kepler-check.py 1e-6 OUT.json --digits 40 --tol 26 --floor 1e-14",
+   "status": "done",
+   "error_max": "8.7467e-21",
+   "errors": [
+    "5.24988e-21",
+    "1.7414e-23",
+    "8.7467e-21",
+    "5.25001e-24"
+   ],
+   "steps": 161,
+   "rejected": 24,
+   "min_accepted_step": 1.844674407370955e-10,
+   "seconds": 8.9,
+   "condition": true,
+   "pass": true
+  },
+  {
+   "q": "1e-7",
+   "command": "python tools/kepler-check.py 1e-7 OUT.json --digits 40 --tol 26 --floor 1e-14",
+   "status": "done",
+   "error_max": "4.74641e-19",
+   "errors": [
+    "2.84885e-19",
+    "2.99813e-22",
+    "4.74641e-19",
+    "9.00886e-23"
+   ],
+   "steps": 184,
+   "rejected": 28,
+   "min_accepted_step": 5.902958103587057e-12,
+   "seconds": 10.6,
+   "condition": true,
+   "pass": true
+  },
+  {
+   "q": "3e-8",
+   "command": "python tools/kepler-check.py 3e-8 OUT.json --digits 40 --tol 26 --floor 1e-14",
+   "status": "done",
+   "error_max": "3.27689e-18",
+   "errors": [
+    "1.96682e-18",
+    "1.13541e-21",
+    "3.27689e-18",
+    "3.40664e-22"
+   ],
+   "steps": 195,
+   "rejected": 30,
+   "min_accepted_step": 1.1805916207174114e-12,
+   "seconds": 11.5,
+   "condition": false,
+   "pass": true
+  }
+ ]
+}
