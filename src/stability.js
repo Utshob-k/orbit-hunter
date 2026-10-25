@@ -1,6 +1,8 @@
 // linear stability of a periodic orbit: the variational equations over one period give the monodromy matrix M; stable if all eigenvalues
 // have modulus 1. only perturbations with zero centre of mass and momentum are used (8 dimensions).
 
+import { settings } from './settings.js';
+
 // state x = [x0,y0,x1,y1,x2,y2, vx0,vy0,vx1,vy1,vx2,vy2], G = m = 1
 const N = 12;
 
@@ -56,7 +58,7 @@ const A = [[], [1 / 5], [3 / 40, 9 / 40], [44 / 45, -56 / 15, 32 / 9], [19372 / 
 const B5 = [35 / 384, 0, 500 / 1113, 125 / 192, -2187 / 6784, 11 / 84, 0];
 const B4 = [5179 / 57600, 0, 7571 / 16695, 393 / 640, -92097 / 339200, 187 / 2100, 1 / 40];
 
-export function monodromy(x0, T, { rtol = 1e-12, atol = 1e-13, hMax = 0.01 } = {}) {
+export function monodromy(x0, T, { rtol = settings.mrtol, atol = settings.matol, hMax = settings.hMax } = {}) {
   const n = N + N * N;
   const y = new Float64Array(n);
   y.set(x0);

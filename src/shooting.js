@@ -5,6 +5,8 @@ import { deriv, dp45Step } from './physics.js';
 import { monodromy } from './stability.js';
 import { solve } from './newton.js';
 import { perpInitial, symResidual, perpInfo } from './perp.js';
+import { settings } from './settings.js';
+import { iasPieces, iasFlow, BridgeError } from './ias/bridge.js';
 
 const N = 12;
 
@@ -13,13 +15,17 @@ const dS0 = [new Float64Array(N), new Float64Array(N)];
 dS0[0][7] = 1; dS0[0][11] = -1;
 dS0[1][9] = 1; dS0[1][11] = -1;
 
-// plain integration of one state over time tau (no variational equations, cheap)
+// plain integration of one state over time tau (no variational equations, cheap). with settings.integrator = 'ias' it is REBOUND IAS15 through the
+// bridge of src/ias (null when the bridge fails)
 function flow(x0, tau) {
+  return settings.integrator === 'ias' ? iasFlow(x0, tau) : flowDP45(x0, tau);
+}
+function flowDP45(x0, tau) {
   const s = Float64Array.from(x0);
   let t = 0, h = 1e-3;
   for (let n = 0; t < tau - 1e-15; n++) {
     if (n > 20 * (4000 + 3000 * Math.max(tau, 1))) return null;
-    const [dt, hn] = dp45Step(s, Math.min(h, tau - t), 1e-13, 1e-14, 0.01);
+    const [dt, hn] = dp45Step(s, Math.min(h, tau - t), settings.rtol, settings.atol, settings.hMax);
     if (dt === 0) return null;
     t += dt;
     h = hn;
@@ -73,9 +79,24 @@ function system(z, lam, m) {
   const J = Array.from({ length: n }, () => new Float64Array(n));
   const f = new Float64Array(N);
   let end = null;
+  const ias = settings.integrator === 'ias';
+  let ends = null;
+  const encMats = new Array(m).fill(null);
+  if (ias) {
+    // all pieces by IAS15 through the bridge; the pieces with a close approach come from reg.js with their 12 x 12 matrices (a bridge failure throws BridgeError)
+    const starts = [perpInitial(z[0], z[1], lam)]; for (let i = 1; i < m; i++) starts.push(z.subarray(3 + N * (i - 1), 3 + N * i));
+    ends = iasPieces(starts, tau);
+    if (settings.observer) settings.observer.starts(starts, tau);
+    ends.enc.forEach((f, i) => { if (ends.mats[i]) encMats[i] = Array.from({ length: 12 }, (_, k) => ends.mats[i].subarray(12 * k, 12 * k + 12)); });
+  }
   for (let i = 0; i < m; i++) {
     const start = i === 0 ? perpInitial(z[0], z[1], lam) : z.subarray(3 + N * (i - 1), 3 + N * i);
-    const { end: e, M } = monodromy(start, tau);
+    let e, M;
+    if (ias) {
+      M = encMats[i] || monodromy(start, tau).M;
+      if (settings.observer) settings.observer.mono(i, M);
+      e = ends[i];
+    } else ({ end: e, M } = monodromy(start, tau));
     end = e;
     deriv(e, f);
     if (i < m - 1) {
@@ -123,7 +144,7 @@ function system(z, lam, m) {
 }
 
 // close the symmetric half orbit with m pieces. pass the nodes of a nearby solution to warm start.
-export function closePerpMS(u1, u2, lam, t0, { m = 6, nodes = null, maxIter = 30, tol = 1e-11, maxMs = Infinity } = {}) {   // stops on iterations or tolerance; a time limit is optional
+export function closePerpMS(u1, u2, lam, t0, { m = 6, nodes = null, maxIter = 30, tol = settings.newton, maxMs = Infinity } = {}) {   // stops on iterations or tolerance; a time limit is optional
   const started = Date.now();
   let start = nodes || nodesFrom(u1, u2, lam, t0, m);
   if (!start) return { res: Infinity, why: 'guess orbit blew up' };
@@ -296,17 +317,25 @@ function tangentAt(J, Flam, tauPrev) {
 
 // newton on [F = 0, tau . (Y - Yp) = 0]. returns the solution with its jacobian so the next tangent is cheap.
 function correct(Yp, tau, m, t0) {
+  const obs = settings.observer;
+  if (!obs) return correct0(Yp, tau, m, t0);
+  obs.begin(); const r = correct0(Yp, tau, m, t0); obs.end(r); return r;
+}
+function correct0(Yp, tau, m, t0) {
   const n = Yp.length - 1;
   let Y = Float64Array.from(Yp);
   for (let it = 0; it < 12; it++) {
-    const sys = system(Float64Array.from(Y.subarray(0, n)), Y[n], m);
+    let sys;
+    // a bridge failure (timeout, Python process ended) is a failed attempt, there is no fallback to dp45
+    try { sys = system(Float64Array.from(Y.subarray(0, n)), Y[n], m); } catch (e) { if (e instanceof BridgeError) { if (settings.observer) settings.observer.why = e.reason || 'bridge error'; return { ok: false }; } throw e; }
     const Fn = sup(sys.F);
-    if (Fn < 1e-11) return { ok: true, Y, J: sys.J, Flam: sys.Flam, iters: it };
+    if (settings.observer) settings.observer.iter(it, Fn, sys, tau, Y);
+    if (Fn < settings.newton) return { ok: true, Y, J: sys.J, Flam: sys.Flam, iters: it };
     const A = sys.J.map((row, i) => [...Array.from(row), sys.Flam[i]]);
     A.push(Array.from(tau));
     const rhs = [...Array.from(sys.F, (v) => -v), -dot(tau, Y.map((v, i) => v - Yp[i]))];
     const d = solve(A, rhs);
-    if (!d) return { ok: false };
+    if (!d) { if (settings.observer) settings.observer.why = 'solve null'; return { ok: false }; }
     let accepted = false;
     for (let a = 1; a > 1 / 16; a /= 2) {
       const Yn = Float64Array.from(Y, (v, i) => v + a * d[i]);
@@ -314,7 +343,7 @@ function correct(Yp, tau, m, t0) {
       const Fnew = residual(Yn.subarray(0, n), Yn[n], m);
       if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; break; }
     }
-    if (!accepted) return { ok: false };
+    if (!accepted) { if (settings.observer) settings.observer.why = 'line search failed'; return { ok: false }; }
   }
   return { ok: false };
 }
@@ -342,23 +371,26 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
   while (steps++ < maxSteps) {
     if (Date.now() - started > maxMs) return end('out of time');
     const Yp = Float64Array.from(Y, (v, i) => v + h * tau[i]);
+    if (settings.observer) { settings.observer.step = steps; settings.observer.h = h; settings.observer.tauLam = tau[n]; }
     const c = correct(Yp, tau, m, t0);
     let accept = false, tauNew = null;
     if (c.ok) {
       tauNew = tangentAt(c.J, c.Flam, tau);
       accept = tauNew && dot(tauNew, tau) > Math.cos(0.35);   // don't jump to another branch
+      if (settings.observer) settings.observer.note({ tangentDot: tauNew ? dot(tauNew, tau) : null });
     }
+    if (settings.observer) settings.observer.note({ outcome: accept ? 'tangent ok' : (c.ok ? 'tangent rejected' : 'newton failed') });
     if (!accept) {
       h /= 2;
       if (h < 1e-9) return end('lost the family near lam=' + Y[n].toFixed(4));
       continue;
     }
     const thNew = thetaOf(solOf(c.Y, m));
-    if (thNew === null) { h /= 2; continue; }
+    if (thNew === null) { if (settings.observer) settings.observer.note({ outcome: 'theta null' }); h /= 2; continue; }
     // theta must not jump, or two zeros could hide between the points (it wraps around at +-pi)
     let dth = Math.abs(thNew - th);
     if (dth > Math.PI) dth = 2 * Math.PI - dth;
-    if (dth > Math.max(0.03, 0.3 * Math.abs(th)) && h > 1e-6) { h /= 2; continue; }
+    if (dth > Math.max(0.03, 0.3 * Math.abs(th)) && h > 1e-6) { if (settings.observer) settings.observer.note({ outcome: 'theta jump', dth }); h /= 2; continue; }
     if (Math.abs(thNew) < thTol) { const o = arcFinish(c.Y, m); if (o.ok) found.push(o); if (!all && o.ok) return o; }
     else if (th * thNew < 0 && Math.abs(th) < 1 && Math.abs(thNew) < 1) {
       const Yz = refineZero(Y, c.Y, th, thNew, m, t0, thTol);
@@ -371,6 +403,7 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
     }
     if (trace && trace(steps, c.Y[n], thNew, h, c.iters, c.Y) === true) return end('stopped by the caller');   // e.g. the curve is a closed loop
     // accept the step
+    if (settings.observer) settings.observer.note({ outcome: 'accepted', lamNew: c.Y[n] });
     Y = c.Y; tau = tauNew; th = thNew;
     lamMin = Math.min(lamMin, Y[n]); lamMax = Math.max(lamMax, Y[n]);
     h = Math.min(hMax, c.iters <= 3 ? h * 1.4 : h);
@@ -419,4 +452,4 @@ function arcFinish(Y, m) {
 }
 
 // pieces used by src/satellites.js
-export { system, correct, tangentAt, packZ, solOf, toY, unit, dot };
+export { system, correct, tangentAt, packZ, solOf, toY, unit, dot, residual };

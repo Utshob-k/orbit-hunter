@@ -3,6 +3,7 @@
 // the line, the orbit is mirror symmetric and repeats after twice that time, rotated by some angle.
 import { dp45Step } from './physics.js';
 import { solve } from './newton.js';
+import { settings } from './settings.js';
 
 export function perpInitial(u1, u2, lam) {
   const cm = lam / 3;
@@ -29,7 +30,7 @@ function stateAt(u1, u2, lam, t) {
   const maxSteps = 20 * (4000 + 3000 * Math.max(t, 1));   // generous: an orbit with n close passes (the satellites for n >= 29) needs far more than 4000 + 3000 t steps
   for (let n = 0; tt < t - 1e-15; n++) {
     if (n > maxSteps || !(t > 0) || !Number.isFinite(t)) return null;
-    const [dt, hn] = dp45Step(s, Math.min(h, t - tt), 1e-13, 1e-14, 0.01);
+    const [dt, hn] = dp45Step(s, Math.min(h, t - tt), settings.rtol, settings.atol, settings.hMax);
     tt += dt;
     h = hn;
   }
@@ -100,7 +101,7 @@ export function perpInfo(u1, u2, lam, t) {
   let tt = 0, h = 1e-3, minDist = Infinity, extent = 0;
   for (let n = 0; tt < T - 1e-15; n++) {
     if (n > 20 * (4000 + 3000 * T)) return null;
-    const [dt, hn] = dp45Step(s, Math.min(h, T - tt), 1e-13, 1e-14, 0.01);
+    const [dt, hn] = dp45Step(s, Math.min(h, T - tt), settings.rtol, settings.atol, settings.hMax);
     tt += dt;
     h = hn;
     for (let i = 0; i < 3; i++) {
