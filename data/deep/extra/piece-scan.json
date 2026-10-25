@@ -1,0 +1,1429 @@
+{
+ "what": "scan of the end states of 9016 pieces of the multiple shooting (24 pieces per orbit) against the multiple precision flow, and the one event with an error far above the corrector tolerance. groups, totals: the table of the scan (pieces, pieces with a loop error of 1e-9 or 1e-12 and more, largest loop error of IAS15 and of reg.js); loop error = max over the 12 components of |tool - multiple precision| / max(1, |value|) for the piece integrated from the tool's own start state. bins: the same pieces by the smallest pair minimum of the piece. erring_pieces: the 18 pieces with a loop error of 1e-12 or more, all not flagged as encounter pieces. point_11_event: three consecutive kept points of the first trace of t35 - (k10, k11, k12) and the refined orbit of k11 rounded to double (k11r): the error sits in piece 18 of k11 (IAS15, 1.18e-7), the piece after the encounter piece 17; chain_gap_abs: gap between the tool's node chain and the multiple precision chain after the pieces. kept_points: the 69 kept points of the scan (group, index, start values). The 7360 pieces of the groups called earlier iterates come from 320 iterates of earlier runs that are not stored here.",
+ "pieces_scanned": 9016,
+ "groups": [
+  {
+   "group": "earlier iterates t12 +",
+   "pieces": 1610,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 1.03e-14,
+   "max_c1_err": 1.03e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "earlier iterates t14 +",
+   "pieces": 1058,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 2.55e-15,
+   "max_c1_err": 2.55e-15,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "earlier iterates t28 +",
+   "pieces": 1610,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 16,
+   "max_loop_err": 2.84e-12,
+   "max_c1_err": 7.55e-15,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "earlier iterates t35 -",
+   "pieces": 1610,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 1.18e-14,
+   "max_c1_err": 1.18e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "earlier iterates t35 +",
+   "pieces": 1472,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 4.83e-15,
+   "max_c1_err": 3.83e-15,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "trace t35 - (reg.js)",
+   "pieces": 528,
+   "loop_err_ge_1e9": 1,
+   "loop_err_ge_1e12": 1,
+   "max_loop_err": 1.18e-07,
+   "max_c1_err": 1.74e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "trace t12 + (reg.js)",
+   "pieces": 144,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 6.33e-15,
+   "max_c1_err": 6.33e-15,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)",
+   "pieces": 552,
+   "loop_err_ge_1e9": 1,
+   "loop_err_ge_1e12": 1,
+   "max_loop_err": 1.18e-07,
+   "max_c1_err": 1.69e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "trace t35 - (multiple precision encounter piece, end state)",
+   "pieces": 312,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 1.28e-14,
+   "max_c1_err": 1.28e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "trace t12 + (multiple precision encounter piece, end state)",
+   "pieces": 120,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 0,
+   "max_loop_err": 8.17e-15,
+   "max_c1_err": 8.17e-15,
+   "c1_failed_pieces": 0
+  }
+ ],
+ "totals": [
+  {
+   "group": "earlier iterates, total",
+   "pieces": 7360,
+   "loop_err_ge_1e9": 0,
+   "loop_err_ge_1e12": 16,
+   "max_loop_err": 2.84e-12,
+   "max_c1_err": 1.18e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "kept points, total",
+   "pieces": 1656,
+   "loop_err_ge_1e9": 2,
+   "loop_err_ge_1e12": 2,
+   "max_loop_err": 1.18e-07,
+   "max_c1_err": 1.74e-14,
+   "c1_failed_pieces": 0
+  },
+  {
+   "group": "ALL",
+   "pieces": 9016,
+   "loop_err_ge_1e9": 2,
+   "loop_err_ge_1e12": 18,
+   "max_loop_err": 1.18e-07,
+   "max_c1_err": 1.74e-14,
+   "c1_failed_pieces": 0
+  }
+ ],
+ "bins": [
+  {
+   "smallest_pair_minimum": "below 1e-3 (flagged, reg.js)",
+   "pieces": 389,
+   "loop_err_ge_1e12": 0,
+   "loop_err_ge_1e10": 0,
+   "max_loop_err": 1.74e-14,
+   "max_c1_err": 1.74e-14
+  },
+  {
+   "smallest_pair_minimum": "1e-3 to 3e-3",
+   "pieces": 70,
+   "loop_err_ge_1e12": 16,
+   "loop_err_ge_1e10": 0,
+   "max_loop_err": 2.84e-12,
+   "max_c1_err": 2e-15
+  },
+  {
+   "smallest_pair_minimum": "3e-3 to 1e-2",
+   "pieces": 0
+  },
+  {
+   "smallest_pair_minimum": "1e-2 to 2e-2",
+   "pieces": 192,
+   "loop_err_ge_1e12": 2,
+   "loop_err_ge_1e10": 2,
+   "max_loop_err": 1.18e-07,
+   "max_c1_err": 2.48e-15
+  },
+  {
+   "smallest_pair_minimum": "2e-2 to 5e-2",
+   "pieces": 70,
+   "loop_err_ge_1e12": 0,
+   "loop_err_ge_1e10": 0,
+   "max_loop_err": 7.55e-15,
+   "max_c1_err": 7.55e-15
+  },
+  {
+   "smallest_pair_minimum": "5e-2 to 0.1",
+   "pieces": 872,
+   "loop_err_ge_1e12": 0,
+   "loop_err_ge_1e10": 0,
+   "max_loop_err": 4.81e-15,
+   "max_c1_err": 2.98e-15
+  },
+  {
+   "smallest_pair_minimum": "0.1 and above",
+   "pieces": 7423,
+   "loop_err_ge_1e12": 0,
+   "loop_err_ge_1e10": 0,
+   "max_loop_err": 1.94e-15,
+   "max_c1_err": 1.99e-15
+  }
+ ],
+ "cross_check_unflagged_below_0_05": {
+  "pair_minimum_below": 0.05,
+  "unflagged_pieces": 332,
+  "scanned_pieces": 9016
+ },
+ "erring_pieces": [
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.7851276012947892e-12,
+   "err_c1": 1.7763568394002505e-15,
+   "tool_pair_minima": [
+    1.0952714083674562,
+    1.3955896293800123,
+    0.0012287339729452743
+   ],
+   "start_pair_dist": [
+    1.3541668138623808,
+    1.452127984167184,
+    0.09862138980584598
+   ],
+   "start_pair_speed": 5.938195445597795,
+   "c1_minD1": 0.0012303769570123813,
+   "c1_d2": 1.3956524353323254,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00022_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.0712541964608135e-12,
+   "err_c1": 8.881784197001252e-16,
+   "tool_pair_minima": [
+    1.095268624056893,
+    1.3955919982012546,
+    0.0012285887331336756
+   ],
+   "start_pair_dist": [
+    1.3541750906086398,
+    1.4521209536768014,
+    0.09860587440473055
+   ],
+   "start_pair_speed": 5.938731824120596,
+   "c1_minD1": 0.0012283449968209946,
+   "c1_d2": 1.3956719669773998,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00045_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.0712541964608135e-12,
+   "err_c1": 8.881784197001252e-16,
+   "tool_pair_minima": [
+    1.095268624056893,
+    1.3955919982012546,
+    0.0012285887331336756
+   ],
+   "start_pair_dist": [
+    1.3541750906086398,
+    1.4521209536768014,
+    0.09860587440473055
+   ],
+   "start_pair_speed": 5.938731824120596,
+   "c1_minD1": 0.0012283449968209946,
+   "c1_d2": 1.3956719669773998,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00045_last"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 2.83728596173205e-12,
+   "err_c1": 4.440892098500626e-16,
+   "tool_pair_minima": [
+    1.0952686144309223,
+    1.3955920052647386,
+    0.0012285883087838779
+   ],
+   "start_pair_dist": [
+    1.3541751168491014,
+    1.452120930310625,
+    0.0986058240856251
+   ],
+   "start_pair_speed": 5.938733563796144,
+   "c1_minD1": 0.001228345529504021,
+   "c1_d2": 1.3956693550725976,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00048_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.7765788840051755e-12,
+   "err_c1": 5.207084408733621e-16,
+   "tool_pair_minima": [
+    1.095268613053363,
+    1.3955920064570344,
+    0.0012285882357574115
+   ],
+   "start_pair_dist": [
+    1.3541751209937924,
+    1.452120926804942,
+    0.09860581633162613
+   ],
+   "start_pair_speed": 5.938733831846874,
+   "c1_minD1": 0.0012283403544952466,
+   "c1_d2": 1.3956696761593437,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00051_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.7765788840051755e-12,
+   "err_c1": 5.207084408733621e-16,
+   "tool_pair_minima": [
+    1.095268613053363,
+    1.3955920064570344,
+    0.0012285882357574115
+   ],
+   "start_pair_dist": [
+    1.3541751209937924,
+    1.452120926804942,
+    0.09860581633162613
+   ],
+   "start_pair_speed": 5.938733831846874,
+   "c1_minD1": 0.0012283403544952466,
+   "c1_d2": 1.3956696761593437,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00051_last"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.2752021660844548e-12,
+   "err_c1": 2.220446049250313e-16,
+   "tool_pair_minima": [
+    1.0952686074477809,
+    1.3955920106679383,
+    0.0012285879818683463
+   ],
+   "start_pair_dist": [
+    1.3541751364823338,
+    1.4521209131134671,
+    0.09860578673600015
+   ],
+   "start_pair_speed": 5.938734855037531,
+   "c1_minD1": 0.0012283540338068764,
+   "c1_d2": 1.3956724625538621,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00055_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.3007372956508334e-12,
+   "err_c1": 5.20708453511007e-16,
+   "tool_pair_minima": [
+    1.0952686061064365,
+    1.3955920117963445,
+    0.00122858791270226
+   ],
+   "start_pair_dist": [
+    1.354175140444655,
+    1.4521209097343128,
+    0.09860577929427064
+   ],
+   "start_pair_speed": 5.938735112296447,
+   "c1_minD1": 0.0012286645655388824,
+   "c1_d2": 1.3956638319777634,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00057_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.5440981826486677e-12,
+   "err_c1": 6.942779360336978e-16,
+   "tool_pair_minima": [
+    1.0952686069324473,
+    1.3955920111773725,
+    0.0012285879499796502
+   ],
+   "start_pair_dist": [
+    1.3541751381650438,
+    1.4521209117513272,
+    0.09860578365217254
+   ],
+   "start_pair_speed": 5.9387349616330845,
+   "c1_minD1": 0.001228362530983015,
+   "c1_d2": 1.3956686162283798,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00061_last"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.8420820424580597e-12,
+   "err_c1": 1.3877787807814457e-16,
+   "tool_pair_minima": [
+    1.0952686069482256,
+    1.3955920110216569,
+    0.0012285879606154897
+   ],
+   "start_pair_dist": [
+    1.3541751378150981,
+    1.4521209119144753,
+    0.09860578416751961
+   ],
+   "start_pair_speed": 5.93873494383884,
+   "c1_minD1": 0.0012283740775494189,
+   "c1_d2": 1.3956731778016167,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00062_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.8420820424580597e-12,
+   "err_c1": 1.3877787807814457e-16,
+   "tool_pair_minima": [
+    1.0952686069482256,
+    1.3955920110216569,
+    0.0012285879606154897
+   ],
+   "start_pair_dist": [
+    1.3541751378150981,
+    1.4521209119144753,
+    0.09860578416751961
+   ],
+   "start_pair_speed": 5.93873494383884,
+   "c1_minD1": 0.0012283740775494189,
+   "c1_d2": 1.3956731778016167,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00062_last"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.286859507843019e-12,
+   "err_c1": 1.0547118733938987e-15,
+   "tool_pair_minima": [
+    1.0952686064787611,
+    1.3955920112611857,
+    0.0012285879471479184
+   ],
+   "start_pair_dist": [
+    1.3541751388710443,
+    1.4521209108662674,
+    0.09860578202944195
+   ],
+   "start_pair_speed": 5.93873501777483,
+   "c1_minD1": 0.0012287999982337782,
+   "c1_d2": 1.39567924325549,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00066_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.01019193010643e-12,
+   "err_c1": 4.718447854656915e-16,
+   "tool_pair_minima": [
+    1.0952686064975203,
+    1.395592011272158,
+    0.001228587946284391
+   ],
+   "start_pair_dist": [
+    1.3541751388730967,
+    1.4521209108895987,
+    0.09860578205188023
+   ],
+   "start_pair_speed": 5.938735016995316,
+   "c1_minD1": 0.0012284060019339483,
+   "c1_d2": 1.3956674363020742,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00066_last"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.3882228699912957e-12,
+   "err_c1": 1.1102230246251565e-16,
+   "tool_pair_minima": [
+    1.0952686066652066,
+    1.3955920112516647,
+    0.0012285879465101395
+   ],
+   "start_pair_dist": [
+    1.3541751386330598,
+    1.4521209112097826,
+    0.09860578262385851
+   ],
+   "start_pair_speed": 5.938734997203677,
+   "c1_minD1": 0.0012283337188398363,
+   "c1_d2": 1.3956703972686517,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00067_last"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 2.1869173139066334e-12,
+   "err_c1": 1.6653345369377348e-15,
+   "tool_pair_minima": [
+    1.095268606610667,
+    1.3955920111656606,
+    0.0012285879528705294
+   ],
+   "start_pair_dist": [
+    1.3541751385140819,
+    1.4521209111854878,
+    0.09860578271538356
+   ],
+   "start_pair_speed": 5.93873499405963,
+   "c1_minD1": 0.0012283403152585956,
+   "c1_d2": 1.3956717284068816,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00068_first"
+  },
+  {
+   "piece": 4,
+   "flagged": false,
+   "err_loop": 1.191491350027718e-12,
+   "err_c1": 1.1102230246251565e-15,
+   "tool_pair_minima": [
+    1.0952686065907844,
+    1.3955920112338311,
+    0.0012285879482941818
+   ],
+   "start_pair_dist": [
+    1.3541751386826915,
+    1.452120911090334,
+    0.09860578244972451
+   ],
+   "start_pair_speed": 5.938735003235806,
+   "c1_minD1": 0.0012285068559539309,
+   "c1_d2": 1.3956758556557025,
+   "group": "earlier iterates t28 +",
+   "orbit": "t28p_a00069_last"
+  },
+  {
+   "piece": 18,
+   "flagged": false,
+   "err_loop": 1.1839603189143178e-07,
+   "err_c1": 9.175272144337435e-16,
+   "tool_pair_minima": [
+    0.01374579419826983,
+    0.389295267846882,
+    0.019189626976981285
+   ],
+   "start_pair_dist": [
+    0.01374579419826983,
+    0.4042309291382084,
+    0.39068142725685284
+   ],
+   "start_pair_speed": 17.073614777096953,
+   "c1_minD1": 0.013745794198269828,
+   "c1_d2": 0.39068142725685284,
+   "group": "trace t35 - (reg.js)",
+   "orbit": "reg-t35m_011"
+  },
+  {
+   "piece": 18,
+   "flagged": false,
+   "err_loop": 1.1839604155021104e-07,
+   "err_c1": 3.5697493807611445e-16,
+   "tool_pair_minima": [
+    0.013745794198212976,
+    0.38929526784686147,
+    0.019189626976968306
+   ],
+   "start_pair_dist": [
+    0.013745794198212976,
+    0.404230929138158,
+    0.3906814272568615
+   ],
+   "start_pair_speed": 17.073614777132153,
+   "c1_minD1": 0.013745794198212976,
+   "c1_d2": 0.3906814272568615,
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)",
+   "orbit": "mp2-t35m_011"
+  }
+ ],
+ "point_11_event": [
+  {
+   "id": "k10",
+   "start": {
+    "u1": 0.039615712165162124,
+    "u2": 0.6481143876040939,
+    "lam": 0.6663563111364432,
+    "t": 2.058924557415532
+   },
+   "tool_residual_sup": 6.350475700855895e-14,
+   "tau_of_piece_18": 0.08578852322564717,
+   "piece_17": {
+    "piece": 17,
+    "flagged": true,
+    "integrator": "reg.js",
+    "err_rel": 3.714872638934573e-15,
+    "err_abs": 2.793616508268222e-14,
+    "dmin": 7.998928679507e-06,
+    "d_start": 0.4251111300472956,
+    "d_end": 0.014206511076761264,
+    "tool_pair_minima": [
+     8.003799207114955e-06,
+     0.3981958678615599,
+     0.2770370399783209
+    ]
+   },
+   "piece_18": {
+    "piece": 18,
+    "flagged": false,
+    "integrator": "IAS15",
+    "err_rel": 5.246397112577655e-15,
+    "err_abs": 5.246397112577655e-15,
+    "dmin": 0.014206511076761352,
+    "d_start": 0.014206511076761352,
+    "d_end": 0.42433031414384603,
+    "tool_pair_minima": [
+     0.014206511076761352,
+     0.38921878859178627,
+     0.019107371461258637
+    ]
+   },
+   "chain_gap_abs_after_pieces": {
+    "17": 2.8083157758801304e-13,
+    "18": 1.3724863103213156e-14,
+    "19": 1.5281759974968258e-14,
+    "20": 2.091520979220319e-14,
+    "21": 3.409438998329919e-14,
+    "22": 4.934906525717941e-14,
+    "23": 5.2000515104824116e-14
+   },
+   "closing_residual_of_mp_chain_end": [
+    4.750440996984786e-15,
+    -2.271529194309723e-14,
+    5.696284256920139e-15
+   ],
+   "closing_residual_of_tool_chain_end": [
+    -1.2615133140451438e-14,
+    -4.1744385725905886e-14,
+    6.350475700855895e-14
+   ]
+  },
+  {
+   "id": "k11",
+   "start": {
+    "u1": 0.039679252002060544,
+    "u2": 0.647210338670614,
+    "lam": 0.6662349152661655,
+    "t": 2.0587490210030346
+   },
+   "tool_residual_sup": 6.744604874597826e-14,
+   "tau_of_piece_18": 0.08578120920845977,
+   "piece_17": {
+    "piece": 17,
+    "flagged": true,
+    "integrator": "reg.js",
+    "err_rel": 1.053655693120707e-14,
+    "err_abs": 4.2461888622417714e-14,
+    "dmin": 6.782568542512303e-06,
+    "d_start": 0.42518589321172107,
+    "d_end": 0.013745794198269672,
+    "tool_pair_minima": [
+     6.787753238949023e-06,
+     0.3982988066275448,
+     0.27705251625256655
+    ]
+   },
+   "piece_18": {
+    "piece": 18,
+    "flagged": false,
+    "integrator": "IAS15",
+    "err_rel": 1.1839603189143178e-07,
+    "err_abs": 1.1839603189143178e-07,
+    "dmin": 0.01374579419826983,
+    "d_start": 0.01374579419826983,
+    "d_end": 0.42451145288868536,
+    "tool_pair_minima": [
+     0.01374579419826983,
+     0.389295267846882,
+     0.019189626976981285
+    ]
+   },
+   "chain_gap_abs_after_pieces": {
+    "17": 2.794047417174232e-13,
+    "18": 1.1839599827751456e-07,
+    "19": 1.7199930574264977e-07,
+    "20": 2.1889523360357154e-07,
+    "21": 3.0126806958828527e-07,
+    "22": 4.2377216574951733e-07,
+    "23": 4.553088472166852e-07
+   },
+   "closing_residual_of_mp_chain_end": [
+    1.6833979372666774e-07,
+    6.102590768225654e-08,
+    -5.112015074910419e-07
+   ],
+   "closing_residual_of_tool_chain_end": [
+    2.475947923188176e-14,
+    8.548717289613705e-15,
+    -6.744604874597826e-14
+   ]
+  },
+  {
+   "id": "k12",
+   "start": {
+    "u1": 0.03973920819677673,
+    "u2": 0.6463571252121051,
+    "lam": 0.6661203880966632,
+    "t": 2.0585837052592053
+   },
+   "tool_residual_sup": 1.4088730182493236e-13,
+   "tau_of_piece_18": 0.08577432105246689,
+   "piece_17": {
+    "piece": 17,
+    "flagged": true,
+    "integrator": "reg.js",
+    "err_rel": 1.7991788464109803e-15,
+    "err_abs": 1.4678944072132877e-14,
+    "dmin": 5.723451402557452e-06,
+    "d_start": 0.4252558820704218,
+    "d_end": 0.013306696990792247,
+    "tool_pair_minima": [
+     5.728592428633063e-06,
+     0.3983956505931234,
+     0.27706697033387284
+    ]
+   },
+   "piece_18": {
+    "piece": 18,
+    "flagged": false,
+    "integrator": "IAS15",
+    "err_rel": 8.357460032846415e-15,
+    "err_abs": 8.357460032846415e-15,
+    "dmin": 0.013306696990792198,
+    "d_start": 0.013306696990792198,
+    "d_end": 0.42468227990168833,
+    "tool_pair_minima": [
+     0.013306696990792198,
+     0.3893685956768848,
+     0.01927046424407055
+    ]
+   },
+   "chain_gap_abs_after_pieces": {
+    "17": 1.1034230663318485e-12,
+    "18": 1.278981687981576e-13,
+    "19": 3.635994676755841e-14,
+    "20": 3.543779224437696e-14,
+    "21": 4.028124281292714e-14,
+    "22": 4.7887223875916035e-14,
+    "23": 5.711368623662089e-14
+   },
+   "closing_residual_of_mp_chain_end": [
+    -2.714365043824915e-14,
+    1.4674031139474818e-15,
+    7.635041090543559e-14
+   ],
+   "closing_residual_of_tool_chain_end": [
+    -3.9634448611483497e-14,
+    -4.107825191113079e-15,
+    1.4088730182493236e-13
+   ]
+  },
+  {
+   "id": "k11r",
+   "start": {
+    "u1": 0.0396792543080282,
+    "u2": 0.6472103433070152,
+    "lam": 0.6662349152661655,
+    "t": 2.058749122888411
+   },
+   "tool_residual_sup": 5.104905303476848e-07,
+   "tau_of_piece_18": 0.0857812134536838,
+   "piece_17": {
+    "piece": 17,
+    "flagged": true,
+    "integrator": "reg.js",
+    "err_rel": 6.177637887300435e-15,
+    "err_abs": 1.2161564474022818e-14,
+    "dmin": 6.7818710546953595e-06,
+    "d_start": 0.4251856297473537,
+    "d_end": 0.013747078718114454,
+    "tool_pair_minima": [
+     6.787697176941835e-06,
+     0.39829880304302745,
+     0.2770526055277023
+    ]
+   },
+   "piece_18": {
+    "piece": 18,
+    "flagged": false,
+    "integrator": "IAS15",
+    "err_rel": 1.182313262702645e-07,
+    "err_abs": 1.182313262702645e-07,
+    "dmin": 0.013747078718114408,
+    "d_start": 0.013747078718114408,
+    "d_end": 0.4245114996106858,
+    "tool_pair_minima": [
+     0.013747078718114408,
+     0.3892952507659005,
+     0.01918960132214548
+    ]
+   },
+   "chain_gap_abs_after_pieces": {
+    "17": 1.2205887129797028e-12,
+    "18": 1.1823139091614973e-07,
+    "19": 1.7176014259022932e-07,
+    "20": 2.1859082554286127e-07,
+    "21": 3.008492363859498e-07,
+    "22": 4.23182902305675e-07,
+    "23": 4.546758045741839e-07
+   },
+   "closing_residual_of_mp_chain_end": [
+    3.7753781772273e-16,
+    5.167438883628358e-16,
+    -1.070751604345368e-15
+   ],
+   "closing_residual_of_tool_chain_end": [
+    -1.6810569415491215e-07,
+    -6.09409739338318e-08,
+    5.104905303476848e-07
+   ]
+  }
+ ],
+ "kept_points": [
+  {
+   "index": 0,
+   "u1": 0.03867635943903087,
+   "u2": 0.6614493884212753,
+   "lam": 0.6681524705165293,
+   "t": 2.06153120635426,
+   "id": "reg-t35m_000",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 1,
+   "u1": 0.038802470987027375,
+   "u2": 0.659662426905016,
+   "lam": 0.6679111767109516,
+   "t": 2.0611798940183217,
+   "id": "reg-t35m_001",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 2,
+   "u1": 0.038919839423828456,
+   "u2": 0.6579984098420837,
+   "lam": 0.6676866503700468,
+   "t": 2.0608533001943545,
+   "id": "reg-t35m_002",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 3,
+   "u1": 0.039029149714511935,
+   "u2": 0.6564478306353433,
+   "lam": 0.667477574732204,
+   "t": 2.0605494508766564,
+   "id": "reg-t35m_003",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 4,
+   "u1": 0.03913103272419037,
+   "u2": 0.6550019135583588,
+   "lam": 0.6672827371808997,
+   "t": 2.0602665322455405,
+   "id": "reg-t35m_004",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 5,
+   "u1": 0.039226068511238714,
+   "u2": 0.6536525732920755,
+   "lam": 0.6671010229426557,
+   "t": 2.060002880342854,
+   "id": "reg-t35m_005",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 6,
+   "u1": 0.03931478973964227,
+   "u2": 0.6523923717143081,
+   "lam": 0.6669314085318245,
+   "t": 2.059756970508016,
+   "id": "reg-t35m_006",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 7,
+   "u1": 0.039397685085764564,
+   "u2": 0.6512144738798853,
+   "lam": 0.6667729551909405,
+   "t": 2.0595274069205423,
+   "id": "reg-t35m_007",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 8,
+   "u1": 0.039475202589418855,
+   "u2": 0.6501126040571986,
+   "lam": 0.6666248024302247,
+   "t": 2.059312912409187,
+   "id": "reg-t35m_008",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 9,
+   "u1": 0.03954775286601298,
+   "u2": 0.6490810031189345,
+   "lam": 0.6664861618298514,
+   "t": 2.059112318737651,
+   "id": "reg-t35m_009",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 10,
+   "u1": 0.039615712165162124,
+   "u2": 0.6481143876040939,
+   "lam": 0.6663563111364432,
+   "t": 2.058924557415532,
+   "id": "reg-t35m_010",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 11,
+   "u1": 0.039679252002060544,
+   "u2": 0.647210338670614,
+   "lam": 0.6662349152661655,
+   "t": 2.0587490210030346,
+   "id": "reg-t35m_011",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 12,
+   "u1": 0.03973920819677673,
+   "u2": 0.6463571252121051,
+   "lam": 0.6661203880966632,
+   "t": 2.0585837052592053,
+   "id": "reg-t35m_012",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 13,
+   "u1": 0.039795350361415294,
+   "u2": 0.6455579550653802,
+   "lam": 0.6660131542735386,
+   "t": 2.0584289023091404,
+   "id": "reg-t35m_013",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 14,
+   "u1": 0.039848117488908104,
+   "u2": 0.6448066543307162,
+   "lam": 0.6659123776136668,
+   "t": 2.0582834925291587,
+   "id": "reg-t35m_014",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 15,
+   "u1": 0.03989775326237464,
+   "u2": 0.6440997852235721,
+   "lam": 0.6658175909125347,
+   "t": 2.0581467894423278,
+   "id": "reg-t35m_015",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 16,
+   "u1": 0.03994448137644112,
+   "u2": 0.6434341896814226,
+   "lam": 0.6657283653869323,
+   "t": 2.058018163758835,
+   "id": "reg-t35m_016",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 17,
+   "u1": 0.039988507302623544,
+   "u2": 0.6428069649802475,
+   "lam": 0.6656443072714561,
+   "t": 2.057897038222156,
+   "id": "reg-t35m_017",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 18,
+   "u1": 0.04003001989679476,
+   "u2": 0.6422154414792597,
+   "lam": 0.6655650547204025,
+   "t": 2.0577828829284113,
+   "id": "reg-t35m_018",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 19,
+   "u1": 0.04006919286556898,
+   "u2": 0.6416571622749248,
+   "lam": 0.6654902749826597,
+   "t": 2.0576752110705936,
+   "id": "reg-t35m_019",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 20,
+   "u1": 0.04010618609616658,
+   "u2": 0.6411298647144181,
+   "lam": 0.6654196618403388,
+   "t": 2.057573575086312,
+   "id": "reg-t35m_020",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 21,
+   "u1": 0.04014114686920327,
+   "u2": 0.6406314635068663,
+   "lam": 0.6653529332738678,
+   "t": 2.0574775631566076,
+   "id": "reg-t35m_021",
+   "group": "trace t35 - (reg.js)"
+  },
+  {
+   "index": 0,
+   "u1": -0.07481585264222992,
+   "u2": -1.3345876536788464,
+   "lam": 0.6536521796692187,
+   "t": 2.805007033986558,
+   "id": "reg-t12p_000",
+   "group": "trace t12 + (reg.js)"
+  },
+  {
+   "index": 1,
+   "u1": -0.0723300996251829,
+   "u2": -1.3441974714459801,
+   "lam": 0.6564429640625822,
+   "t": 2.8058226163946167,
+   "id": "reg-t12p_001",
+   "group": "trace t12 + (reg.js)"
+  },
+  {
+   "index": 2,
+   "u1": -0.06383917644674883,
+   "u2": -1.377049743704008,
+   "lam": 0.6657653441248936,
+   "t": 2.8086289120500525,
+   "id": "reg-t12p_002",
+   "group": "trace t12 + (reg.js)"
+  },
+  {
+   "index": 3,
+   "u1": -0.05671085218097503,
+   "u2": -1.404566304050666,
+   "lam": 0.6733165778401582,
+   "t": 2.8110073034382155,
+   "id": "reg-t12p_003",
+   "group": "trace t12 + (reg.js)"
+  },
+  {
+   "index": 4,
+   "u1": -0.05306586777241246,
+   "u2": -1.418567819911186,
+   "lam": 0.6770696372021814,
+   "t": 2.8122298451644276,
+   "id": "reg-t12p_004",
+   "group": "trace t12 + (reg.js)"
+  },
+  {
+   "index": 5,
+   "u1": -0.050476113532021416,
+   "u2": -1.4284704616719393,
+   "lam": 0.6796876573488017,
+   "t": 2.813100340088328,
+   "id": "reg-t12p_005",
+   "group": "trace t12 + (reg.js)"
+  },
+  {
+   "index": 0,
+   "u1": 0.03867635943899814,
+   "u2": 0.6614493884217251,
+   "lam": 0.66815247051659,
+   "t": 2.0615312063543154,
+   "id": "mp2-t35m_000",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 1,
+   "u1": 0.03880247098705516,
+   "u2": 0.6596624269046283,
+   "lam": 0.6679111767109003,
+   "t": 2.061179894018252,
+   "id": "mp2-t35m_001",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 2,
+   "u1": 0.03891983942381142,
+   "u2": 0.6579984098423157,
+   "lam": 0.6676866503700774,
+   "t": 2.060853300194378,
+   "id": "mp2-t35m_002",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 3,
+   "u1": 0.03902914971455058,
+   "u2": 0.6564478306348035,
+   "lam": 0.6674775747321319,
+   "t": 2.0605494508765645,
+   "id": "mp2-t35m_003",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 4,
+   "u1": 0.03913103272417184,
+   "u2": 0.6550019135586171,
+   "lam": 0.6672827371809352,
+   "t": 2.0602665322455724,
+   "id": "mp2-t35m_004",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 5,
+   "u1": 0.039226068511272465,
+   "u2": 0.6536525732915992,
+   "lam": 0.6671010229425914,
+   "t": 2.060002880342773,
+   "id": "mp2-t35m_005",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 6,
+   "u1": 0.03931478973963035,
+   "u2": 0.652392371714471,
+   "lam": 0.6669314085318461,
+   "t": 2.0597569705080336,
+   "id": "mp2-t35m_006",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 7,
+   "u1": 0.03939768508579101,
+   "u2": 0.6512144738795114,
+   "lam": 0.66677295519089,
+   "t": 2.0595274069204774,
+   "id": "mp2-t35m_007",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 8,
+   "u1": 0.039475202589431,
+   "u2": 0.6501126040570263,
+   "lam": 0.6666248024302011,
+   "t": 2.0593129124091543,
+   "id": "mp2-t35m_008",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 9,
+   "u1": 0.03954775286601569,
+   "u2": 0.6490810031188945,
+   "lam": 0.6664861618298458,
+   "t": 2.0591123187376392,
+   "id": "mp2-t35m_009",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 10,
+   "u1": 0.039615712165164775,
+   "u2": 0.6481143876040589,
+   "lam": 0.6663563111364388,
+   "t": 2.0589245574155215,
+   "id": "mp2-t35m_010",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 11,
+   "u1": 0.03967925200204386,
+   "u2": 0.6472103386708478,
+   "lam": 0.666234915266197,
+   "t": 2.0587490210030657,
+   "id": "mp2-t35m_011",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 12,
+   "u1": 0.03973920819630488,
+   "u2": 0.646357125218744,
+   "lam": 0.6661203880975722,
+   "t": 2.058583705260211,
+   "id": "mp2-t35m_012",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 13,
+   "u1": 0.03979535034891742,
+   "u2": 0.6455579552413383,
+   "lam": 0.6660131542975991,
+   "t": 2.058428902335906,
+   "id": "mp2-t35m_013",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 14,
+   "u1": 0.03984811748894541,
+   "u2": 0.6448066543301878,
+   "lam": 0.6659123776135959,
+   "t": 2.0582834925290685,
+   "id": "mp2-t35m_014",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 15,
+   "u1": 0.039873312275326665,
+   "u2": 0.6444478707674643,
+   "lam": 0.6658642633513168,
+   "t": 2.058214093509668,
+   "id": "mp2-t35m_015",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 16,
+   "u1": 0.03989775309035063,
+   "u2": 0.6440997876736422,
+   "lam": 0.6658175912410232,
+   "t": 2.058146789915964,
+   "id": "mp2-t35m_016",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 17,
+   "u1": 0.03992146728504599,
+   "u2": 0.643762018842009,
+   "lam": 0.6657723088587675,
+   "t": 2.0580815048331056,
+   "id": "mp2-t35m_017",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 18,
+   "u1": 0.039944481072849355,
+   "u2": 0.6434341940062048,
+   "lam": 0.6657283659666016,
+   "t": 2.0580181645942894,
+   "id": "mp2-t35m_018",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 19,
+   "u1": 0.03996681958110632,
+   "u2": 0.6431159581274881,
+   "lam": 0.6656857144133178,
+   "t": 2.0579566986308313,
+   "id": "mp2-t35m_019",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 20,
+   "u1": 0.039977743165524764,
+   "u2": 0.6429603291975704,
+   "lam": 0.6656648584027094,
+   "t": 2.0579266472815956,
+   "id": "mp2-t35m_020",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 21,
+   "u1": 0.03999276825636456,
+   "u2": 0.6427462542785762,
+   "lam": 0.6656361722875485,
+   "t": 2.0578853185581285,
+   "id": "mp2-t35m_021",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 32,
+   "u1": 0.03999855469178646,
+   "u2": 0.642663806560219,
+   "lam": 0.6656251249774778,
+   "t": 2.057869403995615,
+   "id": "mp2-t35m_032",
+   "group": "trace t35 - (multiple precision encounter piece, end state and matrix)"
+  },
+  {
+   "index": 0,
+   "u1": 0.038676374534312725,
+   "u2": 0.6614491745863921,
+   "lam": 0.6681524416313425,
+   "t": 2.0615311642722145,
+   "id": "mp1-t35m_000",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 1,
+   "u1": 0.03880252055830296,
+   "u2": 0.6596617242889419,
+   "lam": 0.667911081872888,
+   "t": 2.061179756006616,
+   "id": "mp1-t35m_001",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 2,
+   "u1": 0.03891992855966339,
+   "u2": 0.6579971457668466,
+   "lam": 0.6676864798688373,
+   "t": 2.0608530523245534,
+   "id": "mp1-t35m_002",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 3,
+   "u1": 0.03897559193214864,
+   "u2": 0.6572076508965217,
+   "lam": 0.6675800092807547,
+   "t": 2.060698286027861,
+   "id": "mp1-t35m_003",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 4,
+   "u1": 0.03902976393445567,
+   "u2": 0.6564391156748371,
+   "lam": 0.6674764000261664,
+   "t": 2.060547744442145,
+   "id": "mp1-t35m_004",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 5,
+   "u1": 0.03908252351575774,
+   "u2": 0.6556904362720272,
+   "lam": 0.6673755005809446,
+   "t": 2.060401202659198,
+   "id": "mp1-t35m_005",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 6,
+   "u1": 0.03913254667412504,
+   "u2": 0.6549804226609494,
+   "lam": 0.6672798421949823,
+   "t": 2.060262330271896,
+   "id": "mp1-t35m_006",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 7,
+   "u1": 0.03918240505934742,
+   "u2": 0.6542725885676313,
+   "lam": 0.6671845066068456,
+   "t": 2.060123982585806,
+   "id": "mp1-t35m_007",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 8,
+   "u1": 0.03922971679663057,
+   "u2": 0.6536007626376311,
+   "lam": 0.6670940477664025,
+   "t": 2.059992764041324,
+   "id": "mp1-t35m_008",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 9,
+   "u1": 0.039252790800339464,
+   "u2": 0.653273060645318,
+   "lam": 0.6670499334460523,
+   "t": 2.0599287908704076,
+   "id": "mp1-t35m_009",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 10,
+   "u1": 0.03927515710591012,
+   "u2": 0.6529553774055851,
+   "lam": 0.6670071737844055,
+   "t": 2.0598667938676636,
+   "id": "mp1-t35m_010",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 12,
+   "u1": 0.03928349214912706,
+   "u2": 0.6528369812587016,
+   "lam": 0.6669912393520937,
+   "t": 2.0598436935447837,
+   "id": "mp1-t35m_012",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 18,
+   "u1": 0.03928937699054091,
+   "u2": 0.6527533866629177,
+   "lam": 0.6669799892032866,
+   "t": 2.059827385036782,
+   "id": "mp1-t35m_018",
+   "group": "trace t35 - (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 0,
+   "u1": -0.07481594766705311,
+   "u2": -1.3345872864841382,
+   "lam": 0.6536520724757366,
+   "t": 2.805007002863086,
+   "id": "mp1-t12p_000",
+   "group": "trace t12 + (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 1,
+   "u1": -0.0743733388199406,
+   "u2": -1.336297766899365,
+   "lam": 0.6541509431350635,
+   "t": 2.8051520235903284,
+   "id": "mp1-t12p_001",
+   "group": "trace t12 + (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 2,
+   "u1": -0.07393020031142288,
+   "u2": -1.338010587939928,
+   "lam": 0.6546495707931954,
+   "t": 2.805297304790582,
+   "id": "mp1-t12p_002",
+   "group": "trace t12 + (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 3,
+   "u1": -0.0738193323959542,
+   "u2": -1.3384391590169782,
+   "lam": 0.6547741894371896,
+   "t": 2.805333666031611,
+   "id": "mp1-t12p_003",
+   "group": "trace t12 + (multiple precision encounter piece, end state)"
+  },
+  {
+   "index": 133,
+   "u1": -0.07374509411841657,
+   "u2": -1.3387261440689338,
+   "lam": 0.6548576057344725,
+   "t": 2.8053580169205254,
+   "id": "mp1-t12p_133",
+   "group": "trace t12 + (multiple precision encounter piece, end state)"
+  }
+ ]
+}

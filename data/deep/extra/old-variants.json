@@ -1,0 +1,75 @@
+{
+ "what": "seven earlier runs of the Dormand-Prince code of src/physics.js (version 0.2.33: its source files with only the constants of the corrector tolerance and of the integrator tolerances turned into settings whose defaults are the original values; the run files record the settings that were used), each following one family in one direction of lam from a start orbit until it lost the family. tolerance: the corrector tolerance, 1e-11 (the default) or 1e-10 (one declared variant). dp45_settings: \"default\", or the tighter integrator tolerances that were used for a14 +. n: number of recorded points. why: the reason the trace ended, as stored. end_d: the closest approach of the tool at the last point, where the trace lost the family (a tool value, not witnessed). endx: the closest approach where the reliable stretch of the trace ended as read then: the points before the first one whose tool closure was 1e-6 or more or whose multiple precision witness closure was 1e-6 or more; it equals end_d where no point failed and is larger where one did (t19 -, t35 + and a14 + at 1e-10).",
+ "runs": [
+  {
+   "label": "t19 -",
+   "direction": -1,
+   "tolerance": 1e-11,
+   "why": "lost the family near lam=0.1103",
+   "n": 152,
+   "end_d": 0.0008140435305888315,
+   "endx": 0.0008140435305888315,
+   "dp45_settings": "default"
+  },
+  {
+   "label": "t35 +",
+   "direction": 1,
+   "tolerance": 1e-11,
+   "why": "lost the family near lam=0.7237",
+   "n": 25,
+   "end_d": 0.0003793331856628425,
+   "endx": 0.0003793331856628425,
+   "dp45_settings": "default"
+  },
+  {
+   "label": "t35 -",
+   "direction": -1,
+   "tolerance": 1e-11,
+   "why": "lost the family near lam=0.6771",
+   "n": 117,
+   "end_d": 0.0004697973336027984,
+   "endx": 0.0004697973336027984,
+   "dp45_settings": "default"
+  },
+  {
+   "label": "t19 -",
+   "direction": -1,
+   "tolerance": 1e-10,
+   "why": "lost the family near lam=0.1017",
+   "n": 168,
+   "end_d": 0.00026221940772963695,
+   "endx": 0.00035323395484706095,
+   "dp45_settings": "default"
+  },
+  {
+   "label": "t35 +",
+   "direction": 1,
+   "tolerance": 1e-10,
+   "why": "lost the family near lam=0.7276",
+   "n": 33,
+   "end_d": 0.00014514247064958526,
+   "endx": 0.00014953504831594747,
+   "dp45_settings": "default"
+  },
+  {
+   "label": "t35 -",
+   "direction": -1,
+   "tolerance": 1e-10,
+   "why": "lost the family near lam=0.6710",
+   "n": 79,
+   "end_d": 0.00012434377541758362,
+   "endx": 0.00012434377541758362,
+   "dp45_settings": "default"
+  },
+  {
+   "label": "a14 +",
+   "direction": -1,
+   "tolerance": 1e-10,
+   "why": "lost the family near lam=0.3484",
+   "n": 136,
+   "end_d": 0.0001520658226176926,
+   "endx": 0.003253981604402636,
+   "dp45_settings": "tighter: rtol 1e-14, atol 1e-15, hMax 0.002, monodromy rtol 1e-13, atol 1e-14"
+  }
+ ]
+}

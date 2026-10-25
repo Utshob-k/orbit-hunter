@@ -1,0 +1,41 @@
+[0 s] trace: 4 recorded points
+<temp folder>\t35m.json dir -1 | stopped after 4 accepted points | 4 points, lam 0.6644567583027146 to 0.6653529332738678 | 0 zeros of theta
+[109 s] points to witness
+t35m: 4 recorded points, 4 kept (4 written, 0 beyond the cap), s = 0.00107723; 21 unrecorded steps (21 written)
+[255 s] w1 witnesses: points 25; finished 25; closure below 1e-6 for 25; closure 1e-6 or more: []; not finished: []; check 1e-14 failed: []
+selected for w1b: 9 (['t35m-u0007', 't35m-u0008', 't35m-u0009', 't35m-u0010', 't35m-u0011', 't35m-u0012', 't35m-u0013', 't35m-u0014'])
+[331 s] w1b witnesses: points 9; finished 9; closure below 1e-6 for 9; closure 1e-6 or more: []; not finished: []; check 1e-14 failed: []
+[331 s] summary
+t35m: stopped after 4 accepted points; 4 recorded points, 21 unrecorded accepted steps, lam 0.665290 to 0.664437; guard trips {'G1a': 0, 'G1b': 0, 'G2': 0, 'G3': 0}, cross-check replaced 0
+point              step kind            lam        w1 min       w1b min    closure  status
+t35m-k0000            1 kept     0.66528983   7.20438e-07             -    1.0e-12  witnessed (w1)
+t35m-u0002            2 unrec    0.66523011   5.43495e-07             -    1.3e-12  witnessed (w1)
+t35m-k0001            3 kept     0.66517355   3.98769e-07             -    1.3e-12  witnessed (w1)
+t35m-u0004            4 unrec    0.66511996   2.82252e-07             -    1.5e-12  witnessed (w1)
+t35m-u0005            5 unrec    0.66506913   1.90231e-07             -    2.3e-12  witnessed (w1)
+t35m-u0006            6 unrec    0.66502090   1.19608e-07             -    2.6e-12  witnessed (w1)
+t35m-u0007            7 unrec    0.66497510   6.76240e-08   6.76193e-08    2.3e-12  witnessed (w1b)
+t35m-u0008            8 unrec    0.66493158   3.18545e-08   3.18539e-08    3.2e-12  witnessed (w1b)
+t35m-u0009            9 unrec    0.66489021   1.01801e-08   1.01797e-08    1.8e-12  witnessed (w1b)
+t35m-u0010           10 unrec    0.66485085   7.31954e-10   7.31973e-10    1.7e-12  witnessed (w1b)
+t35m-u0011           11 unrec    0.66481339   1.87185e-09   1.87173e-09    2.5e-13  witnessed (w1b)
+t35m-u0012           12 unrec    0.66477770   1.21586e-08   1.21585e-08    1.7e-12  witnessed (w1b)
+t35m-u0013           13 unrec    0.66474370   3.03275e-08   3.03257e-08    1.5e-12  witnessed (w1b)
+t35m-u0014           14 unrec    0.66471127   5.52597e-08   5.52608e-08    1.7e-13  witnessed (w1b)
+t35m-u0015           15 unrec    0.66468034   8.59809e-08   8.59823e-08    2.7e-12  witnessed (w1b)
+t35m-u0016           16 unrec    0.66465081   1.21645e-07             -    8.4e-13  witnessed (w1)
+t35m-u0017           17 unrec    0.66462260   1.61445e-07             -    7.2e-13  witnessed (w1)
+t35m-u0018           18 unrec    0.66459566   2.04777e-07             -    3.3e-13  witnessed (w1)
+t35m-u0019           19 unrec    0.66456990   2.51017e-07             -    2.0e-12  witnessed (w1)
+t35m-u0020           20 unrec    0.66454526   2.99663e-07             -    3.1e-12  witnessed (w1)
+t35m-u0021           21 unrec    0.66452168   3.50227e-07             -    4.5e-12  witnessed (w1)
+t35m-u0022           22 unrec    0.66449910   4.02363e-07             -    2.8e-12  witnessed (w1)
+t35m-k0002           23 kept     0.66447748   4.55712e-07             -    5.2e-12  witnessed (w1)
+t35m-u0024           24 unrec    0.66445676   5.09962e-07             -    2.1e-12  witnessed (w1)
+t35m-k0003           25 kept     0.66443689   5.64857e-07             -    1.6e-12  witnessed (w1)
+points 25: witnessed 25, closure failed 0, unchecked 0
+STRICT CHAIN: no cut; STRICT WITNESSED DEPTH 7.31973e-10 at step 10
+TURNED: the witnessed closest approach turns at d = 7.31973e-10 (step 10)
+further turns below 1e-6: none
+PASS  the summary equals data/deep/sample/expected-summary.txt
+time 331 s, files in <temp folder>

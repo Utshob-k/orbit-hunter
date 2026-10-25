@@ -1,0 +1,7 @@
+{
+ "what": "Henon's relation dT* = -pi L* d(turns) between consecutive points of traces/t35m.json: the number of pairs with |d(turns)| of 1e-6 or more, the median and the largest relative deviation |dT* - s| / max(|dT*|, |s|) with s = -pi L* d(turns), L* the mean of |L*| of the pair (test/henon.test.js)",
+ "trace": "traces/t35m.json",
+ "pairs": 155,
+ "median_deviation": 3.664033809924025e-07,
+ "max_deviation": 3.190744547392122e-05
+}

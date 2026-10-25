@@ -1,0 +1,108 @@
+{
+ "what": "the multiple precision flow of tools/refine-mp.py (50 digits, tolerance 1e-30, step floor 1e-20) against the exact Kepler flow of tools/kepler-ref.py: one nominal period of a near-radial pair, apocentre start with a = 1, e = 1 - q, third body of mass 1 at rest at (1e9, 0); error = |difference| / max(1, |exact|) over the four relative numbers of the pair",
+ "limit": 1e-17,
+ "digits": 50,
+ "tol": 1e-30,
+ "floor": 1e-20,
+ "third": 1000000000.0,
+ "rows": [
+  {
+   "q": "1e-7",
+   "error_max": "5.85564e-24",
+   "errors": [
+    "3.51829e-24",
+    "3.69937e-27",
+    "5.85564e-24",
+    "1.11259e-27"
+   ],
+   "steps": 260,
+   "rejected": 21,
+   "min_accepted_step": 4.355614296588012e-12,
+   "seconds": 12.9
+  },
+  {
+   "q": "1e-8",
+   "error_max": "4.50801e-22",
+   "errors": [
+    "2.70572e-22",
+    "9.01729e-26",
+    "4.50801e-22",
+    "2.70572e-26"
+   ],
+   "steps": 293,
+   "rejected": 24,
+   "min_accepted_step": 1.42724769270596e-13,
+   "seconds": 14.9
+  },
+  {
+   "q": "3e-9",
+   "error_max": "3.46069e-22",
+   "errors": [
+    "2.07718e-22",
+    "3.79078e-26",
+    "3.46069e-22",
+    "1.13772e-26"
+   ],
+   "steps": 310,
+   "rejected": 25,
+   "min_accepted_step": 2.3384026197294448e-14,
+   "seconds": 16.4
+  },
+  {
+   "q": "1e-9",
+   "error_max": "8.04251e-21",
+   "errors": [
+    "4.82721e-21",
+    "5.0865e-25",
+    "8.04251e-21",
+    "1.5265e-25"
+   ],
+   "steps": 324,
+   "rejected": 26,
+   "min_accepted_step": 4.7890485652059024e-15,
+   "seconds": 16.2
+  },
+  {
+   "q": "5e-10",
+   "error_max": "4.34888e-20",
+   "errors": [
+    "2.61025e-20",
+    "1.94484e-24",
+    "4.34888e-20",
+    "5.83669e-25"
+   ],
+   "steps": 336,
+   "rejected": 28,
+   "min_accepted_step": 1.4965776766268446e-15,
+   "seconds": 16.4
+  },
+  {
+   "q": "3e-10",
+   "error_max": "6.76236e-21",
+   "errors": [
+    "4.05884e-21",
+    "2.34268e-25",
+    "6.76236e-21",
+    "7.03012e-26"
+   ],
+   "steps": 345,
+   "rejected": 29,
+   "min_accepted_step": 7.482888383134223e-16,
+   "seconds": 16.6
+  },
+  {
+   "q": "1e-10",
+   "error_max": "5.54732e-21",
+   "errors": [
+    "3.32957e-21",
+    "1.10934e-25",
+    "5.54732e-21",
+    "3.32957e-26"
+   ],
+   "steps": 359,
+   "rejected": 30,
+   "min_accepted_step": 1.5324955408658889e-16,
+   "seconds": 9.4
+  }
+ ]
+}

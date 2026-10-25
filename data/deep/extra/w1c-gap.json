@@ -1,0 +1,39 @@
+{
+ "what": "the witness minimum of the pair distance and the closure at accepted steps 9, 10, 11 of the trace of t35 - computed with the 50 digit flow (w1b: tolerance 1e-30, step floor 1e-20) and with a 60 digit flow (w1c: tolerance 1e-36); rel = relative difference of the two minima, dclosure = difference of the two closures.",
+ "agrees": true,
+ "rows": [
+  {
+   "id": "T0c-unrec_009",
+   "w1b": 1.0179691272016225e-08,
+   "w1c": 1.017962455237674e-08,
+   "rel": 6.554190859181791e-06,
+   "closure_w1b": 1.7794822746129256e-12,
+   "closure_w1c": 1.7794822739150225e-12,
+   "dclosure": 6.979031476344649e-22,
+   "ok": true,
+   "seconds": 96.3
+  },
+  {
+   "id": "T0c-unrec_010",
+   "w1b": 7.319732642602164e-10,
+   "w1c": 7.319465152453638e-10,
+   "rel": 3.654370474798972e-05,
+   "closure_w1b": 1.7049398972813499e-12,
+   "closure_w1c": 1.704939894879092e-12,
+   "dclosure": 2.4022579088052608e-21,
+   "ok": true,
+   "seconds": 103.8
+  },
+  {
+   "id": "T0c-unrec_011",
+   "w1b": 1.8717302858075e-09,
+   "w1c": 1.8717304270706215e-09,
+   "rel": 7.547194305727721e-08,
+   "closure_w1b": 2.451638722273332e-13,
+   "closure_w1c": 2.4516386996737747e-13,
+   "dclosure": 2.2599557318745494e-21,
+   "ok": true,
+   "seconds": 101.5
+  }
+ ]
+}
