@@ -1,0 +1,1 @@
+{"comp": true, "TOL": 1e-15, "nseq": [2, 4, 6, 8], "kmin": 3, "safety": 0.9, "gmax": 2, "gmin": 0.5, "d6": "D6p", "ds0f": 0.05, "endUlp": 4, "stagUlp": 64, "maxEnd": 60, "maxMacro": 3000000}
