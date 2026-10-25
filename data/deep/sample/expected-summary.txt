@@ -1,4 +1,4 @@
-t35m: stopped after 4 accepted points; 4 recorded points, 21 unrecorded accepted steps, lam 0.665290 to 0.664437; guard trips {'G1a': 0, 'G1b': 0, 'G2': 0, 'G3': 0}, cross-check replaced 0
+t35m: stopped after 4 recorded points; 4 recorded points, 21 unrecorded accepted steps, lam 0.665290 to 0.664437; guard trips {'G1a': 0, 'G1b': 0, 'G2': 0, 'G3': 0}, cross-check replaced 0
 point              step kind            lam        w1 min       w1b min    closure  status
 t35m-k0000            1 kept     0.66528983   7.20438e-07             -    1.0e-12  witnessed (w1)
 t35m-u0002            2 unrec    0.66523011   5.43495e-07             -    1.3e-12  witnessed (w1)

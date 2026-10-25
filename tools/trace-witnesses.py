@@ -10,8 +10,9 @@
 #     The STRICT CHAIN runs over all points in the order of the loop step and is cut at the first point that is not witnessed; the strict witnessed depth is the smallest minimum before the cut.
 #     TURNED: a witnessed minimum followed by a rise by a factor 2 or more, witnessed points on both sides (quoted as "the witnessed closest approach turns at d = ..."). Further turns (information):
 #     witnessed local minima below 1e-6, lower than both neighbours in the order of the steps, with a rise of a factor 2 or more on both sides before the next local minimum or the end.
-# python tools/trace-witnesses.py reading WITNESSES.json
-#     the same reading from a compact witness file of data/deep/witnesses/ (no raw results needed).
+# python tools/trace-witnesses.py reading WITNESSES.json [--trace TRACE.json]
+#     the same reading from a compact witness file of data/deep/witnesses/ (no raw results needed). With --trace (the trace file of data/deep/traces/) it also prints how many recorded points of the trace
+#     were not selected for witnessing and the step ranges of the runs of such points, and, if the witness file has them, the s of the kept-point rule and the ids added outside the rule.
 import sys, os, json, statistics
 
 CAP_DEFAULT = 400
@@ -100,7 +101,7 @@ def reading(rows, lines):
     return dict(strict_depth=sw, cut_step=(cut or {}).get('step'), turned=turned, turn=turn, further=further)
 
 
-def reading_from_data(f):
+def reading_from_data(f, trace=None):
     # the reading from a compact witness file of data/deep/witnesses/ (no raw results needed)
     d = json.load(open(f)); rows = []
     for r in d['points']:
@@ -109,7 +110,20 @@ def reading_from_data(f):
         st, v = classify(ra, rb, a.get('check_1e14') if a else None, b.get('check_1e14') if b else None)
         rows.append(dict(id=r['id'], step=r['step'], kind=r['kind'], status=st, value=v, ok=v is not None))
     for x in d.get('unwitnessed', []): rows.append(dict(id=x['id'], step=x['step'], kind='recorded', status=x['status'], value=None, ok=False))
-    lines = ['%s: %s' % (d['label'], d.get('why'))]; out = reading(rows, lines); print('\n'.join(lines)); return out
+    lines = ['%s: %s' % (d['label'], d.get('why'))]; out = reading(rows, lines)
+    if 's' in d: lines.append('kept-point rule: s = %.8g; ids added outside the rule: %s' % (d['s'], ', '.join(d.get('added', [])) or 'none'))
+    if trace:
+        T = json.load(open(trace)); P = T['points']; have = set(r['step'] for r in d['points'] if r['kind'] != 'unrecorded')
+        runs = []; cur = None
+        for p in P:
+            if p['step'] in have: cur = None; continue
+            if cur is None: cur = [p['step'], p['step'], 0]; runs.append(cur)
+            cur[1] = p['step']; cur[2] += 1
+        n_not = sum(r[2] for r in runs)
+        lines.append('recorded points of %s: %d; selected for witnessing: %d; NOT selected: %d in %d runs' % (os.path.basename(trace), len(P), len(P) - n_not, n_not, len(runs)))
+        big = sorted(runs, key=lambda r: -r[2])[:6]
+        lines.append('  step range of the points not selected: %s; the longest runs (first step - last step, number of points): %s' % ('%d-%d' % (runs[0][0], runs[-1][1]) if runs else 'none', '; '.join('%d-%d (%d)' % tuple(r) for r in big) or 'none'))
+    print('\n'.join(lines)); return out
 
 
 def summary(trace, w1dirs, w1bdirs, checkfiles, checkfiles_b, cap, s, outj):
@@ -151,7 +165,7 @@ def main():
     cmd = sys.argv[1]; cap = int(option('--cap', CAP_DEFAULT)); s = float(option('--s', 0)) or None
     if cmd == 'points': make_points(sys.argv[2], sys.argv[3], cap, s)
     elif cmd == 'select': select_low(sys.argv[2], sys.argv[3])
-    elif cmd == 'reading': reading_from_data(sys.argv[2])
+    elif cmd == 'reading': reading_from_data(sys.argv[2], option('--trace', None))
     elif cmd == 'summary':
         pos = []; i = 3
         while i < len(sys.argv):

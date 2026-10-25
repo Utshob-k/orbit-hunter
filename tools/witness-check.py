@@ -1,5 +1,5 @@
 # checks the results of tools/witness.py in a folder made by tools/witness-jobs.py: for every point the status, the closure of the full period, the smallest pair distance (sampled and
-# parabolic), the seconds, and the relative change of the energy and of the angular momentum of the end state x_full (50 digits) against the start state of the perpendicular start:
+# parabolic), the seconds, and the relative change of the energy and of the angular momentum of the end state x_full (the digits of the preset: 40 for w1, 50 for w1b) against the start state of the perpendicular start:
 #   E = sum of |v|^2 / 2 over the three bodies minus the sum of 1/r over the three pairs (masses 1, G = 1), L = sum (x vy - y vx); |dE| / |E0| and |dL| / max(|L0|, 1e-3).
 # A finished point passes the check if both are at most 1e-14: the integration conserved what it should, so the closure is a property of the numbers (u1, u2, lam, t) and not of the flow.
 # python tools/witness-check.py WITDIR [--out CHECK.json]     prints a table and one summary line; CHECK.json (must be new) holds one record per point, read by tools/trace-witnesses.py summary

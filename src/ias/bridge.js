@@ -35,7 +35,7 @@ function getWorker() {
   return worker;
 }
 
-export const stats = { regPieces: 0, regMacro: 0, regSub: 0, regEndTrials: 0, regStagnation: 0, calls: 0, pieces: 0, steps: 0, timeouts: 0, errors: 0, stepFloor: 0, encounterPieces: 0 };
+export const stats = { regPieces: 0, regMacro: 0, regSub: 0, regEndTrials: 0, regStagnation: 0, lastReason: null, calls: 0, pieces: 0, steps: 0, timeouts: 0, errors: 0, stepFloor: 0, encounterPieces: 0 };
 export const gstats = { trips: { G1a: 0, G1b: 0, G2: 0, G3: 0 }, tripsTotal: 0, tripList: [], ratioMin: Infinity, d2CloseMin: Infinity, attRatioMin: Infinity, attD2Close: Infinity, samePair: 0,
   missChecks: 0, missedCounted: 0, missedStops: 0, missFailed: 0, regFailures: 0, cMinSeen: Infinity, cRatioMin: Infinity, tIas: 0, tC: 0, tMiss: 0, xchk: 0, xchkMaxDiff: 0, replaced: 0, replList: [], tX: 0 };
 let nextId = 1;
@@ -50,11 +50,13 @@ function request(msg) {
   Atomics.store(ctrl, 0, 0);
   w.postMessage({ id, ...msg });
   const r = Atomics.wait(ctrl, 0, 0, settings.ias.timeoutMs);
-  if (r === 'timed-out') { stats.timeouts++; w.postMessage({ kill: true }); throw new BridgeError('bridge timeout', 'timeout'); }
+  if (r === 'timed-out') { stats.timeouts++; stats.lastReason = 'no answer within ' + settings.ias.timeoutMs / 60000 + ' minutes'; w.postMessage({ kill: true }); throw new BridgeError('bridge timeout', 'timeout'); }
   if (Atomics.load(ctrl, 0) !== 2 || ctrl[3] !== id) {
     // code 1 (step floor) is not sent by ias-bridge.py: an exception there ends the process and the worker reports code 2
     if (ctrl[4] === 1 && ctrl[3] === id) { stats.stepFloor++; throw new BridgeError('step floor', 'step floor'); }
-    stats.errors++; w.postMessage({ kill: true }); throw new BridgeError('bridge error', 'bridge error');
+    // the worker leaves the reason (the python process could not be started, exited, or answered with an error) as char codes in the data buffer
+    const why = ctrl[5] > 0 ? String.fromCharCode(...data.subarray(0, ctrl[5])) : null;
+    stats.errors++; stats.lastReason = why || 'bridge error'; w.postMessage({ kill: true }); throw new BridgeError('bridge error' + (why ? ': ' + why : ''), 'bridge error');
   }
   return ctrl[1];
 }

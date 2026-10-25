@@ -5,8 +5,8 @@
 // OUT.json.diag.jsonl (one line per attempt of the corrector, src/ias/recorder.js).
 // node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N]
 //                                  [--ias-mode=2] [--timeout-min=30] [--python=PY] [--guard-ratio=390]
-//   DIR = 1 or -1 in lam; t = half the period. pieces: the number of pieces of the multiple shooting, at most 250. max-dist: stop when the closest approach is above it (inf for never). stop-below: stop
-//   when the closest approach is below it (0: never). stop-after: stop after that many recorded points. The other options set src/settings.js: IAS15 adaptive_mode, the longest wait for
+//   DIR = 1 or -1 in lam (anything else stops the driver with exit 2, as does an unknown option); t = half the period. pieces: the number of pieces of the multiple shooting, at most 250. max-dist: stop when the closest approach is above it (inf for never). stop-below: stop
+//   when the closest approach is below it (0: never). stop-after: stop after that many recorded points (the message is "stopped after N recorded points"). The other options set src/settings.js: IAS15 adaptive_mode, the longest wait for
 //   the Python process, the python executable PY (the default is that of src/settings.js: ORBIT_PYTHON, else python on Windows and python3 elsewhere), the ratio of guard G1b.
 import fs from 'fs';
 import { settings } from '../src/settings.js';
@@ -18,11 +18,13 @@ import { syzygyWord } from '../src/topology.js';
 import { relativeStability } from '../src/relative.js';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); opt[k] = v === undefined ? true : v; }
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'timeout-min', 'python', 'guard-ratio'];
+for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outFile, dirArg, u1A, u2A, lamA, tA] = pos;
 if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--timeout-min=30] [--python=PY] [--guard-ratio=390]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json']) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
-const dir = Number(dirArg) >= 0 ? 1 : -1, minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
+if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
+const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
 const pieces = Number(opt.pieces ?? 24), maxDist = opt['max-dist'] === undefined ? 0.03 : Number(opt['max-dist'] === 'inf' ? Infinity : opt['max-dist']);
 if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece)'); process.exit(2); }
 const stopBelow = Number(opt['stop-below'] ?? 0), stopAfter = opt['stop-after'] === undefined ? Infinity : Number(opt['stop-after']);
@@ -36,7 +38,12 @@ const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
 const s0 = closePerpMS(start.u1, start.u2, start.lam, start.t, { m: pieces });
 const shifted = s0 && s0.res < 1e-9 ? { u1: s0.u1, u2: s0.u2, lam: s0.lam, t: s0.t, m: pieces } : null;
 const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter } };
-if (!shifted) { out.error = 'could not move the start onto the family'; fs.writeFileSync(outFile, JSON.stringify(out)); console.error(out.error); process.exit(1); }
+if (!shifted) {
+  out.error = 'could not move the start onto the family'; out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.lastBridgeReason = iasStats.lastReason;
+  fs.writeFileSync(outFile, JSON.stringify(out));
+  console.error(out.error + '; bridge: ' + iasStats.calls + ' calls, ' + iasStats.errors + ' errors, ' + iasStats.timeouts + ' timeouts, last reason: ' + (iasStats.lastReason || 'none') + '; guard trips ' + gstats.tripsTotal);
+  process.exit(1);
+}
 const pts = [], keys = [];
 const unrec = []; out.unrec = unrec;   // accepted steps that are not recorded as points
 process.on('uncaughtException', (e) => { try { fs.writeFileSync(outFile + '.crash.json', JSON.stringify({ ...out, error: String(e && e.stack), points: pts })); recorder.flush(); } catch (e2) {} process.exit(3); });
@@ -63,7 +70,7 @@ try { r = huntArclength(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shi
     }
     pts.push(p);
     if (pts.length % 5 === 0) fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true }));
-    if (pts.length >= stopAfter) { stop = 'stopped after ' + pts.length + ' accepted points'; return true; }
+    if (pts.length >= stopAfter) { stop = 'stopped after ' + pts.length + ' recorded points'; return true; }
     if (info.minDist < stopBelow) { stop = 'close approach (closest distance ' + info.minDist.toFixed(4) + ')'; return true; }
     if (p.Lstar < 1e-3) { stop = 'L* reached 0'; return true; }
     if (info.minDist > maxDist) { stop = 'left the region (closest approach above ' + maxDist + ')'; return true; }
@@ -74,5 +81,6 @@ const zeros = (r.orbits || (r.ok && r.info ? [r] : [])).map((o) => ({ lam: o.lam
 out.why = stop || r.why || (zeros.length ? 'zero of theta' : 'unknown');
 out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.traceStop = traceStop; out.steps = r.steps; out.lamMin = r.lamMin; out.lamMax = r.lamMax; out.points = pts; out.zeros = zeros;
 fs.writeFileSync(outFile, JSON.stringify(out));
-recorder.flush(); console.log(outFile, 'dir', dir, '|', out.why, '|', pts.length, 'points, lam', r.lamMin, 'to', r.lamMax, '|', zeros.length, 'zeros of theta');
+recorder.flush(); if (iasStats.errors || iasStats.timeouts) console.log('bridge: ' + iasStats.errors + ' errors, ' + iasStats.timeouts + ' timeouts, last reason: ' + iasStats.lastReason);
+console.log(outFile, 'dir', dir, '|', out.why, '|', pts.length, 'points, lam', r.lamMin, 'to', r.lamMax, '|', zeros.length, 'zeros of theta');
 process.exit(0);

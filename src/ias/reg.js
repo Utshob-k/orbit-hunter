@@ -310,7 +310,7 @@ export function opTest(spec) {
   return { y: Array.from(out.y), tg: out.tg.map((v) => Array.from(v)) };
 }
 function singleOp(sys, Q0, P0, Pt, op, hh, tg0, dPt) {
-  // implemented by the same code as inside leapfrog (a copy of the two closures; kept identical): used only by the unit test
+  // implemented by the same code as inside leapfrog (a copy of the two closures; kept identical): for opTest; no test or tool of the repository calls opTest or chainRoundTrip
   const nQ = sys.nQ, Q = Float64Array.from(Q0), P = Float64Array.from(P0), tg = tg0.map((a) => Float64Array.from(a)), AP = new Float64Array(nQ), AdP = new Float64Array(nQ); let tt = 0;
   if (op === 'drift') {
     const T = Tval(sys, P, AP), D = T + Pt, iD = 1 / D;
