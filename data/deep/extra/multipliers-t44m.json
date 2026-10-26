@@ -1,0 +1,46 @@
+{
+ "what": "the multipliers of the orbit at the stored values of t44 - at the loop step 1588 (u1, u2, t, lam of the accepted step, no refinement), 40 digits, from tools/point-diagnostic.py with --mult-only: the four real non-trivial multipliers (nontrivial: [real, imaginary part], moduli), the scatter of the trivial multipliers from 1 (trivial_scatter) and |det - 1| (det_minus_1), the two quality checks of the tool (scatter below 1e-3, |det - 1| below 1e-10). The stored output of the command in \"command\" (1056 s); the points file it reads is stall/jacobian/points.json of the raw files.",
+ "command": "python tools/point-diagnostic.py stall/jacobian/points.json t44m-s1588 OUT.json --mult-only",
+ "status": "mult only (stored values)",
+ "stored": [
+  -0.39354157931508876,
+  0.4364867616323272,
+  4.595096878691359
+ ],
+ "lam": 0.22906934975198912,
+ "mult": {
+  "alpha": 1.104914867233432,
+  "moduli": [
+   1556.8898754073032,
+   77.58517478792898,
+   0.012889060348620494,
+   0.0006423061873517891
+  ],
+  "nontrivial": [
+   [
+    -0.0006423061873517891,
+    6.390720306173227e-44
+   ],
+   [
+    -0.012889060348620494,
+    -1.1765682308404169e-43
+   ],
+   [
+    -77.58517478792898,
+    1.533368023304383e-44
+   ],
+   [
+    -1556.8898754073032,
+    -2.33596490304235e-44
+   ]
+  ],
+  "trivial_scatter": 8.212069657265175e-05,
+  "det_minus_1": 6.641099633498708e-13,
+  "maxMod": 1556.8898754073032,
+  "seconds": 1056
+ },
+ "id": "t44m-s1588",
+ "source": null,
+ "floor": "1e-20",
+ "iterations": []
+}

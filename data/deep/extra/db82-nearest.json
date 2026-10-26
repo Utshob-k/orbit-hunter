@@ -1,0 +1,182 @@
+{
+ "what": "every converted row of Davoust and Broucke (1982) (130 rows, data/db82-*-converted.json) against the four families t35 -, t44 -, t62 -, t72 - (stored curve of T*, L* and turns of data/deep/traces/*.json and the start orbit of data/orbit-table.json), as the orbit and as an n-fold repeat (A1 to A9: the row is n times the family orbit; B2 to B9: the family orbit is n times the row), in T* and L* and in the turns modulo 1 with both signs: n_match = rows with a distance of at most 1e-5 (normalised T*, L*) and turns to 1e-4, near = rows with a distance of at most 1e-3, closest = the five rows nearest to the curve (d_curve) and their distance to the start orbit of the family (d_start), rows_in_box = rows whose (T*, L*) lies in the box of the stored stretch widened by 0.1 percent. These are the stored results of the command in \"command\"; it can be run again (a few seconds).",
+ "command": "python tools/db82-families.py OUT.json",
+ "families": {
+  "t35m": {
+   "n_rows": 130,
+   "n_match": 0,
+   "matched": [],
+   "near": [],
+   "closest": [
+    {
+     "file": "table4",
+     "N": 45,
+     "d_curve": 0.10390529771862796,
+     "n": "B4",
+     "d_start": 0.06665553292388095
+    },
+    {
+     "file": "table3",
+     "N": 35,
+     "d_curve": 0.14229789455553088,
+     "n": "B3",
+     "d_start": 0.1259862256484972
+    },
+    {
+     "file": "table4",
+     "N": 44,
+     "d_curve": 0.2551470137328911,
+     "n": "B4",
+     "d_start": 0.22468076940041165
+    },
+    {
+     "file": "table7",
+     "N": 119,
+     "d_curve": 0.2890830110519441,
+     "n": "B2",
+     "d_start": 0.34444188065521136
+    },
+    {
+     "file": "table6",
+     "N": 110,
+     "d_curve": 0.33728258815854334,
+     "n": "B3",
+     "d_start": 0.31029519582359183
+    }
+   ],
+   "rows_in_box": 0
+  },
+  "t44m": {
+   "n_rows": 130,
+   "n_match": 0,
+   "matched": [],
+   "near": [],
+   "closest": [
+    {
+     "file": "table3",
+     "N": 35,
+     "d_curve": 0.00199466204242064,
+     "n": "B4",
+     "d_start": 0.1742841700154977
+    },
+    {
+     "file": "table4",
+     "N": 45,
+     "d_curve": 0.03971331535253966,
+     "n": "B5",
+     "d_start": 0.1693128623386542
+    },
+    {
+     "file": "table4",
+     "N": 44,
+     "d_curve": 0.08111939768741827,
+     "n": "B5",
+     "d_start": 0.3091620736399396
+    },
+    {
+     "file": "table6",
+     "N": 110,
+     "d_curve": 0.1994310715829841,
+     "n": "B4",
+     "d_start": 0.39499134510928197
+    },
+    {
+     "file": "table6",
+     "N": 111,
+     "d_curve": 0.2115965378962478,
+     "n": "B4",
+     "d_start": 0.4046063928379506
+    }
+   ],
+   "rows_in_box": 1
+  },
+  "t62m": {
+   "n_rows": 130,
+   "n_match": 0,
+   "matched": [],
+   "near": [],
+   "closest": [
+    {
+     "file": "table4",
+     "N": 43,
+     "d_curve": 0.02873455860859341,
+     "n": "B6",
+     "d_start": 0.5123576866552206
+    },
+    {
+     "file": "table6",
+     "N": 93,
+     "d_curve": 0.03778469058649323,
+     "n": "B5",
+     "d_start": 0.472881744235816
+    },
+    {
+     "file": "table6",
+     "N": 92,
+     "d_curve": 0.03980726487152255,
+     "n": "B5",
+     "d_start": 0.4722820952961004
+    },
+    {
+     "file": "table4",
+     "N": 44,
+     "d_curve": 0.04475082160914809,
+     "n": "B6",
+     "d_start": 0.3268958771164995
+    },
+    {
+     "file": "table3",
+     "N": 35,
+     "d_curve": 0.047370281957839946,
+     "n": "B5",
+     "d_start": 0.19925550759515528
+    }
+   ],
+   "rows_in_box": 0
+  },
+  "t72m": {
+   "n_rows": 130,
+   "n_match": 0,
+   "matched": [],
+   "near": [],
+   "closest": [
+    {
+     "file": "table6",
+     "N": 93,
+     "d_curve": 0.01189708583290088,
+     "n": "B6",
+     "d_start": 0.4818263421639218
+    },
+    {
+     "file": "table6",
+     "N": 92,
+     "d_curve": 0.013979067968090017,
+     "n": "B6",
+     "d_start": 0.48113507829248703
+    },
+    {
+     "file": "table4",
+     "N": 45,
+     "d_curve": 0.031909124073752,
+     "n": "B8",
+     "d_start": 0.20074889683406552
+    },
+    {
+     "file": "table6",
+     "N": 91,
+     "d_curve": 0.033218435868109776,
+     "n": "B6",
+     "d_start": 0.5180736619007585
+    },
+    {
+     "file": "table6",
+     "N": 109,
+     "d_curve": 0.033686782064497524,
+     "n": "B6",
+     "d_start": 0.42220304607268166
+    }
+   ],
+   "rows_in_box": 1
+  }
+ }
+}

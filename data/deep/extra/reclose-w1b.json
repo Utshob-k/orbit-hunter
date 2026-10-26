@@ -1,0 +1,603 @@
+{
+ "what": "tools/reclose.py (default settings: 50 digits, tolerance 1e-30) at the stored start values (u1, u2, lam, t) of the 33 witnessed points that have a w1b result, at their stored lam: whether it converged, whether the closed orbit is the same orbit (change of (u1, u2, t) at most 1e-6 relative), the number of updates, the first residual and the relative change of u1, u2 and t of each point (largest_change: the largest of the three). \"comparison\" lists the points that are also accepted steps of data/deep/reclose/*.json, with the largest relative change stored there. These are the stored results of the commands in \"command\" (85 to 500 s for a point); the output of tools/reclose.py of each point is in the raw files (stall/reclose-w1b/res/).",
+ "command": [
+  "python tools/reclose-w1b.py run stall/reclose-w1b",
+  "python tools/reclose-w1b.py summary stall/reclose-w1b OUT.json"
+ ],
+ "rows": [
+  {
+   "id": "t35m-u0002",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.7207497141581478e-13,
+   "largest_change": 1.8906922754725067e-14,
+   "change": {
+    "u1": 1.8906922754725067e-14,
+    "u2": 1.07496688778151e-15,
+    "t": 1.497739443346996e-14
+   },
+   "seconds": 101.5
+  },
+  {
+   "id": "t35m-u0004",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 2.3290154936311923e-13,
+   "largest_change": 2.320537953081265e-14,
+   "change": {
+    "u1": 2.1056250722642643e-14,
+    "u2": 6.334672505517135e-15,
+    "t": 2.320537953081265e-14
+   },
+   "seconds": 104.5
+  },
+  {
+   "id": "t35m-u0005",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.047865770021528e-13,
+   "largest_change": 3.779500687893583e-14,
+   "change": {
+    "u1": 2.9111484517188815e-14,
+    "u2": 7.892232478926064e-15,
+    "t": 3.779500687893583e-14
+   },
+   "seconds": 105.4
+  },
+  {
+   "id": "t35m-u0006",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.0259757656328965e-13,
+   "largest_change": 3.979525979602557e-14,
+   "change": {
+    "u1": 3.5350871272364486e-14,
+    "u2": 1.0576797689957753e-14,
+    "t": 3.979525979602557e-14
+   },
+   "seconds": 98.0
+  },
+  {
+   "id": "t35m-u0007",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 3.258381337326079e-13,
+   "largest_change": 3.587068343127641e-14,
+   "change": {
+    "u1": 3.587068343127641e-14,
+    "u2": 2.5940037981225572e-17,
+    "t": 2.929451006095093e-14
+   },
+   "seconds": 99.7
+  },
+  {
+   "id": "t35m-u0008",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.291772569013995e-13,
+   "largest_change": 4.909678615351595e-14,
+   "change": {
+    "u1": 4.909678615351595e-14,
+    "u2": 2.57620479249676e-15,
+    "t": 4.0067990692307734e-14
+   },
+   "seconds": 102.3
+  },
+  {
+   "id": "t35m-u0009",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.8114232671859614e-13,
+   "largest_change": 2.9476865683636397e-14,
+   "change": {
+    "u1": 2.9476865683636397e-14,
+    "u2": 1.798412753001919e-15,
+    "t": 1.8528249719414915e-14
+   },
+   "seconds": 100.2
+  },
+  {
+   "id": "t35m-u0010",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.6017662715668715e-13,
+   "largest_change": 2.9865488066661676e-14,
+   "change": {
+    "u1": 2.9865488066661676e-14,
+    "u2": 5.274165077949535e-16,
+    "t": 1.5958215569026148e-14
+   },
+   "seconds": 109.2
+  },
+  {
+   "id": "t35m-u0011",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.674369353308014e-14,
+   "largest_change": 5.787788178825352e-15,
+   "change": {
+    "u1": 5.787788178825352e-15,
+    "u2": 1.243589834718019e-16,
+    "t": 2.0549775311070505e-16
+   },
+   "seconds": 104.9
+  },
+  {
+   "id": "t35m-u0012",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 2.0341823413023804e-13,
+   "largest_change": 2.855797896946851e-14,
+   "change": {
+    "u1": 2.855797896946851e-14,
+    "u2": 5.739824365936003e-16,
+    "t": 1.8933366660753104e-14
+   },
+   "seconds": 101.9
+  },
+  {
+   "id": "t35m-u0013",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.7992540483028677e-13,
+   "largest_change": 2.4796610591199616e-14,
+   "change": {
+    "u1": 2.4796610591199616e-14,
+    "u2": 1.757709348728315e-15,
+    "t": 1.6095762426873056e-14
+   },
+   "seconds": 100.2
+  },
+  {
+   "id": "t35m-u0014",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.12164376694897e-14,
+   "largest_change": 5.309333144571347e-15,
+   "change": {
+    "u1": 5.309333144571347e-15,
+    "u2": 2.311328998389184e-16,
+    "t": 2.1500986827106395e-15
+   },
+   "seconds": 97.9
+  },
+  {
+   "id": "t35m-u0015",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.315353600577454e-13,
+   "largest_change": 4.2676644346635345e-14,
+   "change": {
+    "u1": 3.588283443014516e-14,
+    "u2": 1.1953401694758356e-14,
+    "t": 4.2676644346635345e-14
+   },
+   "seconds": 94.1
+  },
+  {
+   "id": "t35m-u0016",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 9.153378384970295e-14,
+   "largest_change": 1.5539042853035483e-14,
+   "change": {
+    "u1": 1.5539042853035483e-14,
+    "u2": 4.350011217108698e-15,
+    "t": 7.0040371819065654e-15
+   },
+   "seconds": 92.6
+  },
+  {
+   "id": "t35m-u0017",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.1242825898296849e-13,
+   "largest_change": 1.1410847838639579e-14,
+   "change": {
+    "u1": 1.1410847838639579e-14,
+    "u2": 8.749429370076944e-16,
+    "t": 9.559343275055067e-15
+   },
+   "seconds": 90.8
+  },
+  {
+   "id": "t35m-u0018",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.4110561729839958e-14,
+   "largest_change": 5.442689152243144e-15,
+   "change": {
+    "u1": 5.442689152243144e-15,
+    "u2": 1.6816864395924807e-15,
+    "t": 2.6279776839638468e-15
+   },
+   "seconds": 87.0
+  },
+  {
+   "id": "t35m-u0019",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 2.9839277336530455e-13,
+   "largest_change": 3.1388834147992585e-14,
+   "change": {
+    "u1": 3.1388834147992585e-14,
+    "u2": 1.7006422386318089e-15,
+    "t": 2.5822521464955748e-14
+   },
+   "seconds": 86.4
+  },
+  {
+   "id": "t35m-u0020",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 5.096558623834032e-13,
+   "largest_change": 5.1733525238275576e-14,
+   "change": {
+    "u1": 3.998242434416046e-14,
+    "u2": 1.7687021858970374e-14,
+    "t": 5.1733525238275576e-14
+   },
+   "seconds": 85.6
+  },
+  {
+   "id": "t35m-u0021",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 7.381228017805319e-13,
+   "largest_change": 7.066346089050275e-14,
+   "change": {
+    "u1": 6.322493499898908e-14,
+    "u2": 1.4833012301022255e-14,
+    "t": 7.066346089050275e-14
+   },
+   "seconds": 98.1
+  },
+  {
+   "id": "t35m-u0022",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.350877760609045e-13,
+   "largest_change": 4.4380438181395106e-14,
+   "change": {
+    "u1": 3.749712990157205e-14,
+    "u2": 1.44912093515706e-14,
+    "t": 4.4380438181395106e-14
+   },
+   "seconds": 97.0
+  },
+  {
+   "id": "t35m-u0024",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 2.9603600926181665e-13,
+   "largest_change": 3.223529494087365e-14,
+   "change": {
+    "u1": 3.223529494087365e-14,
+    "u2": 2.3834034340895798e-15,
+    "t": 2.768516707502414e-14
+   },
+   "seconds": 96.3
+  },
+  {
+   "id": "t44m-u0006",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 4.0714397844248004e-14,
+   "largest_change": 7.728969812595625e-15,
+   "change": {
+    "u1": 6.320212083020107e-15,
+    "u2": 7.728969812595625e-15,
+    "t": 7.237164410796992e-16
+   },
+   "seconds": 159.4
+  },
+  {
+   "id": "t44m-u0021",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 9.56951390305714e-14,
+   "largest_change": 1.461789688214726e-14,
+   "change": {
+    "u1": 1.461789688214726e-14,
+    "u2": 1.455947667397029e-14,
+    "t": 5.6708264176580184e-15
+   },
+   "seconds": 185.3
+  },
+  {
+   "id": "t44m-u0029",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 2.2404705070208676e-13,
+   "largest_change": 3.425982107239458e-14,
+   "change": {
+    "u1": 2.764789609316575e-14,
+    "u2": 3.425982107239458e-14,
+    "t": 1.0111139961486612e-15
+   },
+   "seconds": 190.8
+  },
+  {
+   "id": "t44m-u0030",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.8223725554488007e-13,
+   "largest_change": 2.390469027737452e-14,
+   "change": {
+    "u1": 1.9006658543138693e-14,
+    "u2": 2.390469027737452e-14,
+    "t": 3.365263845971429e-15
+   },
+   "seconds": 209.2
+  },
+  {
+   "id": "t44m-u0031",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 5.559007495489055e-13,
+   "largest_change": 7.613183608258458e-14,
+   "change": {
+    "u1": 5.955852243502336e-14,
+    "u2": 7.613183608258458e-14,
+    "t": 1.0912115992736036e-14
+   },
+   "seconds": 201.3
+  },
+  {
+   "id": "t44m-u0033",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.377496293324134e-13,
+   "largest_change": 1.508358398048717e-14,
+   "change": {
+    "u1": 9.839733163573902e-15,
+    "u2": 1.508358398048717e-14,
+    "t": 8.91407918117846e-15
+   },
+   "seconds": 204.2
+  },
+  {
+   "id": "t44m-u0034",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 9.1580028779974e-12,
+   "largest_change": 1.1011744743149198e-12,
+   "change": {
+    "u1": 8.389207068845025e-13,
+    "u2": 1.1011744743149198e-12,
+    "t": 2.936320488786942e-13
+   },
+   "seconds": 207.4
+  },
+  {
+   "id": "t44m-u0035",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 2.818110968466016e-11,
+   "largest_change": 3.4226740254915403e-12,
+   "change": {
+    "u1": 2.6013568704965048e-12,
+    "u2": 3.4226740254915403e-12,
+    "t": 8.999920460043767e-13
+   },
+   "seconds": 196.1
+  },
+  {
+   "id": "t44m-u0036",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 8.282086529481767e-11,
+   "largest_change": 1.0097548184454872e-11,
+   "change": {
+    "u1": 7.65537799249143e-12,
+    "u2": 1.0097548184454872e-11,
+    "t": 2.6619488548551565e-12
+   },
+   "seconds": 190.7
+  },
+  {
+   "id": "t62m-u0009",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.3012002755134058e-12,
+   "largest_change": 4.352355450821773e-14,
+   "change": {
+    "u1": 1.9747463265963438e-14,
+    "u2": 2.17017256393377e-14,
+    "t": 4.352355450821773e-14
+   },
+   "seconds": 261.3
+  },
+  {
+   "id": "t72m-u0097",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 7.06605731931654e-13,
+   "largest_change": 1.2774404275743014e-14,
+   "change": {
+    "u1": 7.417165534629156e-15,
+    "u2": 6.660958503333945e-15,
+    "t": 1.2774404275743014e-14
+   },
+   "seconds": 364.4
+  },
+  {
+   "id": "t72m-u0106",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "first_residual": 1.5958505013354227e-12,
+   "largest_change": 5.907046417111032e-14,
+   "change": {
+    "u1": 1.4730046678406416e-15,
+    "u2": 7.443586798084466e-16,
+    "t": 5.907046417111032e-14
+   },
+   "seconds": 501.7
+  }
+ ],
+ "comparison": [
+  {
+   "id": "t35m-u0002",
+   "stored_largest_change": 1.8906922754725067e-14,
+   "largest_change": 1.8906922754725067e-14
+  },
+  {
+   "id": "t35m-u0004",
+   "stored_largest_change": 2.320537953081265e-14,
+   "largest_change": 2.320537953081265e-14
+  },
+  {
+   "id": "t35m-u0005",
+   "stored_largest_change": 3.779500687893583e-14,
+   "largest_change": 3.779500687893583e-14
+  },
+  {
+   "id": "t35m-u0006",
+   "stored_largest_change": 3.979525979602557e-14,
+   "largest_change": 3.979525979602557e-14
+  },
+  {
+   "id": "t35m-u0007",
+   "stored_largest_change": 3.587068343127641e-14,
+   "largest_change": 3.587068343127641e-14
+  },
+  {
+   "id": "t35m-u0008",
+   "stored_largest_change": 4.909678615351595e-14,
+   "largest_change": 4.909678615351595e-14
+  },
+  {
+   "id": "t35m-u0009",
+   "stored_largest_change": 2.9476865683636397e-14,
+   "largest_change": 2.9476865683636397e-14
+  },
+  {
+   "id": "t35m-u0010",
+   "stored_largest_change": 2.9865488066661676e-14,
+   "largest_change": 2.9865488066661676e-14
+  },
+  {
+   "id": "t35m-u0011",
+   "stored_largest_change": 5.787788178825352e-15,
+   "largest_change": 5.787788178825352e-15
+  },
+  {
+   "id": "t35m-u0012",
+   "stored_largest_change": 2.855797896946851e-14,
+   "largest_change": 2.855797896946851e-14
+  },
+  {
+   "id": "t35m-u0013",
+   "stored_largest_change": 2.4796610591199616e-14,
+   "largest_change": 2.4796610591199616e-14
+  },
+  {
+   "id": "t35m-u0014",
+   "stored_largest_change": 5.309333144571347e-15,
+   "largest_change": 5.309333144571347e-15
+  },
+  {
+   "id": "t35m-u0015",
+   "stored_largest_change": 4.2676644346635345e-14,
+   "largest_change": 4.2676644346635345e-14
+  },
+  {
+   "id": "t35m-u0016",
+   "stored_largest_change": 1.5539042853035483e-14,
+   "largest_change": 1.5539042853035483e-14
+  },
+  {
+   "id": "t35m-u0017",
+   "stored_largest_change": 1.1410847838639579e-14,
+   "largest_change": 1.1410847838639579e-14
+  },
+  {
+   "id": "t35m-u0018",
+   "stored_largest_change": 5.442689152243144e-15,
+   "largest_change": 5.442689152243144e-15
+  },
+  {
+   "id": "t35m-u0019",
+   "stored_largest_change": 3.1388834147992585e-14,
+   "largest_change": 3.1388834147992585e-14
+  },
+  {
+   "id": "t35m-u0020",
+   "stored_largest_change": 5.1733525238275576e-14,
+   "largest_change": 5.1733525238275576e-14
+  },
+  {
+   "id": "t35m-u0021",
+   "stored_largest_change": 7.066346089050275e-14,
+   "largest_change": 7.066346089050275e-14
+  },
+  {
+   "id": "t35m-u0022",
+   "stored_largest_change": 4.4380438181395106e-14,
+   "largest_change": 4.4380438181395106e-14
+  },
+  {
+   "id": "t35m-u0024",
+   "stored_largest_change": 3.223529494087365e-14,
+   "largest_change": 3.223529494087365e-14
+  },
+  {
+   "id": "t44m-u0033",
+   "stored_largest_change": 1.508358398048717e-14,
+   "largest_change": 1.508358398048717e-14
+  },
+  {
+   "id": "t44m-u0034",
+   "stored_largest_change": 1.1011744743149198e-12,
+   "largest_change": 1.1011744743149198e-12
+  },
+  {
+   "id": "t44m-u0035",
+   "stored_largest_change": 3.4226740254915403e-12,
+   "largest_change": 3.4226740254915403e-12
+  },
+  {
+   "id": "t62m-u0009",
+   "stored_largest_change": 4.352355450821773e-14,
+   "largest_change": 4.352355450821773e-14
+  },
+  {
+   "id": "t72m-u0097",
+   "stored_largest_change": 1.2774404275743014e-14,
+   "largest_change": 1.2774404275743014e-14
+  }
+ ]
+}

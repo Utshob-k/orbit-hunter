@@ -1,0 +1,105 @@
+{
+ "what": "the osculating two-body pericentre at the closest sample of the 50 digit flow (preset w1b of tools/witness.py) at six points of t35 -, t44 -, t62 -, t72 - (the smallest witnessed value of each, and the re-closed midpoints of the steps 10 and 11 of t35 - and 34 and 35 of t44 -), with the pair, the time of the sample, the smallest sampled distance, e - 1 and the stored parabolic estimate of the minimum (stored_dmin_parabolic) and its relative difference to the pericentre. These are the stored results of the command in \"command\" (60 to 180 s for a point).",
+ "command": [
+  "python tools/pericentres.py run DIR",
+  "python tools/pericentres.py summary DIR OUT.json"
+ ],
+ "points": [
+  {
+   "id": "t35m-u0010",
+   "pair": [
+    0,
+    1
+   ],
+   "t_at_min": 2.5711738709986305,
+   "sampled_min": 7.333372923667616e-10,
+   "osculating_pericentre": "7.31946320389e-10",
+   "osculating_float": 7.319463203887653e-10,
+   "eccentricity_minus_1": "1.9098136e-10",
+   "stored_dmin_parabolic": 7.319732642602164e-10,
+   "stored_sampled": 7.333372923667616e-10,
+   "rel_diff_to_stored_parabolic": 3.681126702954704e-05,
+   "seconds": 61
+  },
+  {
+   "id": "t44m-u0034",
+   "pair": [
+    1,
+    2
+   ],
+   "t_at_min": 4.951214898384769,
+   "sampled_min": 1.910410166073226e-09,
+   "osculating_pericentre": "1.90678161803e-9",
+   "osculating_float": 1.9067816180290628e-09,
+   "eccentricity_minus_1": "-6.5470366e-9",
+   "stored_dmin_parabolic": 1.906810572353631e-09,
+   "stored_sampled": 1.910410166073226e-09,
+   "rel_diff_to_stored_parabolic": 1.5184919077445016e-05,
+   "seconds": 104
+  },
+  {
+   "id": "t62m-u0009",
+   "pair": [
+    1,
+    2
+   ],
+   "t_at_min": 9.958834792309919,
+   "sampled_min": 8.614768328746467e-09,
+   "osculating_pericentre": "8.57300297053e-9",
+   "osculating_float": 8.573002970531128e-09,
+   "eccentricity_minus_1": "-3.3142986e-8",
+   "stored_dmin_parabolic": 8.573416666652204e-09,
+   "stored_sampled": 8.614768328746467e-09,
+   "rel_diff_to_stored_parabolic": 4.825568385993953e-05,
+   "seconds": 136
+  },
+  {
+   "id": "t72m-u0097",
+   "pair": [
+    1,
+    2
+   ],
+   "t_at_min": 2.033578798962455,
+   "sampled_min": 1.6112751881442768e-08,
+   "osculating_pericentre": "1.61123416641e-8",
+   "osculating_float": 1.6112341664080136e-08,
+   "eccentricity_minus_1": "-6.5446886e-8",
+   "stored_dmin_parabolic": 1.6112336531041596e-08,
+   "stored_sampled": 1.6112751881442768e-08,
+   "rel_diff_to_stored_parabolic": 3.185780594659035e-07,
+   "seconds": 188
+  },
+  {
+   "id": "t35m-m010-011",
+   "pair": [
+    0,
+    1
+   ],
+   "t_at_min": 2.5711361141455806,
+   "sampled_min": 6.564578711829098e-11,
+   "osculating_pericentre": "6.56218035664e-11",
+   "osculating_float": 6.562180356635828e-11,
+   "eccentricity_minus_1": "1.7130352e-11",
+   "stored_dmin_parabolic": 6.562206607822047e-11,
+   "stored_sampled": null,
+   "rel_diff_to_stored_parabolic": 4.000375605669356e-06,
+   "seconds": 57
+  },
+  {
+   "id": "t44m-m034-035",
+   "pair": [
+    1,
+    2
+   ],
+   "t_at_min": 4.244815361770425,
+   "sampled_min": 1.3447850605613719e-09,
+   "osculating_pericentre": "1.3435003328e-9",
+   "osculating_float": 1.3435003327984978e-09,
+   "eccentricity_minus_1": "-4.6130042e-9",
+   "stored_dmin_parabolic": 1.3435187015314117e-09,
+   "stored_sampled": null,
+   "rel_diff_to_stored_parabolic": 1.3672295023253681e-05,
+   "seconds": 93
+  }
+ ]
+}

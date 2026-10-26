@@ -1,0 +1,140 @@
+{
+ "what": "the 3 x 4 Jacobian d(r1, r2, r3)/d(u1, u2, t, lam) of the closing conditions of tools/reclose.py (unregularised flow, 50 digits) at stored points of t35 - (loop steps 165, 700, 1227, 2190) and t44 - (588, 1588), re-closed at their lam: the singular values sigma, sigma2/sigma1 and sigma3/sigma1, lam_lim (Aitken delta-squared on the stored lam of the accepted steps) and the distance |lam - lam_lim|. If the closing conditions lost rank, sigma3/sigma1 would fall in proportion to the distance. These are the stored results of the commands in \"command\" (the re-closing takes 75 to 170 s for a point); the re-closed values are in the raw files (stall/jacobian/res/).",
+ "command": [
+  "python tools/stall-jacobian-mp.py prepare stall/jacobian",
+  "python tools/stall-jacobian-mp.py reclose stall/jacobian",
+  "python tools/stall-jacobian-mp.py jacobian stall/jacobian OUT.json"
+ ],
+ "summary": [
+  "t35m-s165 (step 165): sigma 9.842e+01 3.631e+01 1.668e+00; sigma2/sigma1 3.689e-01, sigma3/sigma1 1.694e-02; lam 0.663861093887, lam_lim 0.663840755140 (earlier triple 0.663840739775), |lam - lam_lim| 2.034e-05",
+  "t35m-s700 (step 700): sigma 9.846e+01 3.629e+01 1.667e+00; sigma2/sigma1 3.686e-01, sigma3/sigma1 1.694e-02; lam 0.663843409983, lam_lim 0.663840755140 (earlier triple 0.663840739775), |lam - lam_lim| 2.655e-06",
+  "t35m-s1227 (step 1227): sigma 9.846e+01 3.628e+01 1.667e+00; sigma2/sigma1 3.685e-01, sigma3/sigma1 1.694e-02; lam 0.663841250642, lam_lim 0.663840755140 (earlier triple 0.663840739775), |lam - lam_lim| 4.955e-07",
+  "t35m-s2190 (step 2190): sigma 9.846e+01 3.628e+01 1.667e+00; sigma2/sigma1 3.685e-01, sigma3/sigma1 1.693e-02; lam 0.663840603063, lam_lim 0.663840755140 (earlier triple 0.663840739775), |lam - lam_lim| 1.521e-07",
+  "t44m-s588 (step 588): sigma 1.010e+02 4.112e+00 6.635e-01; sigma2/sigma1 4.070e-02, sigma3/sigma1 6.567e-03; lam 0.229069688699, lam_lim 0.229069350047 (earlier triple 0.229069349516), |lam - lam_lim| 3.387e-07",
+  "t44m-s1588 (step 1588): sigma 1.010e+02 4.112e+00 6.635e-01; sigma2/sigma1 4.070e-02, sigma3/sigma1 6.567e-03; lam 0.229069349752, lam_lim 0.229069350047 (earlier triple 0.229069349516), |lam - lam_lim| 2.953e-10",
+  "t35 - points used 4: log-log slope of sigma3/sigma1 against |lam - lam_lim| 0.000; sigma3/sigma1 first/last 1; distance first/last 134",
+  "t44 - sigma3/sigma1 at step 588 / at step 1588: 1"
+ ],
+ "rows": [
+  {
+   "id": "t35m-s165",
+   "trace": "t35m",
+   "step": 165,
+   "lam": 0.663861093886676,
+   "residual_reclose": 4.814386428038894e-25,
+   "updates": 1,
+   "sigma": [
+    98.41640615909398,
+    36.30844963373581,
+    1.6675925288814009
+   ],
+   "s2_over_s1": 0.36892679839418013,
+   "s3_over_s1": 0.016944253442720436,
+   "aitken_last": 0.6638407551396976,
+   "aitken_earlier": 0.6638407397746787,
+   "lam_lim": 0.6638407551396976,
+   "dist": 2.0338746978376676e-05,
+   "seconds": 75.5
+  },
+  {
+   "id": "t35m-s700",
+   "trace": "t35m",
+   "step": 700,
+   "lam": 0.6638434099828688,
+   "residual_reclose": 3.5143341952429234e-22,
+   "updates": 1,
+   "sigma": [
+    98.4556443140373,
+    36.286772114934955,
+    1.6674501013764962
+   ],
+   "s2_over_s1": 0.36855959216714373,
+   "s3_over_s1": 0.016936053925541775,
+   "aitken_last": 0.6638407551396976,
+   "aitken_earlier": 0.6638407397746787,
+   "lam_lim": 0.6638407551396976,
+   "dist": 2.6548431711903575e-06,
+   "seconds": 102.7
+  },
+  {
+   "id": "t35m-s1227",
+   "trace": "t35m",
+   "step": 1227,
+   "lam": 0.6638412506417275,
+   "residual_reclose": 5.766831009704326e-23,
+   "updates": 1,
+   "sigma": [
+    98.46043778408112,
+    36.28412539081939,
+    1.667432705613573
+   ],
+   "s2_over_s1": 0.36851476803697225,
+   "s3_over_s1": 0.01693505272920044,
+   "aitken_last": 0.6638407551396976,
+   "aitken_earlier": 0.6638407397746787,
+   "lam_lim": 0.6638407551396976,
+   "dist": 4.955020298513801e-07,
+   "seconds": 75.1
+  },
+  {
+   "id": "t35m-s2190",
+   "trace": "t35m",
+   "step": 2190,
+   "lam": 0.6638406030628946,
+   "residual_reclose": 2.3088943178698126e-23,
+   "updates": 1,
+   "sigma": [
+    98.46187542142681,
+    36.28333165906979,
+    1.667427488503288
+   ],
+   "s2_over_s1": 0.36850132605918223,
+   "s3_over_s1": 0.016934752475174064,
+   "aitken_last": 0.6638407551396976,
+   "aitken_earlier": 0.6638407397746787,
+   "lam_lim": 0.6638407551396976,
+   "dist": 1.5207680303941373e-07,
+   "seconds": 102.6
+  },
+  {
+   "id": "t44m-s588",
+   "trace": "t44m",
+   "step": 588,
+   "lam": 0.22906968869917751,
+   "residual_reclose": 1.754495865215677e-21,
+   "updates": 1,
+   "sigma": [
+    101.03377718610525,
+    4.112319705167948,
+    0.663517315990253
+   ],
+   "s2_over_s1": 0.04070242467123657,
+   "s3_over_s1": 0.006567282095848474,
+   "aitken_last": 0.22906935004724033,
+   "aitken_earlier": 0.22906934951613975,
+   "lam_lim": 0.22906935004724033,
+   "dist": 3.3865193718729536e-07,
+   "seconds": 167.7
+  },
+  {
+   "id": "t44m-s1588",
+   "trace": "t44m",
+   "step": 1588,
+   "lam": 0.22906934975198912,
+   "residual_reclose": 1.322843581194661e-21,
+   "updates": 1,
+   "sigma": [
+    101.03593158832031,
+    4.112333483965069,
+    0.6635118267264994
+   ],
+   "s2_over_s1": 0.04070169314339704,
+   "s3_over_s1": 0.006567087731026582,
+   "aitken_last": 0.22906935004724033,
+   "aitken_earlier": 0.22906934951613975,
+   "lam_lim": 0.22906935004724033,
+   "dist": 2.952512123677309e-10,
+   "seconds": 168.4
+  }
+ ]
+}
