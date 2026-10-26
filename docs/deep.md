@@ -4,12 +4,12 @@ The close-approach route of the perpendicular start is called PeriCont (version 
 
 ## What it needs
 
-Node v24.15.0 (the only version this route was run with; Node 18 or newer for the DP45 code), Python with `rebound` and `mpmath` (the stored runs used 3.14.6, REBOUND 5.2.2, mpmath 1.4.1, numpy 2.5.3):
+Node v24.15.0 (the only version this route was run with; Node 18 or newer for the DP45 code), Python with `rebound` and `mpmath` (the stored runs used 3.14.6, REBOUND 5.2.2, mpmath 1.4.1, numpy 2.5.3). Use Python 3.14 (3.15 does not build rebound 5.2.2), in a venv, and set `ORBIT_PYTHON` to its python for the node commands (activate the venv for the python tools).
 
 ```
 pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
-npm test                 # the tests of the default route (Dormand-Prince), 10 to 20 seconds
-npm run test:ias         # the tests of this route, 4 to 6 minutes
+npm test                 # the tests of the default route (Dormand-Prince), about 20 seconds
+npm run test:ias         # the tests of this route, 4 to 8 minutes
 ```
 
 The route is off unless asked for. `settings.integrator` in `src/settings.js` is `'dp45'` (default) or `'ias'`; the environment variable `ORBIT_INTEGRATOR=ias` sets it from the shell. `ORBIT_PYTHON` names the python executable (default `python` on Windows, `python3` elsewhere). `tools/family-follow-ias.mjs` sets it itself.
@@ -77,7 +77,7 @@ Times are from the machine of the stored runs (Windows 11, one core per job).
 |---|---|---|
 | `src/ias/reg.js` against the exact Kepler flow: 80 rows (A1 48 ellipses: 46 within the limit, 2 not graded because the sensitivity is not resolved; A2 24 near-radial orbits, periapsis distance 1e-3 to 1e-8; A3 8 of them with the pair away from the origin), all within the limit `max(floor, 10 * 1.1e-16 * S)`; on the machine of the stored run the end states equal the stored ones bit for bit | `python tools/gate-a-rows.py rows.json` then `node tools/gate-a.mjs rows.json --stored data/deep/gate-a-all.json` | 3 s and 1 s |
 | the same for seven of the rows | `node test/gate-a.test.js` | a few seconds |
-| gate A for the periapsis distances 1e-10 and 1e-11 (8 rows of type A2: one and five periods, from the apocentre and from 0.3 radians before the pericentre): 7 within the limit, 1 HARD FAIL (q = 1e-11, apocentre, five periods: error 1.8e-11, limit 5e-13) | `node tools/gate-a.mjs data/deep/extra/gate-a-deep-q.json` (the rows are in the file; `tools/kepler-ref.py selfcheck` passes for both q) | a second |
+| gate A (the test of `reg.js` against the exact Kepler flow) for the periapsis distances 1e-10 and 1e-11 (8 rows of type A2: one and five periods, from the apocentre and from 0.3 radians before the pericentre): 7 within the limit, 1 HARD FAIL (q = 1e-11, apocentre, five periods: error 1.8e-11, limit 5e-13) | `node tools/gate-a.mjs data/deep/extra/gate-a-deep-q.json` (the rows are in the file; `tools/kepler-ref.py selfcheck` passes for both q) | a second |
 | `reg.js` for two unequal masses (1 and 0.1, e = 0.9, one period) against the exact Kepler flow with mu = m1 + m2: error 5.2e-16, limit 2e-14; energy and angular momentum kept | `node test/reg-unequal.test.js` (the row: `python tools/gate-a-unequal.py OUT.json`) | a second |
 | the 12 x 12 matrix of `reg.js` on six encounter pieces of stored points (closest approach 4e-4 down to 7e-10): at most 1.1e-9 of max\|M\| from central differences with Richardson extrapolation, symplectic defect at most 2.3e-12 of max\|M\|^2 | `node test/reg-matrix.test.js` | a second |
 | the multiple precision flow of the witnesses against the exact Kepler flow, one period, periapsis distance 1e-7 to 1e-10: error 5.9e-24 (1e-7), 4.5e-22 (1e-8), 5.5e-21 (1e-10), limit 1e-17, no collapse of the step; the 40 digit flow of the preset w1 at q = 1e-6 and 1e-7: error 8.7e-21 and 4.7e-19, same limit | `python tools/witness-acceptance.py` (q = 1e-8 and 1e-10; `--q all` for the seven stored ones); `python tools/kepler-check.py 1e-7 OUT.json --digits 40 --tol 26 --floor 1e-14` (also 1e-6; stored in `data/deep/extra/w1-acceptance.json`) | 15 s per q; 10 s for each w1 row |
@@ -95,7 +95,7 @@ Times are from the machine of the stored runs (Windows 11, one core per job).
 | the table of 19 traces (15 run, 4 not run because guard G2 trips at the start orbit) with start values, direction, stop reason, number of points, strict depth and run time | `data/deep/traces-table.csv` and `.json`; a trace again with the command above and the start values of the json | 5 s to 2 h per trace |
 | a short trace of t35 -, its witnesses and the summary | `node tools/deep-sample.mjs` | see below |
 
-The trace files of `data/deep/traces/` and the witness files of `data/deep/witnesses/` hold the numbers behind the reading of the four traces; `data/deep/README.md` lists every file. A rerun of a trace on another machine is not expected to give the same points bit for bit (the libm and the IAS15 build differ), and which accepted steps are recorded (T* and L* computed) can differ; `test/replay.test.js` compares the accepted steps of the continuation (lam, u1, u2, t) with the stored trace to 1e-9 relative. On Linux (GitHub Actions run 40185378474: Ubuntu 24.04.5, Node v24.15.0, Python 3.14.8) all tests pass and the replayed accepted steps agree with the stored trace to 1.1e-11 relative (31 steps), with the recording different at 4 of them.
+The trace files of `data/deep/traces/` and the witness files of `data/deep/witnesses/` hold the numbers behind the reading of the four traces; `data/deep/README.md` lists every file. A rerun of a trace on another machine is not expected to give the same points bit for bit (the libm and the IAS15 build differ), and which accepted steps are recorded (T* and L* computed) can differ; `test/replay.test.js` compares the accepted steps of the continuation (lam, u1, u2, t) with the stored trace to 1e-9 relative. On Linux (GitHub Actions run 40311634590 of commit ef87be2: Ubuntu 24.04.5, Node v24.15.0, Python 3.14.8) all tests pass and the replayed accepted steps agree with the stored trace to 1.1e-11 relative (31 steps), with the recording different at 4 of them.
 
 ## Sample run
 
@@ -103,7 +103,7 @@ The trace files of `data/deep/traces/` and the witness files of `data/deep/witne
 node tools/deep-sample.mjs
 ```
 
-follows the family of t35 - from its stored start for 4 recorded points (25 accepted steps, 21 of them not recorded), makes the witnesses of all 25 (w1, and w1b for the points below 1e-7) and prints the summary. It compares the summary with `data/deep/sample/expected-summary.txt` and prints PASS or FAIL. The text it compares depends on the machine (which steps are recorded, lam to 8 decimals, the w1 minima to 6 digits, the guard counts and the number of replacements by the cross-check), so on another platform a FAIL is expected where these differ in the last digits or in which steps are recorded; compare the two summaries by their numbers then (the strict depth, the 25 accepted steps, the minima to four digits). It took 331 seconds on the machine of the stored run (trace 109 s, w1 witnesses 146 s, w1b witnesses 76 s); a first run with other jobs on the machine took 621 seconds. The whole output of the stored run is `data/deep/sample/output.txt`.
+follows the family of t35 - from its stored start for 4 recorded points (25 accepted steps, 21 of them not recorded), makes the witnesses of all 25 (w1, and w1b for the points below 1e-7) and prints the summary. It compares the summary with `data/deep/sample/expected-summary.txt` and prints PASS or FAIL. The text it compares depends on the machine (which steps are recorded, lam to 8 decimals, the w1 minima to 6 digits, the guard counts and the number of replacements by the cross-check), so on another platform a FAIL is expected where these differ in the last digits or in which steps are recorded; compare the two summaries by their numbers then (the strict depth, the 25 accepted steps, the minima to four digits). It took 331 seconds on the machine of the stored run (trace 109 s, w1 witnesses 146 s, w1b witnesses 76 s); a first run with other jobs on the machine took 621 seconds; expect 6 to 12 minutes. The whole output of the stored run is `data/deep/sample/output.txt`.
 
 ## Other files
 

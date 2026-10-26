@@ -1,5 +1,8 @@
 # Orbit Hunter
 
+Version 0.3.0 adds PeriCont (the ias route): continuation of families of periodic orbits through close approaches of two bodies, with multiple precision witnesses.
+See [The ias route](#the-ias-route-pericont-version-030).
+
 A search for periodic orbits of the planar three-body problem with equal masses and non-zero angular momentum. A GPU does the rough search in the
 browser (WebGPU). Double precision code on the CPU closes and checks every candidate.
 
@@ -98,7 +101,7 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 Node 18 or newer, nothing to install for the JavaScript code (the ias route below was run only with v24.15.0). Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
 
 ```
-npm test                              # the tests of the default route (Dormand-Prince), 10 to 20 seconds
+npm test                              # the tests of the default route (Dormand-Prince), about 20 seconds
 python -m http.server                 # then open http://localhost:8000 (needs WebGPU)
 node tools/nu-map.mjs                 # the 41 places where satellites can leave the R family
 node tools/branch-summary.mjs         # how every satellite continuation ended
@@ -116,12 +119,12 @@ Which integrator gives which number: the corrector (the multiple shooting) takes
 
 Two limits to read first: a stored point can be off the orbit by more than the corrector tolerance (piece 18 of an earlier point of t35 - was wrong by 1.18e-7 while the residual of the corrector was 6.7e-14), and 15 stored points of t28 - and t81 + fail the witness closure; both are described in the section "The ias route" of [docs/methods-and-limits.md](docs/methods-and-limits.md).
 
-The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`.
+The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`. Use Python 3.14 (3.15 does not build rebound 5.2.2), in a venv, and set `ORBIT_PYTHON` to its python for the node commands (activate the venv for the python tools).
 
 ```
 pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
-npm run test:ias                      # the tests of the ias route, 4 to 6 minutes
-node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, about 6 minutes (its PASS or FAIL compares text that depends on the machine, see docs/deep.md)
+npm run test:ias                      # the tests of the ias route, 4 to 8 minutes
+node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 6 to 12 minutes (its PASS or FAIL compares text that depends on the machine, see docs/deep.md)
 ```
 
 The stored traces and witnesses of the families t35 -, t44 -, t62 - and t72 - and the table of the 19 traces that were started are in `data/deep/`. What the route does not cover is in [docs/methods-and-limits.md](docs/methods-and-limits.md) (section "The ias route"), the commands and run times in [docs/deep.md](docs/deep.md).
