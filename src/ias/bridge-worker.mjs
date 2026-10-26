@@ -1,5 +1,5 @@
 // worker thread of the IAS15 bridge. Owns the Python child process (ias-bridge.py), reads its stdout line by line and answers the main thread through shared memory.
-// ctrl: [0] flag (0 waiting, 2 done, 3 error), [1] number of values, [2] IAS15 steps, [3] id of the answer, [4] error code (0 none, 1 step floor, 2 the child died or could not be started; ias-bridge.py never sends code 1: an exception ends the child process, code 2), [5] length of the error text.
+// ctrl: [0] flag (0 waiting, 2 done, 3 error), [1] number of values, [2] IAS15 steps, [3] id of the answer, [4] error code (0 none, 2 the child died, could not be started or answered with an error), [5] length of the error text.
 // data: for a pieces request the 12 m end states, then the m encounter flags, then 11 analysis numbers per piece; for an error answer the characters (char codes) of the error text from data[0] on.
 // Messages from the main thread: {id, starts, tau} or {kill: true} (kill the child and start a new one, after a timeout or an error).
 // When the child cannot be started (spawn error) or exits, at any time, the pending request is answered at once with code 2 and the reason; so is every later request until a new child has been started (the main thread asks for it after an error).
@@ -29,7 +29,7 @@ function start() {
       if (!line.trim()) continue;
       let r; try { r = JSON.parse(line); } catch (e) { continue; }
       if (r.id !== current) continue;   // stale answer of an earlier request
-      if (r.error) { fail(String(r.error), r.error.includes('step floor') ? 1 : 2); continue; }
+      if (r.error) { fail(String(r.error)); continue; }
       let n = 0;
       for (const e of r.ends) for (const v of e) data[n++] = v;
       for (const f of r.enc) data[n++] = f;

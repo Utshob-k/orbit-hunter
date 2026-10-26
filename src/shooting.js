@@ -452,4 +452,4 @@ function arcFinish(Y, m) {
 }
 
 // pieces used by src/satellites.js
-export { system, correct, tangentAt, packZ, solOf, toY, unit, dot, residual };
+export { system, correct, tangentAt, packZ, solOf, toY, unit, dot };

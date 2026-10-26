@@ -52,7 +52,6 @@ let stop = null;
 let traceStop = null, r;
 try { r = huntArclength(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, dir, force: true, maxMs, all: true, hMax: 0.2, maxSteps: 6000,
   trace: (step, lam, th, h, it, Y) => {
-    if (!Y) { unrec.push({ step, reason: 'no Y' }); return false; }
     const n = Y.length - 1, u1 = Y[0], u2 = Y[1], t = Y[2];
     const key = [u1, u2, t, lam];
     const kl = keys.length ? keys[keys.length - 1] : null; const cum = kl ? kl.cum + Math.hypot(key[0] - kl.k[0], key[1] - kl.k[1], key[2] - kl.k[2], key[3] - kl.k[3]) : 0;   // path length along the accepted points

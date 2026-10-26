@@ -52,15 +52,6 @@ for lab, row in [('t35m', 35), ('t44m', 44), ('t62m', 62), ('t72m', 72)]:
     fams[lab] = dict(poly=allp, start=start, row=row)
 
 
-def near_segment(P, Q, A, B):
-    """normalised coordinates: the row is at (1, 1); P, Q = segment ends already divided by the row's (T, L); returns d, s"""
-    P = np.asarray(P); Q = np.asarray(Q); O = np.array([1.0, 1.0])
-    D = Q - P; dd = D @ D
-    s = 0.0 if dd == 0 else float(np.clip(((O - P) @ D) / dd, 0, 1))
-    X = P + s * D
-    return float(np.hypot(*(X - O))), s
-
-
 def dist_int(x):
     return abs(x - round(x))
 

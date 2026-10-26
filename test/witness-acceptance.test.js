@@ -5,13 +5,14 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { settings } from '../src/settings.js';
 
 let fail = 0;
 const t0 = Date.now();
 const check = (name, ok, extra = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name} ${extra}`); if (!ok) fail++; };
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const python = process.env.ORBIT_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
+const python = settings.ias.python;
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'orbit-hunter-'));
 const result = path.join(dir, 'result.json');
 const run = spawnSync(python, ['-B', path.join(root, 'tools', 'witness-acceptance.py'), '--q', '1e-8', '1e-10', '--dir', dir, '--out', result], { encoding: 'utf8' });

@@ -52,8 +52,6 @@ function request(msg) {
   const r = Atomics.wait(ctrl, 0, 0, settings.ias.timeoutMs);
   if (r === 'timed-out') { stats.timeouts++; stats.lastReason = 'no answer within ' + settings.ias.timeoutMs / 60000 + ' minutes'; w.postMessage({ kill: true }); throw new BridgeError('bridge timeout', 'timeout'); }
   if (Atomics.load(ctrl, 0) !== 2 || ctrl[3] !== id) {
-    // code 1 (step floor) is not sent by ias-bridge.py: an exception there ends the process and the worker reports code 2
-    if (ctrl[4] === 1 && ctrl[3] === id) { stats.stepFloor++; throw new BridgeError('step floor', 'step floor'); }
     // the worker leaves the reason (the python process could not be started, exited, or answered with an error) as char codes in the data buffer
     const why = ctrl[5] > 0 ? String.fromCharCode(...data.subarray(0, ctrl[5])) : null;
     stats.errors++; stats.lastReason = why || 'bridge error'; w.postMessage({ kill: true }); throw new BridgeError('bridge error' + (why ? ': ' + why : ''), 'bridge error');

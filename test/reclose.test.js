@@ -7,12 +7,13 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { settings } from '../src/settings.js';
 
 let fail = 0;
 const check = (name, ok, extra = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name} ${extra}`); if (!ok) fail++; };
 const t0 = Date.now();
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const python = process.env.ORBIT_PYTHON || (process.platform === 'win32' ? 'python' : 'python3');
+const python = settings.ias.python;
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'orbit-hunter-'));
 const data = JSON.parse(fs.readFileSync(path.join(root, 'data', 'deep', 'reclose-t35m-gap.json'), 'utf8'));
 const queue = [];

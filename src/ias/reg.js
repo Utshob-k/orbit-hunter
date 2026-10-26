@@ -8,21 +8,21 @@
 //   T = sum_k (1/2)(1/m_k + 1/m_{k+1}) W_k^2 - sum_{k>=1} W_{k-1}.W_k / m_k;  U = sum_{i<j} m_i m_j / |X_i + ... + X_{j-1}| (chain positions).
 // State layout of the interface (as the bridge): positions x0,y0,x1,y1,...  then velocities vx0,vy0,vx1,vy1,...  (length 4N).
 'use strict';
-export const DEFAULTS = { comp: true, TOL: 1e-15, nseq: [2, 4, 6, 8], kmin: 3, safety: 0.9, gmax: 2, gmin: 0.5, d6: 'D6p', ds0f: 0.05, endUlp: 4, stagUlp: 64, maxEnd: 60, maxMacro: 3000000 };
+const DEFAULTS = { comp: true, TOL: 1e-15, nseq: [2, 4, 6, 8], kmin: 3, safety: 0.9, gmax: 2, gmin: 0.5, d6: 'D6p', ds0f: 0.05, endUlp: 4, stagUlp: 64, maxEnd: 60, maxMacro: 3000000 };
 // ---------------------------------------------------------------- double-double (error-free transformations; no fused operations)
 const SP = 134217729;
 const twoSum = (a, b) => { const s = a + b, bb = s - a; return [s, (a - (s - bb)) + (b - bb)]; };
 const quickTwoSum = (a, b) => { const s = a + b; return [s, b - (s - a)]; };
 const split = (a) => { const t = SP * a, hi = t - (t - a); return [hi, a - hi]; };
 const twoProd = (a, b) => { const p = a * b, [ah, al] = split(a), [bh, bl] = split(b); return [p, ((ah * bh - p) + ah * bl + al * bh) + al * bl]; };
-export const ddAdd = (a, b) => { let [s, e] = twoSum(a[0], b[0]); const [t, f] = twoSum(a[1], b[1]); e += t; [s, e] = quickTwoSum(s, e); e += f; return quickTwoSum(s, e); };
-export const ddNeg = (a) => [-a[0], -a[1]];
-export const ddMul = (a, b) => { let [p, e] = twoProd(a[0], b[0]); e += a[0] * b[1] + a[1] * b[0]; return quickTwoSum(p, e); };
-export const ddMulD = (a, d) => { let [p, e] = twoProd(a[0], d); e += a[1] * d; return quickTwoSum(p, e); };
-export const ddDiv = (a, b) => { const q1 = a[0] / b[0]; let r = ddAdd(a, ddNeg(ddMulD(b, q1))); const q2 = r[0] / b[0]; r = ddAdd(r, ddNeg(ddMulD(b, q2))); const q3 = r[0] / b[0]; return ddAdd(quickTwoSum(q1, q2), [q3, 0]); };
-export const ddSqrt = (a) => { if (!(a[0] > 0)) return [0, 0]; const s = Math.sqrt(a[0]); const r = ddAdd(a, ddNeg(twoProd(s, s))); return quickTwoSum(s, r[0] / (2 * s)); };
+const ddAdd = (a, b) => { let [s, e] = twoSum(a[0], b[0]); const [t, f] = twoSum(a[1], b[1]); e += t; [s, e] = quickTwoSum(s, e); e += f; return quickTwoSum(s, e); };
+const ddNeg = (a) => [-a[0], -a[1]];
+const ddMul = (a, b) => { let [p, e] = twoProd(a[0], b[0]); e += a[0] * b[1] + a[1] * b[0]; return quickTwoSum(p, e); };
+const ddMulD = (a, d) => { let [p, e] = twoProd(a[0], d); e += a[1] * d; return quickTwoSum(p, e); };
+const ddDiv = (a, b) => { const q1 = a[0] / b[0]; let r = ddAdd(a, ddNeg(ddMulD(b, q1))); const q2 = r[0] / b[0]; r = ddAdd(r, ddNeg(ddMulD(b, q2))); const q3 = r[0] / b[0]; return ddAdd(quickTwoSum(q1, q2), [q3, 0]); };
+const ddSqrt = (a) => { if (!(a[0] > 0)) return [0, 0]; const s = Math.sqrt(a[0]); const r = ddAdd(a, ddNeg(twoProd(s, s))); return quickTwoSum(s, r[0] / (2 * s)); };
 const _f = new Float64Array(1), _u = new BigUint64Array(_f.buffer);
-export function ulp(x) { x = Math.abs(x); if (x === 0) return 5e-324; _f[0] = x; _u[0] += 1n; return _f[0] - x; }
+function ulp(x) { x = Math.abs(x); if (x === 0) return 5e-324; _f[0] = x; _u[0] += 1n; return _f[0] - x; }
 // ---------------------------------------------------------------- chain system (depends on the chain order only)
 function makeSys(masses, perm) {
   const N = masses.length, nQ = 2 * (N - 1), mc = perm.map((i) => masses[i]), A = new Float64Array(nQ * nQ);
@@ -48,7 +48,7 @@ function potential(sys, Q, wantH) {
 }
 // ---------------------------------------------------------------- linear maps between the Cartesian state and chain variables
 // state s (4N) -> chain (Q, W) for the chain order perm; the centre-of-mass velocity is removed from the momenta (Vcm given or computed in double)
-export function toChain(masses, perm, s, Vcm) {
+function toChain(masses, perm, s, Vcm) {
   const N = masses.length, M = masses.reduce((a, b) => a + b, 0), Q = new Float64Array(2 * (N - 1)), W = new Float64Array(2 * (N - 1));
   if (!Vcm) { Vcm = [0, 0]; for (let i = 0; i < N; i++) { Vcm[0] += masses[i] * s[2 * N + 2 * i]; Vcm[1] += masses[i] * s[2 * N + 2 * i + 1]; } Vcm[0] /= M; Vcm[1] /= M; }
   for (let k = 0; k < N - 1; k++) { const a = perm[k], b = perm[k + 1]; Q[2 * k] = s[2 * b] - s[2 * a]; Q[2 * k + 1] = s[2 * b + 1] - s[2 * a + 1]; }
@@ -57,7 +57,7 @@ export function toChain(masses, perm, s, Vcm) {
   return { Q, W };
 }
 // chain (Q, W) + centre of mass (position, velocity) -> Cartesian state (4N)
-export function fromChain(masses, perm, Q, W, Rcm, Vcm) {
+function fromChain(masses, perm, Q, W, Rcm, Vcm) {
   const N = masses.length, M = masses.reduce((a, b) => a + b, 0), mc = perm.map((i) => masses[i]), out = new Float64Array(4 * N);
   let ox = 0, oy = 0;
   for (let k = 0; k < N - 1; k++) { let S = 0; for (let i = k + 1; i < N; i++) S += mc[i]; ox += Q[2 * k] * S; oy += Q[2 * k + 1] * S; }
@@ -71,7 +71,7 @@ export function fromChain(masses, perm, Q, W, Rcm, Vcm) {
   return out;
 }
 // the linear change of chain (Q, W) from the order perm to the order newperm
-export function reformChain(masses, perm, newperm, Q, W) {
+function reformChain(masses, perm, newperm, Q, W) {
   const N = masses.length, d = new Float64Array(2 * N), p = new Float64Array(2 * N), Qn = new Float64Array(2 * (N - 1)), Wn = new Float64Array(2 * (N - 1));
   for (let i = 0; i < N; i++) {
     const a = perm[i]; if (i > 0) { d[2 * a] = d[2 * perm[i - 1]] + Q[2 * (i - 1)]; d[2 * a + 1] = d[2 * perm[i - 1] + 1] + Q[2 * (i - 1) + 1]; }
@@ -182,10 +182,10 @@ export function flowChain(masses, s, tau, opts = {}) {
   const ch = toChain(masses, perm, s, Vcm); let Q = ch.Q, P = ch.W, Ql = new Float64Array(nQ), Pl = new Float64Array(nQ);   // hi parts and, with comp, the low parts of the state (double-double between the macro-steps)
   // Pt = U0 - T0 in double-double
   let Pt;
-  { const dN = (x, y) => { const sx = ddMul([x, 0], [x, 0]), sy = ddMul([y, 0], [y, 0]); return ddSqrt(ddAdd(sx, sy)); };
+  {
     let Ud = [0, 0]; for (const pr of sys.pairs) { let dx = [0, 0], dy = [0, 0]; for (let k = pr.k0; k < pr.k1; k++) { dx = ddAdd(dx, [Q[2 * k], 0]); dy = ddAdd(dy, [Q[2 * k + 1], 0]); } const R = ddSqrt(ddAdd(ddMul(dx, dx), ddMul(dy, dy))); Ud = ddAdd(Ud, ddDiv([pr.mm, 0], R)); }
     let Td = [0, 0]; for (let i = 0; i < nQ; i++) for (let j = 0; j < nQ; j++) { const a = sys.A[i * nQ + j]; if (a !== 0) Td = ddAdd(Td, ddMulD(ddMul([P[i], 0], [P[j], 0]), 0.5 * a)); }
-    const Pd = ddAdd(Ud, ddNeg(Td)); Pt = Pd[0]; PtLo = o.comp ? Pd[1] : 0; sys.PtLo = PtLo; void dN; }
+    const Pd = ddAdd(Ud, ddNeg(Td)); Pt = Pd[0]; PtLo = o.comp ? Pd[1] : 0; sys.PtLo = PtLo; }
   // tangent columns: unit perturbations of the 4N input components
   let tg = null, dPt = null;
   if (wantTg) {
@@ -288,56 +288,3 @@ export function flowChain(masses, s, tau, opts = {}) {
 }
 // the interface of the bridge for the three equal masses: state (12) -> { end, M (144), ... }
 export function flowEnc(state12, tau, opts = {}) { return flowChain([1, 1, 1], state12, tau, opts); }
-// ---------------------------------------------------------------- operations for the tests of the derivative; values and tangents in chain variables
-// spec: { masses, perm, Q, P, Pt, op: 'drift'|'kick'|'macro', hh, H, nseq }  tangent columns: unit perturbations of Q (nQ), of P (nQ) and of Pt (one column)
-export function opTest(spec) {
-  const sys = makeSys(spec.masses, spec.perm), nQ = sys.nQ, nY = 2 * nQ + 1, Q = Float64Array.from(spec.Q), P = Float64Array.from(spec.P), Pt = spec.Pt;
-  const tg = [], dPt = new Float64Array(2 * nQ + 1);
-  for (let c = 0; c < 2 * nQ; c++) { const g = new Float64Array(nY); if (c < nQ) g[c] = 1; else g[nQ + 1 + (c - nQ)] = 1; tg.push(g); }
-  tg.push(new Float64Array(nY)); dPt[2 * nQ] = 1;
-  const stats = { subSteps: 0 };
-  if (spec.op === 'macro') {
-    const ns = spec.nseq, T = [];
-    for (let j = 0; j < ns.length; j++) {
-      const r = leapfrog(sys, Q, P, Pt, ns[j], spec.H, tg, dPt, true, false), row = [r];
-      for (let kk = 1; kk <= j; kk++) row.push(extrap(row[kk - 1], T[j - 1][kk - 1], (ns[j] / ns[j - kk]) ** 2 - 1));
-      T.push(row);
-    }
-    const last = T[ns.length - 1][ns.length - 1]; return { y: Array.from(last.y, (v, i) => (i < nQ ? Q[i] + v : i === nQ ? v : P[i - nQ - 1] + v)), tg: last.tg.map((v) => Array.from(v)) };
-  }
-  // a single operation: a leapfrog with n = 1 is drift(h/2) kick(h) drift(h/2); the separate drift and kick are provided by n-independent helpers below
-  const out = singleOp(sys, Q, P, Pt, spec.op, spec.hh, tg, dPt);
-  return { y: Array.from(out.y), tg: out.tg.map((v) => Array.from(v)) };
-}
-function singleOp(sys, Q0, P0, Pt, op, hh, tg0, dPt) {
-  // implemented by the same code as inside leapfrog (a copy of the two closures; kept identical): for opTest; no test or tool of the repository calls opTest or chainRoundTrip
-  const nQ = sys.nQ, Q = Float64Array.from(Q0), P = Float64Array.from(P0), tg = tg0.map((a) => Float64Array.from(a)), AP = new Float64Array(nQ), AdP = new Float64Array(nQ); let tt = 0;
-  if (op === 'drift') {
-    const T = Tval(sys, P, AP), D = T + Pt, iD = 1 / D;
-    for (let c = 0; c < tg.length; c++) {
-      const g = tg[c]; let dot = 0;
-      for (let i = 0; i < nQ; i++) { let s = 0; for (let j = 0; j < nQ; j++) s += sys.A[i * nQ + j] * g[nQ + 1 + j]; AdP[i] = s; dot += AP[i] * g[nQ + 1 + i]; }
-      const dD = dot + dPt[c], q = dD * iD * iD; for (let i = 0; i < nQ; i++) g[i] += hh * (AdP[i] * iD - AP[i] * q); g[nQ] += hh * (-q);
-    }
-    for (let i = 0; i < nQ; i++) Q[i] += hh * AP[i] * iD; tt += hh * iD;
-  } else {
-    const { U, G, H: Hm } = potential(sys, Q, true), iU = 1 / U;
-    for (let c = 0; c < tg.length; c++) {
-      const g = tg[c]; let dotG = 0; for (let j = 0; j < nQ; j++) dotG += G[j] * g[j];
-      for (let i = 0; i < nQ; i++) { let s = 0; for (let j = 0; j < nQ; j++) s += Hm[i * nQ + j] * g[j]; g[nQ + 1 + i] += hh * (s * iU - G[i] * dotG * iU * iU); }
-    }
-    for (let i = 0; i < nQ; i++) P[i] += hh * G[i] * iU;
-  }
-  const y = new Float64Array(2 * nQ + 1); y.set(Q, 0); y[nQ] = tt; y.set(P, nQ + 1); return { y, tg };
-}
-// round trips of the chain maps: Cartesian -> chain -> Cartesian, and chain -> re-formed chain -> back; returns the relative errors
-export function chainRoundTrip(masses, s, perm1, perm2) {
-  const N = masses.length, M = masses.reduce((a, b) => a + b, 0), Vcm = [0, 0], Rcm = [0, 0];
-  for (let i = 0; i < N; i++) for (let c = 0; c < 2; c++) { Vcm[c] += masses[i] * s[2 * N + 2 * i + c] / M; Rcm[c] += masses[i] * s[2 * i + c] / M; }
-  const a = toChain(masses, perm1, s, Vcm), back = fromChain(masses, perm1, a.Q, a.W, Rcm, Vcm);
-  let e1 = 0; for (let i = 0; i < 4 * N; i++) e1 = Math.max(e1, Math.abs(back[i] - s[i]) / Math.max(1, Math.abs(s[i])));
-  const r = reformChain(masses, perm1, perm2, a.Q, a.W), r2 = reformChain(masses, perm2, perm1, r.Q, r.W); let e2 = 0;
-  for (let i = 0; i < a.Q.length; i++) e2 = Math.max(e2, Math.abs(r2.Q[i] - a.Q[i]) / Math.max(1, Math.abs(a.Q[i])), Math.abs(r2.W[i] - a.W[i]) / Math.max(1, Math.abs(a.W[i])));
-  const b2 = fromChain(masses, perm2, r.Q, r.W, Rcm, Vcm); let e3 = 0; for (let i = 0; i < 4 * N; i++) e3 = Math.max(e3, Math.abs(b2[i] - s[i]) / Math.max(1, Math.abs(s[i])));
-  return { cart_chain_cart: e1, reform_back: e2, cart_via_reformed: e3 };
-}
