@@ -1,6 +1,7 @@
 // follows the family of relative periodic orbits through one orbit of the perpendicular start in ONE direction with the ias route (REBOUND IAS15 through src/ias/bridge.js,
 // encounter pieces by src/ias/reg.js, the guards of src/ias/guards.py), recording every accepted step (start values, T*, L*, theta, closest approach, closure). An accepted step
-// whose T*, L* cannot be computed is not a point of the trace but is listed in `unrec`. Stops at a closed loop, L* below 1e-3, a closest approach above --max-dist, a guard,
+// for which perpInfo returns nothing (its Dormand-Prince integration gives up, so there is no closest approach and no closure) is not a point of the trace but is listed in `unrec`; T* and L* of every
+// accepted step come from the start values (perpEL), so `unrec` has them too. Stops at a closed loop, L* below 1e-3, a closest approach above --max-dist, a guard,
 // a failure of reg.js, a step collapse, a lost family, the step limit or the time limit; the reason is in the file. Writes OUT.json, OUT.json.partial.json every 5 points and
 // OUT.json.diag.jsonl (one line per attempt of the corrector, src/ias/recorder.js).
 // node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N]
@@ -13,7 +14,7 @@ import { settings } from '../src/settings.js';
 import { startRecorder } from '../src/ias/recorder.js';
 import { stats as iasStats, gstats } from '../src/ias/bridge.js';
 import { huntArclength, closePerpMS } from '../src/shooting.js';
-import { perpInfo, perpInitial } from '../src/perp.js';
+import { perpInfo, perpInitial, perpEL } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';
 import { relativeStability } from '../src/relative.js';
 
@@ -60,9 +61,10 @@ try { r = huntArclength(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shi
       if (Math.hypot(key[0] - q[0], key[1] - q[1], key[2] - q[2], key[3] - q[3]) < 1e-4 && cum - keys[i].cum >= 0.01) { stop = 'closed loop'; out.loop = { matchedIndex: i, path: cum - keys[i].cum, distance: Math.hypot(key[0] - q[0], key[1] - q[1], key[2] - q[2], key[3] - q[3]) }; return true; }   // a match needs a path of 0.01 or more between the points
     }
     keys.push({ k: key, cum });
+    const el = perpEL(u1, u2, Y[n], t);
     const info = perpInfo(u1, u2, Y[n], t);
-    if (!info) { unrec.push({ step, lam: Y[n], u1, u2, t, reason: 'perpInfo null' }); return false; }
-    const p = { step, lam: Y[n], u1, u2, t, Tstar: info.ts, Lstar: Math.abs(info.ls), theta: th, turns: th / (2 * Math.PI), minDist: info.minDist, closure: info.repeatErr };
+    if (!info) { unrec.push({ step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), reason: 'perpInfo null' }); return false; }
+    const p = { step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), theta: th, turns: th / (2 * Math.PI), minDist: info.minDist, closure: info.repeatErr };
     if (pts.length % 5 === 0) {
       const w = syzygyWord(perpInitial(u1, u2, Y[n]), 2 * t);
       const st = relativeStability(u1, u2, Y[n], t);

@@ -1,0 +1,48 @@
+{
+ "what": "one row for src/ias/reg.js with two UNEQUAL masses (1 and 0.1): the relative orbit with a = 1, e = 0.9 from the apocentre for one period, the exact end state (ref_hi + ref_lo) from the Kepler flow of tools/kepler-ref.py with mu = m1 + m2 (tools/gate-a-unequal.py sets its constant MU), the sensitivity S as in tools/gate-a-rows.py. test/reg-unequal.test.js reads it.",
+ "rows": [
+  {
+   "gate": "A1u",
+   "name": "A1u-m1-0.1-e0.9-1P-apo",
+   "masses": [
+    1.0,
+    0.1
+   ],
+   "start": [
+    -0.17272727272727273,
+    0.0,
+    1.727272727272727,
+    0.0,
+    0.0,
+    -0.021873931962990357,
+    0.0,
+    0.21873931962990353
+   ],
+   "tau": 5.990782131693311,
+   "ref_hi": [
+    -0.17272727272727273,
+    -3.413398880629585e-17,
+    1.727272727272727,
+    2.0623578100716724e-16,
+    2.76727999518913e-17,
+    -0.021873931962990357,
+    -2.7672799951891296e-16,
+    0.21873931962990353
+   ],
+   "ref_lo": [
+    1.3822398622051977e-32,
+    -2.9051182241362802e-33,
+    -1.3822398622051976e-31,
+    7.042811146925944e-33,
+    -1.328683004625847e-33,
+    1.7504485669816116e-33,
+    -2.1665592327194836e-33,
+    -1.7504485669816116e-32
+   ],
+   "S": 9.79937350434398,
+   "limit_floor": 2e-14,
+   "e": 0.9,
+   "a": 1.0
+  }
+ ]
+}

@@ -92,6 +92,20 @@ export function quickTheta(u1, u2, lam, t) {
   return Math.atan2(Math.sin(2 * Math.atan2(dy, dx)), Math.cos(2 * Math.atan2(dy, dx)));
 }
 
+// energy, angular momentum, period and the scale free period and angular momentum from the start values alone, no integration (the same sums as perpInfo below, so the numbers are
+// equal to its ts and ls bit for bit). L keeps its sign (negative for some families); L* in the stored traces is |ls|.
+export function perpEL(u1, u2, lam, t) {
+  const s0 = perpInitial(u1, u2, lam);
+  const T = 2 * t;
+  let E = 0, L = 0;
+  for (let i = 0; i < 3; i++) {
+    E += 0.5 * (s0[6 + 2 * i] ** 2 + s0[7 + 2 * i] ** 2);
+    L += s0[2 * i] * s0[7 + 2 * i] - s0[2 * i + 1] * s0[6 + 2 * i];
+    for (let j = i + 1; j < 3; j++) E -= 1 / Math.hypot(s0[2 * i] - s0[2 * j], s0[2 * i + 1] - s0[2 * j + 1]);
+  }
+  return { T, E, L, ts: T * Math.abs(E) ** 1.5, ls: L * Math.abs(E) ** 0.5 };
+}
+
 // everything we want to know about a closed one: energy, angular momentum, rotation after a full
 // period, and an independent check that it really repeats (integrate 2t, compare with start)
 export function perpInfo(u1, u2, lam, t) {

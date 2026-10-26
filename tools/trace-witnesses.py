@@ -64,7 +64,7 @@ def select_low(wd, out):
     for w in json.load(open(os.path.join(wd, 'points.json'))):
         r = result([wd], w['id'])
         if r is None or not r['done'] or r['d'] < 1e-7: sel.append(w)
-    json.dump(sel, open(out, 'x'), indent=1); print('selected for w1b: %d (%s)' % (len(sel), [w['id'] for w in sel][:8]))
+    json.dump(sel, open(out, 'x'), indent=1); print('selected for w1b: %d (%s)' % (len(sel), [w['id'] for w in sel]))
 
 
 def classify(a, b, ca, cb):
