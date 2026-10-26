@@ -351,5 +351,19 @@
    "bit_identical": false,
    "max_rel_diff": 0.00011877915841132149
   }
- ]
+ ],
+ "copy_of_the_code_that_ran_the_traces": {
+  "what": "the first 20 accepted steps of t72 - run by the copy of the code that ran the traces (first step legacy), from the command-line start and from the stored start, against the stored trace and against the released code run from the same start",
+  "from_command_line_start": {
+   "accepted_steps_compared": 20,
+   "bit_identical_to_the_stored_trace": 20,
+   "bit_identical_to_the_released_code": 20
+  },
+  "from_stored_start": {
+   "accepted_steps_compared": 20,
+   "bit_identical_to_the_stored_trace": 0,
+   "first_difference_from_the_stored_trace": 1.2601383392346156e-10,
+   "bit_identical_to_the_released_code": 20
+  }
+ }
 }
