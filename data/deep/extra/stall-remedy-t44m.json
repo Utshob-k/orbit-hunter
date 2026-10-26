@@ -1,0 +1,57 @@
+{
+ "what": "remedy tests on t44 -: the driver resumed from the last stored accepted step of data/deep/traces/t44m.json (u1 -0.39354157931508876, u2 0.4364867616323272, lam 0.22906934975198912, t 4.595096878691359), direction -1, 24 pieces, guard ratio 390, 30 minutes at most. passes_the_stall: lam beyond the last lam of the stored trace by at least 1e-5 in the falling direction AND the median |dlam| of the last 100 accepted steps above m0/100 (m0: median |dlam| of the first 500 accepted steps of the stored trace), i.e. the creep rule is not met",
+ "command": "node tools/family-follow-ias.mjs OUT.json -1 -0.39354157931508876 0.4364867616323272 0.22906934975198912 4.595096878691359 --pieces=24 --minutes=30 --guard-ratio=390 OPTIONS",
+ "runs": [
+  {
+   "why": "step length below 1e-9 (lost the family) near lam=0.2291",
+   "accepted_steps": 106,
+   "lam_start": 0.22906931610806971,
+   "lam_min": 0.22906918275748386,
+   "lam_end": 0.22906918275748386,
+   "lam_last_stored": 0.22906934975198912,
+   "progress_beyond_lam_last": 1.6699450525181625e-07,
+   "median_last_100": 9.019299196388886e-12,
+   "m0_over_100": 5.437601510727141e-10,
+   "backward_steps": 22,
+   "replaced": 0,
+   "trips": 0,
+   "passes_the_stall": false,
+   "variant": "(i) first step timescale, tolerance 1e-11",
+   "options": "--ias-first-step=timescale"
+  },
+  {
+   "why": "step length below 1e-9 (lost the family) near lam=0.2291",
+   "accepted_steps": 46,
+   "lam_start": 0.22906931612440595,
+   "lam_min": 0.22906926870501693,
+   "lam_end": 0.22906926871132016,
+   "lam_last_stored": 0.22906934975198912,
+   "progress_beyond_lam_last": 8.104697218902501e-08,
+   "median_last_100": null,
+   "m0_over_100": 5.437601510727141e-10,
+   "backward_steps": 11,
+   "replaced": 0,
+   "trips": 0,
+   "passes_the_stall": false,
+   "variant": "(ii) first step legacy, tolerance 1e-11 (control)",
+   "options": "--ias-first-step=legacy"
+  },
+  {
+   "why": "out of time",
+   "accepted_steps": 480,
+   "lam_start": 0.2290693161179153,
+   "lam_min": 0.2290673590962976,
+   "lam_end": 0.2290673590962976,
+   "lam_last_stored": 0.22906934975198912,
+   "progress_beyond_lam_last": 1.9906556915083584e-06,
+   "median_last_100": 1.1029409469065499e-09,
+   "m0_over_100": 5.437601510727141e-10,
+   "backward_steps": 0,
+   "replaced": 0,
+   "trips": 0,
+   "passes_the_stall": false,
+   "variant": "(iii) first step timescale, corrector tolerance 3e-11",
+   "options": "--ias-first-step=timescale --newton-tol=3e-11"
+  }
+ ]
+}

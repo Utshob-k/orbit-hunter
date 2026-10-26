@@ -1,0 +1,241 @@
+{
+ "what": "the default route (Dormand-Prince, settings.integrator dp45, tools/family-follow.mjs, tolerance of the corrector 1e-11, 24 pieces, direction -1, 60 minutes) from the start of t35 - (data/deep/t35m-replay.json) and from the start of its earlier trace (data/deep/traces/earlier/t35m.json), and the closing of the orbits of that earlier trace with the same code. Made by drafts-side scripts of the round; the commands are below.",
+ "commands": [
+  "node tools/family-follow.mjs OUT.json -1 60 0.04014114686920327 0.6406314635068663 0.6653529332738678 2.0574775631566076 t35m-dp45 24",
+  "node tools/family-follow.mjs OUT.json -1 60 0.038540762675020226 0.663369567430389 0.6684119584659772 2.061909380988913 t35m-dp45-earlier 24"
+ ],
+ "from_replay_start": {
+  "start": {
+   "u1": 0.04014114686920327,
+   "u2": 0.6406314635068663,
+   "lam": 0.6653529332738678,
+   "t": 2.0574775631566076
+  },
+  "tool_closest_approach_of_ias_run": 8.216717976359334e-07,
+  "result": "could not move the start onto the family: closePerpMS (the first step of the driver, condition residual below 1e-9) gives a residual of 2.8e-6 (8 pieces), 7.2e-7 (16), 8.3e-7 (24), 1.0e-7 (32), 8.9e-7 (48), 1.2e-6 (64); no accepted step, no point, so no witness of last points",
+  "residual_by_pieces": {
+   "8": 2.83e-06,
+   "16": 7.16e-07,
+   "24": 8.34e-07,
+   "32": 1.04e-07,
+   "48": 8.88e-07,
+   "64": 1.21e-06
+  }
+ },
+ "from_earlier_start": {
+  "start": {
+   "u1": 0.038540762675020226,
+   "u2": 0.663369567430389,
+   "lam": 0.6684119584659772,
+   "t": 2.061909380988913
+  },
+  "shifted": {
+   "u1": 0.038540762484147104,
+   "u2": 0.663369567154734,
+   "lam": 0.6684119584659772,
+   "t": 2.0619093739154155,
+   "m": 24
+  },
+  "why": "step length below 1e-9 (lost the family) near lam=0.6684",
+  "loop_steps": 28,
+  "accepted_steps": 0,
+  "points": 0,
+  "lam_reached": 0.6684119584659772,
+  "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: the step length falls below 1e-9 after 28 attempts of the corrector; no accepted step, no point, so no witness of last points"
+ },
+ "closing_of_the_earlier_trace_with_dp45": {
+  "what": "closePerpMS with the Dormand-Prince flow, 24 pieces, at the stored values of the start and of the 22 points of the earlier trace; ias_tool_minDist is the closest approach of the tool (Dormand-Prince integration of the orbit) stored with the point; closes = residual below 1e-9 (the condition of the driver); the tolerance of the corrector is 1e-11",
+  "rows": [
+   {
+    "id": "start",
+    "lam": 0.6684119584659772,
+    "ias_tool_minDist": null,
+    "dp45_residual": 8.835776554860786e-11,
+    "closes": true,
+    "seconds": 0.906
+   },
+   {
+    "id": "step 1",
+    "lam": 0.6681524705165293,
+    "ias_tool_minDist": 3.734352846255768e-05,
+    "dp45_residual": 1.6834800220522084e-09,
+    "closes": false,
+    "seconds": 0.653
+   },
+   {
+    "id": "step 2",
+    "lam": 0.6679111767109516,
+    "ias_tool_minDist": 3.218894593423325e-05,
+    "dp45_residual": 1.1617213857562092e-09,
+    "closes": false,
+    "seconds": 0.969
+   },
+   {
+    "id": "step 3",
+    "lam": 0.6676866503700468,
+    "ias_tool_minDist": 2.772629052796294e-05,
+    "dp45_residual": 1.8221862907452646e-09,
+    "closes": false,
+    "seconds": 2.821
+   },
+   {
+    "id": "step 4",
+    "lam": 0.667477574732204,
+    "ias_tool_minDist": 2.3861271206559933e-05,
+    "dp45_residual": 1.6523178381078196e-09,
+    "closes": false,
+    "seconds": 1.976
+   },
+   {
+    "id": "step 5",
+    "lam": 0.6672827371808997,
+    "ias_tool_minDist": 2.0512448821800776e-05,
+    "dp45_residual": 3.476641197153185e-10,
+    "closes": true,
+    "seconds": 4.142
+   },
+   {
+    "id": "step 6",
+    "lam": 0.6671010229426557,
+    "ias_tool_minDist": 1.7613177674391762e-05,
+    "dp45_residual": 7.721280281813847e-10,
+    "closes": true,
+    "seconds": 2.306
+   },
+   {
+    "id": "step 7",
+    "lam": 0.6669314085318245,
+    "ias_tool_minDist": 1.5098413322169075e-05,
+    "dp45_residual": 1.3856563896297303e-08,
+    "closes": false,
+    "seconds": 4.733
+   },
+   {
+    "id": "step 8",
+    "lam": 0.6667729551909405,
+    "ias_tool_minDist": 1.2926181434584412e-05,
+    "dp45_residual": 5.401945557537147e-10,
+    "closes": true,
+    "seconds": 1.001
+   },
+   {
+    "id": "step 9",
+    "lam": 0.6666248024302247,
+    "ias_tool_minDist": 1.104196272773455e-05,
+    "dp45_residual": 2.1134774819131508e-08,
+    "closes": false,
+    "seconds": 1.307
+   },
+   {
+    "id": "step 10",
+    "lam": 0.6664861618298514,
+    "ias_tool_minDist": 9.410565908736416e-06,
+    "dp45_residual": 7.097388821097894e-08,
+    "closes": false,
+    "seconds": 0.989
+   },
+   {
+    "id": "step 11",
+    "lam": 0.6663563111364432,
+    "ias_tool_minDist": 7.967709477644523e-06,
+    "dp45_residual": 9.011360546651304e-09,
+    "closes": false,
+    "seconds": 0.981
+   },
+   {
+    "id": "step 12",
+    "lam": 0.6662349152661655,
+    "ias_tool_minDist": 6.770541816043435e-06,
+    "dp45_residual": 2.0478235995824434e-08,
+    "closes": false,
+    "seconds": 2.244
+   },
+   {
+    "id": "step 13",
+    "lam": 0.6661203880966632,
+    "ias_tool_minDist": 5.720616184908336e-06,
+    "dp45_residual": 1.2148994699145987e-08,
+    "closes": false,
+    "seconds": 1.933
+   },
+   {
+    "id": "step 14",
+    "lam": 0.6660131542735386,
+    "ias_tool_minDist": 4.8129235227084e-06,
+    "dp45_residual": 3.801459413921293e-08,
+    "closes": false,
+    "seconds": 1.484
+   },
+   {
+    "id": "step 15",
+    "lam": 0.6659123776136668,
+    "ias_tool_minDist": 3.993963421839185e-06,
+    "dp45_residual": 1.8960136488610502e-07,
+    "closes": false,
+    "seconds": 0.374
+   },
+   {
+    "id": "step 16",
+    "lam": 0.6658175909125347,
+    "ias_tool_minDist": 3.3534060123178395e-06,
+    "dp45_residual": 8.863880829323989e-08,
+    "closes": false,
+    "seconds": 1.107
+   },
+   {
+    "id": "step 17",
+    "lam": 0.6657283653869323,
+    "ias_tool_minDist": 2.773989345806147e-06,
+    "dp45_residual": 3.082135258125618e-08,
+    "closes": false,
+    "seconds": 0.799
+   },
+   {
+    "id": "step 18",
+    "lam": 0.6656443072714561,
+    "ias_tool_minDist": 2.138803984086595e-06,
+    "dp45_residual": 8.600357936927594e-08,
+    "closes": false,
+    "seconds": 1.466
+   },
+   {
+    "id": "step 19",
+    "lam": 0.6655650547204025,
+    "ias_tool_minDist": 1.854553825607485e-06,
+    "dp45_residual": 6.37797228364434e-08,
+    "closes": false,
+    "seconds": 1.799
+   },
+   {
+    "id": "step 20",
+    "lam": 0.6654902749826597,
+    "ias_tool_minDist": 1.2510507837652537e-06,
+    "dp45_residual": 2.190674308621965e-09,
+    "closes": false,
+    "seconds": 2.378
+   },
+   {
+    "id": "step 21",
+    "lam": 0.6654196618403388,
+    "ias_tool_minDist": 1.0217607358077625e-06,
+    "dp45_residual": 4.439621825724771e-07,
+    "closes": false,
+    "seconds": 2.546
+   },
+   {
+    "id": "step 22",
+    "lam": 0.6653529332738678,
+    "ias_tool_minDist": 8.216717976359334e-07,
+    "dp45_residual": 8.342560757768069e-07,
+    "closes": false,
+    "seconds": 1.074
+   }
+  ]
+ },
+ "summary": {
+  "closes": 4,
+  "of": 23,
+  "smallest_ias_tool_minDist_that_closes": 1.2926181434584412e-05,
+  "largest_residual": 8.342560757768069e-07
+ }
+}

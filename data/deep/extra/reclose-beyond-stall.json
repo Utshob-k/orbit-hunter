@@ -1,0 +1,155 @@
+{
+ "what": "the creeping traces re-closed beyond their last lam with tools/reclose.py (50 digits) from a linear extrapolation over the last 300 accepted steps (tools/reclose-beyond.py)",
+ "traces": {
+  "t35m": {
+   "lam_last": 0.6638406030628946,
+   "last_loop_step": 2190,
+   "lam_range_of_the_fit": 1.363176187485493e-07,
+   "reclose": [
+    {
+     "delta_lam": 0.0,
+     "lam": 0.6638406030628946,
+     "converged": true,
+     "updates": 1,
+     "residual": 2.8778372164484245e-25,
+     "distance_from_extrapolation": 8.322163742311869e-14,
+     "seconds": 79.4,
+     "change_against_stored_orbit": 6.345951149513388e-13
+    },
+    {
+     "delta_lam": 1e-06,
+     "lam": 0.6638396030628946,
+     "converged": true,
+     "updates": 1,
+     "residual": 7.530625966187115e-20,
+     "distance_from_extrapolation": 2.192485520392146e-11,
+     "seconds": 79.4
+    },
+    {
+     "delta_lam": 1e-05,
+     "lam": 0.6638306030628947,
+     "converged": true,
+     "updates": 2,
+     "residual": 4.5140088078009005e-29,
+     "distance_from_extrapolation": 1.977672740812314e-09,
+     "seconds": 76.7
+    },
+    {
+     "delta_lam": 0.0001,
+     "lam": 0.6637406030628946,
+     "converged": true,
+     "updates": 2,
+     "residual": 1.9874262303103992e-23,
+     "distance_from_extrapolation": 1.9583640115590664e-07,
+     "seconds": 75.6
+    }
+   ],
+   "witness_w1_at_lam_last_minus_1e_4": {
+    "closure": 1.3213203623461696e-14,
+    "dmin_parabolic": 4.283556017120161e-06,
+    "dmin": 4.2835576520860756e-06,
+    "e_half": 2.1129328979807386e-15
+   }
+  },
+  "t44m": {
+   "lam_last": 0.22906934975198912,
+   "last_loop_step": 1588,
+   "lam_range_of_the_fit": 6.437564870065415e-09,
+   "reclose": [
+    {
+     "delta_lam": 0.0,
+     "lam": 0.22906934975198912,
+     "converged": true,
+     "updates": 1,
+     "residual": 3.533580451394617e-24,
+     "distance_from_extrapolation": 5.724437363143447e-13,
+     "seconds": 81.0,
+     "change_against_stored_orbit": 8.555208248153541e-12
+    },
+    {
+     "delta_lam": 1e-06,
+     "lam": 0.22906834975198911,
+     "converged": true,
+     "updates": 1,
+     "residual": 2.1631933063173116e-17,
+     "distance_from_extrapolation": 3.5449559059517275e-09,
+     "seconds": 80.8
+    },
+    {
+     "delta_lam": 1e-05,
+     "lam": 0.2290593497519891,
+     "converged": true,
+     "updates": 2,
+     "residual": 1.429491707906039e-24,
+     "distance_from_extrapolation": 2.1952560945574503e-07,
+     "seconds": 232.6
+    },
+    {
+     "delta_lam": 0.0001,
+     "lam": 0.22896934975198913,
+     "converged": true,
+     "updates": 2,
+     "residual": 4.797542450347511e-17,
+     "distance_from_extrapolation": 2.085085289305653e-05,
+     "seconds": 226.0
+    }
+   ],
+   "witness_w1_at_lam_last_minus_1e_4": {
+    "closure": 1.436082293613359e-14,
+    "dmin_parabolic": 1.5815557144848872e-05,
+    "dmin": 1.581997567903421e-05,
+    "e_half": 2.4114093935092734e-15
+   }
+  },
+  "t81m": {
+   "lam_last": 0.40712218081299806,
+   "last_loop_step": 1326,
+   "lam_range_of_the_fit": 3.159922878914756e-10,
+   "reclose": [
+    {
+     "delta_lam": 0.0,
+     "lam": 0.40712218081299806,
+     "converged": true,
+     "updates": 1,
+     "residual": 2.5486422509653172e-20,
+     "distance_from_extrapolation": 1.7090072822480482e-12,
+     "seconds": 203.3,
+     "change_against_stored_orbit": 1.1507750071403527e-11
+    },
+    {
+     "delta_lam": 1e-06,
+     "lam": 0.4071211808129981,
+     "converged": true,
+     "updates": 2,
+     "residual": 2.8021554267265336e-23,
+     "distance_from_extrapolation": 2.037609087602171e-08,
+     "seconds": 284.6
+    },
+    {
+     "delta_lam": 1e-05,
+     "lam": 0.40711218081299805,
+     "converged": true,
+     "updates": 2,
+     "residual": 1.0461129490154642e-18,
+     "distance_from_extrapolation": 2.8688407370650493e-07,
+     "seconds": 211.3
+    },
+    {
+     "delta_lam": 0.0001,
+     "lam": 0.40702218081299807,
+     "converged": true,
+     "updates": 3,
+     "residual": 9.91451223179877e-25,
+     "distance_from_extrapolation": 1.1265259456525088e-05,
+     "seconds": 223.8
+    }
+   ],
+   "witness_w1_at_lam_last_minus_1e_4": {
+    "closure": 8.19781159516359e-12,
+    "dmin_parabolic": 0.0005185468458701635,
+    "dmin": 0.0005210378066726698,
+    "e_half": 1.2013429264742733e-14
+   }
+  }
+ }
+}

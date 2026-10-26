@@ -1,0 +1,472 @@
+{
+ "what": "the corrector during the creep of the traces, from the per-attempt records (tools/creep-attempts.py; the rule is in the header of the tool)",
+ "traces": {
+  "t35m": {
+   "trace": "t35m",
+   "accepted_steps": 1711,
+   "attempts": 2190,
+   "direction": -1,
+   "creeps": true,
+   "tolerance": 1e-11,
+   "median_first_500": 5.091583116234588e-08,
+   "median_last_500": 3.423983319095214e-11,
+   "creep_start_accepted": 1221,
+   "creep_start_loop_step": 1491,
+   "steps_before": 1220,
+   "steps_after": 491,
+   "creep": {
+    "loop_steps": [
+     1491,
+     2190
+    ],
+    "attempts": 700,
+    "outcomes": {
+     "accepted": 491,
+     "newton failed (line search failed)": 209
+    },
+    "accepted": 491,
+    "accepted_going_backwards_in_lam": 82,
+    "best_residual_all_attempts": {
+     "n": 700,
+     "min": 4.973799150320701e-14,
+     "p10": 3.33244543071487e-12,
+     "median": 8.103961945948868e-12,
+     "p90": 1.5212719972623745e-11,
+     "max": 3.480948862488731e-11
+    },
+    "best_residual_failed_attempts": {
+     "n": 209,
+     "min": 1.0009215678508099e-11,
+     "p10": 1.0750511592050316e-11,
+     "median": 1.3507417406799505e-11,
+     "p90": 2.0875745576631743e-11,
+     "max": 3.480948862488731e-11
+    },
+    "failed_attempts_with_best_residual_between_tol_and_10_tol": 209,
+    "failed_attempts": 209,
+    "h_all_attempts": {
+     "n": 700,
+     "min": 8.251004275355972e-09,
+     "p10": 2.9006660670306617e-07,
+     "median": 1.9703295329356755e-05,
+     "p90": 0.0009891636466802293,
+     "max": 0.01696972893233653
+    },
+    "h_accepted": {
+     "n": 491,
+     "min": 8.251004275355972e-09,
+     "p10": 2.553510331818672e-07,
+     "median": 1.76924946901395e-05,
+     "p90": 0.000866594003179063,
+     "max": 0.012621027646469132
+    },
+    "h_failed": {
+     "n": 209,
+     "min": 1.6502008550711944e-08,
+     "p10": 3.927413232751104e-07,
+     "median": 2.4291553714613476e-05,
+     "p90": 0.001213231604450688,
+     "max": 0.01696972893233653
+    },
+    "seconds": 1059.728,
+    "newton_iterations_accepted": {
+     "n": 491,
+     "min": 0,
+     "p10": 1,
+     "median": 2,
+     "p90": 4,
+     "max": 8
+    }
+   },
+   "before": {
+    "loop_steps": [
+     991,
+     1490
+    ],
+    "attempts": 500,
+    "outcomes": {
+     "accepted": 372,
+     "newton failed (line search failed)": 128
+    },
+    "accepted": 372,
+    "accepted_going_backwards_in_lam": 10,
+    "best_residual_all_attempts": {
+     "n": 500,
+     "min": 4.263256414560601e-13,
+     "p10": 3.3347768990665827e-12,
+     "median": 7.92221843681773e-12,
+     "p90": 1.3812950783176348e-11,
+     "max": 3.397104819669039e-11
+    },
+    "best_residual_failed_attempts": {
+     "n": 128,
+     "min": 1.00163211058657e-11,
+     "p10": 1.0388134796812665e-11,
+     "median": 1.306327268579821e-11,
+     "p90": 2.1799451133119874e-11,
+     "max": 3.397104819669039e-11
+    },
+    "failed_attempts_with_best_residual_between_tol_and_10_tol": 128,
+    "failed_attempts": 128,
+    "h_all_attempts": {
+     "n": 500,
+     "min": 1.6950009076618068e-06,
+     "p10": 2.369130679863201e-05,
+     "median": 0.00048763301505181983,
+     "p90": 0.006841643171241481,
+     "max": 0.01957566805024461
+    },
+    "h_accepted": {
+     "n": 372,
+     "min": 1.6950009076618068e-06,
+     "p10": 2.369130679863201e-05,
+     "median": 0.00044733087938652927,
+     "p90": 0.00670481030781665,
+     "max": 0.015784546255566564
+    },
+    "h_failed": {
+     "n": 128,
+     "min": 3.3900018153236137e-06,
+     "p10": 3.102263694432383e-05,
+     "median": 0.0006033810807162799,
+     "p90": 0.006580165058409222,
+     "max": 0.01957566805024461
+    },
+    "seconds": 781.245,
+    "newton_iterations_accepted": {
+     "n": 372,
+     "min": 0,
+     "p10": 1,
+     "median": 3.0,
+     "p90": 4,
+     "max": 6
+    }
+   },
+   "corrector_seconds": {
+    "before_creep": 2193.079,
+    "from_creep_start": 1059.728,
+    "share_from_creep_start": 0.3257887725893359
+   },
+   "last_500_accepted_backwards_in_lam": 82
+  },
+  "t44m": {
+   "trace": "t44m",
+   "accepted_steps": 1266,
+   "attempts": 1592,
+   "direction": -1,
+   "creeps": true,
+   "tolerance": 1e-11,
+   "median_first_500": 5.4376015107271414e-08,
+   "median_last_500": 5.677472381115933e-12,
+   "creep_start_accepted": 624,
+   "creep_start_loop_step": 668,
+   "steps_before": 623,
+   "steps_after": 643,
+   "creep": {
+    "loop_steps": [
+     668,
+     1592
+    ],
+    "attempts": 925,
+    "outcomes": {
+     "accepted": 643,
+     "newton failed (line search failed)": 282
+    },
+    "accepted": 643,
+    "accepted_going_backwards_in_lam": 121,
+    "best_residual_all_attempts": {
+     "n": 925,
+     "min": 1.794120407794253e-13,
+     "p10": 3.2513089442964827e-12,
+     "median": 8.343548074662976e-12,
+     "p90": 1.5761614235998422e-11,
+     "max": 4.058087199609872e-11
+    },
+    "best_residual_failed_attempts": {
+     "n": 282,
+     "min": 1.0020866081372759e-11,
+     "p10": 1.0487451185259289e-11,
+     "median": 1.3609391391611325e-11,
+     "p90": 1.9831247755064396e-11,
+     "max": 4.058087199609872e-11
+    },
+    "failed_attempts_with_best_residual_between_tol_and_10_tol": 282,
+    "failed_attempts": 282,
+    "h_all_attempts": {
+     "n": 925,
+     "min": 1.5448819937067046e-09,
+     "p10": 6.09712808589556e-08,
+     "median": 3.749598916508206e-05,
+     "p90": 0.006069334737421204,
+     "max": 0.07885064692814195
+    },
+    "h_accepted": {
+     "n": 643,
+     "min": 1.6414100350477958e-09,
+     "p10": 6.09712808589556e-08,
+     "median": 4.715488173219624e-05,
+     "p90": 0.006120599813224134,
+     "max": 0.07885064692814195
+    },
+    "h_failed": {
+     "n": 282,
+     "min": 1.5448819937067046e-09,
+     "p10": 6.299881511805515e-08,
+     "median": 2.0871300274277133e-05,
+     "p90": 0.005712409300182936,
+     "max": 0.07885064692814195
+    },
+    "seconds": 712.669,
+    "newton_iterations_accepted": {
+     "n": 643,
+     "min": 0,
+     "p10": 1,
+     "median": 2,
+     "p90": 4,
+     "max": 9
+    }
+   },
+   "before": {
+    "loop_steps": [
+     168,
+     667
+    ],
+    "attempts": 500,
+    "outcomes": {
+     "accepted": 457,
+     "newton failed (12 iterations without reaching the tolerance)": 1,
+     "newton failed (line search failed)": 42
+    },
+    "accepted": 457,
+    "accepted_going_backwards_in_lam": 0,
+    "best_residual_all_attempts": {
+     "n": 500,
+     "min": 1.0302869668521453e-13,
+     "p10": 1.6271428648906294e-12,
+     "median": 5.8542060088484504e-12,
+     "p90": 9.879208562324493e-12,
+     "max": 8.20270787382782e-06
+    },
+    "best_residual_failed_attempts": {
+     "n": 43,
+     "min": 1.0016876217378012e-11,
+     "p10": 1.042899100411887e-11,
+     "median": 1.2720380304642731e-11,
+     "p90": 1.6274981362585095e-11,
+     "max": 8.20270787382782e-06
+    },
+    "failed_attempts_with_best_residual_between_tol_and_10_tol": 41,
+    "failed_attempts": 43,
+    "h_all_attempts": {
+     "n": 500,
+     "min": 0.0006212239424453753,
+     "p10": 0.005960785462099042,
+     "median": 0.0686,
+     "p90": 0.1,
+     "max": 0.11672468669822081
+    },
+    "h_accepted": {
+     "n": 457,
+     "min": 0.0006212239424453753,
+     "p10": 0.008178197653999885,
+     "median": 0.0686,
+     "p90": 0.1,
+     "max": 0.11672468669822081
+    },
+    "h_failed": {
+     "n": 43,
+     "min": 0.0012424478848907506,
+     "p10": 0.002386493897298153,
+     "median": 0.020284863426787765,
+     "p90": 0.08170728068875456,
+     "max": 0.11672468669822081
+    },
+    "seconds": 1031.504,
+    "newton_iterations_accepted": {
+     "n": 457,
+     "min": 1,
+     "p10": 3,
+     "median": 5,
+     "p90": 7,
+     "max": 11
+    }
+   },
+   "corrector_seconds": {
+    "before_creep": 1774.675,
+    "from_creep_start": 712.669,
+    "share_from_creep_start": 0.2865180690728745
+   },
+   "last_500_accepted_backwards_in_lam": 121
+  },
+  "t81m": {
+   "trace": "t81m",
+   "accepted_steps": 1106,
+   "attempts": 1329,
+   "direction": -1,
+   "creeps": true,
+   "tolerance": 1e-11,
+   "median_first_500": 7.180364592068722e-05,
+   "median_last_500": 9.402506551126066e-12,
+   "creep_start_accepted": 322,
+   "creep_start_loop_step": 333,
+   "steps_before": 321,
+   "steps_after": 785,
+   "creep": {
+    "loop_steps": [
+     333,
+     1329
+    ],
+    "attempts": 997,
+    "outcomes": {
+     "accepted": 785,
+     "newton failed (line search failed)": 212
+    },
+    "accepted": 785,
+    "accepted_going_backwards_in_lam": 110,
+    "best_residual_all_attempts": {
+     "n": 997,
+     "min": 1.3355982986240633e-13,
+     "p10": 1.5916157281026244e-12,
+     "median": 6.799893981224159e-12,
+     "p90": 1.3418821609434417e-11,
+     "max": 0.003246580865774007
+    },
+    "best_residual_failed_attempts": {
+     "n": 212,
+     "min": 1.008737537944171e-11,
+     "p10": 1.0485057266862441e-11,
+     "median": 1.3208989457780262e-11,
+     "p90": 1.851434283661746e-11,
+     "max": 0.003246580865774007
+    },
+    "failed_attempts_with_best_residual_between_tol_and_10_tol": 211,
+    "failed_attempts": 212,
+    "h_all_attempts": {
+     "n": 997,
+     "min": 1.091335679210178e-09,
+     "p10": 8.164418562974759e-08,
+     "median": 0.004201749999999999,
+     "p90": 0.1,
+     "max": 0.2
+    },
+    "h_accepted": {
+     "n": 785,
+     "min": 1.091335679210178e-09,
+     "p10": 9.274390468508138e-08,
+     "median": 0.03248545218301376,
+     "p90": 0.1,
+     "max": 0.2
+    },
+    "h_failed": {
+     "n": 212,
+     "min": 1.7477333850708218e-09,
+     "p10": 2.8534422613401175e-08,
+     "median": 2.8793442042181753e-06,
+     "p90": 0.04640778883287681,
+     "max": 0.2
+    },
+    "seconds": 4561.555,
+    "newton_iterations_accepted": {
+     "n": 785,
+     "min": 0,
+     "p10": 1,
+     "median": 4,
+     "p90": 6,
+     "max": 9
+    }
+   },
+   "before": {
+    "loop_steps": [
+     1,
+     332
+    ],
+    "attempts": 332,
+    "outcomes": {
+     "theta jump": 4,
+     "accepted": 321,
+     "newton failed (line search failed)": 6,
+     "newton failed (12 iterations without reaching the tolerance)": 1
+    },
+    "accepted": 321,
+    "accepted_going_backwards_in_lam": 0,
+    "best_residual_all_attempts": {
+     "n": 332,
+     "min": 2.0650148258027912e-14,
+     "p10": 8.704148513061227e-14,
+     "median": 2.90656387846866e-13,
+     "p90": 1.5489831639570184e-12,
+     "max": 0.013760279755469833
+    },
+    "best_residual_failed_attempts": {
+     "n": 11,
+     "min": 5.595524044110789e-14,
+     "p10": 1.254552017826427e-13,
+     "median": 0.0005143141269792206,
+     "p90": 0.000977293930694012,
+     "max": 0.013760279755469833
+    },
+    "failed_attempts_with_best_residual_between_tol_and_10_tol": 0,
+    "failed_attempts": 11,
+    "h_all_attempts": {
+     "n": 332,
+     "min": 0.032282885599999984,
+     "p10": 0.06327445577599995,
+     "median": 0.1,
+     "p90": 0.2,
+     "max": 0.2
+    },
+    "h_accepted": {
+     "n": 321,
+     "min": 0.032282885599999984,
+     "p10": 0.06327445577599995,
+     "median": 0.1,
+     "p90": 0.2,
+     "max": 0.2
+    },
+    "h_failed": {
+     "n": 11,
+     "min": 0.06456577119999997,
+     "p10": 0.06588343999999997,
+     "median": 0.1,
+     "p90": 0.2,
+     "max": 0.2
+    },
+    "seconds": 1792.217,
+    "newton_iterations_accepted": {
+     "n": 321,
+     "min": 3,
+     "p10": 3,
+     "median": 5,
+     "p90": 6,
+     "max": 9
+    }
+   },
+   "corrector_seconds": {
+    "before_creep": 1792.217,
+    "from_creep_start": 4561.555,
+    "share_from_creep_start": 0.717928657181907
+   },
+   "last_500_accepted_backwards_in_lam": 110
+  },
+  "t14p": {
+   "trace": "t14p",
+   "accepted_steps": 2926,
+   "attempts": 3061,
+   "direction": 1,
+   "creeps": false,
+   "tolerance": 1e-11,
+   "median_first_500": 2.012016227277702e-05,
+   "median_last_500": 8.217218836273354e-08
+  },
+  "t72p": {
+   "trace": "t72p",
+   "accepted_steps": 1173,
+   "attempts": 1494,
+   "direction": 1,
+   "creeps": false,
+   "tolerance": 1e-11,
+   "median_first_500": 1.4171412857089116e-07,
+   "median_last_500": 5.038018835445968e-09
+  }
+ }
+}

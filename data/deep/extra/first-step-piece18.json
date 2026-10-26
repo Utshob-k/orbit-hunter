@@ -1,0 +1,341 @@
+{
+ "what": "IAS15 over piece 18 of k10, k11, k12 against reg.js, by adaptive_mode and first step (tools/first-step-check.py piece18)",
+ "rows": [
+  {
+   "point": "k10",
+   "adaptive_mode": 0,
+   "first_step": "default (0.001)",
+   "ias15_steps": 278,
+   "error": 1.7513517798971864e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 0,
+   "first_step": 0.0001,
+   "ias15_steps": 275,
+   "error": 1.7763568394002505e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 0,
+   "first_step": 1e-06,
+   "ias15_steps": 282,
+   "error": 1.7513517798971864e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 0,
+   "first_step": "timescale",
+   "ias15_steps": 279,
+   "error": 3.0648656148200763e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 1,
+   "first_step": "default (0.001)",
+   "ias15_steps": 244,
+   "error": 2.189189724871483e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 1,
+   "first_step": 0.0001,
+   "ias15_steps": 242,
+   "error": 1.3135138349228899e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 1,
+   "first_step": 1e-06,
+   "ias15_steps": 248,
+   "error": 2.2561667811864716e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 1,
+   "first_step": "timescale",
+   "ias15_steps": 245,
+   "error": 1.990735395164534e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 2,
+   "first_step": "default (0.001)",
+   "ias15_steps": 135,
+   "error": 5.662137425588298e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 2,
+   "first_step": 0.0001,
+   "ias15_steps": 137,
+   "error": 1.7717557770535444e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 2,
+   "first_step": 1e-06,
+   "ias15_steps": 141,
+   "error": 1.725304009142596e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 2,
+   "first_step": "timescale",
+   "ias15_steps": 139,
+   "error": 1.3322676295501878e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 3,
+   "first_step": "default (0.001)",
+   "ias15_steps": 149,
+   "error": 1.0617255440877514e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 3,
+   "first_step": 0.0001,
+   "ias15_steps": 147,
+   "error": 1.3135138349228899e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 3,
+   "first_step": 1e-06,
+   "ias15_steps": 151,
+   "error": 1.4432899320127035e-15
+  },
+  {
+   "point": "k10",
+   "adaptive_mode": 3,
+   "first_step": "timescale",
+   "ias15_steps": 150,
+   "error": 2.9197452462413163e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 0,
+   "first_step": "default (0.001)",
+   "ias15_steps": 278,
+   "error": 2.5615574988039455e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 0,
+   "first_step": 0.0001,
+   "ias15_steps": 277,
+   "error": 3.701311745805221e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 0,
+   "first_step": 1e-06,
+   "ias15_steps": 283,
+   "error": 3.701311745805221e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 0,
+   "first_step": "timescale",
+   "ias15_steps": 281,
+   "error": 1.5957839901115374e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 1,
+   "first_step": "default (0.001)",
+   "ias15_steps": 244,
+   "error": 2.6126906440978028e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 1,
+   "first_step": 0.0001,
+   "ias15_steps": 242,
+   "error": 1.7417937627318685e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 1,
+   "first_step": 1e-06,
+   "ias15_steps": 248,
+   "error": 1.7417937627318685e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 1,
+   "first_step": "timescale",
+   "ias15_steps": 246,
+   "error": 4.354484406829671e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 2,
+   "first_step": "default (0.001)",
+   "ias15_steps": 129,
+   "error": 1.1839603875074545e-07
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 2,
+   "first_step": 0.0001,
+   "ias15_steps": 138,
+   "error": 1.3063453220489014e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 2,
+   "first_step": 1e-06,
+   "ias15_steps": 141,
+   "error": 2.6126906440978028e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 2,
+   "first_step": "timescale",
+   "ias15_steps": 140,
+   "error": 2.6126906440978028e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 3,
+   "first_step": "default (0.001)",
+   "ias15_steps": 149,
+   "error": 2.8304148644392864e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 3,
+   "first_step": 0.0001,
+   "ias15_steps": 148,
+   "error": 2.2606939859913447e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 3,
+   "first_step": 1e-06,
+   "ias15_steps": 151,
+   "error": 2.364514614280565e-15
+  },
+  {
+   "point": "k11",
+   "adaptive_mode": 3,
+   "first_step": "timescale",
+   "ias15_steps": 150,
+   "error": 2.1674717297571845e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 0,
+   "first_step": "default (0.001)",
+   "ias15_steps": 280,
+   "error": 4.115450599168542e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 0,
+   "first_step": 0.0001,
+   "ias15_steps": 280,
+   "error": 2.166026631141338e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 0,
+   "first_step": 1e-06,
+   "ias15_steps": 283,
+   "error": 1.0659041356039528e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 0,
+   "first_step": "timescale",
+   "ias15_steps": 281,
+   "error": 1.0659041356039528e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 1,
+   "first_step": "default (0.001)",
+   "ias15_steps": 245,
+   "error": 1.1991421525544468e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 1,
+   "first_step": 0.0001,
+   "ias15_steps": 243,
+   "error": 1.5162186417989366e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 1,
+   "first_step": 1e-06,
+   "ias15_steps": 249,
+   "error": 8.664106524565352e-16
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 1,
+   "first_step": "timescale",
+   "ias15_steps": 247,
+   "error": 9.326661186534587e-16
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 2,
+   "first_step": "default (0.001)",
+   "ias15_steps": 137,
+   "error": 5.218048215738236e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 2,
+   "first_step": 0.0001,
+   "ias15_steps": 139,
+   "error": 2.220446049250313e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 2,
+   "first_step": 1e-06,
+   "ias15_steps": 142,
+   "error": 9.326661186534587e-16
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 2,
+   "first_step": "timescale",
+   "ias15_steps": 141,
+   "error": 1.5988562034059292e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 3,
+   "first_step": "default (0.001)",
+   "ias15_steps": 150,
+   "error": 2.8158346204837396e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 3,
+   "first_step": 0.0001,
+   "ias15_steps": 148,
+   "error": 1.3322676295501878e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 3,
+   "first_step": 1e-06,
+   "ias15_steps": 152,
+   "error": 1.2996159786848028e-15
+  },
+  {
+   "point": "k12",
+   "adaptive_mode": 3,
+   "first_step": "timescale",
+   "ias15_steps": 150,
+   "error": 2.166026631141338e-15
+  }
+ ]
+}

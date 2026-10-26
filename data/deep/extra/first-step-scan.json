@@ -1,0 +1,235 @@
+{
+ "what": "IAS15 (adaptive_mode 2) on the unflagged pieces of the 320 stored iterates of the piece scan against reg.js, first step legacy and timescale (tools/first-step-check.py scan)",
+ "seconds": 22.138827323913574,
+ "iterates": 320,
+ "unflagged_pieces": 7360,
+ "stored_ends_reproduced_by_legacy": 7360,
+ "legacy": {
+  "pieces": 7360,
+  "error_ge_1e12": 16,
+  "error_ge_1e9": 0,
+  "largest_error": 2.8368418725222e-12,
+  "ias15_steps": 112462
+ },
+ "timescale": {
+  "pieces": 7360,
+  "error_ge_1e12": 24,
+  "error_ge_1e9": 0,
+  "largest_error": 3.074984711304296e-12,
+  "ias15_steps": 109070
+ },
+ "pair_minimum_below_0_05_legacy": {
+  "pieces": 274,
+  "error_ge_1e12": 16,
+  "error_ge_1e9": 0,
+  "largest_error": 2.8368418725222e-12,
+  "ias15_steps": 30124
+ },
+ "pair_minimum_below_0_05_timescale": {
+  "pieces": 274,
+  "error_ge_1e12": 24,
+  "error_ge_1e9": 0,
+  "largest_error": 3.074984711304296e-12,
+  "ias15_steps": 30334
+ },
+ "pieces_with_error_ge_1e12": [
+  {
+   "rec": "t28p_a00018_first",
+   "piece": 4,
+   "legacy": 6.039613253960852e-13,
+   "timescale": 1.1886047701636926e-12
+  },
+  {
+   "rec": "t28p_a00019_first",
+   "piece": 4,
+   "legacy": 7.267519919196275e-13,
+   "timescale": 1.63069557856943e-12
+  },
+  {
+   "rec": "t28p_a00019_last",
+   "piece": 4,
+   "legacy": 5.738742814287434e-13,
+   "timescale": 1.6447954109821694e-12
+  },
+  {
+   "rec": "t28p_a00022_first",
+   "piece": 4,
+   "legacy": 1.7869039581341895e-12,
+   "timescale": 5.626610288800293e-13
+  },
+  {
+   "rec": "t28p_a00043_first",
+   "piece": 4,
+   "legacy": 2.0450308113595383e-13,
+   "timescale": 1.6334711361309928e-12
+  },
+  {
+   "rec": "t28p_a00044_last",
+   "piece": 4,
+   "legacy": 7.300826609935029e-13,
+   "timescale": 1.308397834520747e-12
+  },
+  {
+   "rec": "t28p_a00045_first",
+   "piece": 4,
+   "legacy": 1.0721423748805137e-12,
+   "timescale": 2.2082335959794364e-12
+  },
+  {
+   "rec": "t28p_a00045_last",
+   "piece": 4,
+   "legacy": 1.0721423748805137e-12,
+   "timescale": 2.2082335959794364e-12
+  },
+  {
+   "rec": "t28p_a00048_first",
+   "piece": 4,
+   "legacy": 2.8368418725222e-12,
+   "timescale": 5.173639294753229e-13
+  },
+  {
+   "rec": "t28p_a00048_last",
+   "piece": 4,
+   "legacy": 7.416289804496046e-14,
+   "timescale": 1.0753620216519266e-12
+  },
+  {
+   "rec": "t28p_a00049_first",
+   "piece": 4,
+   "legacy": 2.793321129956894e-13,
+   "timescale": 2.247535491051167e-12
+  },
+  {
+   "rec": "t28p_a00051_first",
+   "piece": 4,
+   "legacy": 1.7761347947953254e-12,
+   "timescale": 4.833911049217932e-13
+  },
+  {
+   "rec": "t28p_a00051_last",
+   "piece": 4,
+   "legacy": 1.7761347947953254e-12,
+   "timescale": 4.833911049217932e-13
+  },
+  {
+   "rec": "t28p_a00053_first",
+   "piece": 4,
+   "legacy": 2.8754776337791554e-14,
+   "timescale": 1.3292700273837e-12
+  },
+  {
+   "rec": "t28p_a00053_last",
+   "piece": 4,
+   "legacy": 2.8754776337791554e-14,
+   "timescale": 1.3292700273837e-12
+  },
+  {
+   "rec": "t28p_a00054_first",
+   "piece": 4,
+   "legacy": 6.3815619455454e-13,
+   "timescale": 1.3541390231353034e-12
+  },
+  {
+   "rec": "t28p_a00055_first",
+   "piece": 4,
+   "legacy": 1.2754242106893798e-12,
+   "timescale": 8.323342015614799e-13
+  },
+  {
+   "rec": "t28p_a00055_last",
+   "piece": 4,
+   "legacy": 4.3787196091216174e-13,
+   "timescale": 3.074984711304296e-12
+  },
+  {
+   "rec": "t28p_a00056_first",
+   "piece": 4,
+   "legacy": 4.39648317751562e-13,
+   "timescale": 1.6771029009987615e-12
+  },
+  {
+   "rec": "t28p_a00057_first",
+   "piece": 4,
+   "legacy": 1.3002932064409833e-12,
+   "timescale": 3.100852907778062e-13
+  },
+  {
+   "rec": "t28p_a00060_first",
+   "piece": 4,
+   "legacy": 8.623102232263591e-13,
+   "timescale": 1.0719203302755886e-12
+  },
+  {
+   "rec": "t28p_a00061_last",
+   "piece": 4,
+   "legacy": 1.5447643164634428e-12,
+   "timescale": 1.2354561818028742e-12
+  },
+  {
+   "rec": "t28p_a00062_first",
+   "piece": 4,
+   "legacy": 1.8421930647605222e-12,
+   "timescale": 1.0911271886016038e-12
+  },
+  {
+   "rec": "t28p_a00062_last",
+   "piece": 4,
+   "legacy": 1.8421930647605222e-12,
+   "timescale": 1.0911271886016038e-12
+  },
+  {
+   "rec": "t28p_a00064_first",
+   "piece": 4,
+   "legacy": 3.3861802251067274e-13,
+   "timescale": 1.2874146193553315e-12
+  },
+  {
+   "rec": "t28p_a00065_first",
+   "piece": 4,
+   "legacy": 6.173950239940496e-13,
+   "timescale": 1.2111422975635833e-12
+  },
+  {
+   "rec": "t28p_a00066_first",
+   "piece": 4,
+   "legacy": 1.2869705301454815e-12,
+   "timescale": 1.921351966416296e-12
+  },
+  {
+   "rec": "t28p_a00066_last",
+   "piece": 4,
+   "legacy": 1.010413974711355e-12,
+   "timescale": 2.2672974608894947e-12
+  },
+  {
+   "rec": "t28p_a00067_last",
+   "piece": 4,
+   "legacy": 1.3881118476888332e-12,
+   "timescale": 1.2578826869003024e-13
+  },
+  {
+   "rec": "t28p_a00068_first",
+   "piece": 4,
+   "legacy": 2.188582648443571e-12,
+   "timescale": 1.80855330711438e-13
+  },
+  {
+   "rec": "t28p_a00068_last",
+   "piece": 4,
+   "legacy": 5.196953978270358e-13,
+   "timescale": 1.0486056467584604e-12
+  },
+  {
+   "rec": "t28p_a00069_last",
+   "piece": 4,
+   "legacy": 1.1903811270030928e-12,
+   "timescale": 2.956523914576792e-13
+  },
+  {
+   "rec": "t28p_a00072_first",
+   "piece": 4,
+   "legacy": 5.616618281578667e-13,
+   "timescale": 1.854849607241249e-12
+  }
+ ]
+}
