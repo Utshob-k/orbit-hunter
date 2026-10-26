@@ -19,6 +19,7 @@ const { closePerpMS, system } = await load('src/shooting.js');
 const { gstats } = await load('src/ias/bridge.js');
 const tr = JSON.parse(fs.readFileSync(path.join(root, 'data', 'deep', 'traces', label + '.json'), 'utf8'));
 settings.ias.guardRatio = tr.guard_ratio;   // the ratio K of the code that ran the trace, set before the first request
+settings.ias.firstStep = 'legacy';           // and the first step of IAS15 of the stored runs
 const all = [...tr.points.map((p) => ({ kind: 'recorded', ...p })), ...tr.unrecorded.map((p) => ({ kind: 'unrecorded', ...p }))].sort((a, b) => a.step - b.step);
 const m = 24, N = 12;
 fs.mkdirSync(path.dirname(path.resolve(out)), { recursive: true });

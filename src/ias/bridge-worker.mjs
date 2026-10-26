@@ -6,7 +6,7 @@
 import { parentPort, workerData } from 'worker_threads';
 import { spawn } from 'child_process';
 
-const { ctrlBuf, dataBuf, python, script, mode, guardRatio } = workerData;
+const { ctrlBuf, dataBuf, python, script, mode, guardRatio, firstStep, firstStepFactor } = workerData;
 const ctrl = new Int32Array(ctrlBuf), data = new Float64Array(dataBuf);
 let child = null, buf = '', current = -1, pending = false, alive = false, why = '';
 
@@ -18,7 +18,7 @@ function fail(text, code = 2) {
 
 function start() {
   alive = true; why = '';
-  child = spawn(python, [script, String(mode), String(guardRatio)], { stdio: ['pipe', 'pipe', 'inherit'], windowsHide: true });
+  child = spawn(python, [script, String(mode), String(guardRatio), String(firstStep), String(firstStepFactor)], { stdio: ['pipe', 'pipe', 'inherit'], windowsHide: true });
   const me = child;
   buf = '';
   child.stdout.setEncoding('utf8');

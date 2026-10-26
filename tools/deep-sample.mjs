@@ -15,7 +15,7 @@ const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const opt = (name, d) => { const i = process.argv.indexOf(name); return i < 0 ? d : process.argv[i + 1]; };
 const dir = opt('--dir', null) || fs.mkdtempSync(path.join(os.tmpdir(), 'orbit-hunter-sample-')), stopAfter = opt('--stop-after', '4'), jobs = opt('--jobs', '3');
 const python = settings.ias.python;
-for (const f of ['t35m.json', 't35m.json.partial.json', 't35m.json.diag.jsonl', 'points.json', 'low.json', 'w1', 'w1-queue.json', 'w1-queue.json.log', 'w1-check.json', 'w1b', 'w1b-queue.json', 'w1b-queue.json.log', 'w1b-check.json', 'summary.json', 'summary.txt'])
+for (const f of ['t35m.json', 't35m.json.partial.json', 't35m.json.diag.jsonl', 't35m.json.nodes.jsonl', 'points.json', 'low.json', 'w1', 'w1-queue.json', 'w1-queue.json.log', 'w1-check.json', 'w1b', 'w1b-queue.json', 'w1b-queue.json.log', 'w1b-check.json', 'summary.json', 'summary.txt'])
   if (fs.existsSync(path.join(dir, f))) { console.error('exists, not overwriting: ' + path.join(dir, f) + ' (give --dir a new folder)'); process.exit(2); }
 fs.mkdirSync(dir, { recursive: true });
 const t0 = Date.now(), lap = (what) => console.log(`[${((Date.now() - t0) / 1000).toFixed(0)} s] ${what}`);
@@ -25,7 +25,7 @@ const py = (script, args, quiet) => run(python, ['-B', path.join(root, 'tools', 
 const ref = JSON.parse(fs.readFileSync(path.join(root, 'data', 'deep', 't35m-replay.json'), 'utf8')), s = ref.start;
 const trace = path.join(dir, 't35m.json');
 lap('trace: ' + stopAfter + ' recorded points');
-run(process.execPath, [path.join(root, 'tools', 'family-follow-ias.mjs'), trace, String(ref.dir), String(s.u1), String(s.u2), String(s.lam), String(s.t), `--pieces=${ref.pieces}`, `--stop-after=${stopAfter}`, '--label=t35m']);
+run(process.execPath, [path.join(root, 'tools', 'family-follow-ias.mjs'), trace, String(ref.dir), String(s.u1), String(s.u2), String(s.lam), String(s.t), `--pieces=${ref.pieces}`, `--stop-after=${stopAfter}`, '--label=t35m', '--ias-first-step=legacy']);
 const points = path.join(dir, 'points.json');
 lap('points to witness');
 py('trace-witnesses.py', ['points', trace, points, '--s', String(ref.s)]);

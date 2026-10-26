@@ -29,7 +29,7 @@ let worker = null;
 function getWorker() {
   if (!worker) {
     const ias = settings.ias;
-    worker = new Worker(path.join(here, 'bridge-worker.mjs'), { workerData: { ctrlBuf, dataBuf, python: ias.python, script: path.join(here, 'ias-bridge.py'), mode: ias.adaptiveMode, guardRatio: ias.guardRatio } });
+    worker = new Worker(path.join(here, 'bridge-worker.mjs'), { workerData: { ctrlBuf, dataBuf, python: ias.python, script: path.join(here, 'ias-bridge.py'), mode: ias.adaptiveMode, guardRatio: ias.guardRatio, firstStep: ias.firstStep, firstStepFactor: ias.firstStepFactor } });
     worker.unref();
   }
   return worker;

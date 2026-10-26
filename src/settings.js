@@ -11,6 +11,8 @@ export const settings = {
   observer: null,                         // optional recorder of the corrector and of the continuation (src/ias/recorder.js)
   ias: {
     adaptiveMode: 2,                      // IAS15 adaptive_mode of REBOUND
+    firstStep: 'timescale',               // first step of IAS15 on a piece: 'timescale' sets sim.dt = firstStepFactor * the smallest d / |v_rel| of the three pairs at the start of the piece (at most the piece length); 'legacy' leaves REBOUND's default 0.001, which is what every stored run used
+    firstStepFactor: 0.01,
     python: env.ORBIT_PYTHON || (typeof process !== 'undefined' && process.platform === 'win32' ? 'python' : 'python3'),
     timeoutMs: 1800000,                   // longest wait for one answer of the Python process (30 minutes); a timeout is a failed attempt
     guardRatio: 390,                      // guard G1b trips if d2 < guardRatio * d1 at the pericentre of an encounter piece (d1, d2: the two smaller pair distances)

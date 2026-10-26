@@ -5,10 +5,13 @@
 // a failure of reg.js, a step collapse, a lost family, the step limit or the time limit; the reason is in the file. Writes OUT.json, OUT.json.partial.json every 5 points and
 // OUT.json.diag.jsonl (one line per attempt of the corrector, src/ias/recorder.js).
 // node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N]
-//                                  [--ias-mode=2] [--timeout-min=30] [--python=PY] [--guard-ratio=390]
+//                                  [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390]
 //   DIR = 1 or -1 in lam (anything else stops the driver with exit 2, as does an unknown option); t = half the period. pieces: the number of pieces of the multiple shooting, at most 250. max-dist: stop when the closest approach is above it (inf for never). stop-below: stop
 //   when the closest approach is below it (0: never). stop-after: stop after that many recorded points (the message is "stopped after N recorded points"). The other options set src/settings.js: IAS15 adaptive_mode, the longest wait for
 //   the Python process, the python executable PY (the default is that of src/settings.js: ORBIT_PYTHON, else python on Windows and python3 elsewhere), the ratio of guard G1b.
+//   ias-first-step: the first step of IAS15 on every piece ('timescale', the default of src/settings.js, or 'legacy', REBOUND's default 0.001, the setting of the traces stored in data/deep); the value is in out.settings.ias.firstStep.
+//   newton-tol: settings.newton, the stopping tolerance of the corrector residual (1e-11 by default). The 279 components of every accepted step (u1, u2, t and the 23 node states) are written
+//   to OUT.json.nodes.jsonl, one line {step, z} per accepted step, unless --no-nodes is given.
 import fs from 'fs';
 import { settings } from '../src/settings.js';
 import { startRecorder } from '../src/ias/recorder.js';
@@ -19,11 +22,11 @@ import { syzygyWord } from '../src/topology.js';
 import { relativeStability } from '../src/relative.js';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'timeout-min', 'python', 'guard-ratio'];
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outFile, dirArg, u1A, u2A, lamA, tA] = pos;
-if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--timeout-min=30] [--python=PY] [--guard-ratio=390]'); process.exit(2); }
-for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json']) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
+if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390]'); process.exit(2); }
+for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl']) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
 const pieces = Number(opt.pieces ?? 24), maxDist = opt['max-dist'] === undefined ? 0.03 : Number(opt['max-dist'] === 'inf' ? Infinity : opt['max-dist']);
@@ -31,10 +34,13 @@ if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of s
 const stopBelow = Number(opt['stop-below'] ?? 0), stopAfter = opt['stop-after'] === undefined ? Infinity : Number(opt['stop-after']);
 settings.integrator = 'ias';
 if (opt['ias-mode'] !== undefined) settings.ias.adaptiveMode = Number(opt['ias-mode']);
+if (opt['ias-first-step'] !== undefined) { if (opt['ias-first-step'] !== 'legacy' && opt['ias-first-step'] !== 'timescale') { console.error('--ias-first-step must be legacy or timescale, not ' + opt['ias-first-step']); process.exit(2); } settings.ias.firstStep = opt['ias-first-step']; }
+if (opt['newton-tol'] !== undefined) settings.newton = Number(opt['newton-tol']);
 if (opt['timeout-min'] !== undefined) settings.ias.timeoutMs = Number(opt['timeout-min']) * 60000;
 if (opt.python !== undefined) settings.ias.python = opt.python;
 if (opt['guard-ratio'] !== undefined) settings.ias.guardRatio = Number(opt['guard-ratio']);
 const recorder = startRecorder(outFile);
+const nodesFd = opt['no-nodes'] ? null : fs.openSync(outFile + '.nodes.jsonl', 'wx');
 const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
 const s0 = closePerpMS(start.u1, start.u2, start.lam, start.t, { m: pieces });
 const shifted = s0 && s0.res < 1e-9 ? { u1: s0.u1, u2: s0.u2, lam: s0.lam, t: s0.t, m: pieces } : null;
@@ -53,6 +59,7 @@ let traceStop = null, r;
 try { r = huntArclength(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, dir, force: true, maxMs, all: true, hMax: 0.2, maxSteps: 6000,
   trace: (step, lam, th, h, it, Y) => {
     const n = Y.length - 1, u1 = Y[0], u2 = Y[1], t = Y[2];
+    if (nodesFd !== null) fs.writeSync(nodesFd, JSON.stringify({ step, z: Array.from(Y.slice(0, n)) }) + '\n');
     const key = [u1, u2, t, lam];
     const kl = keys.length ? keys[keys.length - 1] : null; const cum = kl ? kl.cum + Math.hypot(key[0] - kl.k[0], key[1] - kl.k[1], key[2] - kl.k[2], key[3] - kl.k[3]) : 0;   // path length along the accepted points
     if (step > 60) for (let i = 0; i < keys.length; i++) {
