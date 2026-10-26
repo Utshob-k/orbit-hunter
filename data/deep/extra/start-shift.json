@@ -1,0 +1,355 @@
+{
+ "what": "the start of a stored trace (traces/<label>.json, field start) is the start after the shift that tools/family-follow-ias.mjs makes first (closePerpMS with 24 pieces, first step legacy): command_line_start is what the original run was given. A new run given the stored start shifts it again; where that moves it (second_shift_from_stored_start > 0) the run differs from the stored trace from the second accepted step on. runs: first accepted steps of new runs against the stored trace (first step legacy)",
+ "columns": "shift_from_command_line and second_shift_from_stored_start: largest relative change of u1, u2, t",
+ "rows": [
+  {
+   "label": "t12p",
+   "command_line_start": {
+    "u1": -0.07658126130001015,
+    "u2": -1.3277684145585715,
+    "lam": 0.6516541108763613,
+    "t": 2.8044294589959033
+   },
+   "stored_start": {
+    "u1": -0.07658126129918556,
+    "u2": -1.3277684145587876,
+    "lam": 0.6516541108763613,
+    "t": 2.804429459462336
+   },
+   "shift_from_command_line": 1.6631998668001803e-10,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t14p",
+   "command_line_start": {
+    "u1": -0.15355345497375922,
+    "u2": 1.2141438750369977,
+    "lam": 0.37066609526831684,
+    "t": 4.539427773371559
+   },
+   "stored_start": {
+    "u1": -0.1535534545065661,
+    "u2": 1.2141438750495102,
+    "lam": 0.37066609526831684,
+    "t": 4.539427769858362
+   },
+   "shift_from_command_line": 3.0425438333888647e-09,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t28m",
+   "command_line_start": {
+    "u1": -0.5851535880227771,
+    "u2": 0.16029118765081057,
+    "lam": 0.04916852336513334,
+    "t": 3.5994495405499567
+   },
+   "stored_start": {
+    "u1": -0.5851535880205387,
+    "u2": 0.16029118764974498,
+    "lam": 0.04916852336513334,
+    "t": 3.5994495404778637
+   },
+   "shift_from_command_line": 2.0028895370161042e-11,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t28p",
+   "command_line_start": {
+    "u1": -0.5201741802458193,
+    "u2": 0.23049727433531805,
+    "lam": 0.18550792432494073,
+    "t": 3.6088340858336014
+   },
+   "stored_start": {
+    "u1": -0.520174180179084,
+    "u2": 0.23049727424496042,
+    "lam": 0.18550792432494073,
+    "t": 3.608834086444206
+   },
+   "shift_from_command_line": 3.920117420000037e-10,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t35m",
+   "command_line_start": {
+    "u1": 0.04014114686920327,
+    "u2": 0.6406314635068663,
+    "lam": 0.6653529332738678,
+    "t": 2.0574775631566076
+   },
+   "stored_start": {
+    "u1": 0.04014114686920327,
+    "u2": 0.6406314635068663,
+    "lam": 0.6653529332738678,
+    "t": 2.0574775631566076
+   },
+   "shift_from_command_line": 0.0,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t35p",
+   "command_line_start": {
+    "u1": -0.0016512158343312076,
+    "u2": 1.10125501444016,
+    "lam": 0.7304113519156348,
+    "t": 2.15644483562722
+   },
+   "stored_start": {
+    "u1": -0.0016512158124144397,
+    "u2": 1.1012550144352566,
+    "lam": 0.7304113519156348,
+    "t": 2.156444835715249
+   },
+   "shift_from_command_line": 1.3273109077585805e-08,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t44m",
+   "command_line_start": {
+    "u1": -0.37322129340277255,
+    "u2": 0.46634484394483267,
+    "lam": 0.23332876562866695,
+    "t": 4.631157998712088
+   },
+   "stored_start": {
+    "u1": -0.37322129337988913,
+    "u2": 0.4663448439716718,
+    "lam": 0.23332876562866695,
+    "t": 4.6311579985646985
+   },
+   "shift_from_command_line": 6.131326852918154e-11,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {}
+  },
+  {
+   "label": "t44p",
+   "command_line_start": {
+    "u1": -0.3537991336372494,
+    "u2": 0.4892555716475317,
+    "lam": 0.23955434734945008,
+    "t": 4.65865637031737
+   },
+   "stored_start": {
+    "u1": -0.3537991336187769,
+    "u2": 0.48925557166024736,
+    "lam": 0.23955434734945008,
+    "t": 4.658656370126288
+   },
+   "shift_from_command_line": 5.221183307169082e-11,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 1.4186915165650779e-12,
+   "runs": {}
+  },
+  {
+   "label": "t62m",
+   "command_line_start": {
+    "u1": -0.3608230785422193,
+    "u2": 0.495143505671977,
+    "lam": 0.2600367265090116,
+    "t": 6.025456255902029
+   },
+   "stored_start": {
+    "u1": -0.3608230785421222,
+    "u2": 0.4951435056721017,
+    "lam": 0.2600367265090116,
+    "t": 6.025456255899587
+   },
+   "shift_from_command_line": 4.052145384615574e-13,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 0,
+   "runs": {
+    "command_line": {
+     "accepted_steps_compared": 23,
+     "bit_identical_steps": 23,
+     "first_differing_accepted_step": null,
+     "largest_relative_difference": 0.0,
+     "cross_checked": 170,
+     "replaced": 0
+    },
+    "stored": {
+     "accepted_steps_compared": 23,
+     "bit_identical_steps": 23,
+     "first_differing_accepted_step": null,
+     "largest_relative_difference": 0.0,
+     "cross_checked": 168,
+     "replaced": 0
+    }
+   }
+  },
+  {
+   "label": "t62p",
+   "command_line_start": {
+    "u1": -0.35029023040772134,
+    "u2": 0.5086418062208198,
+    "lam": 0.26552686357726374,
+    "t": 6.035303509659006
+   },
+   "stored_start": {
+    "u1": -0.35029023075730065,
+    "u2": 0.50864180551571,
+    "lam": 0.26552686357726374,
+    "t": 6.035303507528021
+   },
+   "shift_from_command_line": 1.3862599175748462e-09,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 2.6736725848144028e-12,
+   "runs": {}
+  },
+  {
+   "label": "t72m",
+   "command_line_start": {
+    "u1": -0.34695164928857775,
+    "u2": 0.5169438844437719,
+    "lam": 0.2777381905662087,
+    "t": 7.3687955213759055
+   },
+   "stored_start": {
+    "u1": -0.3469516492882594,
+    "u2": 0.5169438844441089,
+    "lam": 0.2777381905662087,
+    "t": 7.368795521343485
+   },
+   "shift_from_command_line": 4.399672725596332e-12,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 2.347488521289002e-12,
+   "runs": {
+    "command_line": {
+     "accepted_steps_compared": 134,
+     "bit_identical_steps": 134,
+     "first_differing_accepted_step": null,
+     "largest_relative_difference": 0.0,
+     "cross_checked": 10814,
+     "replaced": 2414
+    }
+   }
+  },
+  {
+   "label": "t72p",
+   "command_line_start": {
+    "u1": -0.34686715526217315,
+    "u2": 0.5170490249626505,
+    "lam": 0.2777924092768135,
+    "t": 7.368807103541708
+   },
+   "stored_start": {
+    "u1": -0.34686715526287204,
+    "u2": 0.517049024961916,
+    "lam": 0.2777924092768135,
+    "t": 7.3688071036172165
+   },
+   "shift_from_command_line": 1.0247043692392777e-11,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 4.681590590509316e-12,
+   "runs": {
+    "command_line": {
+     "accepted_steps_compared": 20,
+     "bit_identical_steps": 20,
+     "first_differing_accepted_step": null,
+     "largest_relative_difference": 0.0,
+     "cross_checked": 3219,
+     "replaced": 511
+    },
+    "stored": {
+     "accepted_steps_compared": 20,
+     "bit_identical_steps": 0,
+     "first_differing_accepted_step": 1,
+     "largest_relative_difference": 3.105247143055656e-10,
+     "cross_checked": 3219,
+     "replaced": 558
+    }
+   }
+  },
+  {
+   "label": "t81m",
+   "command_line_start": {
+    "u1": -0.2862924749236854,
+    "u2": 0.9967800093305745,
+    "lam": 0.5348371745869418,
+    "t": 7.810293876237873
+   },
+   "stored_start": {
+    "u1": -0.28629247492308135,
+    "u2": 0.9967800093303463,
+    "lam": 0.5348371745869418,
+    "t": 7.810293876147046
+   },
+   "shift_from_command_line": 1.1629127276722199e-11,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 4.3361035679585187e-13,
+   "runs": {
+    "command_line": {
+     "accepted_steps_compared": 20,
+     "bit_identical_steps": 20,
+     "first_differing_accepted_step": null,
+     "largest_relative_difference": 0.0,
+     "cross_checked": 1005,
+     "replaced": 0
+    },
+    "stored": {
+     "accepted_steps_compared": 20,
+     "bit_identical_steps": 0,
+     "first_differing_accepted_step": 1,
+     "largest_relative_difference": 3.070253651164665e-12,
+     "cross_checked": 1005,
+     "replaced": 0
+    }
+   }
+  },
+  {
+   "label": "t81p",
+   "command_line_start": {
+    "u1": -0.2862924749236854,
+    "u2": 0.9967800093305745,
+    "lam": 0.5348371745869418,
+    "t": 7.810293876237873
+   },
+   "stored_start": {
+    "u1": -0.28629247492308135,
+    "u2": 0.9967800093303463,
+    "lam": 0.5348371745869418,
+    "t": 7.810293876147046
+   },
+   "shift_from_command_line": 1.1629127276722199e-11,
+   "shift_reproduces_stored_start": true,
+   "second_shift_from_stored_start": 4.3361035679585187e-13,
+   "runs": {}
+  }
+ ],
+ "earlier_runs_from_the_stored_start": [
+  {
+   "stretch": "t35m",
+   "first_step": "legacy",
+   "compared": 31,
+   "bit_identical": true,
+   "max_rel_diff": 0
+  },
+  {
+   "stretch": "t44m",
+   "first_step": "legacy",
+   "compared": 100,
+   "bit_identical": true,
+   "max_rel_diff": 0
+  },
+  {
+   "stretch": "t72m",
+   "first_step": "legacy",
+   "compared": 134,
+   "bit_identical": false,
+   "max_rel_diff": 0.00011877915841132149
+  }
+ ]
+}
