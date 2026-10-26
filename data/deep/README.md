@@ -23,7 +23,7 @@ The complete outputs behind these files (the full results of `tools/witness.py` 
 - `reclose-t35m-gap.json`: accepted steps 9, 10 and 11 of a continuation of the family t35 - (start values), the same orbits re-closed at the same lam by `tools/reclose.py`, and the witness minimum
   of the pair distance and the closure of the start values from `tools/witness.py --preset w1b` (`test/reclose.test.js`).
 - `t35m-replay.json`: the start of that continuation, its first 10 recorded points on the machine of the stored run and the loop steps of the accepted steps that were not recorded there; `test/replay.test.js` takes the start from here and compares the accepted steps of the continuation (lam, u1, u2, t) with `traces/t35m.json` to 1e-9 relative, and `node tools/deep-sample.mjs` takes its start from here.
-- `henon-t35m.json`: the stored median and largest deviation from Hénon's relation dT* = -pi L* d(turns) between consecutive points of `traces/t35m.json` (`test/henon.test.js`).
+- `henon-t35m.json`: the stored median and largest deviation from Hénon's relation dT* = pi Ls d(turns) with the signed Ls = L |E|^(1/2) (for t35 -, where L < 0, dT* = -pi L* d(turns)) between consecutive points of `traces/t35m.json` (`test/henon.test.js`).
 - `sample/expected-summary.txt`: the summary that `node tools/deep-sample.mjs` has to print; `sample/output.txt` is the whole output of the stored run with the times (the name of its temporary folder is replaced by `<temp folder>`).
 
 The numbers were computed on Windows 11 with Node v24.15.0, Python 3.14.6, REBOUND 5.2.2 and mpmath 1.4.1. On that machine the end states of `src/ias/reg.js` and the replayed accepted steps are equal to

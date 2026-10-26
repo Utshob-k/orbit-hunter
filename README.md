@@ -98,7 +98,7 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 Node 18 or newer, nothing to install for the JavaScript code (the ias route below was run only with v24.15.0). Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
 
 ```
-npm test                              # the tests of the default route (Dormand-Prince), about 20 seconds
+npm test                              # the tests of the default route (Dormand-Prince), 10 to 20 seconds
 python -m http.server                 # then open http://localhost:8000 (needs WebGPU)
 node tools/nu-map.mjs                 # the 41 places where satellites can leave the R family
 node tools/branch-summary.mjs         # how every satellite continuation ended

@@ -8,7 +8,7 @@ Node v24.15.0 (the only version this route was run with; Node 18 or newer for th
 
 ```
 pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
-npm test                 # the tests of the default route (Dormand-Prince), about 20 seconds
+npm test                 # the tests of the default route (Dormand-Prince), 10 to 20 seconds
 npm run test:ias         # the tests of this route, 4 to 6 minutes
 ```
 
@@ -81,7 +81,7 @@ Times are from the machine of the stored runs (Windows 11, one core per job).
 | `reg.js` for two unequal masses (1 and 0.1, e = 0.9, one period) against the exact Kepler flow with mu = m1 + m2: error 5.2e-16, limit 2e-14; energy and angular momentum kept | `node test/reg-unequal.test.js` (the row: `python tools/gate-a-unequal.py OUT.json`) | a second |
 | the 12 x 12 matrix of `reg.js` on six encounter pieces of stored points (closest approach 4e-4 down to 7e-10): at most 1.1e-9 of max\|M\| from central differences with Richardson extrapolation, symplectic defect at most 2.3e-12 of max\|M\|^2 | `node test/reg-matrix.test.js` | a second |
 | the multiple precision flow of the witnesses against the exact Kepler flow, one period, periapsis distance 1e-7 to 1e-10: error 5.9e-24 (1e-7), 4.5e-22 (1e-8), 5.5e-21 (1e-10), limit 1e-17, no collapse of the step; the 40 digit flow of the preset w1 at q = 1e-6 and 1e-7: error 8.7e-21 and 4.7e-19, same limit | `python tools/witness-acceptance.py` (q = 1e-8 and 1e-10; `--q all` for the seven stored ones); `python tools/kepler-check.py 1e-7 OUT.json --digits 40 --tol 26 --floor 1e-14` (also 1e-6; stored in `data/deep/extra/w1-acceptance.json`) | 15 s per q; 10 s for each w1 row |
-| Hénon's relation dT* = -pi L* d(turns) on the 1690 points of the trace of t35 -: 155 pairs, median relative deviation 3.7e-7, largest 3.2e-5 | `node test/henon.test.js` | 1 s |
+| Hénon's relation dT* = pi Ls d(turns) with the signed Ls = L \|E\|^(1/2) (for t35 -, where L < 0, dT* = -pi L* d(turns) with L* = \|L\| \|E\|^(1/2)) on the 1690 points of the trace of t35 -: 155 pairs, median relative deviation 3.7e-7, largest 3.2e-5 | `node test/henon.test.js` | 1 s |
 | the re-closer on accepted steps 9, 10 and 11 of the t35 - trace: converged within 10 updates, the same orbit as the stored values to 3e-14, and the witnessed minima 1.018e-8, 7.320e-10 and 1.872e-9 | `node test/reclose.test.js` | 2.5 min |
 | the first 31 accepted steps of the continuation of t35 - from the stored start (10 recorded points and the unrecorded steps), compared with the stored trace: the step numbers equal, lam, u1, u2 and t to 1e-9 relative; which steps are recorded can differ between machines | `node test/replay.test.js` | 3 min |
 | the smallest witnessed value of each of the four traces (t35 -: 7.320e-10 at step 10, with the unchecked midpoint 6.562e-11 between steps 10 and 11 next to it; t44 -: 1.907e-9 at step 34; t62 -: 8.573e-9 at step 9; t72 -: 1.611e-8 at step 97), the further minima below 1e-6 (rises of a factor 2 over witnessed points, as the reading defines them), the counts of witnessed points | `python tools/trace-witnesses.py reading data/deep/witnesses/t35m.json [--trace data/deep/traces/t35m.json]` (also t44m, t62m, t72m; with `--trace` it also prints how many recorded points were not selected for witnessing and their step ranges) | 0.3 s each |

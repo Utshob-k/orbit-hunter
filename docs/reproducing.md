@@ -5,7 +5,7 @@ This file holds a part of the former README, moved here on 2026-10-10 (only head
 ## Running it
 
 ```
-npm test                       # the tests of the default route (Dormand-Prince), about 20 seconds, node 18+ (the ias route was run only with v24.15.0; its tests are `npm run test:ias`)
+npm test                       # the tests of the default route (Dormand-Prince), 10 to 20 seconds, node 18+ (the ias route was run only with v24.15.0; its tests are `npm run test:ias`)
 python -m http.server          # then open http://localhost:8000 (needs WebGPU)
 ```
 

@@ -1,6 +1,7 @@
-// Henon's relation dT* = -pi L* d(turns) between consecutive points of a stored trace of the family t35 - (data/deep/traces/t35m.json, 1690 points, direction -1 in lam): for the pairs
-// with |d(turns)| of 1e-6 or more, L* the mean of |L*| of the pair, the relative deviation |dT* - s| / max(|dT*|, |s|) with s = -pi L* d(turns). PASS if the median is below 1e-6 and the largest
-// below 1e-4 and both equal the stored values (median 3.7e-7, largest 3.2e-5 over 155 pairs). takes about a second.
+// Henon's relation dT* = pi Ls d(turns) with Ls = L |E|^(1/2), keeping the sign of L, between consecutive points of a stored trace of the family t35 - (data/deep/traces/t35m.json, 1690 points,
+// direction -1 in lam). L is negative on t35 -, so the relation reads dT* = -pi L* d(turns) with L* = |L| |E|^(1/2) as stored in the file, which is the form used below; for a family with L > 0 the
+// sign is the other one. For the pairs with |d(turns)| of 1e-6 or more, L* the mean of |L*| of the pair, the relative deviation |dT* - s| / max(|dT*|, |s|) with s = -pi L* d(turns). PASS if the
+// median is below 1e-6 and the largest below 1e-4 and both equal the stored values (median 3.7e-7, largest 3.2e-5 over 155 pairs). takes about a second.
 import fs from 'fs';
 
 let fail = 0;
