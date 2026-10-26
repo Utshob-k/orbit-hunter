@@ -382,7 +382,7 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
     if (settings.observer) settings.observer.note({ outcome: accept ? 'tangent ok' : (c.ok ? 'tangent rejected' : 'newton failed') });
     if (!accept) {
       h /= 2;
-      if (h < 1e-9) return end('lost the family near lam=' + Y[n].toFixed(4));
+      if (h < 1e-9) return end('step length below 1e-9 (lost the family) near lam=' + Y[n].toFixed(4));
       continue;
     }
     const thNew = thetaOf(solOf(c.Y, m));
