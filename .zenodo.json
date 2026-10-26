@@ -1,0 +1,18 @@
+{
+  "upload_type": "software",
+  "title": "Orbit Hunter 0.3.0, with PeriCont: continuation of relative periodic orbits of the planar equal-mass three-body problem through close two-body approaches",
+  "creators": [
+    { "name": "Kandel, Utshob" }
+  ],
+  "version": "0.3.0",
+  "license": "mit",
+  "keywords": [
+    "three-body problem",
+    "periodic orbits",
+    "WebGPU",
+    "PeriCont",
+    "regularisation",
+    "continuation"
+  ],
+  "description": "Orbit Hunter is a search for periodic orbits of the planar three-body problem with equal masses and non-zero angular momentum: a WebGPU search in the browser, and double precision code that closes and checks every candidate. Version 0.3.0 adds PeriCont (the ias route), which follows families of relative periodic orbits through close approaches of two bodies, with REBOUND IAS15, a regularised integrator for the encounter pieces, guards for a third body and multiple precision witnesses of the stored points. The code (src, tools, test) is under the MIT licence (LICENSE); the data, the docs and the text files are under CC BY 4.0 (LICENSE-DATA); versions up to 0.2.33 are under CC BY 4.0."
+}
