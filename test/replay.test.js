@@ -19,7 +19,7 @@ const stored = JSON.parse(fs.readFileSync(path.join(root, 'data', 'deep', 'trace
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'orbit-hunter-'));
 const out = path.join(dir, 'replay.json');
 const s = ref.start;
-const run = spawnSync(process.execPath, [path.join(root, 'tools', 'family-follow-ias.mjs'), out, String(ref.dir), String(s.u1), String(s.u2), String(s.lam), String(s.t), `--pieces=${ref.pieces}`, `--stop-after=${ref.points.length}`, '--minutes=60'], { cwd: root, encoding: 'utf8' });
+const run = spawnSync(process.execPath, [path.join(root, 'tools', 'family-follow-ias.mjs'), out, String(ref.dir), String(s.u1), String(s.u2), String(s.lam), String(s.t), `--pieces=${ref.pieces}`, `--stop-after=${ref.points.length}`, '--minutes=60', '--ias-first-step=legacy'], { cwd: root, encoding: 'utf8' });
 console.log(run.stdout.trim());
 if (!fs.existsSync(out)) { check('the driver runs', false, String(run.error || run.stderr).slice(0, 300)); process.exit(1); }
 const res = JSON.parse(fs.readFileSync(out, 'utf8'));
