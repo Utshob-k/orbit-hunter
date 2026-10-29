@@ -359,7 +359,8 @@ function correct0(Yp, tau, m, t0) {
     let accepted = false;
     for (let a = 1; a > 1 / 16; a /= 2) {
       const Yn = Float64Array.from(Y, (v, i) => v + a * d[i]);
-      if (Yn[2] < 0.3 * t0 || Yn[2] > 3 * t0 || Math.abs(Yn[n]) > 1.2) continue;
+      // the bound on t guards against a jump to another orbit within one Newton solve, not against the family changing its period
+      if (Yn[2] < 0.3 * Yp[2] || Yn[2] > 3 * Yp[2] || Math.abs(Yn[n]) > 1.2) continue;
       const Fnew = residual(Yn.subarray(0, n), Yn[n], m);
       if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; break; }
     }
@@ -454,7 +455,7 @@ function correctNat0(z0, lam, m, t0) {
     let accepted = false;
     for (let a = 1; a > 1 / 16; a /= 2) {
       const zn = Float64Array.from(z, (v, i) => v + a * d[i]);
-      if (zn[2] < 0.3 * t0 || zn[2] > 3 * t0) continue;
+      if (zn[2] < 0.3 * z0[2] || zn[2] > 3 * z0[2]) continue;
       const Fnew = residual(zn, lam, m);
       if (Fnew && sup(Fnew) < Fn) { z = zn; accepted = true; break; }
     }
