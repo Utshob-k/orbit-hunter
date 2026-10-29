@@ -1,5 +1,5 @@
 {
- "what": "the default route (Dormand-Prince, settings.integrator dp45, tools/family-follow.mjs, tolerance of the corrector 1e-11, 24 pieces, direction -1, 60 minutes) from the start of t35 - (data/deep/t35m-replay.json) and from the start of its earlier trace (data/deep/traces/earlier/t35m.json), and the closing of the orbits of that earlier trace with the same code. Made by drafts-side scripts of the round; the commands are below.",
+ "what": "the default route (Dormand-Prince, settings.integrator dp45, tools/family-follow.mjs, tolerance of the corrector 1e-11, 24 pieces, direction -1, 60 minutes) from the start of t35 - (data/deep/t35m-replay.json) and from the start of its earlier trace (data/deep/traces/earlier/t35m.json), and the closing of the orbits of that earlier trace with the same code. Made by running tools/family-follow.mjs with the two commands below; the closing of the orbits of the earlier trace by calling closePerpMS of src/shooting.js (24 pieces, Dormand-Prince) at the stored values of the start and of each point.",
  "commands": [
   "node tools/family-follow.mjs OUT.json -1 60 0.04014114686920327 0.6406314635068663 0.6653529332738678 2.0574775631566076 t35m-dp45 24",
   "node tools/family-follow.mjs OUT.json -1 60 0.038540762675020226 0.663369567430389 0.6684119584659772 2.061909380988913 t35m-dp45-earlier 24"

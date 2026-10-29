@@ -1,0 +1,481 @@
+{
+ "what": "the default route (Dormand-Prince, settings.integrator dp45, tools/family-follow.mjs, tolerance of the corrector 1e-11, 24 pieces, direction -1, 60 minutes) from two starts of each of t35 -, t44 -, t62 - and t72 -: the command-line start (for t35 - the replay start, data/deep/t35m-replay.json; for the others the field command_line_start of data/deep/extra/start-shift.json) and the start of the earlier trace (data/deep/traces/earlier/<label>.json, field start). Made by running tools/family-follow.mjs with the commands below; where the start could not be moved onto the family, the residuals of closePerpMS (src/shooting.js) at the start values with 8 to 64 pieces; the t35 - rows are copied from dp45-same-start.json",
+ "commands": [
+  "node tools/family-follow.mjs OUT.json -1 60 0.04014114686920327 0.6406314635068663 0.6653529332738678 2.0574775631566076 t35m-dp45 24",
+  "node tools/family-follow.mjs OUT.json -1 60 0.038540762675020226 0.663369567430389 0.6684119584659772 2.061909380988913 t35m-dp45-earlier 24",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.37322129340277255 0.46634484394483267 0.23332876562866695 4.631157998712088 t44m-dp45 24",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.3537991336372494 0.4892555716475317 0.23955434734945008 4.65865637031737 t44m-dp45-earlier 24",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.3608230785422193 0.495143505671977 0.2600367265090116 6.025456255902029 t62m-dp45 24",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.35029023040772134 0.5086418062208198 0.26552686357726374 6.035303509659006 t62m-dp45-earlier 24",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.34695164928857775 0.5169438844437719 0.2777381905662087 7.3687955213759055 t72m-dp45 24",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.3469078898537304 0.5169983492663192 0.27776626203721416 7.368801593568835 t72m-dp45-earlier 24"
+ ],
+ "summary": [
+  {
+   "family": "t35 -",
+   "start": "replay start (the command-line start)",
+   "closes_the_start": false,
+   "accepted_steps": 0,
+   "stops": "could not move the start onto the family",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t35 -",
+   "start": "start of the earlier trace",
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.6684",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t44 -",
+   "start": "command-line start",
+   "closes_the_start": false,
+   "accepted_steps": 0,
+   "stops": "could not move the start onto the family",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t44 -",
+   "start": "start of the earlier trace",
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2396",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t62 -",
+   "start": "command-line start",
+   "closes_the_start": false,
+   "accepted_steps": 0,
+   "stops": "could not move the start onto the family",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t62 -",
+   "start": "start of the earlier trace",
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2655",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t72 -",
+   "start": "command-line start",
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2777",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t72 -",
+   "start": "start of the earlier trace",
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2778",
+   "smallest_tool_closest_approach": null
+  }
+ ],
+ "rows": [
+  {
+   "family": "t35 -",
+   "start_kind": "replay start (the command-line start)",
+   "closes_the_start": false,
+   "start": {
+    "u1": 0.04014114686920327,
+    "u2": 0.6406314635068663,
+    "lam": 0.6653529332738678,
+    "t": 2.0574775631566076
+   },
+   "tool_closest_approach_of_ias_run": 8.216717976359334e-07,
+   "result": "could not move the start onto the family: closePerpMS (the first step of the driver, condition residual below 1e-9) gives a residual of 2.8e-6 (8 pieces), 7.2e-7 (16), 8.3e-7 (24), 1.0e-7 (32), 8.9e-7 (48), 1.2e-6 (64); no accepted step, no point, so no witness of last points",
+   "residual_by_pieces": {
+    "8": 2.83e-06,
+    "16": 7.16e-07,
+    "24": 8.34e-07,
+    "32": 1.04e-07,
+    "48": 8.88e-07,
+    "64": 1.21e-06
+   }
+  },
+  {
+   "family": "t35 -",
+   "start_kind": "start of the earlier trace",
+   "closes_the_start": true,
+   "start": {
+    "u1": 0.038540762675020226,
+    "u2": 0.663369567430389,
+    "lam": 0.6684119584659772,
+    "t": 2.061909380988913
+   },
+   "shifted": {
+    "u1": 0.038540762484147104,
+    "u2": 0.663369567154734,
+    "lam": 0.6684119584659772,
+    "t": 2.0619093739154155,
+    "m": 24
+   },
+   "why": "step length below 1e-9 (lost the family) near lam=0.6684",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_reached": 0.6684119584659772,
+   "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: the step length falls below 1e-9 after 28 attempts of the corrector; no accepted step, no point, so no witness of last points"
+  },
+  {
+   "family": "t44 -",
+   "start_kind": "command-line start",
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.37322129340277255 0.46634484394483267 0.23332876562866695 4.631157998712088 t44m-dp45 24",
+   "start": {
+    "u1": -0.37322129340277255,
+    "u2": 0.46634484394483267,
+    "lam": 0.23332876562866695,
+    "t": 4.631157998712088
+   },
+   "shifted": null,
+   "closes_the_start": false,
+   "residual_by_pieces": {
+    "8": 4.954229249065634e-10,
+    "16": 9.496282787901933e-10,
+    "24": 2.7762148135934694e-09,
+    "32": 7.70378205672273e-10,
+    "48": 4.667572994776492e-10,
+    "64": 6.396589924406726e-10
+   },
+   "why": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "points": 0,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "could not move the start onto the family: closePerpMS (the first step of the driver, condition residual below 1e-9) gives residuals 5e-10 (8 pieces), 9.5e-10 (16 pieces), 2.8e-09 (24 pieces), 7.7e-10 (32 pieces), 4.7e-10 (48 pieces), 6.4e-10 (64 pieces); no accepted step, no point, so no witness of last points. With 8, 16, 32, 48, 64 pieces the residual is below 1e-9 (the run was given 24 pieces, as for t35 -; it was not repeated with another number)"
+  },
+  {
+   "family": "t44 -",
+   "start_kind": "start of the earlier trace",
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3537991336372494 0.4892555716475317 0.23955434734945008 4.65865637031737 t44m-dp45-earlier 24",
+   "start": {
+    "u1": -0.3537991336372494,
+    "u2": 0.4892555716475317,
+    "lam": 0.23955434734945008,
+    "t": 4.65865637031737
+   },
+   "shifted": {
+    "u1": -0.35379913362503185,
+    "u2": 0.48925557165591677,
+    "lam": 0.23955434734945008,
+    "t": 4.658656370176254,
+    "m": 24
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2396",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.23955434734945008,
+   "lam_reached": 0.23955434734945008,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2396; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  },
+  {
+   "family": "t62 -",
+   "start_kind": "command-line start",
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3608230785422193 0.495143505671977 0.2600367265090116 6.025456255902029 t62m-dp45 24",
+   "start": {
+    "u1": -0.3608230785422193,
+    "u2": 0.495143505671977,
+    "lam": 0.2600367265090116,
+    "t": 6.025456255902029
+   },
+   "shifted": null,
+   "closes_the_start": false,
+   "residual_by_pieces": {
+    "8": 7.646672295358314e-09,
+    "16": 1.5210766951545551e-09,
+    "24": 1.2670545376791686e-09,
+    "32": 4.525089192242149e-10,
+    "48": 4.5777626134224647e-10,
+    "64": 4.5155335026692e-10
+   },
+   "why": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "points": 0,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "could not move the start onto the family: closePerpMS (the first step of the driver, condition residual below 1e-9) gives residuals 7.6e-09 (8 pieces), 1.5e-09 (16 pieces), 1.3e-09 (24 pieces), 4.5e-10 (32 pieces), 4.6e-10 (48 pieces), 4.5e-10 (64 pieces); no accepted step, no point, so no witness of last points. With 32, 48, 64 pieces the residual is below 1e-9 (the run was given 24 pieces, as for t35 -; it was not repeated with another number)"
+  },
+  {
+   "family": "t62 -",
+   "start_kind": "start of the earlier trace",
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.35029023040772134 0.5086418062208198 0.26552686357726374 6.035303509659006 t62m-dp45-earlier 24",
+   "start": {
+    "u1": -0.35029023040772134,
+    "u2": 0.5086418062208198,
+    "lam": 0.26552686357726374,
+    "t": 6.035303509659006
+   },
+   "shifted": {
+    "u1": -0.35029023077934024,
+    "u2": 0.5086418054951428,
+    "lam": 0.26552686357726374,
+    "t": 6.035303508591326,
+    "m": 24
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2655",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.26552686357726374,
+   "lam_reached": 0.26552686357726374,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2655; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  },
+  {
+   "family": "t72 -",
+   "start_kind": "command-line start",
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.34695164928857775 0.5169438844437719 0.2777381905662087 7.3687955213759055 t72m-dp45 24",
+   "start": {
+    "u1": -0.34695164928857775,
+    "u2": 0.5169438844437719,
+    "lam": 0.2777381905662087,
+    "t": 7.3687955213759055
+   },
+   "shifted": {
+    "u1": -0.34695164932984734,
+    "u2": 0.5169438844004076,
+    "lam": 0.2777381905662087,
+    "t": 7.3687955256376725,
+    "m": 24
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2777",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.2777381905662087,
+   "lam_reached": 0.2777381905662087,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2777; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  },
+  {
+   "family": "t72 -",
+   "start_kind": "start of the earlier trace",
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3469078898537304 0.5169983492663192 0.27776626203721416 7.368801593568835 t72m-dp45-earlier 24",
+   "start": {
+    "u1": -0.3469078898537304,
+    "u2": 0.5169983492663192,
+    "lam": 0.27776626203721416,
+    "t": 7.368801593568835
+   },
+   "shifted": {
+    "u1": -0.3469078899060746,
+    "u2": 0.5169983491837167,
+    "lam": 0.27776626203721416,
+    "t": 7.368801595979688,
+    "m": 24
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2778",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.27776626203721416,
+   "lam_reached": 0.27776626203721416,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2778; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  }
+ ],
+ "closing_of_the_earlier_trace_of_t35_with_dp45": {
+  "what": "closePerpMS with the Dormand-Prince flow, 24 pieces, at the stored values of the start and of the 22 points of the earlier trace; ias_tool_minDist is the closest approach of the tool (Dormand-Prince integration of the orbit) stored with the point; closes = residual below 1e-9 (the condition of the driver); the tolerance of the corrector is 1e-11",
+  "rows": [
+   {
+    "id": "start",
+    "lam": 0.6684119584659772,
+    "ias_tool_minDist": null,
+    "dp45_residual": 8.835776554860786e-11,
+    "closes": true,
+    "seconds": 0.906
+   },
+   {
+    "id": "step 1",
+    "lam": 0.6681524705165293,
+    "ias_tool_minDist": 3.734352846255768e-05,
+    "dp45_residual": 1.6834800220522084e-09,
+    "closes": false,
+    "seconds": 0.653
+   },
+   {
+    "id": "step 2",
+    "lam": 0.6679111767109516,
+    "ias_tool_minDist": 3.218894593423325e-05,
+    "dp45_residual": 1.1617213857562092e-09,
+    "closes": false,
+    "seconds": 0.969
+   },
+   {
+    "id": "step 3",
+    "lam": 0.6676866503700468,
+    "ias_tool_minDist": 2.772629052796294e-05,
+    "dp45_residual": 1.8221862907452646e-09,
+    "closes": false,
+    "seconds": 2.821
+   },
+   {
+    "id": "step 4",
+    "lam": 0.667477574732204,
+    "ias_tool_minDist": 2.3861271206559933e-05,
+    "dp45_residual": 1.6523178381078196e-09,
+    "closes": false,
+    "seconds": 1.976
+   },
+   {
+    "id": "step 5",
+    "lam": 0.6672827371808997,
+    "ias_tool_minDist": 2.0512448821800776e-05,
+    "dp45_residual": 3.476641197153185e-10,
+    "closes": true,
+    "seconds": 4.142
+   },
+   {
+    "id": "step 6",
+    "lam": 0.6671010229426557,
+    "ias_tool_minDist": 1.7613177674391762e-05,
+    "dp45_residual": 7.721280281813847e-10,
+    "closes": true,
+    "seconds": 2.306
+   },
+   {
+    "id": "step 7",
+    "lam": 0.6669314085318245,
+    "ias_tool_minDist": 1.5098413322169075e-05,
+    "dp45_residual": 1.3856563896297303e-08,
+    "closes": false,
+    "seconds": 4.733
+   },
+   {
+    "id": "step 8",
+    "lam": 0.6667729551909405,
+    "ias_tool_minDist": 1.2926181434584412e-05,
+    "dp45_residual": 5.401945557537147e-10,
+    "closes": true,
+    "seconds": 1.001
+   },
+   {
+    "id": "step 9",
+    "lam": 0.6666248024302247,
+    "ias_tool_minDist": 1.104196272773455e-05,
+    "dp45_residual": 2.1134774819131508e-08,
+    "closes": false,
+    "seconds": 1.307
+   },
+   {
+    "id": "step 10",
+    "lam": 0.6664861618298514,
+    "ias_tool_minDist": 9.410565908736416e-06,
+    "dp45_residual": 7.097388821097894e-08,
+    "closes": false,
+    "seconds": 0.989
+   },
+   {
+    "id": "step 11",
+    "lam": 0.6663563111364432,
+    "ias_tool_minDist": 7.967709477644523e-06,
+    "dp45_residual": 9.011360546651304e-09,
+    "closes": false,
+    "seconds": 0.981
+   },
+   {
+    "id": "step 12",
+    "lam": 0.6662349152661655,
+    "ias_tool_minDist": 6.770541816043435e-06,
+    "dp45_residual": 2.0478235995824434e-08,
+    "closes": false,
+    "seconds": 2.244
+   },
+   {
+    "id": "step 13",
+    "lam": 0.6661203880966632,
+    "ias_tool_minDist": 5.720616184908336e-06,
+    "dp45_residual": 1.2148994699145987e-08,
+    "closes": false,
+    "seconds": 1.933
+   },
+   {
+    "id": "step 14",
+    "lam": 0.6660131542735386,
+    "ias_tool_minDist": 4.8129235227084e-06,
+    "dp45_residual": 3.801459413921293e-08,
+    "closes": false,
+    "seconds": 1.484
+   },
+   {
+    "id": "step 15",
+    "lam": 0.6659123776136668,
+    "ias_tool_minDist": 3.993963421839185e-06,
+    "dp45_residual": 1.8960136488610502e-07,
+    "closes": false,
+    "seconds": 0.374
+   },
+   {
+    "id": "step 16",
+    "lam": 0.6658175909125347,
+    "ias_tool_minDist": 3.3534060123178395e-06,
+    "dp45_residual": 8.863880829323989e-08,
+    "closes": false,
+    "seconds": 1.107
+   },
+   {
+    "id": "step 17",
+    "lam": 0.6657283653869323,
+    "ias_tool_minDist": 2.773989345806147e-06,
+    "dp45_residual": 3.082135258125618e-08,
+    "closes": false,
+    "seconds": 0.799
+   },
+   {
+    "id": "step 18",
+    "lam": 0.6656443072714561,
+    "ias_tool_minDist": 2.138803984086595e-06,
+    "dp45_residual": 8.600357936927594e-08,
+    "closes": false,
+    "seconds": 1.466
+   },
+   {
+    "id": "step 19",
+    "lam": 0.6655650547204025,
+    "ias_tool_minDist": 1.854553825607485e-06,
+    "dp45_residual": 6.37797228364434e-08,
+    "closes": false,
+    "seconds": 1.799
+   },
+   {
+    "id": "step 20",
+    "lam": 0.6654902749826597,
+    "ias_tool_minDist": 1.2510507837652537e-06,
+    "dp45_residual": 2.190674308621965e-09,
+    "closes": false,
+    "seconds": 2.378
+   },
+   {
+    "id": "step 21",
+    "lam": 0.6654196618403388,
+    "ias_tool_minDist": 1.0217607358077625e-06,
+    "dp45_residual": 4.439621825724771e-07,
+    "closes": false,
+    "seconds": 2.546
+   },
+   {
+    "id": "step 22",
+    "lam": 0.6653529332738678,
+    "ias_tool_minDist": 8.216717976359334e-07,
+    "dp45_residual": 8.342560757768069e-07,
+    "closes": false,
+    "seconds": 1.074
+   }
+  ]
+ }
+}
