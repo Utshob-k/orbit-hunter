@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the multiple precision flow used as a witness reproduces the exact Kepler flow of a near-radial pair (periapsis distance q = 1e-8 and 1e-10) to 1e-17:
 // tools/witness-acceptance.py runs tools/kepler-check.py and compares with data/deep/witness-acceptance.json. needs python with mpmath, takes about 10 seconds.
 import { spawnSync } from 'child_process';

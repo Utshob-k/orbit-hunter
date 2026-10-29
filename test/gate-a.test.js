@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the regularised integrator of src/ias/reg.js against the exact Kepler flow of the pair (tools/kepler-ref.py): seven rows of the stored gate (a 1P and a 10P ellipse, near-radial passages
 // down to periapsis distance 1e-8, one with the pair at barycentric distance 1), from data/deep/gate-a-subset.json. The exact end state is stored as a double-double (ref_hi + ref_lo), so the
 // error |end - exact| / max(1, |exact|) is computed to full accuracy in doubles. PASS if the error is within the limit max(floor, 10 eps S) and within a factor 10 of the stored error.

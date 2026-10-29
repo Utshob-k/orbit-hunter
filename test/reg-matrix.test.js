@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the 12 x 12 matrix of src/ias/reg.js (flowEnc with jac: true, the derivative of the end state of a piece with respect to its start state) on the six encounter pieces of the stored points
 // t35 - steps 1 and 10 and t44 - step 34 (data/deep/extra/reg-matrix-pieces.json, closest approach of the pair from 4e-4 down to 7e-10), two ways: (1) central differences of the end states of
 // flowEnc with the step h = 1e-6 and 2h, combined by Richardson extrapolation; PASS if the largest |M - M_fd| is at most 1e-8 max|M|. (2) the matrix has to be symplectic (masses 1, so the velocities
@@ -79,5 +80,33 @@ while (used < 4 && tried < 400) {
   oneCase(`three bodies, seed state ${tried}, ${r.reforms} chain re-formations`, st, 0.5, [1e-6, 1e-5], `${r.reforms} re-formations, `);
 }
 check('four states with chain re-formations found', used === 4, `found ${used} in ${tried} seed states`);
+// (5): the branch in which the last macro-step lands exactly on tau (no end-time search). The matrix has to be the derivative at fixed physical time there too (the end-time correction dZ - Z' dt / t').
+// A state and the first step size ds0f of the settings are fixed. For tau of 0.1 or more the macro-steps do not depend on tau until the last one, so the first accepted macro-step has a fixed duration dt1; the
+// largest tau for which the flow still ends in that step (found by bisection on tau) is dt1, and there the step lands on tau exactly. The branch is taken when the flow reports no end-time trial (endTrials = 0).
+// If a ds0f does not give an exact landing for a state, the next ds0f is tried.
+function exactLanding(start, ds0f) {
+  const run = (tau) => flowEnc(start, tau, { jac: true, settings: { ...settings, ds0f } });
+  const a = run(0.1), b = run(5);
+  if (!a.ok || !b.ok || !(a.endTrials > 0) || !(b.macro > a.macro)) return null;
+  let lo = 0.1, hi = 5;
+  for (let k = 0; k < 200; k++) { const mid = 0.5 * (lo + hi); if (mid === lo || mid === hi) break; if (run(mid).macro === a.macro) lo = mid; else hi = mid; }
+  const r = run(lo);
+  return r.ok && r.endTrials === 0 ? { r, tau: lo, ds0f } : null;
+}
+const exactStates = [[-2, 0, 2, 0.1, 0, 3, 0.05, 0.1, -0.05, 0.1, 0, -0.2], [-1.5, 0.2, 1.8, -0.3, 0.2, 2.5, 0.1, -0.1, 0, 0.15, -0.1, -0.05]];
+let forced = 0;
+exactStates.forEach((st, n) => {
+  for (const ds0f of [5, 30, 1, 3, 10]) {
+    const f = exactLanding(st, ds0f); if (!f) continue;
+    forced++;
+    let maxM = 0; for (const v of f.r.M) maxM = Math.max(maxM, Math.abs(v));
+    const diff = fdDiff(f.r.M, st, f.tau, 1e-6);
+    check(`exact landing, state ${n + 1}: no end-time trial, fRes = 0`, f.r.endTrials === 0 && f.r.fRes === 0, `ds0f=${f.ds0f} tau=${f.tau}`);
+    check(`exact landing, state ${n + 1}: matrix equals central differences at fixed time`, diff <= 1e-8 * maxM, `max|M|=${maxM.toExponential(2)} difference/max|M|=${(diff / maxM).toExponential(2)}`);
+    break;
+  }
+});
+check('the exact landing was forced for both states', forced === exactStates.length, `${forced} of ${exactStates.length}`);
+
 console.log(`time ${((Date.now() - t00) / 1000).toFixed(1)} s`);
 process.exit(fail ? 1 : 0);

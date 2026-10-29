@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // a short continuation of the family t35 - with the ias route (tools/family-follow-ias.mjs, 24 pieces, direction -1) from the stored start (data/deep/t35m-replay.json), stopped after 10 recorded points.
 // The test compares the path of the continuation, not the recorded points: the accepted steps of the run (the recorded points and the unrecorded steps, sorted by step) with the
 // first 31 accepted steps of the stored trace data/deep/traces/t35m.json, the k-th with the k-th, for the first n accepted steps, n = the smaller of 31 and the number of accepted steps of the run, at least 10. The step numbers must be equal at every step compared; lam, u1, u2 and t must agree to a relative

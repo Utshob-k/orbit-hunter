@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the 8 x 8 matrix of src/ias/reg.js for the equal-mass pair against the matrix of the exact Kepler flow (data/deep/extra/kepler-stm.json, made by tools/kepler-stm.py: central differences of the exact flow
 // in 60 digits), for the periapsis distances q = 1e-3, 1e-6 and 1e-8, from the apocentre and from a phase 0.3 radians before the pericentre, one period. PASS if the largest difference of the matrix is
 // at most 1e-10 max|M| and the end state agrees with the exact one to max(1e-12, 10 * 1.1e-16 * S), S the largest row sum of |M| (the limit of gate A; error = |difference| / max(1, |value|)).

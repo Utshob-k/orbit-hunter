@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // src/ias/reg.js for two UNEQUAL masses (1 and 0.1, G = 1): a pair with a = 1, e = 0.9 of the relative orbit, from the apocentre, one period (data/deep/extra/reg-unequal-mass.json, made by
 // tools/gate-a-unequal.py; the exact end state is the Kepler flow of tools/kepler-ref.py with mu = m1 + m2, stored as a double-double). PASS if the error |end - exact| / max(1, |exact|)
 // is within the limit max(floor, 10 eps S) as in test/gate-a.test.js, and if the energy and the angular momentum of the end state differ from those of the start by 1e-13 or less (relative).

@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: MIT
 // the orbits at steps 9, 10 and 11 of the stored continuation of the family t35 - (the three with the closest approaches 1e-8 to 7e-10, data/deep/reclose-t35m-gap.json) are re-closed at the
 // same lam by tools/reclose.py (multiple precision flow, no integrator of src/ in it) and the start values are witnessed by tools/witness.py with the w1b preset. The six jobs run through
-// tools/run-queue.py, three at a time. PASS if: the re-closing converged (largest |r| at most 1e-16) and is the same orbit within 1e-6 (the stored differences are 3e-14 and less), the re-closed
+// tools/run-queue.py, three at a time. PASS if: the re-closing converged (largest |r| at most 1e-16) and is the same orbit within 1e-9 (the stored differences are 3e-14 and less), the re-closed
 // values equal the stored ones to 1e-12, and the witness gives the stored minimum of the pair distance to 1e-4 and a closure below 1e-6. needs python with mpmath, takes about 2 minutes.
 import { spawnSync } from 'child_process';
 import fs from 'fs';

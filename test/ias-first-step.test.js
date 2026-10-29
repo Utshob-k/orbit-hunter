@@ -1,4 +1,5 @@
-// the first step of IAS15 (src/ias/ias-bridge.py): piece 18 of the kept point k11 of t35 - (data/deep/extra/piece18-states.json), the piece after the encounter piece 17, with the pair at 0.0137 separating at
+// SPDX-License-Identifier: MIT
+// A diagnostic of REBOUND's default first step, not a test of PeriCont (it is not in the test:ias script): the first step of IAS15 (src/ias/ias-bridge.py): piece 18 of the kept point k11 of t35 - (data/deep/extra/piece18-states.json), the piece after the encounter piece 17, with the pair at 0.0137 separating at
 // speed 17. IAS15 with adaptive_mode 2 and REBOUND's default first step 0.001 ('legacy', the setting of every stored run) ends 1.18e-7 from the end state of reg.js (the event of the piece scan); with the first
 // step from the pair timescale ('timescale') it agrees to about 1e-15. The error is the largest over the 12 components of |IAS15 - reg.js| / max(1, |reg.js|), reg.js run here on the same state.
 // PASS if the error is at least 1e-8 with 'legacy' and at most 1e-13 with 'timescale'. Needs python with rebound, takes a few seconds.
