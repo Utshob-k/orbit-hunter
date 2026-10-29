@@ -11,22 +11,26 @@
 //   when the closest approach is below it (0: never). stop-after: stop after that many recorded points (the message is "stopped after N recorded points"). The other options set src/settings.js: IAS15 adaptive_mode, the longest wait for
 //   the Python process, the python executable PY (the default is that of src/settings.js: ORBIT_PYTHON, else python on Windows and python3 elsewhere), the ratio of guard G1b.
 //   ias-first-step: the first step of IAS15 on every piece ('timescale', the default of src/settings.js, or 'legacy', REBOUND's default 0.001, the setting of the traces stored in data/deep); the value is in out.settings.ias.firstStep.
+//   tol-scale=K: the corrector stops when sup|F| < max(newton-tol, K * 2^-52 * (largest entry of the Jacobian of the iteration) * max(1, largest |Y|)); each line of the diag file has the effective tolerance (tolEff) of its last iteration.
+//   arc-weight=W: weighted arclength: the 276 (with 24 pieces) node components of the pseudo-arclength unknowns have weight W, u1, u2, t and lam weight 1; the weighted norm is in the unit tangent, in the constraint row of the tangent and of the corrector,
+//   in the step length of the predictor, in the orientation test of the tangent and in the branch test dot(tauNew, tau) > cos(0.35) (src/shooting.js, wdot, wunit, wrow).
+//   natural=DL: natural continuation in lam instead of the pseudo-arclength (lam fixed per step, Newton on F alone, first step DL in DIR, doubled after at most 3 iterations, halved on failure, ends below 1e-14); zeros of theta are not looked for.
 //   newton-tol: settings.newton, the stopping tolerance of the corrector residual (1e-11 by default). The 279 components of every accepted step (u1, u2, t and the 23 node states) are written
 //   to OUT.json.nodes.jsonl, one line {step, z} per accepted step, unless --no-nodes is given.
 import fs from 'fs';
 import { settings } from '../src/settings.js';
 import { startRecorder } from '../src/ias/recorder.js';
 import { stats as iasStats, gstats } from '../src/ias/bridge.js';
-import { huntArclength, closePerpMS } from '../src/shooting.js';
+import { huntArclength, huntNatural, closePerpMS } from '../src/shooting.js';
 import { perpInfo, perpInitial, perpEL } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';
 import { relativeStability } from '../src/relative.js';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio'];
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'natural'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outFile, dirArg, u1A, u2A, lamA, tA] = pos;
-if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390]'); process.exit(2); }
+if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--natural=DL]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl']) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
@@ -40,12 +44,15 @@ if (opt['newton-tol'] !== undefined) settings.newton = Number(opt['newton-tol'])
 if (opt['timeout-min'] !== undefined) settings.ias.timeoutMs = Number(opt['timeout-min']) * 60000;
 if (opt.python !== undefined) settings.ias.python = opt.python;
 if (opt['guard-ratio'] !== undefined) settings.ias.guardRatio = Number(opt['guard-ratio']);
+if (opt['tol-scale'] !== undefined) settings.tolScale = Number(opt['tol-scale']);
+if (opt['arc-weight'] !== undefined) settings.arcWeight = Number(opt['arc-weight']);
+const hunt = opt.natural !== undefined ? huntNatural : huntArclength;
 const recorder = startRecorder(outFile);
 const nodesFd = opt['no-nodes'] ? null : fs.openSync(outFile + '.nodes.jsonl', 'wx');
 const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
 const s0 = closePerpMS(start.u1, start.u2, start.lam, start.t, { m: pieces });
 const shifted = s0 && s0.res < 1e-9 ? { u1: s0.u1, u2: s0.u2, lam: s0.lam, t: s0.t, m: pieces } : null;
-const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter } };
+const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter, ...(opt.natural !== undefined ? { natural: Number(opt.natural), note: 'natural continuation in lam, zeros of theta are not looked for' } : {}) } };
 if (!shifted) {
   out.error = 'could not move the start onto the family'; out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.lastBridgeReason = iasStats.lastReason;
   fs.writeFileSync(outFile, JSON.stringify(out));
@@ -57,7 +64,7 @@ const unrec = []; out.unrec = unrec;   // accepted steps that are not recorded a
 process.on('uncaughtException', (e) => { try { fs.writeFileSync(outFile + '.crash.json', JSON.stringify({ ...out, error: String(e && e.stack), points: pts })); recorder.flush(); } catch (e2) {} process.exit(3); });
 let stop = null;
 let traceStop = null, r;
-try { r = huntArclength(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, dir, force: true, maxMs, all: true, hMax: 0.2, maxSteps: 6000,
+try { r = hunt(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, dir, force: true, maxMs, all: true, hMax: 0.2, maxSteps: 6000, dl0: Number(opt.natural),
   trace: (step, lam, th, h, it, Y) => {
     const n = Y.length - 1, u1 = Y[0], u2 = Y[1], t = Y[2];
     if (nodesFd !== null) fs.writeSync(nodesFd, JSON.stringify({ step, z: Array.from(Y.slice(0, n)) }) + '\n');

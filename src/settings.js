@@ -10,6 +10,7 @@ export const settings = {
   rtol: 1e-13, atol: 1e-14, hMax: 0.01,   // dp45 flow of shooting.js and perp.js
   mrtol: 1e-12, matol: 1e-13,             // dp45 variational equations (monodromy) of stability.js
   observer: null,                         // optional recorder of the corrector and of the continuation (src/ias/recorder.js)
+                                          // unset by default and read by shooting.js: tolScale (scaled residual test) and arcWeight (weight of the node components in the arclength), see tools/family-follow-ias.mjs
   ias: {
     adaptiveMode: 2,                      // IAS15 adaptive_mode of REBOUND
     firstStep: 'timescale',               // first step of IAS15 on a piece: 'timescale' sets sim.dt = firstStepFactor * the smallest d / |v_rel| of the three pairs at the start of the piece (at most the piece length); 'legacy' leaves REBOUND's default 0.001, which is what every stored run used

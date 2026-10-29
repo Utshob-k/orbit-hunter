@@ -289,6 +289,23 @@ export function stepInLam(sol, d, opts = {}) {
 const dot = (a, b) => { let v = 0; for (let i = 0; i < a.length; i++) v += a[i] * b[i]; return v; };
 const unit = (a) => { const n = Math.sqrt(dot(a, a)); return Float64Array.from(a, (v) => v / n); };
 
+// weighted arclength (settings.arcWeight W, unset = 1): the norm of a step in (z, lam) is sum c_i^2 v_i^2 with c_i = W for the node components 3 .. n-1 and 1 for u1, u2, t and lam.
+// It enters the unit tangent, the constraint row of the tangent and of the corrector, the sign test and the branch test; with W = 1 these are the plain dot and unit above
+const w2 = (i, len) => { const W = settings.arcWeight ?? 1; return i >= 3 && i < len - 1 ? W * W : 1; };
+const wdot = (a, b) => { if ((settings.arcWeight ?? 1) === 1) return dot(a, b); let v = 0; for (let i = 0; i < a.length; i++) v += w2(i, a.length) * a[i] * b[i]; return v; };
+const wunit = (a) => { const n = Math.sqrt(wdot(a, a)); return Float64Array.from(a, (v) => v / n); };
+const wrow = (a) => ((settings.arcWeight ?? 1) === 1 ? Array.from(a) : Array.from(a, (v, i) => w2(i, a.length) * v));
+
+// stopping tolerance of the corrector: settings.newton, or with settings.tolScale K the larger of it and K * 2^-52 * (largest entry of J) * max(1, largest |Y|)
+function effTol(J, Y) {
+  const K = settings.tolScale;
+  if (!(K > 0)) return settings.newton;
+  let mj = 0, my = 1;
+  for (const row of J) for (let i = 0; i < row.length; i++) { const a = Math.abs(row[i]); if (a > mj) mj = a; }
+  for (let i = 0; i < Y.length; i++) my = Math.max(my, Math.abs(Y[i]));
+  return Math.max(settings.newton, K * 2 ** -52 * mj * my);
+}
+
 function packZ(sol) {
   const z = new Float64Array(3 + N * (sol.m - 1));
   z[0] = sol.u1; z[1] = sol.u2; z[2] = sol.t;
@@ -307,13 +324,13 @@ function solOf(Y, m) {
 function tangentAt(J, Flam, tauPrev) {
   const n = Flam.length;
   const A = J.map((row, i) => [...Array.from(row), Flam[i]]);
-  A.push(Array.from(tauPrev));
+  A.push(wrow(tauPrev));
   const rhs = new Array(n + 1).fill(0);
   rhs[n] = 1;
   const x = solve(A, rhs);
   if (!x) return null;
-  const t = unit(x);
-  return dot(t, tauPrev) < 0 ? t.map((v) => -v) : t;
+  const t = wunit(x);
+  return wdot(t, tauPrev) < 0 ? t.map((v) => -v) : t;
 }
 
 // newton on [F = 0, tau . (Y - Yp) = 0]. returns the solution with its jacobian so the next tangent is cheap.
@@ -331,10 +348,12 @@ function correct0(Yp, tau, m, t0) {
     try { sys = system(Float64Array.from(Y.subarray(0, n)), Y[n], m); } catch (e) { if (e instanceof BridgeError) { if (settings.observer) settings.observer.why = e.reason || 'bridge error'; return { ok: false }; } throw e; }
     const Fn = sup(sys.F);
     if (settings.observer) settings.observer.iter(it, Fn, sys, tau, Y);
-    if (Fn < settings.newton) return { ok: true, Y, J: sys.J, Flam: sys.Flam, iters: it };
+    const tolEff = effTol(sys.J, Y);
+    if (settings.observer && settings.tolScale > 0) settings.observer.note({ tolEff });
+    if (Fn < tolEff) return { ok: true, Y, J: sys.J, Flam: sys.Flam, iters: it };
     const A = sys.J.map((row, i) => [...Array.from(row), sys.Flam[i]]);
-    A.push(Array.from(tau));
-    const rhs = [...Array.from(sys.F, (v) => -v), -dot(tau, Y.map((v, i) => v - Yp[i]))];
+    A.push(wrow(tau));
+    const rhs = [...Array.from(sys.F, (v) => -v), -wdot(tau, Y.map((v, i) => v - Yp[i]))];
     const d = solve(A, rhs);
     if (!d) { if (settings.observer) settings.observer.why = 'solve null'; return { ok: false }; }
     let accepted = false;
@@ -360,7 +379,7 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
   const sys0 = system(z0, lam0, m);
   const dz = solve(sys0.J.map((r) => Array.from(r)), Array.from(sys0.Flam, (v) => -v));
   if (!dz) return { ok: false, why: 'singular at the start' };
-  let tau = unit([...dz, 1].map((v) => v * dir));
+  let tau = wunit([...dz, 1].map((v) => v * dir));
   let Y = toY(z0, lam0);
   let th = thetaOf({ ...first });
   if (th === null) return { ok: false, why: 'start orbit failed' };
@@ -377,8 +396,8 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
     let accept = false, tauNew = null;
     if (c.ok) {
       tauNew = tangentAt(c.J, c.Flam, tau);
-      accept = tauNew && dot(tauNew, tau) > Math.cos(0.35);   // don't jump to another branch
-      if (settings.observer) settings.observer.note({ tangentDot: tauNew ? dot(tauNew, tau) : null });
+      accept = tauNew && wdot(tauNew, tau) > Math.cos(0.35);   // don't jump to another branch
+      if (settings.observer) settings.observer.note({ tangentDot: tauNew ? wdot(tauNew, tau) : null });
     }
     if (settings.observer) settings.observer.note({ outcome: accept ? 'tangent ok' : (c.ok ? 'tangent rejected' : 'newton failed') });
     if (!accept) {
@@ -412,6 +431,72 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
   return end('no convergence');
 }
 
+// natural continuation in lam (--natural=DL of tools/family-follow-ias.mjs): lam is fixed at every step and Newton runs on F alone with the square J. The predictor is z + dlam * dz/dlam
+// (J dz = -Flam), the first step is dl0 in the direction dir, the step is doubled after a step with at most 3 iterations (at most hMax) and halved on failure; it ends when |dlam| < 1e-14.
+// It does not look for zeros of theta; trace(...) is called as in huntArclength.
+function correctNat(z0, lam, m, t0) {
+  const obs = settings.observer;
+  if (!obs) return correctNat0(z0, lam, m, t0);
+  obs.begin(); const r = correctNat0(z0, lam, m, t0); obs.end(r); return r;
+}
+function correctNat0(z0, lam, m, t0) {
+  let z = Float64Array.from(z0);
+  for (let it = 0; it < 12; it++) {
+    let sys;
+    try { sys = system(z, lam, m); } catch (e) { if (e instanceof BridgeError) { if (settings.observer) settings.observer.why = e.reason || 'bridge error'; return { ok: false }; } throw e; }
+    const Fn = sup(sys.F);
+    if (settings.observer) settings.observer.iter(it, Fn, sys, null, z);
+    const tolEff = effTol(sys.J, z);
+    if (settings.observer && settings.tolScale > 0) settings.observer.note({ tolEff });
+    if (Fn < tolEff) return { ok: true, z, J: sys.J, Flam: sys.Flam, iters: it };
+    const d = solve(sys.J.map((row) => Array.from(row)), Array.from(sys.F, (v) => -v));
+    if (!d) { if (settings.observer) settings.observer.why = 'solve null'; return { ok: false }; }
+    let accepted = false;
+    for (let a = 1; a > 1 / 16; a /= 2) {
+      const zn = Float64Array.from(z, (v, i) => v + a * d[i]);
+      if (zn[2] < 0.3 * t0 || zn[2] > 3 * t0) continue;
+      const Fnew = residual(zn, lam, m);
+      if (Fnew && sup(Fnew) < Fn) { z = zn; accepted = true; break; }
+    }
+    if (!accepted) { if (settings.observer) settings.observer.why = 'line search failed'; return { ok: false }; }
+  }
+  return { ok: false };
+}
+
+export function huntNatural(u1, u2, lam0, t0, { m = 8, dir = 1, dl0 = 1e-6, maxMs = 600000, hMax = 0.2, maxSteps = 6000, trace = null } = {}) {
+  const started = Date.now();
+  const first = closePerpMS(u1, u2, lam0, t0, { m });
+  if (!(first.res < 1e-9)) return { ok: false, why: 'start did not close' };
+  let z = packZ(first), lam = lam0;
+  let th = thetaOf({ ...first });
+  if (th === null) return { ok: false, why: 'start orbit failed' };
+  let sys = system(z, lam, m);
+  let dl = Math.min(hMax, dl0), steps = 0, lamMin = lam0, lamMax = lam0;
+  const end = (why) => ({ ok: false, why, lam, th, steps, lamMin, lamMax });
+  while (steps++ < maxSteps) {
+    if (Date.now() - started > maxMs) return end('out of time');
+    const dz = solve(sys.J.map((row) => Array.from(row)), Array.from(sys.Flam, (v) => -v));
+    if (!dz) return end('singular');
+    const lamNew = lam + dir * dl;
+    if (settings.observer) { settings.observer.step = steps; settings.observer.h = dl; settings.observer.tauLam = dir; }
+    const c = correctNat(Float64Array.from(z, (v, i) => v + dir * dl * dz[i]), lamNew, m, t0);
+    let thNew = null;
+    if (c.ok) thNew = thetaOf(solOf(toY(c.z, lamNew), m));
+    if (settings.observer) settings.observer.note({ outcome: c.ok && thNew !== null ? 'accepted' : (c.ok ? 'theta null' : 'newton failed'), lamNew: c.ok ? lamNew : null });
+    if (!c.ok || thNew === null) {
+      dl /= 2;
+      if (dl < 1e-14) return end('step length below 1e-14 near lam=' + lam.toFixed(6));
+      continue;
+    }
+    const Y = toY(c.z, lamNew);
+    if (trace && trace(steps, lamNew, thNew, dl, c.iters, Y) === true) return end('stopped by the caller');
+    z = c.z; lam = lamNew; th = thNew; sys = { J: c.J, Flam: c.Flam };
+    lamMin = Math.min(lamMin, lam); lamMax = Math.max(lamMax, lam);
+    if (c.iters <= 3) dl = Math.min(hMax, dl * 2);
+  }
+  return end('no convergence');
+}
+
 // theta changes sign between A and B (points on the curve): illinois regula falsi along the chord,
 // with the constraint plane perpendicular to it. returns the point with |theta| < thTol or null
 function refineZero(A, B, thA, thB, m, t0, thTol) {
@@ -420,7 +505,7 @@ function refineZero(A, B, thA, thB, m, t0, thTol) {
   for (let k = 0; k < 60; k++) {
     const frac = -fA / (fB - fA);
     const chord = B.map((v, i) => v - A[i]);
-    const c = correct(Float64Array.from(A, (v, i) => v + frac * chord[i]), unit(chord), m, t0);
+    const c = correct(Float64Array.from(A, (v, i) => v + frac * chord[i]), wunit(chord), m, t0);
     if (!c.ok) return null;
     const tc = thetaOf(solOf(c.Y, m));
     if (tc === null) return null;
