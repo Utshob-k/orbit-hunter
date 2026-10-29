@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // worker thread of the IAS15 bridge. Owns the Python child process (ias-bridge.py), reads its stdout line by line and answers the main thread through shared memory.
 // ctrl: [0] flag (0 waiting, 2 done, 3 error), [1] number of values, [2] IAS15 steps, [3] id of the answer, [4] error code (0 none, 2 the child died, could not be started or answered with an error), [5] length of the error text.
 // data: for a pieces request the 12 m end states, then the m encounter flags, then 11 analysis numbers per piece; for an error answer the characters (char codes) of the error text from data[0] on.

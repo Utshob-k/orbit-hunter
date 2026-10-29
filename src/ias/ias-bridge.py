@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # REBOUND IAS15 process for src/ias/bridge.js: one long-lived process, line-delimited JSON on stdin and stdout, each answer flushed at once.
 # python ias-bridge.py MODE RATIO [FIRST [FACTOR]]      MODE: IAS15 adaptive_mode; RATIO: the ratio of guard G1b (see guards.py)
 #   FIRST: 'legacy' (the default when it is not given: sim.dt is not set, so IAS15 starts with REBOUND's default 0.001, as in every stored run) or 'timescale'

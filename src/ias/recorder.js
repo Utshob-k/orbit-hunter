@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // recorder of the corrector and of the continuation loop of shooting.js for the ias route. It only observes the numbers of the corrector, apart from the stop rules below.
 // startRecorder(outFile) installs it as settings.observer; flush() writes <outFile>.diag.jsonl, one json line per continuation attempt (one call of correct()):
 // step (loop step), h, tauLam (lam component of the unit tangent), the residual history (sup F at the start of each Newton iteration), iterations, ok, why,

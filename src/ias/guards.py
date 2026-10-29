@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # analysis of one piece for the guards of the IAS15 bridge. A piece is sampled at its start and at every step end of IAS15: (t, d01, d02, d12).
 # d1 <= d2 <= d3 are the three pair distances at one instant. A piece is an encounter piece if its smallest sampled pair distance is below 1e-3.
 # The pericentre distance d1 of an encounter piece is the smallest sampled one, improved by a parabola through the squared distance of that pair at three

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // synchronous bridge from the (synchronous) shooting code to REBOUND IAS15 in a Python process, with the guards for triple approaches.
 // The main thread posts a request to a worker thread that owns one long-lived Python process (ias-bridge.py) and blocks with Atomics.wait until the
 // answer is in shared memory, settings.ias.timeoutMs at most per request. A timeout kills the Python process (a new one starts for the next request)

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // reg.js: algorithmic regularisation of the N-body problem (N = 2 or 3, masses as a parameter, G = 1) in chain coordinates, for the encounter pieces.
 // Method: logarithmic Hamiltonian Lambda = log(T + Pt) - log(U) (Mikkola and Tanikawa 1999 eqs 1-5, 13-15), drift-kick-drift modified leapfrog (their eqs 19-22 and A6),
 // Bulirsch-Stoer extrapolation (their section 5), chain coordinates (their section 4.1, eqs 16-18). The step control, the double-double energy constant and time,
@@ -264,13 +265,13 @@ export function flowChain(masses, s, tau, opts = {}) {
   }
   // end state
   let Qe, Pe, tgE = null, tEnd;
-  if (final.exact) { Qe = Float64Array.from(Q, (v, i) => v + Ql[i]); Pe = Float64Array.from(P, (v, i) => v + Pl[i]); tgE = tg; tEnd = tdd; }
+  if (final.exact) { Qe = Float64Array.from(Q, (v, i) => v + Ql[i]); Pe = Float64Array.from(P, (v, i) => v + Pl[i]); tgE = tg; tEnd = tdd; }   // the last macro-step lands exactly on tau (a step that passes tau goes to the end-time search above), so there is no search
   else {
     const y = final.rr.res.y; Qe = Float64Array.from({ length: nQ }, (_, i) => Q[i] + (y[i] + Ql[i])); Pe = Float64Array.from({ length: nQ }, (_, i) => P[i] + (y[nQ + 1 + i] + Pl[i])); tEnd = ddAdd(tdd, [y[nQ], 0]); tgE = final.rr.res.tg;
-    if (wantTg) {   // the end-time dependence: dZ/dy0 = dZ - (dZ/ds) dt / (dt/ds)
-      const Tq = Tval(sys, Pe, AP); const D = (Tq + Pt) + PtLo, fP = Array.from(AP, (v) => v / D), gE = potential(sys, Qe, false); const gQ = Array.from(gE.G, (v) => v / gE.U), rateT = 1 / D;
-      tgE = tgE.map((g) => { const o2 = Float64Array.from(g), k = g[nQ] / rateT; for (let i = 0; i < nQ; i++) { o2[i] -= fP[i] * k; o2[nQ + 1 + i] -= gQ[i] * k; } o2[nQ] = 0; return o2; });
-    }
+  }
+  if (wantTg) {   // the end-time dependence, for both ways to end: dZ/dy0 = dZ - (dZ/ds) dt / (dt/ds); the tangent columns are at fixed fictitious time, the matrix has to be at fixed physical time tau
+    const Tq = Tval(sys, Pe, AP); const D = (Tq + Pt) + PtLo, fP = Array.from(AP, (v) => v / D), gE = potential(sys, Qe, false); const gQ = Array.from(gE.G, (v) => v / gE.U), rateT = 1 / D;
+    tgE = tgE.map((g) => { const o2 = Float64Array.from(g), k = g[nQ] / rateT; for (let i = 0; i < nQ; i++) { o2[i] -= fP[i] * k; o2[nQ + 1 + i] -= gQ[i] * k; } o2[nQ] = 0; return o2; });
   }
   const Rcm1 = [0, 0]; for (let c = 0; c < 2; c++) Rcm1[c] = ddAdd([Rcm0[c], 0], ddMulD([tau, 0], Vcm[c]))[0];
   const end = fromChain(masses, perm, Qe, Pe, Rcm1, Vcm);
