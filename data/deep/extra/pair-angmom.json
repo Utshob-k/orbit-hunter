@@ -1,0 +1,255 @@
+{
+ "what": "the signed angular momentum h of the close pair at the closest sample of the 50 digit flow (preset w1b of tools/witness.py) at witnessed steps and re-closed midpoints of t35 - (steps 9 to 12, midpoints 9-10, 10-11) and t44 - (steps 33 to 35, midpoint 34-35), with the pair, the osculating pericentre q, e - 1, and h at the sample before and after the closest one. sign_changes_between lists the neighbours in lam with opposite signs of h.",
+ "command": [
+  "python tools/pair-angmom.py run DIR",
+  "python tools/pair-angmom.py summary DIR OUT.json"
+ ],
+ "traces": {
+  "t35m": {
+   "points_in_order_of_lam": [
+    {
+     "id": "t35m-u0012",
+     "kind": "witnessed step 12",
+     "lam": 0.6647777023153331,
+     "pair": [
+      0,
+      1
+     ],
+     "samples": 926,
+     "t_at_min": 2.571026456752739,
+     "sampled_min": 1.2160224360131085e-08,
+     "h": "-0.000220530771396",
+     "h_float": -0.0002205307713961677,
+     "sign_of_h": -1,
+     "h_sample_before": -0.0002205307713961677,
+     "h_sample_after": -0.0002205307713961677,
+     "osculating_pericentre": "1.21584552638e-8",
+     "osculating_float": 1.2158455263825486e-08,
+     "eccentricity_minus_1": "3.1783166e-9",
+     "seconds": 59
+    },
+    {
+     "id": "t35m-u0011",
+     "kind": "witnessed step 11",
+     "lam": 0.6648133863958717,
+     "pair": [
+      0,
+      1
+     ],
+     "samples": 970,
+     "t_at_min": 1.5423065069027508,
+     "sampled_min": 1.8718607642597484e-09,
+     "h": "-8.65269600567e-5",
+     "h_float": -8.652696005670658e-05,
+     "sign_of_h": -1,
+     "h_sample_before": -8.652696005670658e-05,
+     "h_sample_after": -8.652696005670658e-05,
+     "osculating_pericentre": "1.87172870371e-9",
+     "osculating_float": 1.8717287037062354e-09,
+     "eccentricity_minus_1": "4.8884098e-10",
+     "seconds": 67
+    },
+    {
+     "id": "t35m-m010-011",
+     "kind": "re-closed midpoint",
+     "lam": 0.6648321193024125,
+     "pair": [
+      0,
+      1
+     ],
+     "samples": 1068,
+     "t_at_min": 2.5711361141455806,
+     "sampled_min": 6.564578711829098e-11,
+     "h": "-1.62014571649e-5",
+     "h_float": -1.6201457164949126e-05,
+     "sign_of_h": -1,
+     "h_sample_before": -1.6201457164949126e-05,
+     "h_sample_after": -1.6201457164949126e-05,
+     "osculating_pericentre": "6.56218035664e-11",
+     "osculating_float": 6.562180356635828e-11,
+     "eccentricity_minus_1": "1.7130352e-11",
+     "seconds": 73
+    },
+    {
+     "id": "t35m-u0010",
+     "kind": "witnessed step 10",
+     "lam": 0.6648508522089533,
+     "pair": [
+      0,
+      1
+     ],
+     "samples": 997,
+     "t_at_min": 2.5711738709986305,
+     "sampled_min": 7.333372923667616e-10,
+     "h": "5.41090129446e-5",
+     "h_float": 5.41090129445607e-05,
+     "sign_of_h": 1,
+     "h_sample_before": 5.41090129445607e-05,
+     "h_sample_after": 5.41090129445607e-05,
+     "osculating_pericentre": "7.31946320389e-10",
+     "osculating_float": 7.319463203887653e-10,
+     "eccentricity_minus_1": "1.9098136e-10",
+     "seconds": 69
+    },
+    {
+     "id": "t35m-m009-010",
+     "kind": "re-closed midpoint",
+     "lam": 0.6648705318867624,
+     "pair": [
+      0,
+      1
+     ],
+     "samples": 958,
+     "t_at_min": 1.5423553173624203,
+     "sampled_min": 4.098664145792497e-09,
+     "h": "0.000127956831997",
+     "h_float": 0.00012795683199656272,
+     "sign_of_h": 1,
+     "h_sample_before": 0.00012795683199656272,
+     "h_sample_after": 0.00012795683199656272,
+     "osculating_pericentre": "4.09323771146e-9",
+     "osculating_float": 4.093237711464407e-09,
+     "eccentricity_minus_1": "1.0674858e-9",
+     "seconds": 59
+    },
+    {
+     "id": "t35m-u0009",
+     "kind": "witnessed step 9",
+     "lam": 0.6648902115645714,
+     "pair": [
+      0,
+      1
+     ],
+     "samples": 926,
+     "t_at_min": 2.5712532138146798,
+     "sampled_min": 1.0187574429425877e-08,
+     "h": "0.000201788086319",
+     "h_float": 0.00020178808631887834,
+     "sign_of_h": 1,
+     "h_sample_before": 0.00020178808631887834,
+     "h_sample_after": 0.00020178808631887834,
+     "osculating_pericentre": "1.01796079316e-8",
+     "osculating_float": 1.0179607931553268e-08,
+     "eccentricity_minus_1": "2.6534433e-9",
+     "seconds": 60
+    }
+   ],
+   "sign_changes_between": [
+    [
+     "t35m-m010-011",
+     "t35m-u0010"
+    ]
+   ],
+   "straight_line_fit_of_h_against_lam": {
+    "points": 6,
+    "slope": 3.7536323140728522,
+    "zero_of_h_at_lam": 0.6648364434520359,
+    "largest_residual": 3.814250326892557e-08,
+    "largest_residual_over_largest_abs_h": 0.00017295773749598554,
+    "note": "the pericentre q = h^2 / (2 (1 + e)) goes to zero where h does; the paper gives lam_c = 0.66483641 for t35 - from the square root of the witnessed distances"
+   }
+  },
+  "t44m": {
+   "points_in_order_of_lam": [
+    {
+     "id": "t44m-u0035",
+     "kind": "witnessed step 35",
+     "lam": 0.22933212822600313,
+     "pair": [
+      1,
+      2
+     ],
+     "samples": 1728,
+     "t_at_min": 4.244736087223117,
+     "sampled_min": 1.3711065966757394e-08,
+     "h": "0.00023418256145",
+     "h_float": 0.00023418256145035175,
+     "sign_of_h": 1,
+     "h_sample_before": 0.00023418256145035175,
+     "h_sample_after": 0.00023418256145035175,
+     "osculating_pericentre": "1.37103683446e-8",
+     "osculating_float": 1.3710368344575036e-08,
+     "eccentricity_minus_1": "-4.7075773e-8",
+     "seconds": 102
+    },
+    {
+     "id": "t44m-m034-035",
+     "kind": "re-closed midpoint",
+     "lam": 0.22933996071799173,
+     "pair": [
+      1,
+      2
+     ],
+     "samples": 1785,
+     "t_at_min": 4.244815361770425,
+     "sampled_min": 1.3447850605613719e-09,
+     "h": "7.33075802274e-5",
+     "h_float": 7.330758022741472e-05,
+     "sign_of_h": 1,
+     "h_sample_before": 7.330758022741472e-05,
+     "h_sample_after": 7.330758022741472e-05,
+     "osculating_pericentre": "1.3435003328e-9",
+     "osculating_float": 1.3435003327984978e-09,
+     "eccentricity_minus_1": "-4.6130042e-9",
+     "seconds": 109
+    },
+    {
+     "id": "t44m-u0034",
+     "kind": "witnessed step 34",
+     "lam": 0.22934779320998033,
+     "pair": [
+      1,
+      2
+     ],
+     "samples": 1787,
+     "t_at_min": 4.951214898384769,
+     "sampled_min": 1.910410166073226e-09,
+     "h": "-8.7333421135e-5",
+     "h_float": -8.73334211350312e-05,
+     "sign_of_h": -1,
+     "h_sample_before": -8.73334211350312e-05,
+     "h_sample_after": -8.73334211350312e-05,
+     "osculating_pericentre": "1.90678161803e-9",
+     "osculating_float": 1.9067816180290628e-09,
+     "eccentricity_minus_1": "-6.5470366e-9",
+     "seconds": 122
+    },
+    {
+     "id": "t44m-u0033",
+     "kind": "witnessed step 33",
+     "lam": 0.2293647425667399,
+     "pair": [
+      1,
+      2
+     ],
+     "samples": 1717,
+     "t_at_min": 4.9513975279582905,
+     "sampled_min": 4.7132810778458194e-08,
+     "h": "-0.000434159293144",
+     "h_float": -0.0004341592931437629,
+     "sign_of_h": -1,
+     "h_sample_before": -0.0004341592931437629,
+     "h_sample_after": -0.0004341592931437629,
+     "osculating_pericentre": "4.71235767681e-8",
+     "osculating_float": 4.712357676805852e-08,
+     "eccentricity_minus_1": "-1.617995e-7",
+     "seconds": 125
+    }
+   ],
+   "sign_changes_between": [
+    [
+     "t44m-m034-035",
+     "t44m-u0034"
+    ]
+   ],
+   "straight_line_fit_of_h_against_lam": {
+    "points": 4,
+    "slope": -20.489762341724873,
+    "zero_of_h_at_lam": 0.22934354508873428,
+    "largest_residual": 2.904264048624543e-07,
+    "largest_residual_over_largest_abs_h": 0.0006689397404336698,
+    "note": "the pericentre q = h^2 / (2 (1 + e)) goes to zero where h does; the paper gives lam_c = 0.66483641 for t35 - from the square root of the witnessed distances"
+   }
+  }
+ }
+}

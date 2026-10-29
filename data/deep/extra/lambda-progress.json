@@ -1,0 +1,664 @@
+{
+ "what": "progress in lam against accepted steps for every trace of data/deep/traces/ (recorded points and unrecorded steps in loop-step order, index 1 = first accepted step). lam0 = lam of the first accepted step, R = the largest |lam - lam0| over the trace, fraction(k) = the running maximum over steps up to k of |lam_k - lam0| / R (so a backward step does not lower it). step_at: the first accepted step (index and loop step) at which the fraction is at least 0.9, 0.99, 0.999. block_medians: median |dlam| (consecutive accepted steps) in blocks of 100 consecutive dlam values, in order. The trace t12m (the 15th trace that was run) has one point and no file.",
+ "traces": {
+  "t12p": {
+   "accepted_steps": 15,
+   "recorded": 14,
+   "unrecorded": 1,
+   "last_loop_step": 33,
+   "lam0": 0.6536521796692187,
+   "lam_last": 0.6878196725745422,
+   "range_R": 0.034167492905323504,
+   "direction_of_trace": 1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 7,
+     "loop_step": 8,
+     "fraction_of_accepted_steps": 0.4667
+    },
+    "0.99": {
+     "accepted_index": 9,
+     "loop_step": 14,
+     "fraction_of_accepted_steps": 0.6
+    },
+    "0.999": {
+     "accepted_index": 11,
+     "loop_step": 20,
+     "fraction_of_accepted_steps": 0.7333
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.9975796294635981
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 1,
+   "block_medians_dlam": [
+    0.0015239317156375831
+   ]
+  },
+  "t14p": {
+   "accepted_steps": 2926,
+   "recorded": 2926,
+   "unrecorded": 0,
+   "last_loop_step": 3052,
+   "lam0": 0.3726364518341818,
+   "lam_last": -0.025187398720569833,
+   "range_R": 0.5057105581477788,
+   "direction_of_trace": 1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 765,
+     "loop_step": 768,
+     "fraction_of_accepted_steps": 0.2614
+    },
+    "0.99": {
+     "accepted_index": 803,
+     "loop_step": 806,
+     "fraction_of_accepted_steps": 0.2744
+    },
+    "0.999": {
+     "accepted_index": 819,
+     "loop_step": 822,
+     "fraction_of_accepted_steps": 0.2799
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.03897359066375429,
+    "50": 0.07368574496525437,
+    "100": 0.07368574496525437,
+    "200": 0.07368574496525437,
+    "500": 0.4141308354036099,
+    "1000": 1.0,
+    "2000": 1.0
+   },
+   "steps_against_the_net_direction": 2053,
+   "block_size": 100,
+   "n_blocks": 30,
+   "block_medians_dlam": [
+    0.00016643281979611402,
+    2.5021549601461635e-05,
+    0.0005824328942707069,
+    4.696413041252456e-06,
+    4.658942085650208e-06,
+    0.00012164158672900438,
+    6.3604983399565e-05,
+    6.433880039880685e-05,
+    4.24583104217946e-06,
+    4.3131027638754205e-05,
+    1.984764652300519e-05,
+    3.371770036850706e-05,
+    1.1704592730900354e-06,
+    4.471411337268749e-07,
+    5.4736713946124116e-08,
+    2.5463703473907473e-08,
+    3.26927755509715e-08,
+    1.5916281024055956e-08,
+    3.5723465813958244e-08,
+    1.7429135088301018e-08,
+    2.4295960052850285e-08,
+    2.719460735420287e-08,
+    2.432211399644446e-08,
+    4.310374644711512e-08,
+    4.3371403211922566e-08,
+    4.475901839093299e-08,
+    7.613071792422765e-08,
+    1.6834755725732287e-07,
+    2.971367662061436e-06,
+    5.2465364568064776e-05
+   ]
+  },
+  "t28m": {
+   "accepted_steps": 176,
+   "recorded": 176,
+   "unrecorded": 0,
+   "last_loop_step": 179,
+   "lam0": 0.04729596910623691,
+   "lam_last": -0.0239020352284195,
+   "range_R": 0.07119800433465641,
+   "direction_of_trace": -1,
+   "why_stopped": "left the region (closest approach above 0.03)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 158,
+     "loop_step": 161,
+     "fraction_of_accepted_steps": 0.8977
+    },
+    "0.99": {
+     "accepted_index": 175,
+     "loop_step": 178,
+     "fraction_of_accepted_steps": 0.9943
+    },
+    "0.999": {
+     "accepted_index": 176,
+     "loop_step": 179,
+     "fraction_of_accepted_steps": 1.0
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.20424842161074463,
+    "50": 0.4039467691158439,
+    "100": 0.7061557853879938
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 2,
+   "block_medians_dlam": [
+    0.0003066922709769786,
+    0.0002540287281481927
+   ]
+  },
+  "t28p": {
+   "accepted_steps": 13,
+   "recorded": 13,
+   "unrecorded": 0,
+   "last_loop_step": 31,
+   "lam0": 0.18609896111527682,
+   "lam_last": 0.18792663592185288,
+   "range_R": 0.0018276748065760573,
+   "direction_of_trace": 1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 4,
+     "loop_step": 4,
+     "fraction_of_accepted_steps": 0.3077
+    },
+    "0.99": {
+     "accepted_index": 7,
+     "loop_step": 13,
+     "fraction_of_accepted_steps": 0.5385
+    },
+    "0.999": {
+     "accepted_index": 9,
+     "loop_step": 19,
+     "fraction_of_accepted_steps": 0.6923
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.9998663864428098
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 1,
+   "block_medians_dlam": [
+    9.837615239649544e-06
+   ]
+  },
+  "t35m": {
+   "accepted_steps": 1711,
+   "recorded": 1690,
+   "unrecorded": 21,
+   "last_loop_step": 2190,
+   "lam0": 0.6652898293497149,
+   "lam_last": 0.6638406030628946,
+   "range_R": 0.0014492262868203154,
+   "direction_of_trace": -1,
+   "why_stopped": "out of time",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 77,
+     "loop_step": 77,
+     "fraction_of_accepted_steps": 0.045
+    },
+    "0.99": {
+     "accepted_index": 198,
+     "loop_step": 200,
+     "fraction_of_accepted_steps": 0.1157
+    },
+    "0.999": {
+     "accepted_index": 822,
+     "loop_step": 953,
+     "fraction_of_accepted_steps": 0.4804
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.302904484105596,
+    "50": 0.8032916605269897,
+    "100": 0.9411061495376102,
+    "200": 0.9901988359678913,
+    "500": 0.996540925839025,
+    "1000": 0.9995510330853666
+   },
+   "steps_against_the_net_direction": 92,
+   "block_size": 100,
+   "n_blocks": 18,
+   "block_medians_dlam": [
+    7.436694265949839e-06,
+    6.731094446821295e-07,
+    4.902638683912386e-08,
+    2.8420629849534862e-08,
+    1.5475769665762584e-08,
+    1.591784054566503e-08,
+    1.0048367971027261e-08,
+    2.9262562373233436e-09,
+    2.2250444264848568e-09,
+    8.233365100807077e-10,
+    1.6811935177329929e-10,
+    6.044340028488193e-10,
+    8.064471312962951e-10,
+    8.92180773703899e-12,
+    1.2136347482538667e-11,
+    1.0822903684370999e-10,
+    1.1636114294333311e-10,
+    1.45608081147941e-10
+   ]
+  },
+  "t35p": {
+   "accepted_steps": 9,
+   "recorded": 9,
+   "unrecorded": 0,
+   "last_loop_step": 10,
+   "lam0": 0.7323781839033205,
+   "lam_last": 0.7463517762932842,
+   "range_R": 0.013973592389963652,
+   "direction_of_trace": 1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 8,
+     "loop_step": 8,
+     "fraction_of_accepted_steps": 0.8889
+    },
+    "0.99": {
+     "accepted_index": 9,
+     "loop_step": 10,
+     "fraction_of_accepted_steps": 1.0
+    },
+    "0.999": {
+     "accepted_index": 9,
+     "loop_step": 10,
+     "fraction_of_accepted_steps": 1.0
+    }
+   },
+   "fraction_at_accepted_step": {},
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 1,
+   "block_medians_dlam": [
+    0.0018691809117277192
+   ]
+  },
+  "t44m": {
+   "accepted_steps": 1266,
+   "recorded": 1248,
+   "unrecorded": 18,
+   "last_loop_step": 1588,
+   "lam0": 0.23301529280288558,
+   "lam_last": 0.22906934975198912,
+   "range_R": 0.003945943057237639,
+   "direction_of_trace": -1,
+   "why_stopped": "lost the family near lam=0.2291",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 29,
+     "loop_step": 29,
+     "fraction_of_accepted_steps": 0.0229
+    },
+    "0.99": {
+     "accepted_index": 124,
+     "loop_step": 125,
+     "fraction_of_accepted_steps": 0.0979
+    },
+    "0.999": {
+     "accepted_index": 367,
+     "loop_step": 370,
+     "fraction_of_accepted_steps": 0.2899
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.5497720538063566,
+    "50": 0.9605136802738111,
+    "100": 0.9854803087528463,
+    "200": 0.9963221002513859,
+    "500": 0.9997256175950097,
+    "1000": 0.9999999774178616
+   },
+   "steps_against_the_net_direction": 121,
+   "block_size": 100,
+   "n_blocks": 13,
+   "block_medians_dlam": [
+    3.605927398953046e-06,
+    3.5748899260279465e-07,
+    5.4376015107271414e-08,
+    3.521001025463821e-08,
+    2.0811542628118573e-08,
+    8.114799041059051e-09,
+    7.086038006365314e-10,
+    2.3211710331594304e-11,
+    9.932900335574146e-11,
+    1.3903715678775797e-10,
+    1.5474704850859666e-12,
+    2.6471186354015686e-12,
+    2.7703672689227687e-12
+   ]
+  },
+  "t44p": {
+   "accepted_steps": 332,
+   "recorded": 332,
+   "unrecorded": 0,
+   "last_loop_step": 336,
+   "lam0": 0.23979638820579183,
+   "lam_last": 0.3535991913517614,
+   "range_R": 0.11380280314596955,
+   "direction_of_trace": 1,
+   "why_stopped": "left the region (closest approach above 0.03)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 326,
+     "loop_step": 330,
+     "fraction_of_accepted_steps": 0.9819
+    },
+    "0.99": {
+     "accepted_index": 332,
+     "loop_step": 336,
+     "fraction_of_accepted_steps": 1.0
+    },
+    "0.999": {
+     "accepted_index": 332,
+     "loop_step": 336,
+     "fraction_of_accepted_steps": 1.0
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.03215538597577335,
+    "50": 0.24037437017588523,
+    "100": 0.28530257948623194,
+    "200": 0.2994028424029687
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 4,
+   "block_medians_dlam": [
+    0.0002515191886495599,
+    1.3383654100890263e-05,
+    0.00015230575921010292,
+    0.0017366012535131037
+   ]
+  },
+  "t62m": {
+   "accepted_steps": 375,
+   "recorded": 372,
+   "unrecorded": 3,
+   "last_loop_step": 388,
+   "lam0": 0.2596009719834578,
+   "lam_last": 0.23397230611032663,
+   "range_R": 0.025628665873131146,
+   "direction_of_trace": -1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 357,
+     "loop_step": 364,
+     "fraction_of_accepted_steps": 0.952
+    },
+    "0.99": {
+     "accepted_index": 372,
+     "loop_step": 380,
+     "fraction_of_accepted_steps": 0.992
+    },
+    "0.999": {
+     "accepted_index": 374,
+     "loop_step": 385,
+     "fraction_of_accepted_steps": 0.9973
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.1527474415227988,
+    "50": 0.6438026198882458,
+    "100": 0.7141452636236333,
+    "200": 0.7298752585089505
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 4,
+   "block_medians_dlam": [
+    0.00013179900213490525,
+    4.013920386694569e-06,
+    2.3023097548938165e-05,
+    3.153009542915253e-05
+   ]
+  },
+  "t62p": {
+   "accepted_steps": 990,
+   "recorded": 990,
+   "unrecorded": 0,
+   "last_loop_step": 994,
+   "lam0": 0.2658311606111719,
+   "lam_last": 0.36818061385668766,
+   "range_R": 0.10234945324551575,
+   "direction_of_trace": 1,
+   "why_stopped": "left the region (closest approach above 0.03)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 979,
+     "loop_step": 983,
+     "fraction_of_accepted_steps": 0.9889
+    },
+    "0.99": {
+     "accepted_index": 989,
+     "loop_step": 993,
+     "fraction_of_accepted_steps": 0.999
+    },
+    "0.999": {
+     "accepted_index": 990,
+     "loop_step": 994,
+     "fraction_of_accepted_steps": 1.0
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.020905719365390145,
+    "50": 0.04944213534086732,
+    "100": 0.054876404784897796,
+    "200": 0.056704980455476735,
+    "500": 0.058906208471139185
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 10,
+   "block_medians_dlam": [
+    2.310157888982256e-05,
+    1.2132281558274727e-06,
+    9.653346700888576e-07,
+    6.369529641503391e-07,
+    6.583664798054389e-07,
+    7.404979145420043e-07,
+    9.087771945803791e-07,
+    1.853224659231767e-06,
+    2.1609915346665343e-05,
+    0.0008777952501177189
+   ]
+  },
+  "t72m": {
+   "accepted_steps": 325,
+   "recorded": 321,
+   "unrecorded": 4,
+   "last_loop_step": 336,
+   "lam0": 0.2777283743263226,
+   "lam_last": 0.24129926946863445,
+   "range_R": 0.03642910485768813,
+   "direction_of_trace": -1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 295,
+     "loop_step": 298,
+     "fraction_of_accepted_steps": 0.9077
+    },
+    "0.99": {
+     "accepted_index": 319,
+     "loop_step": 322,
+     "fraction_of_accepted_steps": 0.9815
+    },
+    "0.999": {
+     "accepted_index": 322,
+     "loop_step": 327,
+     "fraction_of_accepted_steps": 0.9908
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.002750712531970358,
+    "50": 0.028398349456503633,
+    "100": 0.3240156434308731,
+    "200": 0.8506268921417607
+   },
+   "steps_against_the_net_direction": 0,
+   "block_size": 100,
+   "n_blocks": 4,
+   "block_medians_dlam": [
+    4.2540734486479215e-05,
+    0.00017273200935470634,
+    1.687361563333656e-05,
+    0.0001540528340896602
+   ]
+  },
+  "t72p": {
+   "accepted_steps": 1173,
+   "recorded": 1173,
+   "unrecorded": 0,
+   "last_loop_step": 1493,
+   "lam0": 0.277800726726839,
+   "lam_last": 0.2782753155932408,
+   "range_R": 0.00047458886640183717,
+   "direction_of_trace": 1,
+   "why_stopped": "out of time",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 146,
+     "loop_step": 150,
+     "fraction_of_accepted_steps": 0.1245
+    },
+    "0.99": {
+     "accepted_index": 853,
+     "loop_step": 1061,
+     "fraction_of_accepted_steps": 0.7272
+    },
+    "0.999": {
+     "accepted_index": 1161,
+     "loop_step": 1479,
+     "fraction_of_accepted_steps": 0.9898
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.14109003345517274,
+    "50": 0.5307048161229064,
+    "100": 0.7662672663011411,
+    "200": 0.9345385693915849,
+    "500": 0.9832898036693607,
+    "1000": 0.9950448082964198
+   },
+   "steps_against_the_net_direction": 7,
+   "block_size": 100,
+   "n_blocks": 12,
+   "block_medians_dlam": [
+    3.073591440500012e-06,
+    3.866195419088836e-07,
+    7.617277844595982e-08,
+    5.4706513236135734e-08,
+    1.1043060299531504e-08,
+    8.532167472541374e-10,
+    7.2577456822209285e-09,
+    1.9961790553857384e-10,
+    1.4794280550622929e-08,
+    6.3525817106668825e-09,
+    3.667850051458643e-09,
+    1.7239560556880917e-08
+   ]
+  },
+  "t81m": {
+   "accepted_steps": 1106,
+   "recorded": 1106,
+   "unrecorded": 0,
+   "last_loop_step": 1326,
+   "lam0": 0.5342083956036481,
+   "lam_last": 0.40712218081299806,
+   "range_R": 0.1270862147961287,
+   "direction_of_trace": -1,
+   "why_stopped": "lost the family near lam=0.4071",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 257,
+     "loop_step": 268,
+     "fraction_of_accepted_steps": 0.2324
+    },
+    "0.99": {
+     "accepted_index": 289,
+     "loop_step": 300,
+     "fraction_of_accepted_steps": 0.2613
+    },
+    "0.999": {
+     "accepted_index": 326,
+     "loop_step": 337,
+     "fraction_of_accepted_steps": 0.2948
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.04991754135997801,
+    "50": 0.37041531067602496,
+    "100": 0.41655023094666416,
+    "200": 0.49759726381032315,
+    "500": 0.9999284849743784,
+    "1000": 0.9999999993335315
+   },
+   "steps_against_the_net_direction": 110,
+   "block_size": 100,
+   "n_blocks": 12,
+   "block_medians_dlam": [
+    0.00036274078669490395,
+    8.842824018917561e-05,
+    0.00033386954939237934,
+    1.1106395158277937e-06,
+    1.9186481342581274e-07,
+    5.918511655766956e-08,
+    1.3437442603070338e-08,
+    9.68248378696579e-09,
+    3.718081398318418e-12,
+    3.7921610296365316e-12,
+    3.6355363164375376e-12,
+    1.7771895066687193e-12
+   ]
+  },
+  "t81p": {
+   "accepted_steps": 171,
+   "recorded": 164,
+   "unrecorded": 7,
+   "last_loop_step": 196,
+   "lam0": 0.5354642726449691,
+   "lam_last": 0.6514579795009728,
+   "range_R": 0.11600004848825884,
+   "direction_of_trace": 1,
+   "why_stopped": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "step_at": {
+    "0.9": {
+     "accepted_index": 105,
+     "loop_step": 109,
+     "fraction_of_accepted_steps": 0.614
+    },
+    "0.99": {
+     "accepted_index": 145,
+     "loop_step": 158,
+     "fraction_of_accepted_steps": 0.848
+    },
+    "0.999": {
+     "accepted_index": 157,
+     "loop_step": 170,
+     "fraction_of_accepted_steps": 0.9181
+    }
+   },
+   "fraction_at_accepted_step": {
+    "10": 0.05298258000506952,
+    "50": 0.4170433441443177,
+    "100": 0.8741768946522914
+   },
+   "steps_against_the_net_direction": 7,
+   "block_size": 100,
+   "n_blocks": 2,
+   "block_medians_dlam": [
+    0.0010529092269879192,
+    0.00010083424845069855
+   ]
+  }
+ }
+}

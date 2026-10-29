@@ -1,0 +1,520 @@
+{
+ "what": "cost per unit of lam of PeriCont (the stored traces, the ias route) and of the 50 digit single shooting re-closer (tools/reclose.py), from existing files and from tools/reclose-continue.py; and the attempts of one run of the default route (tools/dp45-attempts.mjs)",
+ "families": {
+  "t35m": {
+   "run_seconds": 3600,
+   "accepted_steps": 1711,
+   "lam_first": 0.6652898293497149,
+   "lam_last": 0.6638406030628946,
+   "lam_range_whole_run": 0.0014492262868203154,
+   "whole_run": {
+    "seconds_per_accepted_step": 2.104032729398013,
+    "seconds_per_unit_lam": 2484084.116289806,
+    "median_abs_dlam": 3.4699162432261232e-09
+   },
+   "before_creep": {
+    "accepted_steps": 1220,
+    "corrector_seconds": 2193.079,
+    "seconds_per_accepted_step": 1.7976057377049182,
+    "lam_range": 0.0014489166358504502,
+    "seconds_per_unit_lam": 1513599.1579755447,
+    "median_abs_dlam": 1.144917505246923e-08,
+    "fraction_of_whole_lam_range": 0.9997863335956011,
+    "note": "corrector seconds from the per-attempt records (the run_seconds of the whole run also hold the recording of the points)"
+   },
+   "reclose_50_digits_at_stored_points": {
+    "points": 69,
+    "seconds_min": 56.8,
+    "seconds_median": 102.3,
+    "seconds_max": 234.5,
+    "updates_max": 1
+   }
+  },
+  "t44m": {
+   "run_seconds": 3030,
+   "accepted_steps": 1266,
+   "lam_first": 0.23301529280288558,
+   "lam_last": 0.22906934975198912,
+   "lam_range_whole_run": 0.003945943050896461,
+   "whole_run": {
+    "seconds_per_accepted_step": 2.3933649289099526,
+    "seconds_per_unit_lam": 767877.275702605,
+    "median_abs_dlam": 1.4145750681926472e-09
+   },
+   "before_creep": {
+    "accepted_steps": 623,
+    "corrector_seconds": 1774.675,
+    "seconds_per_accepted_step": 2.8485955056179773,
+    "lam_range": 0.003945663630589208,
+    "seconds_per_unit_lam": 449778.58382088866,
+    "median_abs_dlam": 4.4625247358487385e-08,
+    "fraction_of_whole_lam_range": 0.9999291879523731,
+    "note": "corrector seconds from the per-attempt records (the run_seconds of the whole run also hold the recording of the points)"
+   },
+   "reclose_50_digits_at_stored_points": {
+    "points": 124,
+    "seconds_min": 70.2,
+    "seconds_median": 162.85,
+    "seconds_max": 258.5,
+    "updates_max": 1
+   }
+  },
+  "t62m": {
+   "run_seconds": 1975,
+   "accepted_steps": 375,
+   "lam_first": 0.2596009719834578,
+   "lam_last": 0.23397230611032663,
+   "lam_range_whole_run": 0.025628665873131146,
+   "whole_run": {
+    "seconds_per_accepted_step": 5.266666666666667,
+    "seconds_per_unit_lam": 77062.14633944607,
+    "median_abs_dlam": 2.2984430534792044e-05
+   },
+   "before_creep": null,
+   "note": "no creep in this trace: the whole run is before it",
+   "reclose_50_digits_at_stored_points": {
+    "points": 336,
+    "seconds_min": 51.1,
+    "seconds_median": 58.2,
+    "seconds_max": 152.5,
+    "updates_max": 1
+   }
+  },
+  "t72m": {
+   "run_seconds": 925,
+   "accepted_steps": 325,
+   "lam_first": 0.2777283743263226,
+   "lam_last": 0.24129926946863445,
+   "lam_range_whole_run": 0.03642910485768813,
+   "whole_run": {
+    "seconds_per_accepted_step": 2.8461538461538463,
+    "seconds_per_unit_lam": 25391.785046971436,
+    "median_abs_dlam": 3.185805844406475e-05
+   },
+   "before_creep": null,
+   "note": "no creep in this trace: the whole run is before it",
+   "reclose_50_digits_at_stored_points": {
+    "points": 325,
+    "seconds_min": 56.7,
+    "seconds_median": 75.3,
+    "seconds_max": 218.0,
+    "updates_max": 1
+   }
+  }
+ },
+ "reclose_midpoints_seconds": {
+  "t35m": {
+   "midpoints": 24,
+   "seconds_median": 171.3,
+   "seconds_max": 185.5
+  },
+  "t44m": {
+   "midpoints": 2,
+   "seconds_median": 319.1,
+   "seconds_max": 365.8
+  }
+ },
+ "continuation_beyond_the_stall_50_digits": {
+  "t35m": {
+   "dlam_per_step": 1e-05,
+   "steps_converged": 10,
+   "seconds_median_per_step": 148.6,
+   "seconds_total": 1570.2,
+   "seconds_per_unit_lam": 15702000.0,
+   "updates_median": 2.0
+  },
+  "t44m": {
+   "dlam_per_step": 1e-05,
+   "steps_converged": 10,
+   "seconds_median_per_step": 293.9,
+   "seconds_total": 2858.9,
+   "seconds_per_unit_lam": 28589000.0,
+   "updates_median": 2.0
+  },
+  "t81m": {
+   "dlam_per_step": 1e-05,
+   "steps_converged": 10,
+   "seconds_median_per_step": 264.5,
+   "seconds_total": 2730.8,
+   "seconds_per_unit_lam": 27308000.0,
+   "updates_median": 2.0
+  }
+ },
+ "dp45_attempts": {
+  "what": "the 28 attempts of the default route (Dormand-Prince, tolerance 1e-11, 24 pieces, direction -1) from the start of the earlier trace of t44 - (command in data/deep/extra/dp45-same-start-all.json), each a call of the corrector at a step length h that is halved after a failure until it is below 1e-9",
+  "attempts": 28,
+  "accepted": 0,
+  "why_counts": {
+   "line search failed": 28
+  },
+  "outcome_counts": {
+   "newton failed": 28
+  },
+  "h_first": 0.2,
+  "h_last": 1.4901161193847657e-09,
+  "iterations_median": 3.0,
+  "best_residual_of_an_attempt": {
+   "min": 1.1683543021945297e-11,
+   "median": 2.3550772443314827e-11,
+   "max": 5.53789791801762e-11
+  },
+  "final_residual": {
+   "min": 1.1683543021945297e-11,
+   "median": 2.4553095667734226e-11,
+   "max": 6.134986962891276e-11
+  },
+  "tolerance": 1e-11,
+  "attempts_with_best_residual_below_10_tolerance": 28,
+  "attempts_with_best_residual_below_tolerance": 0,
+  "seconds_total": 54.2,
+  "per_attempt": [
+   {
+    "attempt": 1,
+    "h": 0.2,
+    "residual_history": [
+     0.0017891213583602905,
+     1.527942215528988e-06,
+     4.773828832238536e-10,
+     1.124635384819328e-10,
+     8.610986923507369e-11,
+     3.5837915968173206e-11,
+     1.7035928223663177e-11
+    ],
+    "iterations": 7,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 2,
+    "h": 0.1,
+    "residual_history": [
+     0.00045305951586249726,
+     1.0018960250324227e-07,
+     5.53789791801762e-11,
+     6.134986962891276e-11
+    ],
+    "iterations": 4,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 3,
+    "h": 0.05,
+    "residual_history": [
+     0.00011397498824117225,
+     6.387585793632411e-09,
+     2.2311152925169608e-11
+    ],
+    "iterations": 3,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 4,
+    "h": 0.025,
+    "residual_history": [
+     2.8581698111151965e-05,
+     4.0229375386502397e-10,
+     6.688832820955781e-11,
+     6.50994258499793e-11,
+     3.194500219905194e-11
+    ],
+    "iterations": 5,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 5,
+    "h": 0.0125,
+    "residual_history": [
+     7.156366213956211e-06,
+     6.919065320687423e-11,
+     7.7397449560479e-11,
+     1.2230783053013283e-10,
+     5.769540400990536e-11,
+     2.7511548594816304e-11
+    ],
+    "iterations": 6,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 6,
+    "h": 0.00625,
+    "residual_history": [
+     1.7904559566073175e-06,
+     7.104228316734407e-11,
+     4.460368185910113e-11,
+     1.3433365531057007e-11,
+     9.153985902621287e-11,
+     4.202355130544788e-11,
+     4.503261652466506e-11,
+     4.732655933814556e-11
+    ],
+    "iterations": 8,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 7,
+    "h": 0.003125,
+    "residual_history": [
+     4.477843329464548e-07,
+     4.785152829533956e-11,
+     5.3664517274398804e-11,
+     5.1568194159301584e-11,
+     4.082939542016106e-11,
+     2.911393348625779e-11
+    ],
+    "iterations": 6,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 8,
+    "h": 0.0015625,
+    "residual_history": [
+     1.1196736715568534e-07,
+     1.182595688042909e-10,
+     2.3092194822993406e-11
+    ],
+    "iterations": 3,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 9,
+    "h": 0.00078125,
+    "residual_history": [
+     2.7994506712758493e-08,
+     4.580533174980417e-11,
+     6.955908071759609e-11,
+     7.001754731561505e-11,
+     2.3172352925371342e-11
+    ],
+    "iterations": 5,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 10,
+    "h": 0.000390625,
+    "residual_history": [
+     6.998963852922202e-09,
+     9.646639043126015e-11,
+     1.2980894137371024e-10,
+     5.256353685645365e-11,
+     7.562286907791815e-11,
+     8.843267784719444e-11,
+     2.2226220863785784e-11
+    ],
+    "iterations": 7,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 11,
+    "h": 0.0001953125,
+    "residual_history": [
+     1.7497828741497301e-09,
+     7.87838960736309e-11,
+     1.3066420168073023e-10,
+     1.88562776504142e-11
+    ],
+    "iterations": 4,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 12,
+    "h": 9.765625e-05,
+    "residual_history": [
+     4.374582918131864e-10,
+     6.249803452540448e-11,
+     3.3521518894019664e-11
+    ],
+    "iterations": 3,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 13,
+    "h": 4.8828125e-05,
+    "residual_history": [
+     1.0936429539754045e-10,
+     7.985534455912102e-11,
+     1.54462803658717e-10,
+     8.68518590380063e-11,
+     1.988989528634022e-11
+    ],
+    "iterations": 5,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 14,
+    "h": 2.44140625e-05,
+    "residual_history": [
+     5.030398320116092e-11,
+     2.392919196125831e-11
+    ],
+    "iterations": 2,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 15,
+    "h": 1.220703125e-05,
+    "residual_history": [
+     1.1683543021945297e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 16,
+    "h": 6.103515625e-06,
+    "residual_history": [
+     6.116387951671243e-11,
+     1.6882509279447788e-10,
+     1.5557596877435742e-10,
+     1.8507084753593972e-11
+    ],
+    "iterations": 4,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 17,
+    "h": 3.0517578125e-06,
+    "residual_history": [
+     2.865918613537133e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 18,
+    "h": 1.52587890625e-06,
+    "residual_history": [
+     2.7837288030241325e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 19,
+    "h": 7.62939453125e-07,
+    "residual_history": [
+     1.570854557542134e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 20,
+    "h": 3.814697265625e-07,
+    "residual_history": [
+     4.090205951712278e-11,
+     1.4613760201953596e-10,
+     1.447375552743324e-11
+    ],
+    "iterations": 3,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 21,
+    "h": 1.9073486328125e-07,
+    "residual_history": [
+     3.1265101618771496e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 22,
+    "h": 9.5367431640625e-08,
+    "residual_history": [
+     5.743069908525911e-11,
+     1.1353837314764803e-10,
+     2.517699937421014e-11
+    ],
+    "iterations": 3,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 23,
+    "h": 4.76837158203125e-08,
+    "residual_history": [
+     4.447775481253302e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 24,
+    "h": 2.384185791015625e-08,
+    "residual_history": [
+     2.618344430160846e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 25,
+    "h": 1.1920928955078126e-08,
+    "residual_history": [
+     1.2261361370669022e-10,
+     1.2774256652470228e-10,
+     7.534120549657075e-11,
+     1.209151112568918e-10,
+     3.3792080245120815e-11
+    ],
+    "iterations": 5,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 26,
+    "h": 5.960464477539063e-09,
+    "residual_history": [
+     1.535327420754129e-11
+    ],
+    "iterations": 1,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 27,
+    "h": 2.9802322387695314e-09,
+    "residual_history": [
+     1.5612011683430183e-11,
+     1.3036433044177898e-11
+    ],
+    "iterations": 2,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   },
+   {
+    "attempt": 28,
+    "h": 1.4901161193847657e-09,
+    "residual_history": [
+     9.184847327148304e-11,
+     4.670508424453601e-11
+    ],
+    "iterations": 2,
+    "why": "line search failed",
+    "outcome": "newton failed"
+   }
+  ]
+ }
+}

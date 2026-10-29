@@ -1,0 +1,900 @@
+{
+ "what": "the resolution of the corrector residual F (the ias route as the corrector evaluates it): at accepted steps, every node component (276 numbers) moved by one unit in the last place with a random sign, 30 times (seed 1); per step sup|F|, the change of F (largest, median and smallest over the 30 trials), the range of the moved sup|F|, and the largest |entry| of the reg.js matrix of each flagged piece. The creep steps are from the three 30 minute runs of stall-tolerance.json (t44 - with the corrector tolerance 1e-10 and 3e-10, t35 - with 1e-10; the tolerance of the stored traces is 1e-11), the steps without creep from a new 16 step run of t62 - from its command-line start. Compare the change of F with the tolerance of the run that made the step (the corrector tolerance of the stored traces is 1e-11).",
+ "commands": [
+  "node tools/family-follow-ias.mjs OUT.json -1 -0.3608230785422193 0.495143505671977 0.2600367265090116 6.025456255902029 --pieces=24 --minutes=30 --guard-ratio=390 --ias-first-step=legacy --stop-after=15  (t62 -, 16 accepted steps)",
+  "node tools/residual-floor.mjs OUT.json LABEL=TRACE.json:I,J,K [...] --k=30 --seed=1"
+ ],
+ "tolerance_of_the_stored_traces": 1e-11,
+ "summary": {
+  "creep, t44 - runs (tolerances 1e-10 and 3e-10, steps 50, 150, 250, 400 of each)": {
+   "steps": 8,
+   "sup_F_range": [
+    1.2946088645549025e-11,
+    1.397495452692965e-10
+   ],
+   "change_of_F_median_range": [
+    7.184879427524216e-11,
+    1.283708313259968e-10
+   ],
+   "change_of_F_largest": 2.6716762135947647e-10,
+   "moved_sup_F_range": [
+    4.182577895139872e-12,
+    4.06917166628773e-10
+   ],
+   "largest_matrix_entry_of_a_flagged_piece_range": [
+    699139.7196843548,
+    1246752.2168519665
+   ]
+  },
+  "creep, t35 - run (tolerance 1e-10, steps 100, 300, 500, 700)": {
+   "steps": 4,
+   "sup_F_range": [
+    2.6776025841002138e-11,
+    8.552092367608566e-11
+   ],
+   "change_of_F_median_range": [
+    5.074279885164401e-11,
+    1.5798917729625828e-10
+   ],
+   "change_of_F_largest": 4.5074699528413475e-10,
+   "moved_sup_F_range": [
+    1.562650009390154e-11,
+    5.30292254552478e-10
+   ],
+   "largest_matrix_entry_of_a_flagged_piece_range": [
+    994611.1381417327,
+    3092646.679998957
+   ]
+  },
+  "no creep, new run of t62 - (steps 1, 14, 15, 16)": {
+   "steps": 4,
+   "sup_F_range": [
+    6.106226635438361e-15,
+    5.129924263158614e-14
+   ],
+   "change_of_F_median_range": [
+    1.8485213360008856e-14,
+    5.773159728050814e-14
+   ],
+   "change_of_F_largest": 6.932648899393712e-14,
+   "moved_sup_F_range": [
+    5.218048215738236e-15,
+    7.711539740107298e-14
+   ],
+   "largest_matrix_entry_of_a_flagged_piece_range": [
+    58.732890953029184,
+    137.45687067586292
+   ]
+  }
+ },
+ "items": [
+  {
+   "label": "t44m-tol1e-10",
+   "line": 50,
+   "loop_step": 52,
+   "lam": 0.22906854405557361,
+   "sup_F": 2.2379056940913244e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 2.2379056940913244e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 699139.7196843548,
+     "smallest_ias15_pair_distance": 0.000792146818484362
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 647980.5377003952,
+     "smallest_ias15_pair_distance": 0.0005088503560871892
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.532983099080862,
+     "smallest_ias15_pair_distance": 4.565736959989054e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.022232967582102,
+     "smallest_ias15_pair_distance": 1.4410549007343177e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.42901483089491,
+     "smallest_ias15_pair_distance": 8.386499728247531e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 1.2396306203754648e-10,
+   "change_of_F_median": 7.184879427524216e-11,
+   "change_of_F_smallest": 3.8546943414985435e-12,
+   "moved_sup_F_range": [
+    1.2627558720890164e-11,
+    1.2735590360080096e-10
+   ],
+   "moved_sup_F_median": 7.213518671278507e-11,
+   "piece_of_the_largest_change_most_often": 10,
+   "change_of_F_line_search_evaluation": {
+    "largest": 1.2396306203754648e-10,
+    "median": 7.184879427524216e-11
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol1e-10",
+   "line": 150,
+   "loop_step": 152,
+   "lam": 0.22906797477656501,
+   "sup_F": 1.2946088645549025e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 1.2946088645549025e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 895342.7858578205,
+     "smallest_ias15_pair_distance": 0.0007102702626391793
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 829787.3240006154,
+     "smallest_ias15_pair_distance": 0.0005090984419041244
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.5325152988894235,
+     "smallest_ias15_pair_distance": 4.573943001427744e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.0221093462268085,
+     "smallest_ias15_pair_distance": 1.4458781850797932e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.428702217092676,
+     "smallest_ias15_pair_distance": 8.420274957927362e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 1.5982948298187694e-10,
+   "change_of_F_median": 8.745655935560315e-11,
+   "change_of_F_smallest": 3.858247055177344e-12,
+   "moved_sup_F_range": [
+    1.123275084058406e-11,
+    1.7277557162742596e-10
+   ],
+   "moved_sup_F_median": 9.485361801564451e-11,
+   "piece_of_the_largest_change_most_often": 11,
+   "change_of_F_line_search_evaluation": {
+    "largest": 1.5982948298187694e-10,
+    "median": 8.745655935560315e-11
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol1e-10",
+   "line": 250,
+   "loop_step": 252,
+   "lam": 0.22906750890570357,
+   "sup_F": 6.104272642915021e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 6.104272642915021e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 1078373.7307195708,
+     "smallest_ias15_pair_distance": 0.0006482513461479175
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 999380.8294351982,
+     "smallest_ias15_pair_distance": 0.0005090614451094105
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.532132478789879,
+     "smallest_ias15_pair_distance": 4.5806831173762414e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.022008171058181,
+     "smallest_ias15_pair_distance": 1.4498503235788858e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.42844635744451,
+     "smallest_ias15_pair_distance": 8.448151089137034e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 1.227675738846301e-10,
+   "change_of_F_median": 1.0768948233152997e-10,
+   "change_of_F_smallest": 1.6839862837514374e-12,
+   "moved_sup_F_range": [
+    4.182577895139872e-12,
+    1.8381030031378032e-10
+   ],
+   "moved_sup_F_median": 1.1142946634845607e-10,
+   "piece_of_the_largest_change_most_often": 10,
+   "change_of_F_line_search_evaluation": {
+    "largest": 1.227675738846301e-10,
+    "median": 1.0768948233152997e-10
+   },
+   "trials_with_moved_sup_F_below_tolerance": 1,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol1e-10",
+   "line": 400,
+   "loop_step": 403,
+   "lam": 0.22906706114299283,
+   "sup_F": 2.8759217229890055e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 2.8759217229890055e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 1242825.6903569207,
+     "smallest_ias15_pair_distance": 0.0005954611184247061
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 1151748.3159395545,
+     "smallest_ias15_pair_distance": 0.0005092958779906254
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.531764538474907,
+     "smallest_ias15_pair_distance": 4.587182249395071e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.021910920275361,
+     "smallest_ias15_pair_distance": 1.4536893430057774e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.428200417009228,
+     "smallest_ias15_pair_distance": 8.47514485503609e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 1.7965362530958373e-10,
+   "change_of_F_median": 1.2773242880070867e-10,
+   "change_of_F_smallest": 3.218758592993254e-12,
+   "moved_sup_F_range": [
+    5.74473801862041e-12,
+    1.6150991655194957e-10
+   ],
+   "moved_sup_F_median": 1.228672684427945e-10,
+   "piece_of_the_largest_change_most_often": 11,
+   "change_of_F_line_search_evaluation": {
+    "largest": 1.7965362530958373e-10,
+    "median": 1.2773242880070867e-10
+   },
+   "trials_with_moved_sup_F_below_tolerance": 2,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol3e-10",
+   "line": 50,
+   "loop_step": 52,
+   "lam": 0.22906853138115046,
+   "sup_F": 1.0766854074972798e-10,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 1.0766854074972798e-10,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 703052.9599908623,
+     "smallest_ias15_pair_distance": 0.0007902728513826819
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 651606.7183039796,
+     "smallest_ias15_pair_distance": 0.0005089372422673791
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.532972680315651,
+     "smallest_ias15_pair_distance": 4.5659193178726173e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.022230215170998,
+     "smallest_ias15_pair_distance": 1.4411619308297175e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.429007871855651,
+     "smallest_ias15_pair_distance": 8.387248344126393e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 1.7688606135379814e-10,
+   "change_of_F_median": 7.235781418479803e-11,
+   "change_of_F_smallest": 9.496951836052148e-12,
+   "moved_sup_F_range": [
+    7.549363911785179e-12,
+    1.6506795930126827e-10
+   ],
+   "moved_sup_F_median": 8.08189071221932e-11,
+   "piece_of_the_largest_change_most_often": 10,
+   "change_of_F_line_search_evaluation": {
+    "largest": 1.7688606135379814e-10,
+    "median": 7.235781418479803e-11
+   },
+   "trials_with_moved_sup_F_below_tolerance": 1,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol3e-10",
+   "line": 150,
+   "loop_step": 152,
+   "lam": 0.22906796456330836,
+   "sup_F": 5.977440764581843e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 5.977440764581843e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 899207.7699827406,
+     "smallest_ias15_pair_distance": 0.000708854264279344
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 833368.6398000496,
+     "smallest_ias15_pair_distance": 0.0005091710068834746
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.532506910701211,
+     "smallest_ias15_pair_distance": 4.574090503237769e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.022107128559017,
+     "smallest_ias15_pair_distance": 1.445965010546105e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.42869660754506,
+     "smallest_ias15_pair_distance": 8.420883704657867e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 1.6930101764955907e-10,
+   "change_of_F_median": 9.265264944158247e-11,
+   "change_of_F_smallest": 4.493509730973955e-12,
+   "moved_sup_F_range": [
+    2.2311041902867146e-11,
+    1.178752720432108e-10
+   ],
+   "moved_sup_F_median": 7.170775431775134e-11,
+   "piece_of_the_largest_change_most_often": 10,
+   "change_of_F_line_search_evaluation": {
+    "largest": 1.6930101764955907e-10,
+    "median": 9.265264944158247e-11
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol3e-10",
+   "line": 250,
+   "loop_step": 252,
+   "lam": 0.22906750038518733,
+   "sup_F": 2.3224089318318875e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 2.3224089318318875e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 1081744.505705483,
+     "smallest_ias15_pair_distance": 0.0006471773980440257
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 1002504.0436172675,
+     "smallest_ias15_pair_distance": 0.000509083769231063
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.532125484309793,
+     "smallest_ias15_pair_distance": 4.580806559924153e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.022006321017381,
+     "smallest_ias15_pair_distance": 1.4499231585560537e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.428441676603528,
+     "smallest_ias15_pair_distance": 8.448662747020796e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 2.127613640823256e-10,
+   "change_of_F_median": 1.1123299850646085e-10,
+   "change_of_F_smallest": 7.077005648170598e-12,
+   "moved_sup_F_range": [
+    1.5301537814593758e-11,
+    2.3598545340064447e-10
+   ],
+   "moved_sup_F_median": 9.926188343500897e-11,
+   "piece_of_the_largest_change_most_often": 10,
+   "change_of_F_line_search_evaluation": {
+    "largest": 2.127613640823256e-10,
+    "median": 1.1123299850646085e-10
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t44m-tol3e-10",
+   "line": 400,
+   "loop_step": 403,
+   "lam": 0.22906704860356963,
+   "sup_F": 1.397495452692965e-10,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 1.397495452692965e-10,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 1246752.2168519665,
+     "smallest_ias15_pair_distance": 0.0005941067624138933
+    },
+    {
+     "piece": 11,
+     "max_abs_matrix_entry": 1155386.0519285856,
+     "smallest_ias15_pair_distance": 0.0005092772246869804
+    },
+    {
+     "piece": 14,
+     "max_abs_matrix_entry": 6.531754228659799,
+     "smallest_ias15_pair_distance": 4.587364583014099e-05
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 4.0219081962957555,
+     "smallest_ias15_pair_distance": 1.4537971722522461e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 10.428193530038877,
+     "smallest_ias15_pair_distance": 8.475903775194695e-06
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 2.6716762135947647e-10,
+   "change_of_F_median": 1.283708313259968e-10,
+   "change_of_F_smallest": 7.208456054286216e-12,
+   "moved_sup_F_range": [
+    4.5691062044994624e-11,
+    4.06917166628773e-10
+   ],
+   "moved_sup_F_median": 2.504947360648657e-10,
+   "piece_of_the_largest_change_most_often": 10,
+   "change_of_F_line_search_evaluation": {
+    "largest": 2.6716762135947647e-10,
+    "median": 1.283708313259968e-10
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t35m-tol1e-10",
+   "line": 100,
+   "loop_step": 102,
+   "lam": 0.6638353174500602,
+   "sup_F": 8.552092367608566e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 8.552092367608566e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 994611.1381417327,
+     "smallest_ias15_pair_distance": 3.5754331943975355e-06
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 904712.8245276033,
+     "smallest_ias15_pair_distance": 0.000526968108134523
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 9.328005035058595e-11,
+   "change_of_F_median": 5.074279885164401e-11,
+   "change_of_F_smallest": 1.4992451724538114e-11,
+   "moved_sup_F_range": [
+    1.562650009390154e-11,
+    1.787086034710228e-10
+   ],
+   "moved_sup_F_median": 1.1636014374261094e-10,
+   "piece_of_the_largest_change_most_often": 17,
+   "change_of_F_line_search_evaluation": {
+    "largest": 9.328005035058595e-11,
+    "median": 5.074279885164401e-11
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t35m-tol1e-10",
+   "line": 300,
+   "loop_step": 302,
+   "lam": 0.6638286646627686,
+   "sup_F": 2.6776025841002138e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 2.6776025841002138e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 1813912.4974350508,
+     "smallest_ias15_pair_distance": 3.62126062495842e-06
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 1649923.3818804391,
+     "smallest_ias15_pair_distance": 0.0003905344556616746
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 2.327027459614328e-10,
+   "change_of_F_median": 9.203604545149346e-11,
+   "change_of_F_smallest": 1.7607248992135283e-11,
+   "moved_sup_F_range": [
+    2.7445268280246182e-11,
+    2.441211677250976e-10
+   ],
+   "moved_sup_F_median": 1.1821071899120739e-10,
+   "piece_of_the_largest_change_most_often": 17,
+   "change_of_F_line_search_evaluation": {
+    "largest": 2.327027459614328e-10,
+    "median": 9.203604545149346e-11
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t35m-tol1e-10",
+   "line": 500,
+   "loop_step": 503,
+   "lam": 0.6638258363645011,
+   "sup_F": 7.954525926834322e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 7.954525926834322e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 2621375.3652052972,
+     "smallest_ias15_pair_distance": 3.640909499895675e-06
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 2384357.526831908,
+     "smallest_ias15_pair_distance": 0.00032497170810875866
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 4.5074699528413475e-10,
+   "change_of_F_median": 1.3477641225279058e-10,
+   "change_of_F_smallest": 1.652011860642233e-11,
+   "moved_sup_F_range": [
+    4.402522790769581e-11,
+    5.30292254552478e-10
+   ],
+   "moved_sup_F_median": 1.957900508386956e-10,
+   "piece_of_the_largest_change_most_often": 17,
+   "change_of_F_line_search_evaluation": {
+    "largest": 4.5074699528413475e-10,
+    "median": 1.3477641225279058e-10
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t35m-tol1e-10",
+   "line": 700,
+   "loop_step": 713,
+   "lam": 0.6638247973540964,
+   "sup_F": 6.054534651411814e-11,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 6.054534651411814e-11,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 3092646.679998957,
+     "smallest_ias15_pair_distance": 3.648188344145205e-06
+    },
+    {
+     "piece": 18,
+     "max_abs_matrix_entry": 2813003.6805382427,
+     "smallest_ias15_pair_distance": 0.0002992155707777108
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 4.3369396962589235e-10,
+   "change_of_F_median": 1.5798917729625828e-10,
+   "change_of_F_smallest": 3.240785417801817e-11,
+   "moved_sup_F_range": [
+    2.1547430506529963e-11,
+    4.942393161400105e-10
+   ],
+   "moved_sup_F_median": 1.9416035446084834e-10,
+   "piece_of_the_largest_change_most_often": 17,
+   "change_of_F_line_search_evaluation": {
+    "largest": 4.3369396962589235e-10,
+    "median": 1.5798917729625828e-10
+   },
+   "trials_with_moved_sup_F_below_tolerance": 0,
+   "sup_F_below_tolerance": false
+  },
+  {
+   "label": "t62m",
+   "line": 1,
+   "loop_step": 1,
+   "lam": 0.2596009719834578,
+   "sup_F": 6.106226635438361e-15,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 6.106226635438361e-15,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 8,
+     "max_abs_matrix_entry": 6.970735097966007,
+     "smallest_ias15_pair_distance": 0.00016853103493186887
+    },
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 6.982723900020955,
+     "smallest_ias15_pair_distance": 0.0006073590934680975
+    },
+    {
+     "piece": 13,
+     "max_abs_matrix_entry": 14.003251338515819,
+     "smallest_ias15_pair_distance": 0.0007352092378727829
+    },
+    {
+     "piece": 15,
+     "max_abs_matrix_entry": 4.8971987061858755,
+     "smallest_ias15_pair_distance": 0.000789661953094549
+    },
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 137.45687067586292,
+     "smallest_ias15_pair_distance": 0.0008168348686546581
+    },
+    {
+     "piece": 20,
+     "max_abs_matrix_entry": 5.2184373837707465,
+     "smallest_ias15_pair_distance": 0.0008308530754303805
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 9.544349586894624,
+     "smallest_ias15_pair_distance": 0.000837124653904702
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 6.932648899393712e-14,
+   "change_of_F_median": 5.773159728050814e-14,
+   "change_of_F_smallest": 6.661338147750939e-15,
+   "moved_sup_F_range": [
+    7.993605777301127e-15,
+    7.394085344003543e-14
+   ],
+   "moved_sup_F_median": 5.462991170546161e-14,
+   "piece_of_the_largest_change_most_often": 17,
+   "change_of_F_line_search_evaluation": {
+    "largest": 6.932648899393712e-14,
+    "median": 5.773159728050814e-14
+   },
+   "trials_with_moved_sup_F_below_tolerance": 30,
+   "sup_F_below_tolerance": true
+  },
+  {
+   "label": "t62m",
+   "line": 14,
+   "loop_step": 14,
+   "lam": 0.25400902886588905,
+   "sup_F": 5.129924263158614e-14,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 5.129924263158614e-14,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 8,
+     "max_abs_matrix_entry": 7.892301263088633,
+     "smallest_ias15_pair_distance": 8.441301590820861e-05
+    },
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 5.817315663618206,
+     "smallest_ias15_pair_distance": 8.684280996733477e-06
+    },
+    {
+     "piece": 13,
+     "max_abs_matrix_entry": 17.006512944207067,
+     "smallest_ias15_pair_distance": 3.0190425795892377e-05
+    },
+    {
+     "piece": 15,
+     "max_abs_matrix_entry": 4.550141722590734,
+     "smallest_ias15_pair_distance": 4.2401246972733086e-05
+    },
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 65.37206853410592,
+     "smallest_ias15_pair_distance": 4.919008976339877e-05
+    },
+    {
+     "piece": 20,
+     "max_abs_matrix_entry": 4.996723564227579,
+     "smallest_ias15_pair_distance": 5.295251906943074e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 8.702385631716542,
+     "smallest_ias15_pair_distance": 5.459416581676547e-05
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 2.6645352591003757e-14,
+   "change_of_F_median": 2.250977182427505e-14,
+   "change_of_F_smallest": 1.021405182655144e-14,
+   "moved_sup_F_range": [
+    2.5836971451198565e-14,
+    7.711539740107298e-14
+   ],
+   "moved_sup_F_median": 4.3163389529254914e-14,
+   "piece_of_the_largest_change_most_often": 18,
+   "change_of_F_line_search_evaluation": {
+    "largest": 2.6645352591003757e-14,
+    "median": 2.250977182427505e-14
+   },
+   "trials_with_moved_sup_F_below_tolerance": 30,
+   "sup_F_below_tolerance": true
+  },
+  {
+   "label": "t62m",
+   "line": 15,
+   "loop_step": 15,
+   "lam": 0.2535995323961114,
+   "sup_F": 3.502753642692369e-14,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 3.502753642692369e-14,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 8,
+     "max_abs_matrix_entry": 7.978156919049044,
+     "smallest_ias15_pair_distance": 0.00012450561129009847
+    },
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 5.728100709535192,
+     "smallest_ias15_pair_distance": 1.011757497395575e-06
+    },
+    {
+     "piece": 13,
+     "max_abs_matrix_entry": 17.310884591029144,
+     "smallest_ias15_pair_distance": 1.2668271326320547e-05
+    },
+    {
+     "piece": 15,
+     "max_abs_matrix_entry": 4.518120421927344,
+     "smallest_ias15_pair_distance": 2.096650298027882e-05
+    },
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 61.954399474960844,
+     "smallest_ias15_pair_distance": 2.5829499969041814e-05
+    },
+    {
+     "piece": 20,
+     "max_abs_matrix_entry": 4.972544302261784,
+     "smallest_ias15_pair_distance": 2.854042607928993e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 8.617935774984796,
+     "smallest_ias15_pair_distance": 2.975322003866451e-05
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 2.930988785010413e-14,
+   "change_of_F_median": 1.8485213360008856e-14,
+   "change_of_F_smallest": 6.5780714209040525e-15,
+   "moved_sup_F_range": [
+    1.2878587085651816e-14,
+    5.934142066621462e-14
+   ],
+   "moved_sup_F_median": 3.927413949611491e-14,
+   "piece_of_the_largest_change_most_often": 18,
+   "change_of_F_line_search_evaluation": {
+    "largest": 2.930988785010413e-14,
+    "median": 1.8485213360008856e-14
+   },
+   "trials_with_moved_sup_F_below_tolerance": 30,
+   "sup_F_below_tolerance": true
+  },
+  {
+   "label": "t62m",
+   "line": 16,
+   "loop_step": 16,
+   "lam": 0.253194380793836,
+   "sup_F": 1.326716514427062e-14,
+   "repeat_evaluation_difference": 0,
+   "sup_F_line_search_evaluation": 1.326716514427062e-14,
+   "difference_of_the_two_evaluations": 0,
+   "flagged_pieces": [
+    {
+     "piece": 8,
+     "max_abs_matrix_entry": 8.066673624570354,
+     "smallest_ias15_pair_distance": 0.00017347661737558234
+    },
+    {
+     "piece": 10,
+     "max_abs_matrix_entry": 5.63940233825416,
+     "smallest_ias15_pair_distance": 9.523548663062872e-07
+    },
+    {
+     "piece": 13,
+     "max_abs_matrix_entry": 17.6300320200029,
+     "smallest_ias15_pair_distance": 2.506913956410811e-06
+    },
+    {
+     "piece": 15,
+     "max_abs_matrix_entry": 4.485483851838587,
+     "smallest_ias15_pair_distance": 6.786775943328052e-06
+    },
+    {
+     "piece": 17,
+     "max_abs_matrix_entry": 58.732890953029184,
+     "smallest_ias15_pair_distance": 9.676576402475504e-06
+    },
+    {
+     "piece": 20,
+     "max_abs_matrix_entry": 4.9474131309531675,
+     "smallest_ias15_pair_distance": 1.1354473729950455e-05
+    },
+    {
+     "piece": 22,
+     "max_abs_matrix_entry": 8.53098323222027,
+     "smallest_ias15_pair_distance": 1.21421940506429e-05
+    }
+   ],
+   "replaced_pieces": [],
+   "change_of_F_largest": 3.1530333899354446e-14,
+   "change_of_F_median": 1.9631865577629526e-14,
+   "change_of_F_smallest": 7.271960811294775e-15,
+   "moved_sup_F_range": [
+    5.218048215738236e-15,
+    3.9468428525424315e-14
+   ],
+   "moved_sup_F_median": 2.3148150063434514e-14,
+   "piece_of_the_largest_change_most_often": 17,
+   "change_of_F_line_search_evaluation": {
+    "largest": 3.1530333899354446e-14,
+    "median": 1.9631865577629526e-14
+   },
+   "trials_with_moved_sup_F_below_tolerance": 30,
+   "sup_F_below_tolerance": true
+  }
+ ]
+}
