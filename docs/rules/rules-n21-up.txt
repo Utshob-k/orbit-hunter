@@ -1,6 +1,6 @@
 Copied from the local rules file of the run on 2026-10-10 (written before the first run of this search; the times are the clock of the machine). The runs used copies of tools/branch-point.mjs (branch-point-n.mjs and later copies) in which only the paths differ, plus the changes that are listed below as they were made; the tool in the repository has those changes as options (--repeat-tol, --pieces) and the caps of the integration steps in src/perp.js and src/shooting.js raised by 20. 'Folder' means the local folder of the run.
 
-SATELLITES OF THE R FAMILY, k = 1, UPPER BRANCH, n = 21 UPWARD. LOCAL ONLY (drafts/family-follow/n21up/), nothing in the repo, nothing pushed or sent. Written 2026-10-10 before the first run; nothing below may change after the run starts; a change that cannot be avoided goes into DEVIATIONS with what and why.
+SATELLITES OF THE R FAMILY, k = 1, UPPER BRANCH, n = 21 UPWARD. LOCAL ONLY (a local folder), nothing in the repo, nothing pushed or sent. Written 2026-10-10 before the first run; nothing below may change after the run starts; a change that cannot be avoided goes into DEVIATIONS with what and why.
 
 TIME. 4 hours wall-clock from the start time written at the end; at the deadline everything running is stopped and whatever is done is reported.
 
