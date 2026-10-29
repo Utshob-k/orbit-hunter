@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or these orbits, please cite it like this."
-title: "Orbit Hunter: a search for periodic orbits of the planar three-body problem"
+title: "Orbit Hunter 0.3.0, with PeriCont: continuation of relative periodic orbits of the planar equal-mass three-body problem through close two-body approaches"
 authors:
   - given-names: Utshob
     family-names: Kandel
