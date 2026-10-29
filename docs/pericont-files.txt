@@ -62,6 +62,7 @@ tools/pericentres.py
 tools/pair-angmom.py
 tools/piece-ends.mjs
 tools/piece-mp.py
+tools/piece-trace.py
 tools/residual-floor.mjs
 tools/creep-attempts.py
 tools/stall-matrix.mjs
