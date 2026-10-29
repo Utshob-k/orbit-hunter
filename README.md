@@ -98,7 +98,7 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 
 ## Install and reproduce
 
-Node 18 or newer, nothing to install for the JavaScript code (the ias route below was run only with v24.15.0). Some Python scripts need `rebound`, `numpy` or `mpmath` (`pip install`).
+Nothing to install for the JavaScript code. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository needs Node 18 or newer. Some Python scripts need `rebound`, `numpy` or `mpmath` (the ias route below: exact commands there).
 
 ```
 npm test                              # the tests of the default route (Dormand-Prince), about 20 seconds
@@ -119,13 +119,42 @@ Which integrator gives which number: the corrector (the multiple shooting) takes
 
 Two limits to read first: a stored point can be off the orbit by more than the corrector tolerance (piece 18 of an earlier point of t35 - was wrong by 1.18e-7 while the residual of the corrector was 6.7e-14), and 15 stored points of t28 - and t81 + fail the witness closure; both are described in the section "The ias route" of [docs/methods-and-limits.md](docs/methods-and-limits.md).
 
-The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`. Use Python 3.14 (3.15 does not build rebound 5.2.2), in a venv, and set `ORBIT_PYTHON` to its python for the node commands (activate the venv for the python tools).
+The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository needs Node 18 or newer.
+
+Python 3.14 with REBOUND 5.2.2, mpmath 1.4.1 and numpy 2.5.3 in a venv in the top folder of the repository (Python 3.15 does not build REBOUND 5.2.2; on Windows `python` may be 3.15, so name the version). `ORBIT_PYTHON` is the python of that venv; the node commands use it, and the python tools can be run with it directly.
+
+Windows, PowerShell:
 
 ```
-pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
-npm run test:ias                      # the tests of the ias route, 4 to 8 minutes
-node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 6 to 12 minutes (its PASS or FAIL compares text that depends on the machine, see docs/deep.md)
+py -3.14 -m venv venv
+venv\Scripts\pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+$env:ORBIT_PYTHON = "$PWD\venv\Scripts\python.exe"
 ```
+
+Windows, cmd:
+
+```
+py -3.14 -m venv venv
+venv\Scripts\pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+set ORBIT_PYTHON=%CD%\venv\Scripts\python.exe
+```
+
+Linux:
+
+```
+python3.14 -m venv venv
+venv/bin/pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+export ORBIT_PYTHON=$PWD/venv/bin/python
+```
+
+Then, from the top folder:
+
+```
+npm run test:ias                      # the tests of the ias route, 4 to 8 minutes
+node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 6 to 15 minutes (its PASS or FAIL compares numbers with tolerances, see docs/deep.md)
+```
+
+The files of PeriCont are listed in `docs/pericont-files.txt`; `node tools/pack-pericont.mjs OUTDIR` builds the package `pericont-0.3.0.zip` from that list (docs/deep.md, section "The package").
 
 The stored traces and witnesses of the families t35 -, t44 -, t62 - and t72 - and the table of the 19 traces that were started are in `data/deep/`. What the route does not cover is in [docs/methods-and-limits.md](docs/methods-and-limits.md) (section "The ias route"), the commands and run times in [docs/deep.md](docs/deep.md).
 

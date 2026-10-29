@@ -4,10 +4,38 @@ The close-approach route of the perpendicular start is called PeriCont (version 
 
 ## What it needs
 
-Node v24.15.0 (the only version this route was run with; Node 18 or newer for the DP45 code), Python with `rebound` and `mpmath` (the stored runs used 3.14.6, REBOUND 5.2.2, mpmath 1.4.1, numpy 2.5.3). Use Python 3.14 (3.15 does not build rebound 5.2.2), in a venv, and set `ORBIT_PYTHON` to its python for the node commands (activate the venv for the python tools). The workflow `.github/workflows/test.yml` runs `npm test` and `npm run test:ias` on ubuntu-24.04 with Node 24.15.0 and Python 3.14 (the newest 3.14.x; the run quoted in the section on the numbers had 3.14.8); the minimum versions of Node and Python are not established.
+Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository needs Node 18 or newer. Python with `rebound` and `mpmath` (the stored runs used 3.14.6, REBOUND 5.2.2, mpmath 1.4.1, numpy 2.5.3).
+
+Python 3.14 with REBOUND 5.2.2, mpmath 1.4.1 and numpy 2.5.3 in a venv in the top folder of the repository (Python 3.15 does not build REBOUND 5.2.2; on Windows `python` may be 3.15, so name the version). `ORBIT_PYTHON` is the python of that venv; the node commands use it, and the python tools can be run with it directly.
+
+Windows, PowerShell:
 
 ```
-pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+py -3.14 -m venv venv
+venv\Scripts\pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+$env:ORBIT_PYTHON = "$PWD\venv\Scripts\python.exe"
+```
+
+Windows, cmd:
+
+```
+py -3.14 -m venv venv
+venv\Scripts\pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+set ORBIT_PYTHON=%CD%\venv\Scripts\python.exe
+```
+
+Linux:
+
+```
+python3.14 -m venv venv
+venv/bin/pip install rebound==5.2.2 mpmath==1.4.1 numpy==2.5.3
+export ORBIT_PYTHON=$PWD/venv/bin/python
+```
+ The workflow `.github/workflows/test.yml` runs `npm test` and `npm run test:ias` on ubuntu-24.04 with Node 24.15.0 and Python 3.14 (the newest 3.14.x; the run quoted in the section on the numbers had 3.14.8); the minimum versions of Node and Python are not established.
+
+Then, from the top folder:
+
+```
 npm test                 # the tests of the default route (Dormand-Prince), about 20 seconds
 npm run test:ias         # the tests of this route, 4 to 8 minutes
 ```
@@ -26,7 +54,7 @@ The route is off unless asked for. `settings.integrator` in `src/settings.js` is
 
 - `src/ias/ias-bridge.py` is one long-lived Python process per trace. It runs REBOUND IAS15 for one piece at a time and gets its requests as lines of JSON from `src/ias/bridge.js` (through a worker thread, `bridge-worker.mjs`, so the shooting code can stay synchronous).
 - `src/ias/guards.py` decides from the sampled pair distances of a piece whether it is an encounter piece and whether one of the guards trips (below). `src/ias/reg.js` is the regularised integrator (algorithmic regularisation in chain coordinates) used for the encounter pieces; `reg-settings.json` has its constants. `src/ias/recorder.js` writes one line per attempt of the corrector.
-- `tools/family-follow-ias.mjs` follows a family in one direction and writes the trace.
+- `tools/family-follow-ias.mjs` follows a family in one direction and writes the trace. `tools/reproduce-trace.mjs` runs a stored trace again from its command-line start and compares the accepted steps with the stored ones. `tools/pack-pericont.mjs` builds the package (below).
 - `tools/trace-witnesses.py`, `witness-jobs.py`, `run-queue.py`, `witness.py`, `witness-check.py` make the witnesses of a trace and read them (below). `tools/reclose.py` closes a stored orbit again at the same lam in multiple precision. `tools/point-diagnostic.py` looks at one point that does not close. `tools/guard-check.py` runs the guards on stored orbits.
 - `tools/residual-floor.mjs` (the resolution of the corrector residual at accepted steps), `tools/reclose-continue.py` (50 digit continuation in lam from a closed orbit), `tools/pair-angmom.py` (signed angular momentum of the close pair), `tools/piece-ends.mjs` and `tools/piece-mp.py` (end states of the pieces of one step by IAS15, `reg.js` and the Dormand-Prince code against the 50 digit flow) and `tools/dp45-attempts.mjs` (the default route with the record of every attempt of the corrector) are described with the files they made in the table below.
 - `src/ias/reg.js` has its own page, [reg.md](reg.md) (arguments, returned fields, failure reasons, what is tested).
@@ -53,7 +81,7 @@ The missed-flag check runs `reg.js` (without the matrix) on every unflagged piec
 node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390]
 ```
 
-DIR is 1 or -1 (the direction in lam), `t` is half the period. `OUT.json` must be new. `--ias-first-step` sets `settings.ias.firstStep` (the value is in the field `settings.ias.firstStep` of the output; the stored traces have no such field and were run with 'legacy', so a command that is meant to reproduce one of them needs `--ias-first-step=legacy`); `--newton-tol` sets `settings.newton`, the stopping tolerance of the corrector residual. The 279 components of every accepted step (u1, u2, t and the 23 node states) are written to `OUT.json.nodes.jsonl`, one line `{step, z}` per accepted step, unless `--no-nodes` is given; that file is, like the others, never overwritten. The start that a stored trace file holds is the start after the first closing that the driver makes; to reproduce a stored trace give the driver the command-line start of `data/deep/extra/start-shift.json` (given the stored start, the driver closes it a second time and the run can differ from the first accepted step on; see `data/deep/README.md`). The traces t12 + and t35 - were run with `--guard-ratio=400` and the other traces that were run with the default 390 (column `guard_ratio` of `data/deep/traces-table.csv`), so a command that reproduces a trace gives the `--guard-ratio` of that column. The file has one record for every accepted step that could be recorded (start values, T*, L*, theta, turns, closest approach, closure; T* and L* from the start values, the closest approach and the closure from the Dormand-Prince code), a list `unrec` of the accepted steps for which the closest approach and the closure could not be computed (the Dormand-Prince integration of the orbit exceeded its step limit; their T* and L* are in the list, from the start values), the guard counts and the reason why the trace stopped. The cost of an accepted step, run_seconds / (points + unrecorded_steps) of `data/deep/traces-table.json`, was 0.74 to 6.14 seconds on the 15 traces that were run; a trace is sequential (each step needs the one before).
+DIR is 1 or -1 (the direction in lam), `t` is half the period. `OUT.json` must be new. `--ias-first-step` sets `settings.ias.firstStep` (the value is in the field `settings.ias.firstStep` of the output; the stored traces have no such field and were run with 'legacy', so a command that is meant to reproduce one of them needs `--ias-first-step=legacy`); `--newton-tol` sets `settings.newton`, the stopping tolerance of the corrector residual. The 279 components of every accepted step (u1, u2, t and the 23 node states) are written to `OUT.json.nodes.jsonl`, one line `{step, z}` per accepted step, unless `--no-nodes` is given; that file is, like the others, never overwritten. The start that a stored trace file holds is the start after the first closing that the driver makes; to reproduce a stored trace use `node tools/reproduce-trace.mjs LABEL OUT.json [--stop-after=N]`, which builds the command from the command-line start of `data/deep/extra/start-shift.json`, the direction and the guard ratio of `data/deep/traces-table.json` and `--ias-first-step=legacy`, prints it, runs it and compares the accepted steps with `data/deep/traces/LABEL.json` (given the stored start, the driver closes it a second time and the run can differ from the first accepted step on; see `data/deep/README.md`). The settings that the stored traces used, against the defaults, are in the table at the end of this section. The file has one record for every accepted step that could be recorded (start values, T*, L*, theta, turns, closest approach, closure; T* and L* from the start values, the closest approach and the closure from the Dormand-Prince code), a list `unrec` of the accepted steps for which the closest approach and the closure could not be computed (the Dormand-Prince integration of the orbit exceeded its step limit; their T* and L* are in the list, from the start values), the guard counts and the reason why the trace stopped. The cost of an accepted step, run_seconds / (points + unrecorded_steps) of `data/deep/traces-table.json`, was 0.74 to 6.14 seconds on the 15 traces that were run; a trace is sequential (each step needs the one before).
 
 ### The creep rule
 
@@ -110,7 +138,8 @@ Times are from the machine of the stored runs (Windows 11, one core per job).
 | the default route from the command-line start and from the start of the earlier trace of t44 -, t62 -, t72 - (t35 - as in the row above): the command-line starts of t44 - and t62 - cannot be moved onto the family with 24 pieces (residual 2.8e-9 and 1.3e-9) but can with the tool's own default (8 pieces for t44 -, 32 for t62 -); every other start except the t35 - replay start is moved onto the family with 24 pieces and with the default (8 or 16 pieces), and the first step cannot be taken (28 attempts of the corrector, step length below 1e-9); none of the 15 runs has an accepted step | `data/deep/extra/dp45-same-start-all.json`; `node tools/family-follow.mjs OUT.json -1 60 U1 U2 LAM T LABEL [24]` (without the last argument the tool tries 8, 16, 24, 32, 48, 64 pieces) | a few minutes |
 | `reg.js` against the exact Kepler matrix (a pair, periapsis distance 1e-3, 1e-6, 1e-8, two phases, one period): the difference at most 4.3e-11 of max\|M\| | `data/deep/extra/kepler-stm.json`; `python tools/kepler-stm.py OUT.json`; `node test/kepler-stm.test.js` | seconds |
 | `minD1` of `reg.js` against the exact pericentre distance q (40 start phases): smallest, median, largest minD1 / q 1.001, 1.05, 1.18 (q = 1e-3); 1.000, 1.11, 1.38 (5e-4); 1.000, 2.9, 15 (1e-5); 1.07, 5.4, 1059 (1e-8) | `data/deep/extra/mind1-bias.json`; `node tools/mind1-check.mjs OUT.json` | seconds |
-| the start of the 14 stored traces: the command-line start and the stored start, and the first accepted steps of new runs from both against the stored traces (command-line start: bit-identical for t62 -, t72 -, t72 +, t81 -; stored start: bit-identical for t62 -, not for t72 -, t72 +, t81 -) | `data/deep/extra/start-shift.json`; `node tools/family-follow-ias.mjs OUT.json DIR U1 U2 LAM T --ias-first-step=legacy --stop-after=N` with the values of the file | 2 to 40 minutes |
+| the start of the 14 stored traces: the command-line start and the stored start, and the first accepted steps of new runs from both against the stored traces (command-line start: bit-identical for t62 -, t72 -, t72 +, t81 -; stored start: bit-identical for t62 -, not for t72 -, t72 +, t81 -) | `data/deep/extra/start-shift.json`; `node tools/reproduce-trace.mjs LABEL OUT.json --stop-after=N` (the command of the driver with the values of the file) | 2 to 40 minutes |
+| the first 15 recorded points of t62 - and t72 + again from their command-line starts with `tools/reproduce-trace.mjs`: all 16 and 15 accepted steps bit-identical to the stored traces (t35 -: its first 31 accepted steps, 10 recorded points, bit-identical) | `node tools/reproduce-trace.mjs t62m OUT.json --stop-after=15`, `... t72p ...`, `... t35m OUT.json --stop-after=10` | 1 to 4 minutes |
 | the resolution of the corrector residual F: one unit in the last place in every node component moves F by 5.1e-11 to 1.6e-10 (median over 30 trials; largest 4.5e-10) at 12 accepted steps of the three 30 minute runs of the next row (creep, the largest entry of the `reg.js` matrix of a flagged piece 7.0e5 to 3.1e6), and by 1.8e-14 to 5.8e-14 (largest 6.9e-14) at steps 1, 14, 15, 16 of a new 16 step run of t62 - (largest matrix entry 59 to 137) | `data/deep/extra/residual-floor.json`; `node tools/residual-floor.mjs OUT.json LABEL=TRACE.json:I,J,K ... --k=30 --seed=1` (needs the `.nodes.jsonl` file of the run) | 1 to 2 minutes |
 | t44 - and t35 - resumed from their last stored accepted step for 30 minutes with the first step 'legacy' and the corrector tolerance 1e-10 (t44 - also 3e-10): t44 -: 457 and 468 accepted steps, 2.43e-6 and 2.47e-6 beyond lam_last, 3 failed attempts each, no backward step; t35 -: 762 accepted steps, 1.61e-5 beyond, 15 failed attempts, no backward step; the creep rule (median of the last 100 steps at most m0/100) is not met in any of them; the runs with the tolerance 1e-11 stop within 1.7e-7 | `data/deep/extra/stall-tolerance.json`; `node tools/family-follow-ias.mjs OUT.json -1 U1 U2 LAM T --pieces=24 --minutes=30 --guard-ratio=GR --ias-first-step=legacy --newton-tol=1e-10` with the last stored values | 30 minutes each |
 | progress in lam against accepted steps for the 14 trace files: the fraction of the whole lam range reached, the accepted step at 90 %, 99 %, 99.9 % (t35 -: 77, 198, 822 of 1711; t44 -: 29, 124, 367 of 1266), and the median \|dlam\| per block of 100 accepted steps | `data/deep/extra/lambda-progress.json`; read from `data/deep/traces/*.json` (the compact file holds the step numbers and the medians) | seconds |
@@ -123,13 +152,29 @@ Times are from the machine of the stored runs (Windows 11, one core per job).
 
 The trace files of `data/deep/traces/` and the witness files of `data/deep/witnesses/` hold the numbers behind the reading of the four traces; `data/deep/README.md` lists every file. A rerun of a trace on another machine is not expected to give the same points bit for bit (the libm and the IAS15 build differ), and which accepted steps are recorded (T* and L* computed) can differ; `test/replay.test.js` compares the accepted steps of the continuation (lam, u1, u2, t) with the stored trace to 1e-9 relative. On Linux (GitHub Actions run 40311634590 of commit ef87be2: Ubuntu 24.04.5, Node v24.15.0, Python 3.14.8) all tests pass and the replayed accepted steps agree with the stored trace to 1.1e-11 relative (31 steps), with the recording different at 4 of them.
 
+## Settings of the stored traces against the defaults
+
+| setting | stored traces | default of the release | where |
+|---|---|---|---|
+| first step of IAS15 on a piece | 'legacy' (REBOUND's default 0.001) | 'timescale' (0.01 times the smallest d / \|v_rel\| of the pairs) | `--ias-first-step`, `settings.ias.firstStep`; `tools/reproduce-trace.mjs` sets 'legacy' |
+| ratio of guard G1b | 400 for t12 + and t35 -, 390 for the others | 390 | `--guard-ratio`, column `guard_ratio` of `data/deep/traces-table.csv`; `tools/reproduce-trace.mjs` takes it from the table |
+| corrector tolerance | 1e-11 | 1e-11 | `--newton-tol` |
+| pieces | 24 | 24 in the driver | `--pieces` |
+| the copy of `src/ias/reg.js` | a copy that differs from the file in the repository only in comments and in code that nothing calls (sha256 in the field `frozen` of the full trace outputs, `data/deep/README.md`); the file of the release also has the end-time correction in the branch where the last macro-step lands exactly on tau, which was not taken in any stored run (0 of 3040, 9524 and 11980 calls in the t62 - run, the sample run and the replay) | the file | `src/ias/reg.js` |
+
+With the defaults of the release t35 - differs from the stored trace within 31 steps (1.1e-11) and t44 - within 100 steps (2.5e-12) (`data/deep/extra/first-step-runs.json`).
+
+## The package
+
+`docs/pericont-files.txt` lists the files of PeriCont (version 0.3.0): `src`, the tools of this page, the tests of `npm test` and `npm run test:ias`, `data/deep`, the documents, `README.md`, `LICENSE` (MIT: code), `LICENSE-DATA` (CC BY 4.0: data, documents, README) and `package.json`. `node tools/pack-pericont.mjs OUTDIR` builds `pericont-0.3.0.zip` from that list into a folder outside the repository (174 files, 1.6 MB). Unpacked into a new folder with `ORBIT_PYTHON` set (above), `npm test` gives 46 PASS, `npm run test:ias` 107 PASS (4 to 8 minutes) and `node tools/deep-sample.mjs` PASS (6 to 15 minutes), with no FAIL; `test/ias-first-step.test.js`, a diagnostic of REBOUND's default first step, is in the package but not in the script.
+
 ## Sample run
 
 ```
 node tools/deep-sample.mjs
 ```
 
-follows the family of t35 - from its stored start for 4 recorded points (25 accepted steps, 21 of them not recorded), makes the witnesses of all 25 (w1, and w1b for the points below 1e-7) and prints the summary. It compares the summary with `data/deep/sample/expected-summary.txt` and prints PASS or FAIL. The text it compares depends on the machine (which steps are recorded, lam to 8 decimals, the w1 minima to 6 digits, the guard counts and the number of replacements by the cross-check), so on another platform a FAIL is expected where these differ in the last digits or in which steps are recorded; compare the two summaries by their numbers then (the strict depth, the 25 accepted steps, the minima to four digits). It took 331 seconds on the machine of the stored run (trace 109 s, w1 witnesses 146 s, w1b witnesses 76 s); a first run with other jobs on the machine took 621 seconds; expect 6 to 12 minutes. The whole output of the stored run is `data/deep/sample/output.txt`.
+follows the family of t35 - from its stored start for 4 recorded points (25 accepted steps, 21 of them not recorded), makes the witnesses of all 25 (w1, and w1b for the points below 1e-7) and prints the summary. It checks numbers against `data/deep/sample/expected-summary.json` and prints PASS or FAIL: the recorded points (4) and the accepted steps (25), the witnessed points (25 of 25), the strict witnessed depth (7.3197e-10 at step 10, relative tolerance 1e-3), lam of the last point (relative 1e-9), the closure of every witness below its acceptance limit 1e-6, that the closest approach turns, and no guard trip. It runs the trace with `--guard-ratio=400`, the ratio of the stored t35 - trace. The summary text is compared with `data/deep/sample/expected-summary.txt` as information only (it depends on the machine: which steps are recorded, lam to 8 decimals, the w1 minima to 6 digits). Without `--dir DIR` the files go to a new folder `orbit-hunter-sample-XXXXXX` in the temporary folder of the operating system (it is not deleted); `--dir` names a new folder instead. It took 331 seconds on the machine of the stored run (trace 109 s, w1 witnesses 146 s, w1b witnesses 76 s); a first run with other jobs on the machine took 621 seconds; expect 6 to 12 minutes. The whole output of the stored run is `data/deep/sample/output.txt`.
 
 ## Other files
 

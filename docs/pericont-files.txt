@@ -1,0 +1,110 @@
+# The files of PeriCont (version 0.3.0), the Library package. tools/pack-pericont.mjs reads this list: one path per line, relative to the top folder of the repository; a path that ends with / is a
+# folder with everything below it. The package is pericont-0.3.0.zip (top folder pericont-0.3.0/). Licences: the code (src, tools, test) is MIT (LICENSE; every file under src/ias/, the tools named here and the
+# tests of npm run test:ias carry SPDX-License-Identifier: MIT in the first line); the data, the documents and the README are CC BY 4.0 (LICENSE-DATA).
+# The package is self-contained: after unpacking, set ORBIT_PYTHON (README.md) and run  npm test  (the Dormand-Prince tests, about 20 seconds),  npm run test:ias  (the tests of the ias route, 4 to 8 minutes)
+# and  node tools/deep-sample.mjs  (the sample run, whose PASS compares numbers with tolerances).
+
+# the top folder
+package.json
+README.md
+LICENSE
+LICENSE-DATA
+
+# the ias route: integration (IAS15 bridge, guards, the regularised integrator reg.js), corrector and the modules they use
+src/ias/
+src/settings.js
+src/shooting.js
+src/perp.js
+src/physics.js
+src/stability.js
+src/newton.js
+src/relative.js
+src/topology.js
+src/known.js
+src/identity.js
+src/bs.js
+src/closure.js
+src/covers.js
+src/zero.js
+src/corotation.js
+src/iso.js
+
+# drivers, witnesses, re-closer and the other tools that docs/deep.md describes
+tools/family-follow-ias.mjs
+tools/family-follow.mjs
+tools/dp45-attempts.mjs
+tools/reproduce-trace.mjs
+tools/deep-sample.mjs
+tools/pack-pericont.mjs
+tools/witness.py
+tools/witness-jobs.py
+tools/witness-check.py
+tools/trace-witnesses.py
+tools/run-queue.py
+tools/refine-mp.py
+tools/reclose.py
+tools/reclose-all.py
+tools/reclose-w1b.py
+tools/reclose-beyond.py
+tools/reclose-continue.py
+tools/kepler-ref.py
+tools/kepler-check.py
+tools/kepler-stm.py
+tools/gate-a.mjs
+tools/gate-a-rows.py
+tools/gate-a-unequal.py
+tools/witness-acceptance.py
+tools/mind1-check.mjs
+tools/first-step-check.py
+tools/guard-check.py
+tools/point-diagnostic.py
+tools/pericentres.py
+tools/pair-angmom.py
+tools/piece-ends.mjs
+tools/piece-mp.py
+tools/residual-floor.mjs
+tools/creep-attempts.py
+tools/stall-matrix.mjs
+tools/stall-svd.py
+tools/stall-jacobian-3x3.py
+tools/stall-jacobian-mp.py
+tools/orbit-track.mjs
+tools/db82-families.py
+
+# tests: npm test (11) and npm run test:ias (10), and the diagnostic of REBOUND's first step
+test/figure8.test.js
+test/known.test.js
+test/stability.test.js
+test/shooting.test.js
+test/topology.test.js
+test/covers.test.js
+test/relative.test.js
+test/closure.test.js
+test/zero.test.js
+test/corotation.test.js
+test/iso.test.js
+test/witness-acceptance.test.js
+test/gate-a.test.js
+test/reg-unequal.test.js
+test/reg-matrix.test.js
+test/kepler-stm.test.js
+test/henon.test.js
+test/system-jacobian.test.js
+test/guards.test.js
+test/reclose.test.js
+test/replay.test.js
+test/ias-first-step.test.js
+
+# data: everything of data/deep (traces, witnesses, re-closed stretches, extra/, sample/), and the files that npm test reads
+data/deep/
+data/stability-perp-3.json
+data/r-family-trace.json
+data/r-family-trace-iso.json
+data/cpc-converted.json
+data/class-i/refined/n5.json
+
+# documents
+docs/deep.md
+docs/reg.md
+docs/methods-and-limits.md
+docs/pericont-files.txt
