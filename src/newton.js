@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // closing a near periodic orbit with levenberg-marquardt.
 // we want state(T) = state(0) (bodies maybe relabeled); v1, v2, T are the unknowns.
 // if the orbit isn't really periodic the residual just stays above zero.

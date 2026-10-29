@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // stability of a relative periodic orbit: after one period (2t) the state is the start state rotated by some angle.
 // the monodromy matrix is multiplied by the rotation that undoes it, then it is analysed like a periodic orbit.
 import { perpInitial } from './perp.js';

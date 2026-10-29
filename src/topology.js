@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the syzygy word of an orbit: every time the three bodies are on a line, write down which one is in the middle.
 // read around one period this is a cyclic word in {0,1,2}. relabeling the bodies, starting somewhere else or running
 // time backwards gives the same orbit, so the word is brought to a canonical form, and an orbit that is a repeat of a

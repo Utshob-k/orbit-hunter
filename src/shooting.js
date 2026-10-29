@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // multiple shooting for the perpendicular family: the half orbit is cut into m pieces, the state at the start of each piece is an unknown
 // (z = [u1, u2, t, s_1 .. s_(m-1)], s_0 comes from u1, u2, lam), equations flow(s_i, t/m) = s_(i+1) and the last piece ends collinear and
 // perpendicular.

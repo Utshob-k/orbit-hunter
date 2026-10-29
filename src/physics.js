@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // 3 body problem, equal masses, G = 1, 2d
 // state = [x0,y0,x1,y1,x2,y2, vx0,vy0,vx1,vy1,vx2,vy2]
 

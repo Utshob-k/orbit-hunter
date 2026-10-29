@@ -4,7 +4,9 @@
 # and h at the sample before and the sample after it. The question: does h change sign between the two sides of lam_c (the collision orbit of the quadratic law d = c (lam - lam_c)^2).
 # The points: t35 - the witnessed steps 9, 10, 11, 12 and the re-closed midpoints 9-10, 10-11; t44 - the witnessed steps 33, 34, 35 and the re-closed midpoint 34-35 (data/deep/reclose/t35m.json and t44m.json).
 #   python tools/pair-angmom.py run DIR [JOBS | --only ID]   DIR must be new (or hold other ids): DIR/<id>.json for every point, JOBS at a time (default 3); 60 to 180 s for a point
-#   python tools/pair-angmom.py summary DIR OUT.json         reads DIR/<id>.json and writes OUT.json (new), the points of each trace in the order of lam
+#   python tools/pair-angmom.py summary DIR OUT.json         reads DIR/<id>.json and writes OUT.json (new), the points of each trace in the order of lam (the ten points above)
+#   python tools/pair-angmom.py run DIR [JOBS] --ids ID1,ID2,... [--points POINTS.json]   the same for other points: an id is a witnessed point of data/deep/witnesses/<label>.json (t35m-u0030), or an id of the file
+#   POINTS.json, a list of {id, lab, kind, lam, u1, u2, t} (for example re-closed midpoints that are not in data/deep/reclose); no summary for these, DIR/<id>.json is the result of each point
 import sys, os, json, time, subprocess, importlib.util
 sys.dont_write_bytecode = True
 
@@ -29,9 +31,23 @@ def points():
     return out
 
 
-def one(i, outf):
+def find(i, extra=None):
+    # the point with the id i: one of the ten of the default run, else a witnessed point of the four traces, else a point of the file given with --points
+    for p in points():
+        if p['id'] == i: return p
+    lab = i[:4]
+    f = os.path.join(data, 'witnesses', lab + '.json')
+    if os.path.exists(f):
+        for p in json.load(open(f))['points']:
+            if p['id'] == i: return dict(id=i, lab=lab, kind='witnessed step %d' % p['step'], lam=p['lam'], u1=p['u1'], u2=p['u2'], t=p['t'])
+    for p in (json.load(open(extra)) if extra else []):
+        if p['id'] == i: return p
+    sys.exit('no point with the id ' + i)
+
+
+def one(i, outf, extra=None):
     from mpmath import mp, mpf, sqrt, nstr
-    pt = [p for p in points() if p['id'] == i][0]
+    pt = find(i, extra)
     spec = importlib.util.spec_from_file_location('refine_mp', os.path.join(here, 'refine-mp.py'))
     R = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(R)
@@ -80,16 +96,16 @@ def one(i, outf):
     print(json.dumps(res))
 
 
-def run(d, jobs, only):
+def run(d, jobs, only, ids_arg=None, extra=None):
     from concurrent.futures import ThreadPoolExecutor
     os.makedirs(d, exist_ok=True)
-    ids = [i for i in IDS if not only or i == only]
+    ids = ids_arg if ids_arg else [i for i in IDS if not only or i == only]
     for i in ids:
         if os.path.exists('%s/%s.json' % (d, i)):
             sys.exit('exists, not overwriting: %s/%s.json' % (d, i))
 
     def go(i):
-        r = subprocess.run([sys.executable, '-B', os.path.abspath(__file__), '--one', i, '%s/%s.json' % (d, i)], capture_output=True, text=True)
+        r = subprocess.run([sys.executable, '-B', os.path.abspath(__file__), '--one', i, '%s/%s.json' % (d, i)] + ([extra] if extra else []), capture_output=True, text=True)
         print(i, r.stdout[-300:], r.stderr[-300:], flush=True)
     with ThreadPoolExecutor(jobs) as ex:
         list(ex.map(go, ids))
@@ -114,12 +130,13 @@ def summary(d, out):
 
 
 if len(sys.argv) > 3 and sys.argv[1] == '--one':
-    one(sys.argv[2], sys.argv[3])
+    one(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else None)
 elif len(sys.argv) >= 3 and sys.argv[1] == 'run':
-    only = sys.argv[sys.argv.index('--only') + 1] if '--only' in sys.argv else None
-    rest = [a for a in sys.argv[3:] if a != '--only' and a != only]
-    run(sys.argv[2], int(rest[0]) if rest else 3, only)
+    opt = lambda name: sys.argv[sys.argv.index(name) + 1] if name in sys.argv else None
+    only, ids_arg, extra = opt('--only'), opt('--ids'), opt('--points')
+    rest = [a for a in sys.argv[3:] if a not in ('--only', '--ids', '--points') and a not in (only, ids_arg, extra)]
+    run(sys.argv[2], int(rest[0]) if rest else 3, only, ids_arg.split(',') if ids_arg else None, extra)
 elif len(sys.argv) >= 4 and sys.argv[1] == 'summary':
     summary(sys.argv[2], sys.argv[3])
 else:
-    sys.exit('usage: python tools/pair-angmom.py run DIR [JOBS | --only ID]  or  summary DIR OUT.json')
+    sys.exit('usage: python tools/pair-angmom.py run DIR [JOBS | --only ID | --ids ID1,ID2,... [--points POINTS.json]]  or  summary DIR OUT.json')

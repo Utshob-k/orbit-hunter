@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // linear stability of a periodic orbit: the variational equations over one period give the monodromy matrix M; stable if all eigenvalues
 // have modulus 1. only perturbations with zero centre of mass and momentum are used (8 dimensions).
 
