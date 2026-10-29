@@ -1,0 +1,17 @@
+{
+ "what": "the numbers that node tools/deep-sample.mjs has to reproduce (the checks are numeric, with the tolerances below; the text summary of expected-summary.txt is compared as information only)",
+ "label": "t35m",
+ "recorded_points": 4,
+ "accepted_steps": 25,
+ "witnessed_points": 25,
+ "points_to_witness": 25,
+ "strict_depth": 7.319732642602164e-10,
+ "strict_depth_step": 10,
+ "strict_depth_relative_tolerance": 0.001,
+ "lam_last_point": 0.6644368942898733,
+ "lam_last_point_relative_tolerance": 1e-09,
+ "closure_limit_of_a_witness": 1e-06,
+ "turned": true,
+ "guard_trips": 0,
+ "cross_check_replaced": 0
+}

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the resolution of the corrector residual: for accepted steps of a run of tools/family-follow-ias.mjs the residual F of the multiple shooting system (the ias route as the corrector evaluates it: all pieces in one
 // request of src/ias/bridge.js, the settings of the run) at the stored 279 numbers z = [u1, u2, t, nodes] and at the stored lam, and then K times with every NODE component (the 276 numbers after u1, u2, t)
 // moved by one unit in the last place, the sign random (fixed seed). Per step: sup|F|, the largest and the median change sup|F_moved - F| over the K trials, the range of sup|F_moved|, the piece in which the

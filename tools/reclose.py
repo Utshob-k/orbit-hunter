@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # re-closes a periodic orbit of the perpendicular start at a FIXED lam with the multiple precision flow of tools/refine-mp.py: Newton for (u1, u2, t) on the three closing equations of
 # closePerp in src/perp.js. At the time t the state is collinear and the velocities of bodies 1 and 2 are perpendicular to the line (the line may have turned by a rotation, so the orbit
 # repeats after 2t up to that rotation). With s the state at time t and d the unit vector along the longest of the three pair vectors:
@@ -5,7 +6,7 @@
 # The Jacobian is by forward differences in u1 and u2 (step 10^-(digits // 2)) and, for t, from the time derivative of the end state: (r(s + h f(s)) - r(s)) / h. Plain Newton step, at most 10 updates.
 # python tools/reclose.py JOB.json OUT.json [--minutes 60] [--digits 50] [--tol 30] [--floor 1e-20]
 #   JOB.json: {"id", "u1", "u2", "lam", "t", "ref": {"u1", "u2", "t"} or null}, the start values (strings or numbers) and, if given, the values to compare with. OUT.json must be new.
-#   CONVERGED: the largest |r| is at most 1e-16 at an evaluation. SAME ORBIT (only with "ref"): the relative differences of u1, u2 and t from the ref values are at most 1e-6.
+#   CONVERGED: the largest |r| is at most 1e-16 at an evaluation. SAME ORBIT (only with "ref"): the relative differences of u1, u2 and t from the ref values are at most 1e-9 (it was 1e-6 before; the re-closing of the 854 witnessed points changes u1, u2, t by at most 8.2e-11).
 #   The output holds every iteration (residual, its three components, the relative step, the unknowns); a self-timer ends the job at the limit ("over limit").
 import sys, os, json, time, threading, importlib.util
 sys.dont_write_bytecode = True
@@ -79,6 +80,6 @@ except Exception as e:
 out = dict(status='done', converged=converged, residual=float(res), u1=nstr(u1, 40), u2=nstr(u2, 40), t=nstr(t, 40), u1_float=float(u1), u2_float=float(u2), t_float=float(t), same_orbit=None)
 if ref:
     d1, d2, dt = [abs(a - mpf(str(ref[k]))) / abs(mpf(str(ref[k]))) for a, k in ((u1, 'u1'), (u2, 'u2'), (t, 't'))]
-    out.update(rel_diff_ref=dict(u1=float(d1), u2=float(d2), t=float(dt)), same_orbit=bool(converged and max(d1, d2, dt) <= mpf(10) ** (-6)))
+    out.update(rel_diff_ref=dict(u1=float(d1), u2=float(d2), t=float(dt)), same_orbit=bool(converged and max(d1, d2, dt) <= mpf(10) ** (-9)))
 write(out)
 print('done', job['id'], 'converged', converged, 'residual', float(res), 'iterations', len(rec['iterations']), 'flows', rec['flows'], 'seconds', round(time.time() - t0, 1), flush=True)

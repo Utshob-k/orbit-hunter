@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # witnesses of a trace written by tools/family-follow-ias.mjs: which points to witness, which of them need the deeper witness, and the reading of the results.
 # python tools/trace-witnesses.py points TRACE.json OUT.json [--cap 400] [--s S]
 #     the points to witness, as a list for tools/witness-jobs.py: the KEPT points (a recorded point is kept if its lam differs from that of the last kept point by at least 0.01 s, the first point is kept;

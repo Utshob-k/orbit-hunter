@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the signed angular momentum of the close pair at the closest sample of the 50 digit flow (the preset w1b of tools/witness.py, as tools/pericentres.py samples it): h = x_rel * vy_rel - y_rel * vx_rel of the
 # pair with the smallest distance at the closest sample (relative position and velocity of the pair, in the order of the bodies a < j), with the osculating pericentre q and e - 1 as tools/pericentres.py gives them,
 # and h at the sample before and the sample after it. The question: does h change sign between the two sides of lam_c (the collision orbit of the quadratic law d = c (lam - lam_c)^2).

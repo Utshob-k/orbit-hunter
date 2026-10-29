@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // follows the family of relative periodic orbits through one orbit of the perpendicular start in ONE direction with the ias route (REBOUND IAS15 through src/ias/bridge.js,
 // encounter pieces by src/ias/reg.js, the guards of src/ias/guards.py), recording every accepted step (start values, T*, L*, theta, closest approach, closure). An accepted step
 // for which perpInfo returns nothing (its Dormand-Prince integration gives up, so there is no closest approach and no closure) is not a point of the trace but is listed in `unrec`; T* and L* of every

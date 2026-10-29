@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # multiple precision witness of one orbit of the perpendicular start: the stored double start values (u1, u2, lam, t) are integrated with the Gragg-Bulirsch-Stoer flow of tools/refine-mp.py,
 # first over the time t (the end state of the half orbit, where all bodies should be on one line with velocities perpendicular to it) and then over a second t (the closure of the
 # full period, best rotation removed). The smallest pair distance over the whole orbit is recorded: sampled at the start and at every accepted step end, the pair, the distance of the

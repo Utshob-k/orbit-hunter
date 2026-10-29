@@ -1,4 +1,4 @@
-# the first step of IAS15 (src/ias/ias-bridge.py), two checks against the end state of reg.js. error = largest over the 12 components of |IAS15 - reg.js| / max(1, |reg.js|).
+# A diagnostic of REBOUND's default first step, not a test of PeriCont: test/ias-first-step.test.js repeats the piece18 check, it is not in the test:ias script (it fails if REBOUND changes its default). The first step of IAS15 (src/ias/ias-bridge.py), two checks against the end state of reg.js. error = largest over the 12 components of |IAS15 - reg.js| / max(1, |reg.js|).
 #   python tools/first-step-check.py piece18 OUT.json
 #       IAS15 over piece 18 of the kept points k10, k11, k12 of t35 - (data/deep/extra/piece18-states.json) for adaptive_mode 0, 1, 2, 3 and the first steps REBOUND's default 0.001, 1e-4 and 1e-6, and
 #       'timescale' (sim.dt = 0.01 * the smallest d / |v_rel| of the three pairs, the setting of src/settings.js); the reg.js end states are those stored in the data file. A few seconds.

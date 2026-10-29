@@ -65,7 +65,7 @@ def summary(d, out):
         if step is not None and (lab, step) in stored:
             comp.append(dict(id=r['id'], stored_largest_change=max(stored[(lab, step)]['rel_diff'].values()), largest_change=r['largest_change']))
     what = ('tools/reclose.py (default settings: 50 digits, tolerance 1e-30) at the stored start values (u1, u2, lam, t) of the %d witnessed points that have a w1b result, at their stored lam: whether it converged, '
-            'whether the closed orbit is the same orbit (change of (u1, u2, t) at most 1e-6 relative), the number of updates, the first residual and the relative change of u1, u2 and t of each point '
+            'whether the closed orbit is the same orbit (change of (u1, u2, t) at most 1e-9 relative), the number of updates, the first residual and the relative change of u1, u2 and t of each point '
             '(largest_change: the largest of the three). "comparison" lists the points that are also accepted steps of data/deep/reclose/*.json, with the largest relative change stored there. '
             'These are the stored results of the commands in "command" (85 to 500 s for a point); the output of tools/reclose.py of each point is in the raw files (stall/reclose-w1b/res/).') % len(rows)
     cmd = ['python tools/reclose-w1b.py run stall/reclose-w1b', 'python tools/reclose-w1b.py summary stall/reclose-w1b OUT.json']

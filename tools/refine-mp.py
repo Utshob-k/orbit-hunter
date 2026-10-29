@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # refines a symmetric periodic orbit of the perpendicular start to many digits (default 40) and checks the closure of the full period.
 # bodies on the x axis at -1-lam/3, lam-lam/3, 1-lam/3, velocities (0,u1), (0,u2), (0,-u1-u2); it repeats after 2t when at time t all bodies
 # are on the x axis with velocities along y (unknowns u1, u2, lam, t). Gragg-Bulirsch-Stoer in multiple precision.

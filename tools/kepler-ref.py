@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # exact Kepler flow of the equal-mass pair in its relative coordinates (mu = 2, G = 1, masses 1, 1) at 60 digits, from a double precision start state (the exact doubles).
 # Kepler's equation near e = 1 is solved in the form M = s E + e (E - sin E) with s = 1 - e computed stably as (h^2/(mu a))/(1 + e) and E - sin E from its Maclaurin series
 # for |E| < 1 (no cancellation of E - e sin E); the radius is a (s + 2 e sin^2(E/2)); the Gauss functions use 1 - cos dE = 2 sin^2(dE/2) and dE - sin dE by the same series.

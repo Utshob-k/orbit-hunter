@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the 50 digit end state of the pieces written by tools/piece-ends.mjs, and the comparison with the end states of IAS15 alone, reg.js and the Dormand-Prince integrator of the default route.
 # Every piece is integrated from its start state (the stored doubles, exactly) over tau with the Gragg-Bulirsch-Stoer flow of tools/refine-mp.py (50 digits, tolerance 1e-30, step floor 1e-20; the
 # unregularised flow of the witnesses). The distance measure is the one of the cross-check of src/ias/bridge.js: D = the largest over the 12 components of |a - mp| / max(1, |mp|);

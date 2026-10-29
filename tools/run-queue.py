@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # runs the jobs of a queue file with at most POOL at a time, each job its own python process (tools/witness.py, tools/reclose.py and the like; tools/run-jobs.mjs runs only family-one.mjs).
 # python tools/run-queue.py QUEUE.json POOL
 #   QUEUE.json: a list of {"id", "cmd": [script and arguments, run as python -B ...], "out": the output file of the job, "limit_min": minutes}

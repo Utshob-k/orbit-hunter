@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the end states of the pieces of the multiple shooting at one stored step of a trace, by the three integrators of the repository, for tools/piece-mp.py to compare with the 50 digit flow.
 // The step is closed at its lam with closePerpMS (24 pieces, the ias route, first step 'legacy' and the guard ratio of the run that made the trace, as tools/stall-matrix.mjs does); the 24 piece starts and
 // tau = t / 24 are those of that corrected solution. Every flagged piece (encounter piece, recomputed by reg.js in the route), every piece that the cross-check of the route replaced by reg.js, every piece that the route

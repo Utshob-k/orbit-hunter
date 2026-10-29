@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # natural continuation in lam of a periodic orbit of the perpendicular start with the 50 digit single shooting of tools/reclose.py: from a closed orbit (u1, u2, t) at lam0 the parameter is stepped by
 # dlam, STEPS times, every step closed again by tools/reclose.py (50 digits, --tol 30, --floor 1e-20) from a guess. Guess of the first step: the start orbit itself; of the later steps: the secant through the
 # two previous solutions (linear extrapolation in lam; the second step uses the start orbit and the first solution). Per step: converged, updates, residual, the change of (u1, u2, t) from the previous

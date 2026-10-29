@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # makes the witness jobs of a list of points: one job file per point for tools/witness.py and a queue file for tools/run-queue.py.
 # python tools/witness-jobs.py POINTS.json OUTDIR QUEUE.json [--preset w1|w1b] [--minutes 30] [--only ID [ID ...]]
 #   POINTS.json: a list of {"id", "u1", "u2", "lam", "t", ...} (see tools/trace-witnesses.py points). Writes OUTDIR/points.json (a copy of the list), OUTDIR/jobs/<id>.json, the folder OUTDIR/mp/
