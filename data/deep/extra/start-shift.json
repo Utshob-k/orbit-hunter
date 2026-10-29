@@ -1,5 +1,5 @@
 {
- "what": "the start of a stored trace (traces/<label>.json, field start) is the start after the shift that tools/family-follow-ias.mjs makes first (closePerpMS with 24 pieces, first step legacy): command_line_start is what the original run was given. A new run given the stored start shifts it again; where that moves it (second_shift_from_stored_start > 0) the run differs from the stored trace from the second accepted step on. runs: first accepted steps of new runs against the stored trace (first step legacy)",
+ "what": "the start of a stored trace (traces/<label>.json, field start) is the start after the shift that tools/family-follow-ias.mjs makes first (closePerpMS with 24 pieces, first step legacy): command_line_start is what the original run was given. A new run given the stored start shifts it again; where that moves it (second_shift_from_stored_start > 0) the run differs from the stored trace from the first accepted step on. runs: first accepted steps of new runs against the stored trace (first step legacy)",
  "columns": "shift_from_command_line and second_shift_from_stored_start: largest relative change of u1, u2, t",
  "rows": [
   {
