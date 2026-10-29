@@ -34,6 +34,7 @@ tools/family-follow-ias.mjs
 tools/family-follow.mjs
 tools/dp45-attempts.mjs
 tools/reproduce-trace.mjs
+tools/handover-rule.mjs
 tools/deep-sample.mjs
 tools/pack-pericont.mjs
 tools/witness.py
@@ -94,6 +95,7 @@ test/system-jacobian.test.js
 test/guards.test.js
 test/reclose.test.js
 test/replay.test.js
+test/handover-rule.test.js
 test/ias-first-step.test.js
 
 # data: everything of data/deep (traces, witnesses, re-closed stretches, extra/, sample/), and the files that npm test reads
