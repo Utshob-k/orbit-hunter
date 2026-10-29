@@ -1,5 +1,5 @@
 {
- "what": "the default route (Dormand-Prince, settings.integrator dp45, tools/family-follow.mjs, tolerance of the corrector 1e-11, 24 pieces, direction -1, 60 minutes) from two starts of each of t35 -, t44 -, t62 - and t72 -: the command-line start (for t35 - the replay start, data/deep/t35m-replay.json; for the others the field command_line_start of data/deep/extra/start-shift.json) and the start of the earlier trace (data/deep/traces/earlier/<label>.json, field start). Made by running tools/family-follow.mjs with the commands below; where the start could not be moved onto the family, the residuals of closePerpMS (src/shooting.js) at the start values with 8 to 64 pieces; the t35 - rows are copied from dp45-same-start.json. All runs were given 24 pieces (the last argument of the command) except the two rows \"default number of pieces\", whose command has no such argument, so that the tool tries 8, 16, 24, 32, 48, 64 and takes the first that closes the start (field pieces; pieces_taken)",
+ "what": "the default route (Dormand-Prince, settings.integrator dp45, tools/family-follow.mjs, tolerance of the corrector 1e-11, 24 pieces, direction -1, 60 minutes) from two starts of each of t35 -, t44 -, t62 - and t72 -: the command-line start (for t35 - the replay start, data/deep/t35m-replay.json; for the others the field command_line_start of data/deep/extra/start-shift.json) and the start of the earlier trace (data/deep/traces/earlier/<label>.json, field start). Made by running tools/family-follow.mjs with the commands below; where the start could not be moved onto the family, the residuals of closePerpMS (src/shooting.js) at the start values with 8 to 64 pieces; the t35 - rows are copied from dp45-same-start.json. All runs were given 24 pieces (the last argument of the command) except the seven rows \"default number of pieces\", whose command has no such argument, so that the tool tries 8, 16, 24, 32, 48, 64 and takes the first that closes the start (field pieces; pieces_taken)",
  "commands": [
   "node tools/family-follow.mjs OUT.json -1 60 0.04014114686920327 0.6406314635068663 0.6653529332738678 2.0574775631566076 t35m-dp45 24",
   "node tools/family-follow.mjs OUT.json -1 60 0.038540762675020226 0.663369567430389 0.6684119584659772 2.061909380988913 t35m-dp45-earlier 24",
@@ -10,7 +10,12 @@
   "node tools/family-follow.mjs OUT.json -1 60 -0.34695164928857775 0.5169438844437719 0.2777381905662087 7.3687955213759055 t72m-dp45 24",
   "node tools/family-follow.mjs OUT.json -1 60 -0.3469078898537304 0.5169983492663192 0.27776626203721416 7.368801593568835 t72m-dp45-earlier 24",
   "node tools/family-follow.mjs OUT.json -1 60 -0.37322129340277255 0.46634484394483267 0.23332876562866695 4.631157998712088 t44m-dp45-default",
-  "node tools/family-follow.mjs OUT.json -1 60 -0.3608230785422193 0.495143505671977 0.2600367265090116 6.025456255902029 t62m-dp45-default"
+  "node tools/family-follow.mjs OUT.json -1 60 -0.3608230785422193 0.495143505671977 0.2600367265090116 6.025456255902029 t62m-dp45-default",
+  "node tools/family-follow.mjs OUT.json -1 60 0.038540762675020226 0.663369567430389 0.6684119584659772 2.061909380988913 t35m-dp45-earlier-default",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.3537991336372494 0.4892555716475317 0.23955434734945008 4.65865637031737 t44m-dp45-earlier-default",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.35029023040772134 0.5086418062208198 0.26552686357726374 6.035303509659006 t62m-dp45-earlier-default",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.34695164928857775 0.5169438844437719 0.2777381905662087 7.3687955213759055 t72m-dp45-default",
+  "node tools/family-follow.mjs OUT.json -1 60 -0.3469078898537304 0.5169983492663192 0.27776626203721416 7.368801593568835 t72m-dp45-earlier-default"
  ],
  "summary": [
   {
@@ -28,6 +33,16 @@
    "start": "start of the earlier trace",
    "pieces": 24,
    "pieces_taken": 24,
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.6684",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t35 -",
+   "start": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 8,
    "closes_the_start": true,
    "accepted_steps": 0,
    "stops": "step length below 1e-9 (lost the family) near lam=0.6684",
@@ -64,6 +79,16 @@
    "smallest_tool_closest_approach": null
   },
   {
+   "family": "t44 -",
+   "start": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 8,
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2396",
+   "smallest_tool_closest_approach": null
+  },
+  {
    "family": "t62 -",
    "start": "command-line start",
    "pieces": 24,
@@ -94,6 +119,16 @@
    "smallest_tool_closest_approach": null
   },
   {
+   "family": "t62 -",
+   "start": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 16,
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2655",
+   "smallest_tool_closest_approach": null
+  },
+  {
    "family": "t72 -",
    "start": "command-line start",
    "pieces": 24,
@@ -105,9 +140,29 @@
   },
   {
    "family": "t72 -",
+   "start": "command-line start, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 16,
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2777",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t72 -",
    "start": "start of the earlier trace",
    "pieces": 24,
    "pieces_taken": 24,
+   "closes_the_start": true,
+   "accepted_steps": 0,
+   "stops": "step length below 1e-9 (lost the family) near lam=0.2778",
+   "smallest_tool_closest_approach": null
+  },
+  {
+   "family": "t72 -",
+   "start": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 16,
    "closes_the_start": true,
    "accepted_steps": 0,
    "stops": "step length below 1e-9 (lost the family) near lam=0.2778",
@@ -161,6 +216,36 @@
    "lam_reached": 0.6684119584659772,
    "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: the step length falls below 1e-9 after 28 attempts of the corrector; no accepted step, no point, so no witness of last points",
    "pieces": 24
+  },
+  {
+   "family": "t35 -",
+   "start_kind": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 8,
+   "command": "node tools/family-follow.mjs OUT.json -1 60 0.038540762675020226 0.663369567430389 0.6684119584659772 2.061909380988913 t35m-dp45-earlier-default",
+   "start": {
+    "u1": 0.038540762675020226,
+    "u2": 0.663369567430389,
+    "lam": 0.6684119584659772,
+    "t": 2.061909380988913
+   },
+   "shifted": {
+    "u1": 0.03854076297070498,
+    "u2": 0.6633695678450927,
+    "lam": 0.6684119584659772,
+    "t": 2.061909391896298,
+    "m": 8
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.6684",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.6684119584659772,
+   "lam_reached": 0.6684119584659772,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family with 8 pieces (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.6684; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
   },
   {
    "family": "t44 -",
@@ -250,6 +335,36 @@
    "pieces": 24
   },
   {
+   "family": "t44 -",
+   "start_kind": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 8,
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3537991336372494 0.4892555716475317 0.23955434734945008 4.65865637031737 t44m-dp45-earlier-default",
+   "start": {
+    "u1": -0.3537991336372494,
+    "u2": 0.4892555716475317,
+    "lam": 0.23955434734945008,
+    "t": 4.65865637031737
+   },
+   "shifted": {
+    "u1": -0.35379913363883364,
+    "u2": 0.4892555716456841,
+    "lam": 0.23955434734945008,
+    "t": 4.6586563703064705,
+    "m": 8
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2396",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.23955434734945008,
+   "lam_reached": 0.23955434734945008,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family with 8 pieces (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2396; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  },
+  {
    "family": "t62 -",
    "start_kind": "command-line start",
    "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3608230785422193 0.495143505671977 0.2600367265090116 6.025456255902029 t62m-dp45 24",
@@ -337,6 +452,36 @@
    "pieces": 24
   },
   {
+   "family": "t62 -",
+   "start_kind": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 16,
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.35029023040772134 0.5086418062208198 0.26552686357726374 6.035303509659006 t62m-dp45-earlier-default",
+   "start": {
+    "u1": -0.35029023040772134,
+    "u2": 0.5086418062208198,
+    "lam": 0.26552686357726374,
+    "t": 6.035303509659006
+   },
+   "shifted": {
+    "u1": -0.350290230704167,
+    "u2": 0.5086418056364896,
+    "lam": 0.26552686357726374,
+    "t": 6.035303508490225,
+    "m": 16
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2655",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.26552686357726374,
+   "lam_reached": 0.26552686357726374,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family with 16 pieces (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2655; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  },
+  {
    "family": "t72 -",
    "start_kind": "command-line start",
    "command": "node tools/family-follow.mjs OUT.json -1 60 -0.34695164928857775 0.5169438844437719 0.2777381905662087 7.3687955213759055 t72m-dp45 24",
@@ -367,6 +512,36 @@
   },
   {
    "family": "t72 -",
+   "start_kind": "command-line start, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 16,
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.34695164928857775 0.5169438844437719 0.2777381905662087 7.3687955213759055 t72m-dp45-default",
+   "start": {
+    "u1": -0.34695164928857775,
+    "u2": 0.5169438844437719,
+    "lam": 0.2777381905662087,
+    "t": 7.3687955213759055
+   },
+   "shifted": {
+    "u1": -0.3469516493012519,
+    "u2": 0.5169438844311399,
+    "lam": 0.2777381905662087,
+    "t": 7.368795522841463,
+    "m": 16
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2777",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.2777381905662087,
+   "lam_reached": 0.2777381905662087,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family with 16 pieces (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2777; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
+  },
+  {
+   "family": "t72 -",
    "start_kind": "start of the earlier trace",
    "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3469078898537304 0.5169983492663192 0.27776626203721416 7.368801593568835 t72m-dp45-earlier 24",
    "start": {
@@ -393,6 +568,36 @@
    "witnesses_w1": null,
    "result": "the start is moved onto the family (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2778; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points",
    "pieces": 24
+  },
+  {
+   "family": "t72 -",
+   "start_kind": "start of the earlier trace, default number of pieces",
+   "pieces": "default (first of 8, 16, 24, 32, 48, 64 that closes)",
+   "pieces_taken": 16,
+   "command": "node tools/family-follow.mjs OUT.json -1 60 -0.3469078898537304 0.5169983492663192 0.27776626203721416 7.368801593568835 t72m-dp45-earlier-default",
+   "start": {
+    "u1": -0.3469078898537304,
+    "u2": 0.5169983492663192,
+    "lam": 0.27776626203721416,
+    "t": 7.368801593568835
+   },
+   "shifted": {
+    "u1": -0.3469078898537304,
+    "u2": 0.5169983492663192,
+    "lam": 0.27776626203721416,
+    "t": 7.368801593568835,
+    "m": 16
+   },
+   "closes_the_start": true,
+   "why": "step length below 1e-9 (lost the family) near lam=0.2778",
+   "loop_steps": 28,
+   "accepted_steps": 0,
+   "points": 0,
+   "lam_first": 0.27776626203721416,
+   "lam_reached": 0.27776626203721416,
+   "smallest_tool_closest_approach": null,
+   "witnesses_w1": null,
+   "result": "the start is moved onto the family with 16 pieces (residual below 1e-9) but the first step cannot be taken: stops: step length below 1e-9 (lost the family) near lam=0.2778; 0 accepted steps, 0 recorded points; no accepted step, no point, so no witness of last points"
   }
  ],
  "closing_of_the_earlier_trace_of_t35_with_dp45": {
