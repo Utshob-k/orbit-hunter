@@ -1,0 +1,1039 @@
+{
+ "what": "the automatic hand-over of tools/family-follow-ias.mjs --handover to the 50 digit continuation, run on t35 - and t44 - from the command-line start of the stored trace (tools/reproduce-trace.mjs). The rule: after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < 1e-7. Per trace: where the rule fired, the double precision part against the stored trace (bit-identical), the re-closing of the last accepted point, the 20 steps of -1e-5 of the 50 digit continuation (lam, u1, u2, t as strings, updates, seconds, the second differences) and the w1 witness of the last orbit, the same-family check against the last step of the 50 digit continuation of reclose-continuation-beyond.json (reclose.py at that lam from the hand-over steps, 1e-9 against the 50 digit values of that step) and the progress and the time against the stored trace. The 1e-9 same-orbit test applies to the check d only (it has a reference orbit); the re-closing of the last accepted point has the point itself as the reference and the 50 digit steps have none.",
+ "commands": [
+  "node tools/reproduce-trace.mjs t35m OUT.json --handover --minutes=90",
+  "node tools/reproduce-trace.mjs t44m OUT.json --handover --minutes=90",
+  "(the driver then runs: python tools/reclose.py OUT.json.handover-reclose.job.json OUT.json.handover-reclose.json --minutes 60; python tools/reclose-continue.py handover OUT.json.handover-reclose.json LAM OUT.json.handover --steps 20 --dlam -1e-05)",
+  "check d: python tools/reclose.py JOB.json OUT.json --minutes 60   (the start interpolated through the three nearest hand-over points, lam and ref from the raw output of the 50 digit step of reclose-continuation-beyond.json)"
+ ],
+ "checks": {
+  "what": "checks of the hand-over: the double precision part of a run with --handover (tools/reproduce-trace.mjs LABEL OUT.json --handover --minutes=90) against the stored trace, the 50 digit part, the same-family check at the lam of the last step of the 50 digit continuation (reclose-continuation-beyond.json), and the progress and time against the stored trace",
+  "traces": {
+   "t35m": {
+    "a_rule": {
+     "rule_fired": true,
+     "why_stopped": "handed over to the 50 digit continuation",
+     "accepted_step": 262,
+     "loop_step": 268,
+     "lam": 0.6638518766920942,
+     "p100": 9.79615980212234e-08,
+     "below": 1e-07,
+     "step_at_0_99_accepted_index": 198,
+     "step_at_0_99_loop_step": 200,
+     "creep_start_accepted": 1221,
+     "creep_start_loop_step": 1491,
+     "stored_accepted_steps": 1711
+    },
+    "b_double_precision_part": {
+     "compared": 262,
+     "bit_identical": 262,
+     "step_numbers_that_differ": 0,
+     "largest_relative_difference": 0.0,
+     "line": "PASS  the accepted steps follow the stored trace (n = 262), bit-identical   time 4656 s",
+     "holds": true
+    },
+    "c_50_digit_part": {
+     "reclose_of_the_last_point": {
+      "file": "OUT.json.handover-reclose.json",
+      "converged": true,
+      "same_orbit_as_the_point_itself": true,
+      "rel_diff_ref": {
+       "u1": 1.901998382082805e-12,
+       "u2": 3.804306924448527e-13,
+       "t": 2.1354238209867693e-12
+      },
+      "updates": 1,
+      "residual": 2.655862158560301e-22,
+      "seconds": 101.2
+     },
+     "steps_wanted": 20,
+     "steps_run": 20,
+     "steps_converged": 20,
+     "updates": [
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ],
+     "residual_max": 3.62864484964606e-24,
+     "seconds_per_step": [
+      237,
+      169.1,
+      168.4,
+      176.1,
+      176.6,
+      175.5,
+      172.4,
+      179.6,
+      180.1,
+      165.3,
+      160.1,
+      169.4,
+      213.8,
+      163.4,
+      161.7,
+      169.6,
+      168.7,
+      161.4,
+      153,
+      151.4
+     ],
+     "second_over_first_max": [
+      1.2370695503832139e-05,
+      3.2755315606373725e-05,
+      5.796587712811462e-05
+     ],
+     "stored_in_reclose_continuation_beyond": [
+      1.2318599929828178e-05,
+      3.2752623180156534e-05,
+      5.7523296662685484e-05
+     ],
+     "witness": {
+      "status": "done",
+      "closure": 2.0070116886198378e-14,
+      "dmin_parabolic": 5.0105196656601624e-06,
+      "dmin": 5.010938553971873e-06,
+      "dE": 3.8129367503691785e-18,
+      "dL": 5.5281641162083876e-17,
+      "check_1e14": true,
+      "seconds": 31.3,
+      "passes": true
+     },
+     "holds": true
+    },
+    "d_same_family_as_the_50_digit_continuation": {
+     "lam_of_the_last_step_of_the_50_digit_continuation": "0.6637406030628946",
+     "continuation_step": 10,
+     "reference_values_from": "step 10 of the 50 digit continuation of reclose-continuation-beyond.json",
+     "inside_range": true,
+     "converged": true,
+     "same_orbit": true,
+     "rel_diff_ref": {
+      "u1": 3.1459892101730195e-27,
+      "u2": 5.324904000973576e-28,
+      "t": 1.5144567008967583e-28
+     },
+     "updates": 1,
+     "residual": 6.408000949847766e-27,
+     "seconds": 84.6,
+     "result": "SAME ORBIT",
+     "holds": true
+    },
+    "e_progress_and_time": {
+     "lam_last_of_the_stored_trace": 0.6638406030628946,
+     "stored_run_seconds": 3600,
+     "stored_accepted_steps": 1711,
+     "lam_min_reached": 0.6636518766920942,
+     "lam_beyond_lam_last": 0.0001887263708003628,
+     "wall_seconds_total_of_the_run": 4656,
+     "seconds_double_precision_part": 1048.687,
+     "seconds_reclose_of_the_last_point": 101.531,
+     "seconds_continuation_including_witness": 3505.782,
+     "seconds_until_lam_last_is_passed": 1556.3179999999998,
+     "accepted_steps_of_the_double_precision_part": 262,
+     "lam_beyond_lam_last_of_the_stored_trace": 0.0,
+     "ratio_time_to_pass_lam_last_over_stored_run_seconds": 0.4323105555555555
+    },
+    "passes": true
+   },
+   "t44m": {
+    "a_rule": {
+     "rule_fired": true,
+     "why_stopped": "handed over to the 50 digit continuation",
+     "accepted_step": 286,
+     "loop_step": 288,
+     "lam": 0.22907662242111407,
+     "p100": 9.849615065254947e-08,
+     "below": 1e-07,
+     "step_at_0_99_accepted_index": 124,
+     "step_at_0_99_loop_step": 125,
+     "creep_start_accepted": 624,
+     "creep_start_loop_step": 668,
+     "stored_accepted_steps": 1266
+    },
+    "b_double_precision_part": {
+     "compared": 286,
+     "bit_identical": 286,
+     "step_numbers_that_differ": 0,
+     "largest_relative_difference": 0.0,
+     "line": "PASS  the accepted steps follow the stored trace (n = 286), bit-identical   time 8081 s",
+     "holds": true
+    },
+    "c_50_digit_part": {
+     "reclose_of_the_last_point": {
+      "file": "OUT.json.handover-reclose.json",
+      "converged": true,
+      "same_orbit_as_the_point_itself": true,
+      "rel_diff_ref": {
+       "u1": 3.0423273910584087e-12,
+       "u2": 4.089319238967377e-12,
+       "t": 1.0018967217445523e-12
+      },
+      "updates": 1,
+      "residual": 2.8710089095650683e-22,
+      "seconds": 173.6
+     },
+     "steps_wanted": 20,
+     "steps_run": 20,
+     "steps_converged": 20,
+     "updates": [
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ],
+     "residual_max": 1.310326185041203e-23,
+     "seconds_per_step": [
+      479.6,
+      340.6,
+      318.1,
+      367.8,
+      310.6,
+      312.8,
+      308.3,
+      288,
+      294.3,
+      279.4,
+      281.8,
+      283.2,
+      272.5,
+      263.9,
+      287.9,
+      292.9,
+      264.4,
+      256.9,
+      263.3,
+      261.2
+     ],
+     "second_over_first_max": [
+      0.0015690146194951345,
+      0.0019003967573413233,
+      0.0012046709918678985
+     ],
+     "stored_in_reclose_continuation_beyond": [
+      0.0015367308757746527,
+      0.0018726655367073146,
+      0.0012026535751672618
+     ],
+     "witness": {
+      "status": "done",
+      "closure": 1.4895319525883336e-14,
+      "dmin_parabolic": 2.507990790611193e-05,
+      "dmin": 2.512708676933548e-05,
+      "dE": 1.258062391906775e-21,
+      "dL": 7.125683785091431e-27,
+      "check_1e14": true,
+      "seconds": 57.1,
+      "passes": true
+     },
+     "holds": true
+    },
+    "d_same_family_as_the_50_digit_continuation": {
+     "lam_of_the_last_step_of_the_50_digit_continuation": "0.22896934975198912",
+     "continuation_step": 10,
+     "reference_values_from": "step 10 of the 50 digit continuation of reclose-continuation-beyond.json",
+     "inside_range": true,
+     "converged": true,
+     "same_orbit": true,
+     "rel_diff_ref": {
+      "u1": 6.23129582275334e-21,
+      "u2": 1.010474370564384e-20,
+      "t": 5.016213055808398e-22
+     },
+     "updates": 1,
+     "residual": 2.9524556753029605e-21,
+     "seconds": 152.5,
+     "result": "SAME ORBIT",
+     "holds": true
+    },
+    "e_progress_and_time": {
+     "lam_last_of_the_stored_trace": 0.22906934975198912,
+     "stored_run_seconds": 3030,
+     "stored_accepted_steps": 1266,
+     "lam_min_reached": 0.22887662242111406,
+     "lam_beyond_lam_last": 0.00019272733087505323,
+     "wall_seconds_total_of_the_run": 8081,
+     "seconds_double_precision_part": 1821.0199999999995,
+     "seconds_reclose_of_the_last_point": 174.118,
+     "seconds_continuation_including_witness": 6085.862,
+     "seconds_until_lam_last_is_passed": 2474.7379999999994,
+     "accepted_steps_of_the_double_precision_part": 286,
+     "lam_beyond_lam_last_of_the_stored_trace": 0.0,
+     "ratio_time_to_pass_lam_last_over_stored_run_seconds": 0.816745214521452
+    },
+    "passes": true
+   }
+  },
+  "round_passes": true
+ },
+ "runs": {
+  "t35m": {
+   "why_stopped": "handed over to the 50 digit continuation",
+   "accepted_steps_double_precision": 262,
+   "lam_double_precision_range": [
+    0.6638519261183755,
+    0.6653529332738678
+   ],
+   "handover": {
+    "rule": "after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < 1e-7",
+    "p100": 9.79615980212234e-08,
+    "below": 1e-07,
+    "accepted_steps": 262,
+    "loop_step": 268,
+    "lam": 0.6638518766920942,
+    "u1": 0.04092829341569483,
+    "u2": 0.6293912140405458,
+    "t": 2.0553265980300086,
+    "steps_wanted": 20,
+    "dlam": -1e-05,
+    "folder": "OUT.json.handover",
+    "reclose": {
+     "file": "OUT.json.handover-reclose.json",
+     "converged": true,
+     "same_orbit_as_the_point_itself": true,
+     "rel_diff_ref": {
+      "u1": 1.901998382082805e-12,
+      "u2": 3.804306924448527e-13,
+      "t": 2.1354238209867693e-12
+     },
+     "updates": 1,
+     "residual": 2.655862158560301e-22,
+     "seconds": 101.2
+    },
+    "steps": [
+     {
+      "step": 1,
+      "lam": "0.6638418766920942",
+      "u1": "0.04093354207604535620830770534037980113308",
+      "u2": "0.6293161466017967445619262830698755283004",
+      "t": "2.055312327447804324964409130890209669139",
+      "converged": true,
+      "updates": 3,
+      "residual": 3.62864484964606e-24,
+      "seconds": 237,
+      "second_over_first": null
+     },
+     {
+      "step": 2,
+      "lam": "0.6638318766920942",
+      "u1": "0.04093879080068011646280366483893045108159",
+      "u2": "0.6292410767043496644412550289072926669256",
+      "t": "2.055298057675610993852608902502595885901",
+      "converged": true,
+      "updates": 2,
+      "residual": 3.598721840289215e-28,
+      "seconds": 169.1,
+      "second_over_first": [
+       1.2262422602207284e-05,
+       3.2748926914150786e-05,
+       5.707168455581486e-05
+      ]
+     },
+     {
+      "step": 3,
+      "lam": "0.6638218766920942",
+      "u1": "0.04094403958971071856518459171411852849259",
+      "u2": "0.6291660043483296661147689985552885240818",
+      "t": "2.055283788718474518407039178835172945572",
+      "converged": true,
+      "updates": 2,
+      "residual": 9.526084184716497e-28,
+      "seconds": 168.4,
+      "second_over_first": [
+       1.22687045473607e-05,
+       3.2749377381347696e-05,
+       5.712098283501863e-05
+      ]
+     },
+     {
+      "step": 4,
+      "lam": "0.6638118766920942",
+      "u1": "0.0409492884431707622348060497096982956501",
+      "u2": "0.6290909295336232484522312706588149539187",
+      "t": "2.055269520577052331670314554713272843684",
+      "converged": true,
+      "updates": 2,
+      "residual": 6.872177408848799e-29,
+      "seconds": 176.1,
+      "second_over_first": [
+       1.2274955294085213e-05,
+       3.2749816685539875e-05,
+       5.717032545250933e-05
+      ]
+     },
+     {
+      "step": 5,
+      "lam": "0.6638018766920942",
+      "u1": "0.0409545373610936844652659101736808912403",
+      "u2": "0.6290158522601177436392809738438619207587",
+      "t": "2.055255253252002381819296477787300231159",
+      "converged": true,
+      "updates": 2,
+      "residual": 4.531471549876031e-28,
+      "seconds": 176.6,
+      "second_over_first": [
+       1.2281174807349622e-05,
+       3.275024481236827e-05,
+       5.721971245679133e-05
+      ]
+     },
+     {
+      "step": 6,
+      "lam": "0.6637918766920942",
+      "u1": "0.04095978634351275933282833379484382951671",
+      "u2": "0.6289407725277013183666105694305646785006",
+      "t": "2.055240986743983132622320583226595497091",
+      "converged": true,
+      "updates": 2,
+      "residual": 4.6248233537319465e-29,
+      "seconds": 175.5,
+      "second_over_first": [
+       1.2287363052069434e-05,
+       3.2750661747454254e-05,
+       5.7269143896436125e-05
+      ]
+     },
+     {
+      "step": 7,
+      "lam": "0.6637818766920942",
+      "u1": "0.04096503539046109780454100034722359348173",
+      "u2": "0.628865690336262975020819033464429700204",
+      "t": "2.055226721053653563896936174010897891834",
+      "converged": true,
+      "updates": 2,
+      "residual": 4.326303594318876e-29,
+      "seconds": 172.4,
+      "second_over_first": [
+       1.2293519993105848e-05,
+       3.275106747639941e-05,
+       5.73186198200835e-05
+      ]
+     },
+     {
+      "step": 8,
+      "lam": "0.6637718766920942",
+      "u1": "0.04097028450197164754604520843937650537817",
+      "u2": "0.6287906056856925528769433613380211475903",
+      "t": "2.055212456181673171968161415885431892794",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.1820126371880982e-28,
+      "seconds": 179.6,
+      "second_over_first": [
+       1.2299645595265687e-05,
+       3.27514619847855e-05,
+       5.7368140276441894e-05
+      ]
+     },
+     {
+      "step": 9,
+      "lam": "0.6637618766920942",
+      "u1": "0.04097553367807719272907830670365825558778",
+      "u2": "0.6287155185758807292926707552996030528345",
+      "t": "2.055198192128701970127252481997061623565",
+      "converged": true,
+      "updates": 2,
+      "residual": 4.87245778200897e-28,
+      "seconds": 180.1,
+      "second_over_first": [
+       1.2305739823301281e-05,
+       3.2751845258174426e-05,
+       5.741770531428831e-05
+      ]
+     },
+     {
+      "step": 10,
+      "lam": "0.6637518766920942",
+      "u1": "0.04098078291881035383866800850860834961872",
+      "u2": "0.6286404290067190209042341379487931136273",
+      "t": "2.05518392889540048909099007443540999952",
+      "converged": true,
+      "updates": 2,
+      "residual": 2.2025448328623094e-28,
+      "seconds": 165.3,
+      "second_over_first": [
+       1.2311802641910394e-05,
+       3.2752217282108193e-05,
+       5.746731498246862e-05
+      ]
+     },
+     {
+      "step": 11,
+      "lam": "0.6637418766920942",
+      "u1": "0.04098603222420358748001802408614933391496",
+      "u2": "0.628565336978099784823993280200416873472",
+      "t": "2.055169666482429777461480086343499413563",
+      "converged": true,
+      "updates": 2,
+      "residual": 2.3778851860775634e-28,
+      "seconds": 160.1,
+      "second_over_first": [
+       1.23178340157361e-05,
+       3.2752578042108896e-05,
+       5.751696932989745e-05
+      ]
+     },
+     {
+      "step": 12,
+      "lam": "0.6637318766920942",
+      "u1": "0.04099128159428918618508458786892015197641",
+      "u2": "0.6284902424899162198397042799484613361109",
+      "t": "2.055155404890451402186473403918820509328",
+      "converged": true,
+      "updates": 2,
+      "residual": 6.118767580274454e-29,
+      "seconds": 169.4,
+      "second_over_first": [
+       1.2323833909366709e-05,
+       3.275292752367867e-05,
+       5.756666840555856e-05
+      ]
+     },
+     {
+      "step": 13,
+      "lam": "0.6637218766920942",
+      "u1": "0.04099653102909927821884332982287699259518",
+      "u2": "0.6284151455420623676154797388190163663629",
+      "t": "2.055141144120127449020202562037970524064",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.394867741966988e-29,
+      "seconds": 213.8,
+      "second_over_first": [
+       1.2329802287335657e-05,
+       3.275326571229969e-05,
+       5.7616412258504744e-05
+      ]
+     },
+     {
+      "step": 14,
+      "lam": "0.6637118766920942",
+      "u1": "0.04100178052866582738524600165281396722383",
+      "u2": "0.6283400461344331138944421817194819413159",
+      "t": "2.05512688417212052298473654889569409197",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.0151693058172503e-28,
+      "seconds": 163.4,
+      "second_over_first": [
+       1.2335739114121407e-05,
+       3.27535925934341e-05,
+       5.766620093785803e-05
+      ]
+     },
+     {
+      "step": 15,
+      "lam": "0.6637018766920942",
+      "u1": "0.0410070300930206328328665798493665351208",
+      "u2": "0.6282649442669241897030733051352305175513",
+      "t": "2.055112625047093748831855748343952682888",
+      "converged": true,
+      "updates": 2,
+      "residual": 3.2037678185033472e-28,
+      "seconds": 161.7,
+      "second_over_first": [
+       1.2341644354147365e-05,
+       3.2753908152524024e-05,
+       5.7716034492809854e-05
+      ]
+     },
+     {
+      "step": 16,
+      "lam": "0.6636918766920942",
+      "u1": "0.04101227972219532886023619588978866112988",
+      "u2": "0.6281898399394321725572614256045070081908",
+      "t": "2.055098366745710771505444960983399953868",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.1684696518203924e-28,
+      "seconds": 169.6,
+      "second_over_first": [
+       1.2347517971781759e-05,
+       3.2754212374991506e-05,
+       5.7765912972621006e-05
+      ]
+     },
+     {
+      "step": 17,
+      "lam": "0.6636818766920942",
+      "u1": "0.04101752941622138472086645731554421499015",
+      "u2": "0.6281147331518544876700498576978157733486",
+      "t": "2.055084109268635756604408991830705955449",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.0378972035874526e-28,
+      "seconds": 168.7,
+      "second_over_first": [
+       1.2353359931337564e-05,
+       3.2754505246238495e-05,
+       5.7815836426622016e-05
+      ]
+     },
+     {
+      "step": 18,
+      "lam": "0.6636718766920942",
+      "u1": "0.04102277917513010442796059184975797089725",
+      "u2": "0.628039623904089409161088550258609439809",
+      "t": "2.055069852616533390846107809894195729685",
+      "converged": true,
+      "updates": 2,
+      "residual": 3.573049949888323e-29,
+      "seconds": 161.4,
+      "second_over_first": [
+       1.235917019707239e-05,
+       3.275478675164679e-05,
+       5.786580490421298e-05
+      ]
+     },
+     {
+      "step": 19,
+      "lam": "0.6636618766920942",
+      "u1": "0.0410280289989526265588119498634448761125",
+      "u2": "0.6279645121960360612677916360291645139254",
+      "t": "2.055055596790068882530314246997401551464",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.2389909674401342e-29,
+      "seconds": 153,
+      "second_over_first": [
+       1.2364948733188384e-05,
+       3.2755056876578046e-05,
+       5.7915818454863884e-05
+      ]
+     },
+     {
+      "step": 20,
+      "lam": "0.6636518766920942",
+      "u1": "0.04103327888771992405888934494576090962441",
+      "u2": "0.62788939802759441955820338486576768962",
+      "t": "2.055041341789907962003694074942384651461",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.5557744341097395e-28,
+      "seconds": 151.4,
+      "second_over_first": [
+       1.2370695503832139e-05,
+       3.2755315606373725e-05,
+       5.796587712811462e-05
+      ]
+     }
+    ],
+    "witness": {
+     "file": "handover_w1.out.json",
+     "status": "done",
+     "closure": 2.0070116886198378e-14,
+     "e_half": 1.9110914101885616e-15,
+     "rotation": -1.1550399657112105,
+     "dmin": 5.010938553971873e-06,
+     "steps": 516,
+     "seconds_total": 31.3
+    },
+    "stopped": null,
+    "seconds": {
+     "reclose": 101.531,
+     "continuation": 3505.782
+    }
+   }
+  },
+  "t44m": {
+   "why_stopped": "handed over to the 50 digit continuation",
+   "accepted_steps_double_precision": 286,
+   "lam_double_precision_range": [
+    0.22907667806328758,
+    0.23332876562866695
+   ],
+   "handover": {
+    "rule": "after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < 1e-7",
+    "p100": 9.849615065254947e-08,
+    "below": 1e-07,
+    "accepted_steps": 286,
+    "loop_step": 288,
+    "lam": 0.22907662242111407,
+    "u1": -0.39349728966564196,
+    "u2": 0.4365568526865383,
+    "t": 4.595175398182105,
+    "steps_wanted": 20,
+    "dlam": -1e-05,
+    "folder": "OUT.json.handover",
+    "reclose": {
+     "file": "OUT.json.handover-reclose.json",
+     "converged": true,
+     "same_orbit_as_the_point_itself": true,
+     "rel_diff_ref": {
+      "u1": 3.0423273910584087e-12,
+      "u2": 4.089319238967377e-12,
+      "t": 1.0018967217445523e-12
+     },
+     "updates": 1,
+     "residual": 2.8710089095650683e-22,
+     "seconds": 173.6
+    },
+    "steps": [
+     {
+      "step": 1,
+      "lam": "0.22906662242111407",
+      "u1": "-0.3935582009460138579354316792852394542295",
+      "u2": "0.4364604524121070375737539289615739328723",
+      "t": "4.595067415340427381389233590294663752757",
+      "converged": true,
+      "updates": 3,
+      "residual": 6.555300390708084e-26,
+      "seconds": 479.6,
+      "second_over_first": null
+     },
+     {
+      "step": 2,
+      "lam": "0.22905662242111407",
+      "u1": "-0.3936192041942504147169681878696869202429",
+      "u2": "0.4363638736951821312822108426355802340934",
+      "t": "4.594959302675997576832337492992672519618",
+      "converged": true,
+      "updates": 2,
+      "residual": 6.680247177337601e-24,
+      "seconds": 340.6,
+      "second_over_first": [
+       0.0015075700092991367,
+       0.0018476193731407024,
+       0.0012008524326158642
+      ]
+     },
+     {
+      "step": 3,
+      "lam": "0.22904662242111407",
+      "u1": "-0.3936802997489051493183996981784034859126",
+      "u2": "0.4362671159339002780538748258874794828914",
+      "t": "4.594851060006298316778374225795315463117",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.921751420447497e-24,
+      "seconds": 318.1,
+      "second_over_first": [
+       0.0015108532641935285,
+       0.0018504392265276221,
+       0.00120105379714582
+      ]
+     },
+     {
+      "step": 4,
+      "lam": "0.22903662242111407",
+      "u1": "-0.3937414879517596752392196329485428316027",
+      "u2": "0.436170178521240668071223655706786798668",
+      "t": "4.594742687153006806262602023878527533557",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.323737886700006e-24,
+      "seconds": 367.8,
+      "second_over_first": [
+       0.0015141513473044658,
+       0.0018532718465221426,
+       0.001201256479796494
+      ]
+     },
+     {
+      "step": 5,
+      "lam": "0.22902662242111407",
+      "u1": "-0.3938027691466427986977791864758509476525",
+      "u2": "0.4360730608467841420987705543581122760505",
+      "t": "4.594634183937390634342836233835846599599",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.173598233261e-24,
+      "seconds": 310.6,
+      "second_over_first": [
+       0.0015174643506037002,
+       0.001856117312577153,
+       0.001201460472126082
+      ]
+     },
+     {
+      "step": 6,
+      "lam": "0.22901662242111407",
+      "u1": "-0.3938641436794469254351191746894798316046",
+      "u2": "0.4359757622966868778481448022730675408984",
+      "t": "4.594525550180307603562369435837735771245",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.310326185041203e-23,
+      "seconds": 312.8,
+      "second_over_first": [
+       0.0015207923667812078,
+       0.0018589757047506495,
+       0.0012016657654497346
+      ]
+     },
+     {
+      "step": 7,
+      "lam": "0.22900662242111407",
+      "u1": "-0.3939256118981446304379699765420460164301",
+      "u2": "0.4358782822536538228690928794987943501939",
+      "t": "4.594416785702205588993685955702532751789",
+      "converged": true,
+      "updates": 2,
+      "residual": 9.793615837749391e-24,
+      "seconds": 308.3,
+      "second_over_first": [
+       0.0015241354892518368,
+       0.0018618471037111165,
+       0.0012018723508347986
+      ]
+     },
+     {
+      "step": 8,
+      "lam": "0.22899662242111407",
+      "u1": "-0.393987174152805392497556594860460087268",
+      "u2": "0.4357806200969118710817470856994316370597",
+      "t": "4.594307890323122427599751286705937615393",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.939597286539553e-24,
+      "seconds": 288,
+      "second_over_first": [
+       0.0015274938121620234,
+       0.0018647315907429625,
+       0.0012020802190959691
+      ]
+     },
+     {
+      "step": 9,
+      "lam": "0.22898662242111407",
+      "u1": "-0.3940488307956124955466583841046687693923",
+      "u2": "0.435682775202182780028106457629401413192",
+      "t": "4.594198863862685838665314841879812839562",
+      "converged": true,
+      "updates": 2,
+      "residual": 9.678864637552399e-24,
+      "seconds": 294.3,
+      "second_over_first": [
+       0.0015308674303965782,
+       0.0018676292477520036,
+       0.0012022893607903464
+      ]
+     },
+     {
+      "step": 10,
+      "lam": "0.22897662242111407",
+      "u1": "-0.3941105821808800987435917090149738633199",
+      "u2": "0.4355847469416558258827095189364619189441",
+      "t": "4.594089706140113376066761603475515796777",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.328235041581767e-24,
+      "seconds": 279.4,
+      "second_over_first": [
+       0.0015342564395855397,
+       0.001870540157271004,
+       0.0012024997662123983
+      ]
+     },
+     {
+      "step": 11,
+      "lam": "0.22896662242111407",
+      "u1": "-0.3941724286650704772983814964432854164603",
+      "u2": "0.4354865346839601932239912654199580458753",
+      "t": "4.593980416974212413165417281773521669209",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.331659747250347e-24,
+      "seconds": 281.8,
+      "second_over_first": [
+       0.0015376609361111002,
+       0.0018734644024652675,
+       0.0012027114253888244
+      ]
+     },
+     {
+      "step": 12,
+      "lam": "0.22895662242111407",
+      "u1": "-0.394234370606811436063389386167935687568",
+      "u2": "0.4353881377941370965287717461114218949772",
+      "t": "4.593870996183380161125955156796830516892",
+      "converged": true,
+      "updates": 2,
+      "residual": 1.020541790798228e-23,
+      "seconds": 283.2,
+      "second_over_first": [
+       0.001541081017114603,
+       0.0018764020671382829,
+       0.0012029243280733204
+      ]
+     },
+     {
+      "step": 13,
+      "lam": "0.22894662242111407",
+      "u1": "-0.3942964083669138979380778817310795177869",
+      "u2": "0.4352895556336116303127131127939213859509",
+      "t": "4.593761443585603721478676011686728108059",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.700877317014997e-24,
+      "seconds": 272.5,
+      "second_over_first": [
+       0.0015445167805036093,
+       0.0018793532357374216,
+       0.001203138463741242
+      ]
+     },
+     {
+      "step": 14,
+      "lam": "0.22893662242111407",
+      "u1": "-0.3943585423083896691654126937707618282963",
+      "u2": "0.4351907875601643447994057047680909078437",
+      "t": "4.593651758998460173761916024985037039083",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.998056953162988e-24,
+      "seconds": 263.9,
+      "second_over_first": [
+       0.0015479683249590406,
+       0.001882317993359693,
+       0.0012033538215841647
+      ]
+     },
+     {
+      "step": 15,
+      "lam": "0.22892662242111407",
+      "u1": "-0.3944207727964693836256438966799012762608",
+      "u2": "0.4350918329279025439599962363704886101252",
+      "t": "4.593541942239116699098678040105547047792",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.779565865306562e-24,
+      "seconds": 287.9,
+      "second_over_first": [
+       0.0015514357499423921,
+       0.0018852964257575523,
+       0.0012035703905043358
+      ]
+     },
+     {
+      "step": 16,
+      "lam": "0.22891662242111407",
+      "u1": "-0.3944831001986206282618818511642321564647",
+      "u2": "0.434992691087231302723922112231031313016",
+      "t": "4.59343199312433074057986114211303011438",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.637683263995507e-24,
+      "seconds": 292.9,
+      "second_over_first": [
+       0.0015549191557030217,
+       0.0018882886193447637,
+       0.0012037881591090223
+      ]
+     },
+     {
+      "step": 17,
+      "lam": "0.22890662242111407",
+      "u1": "-0.394545524884566251800982397490608998916",
+      "u2": "0.4348933613848242001193872218286767471637",
+      "t": "4.593321911470450201345086610295235669377",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.312217254259646e-24,
+      "seconds": 264.4,
+      "second_over_first": [
+       0.001558418643285513,
+       0.0018912946612023207,
+       0.0012040071157047437
+      ]
+     },
+     {
+      "step": 18,
+      "lam": "0.22889662242111407",
+      "u1": "-0.3946080472263028589628023197818719029368",
+      "u2": "0.4347938431635937650596708348629816524287",
+      "t": "4.593211697093413681271182458952329873736",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.722561927196587e-24,
+      "seconds": 256.9,
+      "second_over_first": [
+       0.0015619343145371143,
+       0.0018943146390844213,
+       0.0012042272482913972
+      ]
+     },
+     {
+      "step": 19,
+      "lam": "0.22888662242111407",
+      "u1": "-0.3946706675981194923808778896890689019876",
+      "u2": "0.4346941357626616314482079173940646278896",
+      "t": "4.593101349808750753197854433664117124985",
+      "converged": true,
+      "updates": 2,
+      "residual": 8.955778875010976e-24,
+      "seconds": 263.3,
+      "second_over_first": [
+       0.0015654662721152543,
+       0.001897348641424501,
+       0.0012044485445562635
+      ]
+     },
+     {
+      "step": 20,
+      "lam": "0.22887662242111407",
+      "u1": "-0.3947333863766165044880277314626069215946",
+      "u2": "0.4345942385173283992316010057037761808384",
+      "t": "4.592990869431582279639967354637461269944",
+      "converged": true,
+      "updates": 2,
+      "residual": 7.779630300684863e-24,
+      "seconds": 261.2,
+      "second_over_first": [
+       0.0015690146194951345,
+       0.0019003967573413233,
+       0.0012046709918678985
+      ]
+     }
+    ],
+    "witness": {
+     "file": "handover_w1.out.json",
+     "status": "done",
+     "closure": 1.4895319525883336e-14,
+     "e_half": 1.5319553207118545e-15,
+     "rotation": 1.1328914026636534,
+     "dmin": 2.512708676933548e-05,
+     "steps": 928,
+     "seconds_total": 57.1
+    },
+    "stopped": null,
+    "seconds": {
+     "reclose": 174.118,
+     "continuation": 6085.862
+    }
+   }
+  }
+ }
+}
