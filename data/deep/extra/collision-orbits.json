@@ -1,0 +1,1018 @@
+{
+ "what": "the collision orbits on the four witnessed traces: the local minima of w1 dmin below 1e-4 along lam (points with a w1 result, ordered by lam; t35 - 1, t44 - 4, t62 - 2, t72 - 3, 10 in all), the signed angular momentum h of the closest pair (tools/pair-angmom.py: 50 digit flow, preset w1b) at each minimum and at its two neighbours in lam; pair = the two closest bodies (0-based indices) at the closest sample. A sign change of h counts only if the closest pair is the same at both ends of the interval, otherwise the interval is \"pair changes\". For an interval with a sign change one re-closed midpoint (tools/reclose.py, 50 digits, start = the means of lam, u1, u2, t of the two ends, as in reclose-midpoints-deep.json; the two midpoints of data/deep/reclose that were made before are used for t35 - and t44 -) and its h give the narrower bracket of the lam at which h = 0 (a collision orbit); zero_of_h_linear is the zero of the straight line through the two ends of the bracket, as information. Where h keeps its sign on both sides: \"close approach, no sign change\". The values of h of the ten points of pair-angmom.json are taken from that file, 24 points and the midpoints were computed in this round.",
+ "lam_c_fit_t35m": 0.66483644,
+ "traces": {
+  "t35m": [
+   {
+    "minimum": "t35m-u0010",
+    "step": 10,
+    "lam": 0.6648508522089533,
+    "dmin_w1": 7.326286611728175e-10,
+    "pair": [
+     0,
+     1
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t35m-u0011",
+      "step": 11,
+      "lam": 0.6648133863958717,
+      "dmin_w1": 1.8741905567300687e-09,
+      "pair": [
+       0,
+       1
+      ],
+      "h_float": -8.652696005670658e-05,
+      "sign_of_h": -1,
+      "h_from": "data/deep/extra/pair-angmom.json"
+     },
+     {
+      "role": "minimum",
+      "id": "t35m-u0010",
+      "step": 10,
+      "lam": 0.6648508522089533,
+      "dmin_w1": 7.326286611728175e-10,
+      "pair": [
+       0,
+       1
+      ],
+      "h_float": 5.41090129445607e-05,
+      "sign_of_h": 1,
+      "h_from": "data/deep/extra/pair-angmom.json"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t35m-u0009",
+      "step": 9,
+      "lam": 0.6648902115645714,
+      "dmin_w1": 1.0207758320181824e-08,
+      "pair": [
+       0,
+       1
+      ],
+      "h_float": 0.00020178808631887834,
+      "sign_of_h": 1,
+      "h_from": "data/deep/extra/pair-angmom.json"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t35m-u0011",
+       "t35m-u0010"
+      ],
+      "lam": [
+       0.6648133863958717,
+       0.6648508522089533
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t35m-m010-011",
+       "lam": 0.6648321193024125,
+       "pair": [
+        0,
+        1
+       ],
+       "h_float": -1.6201457164949126e-05,
+       "sign_of_h": -1,
+       "h_from": "data/deep/extra/pair-angmom.json",
+       "reclosed": "data/deep/reclose"
+      },
+      "bracket": {
+       "lam": [
+        0.6648321193024125,
+        0.6648508522089533
+       ],
+       "width": 1.873290654086368e-05,
+       "width_of_the_interval_before": 3.746581308161634e-05,
+       "zero_of_h_linear": 0.6648364358769201,
+       "lam_c_fit_inside": true,
+       "lam_c_fit_minus_zero_of_h_linear": 4.123079877516034e-09
+      }
+     },
+     {
+      "between": [
+       "t35m-u0010",
+       "t35m-u0009"
+      ],
+      "lam": [
+       0.6648508522089533,
+       0.6648902115645714
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "sign change"
+   }
+  ],
+  "t44m": [
+   {
+    "minimum": "t44m-u0034",
+    "step": 34,
+    "lam": 0.22934779320998033,
+    "dmin_w1": 1.9232537608527146e-09,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t44m-u0035",
+      "step": 35,
+      "lam": 0.22933212822600313,
+      "dmin_w1": 1.3728736328671195e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.00023418256145035175,
+      "sign_of_h": 1,
+      "h_from": "data/deep/extra/pair-angmom.json"
+     },
+     {
+      "role": "minimum",
+      "id": "t44m-u0034",
+      "step": 34,
+      "lam": 0.22934779320998033,
+      "dmin_w1": 1.9232537608527146e-09,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -8.73334211350312e-05,
+      "sign_of_h": -1,
+      "h_from": "data/deep/extra/pair-angmom.json"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t44m-u0033",
+      "step": 33,
+      "lam": 0.2293647425667399,
+      "dmin_w1": 4.7225763841328296e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0004341592931437629,
+      "sign_of_h": -1,
+      "h_from": "data/deep/extra/pair-angmom.json"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t44m-u0035",
+       "t44m-u0034"
+      ],
+      "lam": [
+       0.22933212822600313,
+       0.22934779320998033
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t44m-m034-035",
+       "lam": 0.22933996071799173,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": 7.330758022741472e-05,
+       "sign_of_h": 1,
+       "h_from": "data/deep/extra/pair-angmom.json",
+       "reclosed": "data/deep/reclose"
+      },
+      "bracket": {
+       "lam": [
+        0.22933996071799173,
+        0.22934779320998033
+       ],
+       "width": 7.83249198860192e-06,
+       "width_of_the_interval_before": 1.566498397720384e-05,
+       "zero_of_h_linear": 0.22934353502984217
+      }
+     },
+     {
+      "between": [
+       "t44m-u0034",
+       "t44m-u0033"
+      ],
+      "lam": [
+       0.22934779320998033,
+       0.2293647425667399
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "sign change"
+   },
+   {
+    "minimum": "t44m-u0030",
+    "step": 30,
+    "lam": 0.22942473089055468,
+    "dmin_w1": 5.2915890596986886e-09,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t44m-u0031",
+      "step": 31,
+      "lam": 0.2294030499110826,
+      "dmin_w1": 8.545423889247705e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0005844968460286618,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t44m-u0030",
+      "step": 30,
+      "lam": 0.22942473089055468,
+      "dmin_w1": 5.2915890596986886e-09,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.00014529088261032428,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t44m-u0029",
+      "step": 29,
+      "lam": 0.22944834762933045,
+      "dmin_w1": 2.782184538411812e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.00033114885241737716,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t44m-u0031",
+       "t44m-u0030"
+      ],
+      "lam": [
+       0.2294030499110826,
+       0.22942473089055468
+      ],
+      "result": "same sign"
+     },
+     {
+      "between": [
+       "t44m-u0030",
+       "t44m-u0029"
+      ],
+      "lam": [
+       0.22942473089055468,
+       0.22944834762933045
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t44m-m029-030",
+       "lam": 0.22943653925994256,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": -9.318611839981042e-05,
+       "sign_of_h": -1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 3,
+       "reclose_residual": 5.963543688744322e-22
+      },
+      "bracket": {
+       "lam": [
+        0.22942473089055468,
+        0.22943653925994256
+       ],
+       "width": 1.1808369387883433e-05,
+       "width_of_the_interval_before": 2.3616738775766866e-05,
+       "zero_of_h_linear": 0.22943192507868723
+      }
+     }
+    ],
+    "result": "sign change"
+   },
+   {
+    "minimum": "t44m-u0021",
+    "step": 21,
+    "lam": 0.22974082900756188,
+    "dmin_w1": 6.793084903211393e-09,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t44m-u0022",
+      "step": 22,
+      "lam": 0.2296906777111433,
+      "dmin_w1": 1.598489120932519e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0007996193407067125,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t44m-u0021",
+      "step": 21,
+      "lam": 0.22974082900756188,
+      "dmin_w1": 6.793084903211393e-09,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0001644336225028442,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t44m-u0020",
+      "step": 20,
+      "lam": 0.22979641986915536,
+      "dmin_w1": 3.753334932354704e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.00122327169878542,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t44m-u0022",
+       "t44m-u0021"
+      ],
+      "lam": [
+       0.2296906777111433,
+       0.22974082900756188
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t44m-m021-022",
+       "lam": 0.22971575335935257,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": 0.00031653789328105767,
+       "sign_of_h": 1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 2,
+       "reclose_residual": 5.510555800250975e-18
+      },
+      "bracket": {
+       "lam": [
+        0.22971575335935257,
+        0.22974082900756188
+       ],
+       "width": 2.507564820930508e-05,
+       "width_of_the_interval_before": 5.01512964185824e-05,
+       "zero_of_h_linear": 0.22973225619288085
+      }
+     },
+     {
+      "between": [
+       "t44m-u0021",
+       "t44m-u0020"
+      ],
+      "lam": [
+       0.22974082900756188,
+       0.22979641986915536
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "sign change"
+   },
+   {
+    "minimum": "t44m-u0006",
+    "step": 6,
+    "lam": 0.23165305215401924,
+    "dmin_w1": 2.7901087867077913e-08,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t44m-k0005",
+      "step": 7,
+      "lam": 0.23142646130795266,
+      "dmin_w1": 2.2304867666320028e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.002983881588307684,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t44m-u0006",
+      "step": 6,
+      "lam": 0.23165305215401924,
+      "dmin_w1": 2.7901087867077913e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0003336239213890827,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t44m-k0004",
+      "step": 5,
+      "lam": 0.23189577500586123,
+      "dmin_w1": 3.5991408115389204e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0037775280139649187,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t44m-k0005",
+       "t44m-u0006"
+      ],
+      "lam": [
+       0.23142646130795266,
+       0.23165305215401924
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t44m-m006-007",
+       "lam": 0.23153975673098595,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": 0.0013124122605558427,
+       "sign_of_h": 1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 2,
+       "reclose_residual": 2.761278128683198e-17
+      },
+      "bracket": {
+       "lam": [
+        0.23153975673098595,
+        0.23165305215401924
+       ],
+       "width": 0.00011329542303328832,
+       "width_of_the_interval_before": 0.00022659084606657665,
+       "zero_of_h_linear": 0.23163008907233099
+      }
+     },
+     {
+      "between": [
+       "t44m-u0006",
+       "t44m-k0004"
+      ],
+      "lam": [
+       0.23165305215401924,
+       0.23189577500586123
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "sign change"
+   }
+  ],
+  "t62m": [
+   {
+    "minimum": "t62m-u0017",
+    "step": 17,
+    "lam": 0.2527937491692651,
+    "dmin_w1": 1.884436726705603e-07,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t62m-u0018",
+      "step": 18,
+      "lam": 0.2523977968176689,
+      "dmin_w1": 3.4278349413271706e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0011707860797722821,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t62m-u0017",
+      "step": 17,
+      "lam": 0.2527937491692651,
+      "dmin_w1": 1.884436726705603e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0008681887149014977,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t62m-k0014",
+      "step": 16,
+      "lam": 0.253194380793836,
+      "dmin_w1": 9.52334596374922e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0019517467985034648,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t62m-u0018",
+       "t62m-u0017"
+      ],
+      "lam": [
+       0.2523977968176689,
+       0.2527937491692651
+      ],
+      "result": "same sign"
+     },
+     {
+      "between": [
+       "t62m-u0017",
+       "t62m-k0014"
+      ],
+      "lam": [
+       0.2527937491692651,
+       0.253194380793836
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "close approach, no sign change",
+    "smallest_dmin_w1": 1.884436726705603e-07
+   },
+   {
+    "minimum": "t62m-u0009",
+    "step": 9,
+    "lam": 0.2561141086307316,
+    "dmin_w1": 8.589912340972983e-09,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t62m-k0008",
+      "step": 10,
+      "lam": 0.2556862588416943,
+      "dmin_w1": 2.8672455167114486e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0033759419383371033,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t62m-u0009",
+      "step": 9,
+      "lam": 0.2561141086307316,
+      "dmin_w1": 8.589912340972983e-09,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0001851810230932281,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t62m-k0007",
+      "step": 8,
+      "lam": 0.2565447620885846,
+      "dmin_w1": 3.38499880856343e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.003671522643478131,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t62m-k0008",
+       "t62m-u0009"
+      ],
+      "lam": [
+       0.2556862588416943,
+       0.2561141086307316
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t62m-m009-010",
+       "lam": 0.2559001837362129,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": 0.0015829307615938502,
+       "sign_of_h": 1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 2,
+       "reclose_residual": 4.9099771479377955e-18
+      },
+      "bracket": {
+       "lam": [
+        0.2559001837362129,
+        0.2561141086307316
+       ],
+       "width": 0.00021392489451865782,
+       "width_of_the_interval_before": 0.0004278497890372601,
+       "zero_of_h_linear": 0.2560917034688096
+      }
+     },
+     {
+      "between": [
+       "t62m-u0009",
+       "t62m-k0007"
+      ],
+      "lam": [
+       0.2561141086307316,
+       0.2565447620885846
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "sign change"
+   }
+  ],
+  "t72m": [
+   {
+    "minimum": "t72m-u0106",
+    "step": 106,
+    "lam": 0.26371626616638144,
+    "dmin_w1": 6.146605830280413e-08,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t72m-k0101",
+      "step": 107,
+      "lam": 0.2632833867023912,
+      "dmin_w1": 4.390769645727316e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.004189989803458834,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t72m-u0106",
+      "step": 106,
+      "lam": 0.26371626616638144,
+      "dmin_w1": 6.146605830280413e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0004957794356834495,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t72m-u0105",
+      "step": 105,
+      "lam": 0.2641525417614834,
+      "dmin_w1": 1.30852658955964e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0007194216643512729,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t72m-k0101",
+       "t72m-u0106"
+      ],
+      "lam": [
+       0.2632833867023912,
+       0.26371626616638144
+      ],
+      "result": "same sign"
+     },
+     {
+      "between": [
+       "t72m-u0106",
+       "t72m-u0105"
+      ],
+      "lam": [
+       0.26371626616638144,
+       0.2641525417614834
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t72m-m105-106",
+       "lam": 0.2639344039639324,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": 7.57402396213704e-05,
+       "sign_of_h": 1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 3,
+       "reclose_residual": 3.6682564339310584e-18
+      },
+      "bracket": {
+       "lam": [
+        0.2639344039639324,
+        0.2641525417614834
+       ],
+       "width": 0.00021813779755097684,
+       "width_of_the_interval_before": 0.0004362755951019537,
+       "zero_of_h_linear": 0.2639551818822085
+      }
+     }
+    ],
+    "result": "sign change"
+   },
+   {
+    "minimum": "t72m-u0103",
+    "step": 103,
+    "lam": 0.2650340141646551,
+    "dmin_w1": 3.650823852910357e-07,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t72m-k0100",
+      "step": 104,
+      "lam": 0.2645919080854906,
+      "dmin_w1": 1.3186092040778011e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0022958480111598834,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t72m-u0103",
+      "step": 103,
+      "lam": 0.2650340141646551,
+      "dmin_w1": 3.650823852910357e-07,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.0012083478154448818,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t72m-k0099",
+      "step": 102,
+      "lam": 0.2654784569836613,
+      "dmin_w1": 5.452210825607689e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.004641993224898981,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t72m-k0100",
+       "t72m-u0103"
+      ],
+      "lam": [
+       0.2645919080854906,
+       0.2650340141646551
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t72m-m103-104",
+       "lam": 0.26481296112507285,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": 0.0005324448817799647,
+       "sign_of_h": 1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 2,
+       "reclose_residual": 4.7479385206260555e-17
+      },
+      "bracket": {
+       "lam": [
+        0.26481296112507285,
+        0.2650340141646551
+       ],
+       "width": 0.00022105303958225297,
+       "width_of_the_interval_before": 0.00044210607916450595,
+       "zero_of_h_linear": 0.26488057317314445
+      }
+     },
+     {
+      "between": [
+       "t72m-u0103",
+       "t72m-k0099"
+      ],
+      "lam": [
+       0.2650340141646551,
+       0.2654784569836613
+      ],
+      "result": "same sign"
+     }
+    ],
+    "result": "sign change"
+   },
+   {
+    "minimum": "t72m-u0097",
+    "step": 97,
+    "lam": 0.2677170625204308,
+    "dmin_w1": 1.6180657316071804e-08,
+    "pair": [
+     1,
+     2
+    ],
+    "points": [
+     {
+      "role": "neighbour with the smaller lam",
+      "id": "t72m-k0095",
+      "step": 98,
+      "lam": 0.2672693109957595,
+      "dmin_w1": 2.863290908742292e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.0033842183182271517,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "minimum",
+      "id": "t72m-u0097",
+      "step": 97,
+      "lam": 0.2677170625204308,
+      "dmin_w1": 1.6180657316071804e-08,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": 0.00025386879396120226,
+      "sign_of_h": 1,
+      "h_from": "this round"
+     },
+     {
+      "role": "neighbour with the larger lam",
+      "id": "t72m-k0094",
+      "step": 96,
+      "lam": 0.26816323171079515,
+      "dmin_w1": 1.9652939770860773e-06,
+      "pair": [
+       1,
+       2
+      ],
+      "h_float": -0.002797316235772321,
+      "sign_of_h": -1,
+      "h_from": "this round"
+     }
+    ],
+    "intervals": [
+     {
+      "between": [
+       "t72m-k0095",
+       "t72m-u0097"
+      ],
+      "lam": [
+       0.2672693109957595,
+       0.2677170625204308
+      ],
+      "result": "same sign"
+     },
+     {
+      "between": [
+       "t72m-u0097",
+       "t72m-k0094"
+      ],
+      "lam": [
+       0.2677170625204308,
+       0.26816323171079515
+      ],
+      "result": "sign change",
+      "midpoint": {
+       "id": "t72m-m096-097",
+       "lam": 0.267940147115613,
+       "pair": [
+        1,
+        2
+       ],
+       "h_float": -0.0012800462755961476,
+       "sign_of_h": -1,
+       "h_from": "this round",
+       "reclosed": "this round",
+       "reclose_updates": 2,
+       "reclose_residual": 4.7665811487175207e-20
+      },
+      "bracket": {
+       "lam": [
+        0.2677170625204308,
+        0.267940147115613
+       ],
+       "width": 0.00022308459518216583,
+       "width_of_the_interval_before": 0.00044616919036433167,
+       "zero_of_h_linear": 0.26775398387171956
+      }
+     }
+    ],
+    "result": "sign change"
+   }
+  ]
+ },
+ "counts": {
+  "minima": 10,
+  "sign_change": 9,
+  "pair_change": 0,
+  "no_sign_change": 1,
+  "new_h_points": 31,
+  "new_h_points_note": "24 witnessed points and the re-closed midpoints of this round; the h of the 10 points of pair-angmom.json (3 minima neighbourhoods of t35m and t44m and their midpoints) are taken from that file"
+ }
+}
