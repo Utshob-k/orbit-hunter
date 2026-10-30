@@ -27,7 +27,17 @@ st = json.load(open(startfile))
 if not st.get('converged'): sys.exit('the start orbit is not converged')
 sol = [dict(lam=mpf(lam0s), v=[mpf(st[k]) for k in ('u1', 'u2', 't')])]
 res = dict(label=label, start_file=os.path.basename(startfile), lam0=lam0s, dlam=str(dlam), steps=[], witness=None)
-dump = lambda: (lambda tmp: (json.dump(res, open(tmp, 'w'), indent=1), os.replace(tmp, os.path.join(outdir, label + '_continue.json'))))(os.path.join(outdir, label + '_continue.json.tmp'))
+def put(path, d):
+    # a status file is written whole and then moved into place; Windows now and then refuses os.replace (another process has the file open), so it is tried a few times
+    tmp = path + '.tmp'
+    with open(tmp, 'w') as f: json.dump(d, f, indent=1)
+    for k in range(10):
+        try: os.replace(tmp, path); return
+        except PermissionError: time.sleep(0.1 * (k + 1))
+    os.replace(tmp, path)
+
+
+dump = lambda: put(os.path.join(outdir, label + '_continue.json'), res)
 
 
 def rel(a, b):
@@ -38,7 +48,7 @@ def run(cmd, tag):
     t0 = time.time()
     p = subprocess.run([sys.executable, '-B'] + cmd, capture_output=True, text=True)
     open(os.path.join(outdir, tag + '.stdout'), 'w').write(p.stdout + p.stderr)
-    return time.time() - t0
+    return time.time() - t0, p.returncode
 
 
 for k in range(1, steps + 1):
@@ -51,12 +61,16 @@ for k in range(1, steps + 1):
     job = dict(id=tag, u1=nstr(g[0], 40), u2=nstr(g[1], 40), lam=nstr(lam, 40), t=nstr(g[2], 40), ref=None)
     jf, of = os.path.join(outdir, tag + '.job.json'), os.path.join(outdir, tag + '.out.json')
     json.dump(job, open(jf, 'x'))
-    sec = run([os.path.join(here, 'reclose.py'), jf, of, '--minutes', minutes, '--digits', '50', '--tol', '30', '--floor', '1e-20'], tag)
+    sec, code = run([os.path.join(here, 'reclose.py'), jf, of, '--minutes', minutes, '--digits', '50', '--tol', '30', '--floor', '1e-20'], tag)
     o = json.load(open(of)) if os.path.exists(of) else {}
     row = dict(step=k, lam=nstr(lam, 25), guess_from=how, converged=bool(o.get('converged')), status=o.get('status'), updates=len(o.get('iterations', [])) - 1 if o.get('converged') else None,
                first_residual=o['iterations'][0]['residual'] if o.get('iterations') else None, residual=o.get('residual'), seconds=round(sec, 1), guess_to_solution_rel=None)
     if not o.get('converged'):
-        res['steps'].append(row); res['stopped'] = 'step %d did not converge' % k; dump(); break
+        res['steps'].append(row)
+        if not o: res['stopped'] = 'step %d: reclose.py produced no output (exit %d)' % (k, code)
+        elif o.get('status') == 'done': res['stopped'] = 'step %d did not converge (residual %s after %s updates)' % (k, o.get('residual'), len(o.get('iterations', [])) - 1)
+        else: res['stopped'] = 'step %d: status %s (exit %d)' % (k, o.get('status'), code)
+        dump(); break
     v = [mpf(o[x]) for x in ('u1', 'u2', 't')]
     row['guess_to_solution_rel'] = rel(g, v)
     prev = sol[-1]
@@ -80,7 +94,7 @@ if len(sol) == steps + 1 and '--no-witness' not in sys.argv:
     wj = dict(id=label + '_w1', u1=float(last['v'][0]), u2=float(last['v'][1]), lam=float(last['lam']), t=float(last['v'][2]))
     jf, of = os.path.join(outdir, label + '_w1.job.json'), os.path.join(outdir, label + '_w1.out.json')
     json.dump(wj, open(jf, 'x'))
-    sec = run([os.path.join(here, 'witness.py'), jf, of, '--preset', 'w1', '--minutes', wmin], label + '_w1')
+    sec, _ = run([os.path.join(here, 'witness.py'), jf, of, '--preset', 'w1', '--minutes', wmin], label + '_w1')
     res['witness'] = dict(file=os.path.basename(of), seconds=round(sec, 1), exists=os.path.exists(of))
     dump()
 print(label, 'done', len(res['steps']), 'steps', flush=True)

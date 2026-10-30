@@ -30,10 +30,20 @@ job = json.load(open(jobfile)); u1, u2, t = [mpf(str(job[k])) for k in ('u1', 'u
 rec = dict(iterations=[], flows=0); t0 = time.time()
 
 
+def put(path, d):
+    # a status file is written whole and then moved into place; Windows now and then refuses os.replace (another process has the file open), so it is tried a few times
+    tmp = path + '.tmp'
+    with open(tmp, 'w') as f: json.dump(d, f, indent=1)
+    for k in range(10):
+        try: os.replace(tmp, path); return
+        except PermissionError: time.sleep(0.1 * (k + 1))
+    os.replace(tmp, path)
+
+
 def write(d):
     d.update(id=job['id'], lam=nstr(lam, 25), start=dict(u1=nstr(mpf(str(job['u1'])), 25), u2=nstr(mpf(str(job['u2'])), 25), t=nstr(mpf(str(job['t'])), 25)), digits=DIGITS, tol=TOL, floor=FLOOR, h=nstr(H, 3), limit_minutes=limit,
              flows=rec['flows'], iterations=rec['iterations'], elapsed_s=round(time.time() - t0, 1))
-    tmp = outfile + '.tmp'; json.dump(d, open(tmp, 'w'), indent=1); os.replace(tmp, outfile)
+    put(outfile, d)
 
 
 def timeout():

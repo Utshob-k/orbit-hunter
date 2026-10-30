@@ -78,9 +78,19 @@ def counted(x0, H, tol_):
 R.bs_step = counted
 
 
+def put(path, d):
+    # a status file is written whole and then moved into place; Windows now and then refuses os.replace (another process has the file open), so it is tried a few times
+    tmp = path + '.tmp'
+    with open(tmp, 'w') as f: json.dump(d, f, indent=1)
+    for k in range(10):
+        try: os.replace(tmp, path); return
+        except PermissionError: time.sleep(0.1 * (k + 1))
+    os.replace(tmp, path)
+
+
 def write(d):
     d.update(id=job['id'], digits=DIGITS, tol=TOL, floor=FLOOR, limit_minutes=limit)
-    tmp = outfile + '.tmp'; json.dump(d, open(tmp, 'w'), indent=1); os.replace(tmp, outfile)
+    put(outfile, d)
 
 
 def extra():
