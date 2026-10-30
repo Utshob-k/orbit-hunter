@@ -80,6 +80,11 @@ function fdOrThrow(x, tau, end0, mode, key, what) {
   return f.M;
 }
 
+// counters of settings.ias.piecesBy (only written to the output of a run that has the option): the pieces that IAS15 flagged and that were taken from IAS15 anyway ('ias'), the pieces
+// taken from reg.js that were not flagged and the largest difference of their end state to IAS15, as in the cross-check ('reg')
+export const pbStats = { flaggedTakenFromIas: 0, unflaggedFromReg: 0, maxDiffToIas: 0 };
+const piecesBy = () => (settings.ias.piecesBy === 'ias' || settings.ias.piecesBy === 'reg' ? settings.ias.piecesBy : null);
+
 const pairMin = (s) => Math.min(...PAIRS.map(([i, j]) => Math.hypot(s[2 * j] - s[2 * i], s[2 * j + 1] - s[2 * i + 1])));
 
 // missed flag: reg.js without the tangent on every unflagged piece
@@ -87,9 +92,12 @@ function missedFlagCheck(starts, enc, tau, ana) {
   for (let i = 0; i < starts.length; i++) if (!enc[i]) {
     const t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: false, settings: REG_SETTINGS }); gstats.tMiss += Date.now() - t0; gstats.missChecks++;
     if (!r.ok) { gstats.missFailed++; continue; }
-    if (r.minD1 < gstats.cMinSeen) gstats.cMinSeen = r.minD1;
-    if (r.minD1 < MISSED_COUNT_BELOW) { gstats.missedCounted++; if (r.minD1 < MISSED_STOP_BELOW) { gstats.missedStops++; throw new TraceStop('missed flag', { piece: i, cMinD1: r.minD1, d2AtMin: r.d2AtMinD1, iasMin: ana ? ana[i][3] : null }); } }
+    missedFromResult(i, r, ana);
   }
+}
+function missedFromResult(i, r, ana) {
+  if (r.minD1 < gstats.cMinSeen) gstats.cMinSeen = r.minD1;
+  if (r.minD1 < MISSED_COUNT_BELOW) { gstats.missedCounted++; if (r.minD1 < MISSED_STOP_BELOW) { gstats.missedStops++; throw new TraceStop('missed flag', { piece: i, cMinD1: r.minD1, d2AtMin: r.d2AtMinD1, iasMin: ana ? ana[i][3] : null }); } }
 }
 
 // a guard trip fails the attempt; right after a Newton residual that was already small it ends the trace
@@ -107,7 +115,7 @@ function trip(kind, info) {
 export function iasPieces(starts, tau) {
   if (PER_PIECE * starts.length > BUF_NUMBERS) throw new Error('too many pieces for the shared buffer: ' + starts.length + ' pieces need ' + PER_PIECE * starts.length + ' numbers, there is room for ' + BUF_NUMBERS + ' (at most ' + Math.floor(BUF_NUMBERS / PER_PIECE) + ' pieces)');
   stats.calls++;
-  const ias = settings.ias, obs = settings.observer, FD = fdMode();
+  const ias = settings.ias, obs = settings.observer, FD = fdMode(), PB = piecesBy();
   for (let i = 0; i < starts.length; i++) { const d = pairMin(starts[i]); if (d < START_BELOW) trip('G3', { piece: i, d }); }
   let t0 = Date.now(); const n = request({ starts: starts.map((s) => Array.from(s)), tau }); gstats.tIas += Date.now() - t0;
   const m = starts.length, out = [];
@@ -127,11 +135,29 @@ export function iasPieces(starts, tau) {
   if (pairs.length > 1) { if (new Set(pairs).size > 1) trip('G2', { reason: 'two flagged pieces of different pairs', pairs }); else gstats.samePair++; }
   // the flagged pieces by reg.js (end state and the 12 x 12 matrix); a failure of reg.js fails the evaluation, there is no fallback
   out.mats = new Array(m).fill(null);
+  if (PB === 'ias') {   // every piece is an unflagged piece: the end state of IAS15, the matrix from src/shooting.js; the guards above stay, the missed-flag check (reg.js on every piece) does not run
+    const nFlag = out.enc.reduce((a, b) => a + b, 0); pbStats.flaggedTakenFromIas += nFlag;
+    out.enc = out.enc.map(() => 0);
+    stats.pieces += m; stats.steps += ctrl[2]; stats.encounterPieces += nFlag;
+    return out;
+  }
   for (let i = 0; i < m; i++) if (out.enc[i]) {
     t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: !FD, settings: REG_SETTINGS }); gstats.tC += Date.now() - t0;
     if (!r.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + r.reason, 'reg failure'); }
     out[i] = Float64Array.from(r.end); out.mats[i] = FD ? fdOrThrow(starts[i], tau, r.end, FD, 'tC', '') : r.M; stats.regPieces++; stats.regMacro += r.macro; stats.regSub += r.subSteps; stats.regEndTrials += r.endTrials; if (r.stagnation) stats.regStagnation++;
     const cr = r.d2AtMinD1 / r.minD1; if (cr < gstats.cRatioMin) gstats.cRatioMin = cr;
+  }
+  if (PB === 'reg') {   // every unflagged piece also from reg.js, always replacing IAS15; the missed-flag test is made on this result (no second reg.js call)
+    for (let i = 0; i < m; i++) if (!out.enc[i]) {
+      gstats.xchk++; t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: !FD, settings: REG_SETTINGS }); gstats.tX += Date.now() - t0;
+      if (!r.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + r.reason + ' (all pieces, piece ' + i + ')', 'reg failure'); }
+      let diff = 0; for (let k = 0; k < 12; k++) diff = Math.max(diff, Math.abs(r.end[k] - out[i][k]) / Math.max(1, Math.abs(r.end[k])));
+      if (diff > pbStats.maxDiffToIas) pbStats.maxDiffToIas = diff;
+      out[i] = Float64Array.from(r.end); out.mats[i] = FD ? fdOrThrow(starts[i], tau, r.end, FD, 'tX', ', all pieces') : r.M; pbStats.unflaggedFromReg++;
+      gstats.missChecks++; missedFromResult(i, r, out.ana);
+    }
+    stats.pieces += m; stats.steps += ctrl[2]; stats.encounterPieces += out.enc.reduce((a, b) => a + b, 0);
+    return out;
   }
   // cross-check of every unflagged piece whose smallest IAS15 pair minimum is below crossCheckBelow: reg.js with the tangent on the same start state; where the end states
   // differ by crossCheckDiff or more (largest over the 12 components of |reg - IAS15| / max(1, |reg|)) the end state and the matrix of reg.js replace those of IAS15 and the
