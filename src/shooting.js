@@ -422,7 +422,7 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
         if (!all && o.ok) return o;
       }
     }
-    if (trace && trace(steps, c.Y[n], thNew, h, c.iters, c.Y) === true) return end('stopped by the caller');   // e.g. the curve is a closed loop
+    if (trace && trace(steps, c.Y[n], thNew, h, c.iters, c.Y) === true) { lamMin = Math.min(lamMin, c.Y[n]); lamMax = Math.max(lamMax, c.Y[n]); return end('stopped by the caller'); }   // e.g. the curve is a closed loop; the step is a point of the caller's trace, so it is in the range
     // accept the step
     if (settings.observer) settings.observer.note({ outcome: 'accepted', lamNew: c.Y[n] });
     Y = c.Y; tau = tauNew; th = thNew;
@@ -490,7 +490,7 @@ export function huntNatural(u1, u2, lam0, t0, { m = 8, dir = 1, dl0 = 1e-6, maxM
       continue;
     }
     const Y = toY(c.z, lamNew);
-    if (trace && trace(steps, lamNew, thNew, dl, c.iters, Y) === true) return end('stopped by the caller');
+    if (trace && trace(steps, lamNew, thNew, dl, c.iters, Y) === true) { lamMin = Math.min(lamMin, lamNew); lamMax = Math.max(lamMax, lamNew); return end('stopped by the caller'); }
     z = c.z; lam = lamNew; th = thNew; sys = { J: c.J, Flam: c.Flam };
     lamMin = Math.min(lamMin, lam); lamMax = Math.max(lamMax, lam);
     if (c.iters <= 3) dl = Math.min(hMax, dl * 2);
