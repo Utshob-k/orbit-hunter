@@ -1,0 +1,949 @@
+{
+ "what": "Which part of the route makes the difference: the same corrector with IAS15 alone for every piece, with reg.js for every piece, and with the Dormand-Prince integrator alone at the tolerances 1e-9 and 1e-11, from the starts of the two deep stretches of fd-comparison.json; the cost of the 50 digit single shooting against the stored traces per unit of lam and of arclength. The options --pieces-by=ias|reg (tools/family-follow-ias.mjs) and --newton-tol=X, --stop-below=X (tools/family-follow.mjs) are off by default; without them every output is the same as before.",
+ "commands": [
+  "node tools/reproduce-trace.mjs t35m OUT.json --stop-after=31 --minutes=120 --pieces-by=ias|reg [--pieces=N]",
+  "node tools/reproduce-trace.mjs t44m OUT.json --stop-after=40 --minutes=120 --pieces-by=ias|reg",
+  "node tools/dp45-attempts.mjs OUT.json -1 120 U1 U2 LAM T LABEL PIECES --stop-below=0 --newton-tol=1e-9|1e-11   (U1 U2 LAM T: command_line_start of start-shift.json for t35m and t44m; the tool is family-follow.mjs with the record of every attempt)",
+  "node tools/reproduce-trace.mjs t35m OUT.json --stop-after=31   and   node tools/reproduce-trace.mjs t44m OUT.json --stop-after=40   (the default rows)",
+  "python tools/reclose.py JOB.json OUT.json --minutes 60   (the point of step 10 of the reg run of t35 -, of step 34 of that of t44 -, ref = their own u1, u2, t)"
+ ],
+ "stretches": {
+  "t35m": {
+   "runs": "31 recorded points from the replay start (52 accepted steps with the default route)",
+   "deepest_step_of_the_stored_trace": 10
+  },
+  "t44m": {
+   "runs": "40 recorded points from the command-line start (59 accepted steps with the default route)",
+   "deepest_step_of_the_stored_trace": 34
+  }
+ },
+ "notes": [
+  "The cost rows are computed from files of this folder (extra/cost-comparison.json, extra/creep-attempts.json, reclose/*.json, extra/reclose-continuation-beyond.json, extra/handover.json, traces/*.json): arclength is the sum of the Euclidean distances between successive points in (u1, u2, t, lam), lam range the net change of lam, the seconds are those of the files (the steps of the 50 digit continuations are the ones they were run with, dlam 1e-5, and the seconds per unit lam of a continuation depend on that step).",
+  "A run passes the deepest step if its last accepted step has a number above that of the deepest step of the stored trace (steps are numbered by loop step, failed attempts count).",
+  "The default rows are the exact runs of fd-comparison.json; the wall times of runs made at different times and loads differ: the same default run took 336 s (t35 -) and 816 s (t44 -) there and 162 s and 326 s when it was repeated beside the others of this file, bit-identical both times. The reg run takes 166 s and 241 s: it calls reg.js once per piece with the derivative, where the default route also calls it without the derivative on every unflagged piece for the missed-flag check.",
+  "With --pieces-by=ias the missed-flag check (reg.js on every unflagged piece) does not run, because it would run reg.js on every piece; the guards on the IAS15 analysis stay on. Counters: pieces_by_counters.",
+  "tools/family-follow.mjs stops at a closest approach below 0.03 after the point is recorded; both starts have a closest approach far below that, so the Dormand-Prince runs use --stop-below=0 (the stock rule ends the run after one accepted step, the last row).",
+  "The step lengths, iterations and residuals of the Dormand-Prince runs are those of the record of every attempt (tools/dp45-attempts.mjs); a run that stops at the first gate, the move of the start onto the family (a residual below 1e-9 of the closing equations with the Dormand-Prince flow), has no attempt."
+ ],
+ "runs": [
+  {
+   "trace": "t35m",
+   "variant": "default route (flagged pieces by reg.js, the others by IAS15 with the cross-check)",
+   "stop_reason": "stopped after 31 recorded points",
+   "accepted_steps": 51,
+   "failed_attempts": 0,
+   "newton_iterations_per_accepted_step": {
+    "median": 7,
+    "largest": 7,
+    "sum": 349
+   },
+   "median_accepted_h": 0.2,
+   "wall_seconds": 336,
+   "guard_trips": 0,
+   "last_accepted_step_number": 52,
+   "passed_the_deepest_step": true,
+   "against_the_stored_trace": {
+    "bit_identical": 52,
+    "compared": 52,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t44m",
+   "variant": "default route (flagged pieces by reg.js, the others by IAS15 with the cross-check)",
+   "stop_reason": "stopped after 40 recorded points",
+   "accepted_steps": 57,
+   "failed_attempts": 1,
+   "newton_iterations_per_accepted_step": {
+    "median": 5,
+    "largest": 11,
+    "sum": 279
+   },
+   "median_accepted_h": 0.2,
+   "wall_seconds": 816,
+   "guard_trips": 0,
+   "last_accepted_step_number": 59,
+   "passed_the_deepest_step": true,
+   "against_the_stored_trace": {
+    "bit_identical": 58,
+    "compared": 58,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 24 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 2,
+   "guard_trips": 0,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 0,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 8 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 2,
+   "guard_trips": 0,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 0,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 16 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 2,
+   "guard_trips": 0,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 0,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 32 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 2,
+   "guard_trips": 0,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 0,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 48 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 2,
+   "guard_trips": 0,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 0,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 0.0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 64 pieces",
+   "stop_reason": "start did not close",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 5,
+   "guard_trips": 0,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 0,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 0.0
+   },
+   "pieces_by_counters": {
+    "mode": "ias",
+    "flaggedTakenFromIas": 36,
+    "unflaggedFromReg": 0,
+    "maxDiffToIas": 0
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "every piece from reg.js with its derivative (--pieces-by=reg), 24 pieces",
+   "stop_reason": "stopped after 31 recorded points",
+   "accepted_steps": 51,
+   "failed_attempts": 0,
+   "newton_iterations_per_accepted_step": {
+    "median": 7,
+    "largest": 7,
+    "sum": 349
+   },
+   "median_accepted_h": 0.2,
+   "wall_seconds": 166,
+   "guard_trips": 0,
+   "lam_progress": 0.001242,
+   "last_accepted_step_number": 52,
+   "passed_the_deepest_step": true,
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 52,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 1.53e-11
+   },
+   "pieces_by_counters": {
+    "mode": "reg",
+    "flaggedTakenFromIas": 0,
+    "unflaggedFromReg": 18865,
+    "maxDiffToIas": 5.562217353372034e-14
+   }
+  },
+  {
+   "trace": "t35m",
+   "variant": "default route of the earlier code (Dormand-Prince only), tolerance 1e-9, 24 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 1,
+   "guard_trips": null,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false
+  },
+  {
+   "trace": "t35m",
+   "variant": "default route of the earlier code (Dormand-Prince only), tolerance 1e-11, 24 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 1,
+   "guard_trips": null,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false
+  },
+  {
+   "trace": "t44m",
+   "variant": "every piece from IAS15 with the Dormand-Prince matrix (--pieces-by=ias), 24 pieces",
+   "stop_reason": "step length below 1e-9 (lost the family) near lam=0.2331",
+   "accepted_steps": 6,
+   "failed_attempts": 30,
+   "newton_iterations_per_accepted_step": {
+    "median": 3.0,
+    "largest": 5,
+    "sum": 20
+   },
+   "median_accepted_h": 0.001312,
+   "wall_seconds": 41,
+   "guard_trips": 0,
+   "lam_progress": 0.000242,
+   "last_accepted_step_number": 25,
+   "passed_the_deepest_step": false,
+   "failed_attempts_detail": {
+    "why_counts": {
+     "line search failed": 30
+    },
+    "best_residual_of_an_attempt": {
+     "min": 1.009e-11,
+     "median": 3.33e-11,
+     "max": 1.359e-10
+    },
+    "h_first": 0.2,
+    "h_last": 1.4311075210571287e-09
+   },
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 6,
+    "step_numbers_that_differ": 6,
+    "largest_relative_difference": 0.0183
+   },
+   "pieces_by_counters": {
+    "mode": "ias",
+    "flaggedTakenFromIas": 1656,
+    "unflaggedFromReg": 0,
+    "maxDiffToIas": 0
+   }
+  },
+  {
+   "trace": "t44m",
+   "variant": "every piece from reg.js with its derivative (--pieces-by=reg), 24 pieces",
+   "stop_reason": "stopped after 40 recorded points",
+   "accepted_steps": 57,
+   "failed_attempts": 1,
+   "newton_iterations_per_accepted_step": {
+    "median": 5,
+    "largest": 11,
+    "sum": 279
+   },
+   "median_accepted_h": 0.2,
+   "wall_seconds": 241,
+   "guard_trips": 0,
+   "lam_progress": 0.00413,
+   "last_accepted_step_number": 59,
+   "passed_the_deepest_step": true,
+   "failed_attempts_detail": {
+    "why_counts": {
+     "line search failed": 1
+    },
+    "best_residual_of_an_attempt": {
+     "min": 5.429e-06,
+     "median": 5.429e-06,
+     "max": 5.429e-06
+    },
+    "h_first": 0.2,
+    "h_last": 0.2
+   },
+   "against_the_stored_trace": {
+    "bit_identical": 0,
+    "compared": 58,
+    "step_numbers_that_differ": 0,
+    "largest_relative_difference": 1.02e-12
+   },
+   "pieces_by_counters": {
+    "mode": "reg",
+    "flaggedTakenFromIas": 0,
+    "unflaggedFromReg": 13497,
+    "maxDiffToIas": 1.159106357859935e-13
+   }
+  },
+  {
+   "trace": "t44m",
+   "variant": "default route of the earlier code (Dormand-Prince only), tolerance 1e-9, 24 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 1,
+   "guard_trips": null,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false
+  },
+  {
+   "trace": "t44m",
+   "variant": "default route of the earlier code (Dormand-Prince only), tolerance 1e-11, 24 pieces",
+   "stop_reason": "could not move the start onto the family",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 1,
+   "guard_trips": null,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false
+  },
+  {
+   "trace": "t44m",
+   "variant": "Dormand-Prince only, tolerance 1e-9, 8 pieces",
+   "stop_reason": "step length below 1e-9 (lost the family) near lam=0.2327",
+   "accepted_steps": 1,
+   "failed_attempts": 28,
+   "newton_iterations_per_accepted_step": {
+    "median": 8,
+    "largest": 8,
+    "sum": 8
+   },
+   "median_accepted_h": 0.2,
+   "wall_seconds": 32,
+   "guard_trips": null,
+   "lam_progress": 0.0006391,
+   "last_accepted_step_number": 1,
+   "passed_the_deepest_step": false,
+   "failed_attempts_detail": {
+    "why_counts": {
+     "12 iterations without reaching the tolerance": 2,
+     "line search failed": 26
+    },
+    "best_residual_of_an_attempt": {
+     "min": 1.57e-09,
+     "median": 9.823e-09,
+     "max": 0.0004976
+    },
+    "h_first": 0.2,
+    "h_last": 1.4901161193847657e-09
+   }
+  },
+  {
+   "trace": "t44m",
+   "variant": "Dormand-Prince only, tolerance 1e-11, 8 pieces",
+   "stop_reason": "step length below 1e-9 (lost the family) near lam=0.2333",
+   "accepted_steps": 0,
+   "failed_attempts": 28,
+   "wall_seconds": 33,
+   "guard_trips": null,
+   "last_accepted_step_number": null,
+   "passed_the_deepest_step": false,
+   "failed_attempts_detail": {
+    "why_counts": {
+     "12 iterations without reaching the tolerance": 4,
+     "line search failed": 24
+    },
+    "best_residual_of_an_attempt": {
+     "min": 4.685e-10,
+     "median": 1.699e-09,
+     "max": 7.503e-09
+    },
+    "h_first": 0.2,
+    "h_last": 1.4901161193847657e-09
+   }
+  },
+  {
+   "trace": "t44m",
+   "variant": "Dormand-Prince only, tolerance 1e-9, 8 pieces, with the stop rule of the tool (closest approach below 0.03)",
+   "stop_reason": "close approach (closest distance 0.0001)",
+   "accepted_steps": 0,
+   "failed_attempts": 0,
+   "wall_seconds": 5,
+   "guard_trips": null,
+   "lam_progress": 0.0006391,
+   "last_accepted_step_number": 1,
+   "passed_the_deepest_step": false
+  }
+ ],
+ "reclosing_of_the_points_of_the_reg_runs_at_the_deepest_step": {
+  "t35m": {
+   "point": "step 10 of the reg run",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "relative_change_of_u1_u2_t": {
+    "u1": 4.122939903955207e-14,
+    "u2": 1.3123786410985656e-16,
+    "t": 3.617576480442018e-14
+   },
+   "seconds": 53.9
+  },
+  "t44m": {
+   "point": "step 34 of the reg run",
+   "converged": true,
+   "same_orbit": true,
+   "updates": 1,
+   "relative_change_of_u1_u2_t": {
+    "u1": 8.904453474015173e-13,
+    "u2": 1.1717790599988873e-12,
+    "t": 3.0090964397141594e-13
+   },
+   "seconds": 99.4
+  }
+ },
+ "start_moved_onto_the_family_by_the_default_route": {
+  "what": "closePerpMS with the Dormand-Prince flow from the command-line start, residual of the closing equations after the Newton iteration; the tool accepts a residual below 1e-9",
+  "rows": [
+   {
+    "trace": "t35m",
+    "tolerance": 1e-09,
+    "pieces": 8,
+    "residual": 2.832e-06,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-09,
+    "pieces": 16,
+    "residual": 7.156e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-09,
+    "pieces": 24,
+    "residual": 8.343e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-09,
+    "pieces": 32,
+    "residual": 1.04e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-09,
+    "pieces": 48,
+    "residual": 8.883e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-09,
+    "pieces": 64,
+    "residual": 1.209e-06,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-11,
+    "pieces": 8,
+    "residual": 2.832e-06,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-11,
+    "pieces": 16,
+    "residual": 7.156e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-11,
+    "pieces": 24,
+    "residual": 8.343e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-11,
+    "pieces": 32,
+    "residual": 1.04e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-11,
+    "pieces": 48,
+    "residual": 8.883e-07,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t35m",
+    "tolerance": 1e-11,
+    "pieces": 64,
+    "residual": 1.209e-06,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-09,
+    "pieces": 8,
+    "residual": 4.954e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-09,
+    "pieces": 16,
+    "residual": 9.496e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-09,
+    "pieces": 24,
+    "residual": 2.776e-09,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-09,
+    "pieces": 32,
+    "residual": 8.186e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-09,
+    "pieces": 48,
+    "residual": 4.668e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-09,
+    "pieces": 64,
+    "residual": 6.397e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-11,
+    "pieces": 8,
+    "residual": 4.954e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-11,
+    "pieces": 16,
+    "residual": 9.496e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-11,
+    "pieces": 24,
+    "residual": 2.776e-09,
+    "start_moved_below_1e_9": false
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-11,
+    "pieces": 32,
+    "residual": 7.704e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-11,
+    "pieces": 48,
+    "residual": 4.668e-10,
+    "start_moved_below_1e_9": true
+   },
+   {
+    "trace": "t44m",
+    "tolerance": 1e-11,
+    "pieces": 64,
+    "residual": 6.397e-10,
+    "start_moved_below_1e_9": true
+   }
+  ]
+ },
+ "end_state_error_of_the_integrators_on_flagged_pieces": {
+  "what": "largest over the 12 components of |a - mp| / max(1, |mp|) against the 50 digit flow, from piece-check-mp.json, the 14 flagged pieces with the smallest pair distance; null: the Dormand-Prince integrator gave no end state",
+  "rows": [
+   {
+    "point": "t35m step 10 piece 17",
+    "smallest_pair_distance": 7.325e-10,
+    "error_ias15_alone": 0.006589,
+    "error_reg": 5.477e-15,
+    "error_dormand_prince": null
+   },
+   {
+    "point": "t44m step 34 piece 22",
+    "smallest_pair_distance": 1.913e-09,
+    "error_ias15_alone": 2.169,
+    "error_reg": 2.173e-15,
+    "error_dormand_prince": null
+   },
+   {
+    "point": "t62m step 9 piece 8",
+    "smallest_pair_distance": 8.588e-09,
+    "error_ias15_alone": 0.02628,
+    "error_reg": 5.435e-15,
+    "error_dormand_prince": null
+   },
+   {
+    "point": "t72m step 97 piece 6",
+    "smallest_pair_distance": 1.611e-08,
+    "error_ias15_alone": 0.002271,
+    "error_reg": 4.783e-15,
+    "error_dormand_prince": null
+   },
+   {
+    "point": "t44m step 34 piece 18",
+    "smallest_pair_distance": 7.327e-07,
+    "error_ias15_alone": 1.665e-06,
+    "error_reg": 1.153e-15,
+    "error_dormand_prince": null
+   },
+   {
+    "point": "t44m step 1588 piece 22",
+    "smallest_pair_distance": 8.348e-06,
+    "error_ias15_alone": 7.274e-08,
+    "error_reg": 1.521e-15,
+    "error_dormand_prince": 2.642e-06
+   },
+   {
+    "point": "t44m step 1588 piece 18",
+    "smallest_pair_distance": 1.439e-05,
+    "error_ias15_alone": 2.867e-08,
+    "error_reg": 1.474e-15,
+    "error_dormand_prince": 4.42e-07
+   },
+   {
+    "point": "t44m step 34 piece 14",
+    "smallest_pair_distance": 1.454e-05,
+    "error_ias15_alone": 2.901e-09,
+    "error_reg": 1.309e-15,
+    "error_dormand_prince": 3.944e-07
+   },
+   {
+    "point": "t44m step 1588 piece 14",
+    "smallest_pair_distance": 4.564e-05,
+    "error_ias15_alone": 1.923e-10,
+    "error_reg": 7.698e-16,
+    "error_dormand_prince": 1.734e-08
+   },
+   {
+    "point": "t72m step 97 piece 8",
+    "smallest_pair_distance": 0.0001075,
+    "error_ias15_alone": 2.656e-10,
+    "error_reg": 1.407e-15,
+    "error_dormand_prince": 2.025e-08
+   },
+   {
+    "point": "t62m step 9 piece 10",
+    "smallest_pair_distance": 0.0001468,
+    "error_ias15_alone": 6.895e-11,
+    "error_reg": 3.196e-16,
+    "error_dormand_prince": 3.175e-09
+   },
+   {
+    "point": "t72m step 97 piece 10",
+    "smallest_pair_distance": 0.0001601,
+    "error_ias15_alone": 1.694e-10,
+    "error_reg": 7.023e-16,
+    "error_dormand_prince": 1.176e-09
+   },
+   {
+    "point": "t72m step 97 piece 12",
+    "smallest_pair_distance": 0.0001848,
+    "error_ias15_alone": 1.24e-10,
+    "error_reg": 3.197e-16,
+    "error_dormand_prince": 7.039e-09
+   },
+   {
+    "point": "t72m step 97 piece 13",
+    "smallest_pair_distance": 0.0001987,
+    "error_ias15_alone": 3.041e-11,
+    "error_reg": 1.264e-15,
+    "error_dormand_prince": 1.43e-09
+   }
+  ]
+ },
+ "cost_per_unit_of_lam_and_arclength": [
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t35m",
+   "stretch": "before the creep (accepted steps 1 to 1220)",
+   "accepted_steps_or_points": 1220,
+   "step_dlam": null,
+   "seconds": 2193.0,
+   "lam_range": 0.001449,
+   "total_variation_lam": 0.001449,
+   "path_length": 0.01117,
+   "seconds_per_unit_lam": 1514000.0,
+   "seconds_per_unit_arclength": 196400.0,
+   "note": "seconds = sum of the seconds of the attempts (cost-comparison.json before_creep.corrector_seconds)"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t35m",
+   "stretch": "in the creep (accepted steps 1220 to 1711)",
+   "accepted_steps_or_points": 491,
+   "step_dlam": null,
+   "seconds": 1060.0,
+   "lam_range": 3.257e-07,
+   "total_variation_lam": 3.277e-07,
+   "path_length": 2.531e-06,
+   "seconds_per_unit_lam": 3254000000.0,
+   "seconds_per_unit_arclength": 418700000.0,
+   "note": "seconds = sum of the seconds of the attempts from the creep start (creep-attempts.json creep.seconds); the path starts at step 1220"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t35m",
+   "stretch": "whole run (information)",
+   "accepted_steps_or_points": 1711,
+   "step_dlam": null,
+   "seconds": 3600,
+   "lam_range": 0.001449,
+   "total_variation_lam": 0.001449,
+   "path_length": 0.01117,
+   "seconds_per_unit_lam": 2484000.0,
+   "seconds_per_unit_arclength": 322300.0,
+   "note": "seconds = wall time of the run (cost-comparison.json run_seconds), which also holds the recording of the points"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t44m",
+   "stretch": "before the creep (accepted steps 1 to 623)",
+   "accepted_steps_or_points": 623,
+   "step_dlam": null,
+   "seconds": 1775.0,
+   "lam_range": 0.003946,
+   "total_variation_lam": 0.003946,
+   "path_length": 0.0483,
+   "seconds_per_unit_lam": 449800.0,
+   "seconds_per_unit_arclength": 36750.0,
+   "note": "seconds = sum of the seconds of the attempts (cost-comparison.json before_creep.corrector_seconds)"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t44m",
+   "stretch": "in the creep (accepted steps 623 to 1266)",
+   "accepted_steps_or_points": 643,
+   "step_dlam": null,
+   "seconds": 712.7,
+   "lam_range": 2.805e-07,
+   "total_variation_lam": 2.814e-07,
+   "path_length": 4.431e-06,
+   "seconds_per_unit_lam": 2541000000.0,
+   "seconds_per_unit_arclength": 160800000.0,
+   "note": "seconds = sum of the seconds of the attempts from the creep start (creep-attempts.json creep.seconds); the path starts at step 623"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t44m",
+   "stretch": "whole run (information)",
+   "accepted_steps_or_points": 1266,
+   "step_dlam": null,
+   "seconds": 3030,
+   "lam_range": 0.003946,
+   "total_variation_lam": 0.003946,
+   "path_length": 0.0483,
+   "seconds_per_unit_lam": 767900.0,
+   "seconds_per_unit_arclength": 62730.0,
+   "note": "seconds = wall time of the run (cost-comparison.json run_seconds), which also holds the recording of the points"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t62m",
+   "stretch": "whole run (no creep)",
+   "accepted_steps_or_points": 375,
+   "step_dlam": null,
+   "seconds": 1975,
+   "lam_range": 0.02563,
+   "total_variation_lam": 0.02563,
+   "path_length": 0.2781,
+   "seconds_per_unit_lam": 77060.0,
+   "seconds_per_unit_arclength": 7101.0,
+   "note": "seconds = wall time of the run (cost-comparison.json run_seconds), which also holds the recording of the points"
+  },
+  {
+   "route": "PeriCont (stored trace)",
+   "trace": "t72m",
+   "stretch": "whole run (no creep)",
+   "accepted_steps_or_points": 325,
+   "step_dlam": null,
+   "seconds": 925,
+   "lam_range": 0.03643,
+   "total_variation_lam": 0.03643,
+   "path_length": 0.3037,
+   "seconds_per_unit_lam": 25390.0,
+   "seconds_per_unit_arclength": 3046.0,
+   "note": "seconds = wall time of the run (cost-comparison.json run_seconds), which also holds the recording of the points"
+  },
+  {
+   "route": "50 digits, re-closer at the points of a list (not a continuation: every point starts from a PeriCont value)",
+   "trace": "t35m",
+   "stretch": "the 49 re-closed points of reclose/t35m.json (lam 0.664437 to 0.665290)",
+   "accepted_steps_or_points": 49,
+   "step_dlam": null,
+   "seconds": 5178.0,
+   "lam_range": 0.0008529,
+   "total_variation_lam": 0.0008529,
+   "path_length": 0.006569,
+   "seconds_per_unit_lam": 6070000.0,
+   "seconds_per_unit_arclength": 788200.0,
+   "note": "49 of 49 converged; the points are spread unevenly in lam"
+  },
+  {
+   "route": "50 digits, re-closer at the points of a list (not a continuation: every point starts from a PeriCont value)",
+   "trace": "t44m",
+   "stretch": "the 5 re-closed points of reclose/t44m.json (lam 0.229332 to 0.229365)",
+   "accepted_steps_or_points": 5,
+   "step_dlam": null,
+   "seconds": 1246.0,
+   "lam_range": 3.261e-05,
+   "total_variation_lam": 3.261e-05,
+   "path_length": 0.0004929,
+   "seconds_per_unit_lam": 38210000.0,
+   "seconds_per_unit_arclength": 2528000.0,
+   "note": "5 of 5 converged; the points are spread unevenly in lam"
+  },
+  {
+   "route": "50 digits, re-closer at the points of a list (not a continuation: every point starts from a PeriCont value)",
+   "trace": "t62m",
+   "stretch": "the 5 re-closed points of reclose/t62m.json (lam 0.255686 to 0.256545)",
+   "accepted_steps_or_points": 5,
+   "step_dlam": null,
+   "seconds": 789.5,
+   "lam_range": 0.0008585,
+   "total_variation_lam": 0.0008585,
+   "path_length": 0.00516,
+   "seconds_per_unit_lam": 919600.0,
+   "seconds_per_unit_arclength": 153000.0,
+   "note": "5 of 5 converged; the points are spread unevenly in lam"
+  },
+  {
+   "route": "50 digits, re-closer at the points of a list (not a continuation: every point starts from a PeriCont value)",
+   "trace": "t72m",
+   "stretch": "the 5 re-closed points of reclose/t72m.json (lam 0.267269 to 0.268163)",
+   "accepted_steps_or_points": 5,
+   "step_dlam": null,
+   "seconds": 1172.0,
+   "lam_range": 0.0008939,
+   "total_variation_lam": 0.0008939,
+   "path_length": 0.004246,
+   "seconds_per_unit_lam": 1311000.0,
+   "seconds_per_unit_arclength": 275900.0,
+   "note": "5 of 5 converged; the points are spread unevenly in lam"
+  },
+  {
+   "route": "50 digits, natural continuation in lam (reclose-continue.py)",
+   "trace": "t35m",
+   "stretch": "10 steps beyond the last stored lam, lam 0.663841 downwards",
+   "accepted_steps_or_points": 10,
+   "step_dlam": -1e-05,
+   "seconds": 1570.0,
+   "lam_range": 0.0001,
+   "total_variation_lam": 0.0001,
+   "path_length": 0.0007725,
+   "seconds_per_unit_lam": 15700000.0,
+   "seconds_per_unit_arclength": 2033000.0,
+   "note": "the cost depends on the step dlam = 1e-5 that it was run with; the path is the sum of sqrt(du1^2 + du2^2 + dt^2 + dlam^2) over the steps"
+  },
+  {
+   "route": "50 digits, natural continuation in lam (reclose-continue.py)",
+   "trace": "t44m",
+   "stretch": "10 steps beyond the last stored lam, lam 0.229069 downwards",
+   "accepted_steps_or_points": 10,
+   "step_dlam": -1e-05,
+   "seconds": 2859.0,
+   "lam_range": 0.0001,
+   "total_variation_lam": 0.0001,
+   "path_length": 0.001586,
+   "seconds_per_unit_lam": 28590000.0,
+   "seconds_per_unit_arclength": 1803000.0,
+   "note": "the cost depends on the step dlam = 1e-5 that it was run with; the path is the sum of sqrt(du1^2 + du2^2 + dt^2 + dlam^2) over the steps"
+  },
+  {
+   "route": "50 digits, natural continuation in lam (reclose-continue.py)",
+   "trace": "t81m",
+   "stretch": "10 steps beyond the last stored lam, lam 0.407122 downwards",
+   "accepted_steps_or_points": 10,
+   "step_dlam": -1e-05,
+   "seconds": 2731.0,
+   "lam_range": 0.0001,
+   "total_variation_lam": 0.0001,
+   "path_length": 0.0007494,
+   "seconds_per_unit_lam": 27310000.0,
+   "seconds_per_unit_arclength": 3644000.0,
+   "note": "the cost depends on the step dlam = 1e-5 that it was run with; the path is the sum of sqrt(du1^2 + du2^2 + dt^2 + dlam^2) over the steps"
+  },
+  {
+   "route": "50 digits, steps after the hand-over (reclose-continue.py)",
+   "trace": "t35m",
+   "stretch": "20 steps after the hand-over point (lam 0.663852 downwards)",
+   "accepted_steps_or_points": 20,
+   "step_dlam": -1e-05,
+   "seconds": 3473.0,
+   "lam_range": 0.0002,
+   "total_variation_lam": 0.0002,
+   "path_length": 0.001545,
+   "seconds_per_unit_lam": 17360000.0,
+   "seconds_per_unit_arclength": 2247000.0,
+   "note": "the seconds are those of the 20 converged steps (the re-closing of the hand-over point, 101 s, is not in them); step dlam = -1e-05"
+  },
+  {
+   "route": "50 digits, steps after the hand-over (reclose-continue.py)",
+   "trace": "t44m",
+   "stretch": "20 steps after the hand-over point (lam 0.229077 downwards)",
+   "accepted_steps_or_points": 20,
+   "step_dlam": -1e-05,
+   "seconds": 6028.0,
+   "lam_range": 0.0002,
+   "total_variation_lam": 0.0002,
+   "path_length": 0.003192,
+   "seconds_per_unit_lam": 30140000.0,
+   "seconds_per_unit_arclength": 1888000.0,
+   "note": "the seconds are those of the 20 converged steps (the re-closing of the hand-over point, 174 s, is not in them); step dlam = -1e-05"
+  }
+ ]
+}

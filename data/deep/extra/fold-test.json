@@ -1,0 +1,143 @@
+{
+ "what": "The natural-parameter continuation in lam of the 50 digit single shooting (tools/reclose-continue.py) through a fold of lam: t14 + (data/deep/traces/t14p.json) has its first fold in lam at accepted step 28 (lam 0.4099001110480955 is the largest lam of the first 40 accepted steps; the parabola through accepted steps 27, 28 and 29 in the path length of (u1, u2, t, lam) has its maximum at lam 0.409904). The point of accepted step 25 is re-closed at 50 digits and the continuation goes upwards in lam in 10 steps of 1.5e-4 (the first six are below the fold, the seventh at lam 0.410022 is above it).",
+ "commands": [
+  "python tools/reclose.py JOB.json OUT.json --minutes 60   (JOB.json: u1, u2, lam, t of accepted step 25 of data/deep/traces/t14p.json and ref = the same u1, u2, t)",
+  "python tools/reclose-continue.py t14p OUT.json 0.40897245453310316 OUTDIR --steps 10 --dlam 1.5e-4 --minutes 60 --witness-minutes 30   (OUT.json: the output of the previous command)"
+ ],
+ "start": {
+  "accepted_step": 25,
+  "lam": 0.40897245453310316,
+  "reclosed": {
+   "converged": true,
+   "residual": 1.574e-22,
+   "same_orbit_as_the_stored_point": true,
+   "relative_difference_from_the_stored_values": {
+    "u1": 6.115395178300038e-12,
+    "u2": 9.13887034385133e-13,
+    "t": 1.9659249671112813e-12
+   },
+   "updates": 1,
+   "seconds": 17.7
+  }
+ },
+ "fold": {
+  "accepted_step": 28,
+  "lam_of_the_largest_stored_lam": 0.4099001110480955,
+  "lam_of_the_parabola_through_steps_27_28_29": 0.409904,
+  "largest_lam_over_all_2926_accepted_steps": 0.4099001110480955
+ },
+ "steps": [
+  {
+   "step": 1,
+   "lam": 0.40912245453310314,
+   "lam_minus_lam_of_the_fold": -0.0007777,
+   "converged": true,
+   "updates": 4,
+   "residual": 7.778e-22,
+   "seconds": 58.1,
+   "nearest_stored_accepted_step": 25,
+   "distance_to_it": 0.005249
+  },
+  {
+   "step": 2,
+   "lam": 0.4092724545331032,
+   "lam_minus_lam_of_the_fold": -0.0006277,
+   "converged": true,
+   "updates": 3,
+   "residual": 2.439e-21,
+   "seconds": 45.3,
+   "nearest_stored_accepted_step": 26,
+   "distance_to_it": 0.004592
+  },
+  {
+   "step": 3,
+   "lam": 0.40942245453310316,
+   "lam_minus_lam_of_the_fold": -0.0004777,
+   "converged": true,
+   "updates": 3,
+   "residual": 7.304e-20,
+   "seconds": 47.2,
+   "nearest_stored_accepted_step": 26,
+   "distance_to_it": 0.001969
+  },
+  {
+   "step": 4,
+   "lam": 0.40957245453310315,
+   "lam_minus_lam_of_the_fold": -0.0003277,
+   "converged": true,
+   "updates": 3,
+   "residual": 6.114e-18,
+   "seconds": 44.7,
+   "nearest_stored_accepted_step": 26,
+   "distance_to_it": 0.00969
+  },
+  {
+   "step": 5,
+   "lam": 0.4097224545331032,
+   "lam_minus_lam_of_the_fold": -0.0001777,
+   "converged": true,
+   "updates": 4,
+   "residual": 9.855e-27,
+   "seconds": 76.4,
+   "nearest_stored_accepted_step": 27,
+   "distance_to_it": 0.002084
+  },
+  {
+   "step": 6,
+   "lam": 0.40987245453310317,
+   "lam_minus_lam_of_the_fold": -2.766e-05,
+   "converged": true,
+   "updates": 5,
+   "residual": 1.334e-25,
+   "seconds": 76.5,
+   "nearest_stored_accepted_step": 28,
+   "distance_to_it": 0.007602
+  },
+  {
+   "step": 7,
+   "lam": 0.41002245453310315,
+   "lam_minus_lam_of_the_fold": 0.0001223,
+   "converged": false,
+   "updates": null,
+   "residual": 0.002199,
+   "seconds": 212.1,
+   "residual_after_each_update": [
+    0.0002375,
+    0.001513,
+    0.0004508,
+    0.0002286,
+    0.08839,
+    0.02774,
+    0.004333,
+    0.001298,
+    0.0003947,
+    0.0002345,
+    0.002199
+   ],
+   "first_residual": 0.0002375
+  }
+ ],
+ "result": {
+  "steps_converged": 6,
+  "steps_run": 7,
+  "stopped": "step 7 did not converge (residual 0.002199089423543699 after 10 updates)",
+  "last_converged_step": {
+   "step": 6,
+   "lam": 0.40987245453310317,
+   "below_the_fold_by": 2.766e-05,
+   "updates": 5
+  },
+  "first_step_that_does_not_converge": {
+   "step": 7,
+   "lam": 0.41002245453310315,
+   "above_the_fold_by": 0.0001223,
+   "residual_after_10_updates": 0.002199
+  },
+  "orbit_beyond_the_fold": "none: no step with lam above the fold converged, so there is no orbit to identify; the converged steps 1 to 6 are on the rising side of the stored curve (nearest stored accepted steps 25 to 28)"
+ },
+ "notes": [
+  "The Newton iteration at fixed lam of tools/reclose.py needs more updates as the fold is approached (4, 3, 3, 3, 4, 5 for the steps 1 to 6) and has no solution on this branch at a lam above the fold; the failure is the failure of natural-parameter continuation at a fold (the Jacobian of the closing equations in (u1, u2, t) is singular there), not a limit of the 50 digit arithmetic.",
+  "PeriCont passes the same fold (accepted steps 28 and, later, 903) because its parameter is the arclength in (u1, u2, t, lam), not lam.",
+  "One step size was run (1.5e-4); the first non-converging step is 1.2e-4 above the largest stored lam of the fold, and the last converging one 2.8e-5 below it (3.2e-5 below and 1.2e-4 above the parabola maximum)."
+ ]
+}
