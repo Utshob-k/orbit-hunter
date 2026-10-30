@@ -10,7 +10,7 @@ license:
   - MIT
   - CC-BY-4.0
 version: 0.3.0
-date-released: 2026-10-18
+date-released: TAGDATE
 keywords:
   - three-body problem
   - periodic orbits

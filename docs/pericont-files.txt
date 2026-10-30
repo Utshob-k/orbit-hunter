@@ -1,14 +1,16 @@
 # The files of PeriCont (version 0.3.0), the Library package. tools/pack-pericont.mjs reads this list: one path per line, relative to the top folder of the repository; a path that ends with / is a
-# folder with everything below it. The package is pericont-0.3.0.zip (top folder pericont-0.3.0/). Licences: the code (src, tools, test) is MIT (LICENSE; every file under src/ias/, the tools named here and the
-# tests of npm run test:ias carry SPDX-License-Identifier: MIT in the first line); the data, the documents and the README are CC BY 4.0 (LICENSE-DATA).
-# The package is self-contained: after unpacking, set ORBIT_PYTHON (README.md) and run  npm test  (the Dormand-Prince tests, about 20 seconds),  npm run test:ias  (the tests of the ias route, 4 to 8 minutes)
+# folder with everything below it; a line SOURCE => NAME puts the file SOURCE into the package as NAME. The package is pericont-0.3.0.zip (top folder pericont-0.3.0/). Licences: the code (src, tools, test) is MIT (LICENSE; every file under src/ and every tool named here, and the
+# tests of npm run test:ias, carry SPDX-License-Identifier: MIT in the first line); the data, the documents and the README are CC BY 4.0 (LICENSE-DATA).
+# The package is self-contained: after unpacking, set ORBIT_PYTHON (README.md) and run  npm test  (the Dormand-Prince tests, about 20 seconds),  npm run test:ias  (the tests of the ias route, 4 to 10 minutes)
 # and  node tools/deep-sample.mjs  (the sample run, whose PASS compares numbers with tolerances).
 
-# the top folder
+# the top folder (README.md of the package is docs/pericont-readme.md)
 package.json
-README.md
+docs/pericont-readme.md => README.md
 LICENSE
 LICENSE-DATA
+CITATION.cff
+CHANGELOG.md
 
 # the ias route: integration (IAS15 bridge, guards, the regularised integrator reg.js), corrector and the modules they use
 src/ias/
@@ -35,6 +37,7 @@ tools/family-follow.mjs
 tools/dp45-attempts.mjs
 tools/reproduce-trace.mjs
 tools/handover-rule.mjs
+tools/handover-run.mjs
 tools/deep-sample.mjs
 tools/pack-pericont.mjs
 tools/witness.py
@@ -72,8 +75,9 @@ tools/stall-jacobian-3x3.py
 tools/stall-jacobian-mp.py
 tools/orbit-track.mjs
 tools/db82-families.py
+tools/fd-reference.py
 
-# tests: npm test (11) and npm run test:ias (10), and the diagnostic of REBOUND's first step
+# tests: npm test (11 files) and npm run test:ias (14 files), and the diagnostic of REBOUND's first step
 test/figure8.test.js
 test/known.test.js
 test/stability.test.js
@@ -97,6 +101,8 @@ test/reclose.test.js
 test/replay.test.js
 test/handover-rule.test.js
 test/t-bound.test.js
+test/handover-fail.test.js
+test/relative-out.test.js
 test/ias-first-step.test.js
 
 # data: everything of data/deep (traces, witnesses, re-closed stretches, extra/, sample/), and the files that npm test reads
