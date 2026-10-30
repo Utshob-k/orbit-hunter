@@ -18,9 +18,9 @@
 //   natural=DL: natural continuation in lam instead of the pseudo-arclength (lam fixed per step, Newton on F alone, first step DL in DIR, doubled after at most 3 iterations, halved on failure, ends below 1e-14); zeros of theta are not looked for.
 //   handover: hand the trace over to the 50 digit continuation where the double precision route has become slower than it. Rule, without wall time (tools/handover-rule.mjs): after at least 100 accepted steps
 //   P100 = |lam_k - lam_(k-100)| / 100 over the last 100 accepted steps (lam_0 = lam of the start); if P100 < --handover-below (1e-7 by default) the driver stops, closes the last accepted point again with tools/reclose.py
-//   (50 digits, the point itself as the reference; it must converge) and runs tools/reclose-continue.py from it: --handover-steps steps (20) of --handover-dlam in lam (1e-5, the sign of DIR), with the w1 witness of the last orbit.
+//   (50 digits, the point itself as the reference; it must converge) and runs tools/reclose-continue.py from it: --handover-steps steps (20) of --handover-dlam in lam (1e-5, in the direction of the last step of lam, which is the sign of DIR unless lam has turned at a fold), with the w1 witness of the last orbit.
 //   OUT.json then has a "handover" block (the rule, the re-closing, every 50 digit step with lam, u1, u2, t as strings, the witness, the folders OUT.json.handover-reclose.json and OUT.json.handover/); the stop reason is
-//   "handed over to the 50 digit continuation". Why 1e-7: the 50 digit continuation makes 1e-5 in lam in 148.6 s (t35 -) and 293.9 s (t44 -) (data/deep/extra/cost-comparison.json), that is 6.7e-8 and 3.4e-8 per second,
+//   "handed over to the 50 digit continuation" if the re-closing converged and at least one 50 digit step converged, else "hand-over failed: <reason>" and the exit status is 1 (tools/handover-run.mjs; the exit status of every process is in the block). Why 1e-7: the 50 digit continuation makes 1e-5 in lam in 148.6 s (t35 -) and 293.9 s (t44 -) (data/deep/extra/cost-comparison.json), that is 6.7e-8 and 3.4e-8 per second,
 //   and this route takes about 1.8 to 2.9 s per accepted step before the creep, so it makes 1e-7 per step at 3.5e-8 to 5.6e-8 per second; below about 1e-7 per step the 50 digit route is faster. Needs python with rebound and mpmath.
 //   newton-tol: settings.newton, the stopping tolerance of the corrector residual (1e-11 by default). The 279 components of every accepted step (u1, u2, t and the 23 node states) are written
 //   to OUT.json.nodes.jsonl, one line {step, z} per accepted step, unless --no-nodes is given.
@@ -33,19 +33,25 @@ import { perpInfo, perpInitial, perpEL } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';
 import { relativeStability } from '../src/relative.js';
 import { handoverFires, p100 } from './handover-rule.mjs';
-import { spawnSync } from 'child_process';
+import { runHandover } from './handover-run.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
 const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
-const [outFile, dirArg, u1A, u2A, lamA, tA] = pos;
+const [outArg, dirArg, u1A, u2A, lamA, tA] = pos;
+const outFile = outArg ? path.resolve(outArg) : outArg;   // the children (reclose.py, the files next to OUT) run in the root of the repository
 if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl', ...(opt.handover !== undefined ? [outFile + '.handover-reclose.job.json', outFile + '.handover-reclose.json', outFile + '.handover'] : [])]) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
 const pieces = Number(opt.pieces ?? 24), maxDist = opt['max-dist'] === undefined ? 0.03 : Number(opt['max-dist'] === 'inf' ? Infinity : opt['max-dist']);
+for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false })) {
+  if (opt[k] === undefined) continue;
+  const v = Number(opt[k]);
+  if (typeof opt[k] !== 'string' || opt[k] === '' || !Number.isFinite(v) || (low ? v < 0 : v <= 0)) { console.error('--' + k + ' needs a number' + (low ? ' of at least 0' : ' above 0') + ', as --' + k + '=VALUE, not ' + (opt[k] === true ? 'nothing' : opt[k])); process.exit(2); }
+}
 if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece)'); process.exit(2); }
 const stopBelow = Number(opt['stop-below'] ?? 0), stopAfter = opt['stop-after'] === undefined ? Infinity : Number(opt['stop-after']);
 settings.integrator = 'ias';
@@ -111,7 +117,7 @@ const traceHand = (step, lam, th, h, it, Y) => {
   if (traceBase(step, lam, th, h, it, Y) === true) return true;
   lams.push(lam);
   if (!handoverFires(lams, hBelow)) return false;
-  fired = { p100: p100(lams), below: hBelow, accepted_steps: lams.length - 1, loop_step: step, lam, u1: Y[0], u2: Y[1], t: Y[2] };
+  fired = { p100: p100(lams), below: hBelow, accepted_steps: lams.length - 1, loop_step: step, lam, lam_step: lam - lams[lams.length - 2], u1: Y[0], u2: Y[1], t: Y[2] };
   stop = 'handed over to the 50 digit continuation'; return true;
 };
 try { r = hunt(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, dir, force: true, maxMs, all: true, hMax: 0.2, maxSteps: 6000, dl0: Number(opt.natural), trace: handover ? traceHand : traceBase });
@@ -119,36 +125,18 @@ try { r = hunt(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, d
 const zeros = (r.orbits || (r.ok && r.info ? [r] : [])).map((o) => ({ lam: o.lam, u1: o.u1, u2: o.u2, t: o.t, Tstar: o.info.ts, Lstar: Math.abs(o.info.ls), closure: o.info.repeatErr, minDist: o.info.minDist }));
 out.why = stop || r.why || (zeros.length ? 'zero of theta' : 'unknown');
 out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.traceStop = traceStop; out.steps = r.steps; out.lamMin = r.lamMin; out.lamMax = r.lamMax; out.points = pts; out.zeros = zeros;
+let handoverFailed = null;
 if (fired) {
-  const root = path.dirname(path.dirname(fileURLToPath(import.meta.url))), py = settings.ias.python, base = outFile + '.handover';
-  const run = (args) => spawnSync(py, ['-B', ...args], { cwd: root, stdio: ['ignore', 'inherit', 'inherit'] });
-  const hv = { rule: 'after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < ' + hBelow, p100: fired.p100, below: hBelow, accepted_steps: fired.accepted_steps, loop_step: fired.loop_step, lam: fired.lam, u1: fired.u1, u2: fired.u2, t: fired.t,
-    steps_wanted: hSteps, dlam: dir * hDlam, folder: path.basename(base), reclose: null, steps: [], witness: null };
-  out.handover = hv;
-  fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true }));
-  const pt = { u1: String(fired.u1), u2: String(fired.u2), t: String(fired.t) };
-  fs.writeFileSync(base + '-reclose.job.json', JSON.stringify({ id: 'handover-start', ...pt, lam: String(fired.lam), ref: pt }), { flag: 'wx' });
-  const t0 = Date.now();
-  run([path.join('tools', 'reclose.py'), base + '-reclose.job.json', base + '-reclose.json', '--minutes', '60']);
-  const rc = fs.existsSync(base + '-reclose.json') ? JSON.parse(fs.readFileSync(base + '-reclose.json', 'utf8')) : null;
-  hv.reclose = rc ? { file: path.basename(base) + '-reclose.json', converged: rc.converged, same_orbit_as_the_point_itself: rc.same_orbit, rel_diff_ref: rc.rel_diff_ref, updates: rc.iterations ? rc.iterations.length - 1 : null, residual: rc.residual, seconds: rc.elapsed_s } : { converged: false };
-  if (rc && rc.converged) {
-    const t1 = Date.now();
-    run([path.join('tools', 'reclose-continue.py'), 'handover', base + '-reclose.json', String(fired.lam), base, '--steps', String(hSteps), '--dlam', String(dir * hDlam)]);
-    const cf = path.join(base, 'handover_continue.json');
-    const cont = fs.existsSync(cf) ? JSON.parse(fs.readFileSync(cf, 'utf8')) : { steps: [] };
-    hv.stopped = cont.stopped || null;
-    hv.steps = cont.steps.map((s) => {
-      const f = path.join(base, 'handover_s' + String(s.step).padStart(2, '0') + '.out.json'), o = fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')) : {};
-      return { step: s.step, lam: s.lam, u1: o.u1, u2: o.u2, t: o.t, converged: s.converged, updates: s.updates, residual: s.residual, seconds: s.seconds, second_over_first: s.second_over_first || null };
-    });
-    const wf = path.join(base, 'handover_w1.out.json');
-    hv.witness = fs.existsSync(wf) ? { file: 'handover_w1.out.json', ...Object.fromEntries(['status', 'closure', 'e_half', 'rotation', 'dmin', 'steps', 'seconds_total'].map((k) => [k, JSON.parse(fs.readFileSync(wf, 'utf8'))[k]])) } : null;
-    hv.seconds = { reclose: (t1 - t0) / 1000, continuation: (Date.now() - t1) / 1000 };
-  }
-  out.lamMinWithHandover = Math.min(r.lamMin ?? Infinity, ...hv.steps.filter((s) => s.converged).map((s) => Number(s.lam)));
+  const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+  const h = runHandover({ fired, dir, hBelow, hSteps, hDlam, base: outFile + '.handover', root, python: settings.ias.python, onStart: (hv) => { out.handover = hv; fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true })); } });
+  out.why = h.why;
+  if (h.failed) handoverFailed = h.why;
+  const lamsDone = h.hv.steps.filter((s) => s.converged).map((s) => Number(s.lam));
+  out.lamMinWithHandover = Math.min(r.lamMin ?? Infinity, ...lamsDone);   // the range of lam with the converged 50 digit steps (in either direction)
+  out.lamMaxWithHandover = Math.max(r.lamMax ?? -Infinity, ...lamsDone);
 }
 fs.writeFileSync(outFile, JSON.stringify(out));
 recorder.flush(); if (iasStats.errors || iasStats.timeouts) console.log('bridge: ' + iasStats.errors + ' errors, ' + iasStats.timeouts + ' timeouts, last reason: ' + iasStats.lastReason);
 console.log(outFile, 'dir', dir, '|', out.why, '|', pts.length, 'points, lam', r.lamMin, 'to', r.lamMax, '|', zeros.length, 'zeros of theta');
+if (handoverFailed) { console.error(handoverFailed); process.exit(1); }
 process.exit(0);
