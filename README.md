@@ -87,7 +87,7 @@ between the period and the angular momentum (dT* = -(L*/2) dtheta with theta = -
 Since version 0.2.29: the satellites of class I were followed for n = 13 to 20 as well, and the multipliers of the class C orbits for n = 13 to 20 were computed in multiple
 precision (tier A; rules and predictions written before the runs: `docs/rules/rules-class-i-13-20.txt`, results: `docs/rules/results-class-i-13-20.txt`). For every n the
 member is found, the matrix of the n fold repeat has a two dimensional null space and the bifurcation equation two real roots, as for n = 5 to 12; the curve of the other
-root reaches a rotation 0 in both senses for n = 13 and 14 and in one sense for n = 15 to 20 (the other sense stopped by a collapse of the step, not investigated). The 30
+root reaches a rotation 0 in both senses for n = 13 and 14 and in one sense for n = 15 to 20 (in the stored files; the other sense stopped by a "collapse of the step", which was the bound on t in the line search of the corrector and not a property of the curve: with the code of version 0.3.0 it reaches the same orbit, `data/rerun-0.3.0/`). The 30
 digit end orbits are established (closure 5.7e-25 to 3.6e-24, REBOUND after one period 9e-15 to 3e-13), have an isosceles state and no collinear one (the class C orbit
 the reverse), and differ from the class C orbit of the same n by 3.3e-7 to 3.6e-7 in T* and 7.2e-4 to 1.07e-3 in L* (relative). For n >= 13 both orbits are unstable, so there is no
 pair of a stable and an unstable orbit there: the class C orbit has a real negative pair of multipliers (modulus 1.712 at n = 13 to 7.621 at n = 20) and an elliptic pair with a
@@ -150,7 +150,7 @@ export ORBIT_PYTHON=$PWD/venv/bin/python
 Then, from the top folder:
 
 ```
-npm run test:ias                      # the tests of the ias route, 4 to 8 minutes
+npm run test:ias                      # the tests of the ias route, 4 to 10 minutes
 node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 6 to 15 minutes (its PASS or FAIL compares numbers with tolerances, see docs/deep.md)
 ```
 
