@@ -60,6 +60,26 @@ function request(msg) {
   return ctrl[1];
 }
 
+// the matrix by finite differences of reg.js (settings.ias.matrix 'fd-forward' or 'fd-central'): column c is the difference quotient of the end states of flows from the start state x with component c changed, with the increment
+// h_c = 1e-7 * max(1, |x_c|) (forward, against the unperturbed end state end0) or 1e-5 * max(1, |x_c|) (central, both signs); the quotient is divided by the increment that was really added. A failed flow gives { ok: false }.
+export function fdMatrix(x, tau, end0, mode) {
+  const central = mode === 'fd-central', h0 = central ? 1e-5 : 1e-7, M = new Float64Array(144);
+  for (let c = 0; c < 12; c++) {
+    const h = h0 * Math.max(1, Math.abs(x[c])), xp = Float64Array.from(x); xp[c] = x[c] + h;
+    const rp = flowEnc(xp, tau, { jac: false, settings: REG_SETTINGS }); if (!rp.ok) return { ok: false, reason: rp.reason };
+    let lo = end0, dd = xp[c] - x[c];
+    if (central) { const xm = Float64Array.from(x); xm[c] = x[c] - h; const rm = flowEnc(xm, tau, { jac: false, settings: REG_SETTINGS }); if (!rm.ok) return { ok: false, reason: rm.reason }; lo = rm.end; dd += x[c] - xm[c]; }
+    for (let i = 0; i < 12; i++) M[i * 12 + c] = (rp.end[i] - lo[i]) / dd;
+  }
+  return { ok: true, M };
+}
+const fdMode = () => (settings.ias.matrix === 'fd-forward' || settings.ias.matrix === 'fd-central' ? settings.ias.matrix : null);
+function fdOrThrow(x, tau, end0, mode, key, what) {
+  const t0 = Date.now(); const f = fdMatrix(x, tau, end0, mode); gstats[key] += Date.now() - t0;
+  if (!f.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + f.reason + ' (fd' + what + ')', 'reg failure'); }
+  return f.M;
+}
+
 const pairMin = (s) => Math.min(...PAIRS.map(([i, j]) => Math.hypot(s[2 * j] - s[2 * i], s[2 * j + 1] - s[2 * i + 1])));
 
 // missed flag: reg.js without the tangent on every unflagged piece
@@ -87,7 +107,7 @@ function trip(kind, info) {
 export function iasPieces(starts, tau) {
   if (PER_PIECE * starts.length > BUF_NUMBERS) throw new Error('too many pieces for the shared buffer: ' + starts.length + ' pieces need ' + PER_PIECE * starts.length + ' numbers, there is room for ' + BUF_NUMBERS + ' (at most ' + Math.floor(BUF_NUMBERS / PER_PIECE) + ' pieces)');
   stats.calls++;
-  const ias = settings.ias, obs = settings.observer;
+  const ias = settings.ias, obs = settings.observer, FD = fdMode();
   for (let i = 0; i < starts.length; i++) { const d = pairMin(starts[i]); if (d < START_BELOW) trip('G3', { piece: i, d }); }
   let t0 = Date.now(); const n = request({ starts: starts.map((s) => Array.from(s)), tau }); gstats.tIas += Date.now() - t0;
   const m = starts.length, out = [];
@@ -108,9 +128,9 @@ export function iasPieces(starts, tau) {
   // the flagged pieces by reg.js (end state and the 12 x 12 matrix); a failure of reg.js fails the evaluation, there is no fallback
   out.mats = new Array(m).fill(null);
   for (let i = 0; i < m; i++) if (out.enc[i]) {
-    t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: true, settings: REG_SETTINGS }); gstats.tC += Date.now() - t0;
+    t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: !FD, settings: REG_SETTINGS }); gstats.tC += Date.now() - t0;
     if (!r.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + r.reason, 'reg failure'); }
-    out[i] = Float64Array.from(r.end); out.mats[i] = r.M; stats.regPieces++; stats.regMacro += r.macro; stats.regSub += r.subSteps; stats.regEndTrials += r.endTrials; if (r.stagnation) stats.regStagnation++;
+    out[i] = Float64Array.from(r.end); out.mats[i] = FD ? fdOrThrow(starts[i], tau, r.end, FD, 'tC', '') : r.M; stats.regPieces++; stats.regMacro += r.macro; stats.regSub += r.subSteps; stats.regEndTrials += r.endTrials; if (r.stagnation) stats.regStagnation++;
     const cr = r.d2AtMinD1 / r.minD1; if (cr < gstats.cRatioMin) gstats.cRatioMin = cr;
   }
   // cross-check of every unflagged piece whose smallest IAS15 pair minimum is below crossCheckBelow: reg.js with the tangent on the same start state; where the end states
@@ -118,12 +138,12 @@ export function iasPieces(starts, tau) {
   // dp45 matrix; a failure of reg.js fails the evaluation as for a flagged piece; every replacement is logged
   for (let i = 0; i < m; i++) if (!out.enc[i]) {
     const a = out.ana[i]; const pm = Math.min(a[0], a[1], a[2]); if (!(pm < ias.crossCheckBelow)) continue;
-    gstats.xchk++; t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: true, settings: REG_SETTINGS }); gstats.tX += Date.now() - t0;
+    gstats.xchk++; t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: !FD, settings: REG_SETTINGS }); gstats.tX += Date.now() - t0;
     if (!r.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + r.reason + ' (cross-check, piece ' + i + ')', 'reg failure'); }
     let diff = 0; for (let k = 0; k < 12; k++) diff = Math.max(diff, Math.abs(r.end[k] - out[i][k]) / Math.max(1, Math.abs(r.end[k])));
     if (diff > gstats.xchkMaxDiff) gstats.xchkMaxDiff = diff;
     if (diff >= ias.crossCheckDiff) {
-      out[i] = Float64Array.from(r.end); out.mats[i] = r.M; gstats.replaced++;
+      out[i] = Float64Array.from(r.end); out.mats[i] = FD ? fdOrThrow(starts[i], tau, r.end, FD, 'tX', ', cross-check') : r.M; gstats.replaced++;
       if (gstats.replList.length < 5000) gstats.replList.push({ call: stats.calls, step: obs ? obs.step : null, piece: i, pairMin: pm, diff });
     }
   }

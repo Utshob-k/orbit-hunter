@@ -10,6 +10,7 @@
 //   DIR = 1 or -1 in lam (anything else stops the driver with exit 2, as does an unknown option); t = half the period. pieces: the number of pieces of the multiple shooting, at most 250. max-dist: stop when the closest approach is above it (inf for never). stop-below: stop
 //   when the closest approach is below it (0: never). stop-after: stop after that many recorded points (the message is "stopped after N recorded points"). The other options set src/settings.js: IAS15 adaptive_mode, the longest wait for
 //   the Python process, the python executable PY (the default is that of src/settings.js: ORBIT_PYTHON, else python on Windows and python3 elsewhere), the ratio of guard G1b.
+//   matrix: the 12 x 12 matrix of a flagged piece and of a piece replaced by the cross-check: 'exact' (the default; the derivative of reg.js), 'fd-forward' (forward differences of reg.js with the increment 1e-7 * max(1, |x_c|), Henon's) or 'fd-central' (central differences, 1e-5 * max(1, |x_c|)); any other value stops the driver; the value is in out.settings.ias.matrix when it is not exact.
 //   ias-first-step: the first step of IAS15 on every piece ('timescale', the default of src/settings.js, or 'legacy', REBOUND's default 0.001, the setting of the traces stored in data/deep); the value is in out.settings.ias.firstStep.
 //   tol-scale=K: the corrector stops when sup|F| < max(newton-tol, K * 2^-52 * (largest entry of the Jacobian of the iteration) * max(1, largest |Y|)); each line of the diag file has the effective tolerance (tolEff) of its last iteration.
 //   arc-weight=W: weighted arclength: the 276 (with 24 pieces) node components of the pseudo-arclength unknowns have weight W, u1, u2, t and lam weight 1; the weighted norm is in the unit tangent, in the constraint row of the tangent and of the corrector,
@@ -37,10 +38,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam'];
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outFile, dirArg, u1A, u2A, lamA, tA] = pos;
-if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--natural=DL] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
+if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl', ...(opt.handover !== undefined ? [outFile + '.handover-reclose.job.json', outFile + '.handover-reclose.json', outFile + '.handover'] : [])]) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
@@ -49,6 +50,7 @@ if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of s
 const stopBelow = Number(opt['stop-below'] ?? 0), stopAfter = opt['stop-after'] === undefined ? Infinity : Number(opt['stop-after']);
 settings.integrator = 'ias';
 if (opt['ias-mode'] !== undefined) settings.ias.adaptiveMode = Number(opt['ias-mode']);
+if (opt.matrix !== undefined) { if (!['exact', 'fd-forward', 'fd-central'].includes(opt.matrix)) { console.error('--matrix must be exact, fd-forward or fd-central, not ' + opt.matrix); process.exit(2); } if (opt.matrix !== 'exact') settings.ias.matrix = opt.matrix; }
 if (opt['ias-first-step'] !== undefined) { if (opt['ias-first-step'] !== 'legacy' && opt['ias-first-step'] !== 'timescale') { console.error('--ias-first-step must be legacy or timescale, not ' + opt['ias-first-step']); process.exit(2); } settings.ias.firstStep = opt['ias-first-step']; }
 if (opt['newton-tol'] !== undefined) settings.newton = Number(opt['newton-tol']);
 if (opt['timeout-min'] !== undefined) settings.ias.timeoutMs = Number(opt['timeout-min']) * 60000;
