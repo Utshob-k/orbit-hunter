@@ -1,8 +1,9 @@
 // branch point of a satellite on Broucke's R family: the member with rotation number nu = k/n (k = 1 unless --k=K), where the n fold repeat
 // has a double multiplier 1. prints the singular values of [J | dF/dlam] of the repeat (second smallest about 1e-12 at a branch point) and
 // follows the satellite to rotation 0 (--control: the repeat too).
-// node tools/branch-point.mjs n theta [--k=K] [--repeat-tol=1e-8] [--pieces=P] [--control] [--write] (theta: rotation of the member in
+// node tools/branch-point.mjs n theta [--k=K] [--repeat-tol=1e-8] [--pieces=P] [--max-steps=N] [--control] [--write] (theta: rotation of the member in
 // turns, n = 5: 0.2010 upper, 0.2240 lower nu)
+// --max-steps=N: the most steps of the loop that follows a sense (default 700; a sense that ends at that limit says "step limit", and for n >= 23 the sense that the old bound on t had stopped needs more, see data/rerun-0.3.0/).
 // --write stores data/branch-points/<n>-upper.json or -lower.json (k > 1: <k>-<n>-<branch>-<theta>.json).
 import fs from 'fs';
 import { closePerpMS, system, correct, tangentAt, solOf, packZ, toY, unit, dot } from '../src/shooting.js';
@@ -11,10 +12,12 @@ import { relativeStability } from '../src/relative.js';
 import { locateZero } from '../src/zero.js';
 
 const n = Number(process.argv[2]), thetaWanted = Number(process.argv[3]), control = process.argv.includes('--control'), write = process.argv.includes('--write');
-if (!n || !thetaWanted) { console.error('usage: node tools/branch-point.mjs n theta [--control] [--write]'); process.exit(2); }
+if (!n || !thetaWanted) { console.error('usage: node tools/branch-point.mjs n theta [--k=K] [--repeat-tol=1e-8] [--pieces=P] [--max-steps=N] [--control] [--write]'); process.exit(2); }
 const kArg = process.argv.find((a) => a.startsWith('--k=')), kk = kArg ? Number(kArg.slice(4)) : 1, target = kk / n;
 const piecesArg = process.argv.find((a) => a.startsWith('--pieces='));      // force the number of pieces of the n fold repeat (16 from n = 29, where 8 give very short steps)
 const tolArg = process.argv.find((a) => a.startsWith('--repeat-tol=')), repTol = tolArg ? Number(tolArg.slice(13)) : 1e-9;   // residual accepted for the n fold repeat; the singular system stalls near 3.5e-11 n, so 1e-8 is needed from n = 29
+const stepsArg = process.argv.find((a) => a.startsWith('--max-steps=')), MAXSTEPS = stepsArg ? Number(stepsArg.slice(12)) : 700;   // the limit of the loop that follows a sense
+if (!Number.isInteger(MAXSTEPS) || MAXSTEPS < 1) { console.error('--max-steps needs a whole number of at least 1, as --max-steps=N, not ' + (stepsArg ? stepsArg.slice(12) : '')); process.exit(2); }
 const trace = JSON.parse(fs.readFileSync(new URL('../data/r-family-trace.json', import.meta.url), 'utf8')).curve;
 
 // 1. the bracket and the member with nu = 1/n
@@ -119,7 +122,7 @@ function follow(vDir, vOther, sgn) {
   let tau = Float64Array.from(vDir, (v) => sgn * v), Y = Float64Array.from(Y0), step_h = 1e-3, s = 0, prev = inv(Y0), zero = null, why = 'step limit';
   if (!prev) return { sense: sgn, why: 'integration of the orbit failed at the branch point', points: 0, pathLength: 0, zero: null, curve: [] };
   const pts = [{ s: 0, Tstar: prev.Tstar, Lstar: prev.Lstar, turns: prev.turns, lam: prev.s.lam, minDist: prev.minDist }];
-  for (let step = 1; step <= 700; step++) {
+  for (let step = 1; step <= MAXSTEPS; step++) {
     let c = null;
     while (step_h > 1e-7) {
       // first step: the constraint plane must not cut the other curve near the branch point, so its normal has that tangent taken out
@@ -167,6 +170,6 @@ if (write) {
   const what = 'branch point of satellites on the family of Broucke R orbits (tools/branch-point.mjs): the R member with rotation number nu = k/n on the upper or the lower nu of the stable stretch, the singular values of the n fold repeat, the two directions, and the satellite followed in both senses (curve = s, T*, L*, turns, lam, closest approach); control = the repeat direction. turns has the sign of src/perp.js. A sense ends at a zero of theta (a periodic orbit) or is stopped by a limit of the continuation: a closest approach below 0.03, a collapse of the step, or 700 accepted steps; such a stop says nothing about the curve beyond it.';
   fs.mkdirSync(new URL('../data/branch-points/', import.meta.url), { recursive: true });
   const name = kk === 1 ? `${n}-${branchName}.json` : `${kk}-${n}-${branchName}-${thetaWanted.toFixed(4)}.json`;
-  fs.writeFileSync(new URL('../data/branch-points/' + name, import.meta.url), JSON.stringify({ what, k: kk, ...result, branch: branchName }));
+  fs.writeFileSync(new URL('../data/branch-points/' + name, import.meta.url), JSON.stringify({ what, k: kk, ...result, branch: branchName, ...(MAXSTEPS === 700 ? {} : { maxSteps: MAXSTEPS }) }));
   console.log('   written to data/branch-points/' + name);
 }

@@ -6,18 +6,18 @@ Reruns of satellite continuations of the R family with the code of version 0.3.0
 
 - `class-c-upper-n<n>.txt`, n = 16 to 36: the printed output of `node tools/branch-point.mjs n theta` (without `--write`; the tool has no output option), theta = |member.turns| of `data/branch-points/<n>-upper.json` rounded to 4 digits (n = 16: 0.0627).
 - `class-c-upper-n<n>-stored-options.txt`, n = 27 and 29 to 36: the same with the options of the stored file, `--repeat-tol=1e-8` (n = 27) and `--repeat-tol=1e-8 --pieces=16` (n = 29 to 36), as `docs/r-family-satellites.md` says the stored files were made. With the defaults the n fold repeat of these n does not close (exit status 1, the runs without a result in the table).
-- `class-c-upper-n<n>-max1500.txt` (n = 23 to 28) and `class-c-upper-n<n>-stored-options-max1500.txt` (n = 29 to 36): the probe. The loop of `tools/branch-point.mjs` that follows a sense is limited to 700 steps and the tool has no option for it; for n = 23 to 28 with the defaults, and for n = 29 to 36 with the options of the stored file, the sense that had stopped by a collapse of the step now ends at that limit (701 points). These runs use a copy of the tool, `tools/branch-point-long.mjs`, in which the limit is an option `--max-steps=1500`; it is not in the repository (the diff to `tools/branch-point.mjs` is at the end of this file) and nothing else is different.
+- `class-c-upper-n<n>-max1500.txt` (n = 23 to 28) and `class-c-upper-n<n>-stored-options-max1500.txt` (n = 29 to 36): the runs with `--max-steps=1500`. The loop of `tools/branch-point.mjs` that follows a sense is limited to 700 steps by default; for n = 23 to 28 with the defaults, and for n = 29 to 36 with the options of the stored file, the sense that had stopped by a collapse of the step now ends at that limit (701 points). The option `--max-steps=N` of the tool (700 by default; the commands of the 14 files are at the end of this file) raises it. These 14 runs were made with a copy of the tool in which that option was the only change; the option is now in `tools/branch-point.mjs`, and the run for n = 23 was made again with it: without the option the printed output is that of `class-c-upper-n23.txt`, with `--max-steps=1500` that of `class-c-upper-n23-max1500.txt`, line by line.
 - `class-i-n<n>.txt` and `class-i-n<n>.json`, n = 15 to 20: the printed output of `node tools/branch-point-iso.mjs n theta --pieces=8 --out=class-i-n<n>.json` and the file that the tool writes (the same fields as `data/class-i/curves/n<n>.json`), with theta 0.0669, 0.0627, 0.0590, 0.0557, 0.0528, 0.0501 for n = 15 to 20 (`docs/reproducing.md`).
 
 ## The code
 
-The release at e6eccf6 with the bound of `src/iso-shooting.js` relative to the predicted point, in a separate copy so that later edits could not reach the runs (the commit of that change is the first of this series). The files that these tools use differ in the release from that copy only in comments, in SPDX lines and, in `src/shooting.js`, in the range lamMin, lamMax that a caller's `trace` function stops (these tools do not call it). At most three runs at a time on one machine, with other jobs; a run that passed 90 minutes would have been stopped and recorded as not finished: none did. Wall times: class I 6 to 8 minutes, class C 3 to 27 minutes.
+The release at e6eccf6 with the bound of `src/iso-shooting.js` relative to the predicted point, in a separate copy so that later edits could not reach the runs (the commit of that change is the first of this series). The files that these tools use differ in the release from that copy only in comments, in SPDX lines, in the option `--max-steps` of `tools/branch-point.mjs` (default 700, the limit that was in the loop) and, in `src/shooting.js`, in the range lamMin, lamMax that a caller's `trace` function stops (these tools do not call it). At most three runs at a time on one machine, with other jobs; a run that passed 90 minutes would have been stopped and recorded as not finished: none did. Wall times: class I 6 to 8 minutes, class C 3 to 27 minutes.
 
 ## Result
 
 - Class I, n = 15 to 20: the sense that the stored file stopped by "step collapse" (path length 9.6, t / t0 = 3.000004 to 3.000006 at its last point in the stored file) goes on for 419, 442, 467, 492, 516, 541 points (n = 15 to 20) to a rotation 0, at the same orbit as the other sense.
-- Class C upper, n = 16 to 36: the sense that the stored file stopped by "step collapse" (after 508 to 624 points) reaches a rotation 0 in every case, at the orbit of the other sense: after 510 to 693 points for n = 16 to 22 (defaults of the tool), and after 723 to 1275 points for n = 23 to 36 with the limit of 700 steps raised to 1500 (the probe). With the limit of 700 steps itself the sense of n = 23 to 36 ends at the step limit without a rotation 0.
-- T* and L* of the two senses of a run agree to 1e-7 relative in all runs but two (the rule of the comparison). In the probe runs of n = 24 and n = 27 L* of the two zeros differs by 1.4e-7 and 1.2e-7 relative (T* by 3e-9): the zero of the sense that was stored is one of the 19 that the stored file leaves at more than 1e-8 turns (`docs/r-family-satellites.md`, "The 19 regenerated zero files"; here rotation left 1.9e-8 and 1.6e-8 turns, "the bisection stopped early"), the zero of the new sense has 4e-12 turns.
+- Class C upper, n = 16 to 36: the sense that the stored file stopped by "step collapse" (after 508 to 624 points) reaches a rotation 0 in every case, at the orbit of the other sense: after 510 to 693 points for n = 16 to 22 (defaults of the tool), and after 723 to 1275 points for n = 23 to 36 with the limit of 700 steps raised to 1500 (`--max-steps=1500`). With the limit of 700 steps itself the sense of n = 23 to 36 ends at the step limit without a rotation 0.
+- T* and L* of the two senses of a run agree to 1e-7 relative in all runs but two (the rule of the comparison). In the runs with `--max-steps=1500` of n = 24 and n = 27 L* of the two zeros differs by 1.4e-7 and 1.2e-7 relative (T* by 3e-9): the zero of the sense that was stored is one of the 19 that the stored file leaves at more than 1e-8 turns (`docs/r-family-satellites.md`, "The 19 regenerated zero files"; here rotation left 1.9e-8 and 1.6e-8 turns, "the bisection stopped early"), the zero of the new sense has 4e-12 turns.
 - The zeros of the senses that were stored are reproduced to the 8 printed digits where the stored zero is converged. For n = 24, 26, 27 and 28 the zero of `data/branch-points/<n>-upper.json` is less converged (rotation left 4e-6 to 5e-5 turns), so T* and L* of the rerun differ from it by up to 4e-4 in T* and 1e-3 in L*, and they agree with the regenerated zeros in `data/branch-points-regenerated/` to 4e-9 (last column of the second table).
 - The runs of the table are double precision continuations like the stored ones; the zeros are closed to 1e-9 turns or better, not to 30 digits, and none was refined.
 
@@ -165,26 +165,23 @@ The two senses of a run end at the same orbit if T* and L* agree to 1e-7 relativ
 | class-c-upper-n35-stored-options-max1500 | 0.0e+0, 0.0e+0 (relative 0.0e+0, 0.0e+0) | yes | 2.7e-9, 1.3e-9 | - |
 | class-c-upper-n36-stored-options-max1500 | 0.0e+0, 0.0e+0 (relative 0.0e+0, 0.0e+0) | yes | 3.4e-9, 2.8e-9 | - |
 
-## The probe tool
+## The commands of the 14 files with --max-steps=1500
 
-`tools/branch-point-long.mjs` is `tools/branch-point.mjs` of this release with this one change:
+n and theta as in the first group of files; `--repeat-tol=1e-8` (n = 27) and `--repeat-tol=1e-8 --pieces=16` (n = 29 to 36) are the options of the stored files. The printed output is in the file named after `>`.
 
 ```
-@@ -15,6 +15,7 @@
- const kArg = process.argv.find((a) => a.startsWith('--k=')), kk = kArg ? Number(kArg.slice(4)) : 1, target = kk / n;
- const piecesArg = process.argv.find((a) => a.startsWith('--pieces='));      // force the number of pieces of the n fold repeat (16 from n = 29, where 8 give very short steps)
- const tolArg = process.argv.find((a) => a.startsWith('--repeat-tol=')), repTol = tolArg ? Number(tolArg.slice(13)) : 1e-9;   // residual accepted for the n fold repeat; the singular system stalls near 3.5e-11 n, so 1e-8 is needed from n = 29
-+const msArg = process.argv.find((a) => a.startsWith('--max-steps=')), MAXSTEPS = msArg ? Number(msArg.slice(12)) : 700;   // the probe: the only change to branch-point.mjs
- const trace = JSON.parse(fs.readFileSync(new URL('../data/r-family-trace.json', import.meta.url), 'utf8')).curve;
- 
- // 1. the bracket and the member with nu = 1/n
-@@ -119,7 +120,7 @@
-   let tau = Float64Array.from(vDir, (v) => sgn * v), Y = Float64Array.from(Y0), step_h = 1e-3, s = 0, prev = inv(Y0), zero = null, why = 'step limit';
-   if (!prev) return { sense: sgn, why: 'integration of the orbit failed at the branch point', points: 0, pathLength: 0, zero: null, curve: [] };
-   const pts = [{ s: 0, Tstar: prev.Tstar, Lstar: prev.Lstar, turns: prev.turns, lam: prev.s.lam, minDist: prev.minDist }];
--  for (let step = 1; step <= 700; step++) {
-+  for (let step = 1; step <= MAXSTEPS; step++) {
-     let c = null;
-     while (step_h > 1e-7) {
-       // first step: the constraint plane must not cut the other curve near the branch point, so its normal has that tangent taken out
+node tools/branch-point.mjs 23 0.0436 --max-steps=1500 > class-c-upper-n23-max1500.txt
+node tools/branch-point.mjs 24 0.0417 --max-steps=1500 > class-c-upper-n24-max1500.txt
+node tools/branch-point.mjs 25 0.0401 --max-steps=1500 > class-c-upper-n25-max1500.txt
+node tools/branch-point.mjs 26 0.0385 --max-steps=1500 > class-c-upper-n26-max1500.txt
+node tools/branch-point.mjs 27 0.0371 --max-steps=1500 --repeat-tol=1e-8 > class-c-upper-n27-max1500.txt
+node tools/branch-point.mjs 28 0.0358 --max-steps=1500 > class-c-upper-n28-max1500.txt
+node tools/branch-point.mjs 29 0.0345 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n29-stored-options-max1500.txt
+node tools/branch-point.mjs 30 0.0334 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n30-stored-options-max1500.txt
+node tools/branch-point.mjs 31 0.0323 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n31-stored-options-max1500.txt
+node tools/branch-point.mjs 32 0.0313 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n32-stored-options-max1500.txt
+node tools/branch-point.mjs 33 0.0303 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n33-stored-options-max1500.txt
+node tools/branch-point.mjs 34 0.0294 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n34-stored-options-max1500.txt
+node tools/branch-point.mjs 35 0.0286 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n35-stored-options-max1500.txt
+node tools/branch-point.mjs 36 0.0278 --repeat-tol=1e-8 --pieces=16 --max-steps=1500 > class-c-upper-n36-stored-options-max1500.txt
 ```

@@ -29,7 +29,7 @@ path):
   closure, word and stability at every step; `r-family.mjs` checks the members of the family of Broucke's R orbits through my T* = 33.745 orbit
   against the atlas (by key, give the path of `catalogue.json`) and against Table 5 of Davoust and Broucke 1982
 - `branch-point.mjs` solves the branch point of a satellite on the family of Broucke's R orbits (the member with nu = 1/n, the two null vectors of its
-  n fold repeat, the satellite followed to its periodic orbit; a few minutes, `--control` adds the repeat direction, `--write` stores
+  n fold repeat, the satellite followed to its periodic orbit; a few minutes, `--control` adds the repeat direction, `--max-steps=N` is the limit of the loop that follows a sense (700 by default; the senses of n >= 23 that the old bound on t had stopped need `--max-steps=1500`, see `data/rerun-0.3.0/`), `--write` stores
   `data/branch-points/<n>-upper.json` or `<n>-lower.json` (`<k>-<n>-<branch>-<theta>.json` for k > 1), theta chooses between the two nu of the stable
   stretch, `--k=K` follows nu = K/n, `--repeat-tol=1e-8` relaxes the residual accepted for the n fold repeat (needed from n = 27), `--pieces=P` forces
   the number of pieces of the repeat (16 from n = 29)); `nu-map.mjs` lists the 41 members of the family where a nu of the stable stretch is k/n (n up
