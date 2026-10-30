@@ -1,0 +1,21 @@
+nu = 1/17 (upper nu): member with nu = 1/17: |theta| 0.0589993 turn, T* 2.3388220, L* 3.1275034, nu - k/n = 4.8e-12
+   [J | dF/dlam] 87 x 88: the three smallest singular values 4.7e-155, 4.8e-12, 3.9e-4 (the first is zero by the shape of the matrix, one more column than rows), the largest 4.9e+2
+   bifurcation equation: fit residual 1.1e-9, two real directions, |cos| of the repeat root with the repeat tangent 0.999997, angle between the two 64.5 degrees
+   coefficients c1, c2, c3 = -3.227003e-5, -4.706949e-3, -2.198989e-3; roots: root 0: |cos| with the repeat tangent 0.42837502 (not the repeat); root 1: |cos| with the repeat tangent 0.99999696 (the repeat direction)
+   control, the same matrix at other members: nu - k/n = 2.6e-4: smallest singular value 2.5e-4; nu - k/n = -3.2e-4: smallest singular value 3.4e-4; nu - k/n = -8.9e-4: smallest singular value 5.3e-4
+      sense 1 point 0: s 0.00e+0, T* 39.759974, L* 3.127503, turns -2.988e-3: Error: eigenvalue iteration did not converge
+      sense 1 point 1: s 1.00e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense 1 point 5: s 2.20e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense 1 point 10: s 3.70e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense 1 point 15: s 5.20e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense 1 point 20: s 6.96e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense 1 point 227: s 4.51e+0, T* 39.735078, L* 2.677058, turns 4.817e-5: outside the unit circle: real positive 0.95335, real positive 1.04893, real negative 0.17352, real negative 5.76301; nu 0.000000 (mod 0.953350), 0.000000 (mod 1.048933), 0.500000 (mod 0.173520), 0.500000 (mod 5.763011); defect 8.3e-9
+   satellite, sense 1: zero of theta after 228 points (path length 4.509): theta = 0 at T* 39.73548355, L* 2.67781109, closure 6.9e-10, closest approach 0.105, rotation left -4.1e-12 turns
+      sense -1 point 0: s 0.00e+0, T* 39.759974, L* 3.127503, turns -2.988e-3: Error: eigenvalue iteration did not converge
+      sense -1 point 1: s 1.00e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense -1 point 5: s 2.20e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense -1 point 10: s 3.70e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense -1 point 15: s 5.20e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense -1 point 20: s 6.96e-3, T* 39.759974, L* 3.127503, turns -2.988e-3: all four on the unit circle (elliptic-elliptic); nu 0.000000 (mod 1.000000), 0.014126 (mod 1.000000); defect 4.3e-10
+      sense -1 point 466: s 1.17e+1, T* 39.735249, L* 2.677375, turns 2.783e-5: outside the unit circle: real positive 0.95356, real positive 1.04871, real negative 0.17490, real negative 5.71767; nu 0.000000 (mod 0.953556), 0.000000 (mod 1.048706), 0.500000 (mod 0.174896), 0.500000 (mod 5.717669); defect 1.0e-7
+   satellite, sense -1: zero of theta after 467 points (path length 11.679): theta = 0 at T* 39.73548355, L* 2.67781109, closure 6.2e-10, closest approach 0.379, rotation left -1.4e-12 turns

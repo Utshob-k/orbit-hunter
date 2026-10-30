@@ -1,0 +1,6 @@
+nu = 1/21 (upper nu): member with nu = 1/21: |theta| 0.0477287 turn, T* 2.2258294, L* 3.2619867, nu - k/n = 5.6e-12
+   [J | dF/dlam] 87 x 88: the three smallest singular values 2.0e-155, 6.4e-12, 2.9e-4 (the first is zero by the shape of the matrix, one more column than rows), the largest 3.7e+2
+   bifurcation equation: fit residual 1.2e-9, two real directions, |cos| of the repeat root with the repeat tangent 1.000000, angle between the two 59.7 degrees
+   control, the same matrix at other members: nu - k/n = 9.1e-4: smallest singular value 2.0e-4; nu - k/n = -4.6e-4: smallest singular value 4.5e-4; nu - k/n = -1.8e-3: smallest singular value 4.9e-4
+   satellite, sense 1: zero of theta after 663 points (path length 17.559): theta = 0 at T* 46.72418760, L* 2.69034651, closure 7.2e-10, closest approach 0.417, rotation left 6.3e-12 turns
+   satellite, sense -1: zero of theta after 258 points (path length 5.409): theta = 0 at T* 46.72418761, L* 2.69034651, closure 1.3e-9, closest approach 0.108, rotation left -1.7e-12 turns

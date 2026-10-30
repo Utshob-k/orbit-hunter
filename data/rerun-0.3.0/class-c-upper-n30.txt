@@ -1,0 +1,2 @@
+nu = 1/30 (upper nu): member with nu = 1/30: |theta| 0.0333822 turn, T* 2.0734665, L* 3.5215268, nu - k/n = 2.5e-12
+the n fold repeat did not close
