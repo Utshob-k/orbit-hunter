@@ -37,7 +37,8 @@ const r = huntArclength(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shi
     const p = { step, lam: Y[n], u1, u2, t, Tstar: info.ts, Lstar: Math.abs(info.ls), theta: th, turns: th / (2 * Math.PI), minDist: info.minDist, closure: info.repeatErr };
     if (pts.length % 5 === 0) {
       const w = syzygyWord(perpInitial(u1, u2, Y[n]), 2 * t);
-      const st = relativeStability(u1, u2, Y[n], t);
+      let st = null;
+      try { st = relativeStability(u1, u2, Y[n], t); } catch (e) { p.stabilityError = String(e && e.message || e); out.stabilityErrors = (out.stabilityErrors || 0) + 1; }
       p.word = w ? w.word : null; p.root = w ? w.root : null; p.power = w ? w.power : null; p.maxMod = st ? st.maxMod : null;
     }
     pts.push(p);
