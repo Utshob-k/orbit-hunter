@@ -17,7 +17,7 @@ import { settings } from '../src/settings.js';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const opt = (name, d) => { const i = process.argv.indexOf(name); return i < 0 ? d : process.argv[i + 1]; };
-const dir = opt('--dir', null) || fs.mkdtempSync(path.join(os.tmpdir(), 'orbit-hunter-sample-')), stopAfter = opt('--stop-after', '4'), jobs = opt('--jobs', '3');
+const dir = path.resolve(opt('--dir', null) || fs.mkdtempSync(path.join(os.tmpdir(), 'orbit-hunter-sample-'))), stopAfter = opt('--stop-after', '4'), jobs = opt('--jobs', '3');
 const python = settings.ias.python;
 for (const f of ['t35m.json', 't35m.json.partial.json', 't35m.json.diag.jsonl', 't35m.json.nodes.jsonl', 'points.json', 'low.json', 'w1', 'w1-queue.json', 'w1-queue.json.log', 'w1-check.json', 'w1b', 'w1b-queue.json', 'w1b-queue.json.log', 'w1b-check.json', 'summary.json', 'summary.txt'])
   if (fs.existsSync(path.join(dir, f))) { console.error('exists, not overwriting: ' + path.join(dir, f) + ' (give --dir a new folder)'); process.exit(2); }
