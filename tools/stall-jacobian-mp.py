@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the 3 x 4 Jacobian d(r1, r2, r3)/d(u1, u2, t, lam) of the closing conditions of tools/reclose.py (the unregularised flow, 50 digits) at stored points near the end of a creeping trace, its singular
 # values relative to the largest, and the limit of lam from Aitken's delta-squared on the stored lam of the accepted steps. If the closing conditions lost rank at the stall, sigma3/sigma1 would fall
 # in proportion to the distance |lam - lam_lim|.

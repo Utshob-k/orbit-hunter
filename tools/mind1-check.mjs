@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // minD1 of src/ias/reg.js against the exact pericentre distance. minD1 is the smallest chain distance seen at the ends of the macro-steps (it is not interpolated), so it is at or above the true
 // closest approach of the piece. Test: the equal-mass pair on the ellipse with a = 1 and the periapsis distance q (mu = 2), started at 40 phases before the pericentre (the eccentric anomaly -u0, with u0
 // from 0.05 to 0.55 in 40 equal steps) and integrated for the time that takes the pair from -u0 to +u0 (from the Kepler equation M = u - e sin u divided by n = sqrt(2)), so every piece has the pericentre

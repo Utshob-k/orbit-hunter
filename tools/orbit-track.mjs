@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // The track of one orbit of a trace: the positions of the three bodies over one period, from the start values of an accepted step (a recorded point or an unrecorded step of a stored trace file),
 // computed with src/ias/reg.js only. Every sample is a separate flow from the start state to its own time, so the samples do not depend on each other.
 // The start state is the perpendicular start (src/perp.js). The positions are in the frame of the code (centre of mass at the origin; the orbit comes back rotated by the angle theta after one period).

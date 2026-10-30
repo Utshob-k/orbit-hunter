@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # tools/reclose.py (default settings, 50 digits) at the stored start values of ALL witnessed points of the four traces (the 854 points of data/deep/witnesses/: t35 - 69, t44 - 124, t62 - 336,
 # t72 - 325), at their stored lam: does the stored point close, in how many updates, to the same orbit, and how far is the closed orbit from the stored start values (the largest relative change
 # of u1, u2, t of a point) and what is the closing residual of the stored point (the first residual). tools/reclose-w1b.py does the same for the 33 points with a w1b result.

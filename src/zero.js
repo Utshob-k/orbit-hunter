@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the zero of the rotation angle between two points of a continuation curve (tools/branch-point.mjs): bisection along the chord, every new
 // point corrected back onto the curve. if the corrector fails at the midpoint the points at 1/4 and 3/4, then 1/8 and 7/8 of the chord are
 // tried, and the bisection goes on from the first that converges; if all fail it stops (stopped = true) with the last converged point. a,

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the state transition matrix of the exact Kepler flow of the equal-mass pair (tools/kepler-ref.py, 60 digits), by central differences of the exact flow with a step of 1e-25 (relative, the
 # 8 x 8 matrix of the barycentric state r0, r1, v0, v1), for the periapsis distances q = 1e-3, 1e-6, 1e-8, from the apocentre and from a phase 0.3 radians before the pericentre, one period.
 # Reference for test/kepler-stm.test.js: reg.js has to give this matrix. The matrix is also computed with the step 2e-25 and the largest difference of the two is stored (the check of the reference).

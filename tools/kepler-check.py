@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the multiple precision flow of tools/refine-mp.py (Gragg-Bulirsch-Stoer, three unit masses built in) on a Kepler pair of the equal-mass problem, against the exact Kepler flow of tools/kepler-ref.py.
 # The third body of mass 1 is at rest at (R, 0), R = 1e9, so that the flow can run it; the pair's centre is at the origin at rest, the start is the apocentre of a = 1, e = 1 - q, the interval is
 # one nominal period 2 pi / sqrt(2). Output: the 12 end numbers, the 4 relative numbers of the pair, the exact ones, the errors |difference| / max(1, |exact|), the number of steps, the

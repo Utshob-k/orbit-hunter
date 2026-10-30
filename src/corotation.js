@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // do the binaries of an orbit of the perpendicular start revolve in the same direction? the closest pair is taken as the inner binary, the
 // third body as the outer one; the share of the relative period in which their angular momenta have the same sign is returned ('direct' in
 // the sense of the CPC 2020 paper: share 1; 'retrograde': 0). positions from sampleOrbit (single precision), velocities by central

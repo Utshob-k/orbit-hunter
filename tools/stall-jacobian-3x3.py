@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the 3 x 3 block d(r1, r2, r3)/d(u1, u2, t) of the 3 x 4 closing Jacobian of tools/stall-jacobian-mp.py (same points, same re-closed values from DIR/res, same 50 digit flow and steps), its singular
 # values and the ratio of the smallest to the largest. At a fold of the family in lam this block is singular while the 3 x 4 matrix keeps full rank, so sigma3/sigma1 of the block tells a fold from
 # a smooth continuation. The 3 x 4 matrix is computed again and its sigma3/sigma1 printed next to the stored one as a check.

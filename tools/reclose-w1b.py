@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # tools/reclose.py (default settings, 50 digits) at the start values of the 33 witnessed points that have a w1b result, at their stored lam: does the stored start values close, in one update,
 # to the same orbit, and how far is the closed orbit from the stored start values (the largest relative change of u1, u2, t of a point).
 #   python tools/reclose-w1b.py run DIR [JOBS|--only ID]  DIR must be new (or may hold earlier results of other ids): writes DIR/jobs/<id>.json and DIR/res/<id>.json (the output of tools/reclose.py)

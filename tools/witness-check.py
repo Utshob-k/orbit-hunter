@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # checks the results of tools/witness.py in a folder made by tools/witness-jobs.py: for every point the status, the closure of the full period, the smallest pair distance (sampled and
 # parabolic), the seconds, and the relative change of the energy and of the angular momentum of the end state x_full (the digits of the preset: 40 for w1, 50 for w1b) against the start state of the perpendicular start:
 #   E = sum of |v|^2 / 2 over the three bodies minus the sum of 1/r over the three pairs (masses 1, G = 1), L = sum (x vy - y vx); |dE| / |E0| and |dL| / max(|L0|, 1e-3).

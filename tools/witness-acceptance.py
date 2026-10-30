@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # acceptance of the unregularised multiple precision flow (50 digits, tolerance 1e-30, step floor 1e-20) that is used as a witness for orbits with a pair distance down to 1e-10:
 # it must reproduce the exact Kepler flow of a near-radial pair (periapsis distance q) after one period to 1e-17, without a collapse of the step size.
 # python tools/witness-acceptance.py [--q 1e-8 1e-10 ...] [--stored data/deep/witness-acceptance.json] [--dir DIR] [--jobs N] [--out result.json]

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the guards of src/ias/guards.py on the pieces of stored orbits: for every orbit (u1, u2, lam, t) the 24 pieces of the multiple shooting are built with the multiple precision flow of
 # tools/refine-mp.py (the start of piece i+1 is the end state of piece i, carried in 40 digits and rounded to double only for the start of the next piece, as the nodes of the corrector are doubles);
 # every piece is then run through the IAS15 process of src/ias/ias-bridge.py (REBOUND, a fresh simulation, the three pair distances at every step end) and analysed.

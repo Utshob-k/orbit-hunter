@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // are two periodic orbits of the perpendicular start the same orbit? (T*, L*) is not enough: the start is compared, the collinear
 // configuration at t = 0 and at t = t, scaled to the outer bodies at -1 and 1, as (position of the middle body, velocities of the left,
 // middle and right body), up to the mirror image and the sign of y.

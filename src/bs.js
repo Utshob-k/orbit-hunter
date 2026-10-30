@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // a second integrator, only to check the first one: Gragg-Bulirsch-Stoer (modified midpoint with extrapolation).
 // a different method from the Dormand-Prince 5(4) in physics.js, so agreement means the closure of an orbit is not an artifact of it.
 import { deriv } from './physics.js';

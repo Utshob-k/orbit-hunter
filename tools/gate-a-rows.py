@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the rows of the test of src/ias/reg.js against the exact Kepler flow of the equal-mass pair (tools/kepler-ref.py), 80 rows:
 #   A1: 48 ellipses, e = 0, 0.3, 0.9, 0.99, for the interval 0.0861, one period and ten periods, from the apocentre, the pericentre, the eccentric anomaly pi/2 and a seeded phase;
 #   A2: 24 near-radial orbits, periapsis distance q = 1e-3 ... 1e-8, one and five periods, from the apocentre and from a phase 0.3 radians before the pericentre;

@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // follows the family of relative periodic orbits through one orbit of the perpendicular start in ONE direction, recording every accepted
 // step (start values, T*, L*, theta, closest approach, closure). stops at a close approach (below 0.03), L* below 1e-3, a closed loop, a
 // step collapse, a lost family, the step limit or the time limit; the reason is in the file.

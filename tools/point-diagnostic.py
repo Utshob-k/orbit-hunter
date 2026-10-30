@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # tells whether a stored point of a trace that does not close (the closure of the full period is not small) is off the orbit or cannot be closed with doubles, for one point:
 #  (a) refine the stored (u1, u2, t) at the FIXED lam to the three conditions of symResidual (collinear, both velocities perpendicular, the line may be rotated) with Newton in mpmath
 #      (50 digits, flow tolerance 1e-35, central difference Jacobian with step 1e-18) until the largest |symResidual| is below 1e-30, at most 12 iterations;

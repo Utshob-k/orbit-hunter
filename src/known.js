@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // orbits from the Suvakov-Dmitrasinovic paper (PRL 110, 114301), values closed with newton.js
 export const KNOWN = [
   { name: 'figure-8', v1: 0.347116888, v2: 0.532724945, T: 6.325914 },

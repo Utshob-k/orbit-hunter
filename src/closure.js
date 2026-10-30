@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // how well an orbit closes after one period, measured the same way for any integrator: largest difference of a position or velocity
 // component between the end state and the start state (max norm), once with the best rotation removed and once without
 import { dp45Step } from './physics.js';

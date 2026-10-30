@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # singular values of the extended Jacobian [J | dF/dlam] (279 x 280) written by tools/stall-matrix.mjs: the smallest, the second and third smallest and the largest of the whole matrix, and the
 # two smallest of J alone, with the closing residual of the point.
 # python tools/stall-svd.py OUT.json STALL.json [STALL.json ...]

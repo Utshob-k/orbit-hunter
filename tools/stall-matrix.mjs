@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the 279 x 280 matrix [J | dF/dlam] of the multiple shooting system (24 pieces, ias route) at stored accepted steps of a trace, after closing each step at its lam with closePerpMS.
 // node tools/stall-matrix.mjs LABEL STEPS OUT      e.g. node tools/stall-matrix.mjs t35m 1,100,142,165,700,2190 out/t35m
 //   LABEL: a trace of data/deep/traces/, STEPS: loop steps (the nearest accepted step is taken, the lower one on a tie), OUT: the base name of the output.

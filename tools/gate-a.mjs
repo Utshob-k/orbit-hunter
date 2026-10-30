@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // runs the regularised integrator of src/ias/reg.js on the rows of tools/gate-a-rows.py (or the stored subset) and grades it against the exact Kepler flow:
 // error = largest |end - exact| / max(1, |exact|) over the 4N numbers, the exact end state as ref_hi + ref_lo (a double-double), limit = max(limit_floor, 10 * 1.1e-16 * S), r = error / limit.
 // zones: PASS r <= 1, MARGINAL r <= 10, HARD FAIL above; a row with limit_not_meaningful is not graded (EXCLUDED). The exit status is 1 if a row is a HARD FAIL or does not finish.

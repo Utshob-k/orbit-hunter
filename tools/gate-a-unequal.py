@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # one row of the test of src/ias/reg.js for UNEQUAL masses against the exact Kepler flow: a pair with the masses 1 and 0.1 (G = 1), e = 0.9, a = 1 of the relative orbit, from the apocentre,
 # one period. tools/kepler-ref.py has the sum of the masses fixed in the module constant MU (2 for the masses 1, 1), and does not take masses as an argument; the relative motion of a pair depends
 # on the masses only through mu = m1 + m2, so this tool sets kepler_ref.MU to the exact sum of the two double precision masses and calls its prop() for the relative state. The barycentre moves

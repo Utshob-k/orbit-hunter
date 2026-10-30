@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // is an orbit an n fold repeat of a shorter one? the state at T/n is compared with the start state rotated by the best angle. nRepeat:
 // largest n for which the bodies are in their own places again; nRelabel: largest n for which it is the same up to renaming the bodies
 // (equal masses).

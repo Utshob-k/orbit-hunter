@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # what the corrector does during the creep of a trace, from its per-attempt records (OUT.json.diag.jsonl of tools/family-follow-ias.mjs) and its compact trace file (data/deep/traces/<name>.json).
 # The creep rule (on the accepted steps, the recorded points and the unrecorded steps of the trace in the order of the loop step; d_k = |lam_(k+1) - lam_k|): m0 is the median of the first 500 d_k;
 # the trace creeps if the median of its last 500 d_k is at most m0 / 100 AND there is a start: the creep starts at the smallest accepted step k such that at least one window of 100 consecutive

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # re-closes the three creeping traces (t35 -, t44 -, t81 -) BEYOND the last lam of the trace with tools/reclose.py (50 digits): for each trace a linear least squares fit of u1, u2, t against lam over
 # the last 300 accepted steps (recorded points and unrecorded steps by loop step), extrapolated to lam_last and to lam_last - 1e-6, - 1e-5, - 1e-4 (the three traces go towards falling lam), and
 # reclose.py started from the extrapolated values; if it converges the family goes on there. Then the w1 witness (tools/witness.py) of the orbit at lam_last - 1e-4.

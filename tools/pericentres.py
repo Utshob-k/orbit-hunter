@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # the osculating two-body pericentre at the closest sample of the 50 digit flow (the preset w1b of tools/witness.py), next to the stored parabolic estimate of the minimum pair distance. The samples are the
 # start and the end of every accepted step of the Gragg-Bulirsch-Stoer flow of tools/refine-mp.py over the half orbit t and the second t. At the closest sample the pair with the smallest distance is taken as
 # a two-body orbit (mu = 2, the relative position and velocity of the pair): q = h^2 / (mu (1 + e)), written without the cancellation of a (1 - e).

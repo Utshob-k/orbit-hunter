@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # every converted row of Davoust and Broucke (1982) (data/db82-*-converted.json) against the four families t35 -, t44 -, t62 -, t72 - (the stored curve of T*, L* from data/deep/traces/*.json and the start
 # orbit of the family from data/orbit-table.json), as the orbit and as an n-fold repeat (the row = n times the family orbit for n = 1 to 9, the family orbit = n times the row for n = 2 to 9), in T* and L* and
 # in the turns modulo 1 with both signs. A row is a MATCH if its distance to the polyline (or to the start orbit) is at most 1e-5 in the normalised (T*, L*) and the turns agree to 1e-4; it is near

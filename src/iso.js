@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 // the isosceles start: the second reversing symmetry S' of the orbits of R, equal masses.
 // state (centre of mass at 0): body 0 at (1, 0), bodies 1 and 2 at (-1/2, h) and (-1/2, -h), velocities v0 = (0, w), v1 = (p, -w/2), v2 = (-p, -w/2).
 // unknowns p, w (and t); h plays the role of lam in the perpendicular start (src/perp.js).
