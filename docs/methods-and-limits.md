@@ -27,7 +27,7 @@ This file holds a part of the former README, moved here on 2026-10-10 (only head
    (own complex QR solver, no libraries) say stable or not. Four of the eight eigenvalues are 1 in theory and scatter
    a little numerically, so the four closest to 1 count as trivial.
 
-Checks (the 11 files of `test/`, run by `npm test`): `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
+Checks (the 11 test files run by `npm test`): `test/figure8.test.js` (figure-8 and energy drift), `test/known.test.js` (11 published orbits),
 `test/stability.test.js` (known eigenvalues, figure-8 stable, M^T J M = J, butterfly I unstable),
 `test/topology.test.js` (figure-8 and k = 3 satellite words), `test/covers.test.js` (repeats), `test/relative.test.js` (rotating orbit: trivial
 eigenvalues, agreement with finite differences), `test/closure.test.js` (the closure tiers), `test/shooting.test.js` (multiple shooting gives
