@@ -101,10 +101,12 @@ function missedFromResult(i, r, ana) {
 }
 
 // a guard trip fails the attempt; right after a Newton residual that was already small it ends the trace
+// (settings.ias.guards = 'record', tools/family-follow-ias.mjs --guards=record: the trip is counted and listed (up to 20000 entries) and the evaluation goes on)
 function trip(kind, info) {
-  const obs = settings.observer;
+  const obs = settings.observer, record = settings.ias.guards === 'record';
   gstats.trips[kind]++; gstats.tripsTotal++;
-  if (gstats.tripList.length < 2000) gstats.tripList.push(Object.assign({ kind, step: obs ? obs.step : null }, info));
+  if (gstats.tripList.length < (record ? 20000 : 2000)) gstats.tripList.push(Object.assign({ kind, step: obs ? obs.step : null }, info));
+  if (record) return;
   const lr = obs && obs.lastResidual ? obs.lastResidual() : null;
   if (lr !== null && lr <= SMALL_RESIDUAL) throw new TraceStop('triple-approach guard ' + kind + ' (previous Newton residual ' + lr.toExponential(2) + ')', Object.assign({ kind, lastResidual: lr }, info));
   throw new GuardError(kind, info);

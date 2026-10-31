@@ -4,7 +4,7 @@
 // step (loop step), h, tauLam (lam component of the unit tangent), the residual history (sup F at the start of each Newton iteration), iterations, ok, why,
 // outcome, tangentDot, lamNew, smax (largest row sum of the piece matrices at the first iteration), the guard and reg.js counters of the attempt, the bridge calls
 // and IAS15 steps it used, and the seconds (split into IAS15 pass, reg.js and missed-flag check).
-// Stop rules (TraceStop, ending the trace): 5 consecutive attempts failed with a guard trip, or 10 consecutive attempts failed with a failure of reg.js.
+// Stop rules (TraceStop, ending the trace): 5 consecutive attempts failed with a guard trip (not with settings.ias.guards = 'record', where the trips are only counted), or 10 consecutive attempts failed with a failure of reg.js.
 import fs from 'fs';
 import { stats as bs, gstats, TraceStop } from './bridge.js';
 import { settings } from '../settings.js';
@@ -22,7 +22,7 @@ export function startRecorder(outFile) {
     mono(i, M) { const f = new Float64Array(144); for (let k = 0; k < 12; k++) for (let q = 0; q < 12; q++) f[12 * k + q] = M[k][q]; sysMono[i] = f; },
     begin() {
       if (cur) { const bad = cur.outcome !== 'accepted'; gConsec = (bad && (cur.guardTrips || 0) > 0) ? gConsec + 1 : 0; rConsec = (bad && (cur.regFail || 0) > 0) ? rConsec + 1 : 0; }
-      if (gConsec >= GUARD_STOP) throw new TraceStop('triple-approach guard (' + GUARD_STOP + ' consecutive attempts failed with a guard trip)', { consecutive: gConsec });
+      if (gConsec >= GUARD_STOP && settings.ias.guards !== 'record') throw new TraceStop('triple-approach guard (' + GUARD_STOP + ' consecutive attempts failed with a guard trip)', { consecutive: gConsec });
       if (rConsec >= REG_STOP) throw new TraceStop('stopped by reg.js failures (' + REG_STOP + ' consecutive attempts failed with a failure of reg.js)', { consecutive: rConsec });
       id++; this.why = null; gstats.attRatioMin = Infinity; gstats.attD2Close = Infinity;
       cur = { id, step: this.step, h: this.h, tauLam: this.tauLam, resid: [], t0: Date.now(),
