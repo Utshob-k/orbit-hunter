@@ -150,7 +150,7 @@ export ORBIT_PYTHON=$PWD/venv/bin/python
 Then, from the top folder:
 
 ```
-npm run test:ias                      # the tests of the ias route, 4 to 10 minutes
+npm run test:ias                      # the tests of the ias route, 4 to 15 minutes
 node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 6 to 15 minutes (its PASS or FAIL compares numbers with tolerances, see docs/deep.md)
 ```
 

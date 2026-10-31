@@ -36,7 +36,7 @@ From this folder:
 
 ```
 npm test                 # the tests of the default route (Dormand-Prince), about 20 seconds
-npm run test:ias         # the tests of the ias route, 4 to 10 minutes
+npm run test:ias         # the tests of the ias route, 4 to 15 minutes
 node tools/deep-sample.mjs   # the sample run: a short trace of the family t35 -, its witnesses and a summary, 6 to 15 minutes
 ```
 
