@@ -1,0 +1,463 @@
+{
+ "what": "what lies beyond the guards of the two traces that end at the triple-approach guard with the largest reach, t62 - and t72 -: each run starts from the last RECORDED accepted point of the stored trace, in the stored direction (falling lam), with tools/family-follow-ias.mjs --guards=record, which counts and lists the guard trips (kind, pair distances) but lets neither an attempt fail nor the trace stop at them (the missed-flag stop and the stop after 10 failures of reg.js stay), 60 minutes each. by_kind counts every trip of every attempt (a trip of G1a also trips G2). reclosed_points: 5 of the recorded points of the run, spread evenly (indices round((n - 1) j / 5), j = 1..5, the last recorded point the fifth), closed again by tools/reclose.py in 50 digits at their lam with the run's own (u1, u2, t) as the reference (same orbit: relative differences of u1, u2, t at most 1e-9). default_checks: the route with the option absent, after the change that adds the option.",
+ "commands": [
+  "node tools/family-follow-ias.mjs OUT.json -1 U1 U2 LAM T --guards=record --guard-ratio=390 --ias-first-step=legacy --pieces=24 --minutes=60   (U1 U2 LAM T: the last recorded accepted point of data/deep/traces/<label>.json)",
+  "python tools/reclose.py JOB.json OUT.json   (JOB.json: u1, u2, lam, t of the point, ref = the same values)",
+  "npm test; npm run test:ias; node tools/reproduce-trace.mjs t72m OUT.json [--stop-after=40]"
+ ],
+ "runs": {
+  "t62m": {
+   "label": "t62m",
+   "stored_end": {
+    "step": 388,
+    "lam": 0.23397230611032663,
+    "stored_stop": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+    "stored_guard_trips": {
+     "G1a": 0,
+     "G1b": 10,
+     "G2": 0,
+     "G3": 0
+    }
+   },
+   "command_start": {
+    "u1": -0.4918847363016828,
+    "u2": 0.3173850980446227,
+    "lam": 0.23397230611032663,
+    "t": 5.965993911882143
+   },
+   "options": {
+    "guards": "record",
+    "guard_ratio": 390,
+    "first_step": "legacy",
+    "pieces": 24,
+    "minutes": 60
+   },
+   "stop_reason": "out of time",
+   "accepted_steps_beyond": 642,
+   "recorded": 306,
+   "unrecorded": 336,
+   "loop_steps": 727,
+   "attempts": 727,
+   "lam_first": 0.23380007580786774,
+   "lam_last": 0.3960767686499634,
+   "lam_min": 0.23310332680652993,
+   "lam_min_step": 9,
+   "lam_min_accepted_index": 9,
+   "lam_max": 0.3960767686499634,
+   "lam_beyond_stored_end_downwards": 0.000868979303796702,
+   "Tstar_last": 44.74262033996325,
+   "Lstar_last": 0.019386494661343394,
+   "Lstar_min": 0.019386494661343394,
+   "smallest_recorded_closest_approach": 2.1399744969912492e-07,
+   "last_recorded": {
+    "step": 313,
+    "lam": 0.39531292125039946,
+    "minDist": 7.837913992791054e-05,
+    "closure": 17.791829033927495
+   },
+   "guards_would_have_tripped": {
+    "total": 16355,
+    "by_kind": {
+     "G1a": 5410,
+     "G1b": 5535,
+     "G2": 5410,
+     "G3": 0
+    },
+    "attempts_with_a_trip": 520,
+    "accepted_attempts_with_a_trip": 438,
+    "accepted_attempts": 642,
+    "first_trip": {
+     "kind": "G1b",
+     "step": 20,
+     "piece": 6,
+     "pair": 1,
+     "d1": 0.000882495106694595,
+     "d2": 0.32467155186805646,
+     "ratio": 367.9018154379586,
+     "d2close": 0.32467155186805646,
+     "secondMin": 0.19362634259835707
+    },
+    "last_trip": {
+     "kind": "G2",
+     "step": 727,
+     "piece": 6,
+     "pair": 2,
+     "d1": 5.91256267850625e-05,
+     "d2": 0.0007238517037950409,
+     "ratio": 12.242605163856204,
+     "d2close": 0.0005978914984249305,
+     "secondMin": 0.00043602315302853885
+    },
+    "tripList_entries": 16355,
+    "kinds": {
+     "G1a": {
+      "count": 5410,
+      "d1_min": 5.912562678493037e-05,
+      "d1_max": 0.0009995568876673246,
+      "d2_min": 0.0007238516240277875,
+      "d2_max": 0.0057741783099279215,
+      "ratio_min": 5.775331835780242,
+      "ratio_max": 12.242605163867312
+     },
+     "G1b": {
+      "count": 5535,
+      "d1_min": 5.912562678493037e-05,
+      "d1_max": 0.0009995568876673246,
+      "d2_min": 0.0007238516240277875,
+      "d2_max": 0.32467155186805646,
+      "ratio_min": 5.775331835780242,
+      "ratio_max": 373.8469622810864
+     },
+     "G2": {
+      "count": 5410,
+      "d1_min": 5.912562678493037e-05,
+      "d1_max": 0.0009995568876673246,
+      "d2_min": 0.0007238516240277875,
+      "d2_max": 0.0057741783099279215,
+      "ratio_min": 5.775331835780242,
+      "ratio_max": 12.242605163867312
+     },
+     "G3": null
+    },
+    "first_accepted_attempt_with_a_trip": {
+     "step": 20,
+     "by_kind": {
+      "G1a": 0,
+      "G1b": 7,
+      "G2": 0,
+      "G3": 0
+     }
+    }
+   },
+   "other_counters": {
+    "missed_flags_counted": 0,
+    "missed_stops": 0,
+    "reg_failures": 0,
+    "cross_checked": 2918,
+    "replaced": 0,
+    "bridge_errors": 0,
+    "bridge_timeouts": 0
+   },
+   "failed_attempts": 85,
+   "failed_by_outcome": {
+    "accepted": 642,
+    "newton failed": 85
+   },
+   "reclosed_points": [
+    {
+     "lam": 0.27214381486783434,
+     "converged": true,
+     "updates": 1,
+     "residual": 2.764083751965909e-22,
+     "seconds": 92.7,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 1.1250179077820517e-13,
+      "u2": 2.6784729208987888e-14,
+      "t": 7.215330731501972e-14
+     },
+     "first_residual": 7.362595141042032e-11
+    },
+    {
+     "lam": 0.3519237858192625,
+     "converged": true,
+     "updates": 1,
+     "residual": 1.261089423540329e-23,
+     "seconds": 71.9,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 8.89792071591657e-15,
+      "u2": 2.7966952148965424e-15,
+      "t": 2.019134968820379e-15
+     },
+     "first_residual": 3.930919531487187e-11
+    },
+    {
+     "lam": 0.3901905689249837,
+     "converged": true,
+     "updates": 1,
+     "residual": 4.75849220662441e-23,
+     "seconds": 48.4,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 5.74909564521792e-16,
+      "u2": 2.3357840735176483e-16,
+      "t": 6.727032991290654e-15
+     },
+     "first_residual": 3.467757926286174e-10
+    },
+    {
+     "lam": 0.3940083513501461,
+     "converged": true,
+     "updates": 1,
+     "residual": 1.6898698143926348e-18,
+     "seconds": 53.6,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 7.97531892356952e-15,
+      "u2": 2.736083934593224e-17,
+      "t": 3.783623773567589e-15
+     },
+     "first_residual": 1.5256507245499723e-07
+    },
+    {
+     "lam": 0.39531292125039946,
+     "converged": true,
+     "updates": 2,
+     "residual": 6.402831093481928e-26,
+     "seconds": 98.1,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 7.798774594131656e-15,
+      "u2": 9.460375046869603e-17,
+      "t": 8.406638626417472e-16
+     },
+     "first_residual": 1.577913062846568e-06
+    }
+   ],
+   "reclosed_all_same_orbit": true
+  },
+  "t72m": {
+   "label": "t72m",
+   "stored_end": {
+    "step": 336,
+    "lam": 0.24129926946863445,
+    "stored_stop": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+    "stored_guard_trips": {
+     "G1a": 0,
+     "G1b": 13,
+     "G2": 0,
+     "G3": 0
+    }
+   },
+   "command_start": {
+    "u1": -0.48594406670989815,
+    "u2": 0.32880046742422003,
+    "lam": 0.24129926946863445,
+    "t": 7.320408309289818
+   },
+   "options": {
+    "guards": "record",
+    "guard_ratio": 390,
+    "first_step": "legacy",
+    "pieces": 24,
+    "minutes": 60
+   },
+   "stop_reason": "out of time",
+   "accepted_steps_beyond": 594,
+   "recorded": 411,
+   "unrecorded": 183,
+   "loop_steps": 627,
+   "attempts": 628,
+   "lam_first": 0.24119396548922303,
+   "lam_last": 0.39598155256860224,
+   "lam_min": 0.24075938400669045,
+   "lam_min_step": 21,
+   "lam_min_accepted_index": 20,
+   "lam_max": 0.39598155256860224,
+   "lam_beyond_stored_end_downwards": 0.0005398854619440008,
+   "Tstar_last": 55.33825242262222,
+   "Lstar_last": 0.020444459040847962,
+   "Lstar_min": 0.020444459040847962,
+   "smallest_recorded_closest_approach": 5.510944808569586e-07,
+   "last_recorded": {
+    "step": 597,
+    "lam": 0.3959675250175934,
+    "minDist": 6.922085452676295e-05,
+    "closure": 14.948325833983489
+   },
+   "guards_would_have_tripped": {
+    "total": 10587,
+    "by_kind": {
+     "G1a": 3413,
+     "G1b": 3759,
+     "G2": 3415,
+     "G3": 0
+    },
+    "attempts_with_a_trip": 316,
+    "accepted_attempts_with_a_trip": 285,
+    "accepted_attempts": 594,
+    "first_trip": {
+     "kind": "G1b",
+     "step": 1,
+     "piece": 5,
+     "pair": 1,
+     "d1": 0.0008309694625784921,
+     "d2": 0.32392672346531665,
+     "ratio": 389.817842956797,
+     "d2close": 0.32392510912530514,
+     "secondMin": 0.17090919667032545
+    },
+    "last_trip": {
+     "kind": "G2",
+     "step": 628,
+     "piece": 0,
+     "pair": 2,
+     "d1": 6.793285842950525e-05,
+     "d2": 0.0008053675498287909,
+     "ratio": 11.855346123327498,
+     "d2close": 0.0006715956747778717,
+     "secondMin": 0.0004890948962106809
+    },
+    "tripList_entries": 10587,
+    "kinds": {
+     "G1a": {
+      "count": 3413,
+      "d1_min": 6.793285842946664e-05,
+      "d1_max": 0.0009884784828388935,
+      "d2_min": 0.0008053674778267042,
+      "d2_max": 0.005581698629939238,
+      "ratio_min": 5.645653291488073,
+      "ratio_max": 11.855346123331321
+     },
+     "G1b": {
+      "count": 3759,
+      "d1_min": 6.793285842946664e-05,
+      "d1_max": 0.0009928574830762504,
+      "d2_min": 0.0008053674778267042,
+      "d2_max": 0.32452948531947473,
+      "ratio_min": 5.645653291488073,
+      "ratio_max": 389.817842956797
+     },
+     "G2": {
+      "count": 3415,
+      "d1_min": 1.0723788953219894e-12,
+      "d1_max": 0.0009884784828388935,
+      "d2_min": 0.0008053674778267042,
+      "d2_max": 0.317728489013906,
+      "ratio_min": 5.645653291488073,
+      "ratio_max": 296283795214.4757
+     },
+     "G3": null
+    },
+    "first_accepted_attempt_with_a_trip": {
+     "step": 1,
+     "by_kind": {
+      "G1a": 0,
+      "G1b": 16,
+      "G2": 0,
+      "G3": 0
+     }
+    }
+   },
+   "other_counters": {
+    "missed_flags_counted": 6,
+    "missed_stops": 0,
+    "reg_failures": 0,
+    "cross_checked": 5670,
+    "replaced": 0,
+    "bridge_errors": 0,
+    "bridge_timeouts": 0
+   },
+   "failed_attempts": 34,
+   "failed_by_outcome": {
+    "accepted": 594,
+    "newton failed": 34
+   },
+   "reclosed_points": [
+    {
+     "lam": 0.24765061232195645,
+     "converged": true,
+     "updates": 1,
+     "residual": 1.956914763301268e-22,
+     "seconds": 118.0,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 1.6988969128335983e-13,
+      "u2": 1.1685567449679845e-13,
+      "t": 7.634700394333615e-14
+     },
+     "first_residual": 7.566917432497434e-11
+    },
+    {
+     "lam": 0.3038924767092781,
+     "converged": true,
+     "updates": 1,
+     "residual": 3.969627669421948e-23,
+     "seconds": 95.8,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 1.21699606470942e-14,
+      "u2": 3.997460024840712e-15,
+      "t": 4.66278269284903e-15
+     },
+     "first_residual": 3.800025899255856e-11
+    },
+    {
+     "lam": 0.3820754970754835,
+     "converged": true,
+     "updates": 1,
+     "residual": 5.609645858349838e-22,
+     "seconds": 107.2,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 3.573685683925206e-15,
+      "u2": 2.560808093395384e-16,
+      "t": 2.4113204649449137e-15
+     },
+     "first_residual": 8.414459808789943e-10
+    },
+    {
+     "lam": 0.39228865479564407,
+     "converged": true,
+     "updates": 1,
+     "residual": 1.1088376949147057e-20,
+     "seconds": 128.2,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 1.7161874647856366e-15,
+      "u2": 2.6684259652943543e-16,
+      "t": 3.4474484520374074e-12
+     },
+     "first_residual": 6.640588042720765e-09
+    },
+    {
+     "lam": 0.3959675250175934,
+     "converged": true,
+     "updates": 1,
+     "residual": 3.217237777506e-20,
+     "seconds": 142.5,
+     "same_orbit": true,
+     "relative_difference_to_the_run": {
+      "u1": 5.2846165346630405e-17,
+      "u2": 1.5400231891759205e-17,
+      "t": 1.5914891705604753e-15
+     },
+     "first_residual": 2.0280007702620188e-08
+    }
+   ],
+   "reclosed_all_same_orbit": true
+  }
+ },
+ "default_checks": {
+  "npm_test": {
+   "pass_lines": 46,
+   "fail_lines": 0,
+   "seconds": 18.0
+  },
+  "npm_run_test_ias": {
+   "pass_lines": 135,
+   "fail_lines": 0,
+   "seconds": 959.0
+  },
+  "replay_t72m_first_40_recorded_points": {
+   "compared": 40,
+   "bit_identical": 40,
+   "seconds": 323.0
+  },
+  "replay_t72m_whole_trace": {
+   "stored_accepted_steps": 325,
+   "compared": 325,
+   "bit_identical": 325,
+   "same_stop_reason": true,
+   "stop_reason": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "accepted_steps_of_the_run": 325,
+   "seconds": 2945.0
+  },
+  "constructed_trips": {
+   "note": "the states of test/guards.test.js for G3, G1a, G1b and G2: each throws by default and with guards=record returns with the trip counted and listed (a G1a trip also trips G2)",
+   "pass_lines": 14,
+   "fail_lines": 0
+  }
+ }
+}

@@ -1,0 +1,541 @@
+{
+ "what": "cost per unit of lam and of arclength (u1, u2, t, lam) of the 50 digit natural continuation (tools/reclose-continue.py) over the SAME stretch of lam as the PeriCont cost of cost-comparison.json (before_creep: accepted steps 1 to 1220 of t35 - and 1 to 623 of t44 -), started from accepted step 1 of the stored trace re-closed in 50 digits (tools/reclose.py), in the direction of the trace (falling lam). Two step sizes in lam per family; \"chosen\" is the run with the largest step at which every step converged. seconds = the sum of the wall seconds of the steps (the re-closing of the start orbit is not in it, as the corrector seconds of PeriCont do not hold the closing of its start); lam_covered = converged steps x |step|; arclength = the sum over the steps of sqrt(du1^2 + du2^2 + dt^2 + dlam^2). The steps are not an optimum search: a larger step may be cheaper still. The last orbit of a run is not checked (no witness). largest_relative_difference_to_the_stored_trace compares u1, u2, t of every step with the stored double precision trace linearly interpolated in lam (limited by the spacing of the stored points, large in the early steps of t44 -).",
+ "commands": [
+  "python tools/reclose.py JOB.json OUT.json   (JOB.json: u1, u2, lam, t of accepted step 1 of data/deep/traces/<label>.json, ref = the same values)",
+  "python tools/reclose-continue.py t35m START.json 0.6652898293497149 OUTDIR --steps 15 --dlam -1e-4 --no-witness",
+  "python tools/reclose-continue.py t35m START.json 0.6652898293497149 OUTDIR --steps 5 --dlam -3e-4 --no-witness",
+  "python tools/reclose-continue.py t44m START.json 0.23301529280288558 OUTDIR --steps 13 --dlam -3e-4 --no-witness",
+  "python tools/reclose-continue.py t44m START.json 0.23301529280288558 OUTDIR --steps 4 --dlam -1e-3 --no-witness"
+ ],
+ "conditions": "wall seconds on one machine (Windows 11, 12 cores, Python 3.14.6, mpmath 1.4.1), single-threaded jobs, three long jobs at a time (the runs of t35 - and t44 - and a job of another kind ran together, so the seconds include some contention); the first step of every run starts from the start orbit itself and needs 4 updates, the later ones 2 to 4",
+ "families": {
+  "t35m": {
+   "pericont": {
+    "stretch": "accepted steps 1 to 1220 of the stored trace",
+    "lam_first": 0.6652898293497149,
+    "lam_range": 0.0014489166358504502,
+    "seconds": 2193.079,
+    "seconds_per_unit_lam": 1513599.1579755447,
+    "seconds_per_unit_arclength": 196400.0,
+    "path_length": 0.01117
+   },
+   "start_reclosing": {
+    "converged": true,
+    "updates": 1,
+    "seconds": 44.1,
+    "residual": 1.0515463256391903e-25
+   },
+   "runs": [
+    {
+     "step_dlam": -0.0001,
+     "steps_asked": 15,
+     "steps_converged": 15,
+     "every_step_converged": true,
+     "updates_total": 32,
+     "updates_per_step": [
+      4,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ],
+     "seconds_per_step": [
+      462.1,
+      221.0,
+      242.7,
+      208.9,
+      130.4,
+      227.0,
+      207.0,
+      238.6,
+      201.3,
+      213.6,
+      185.8,
+      196.2,
+      167.6,
+      185.6,
+      77.2
+     ],
+     "seconds": 3165.0,
+     "seconds_all_steps": 3165.0,
+     "lam_start": 0.6652898293497149,
+     "lam_last": 0.6637898293497149,
+     "lam_covered": 0.0015,
+     "path_length": 0.01156299872168357,
+     "seconds_per_unit_lam": 2110000.0,
+     "seconds_per_unit_arclength": 273717.92354044097,
+     "factor_lam_over_pericont": 1.3940282596497662,
+     "factor_arclength_over_pericont": 1.3936757817741394,
+     "stopped": null,
+     "largest_relative_difference_to_the_stored_trace": 1.248610634146086e-08,
+     "steps_compared_with_the_stored_trace": 14,
+     "steps": [
+      {
+       "step": 1,
+       "lam": "0.6651898293497149",
+       "converged": true,
+       "updates": 4,
+       "residual": 1.3762212275739305e-26,
+       "seconds": 462.1
+      },
+      {
+       "step": 2,
+       "lam": "0.6650898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 7.878538689802142e-22,
+       "seconds": 221.0
+      },
+      {
+       "step": 3,
+       "lam": "0.6649898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 2.618841053298211e-21,
+       "seconds": 242.7
+      },
+      {
+       "step": 4,
+       "lam": "0.6648898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 5.367000080676286e-20,
+       "seconds": 208.9
+      },
+      {
+       "step": 5,
+       "lam": "0.6647898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 1.1874032192833176e-18,
+       "seconds": 130.4
+      },
+      {
+       "step": 6,
+       "lam": "0.6646898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.7410830680195315e-21,
+       "seconds": 227.0
+      },
+      {
+       "step": 7,
+       "lam": "0.6645898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 2.0755750826415804e-22,
+       "seconds": 207.0
+      },
+      {
+       "step": 8,
+       "lam": "0.6644898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 1.9694759990579136e-22,
+       "seconds": 238.6
+      },
+      {
+       "step": 9,
+       "lam": "0.6643898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.300610649288454e-22,
+       "seconds": 201.3
+      },
+      {
+       "step": 10,
+       "lam": "0.6642898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.3520292599020534e-22,
+       "seconds": 213.6
+      },
+      {
+       "step": 11,
+       "lam": "0.6641898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 4.0808620368375623e-22,
+       "seconds": 185.8
+      },
+      {
+       "step": 12,
+       "lam": "0.6640898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.1604249612197354e-22,
+       "seconds": 196.2
+      },
+      {
+       "step": 13,
+       "lam": "0.6639898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.1545027466517676e-22,
+       "seconds": 167.6
+      },
+      {
+       "step": 14,
+       "lam": "0.6638898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.2043443674721637e-22,
+       "seconds": 185.6
+      },
+      {
+       "step": 15,
+       "lam": "0.6637898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 3.1484872305766678e-22,
+       "seconds": 77.2
+      }
+     ]
+    },
+    {
+     "step_dlam": -0.0003,
+     "steps_asked": 5,
+     "steps_converged": 5,
+     "every_step_converged": true,
+     "updates_total": 12,
+     "updates_per_step": [
+      4,
+      2,
+      2,
+      2,
+      2
+     ],
+     "seconds_per_step": [
+      296.4,
+      198.3,
+      193.6,
+      182.5,
+      189.7
+     ],
+     "seconds": 1060.5,
+     "seconds_all_steps": 1060.5,
+     "lam_start": 0.6652898293497149,
+     "lam_last": 0.6637898293497149,
+     "lam_covered": 0.0014999999999999998,
+     "path_length": 0.01156299861954306,
+     "seconds_per_unit_lam": 707000.0000000001,
+     "seconds_per_unit_arclength": 91714.96381635893,
+     "factor_lam_over_pericont": 0.4670985685177179,
+     "factor_arclength_over_pericont": 0.4669804674967359,
+     "stopped": null,
+     "largest_relative_difference_to_the_stored_trace": 8.751767511683721e-09,
+     "steps_compared_with_the_stored_trace": 4,
+     "steps": [
+      {
+       "step": 1,
+       "lam": "0.6649898293497149",
+       "converged": true,
+       "updates": 4,
+       "residual": 1.036258849624326e-21,
+       "seconds": 296.4
+      },
+      {
+       "step": 2,
+       "lam": "0.6646898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 2.154648142035536e-18,
+       "seconds": 198.3
+      },
+      {
+       "step": 3,
+       "lam": "0.6643898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 2.2238646251198917e-18,
+       "seconds": 193.6
+      },
+      {
+       "step": 4,
+       "lam": "0.6640898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 2.137698667696046e-18,
+       "seconds": 182.5
+      },
+      {
+       "step": 5,
+       "lam": "0.6637898293497149",
+       "converged": true,
+       "updates": 2,
+       "residual": 2.0507274624198057e-18,
+       "seconds": 189.7
+      }
+     ]
+    }
+   ],
+   "chosen": {
+    "step_dlam": -0.0003,
+    "partial": false,
+    "seconds_per_unit_lam": 707000.0000000001,
+    "seconds_per_unit_arclength": 91714.96381635893,
+    "factor_lam_over_pericont": 0.4670985685177179,
+    "factor_arclength_over_pericont": 0.4669804674967359
+   }
+  },
+  "t44m": {
+   "pericont": {
+    "stretch": "accepted steps 1 to 623 of the stored trace",
+    "lam_first": 0.23301529280288558,
+    "lam_range": 0.003945663630589208,
+    "seconds": 1774.675,
+    "seconds_per_unit_lam": 449778.58382088866,
+    "seconds_per_unit_arclength": 36750.0,
+    "path_length": 0.0483
+   },
+   "start_reclosing": {
+    "converged": true,
+    "updates": 1,
+    "seconds": 75.8,
+    "residual": 2.5087020199727175e-27
+   },
+   "runs": [
+    {
+     "step_dlam": -0.0003,
+     "steps_asked": 13,
+     "steps_converged": 13,
+     "every_step_converged": true,
+     "updates_total": 40,
+     "updates_per_step": [
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ],
+     "seconds_per_step": [
+      668.4,
+      451.4,
+      357.0,
+      508.4,
+      521.0,
+      457.6,
+      285.1,
+      443.7,
+      492.8,
+      466.1,
+      536.1,
+      715.5,
+      602.3
+     ],
+     "seconds": 6505.4,
+     "seconds_all_steps": 6505.4,
+     "lam_start": 0.23301529280288558,
+     "lam_last": 0.2291152928028856,
+     "lam_covered": 0.0039,
+     "path_length": 0.04758001698486069,
+     "seconds_per_unit_lam": 1668051.282051282,
+     "seconds_per_unit_arclength": 136725.46611469117,
+     "factor_lam_over_pericont": 3.7086053939721046,
+     "factor_arclength_over_pericont": 3.720420846658263,
+     "stopped": null,
+     "largest_relative_difference_to_the_stored_trace": 1.236670420781035e-05,
+     "steps_compared_with_the_stored_trace": 13,
+     "steps": [
+      {
+       "step": 1,
+       "lam": "0.23271529280288558",
+       "converged": true,
+       "updates": 4,
+       "residual": 1.2568605053069268e-28,
+       "seconds": 668.4
+      },
+      {
+       "step": 2,
+       "lam": "0.23241529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 2.5505988243502465e-25,
+       "seconds": 451.4
+      },
+      {
+       "step": 3,
+       "lam": "0.23211529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 4.551700230650928e-25,
+       "seconds": 357.0
+      },
+      {
+       "step": 4,
+       "lam": "0.23181529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 2.7186564330478416e-23,
+       "seconds": 508.4
+      },
+      {
+       "step": 5,
+       "lam": "0.23151529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 2.6638509963573117e-22,
+       "seconds": 521.0
+      },
+      {
+       "step": 6,
+       "lam": "0.23121529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 1.3966494720250262e-24,
+       "seconds": 457.6
+      },
+      {
+       "step": 7,
+       "lam": "0.23091529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 2.0961703797738268e-24,
+       "seconds": 285.1
+      },
+      {
+       "step": 8,
+       "lam": "0.23061529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 3.2330807467830866e-24,
+       "seconds": 443.7
+      },
+      {
+       "step": 9,
+       "lam": "0.23031529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 5.206052458155941e-24,
+       "seconds": 492.8
+      },
+      {
+       "step": 10,
+       "lam": "0.23001529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 3.1500001913991795e-24,
+       "seconds": 466.1
+      },
+      {
+       "step": 11,
+       "lam": "0.22971529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 1.1576493170640659e-18,
+       "seconds": 536.1
+      },
+      {
+       "step": 12,
+       "lam": "0.22941529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 8.613121933214225e-19,
+       "seconds": 715.5
+      },
+      {
+       "step": 13,
+       "lam": "0.22911529280288558",
+       "converged": true,
+       "updates": 3,
+       "residual": 3.888374386189476e-23,
+       "seconds": 602.3
+      }
+     ]
+    },
+    {
+     "step_dlam": -0.001,
+     "steps_asked": 4,
+     "steps_converged": 4,
+     "every_step_converged": true,
+     "updates_total": 16,
+     "updates_per_step": [
+      4,
+      4,
+      4,
+      4
+     ],
+     "seconds_per_step": [
+      671.7,
+      360.5,
+      323.6,
+      589.6
+     ],
+     "seconds": 1945.4,
+     "seconds_all_steps": 1945.4,
+     "lam_start": 0.23301529280288558,
+     "lam_last": 0.22901529280288557,
+     "lam_covered": 0.004,
+     "path_length": 0.049154298260766685,
+     "seconds_per_unit_lam": 486350.0,
+     "seconds_per_unit_arclength": 39577.41375290375,
+     "factor_lam_over_pericont": 1.0813098210867125,
+     "factor_arclength_over_pericont": 1.0769364286504421,
+     "stopped": null,
+     "largest_relative_difference_to_the_stored_trace": 1.4912946939102642e-05,
+     "steps_compared_with_the_stored_trace": 3,
+     "steps": [
+      {
+       "step": 1,
+       "lam": "0.23201529280288558",
+       "converged": true,
+       "updates": 4,
+       "residual": 3.3503599737852585e-21,
+       "seconds": 671.7
+      },
+      {
+       "step": 2,
+       "lam": "0.23101529280288558",
+       "converged": true,
+       "updates": 4,
+       "residual": 1.7502347482901087e-28,
+       "seconds": 360.5
+      },
+      {
+       "step": 3,
+       "lam": "0.23001529280288558",
+       "converged": true,
+       "updates": 4,
+       "residual": 3.0815798710959063e-27,
+       "seconds": 323.6
+      },
+      {
+       "step": 4,
+       "lam": "0.22901529280288558",
+       "converged": true,
+       "updates": 4,
+       "residual": 9.42966884399811e-29,
+       "seconds": 589.6
+      }
+     ]
+    }
+   ],
+   "chosen": {
+    "step_dlam": -0.001,
+    "partial": false,
+    "seconds_per_unit_lam": 486350.0,
+    "seconds_per_unit_arclength": 39577.41375290375,
+    "factor_lam_over_pericont": 1.0813098210867125,
+    "factor_arclength_over_pericont": 1.0769364286504421
+   }
+  }
+ }
+}

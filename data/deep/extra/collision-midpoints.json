@@ -1,0 +1,160 @@
+{
+ "what": "the re-closed states (50 digits) of four of the nine bracketing midpoints of collision-orbits.json (the midpoint of the interval of the two neighbours in lam between which the sign of the pair angular momentum h changes): u1, u2, t as strings of 50 digits and as doubles, lam, the start values the re-closer was given, the result of the re-closing (converged, residual, number of updates, flows, seconds) and the h and the bracket of collision-orbits.json for the same midpoint. The other five midpoints are in data/deep/reclose and data/deep/extra/reclose-midpoints-deep.json.",
+ "commands": [
+  "python tools/reclose.py JOB.json OUT.json   (50 digits, --tol 30, --floor 1e-20, the defaults; JOB.json = {\"id\", \"u1\", \"u2\", \"lam\", \"t\", \"ref\": null}; start = the means of lam, u1, u2, t of the two neighbouring witnessed points)"
+ ],
+ "rows": [
+  {
+   "id": "t44m-m021-022",
+   "trace": "t44m",
+   "minimum": "t44m-u0021",
+   "between": [
+    "t44m-u0022",
+    "t44m-u0021"
+   ],
+   "lam_ends": [
+    0.2296906777111433,
+    0.22974082900756188
+   ],
+   "lam": "0.22971575335935257",
+   "u1": "-0.3897809493500340376407016564575588618453",
+   "u2": "0.4423731197984580771984649773707625425801",
+   "t": "4.601815403055285821714046788516112173457",
+   "u1_float": -0.38978094935003404,
+   "u2_float": 0.44237311979845806,
+   "t_float": 4.601815403055286,
+   "start_guess": {
+    "u1": "-0.3897811807277116",
+    "u2": "0.4423726626596968",
+    "t": "4.601815028523928"
+   },
+   "converged": true,
+   "residual": 5.510555800250975e-18,
+   "updates": 2,
+   "flows": 7,
+   "seconds": 169.5,
+   "digits": 50,
+   "h_float": 0.00031653789328105767,
+   "sign_of_h": 1,
+   "bracket_lam": [
+    0.22971575335935257,
+    0.22974082900756188
+   ],
+   "bracket_width": 2.507564820930508e-05
+  },
+  {
+   "id": "t44m-m006-007",
+   "trace": "t44m",
+   "minimum": "t44m-u0006",
+   "between": [
+    "t44m-k0005",
+    "t44m-u0006"
+   ],
+   "lam_ends": [
+    0.23142646130795266,
+    0.23165305215401924
+   ],
+   "lam": "0.23153975673098595",
+   "u1": "-0.3806672795175724876672231842225373917414",
+   "u2": "0.4560048828396553974139893369128432881932",
+   "t": "4.618208970061445520173322331355003806407",
+   "u1_float": -0.3806672795175725,
+   "u2_float": 0.4560048828396554,
+   "t_float": 4.6182089700614455,
+   "start_guess": {
+    "u1": "-0.3806701626788743",
+    "u2": "0.45599900961509277",
+    "t": "4.618202795311873"
+   },
+   "converged": true,
+   "residual": 2.761278128683198e-17,
+   "updates": 2,
+   "flows": 7,
+   "seconds": 144.3,
+   "digits": 50,
+   "h_float": 0.0013124122605558427,
+   "sign_of_h": 1,
+   "bracket_lam": [
+    0.23153975673098595,
+    0.23165305215401924
+   ],
+   "bracket_width": 0.00011329542303328832
+  },
+  {
+   "id": "t72m-m105-106",
+   "trace": "t72m",
+   "minimum": "t72m-u0106",
+   "between": [
+    "t72m-u0106",
+    "t72m-u0105"
+   ],
+   "lam_ends": [
+    0.26371626616638144,
+    0.2641525417614834
+   ],
+   "lam": "0.2639344039639324",
+   "u1": "-0.3732718927737660959753627350598928044657",
+   "u2": "0.4795768333706647702903254803189390946663",
+   "t": "7.341631338139135453379359401064431385238",
+   "u1_float": -0.3732718927737661,
+   "u2_float": 0.47957683337066476,
+   "t_float": 7.341631338139136,
+   "start_guess": {
+    "u1": "-0.3732744301720139",
+    "u2": "0.4795714891624086",
+    "t": "7.341623119617605"
+   },
+   "converged": true,
+   "residual": 3.6682564339310584e-18,
+   "updates": 3,
+   "flows": 10,
+   "seconds": 1052.7,
+   "digits": 50,
+   "h_float": 7.57402396213704e-05,
+   "sign_of_h": 1,
+   "bracket_lam": [
+    0.2639344039639324,
+    0.2641525417614834
+   ],
+   "bracket_width": 0.00021813779755097684
+  },
+  {
+   "id": "t72m-m103-104",
+   "trace": "t72m",
+   "minimum": "t72m-u0103",
+   "between": [
+    "t72m-k0100",
+    "t72m-u0103"
+   ],
+   "lam_ends": [
+    0.2645919080854906,
+    0.2650340141646551
+   ],
+   "lam": "0.26481296112507285",
+   "u1": "-0.3711964747080765218985633250810595465592",
+   "u2": "0.4828250186347858197580222381801424857039",
+   "t": "7.345041074879449751897685528380399099247",
+   "u1_float": -0.37119647470807654,
+   "u2_float": 0.48282501863478583,
+   "t_float": 7.3450410748794495,
+   "start_guess": {
+    "u1": "-0.3711988505717585",
+    "u2": "0.48281996382279735",
+    "t": "7.3450328352313665"
+   },
+   "converged": true,
+   "residual": 4.7479385206260555e-17,
+   "updates": 2,
+   "flows": 7,
+   "seconds": 620.3,
+   "digits": 50,
+   "h_float": 0.0005324448817799647,
+   "sign_of_h": 1,
+   "bracket_lam": [
+    0.26481296112507285,
+    0.2650340141646551
+   ],
+   "bracket_width": 0.00022105303958225297
+  }
+ ]
+}
