@@ -53,6 +53,23 @@ On failure `{ ok: false, reason, ...statistics }` with the reason
 
 `src/ias/bridge.js` turns a failure into an error of the evaluation (there is no fallback to another integrator).
 
+## The matrix at fixed physical time (the end-time correction)
+
+The scheme is differentiated by hand in the fictitious time s (the equations are at the top of the file). Each column of the derivative is a tangent vector g with the layout of the state y = [Q (nQ numbers), t (1), P (nQ numbers)], nQ = 2 (N - 1): g[0..nQ-1] is the derivative of the chain vectors Q, g[nQ] the derivative of the physical time t, g[nQ+1..2 nQ] the derivative of the chain momenta P. The tangents (`tg` in the code, one for each of the ncol = 4 N components of the start) are carried through the leapfrog sub-steps, the extrapolation and the macro-steps, including the perturbation of the constant `Pt` = U0 - T0 = -E0 of the logarithmic Hamiltonian, and at the end of the last macro-step they are derivatives at the same fictitious time s. The end state is wanted at the physical time `tau`, however, and a perturbation of the start changes the s at which t reaches tau. The correction below is made on every column before the columns are mapped back to Cartesian coordinates (`fromChain`, with the centre of mass added):
+
+    D     = T(P_end) + Pt + PtLo                 T(P) = 0.5 P.(A P) is `Tval`; Pt and PtLo are the high and the low part of -E0
+    rateT = 1 / D                                dt/ds
+    fP    = A P_end / D                          dQ/ds
+    gQ    = (dU/dQ) / U, at Q_end                dP/ds
+    k     = g[nQ] / rateT                        the change of s that restores t = tau, per unit of the perturbation
+    g[i]           <- g[i] - fP[i] k             for the nQ components of Q
+    g[nQ + 1 + i]  <- g[nQ + 1 + i] - gQ[i] k    for the nQ components of P
+    g[nQ]          <- 0                          the time is tau for every perturbation
+
+In the notation of the paper the tangent of the end state is dZ - Z' dt / t' with Z = (Q, P), Z' = (A P / D, (dU/dQ) / U) and t' = 1 / D.
+
+The correction is made for both ways in which the flow ends. (1) The last macro-step would pass tau: the length of the last step is found by Newton's method on f(H) = t(H) - tau in a bracket (the constants `endUlp`, `stagUlp` and `maxEnd`); the end state and the tangents are those of the last trial of the search (`final.rr.res`), and the returned `tEnd` is tau to within `fRes` (`fOverUlp` is that in units of the last place of the time increment). (2) The last macro-step lands exactly on tau (`final.exact`, tested after every accepted macro-step): there is no search, the end state and the tangents are those after the step, `tEnd` is tau and `fRes` is 0. An earlier version of the file left the correction out in this second branch. None of the stored runs took that branch (0 of 3040, 9524 and 11980 calls in the t62 - run, the sample run and the replay, see [deep.md](deep.md)), so their matrices are not affected; the released file has the correction in both.
+
 ## What it is tested against
 
 - `test/gate-a.test.js` and `tools/gate-a.mjs`: the end states against the exact Kepler flow of the equal-mass pair (ellipses and near-radial orbits with periapsis distance down to 1e-8; `data/deep/gate-a-all.json`, 80 rows) and, with a third body, against a 40 digit flow (`data/deep/extra/gate-a-extension.json`, 44 rows).
