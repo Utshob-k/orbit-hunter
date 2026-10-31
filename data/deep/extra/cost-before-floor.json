@@ -1,0 +1,275 @@
+{
+ "what": "the cost per unit of lam and of arclength of PeriCont over the accepted steps 1..k of t35 - and t44 - at three boundaries k (H: the first accepted step at which the hand-over rule of tools/handover-rule.mjs fires with 1e-7; Q: the 99 % point of lambda-progress.json; B: the first k >= 100 at which the lam per PeriCont second of the last 100 accepted steps falls below the lam per second of the 50 digit continuation at its larger step), against the 50 digit natural continuation (the larger-step run of cost-same-stretch.json) over the same lam; the route PeriCont to k and then the 50 digit continuation; and the break-even P100 of the hand-over rule. PeriCont seconds are the corrector seconds of the per-attempt records, counted as tools/creep-attempts.py counts them (all attempts with a loop step below the loop step of the (k+1)-th accepted step); the check against cost-comparison.json (2193.079 s and 1774.675 s for the accepted steps 1..1220 and 1..623) passes to 0.1 s. The 50 digit side is the first n steps of the run whose lam reaches lam_k (a step overshoots; the denominator is the lam really covered).",
+ "commands": [
+  "python cost-before-floor.py REL RAW CONT_T35M CONT_T44M OUT.json   (the script is in the raw deposit, not in the package: it needs RAW/traces/<label>.diag.jsonl, the per-attempt records of the stored runs, and the *_continue.json of the larger-step run of each family; REL: this repository)"
+ ],
+ "inputs": {
+  "t35m": {
+   "trace": "data/deep/traces/t35m.json",
+   "diag": "raw deposit traces/t35m.diag.jsonl (2190 attempts)",
+   "larger_step_run": "the *_continue.json of tools/reclose-continue.py of the larger-step run of extra/cost-same-stretch.json (step 0.0003 in lam); it holds the change of (u1, u2, t) of every step, from which the arclength of the first n steps is taken"
+  },
+  "t44m": {
+   "trace": "data/deep/traces/t44m.json",
+   "diag": "raw deposit traces/t44m.diag.jsonl (1592 attempts)",
+   "larger_step_run": "the *_continue.json of tools/reclose-continue.py of the larger-step run of extra/cost-same-stretch.json (step 0.001 in lam); it holds the change of (u1, u2, t) of every step, from which the arclength of the first n steps is taken"
+  }
+ },
+ "families": {
+  "t35m": {
+   "accepted_steps": 1711,
+   "attempts": 2190,
+   "stretch_end_step": 1220,
+   "stretch_lam": 0.0014489005833830948,
+   "pericont_seconds_to_stretch_end": 2193.079,
+   "fifty_digit_larger_step": {
+    "step_dlam": -0.0003,
+    "steps": 5,
+    "seconds": 1060.5,
+    "seconds_per_unit_lam": 707000.0000000001,
+    "seconds_per_unit_arclength": 91714.96381635893,
+    "lam_per_second": 1.4144271570014142e-06
+   },
+   "boundaries": {
+    "H": {
+     "accepted_step": 262,
+     "loop_step": 268,
+     "lam": 0.6638518766920942,
+     "lam_covered": 0.0014379526576207002,
+     "fraction_of_the_stretch_lam": 0.9924439772556155,
+     "pericont": {
+      "corrector_seconds": 574.217,
+      "seconds_per_accepted_step": 2.191667938931298,
+      "path_length": 0.011083696756445901,
+      "seconds_per_unit_lam": 399329.55856149306,
+      "seconds_per_unit_arclength": 51807.353865582336
+     },
+     "fifty_digit": {
+      "steps": 5,
+      "lam_covered": 0.0014999999999999998,
+      "seconds": 1060.5,
+      "path_length": 0.01156299861954306,
+      "seconds_per_unit_lam": 707000.0000000001,
+      "seconds_per_unit_arclength": 91714.96381635893,
+      "one_step_only": false
+     },
+     "factor_lam": 1.7704674869219046,
+     "factor_arclength": 1.7703078225983047,
+     "route": {
+      "pericont_to_k_then_fifty_digit_seconds": 581.957183514013,
+      "remaining_lam": 1.0947925762394561e-05,
+      "fifty_digit_alone_over_the_stretch_seconds": 1024.3727124518482,
+      "route_over_alone": 0.5681107827648899
+     },
+     "p100_at_the_step": 9.79615980212234e-08,
+     "handover_json_accepted_step": 262,
+     "same_as_handover_json": true,
+     "first_k_by_node_handoverFires": 262,
+     "first_k_by_python": 262
+    },
+    "Q": {
+     "accepted_step": 198,
+     "loop_step": 200,
+     "lam": 0.6638549830569407,
+     "lam_covered": 0.001434846292774239,
+     "fraction_of_the_stretch_lam": 0.990300031092513,
+     "pericont": {
+      "corrector_seconds": 456.507,
+      "seconds_per_accepted_step": 2.3055909090909092,
+      "path_length": 0.011059703045611857,
+      "seconds_per_unit_lam": 318157.423759555,
+      "seconds_per_unit_arclength": 41276.60553970549
+     },
+     "fifty_digit": {
+      "steps": 5,
+      "lam_covered": 0.0014999999999999998,
+      "seconds": 1060.5,
+      "path_length": 0.01156299861954306,
+      "seconds_per_unit_lam": 707000.0000000001,
+      "seconds_per_unit_arclength": 91714.96381635893,
+      "one_step_only": false
+     },
+     "factor_lam": 2.2221703697673574,
+     "factor_arclength": 2.221959936316346,
+     "route": {
+      "pericont_to_k_then_fifty_digit_seconds": 466.4433834604611,
+      "remaining_lam": 1.405429060885588e-05,
+      "fifty_digit_alone_over_the_stretch_seconds": 1024.3727124518482,
+      "route_over_alone": 0.4553453814130048
+     }
+    },
+    "B": {
+     "accepted_step": 134,
+     "loop_step": 134,
+     "lam": 0.6638801423561881,
+     "lam_covered": 0.0014096869935268375,
+     "fraction_of_the_stretch_lam": 0.972935624220196,
+     "pericont": {
+      "corrector_seconds": 350.285,
+      "seconds_per_accepted_step": 2.6140671641791045,
+      "path_length": 0.010865379392010212,
+      "seconds_per_unit_lam": 248484.23913143761,
+      "seconds_per_unit_arclength": 32238.6349672778
+     },
+     "fifty_digit": {
+      "steps": 5,
+      "lam_covered": 0.0014999999999999998,
+      "seconds": 1060.5,
+      "path_length": 0.01156299861954306,
+      "seconds_per_unit_lam": 707000.0000000001,
+      "seconds_per_unit_arclength": 91714.96381635893,
+      "one_step_only": false
+     },
+     "factor_lam": 2.8452508797792486,
+     "factor_arclength": 2.844877393520215,
+     "route": {
+      "pericont_to_k_then_fifty_digit_seconds": 378.00900802837396,
+      "remaining_lam": 3.9213589856257336e-05,
+      "fifty_digit_alone_over_the_stretch_seconds": 1024.3727124518482,
+      "route_over_alone": 0.36901510888903405
+     },
+     "break_even_p100": 3.6974075872405998e-06,
+     "break_even_p100_over_default": 36.974075872406
+    }
+   },
+   "pericont_whole_stretch_cost_for_the_record": {
+    "seconds": 2193.079,
+    "seconds_per_unit_lam": 1513599.1579755447,
+    "factor_lam_whole_stretch": 0.4670985685177179
+   }
+  },
+  "t44m": {
+   "accepted_steps": 1266,
+   "attempts": 1592,
+   "stretch_end_step": 623,
+   "stretch_lam": 0.003945662595557176,
+   "pericont_seconds_to_stretch_end": 1774.675,
+   "fifty_digit_larger_step": {
+    "step_dlam": -0.001,
+    "steps": 4,
+    "seconds": 1945.4,
+    "seconds_per_unit_lam": 486350.0,
+    "seconds_per_unit_arclength": 39577.41375290375,
+    "lam_per_second": 2.056132414927521e-06
+   },
+   "boundaries": {
+    "H": {
+     "accepted_step": 286,
+     "loop_step": 288,
+     "lam": 0.22907662242111407,
+     "lam_covered": 0.0039386703817715085,
+     "fraction_of_the_stretch_lam": 0.9982278733631355,
+     "pericont": {
+      "corrector_seconds": 1307.069,
+      "seconds_per_accepted_step": 4.570171328671329,
+      "path_length": 0.04818641703802947,
+      "seconds_per_unit_lam": 331855.3911109757,
+      "seconds_per_unit_arclength": 27125.258119283713
+     },
+     "fifty_digit": {
+      "steps": 4,
+      "lam_covered": 0.004,
+      "seconds": 1945.4,
+      "path_length": 0.049154298260766685,
+      "seconds_per_unit_lam": 486350.0,
+      "seconds_per_unit_arclength": 39577.41375290375,
+      "one_step_only": false
+     },
+     "factor_lam": 1.4655479857410536,
+     "factor_arclength": 1.459061277089475,
+     "route": {
+      "pericont_to_k_then_fifty_digit_seconds": 1310.4696631746592,
+      "remaining_lam": 6.992213785667056e-06,
+      "fifty_digit_alone_over_the_stretch_seconds": 1918.9730033492324,
+      "route_over_alone": 0.6829015629127992
+     },
+     "p100_at_the_step": 9.849615065254947e-08,
+     "handover_json_accepted_step": 286,
+     "same_as_handover_json": true,
+     "first_k_by_node_handoverFires": 286,
+     "first_k_by_python": 286
+    },
+    "Q": {
+     "accepted_step": 124,
+     "loop_step": 125,
+     "lam": 0.22910843183196394,
+     "lam_covered": 0.003906860970921633,
+     "fraction_of_the_stretch_lam": 0.9901660054057249,
+     "pericont": {
+      "corrector_seconds": 556.181,
+      "seconds_per_accepted_step": 4.485330645161291,
+      "path_length": 0.047687399569670386,
+      "seconds_per_unit_lam": 142360.06966708016,
+      "seconds_per_unit_arclength": 11663.059949147157
+     },
+     "fifty_digit": {
+      "steps": 4,
+      "lam_covered": 0.004,
+      "seconds": 1945.4,
+      "path_length": 0.049154298260766685,
+      "seconds_per_unit_lam": 486350.0,
+      "seconds_per_unit_arclength": 39577.41375290375,
+      "one_step_only": false
+     },
+     "factor_lam": 3.416337187368385,
+     "factor_arclength": 3.393398810043653,
+     "route": {
+      "pericont_to_k_then_fifty_digit_seconds": 575.0521701414963,
+      "remaining_lam": 3.880162463554271e-05,
+      "fifty_digit_alone_over_the_stretch_seconds": 1918.9730033492324,
+      "route_over_alone": 0.2996666285236129
+     }
+    },
+    "B": {
+     "accepted_step": 116,
+     "loop_step": 117,
+     "lam": 0.22911351954965123,
+     "lam_covered": 0.0039017732532343474,
+     "fraction_of_the_stretch_lam": 0.9888765597007084,
+     "pericont": {
+      "corrector_seconds": 525.246,
+      "seconds_per_accepted_step": 4.5279827586206896,
+      "path_length": 0.04760780251377632,
+      "seconds_per_unit_lam": 134617.2537229325,
+      "seconds_per_unit_arclength": 11032.771358182496
+     },
+     "fifty_digit": {
+      "steps": 4,
+      "lam_covered": 0.004,
+      "seconds": 1945.4,
+      "path_length": 0.049154298260766685,
+      "seconds_per_unit_lam": 486350.0,
+      "seconds_per_unit_arclength": 39577.41375290375,
+      "one_step_only": false
+     },
+     "factor_lam": 3.6128355507905345,
+     "factor_arclength": 3.587259489751957,
+     "route": {
+      "pericont_to_k_then_fifty_digit_seconds": 546.5915816387075,
+      "remaining_lam": 4.388934232282815e-05,
+      "fifty_digit_alone_over_the_stretch_seconds": 1918.9730033492324,
+      "route_over_alone": 0.2848354722472527
+     },
+     "break_even_p100": 9.310132124232937e-06,
+     "break_even_p100_over_default": 93.10132124232938
+    }
+   },
+   "pericont_whole_stretch_cost_for_the_record": {
+    "seconds": 1774.675,
+    "seconds_per_unit_lam": 449778.58382088866,
+    "factor_lam_whole_stretch": 1.0813098210867125
+   }
+  }
+ },
+ "other_jobs_during_the_stored_runs": "not recorded (the per-attempt records hold seconds per attempt and no load; no log of the stored runs names other jobs)",
+ "decision_inputs": {
+  "t35m": {
+   "H_accepted_step": 262,
+   "H_factor_lam": 1.7704674869219046
+  },
+  "t44m": {
+   "H_accepted_step": 286,
+   "H_factor_lam": 1.4655479857410536
+  }
+ }
+}
