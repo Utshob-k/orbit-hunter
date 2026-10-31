@@ -64,6 +64,7 @@ tools/guard-check.py
 tools/point-diagnostic.py
 tools/pericentres.py
 tools/pair-angmom.py
+tools/satellite-words.py
 tools/piece-ends.mjs
 tools/piece-mp.py
 tools/piece-trace.py
