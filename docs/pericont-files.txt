@@ -66,6 +66,11 @@ tools/pericentres.py
 tools/pair-angmom.py
 tools/satellite-words.py
 tools/paper-figures.py
+tools/cost-same-conditions.py
+tools/step-limit.py
+tools/henon-relation.py
+tools/guards-record-checks.py
+tools/cost-before-floor.py
 tools/piece-ends.mjs
 tools/piece-mp.py
 tools/piece-trace.py

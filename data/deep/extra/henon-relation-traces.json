@@ -1,0 +1,48 @@
+{
+ "what": "Henon's relation dT* = -pi L* d(turns) between consecutive recorded points of the four stored traces, the test of test/henon.test.js applied to each: pairs with |d(turns)| of 1e-6 or more, the median and the largest relative deviation |dT* - s| / max(|dT*|, |s|) with s = -pi L* d(turns), L* the mean of |L*| of the pair (the sign of the relation is that of L of the first point of the trace)",
+ "commands": [
+  "python tools/henon-relation.py REL OUT.json"
+ ],
+ "inputs": [
+  "data/deep/traces/t35m.json",
+  "data/deep/traces/t44m.json",
+  "data/deep/traces/t62m.json",
+  "data/deep/traces/t72m.json",
+  "data/deep/henon-t35m.json"
+ ],
+ "traces": {
+  "t35m": {
+   "recorded_points": 1690,
+   "pairs": 155,
+   "median_deviation": 3.664033809924025e-07,
+   "max_deviation": 3.190744547392122e-05,
+   "sign_of_the_relation": -1.0,
+   "angular_momentum_of_the_first_point": -0.29461649661036254
+  },
+  "t44m": {
+   "recorded_points": 1248,
+   "pairs": 300,
+   "median_deviation": 1.1484445729722208e-06,
+   "max_deviation": 5.112441836091696e-05,
+   "sign_of_the_relation": 1.0,
+   "angular_momentum_of_the_first_point": 0.3924661190513381
+  },
+  "t62m": {
+   "recorded_points": 372,
+   "pairs": 371,
+   "median_deviation": 1.953162195943831e-07,
+   "max_deviation": 8.672458450479765e-05,
+   "sign_of_the_relation": 1.0,
+   "angular_momentum_of_the_first_point": 0.35782902338588224
+  },
+  "t72m": {
+   "recorded_points": 321,
+   "pairs": 320,
+   "median_deviation": 3.027768427554353e-07,
+   "max_deviation": 5.936715114697898e-05,
+   "sign_of_the_relation": 1.0,
+   "angular_momentum_of_the_first_point": 0.3205737828604166
+  }
+ },
+ "gate_t35m_equals_henon_t35m_json": true
+}

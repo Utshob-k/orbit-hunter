@@ -1,7 +1,7 @@
 {
  "what": "the cost per unit of lam and of arclength of PeriCont over the accepted steps 1..k of t35 - and t44 - at three boundaries k (H: the first accepted step at which the hand-over rule of tools/handover-rule.mjs fires with 1e-7; Q: the 99 % point of lambda-progress.json; B: the first k >= 100 at which the lam per PeriCont second of the last 100 accepted steps falls below the lam per second of the 50 digit continuation at its larger step), against the 50 digit natural continuation (the larger-step run of cost-same-stretch.json) over the same lam; the route PeriCont to k and then the 50 digit continuation; and the break-even P100 of the hand-over rule. PeriCont seconds are the corrector seconds of the per-attempt records, counted as tools/creep-attempts.py counts them (all attempts with a loop step below the loop step of the (k+1)-th accepted step); the check against cost-comparison.json (2193.079 s and 1774.675 s for the accepted steps 1..1220 and 1..623) passes to 0.1 s. The 50 digit side is the first n steps of the run whose lam reaches lam_k (a step overshoots; the denominator is the lam really covered).",
  "commands": [
-  "python cost-before-floor.py REL RAW CONT_T35M CONT_T44M OUT.json   (the script is in the raw deposit, not in the package: it needs RAW/traces/<label>.diag.jsonl, the per-attempt records of the stored runs, and the *_continue.json of the larger-step run of each family; REL: this repository)"
+  "python tools/cost-before-floor.py REL RAW CONT_T35M CONT_T44M OUT.json   (it needs RAW/traces/<label>.diag.jsonl, the per-attempt records of the stored runs, and the *_continue.json of the larger-step run of each family, which are in the raw deposit; REL: this repository)"
  ],
  "inputs": {
   "t35m": {

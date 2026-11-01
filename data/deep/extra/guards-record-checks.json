@@ -1,0 +1,259 @@
+{
+ "what": "checks on the two runs past the guards: the failure rate of the corrector in attempts with and without a guard trip, the rule and the place of the five re-closed points, the first trip and the turn, the missed flags, step 32 of t72 - (the attempt with a trip at d1 = 1.07e-12: accepted, unrecorded, re-closed and witnessed), where a trip is counted in src/ias/bridge.js, and the cross-check counts of the four stored traces",
+ "commands": [
+  "python tools/guards-record-checks.py REL BEYOND_T62M BEYOND_T72M STEP32_JOB STEP32_RECLOSE STEP32_WITNESS_JOB STEP32_WITNESS OUT.json   (the run outputs, the re-closing and the witness are in the raw deposit)",
+  "python tools/reclose.py STEP32_JOB STEP32_RECLOSE   (u1, u2, lam, t of step 32 from the unrecorded list of the t72 - run, ref = the same values)",
+  "python tools/witness.py STEP32_WITNESS_JOB STEP32_WITNESS --preset w1b   (the re-closed orbit)"
+ ],
+ "inputs": {
+  "t62m": "out-R11-a2-t62m-beyond.json and .diag.jsonl",
+  "t72m": "out-R11-a2-t72m-beyond.json and .diag.jsonl"
+ },
+ "runs": {
+  "t62m": {
+   "attempts": 727,
+   "accepted": 642,
+   "failed": 85,
+   "recorded_accepted_steps": 306,
+   "unrecorded_accepted_steps": 336,
+   "attempts_with_a_trip": {
+    "attempts": 520,
+    "accepted": 438,
+    "failed": 82,
+    "failure_rate": 0.1576923076923077
+   },
+   "attempts_without_a_trip": {
+    "attempts": 207,
+    "accepted": 204,
+    "failed": 3,
+    "failure_rate": 0.014492753623188406
+   },
+   "failed_reasons": [
+    "12 iterations without reaching the tolerance",
+    "line search failed"
+   ],
+   "turn": {
+    "lam": 0.23310332680652993,
+    "loop_step": 9
+   },
+   "first_trip": {
+    "loop_step": 20,
+    "lam_of_the_last_accepted_step_before_it": 0.23546137773204925,
+    "kinds_in_that_attempt": {
+     "G1a": 0,
+     "G1b": 7,
+     "G2": 0,
+     "G3": 0
+    }
+   },
+   "five_reclosed_points": {
+    "rule": "the recorded points of the run sorted by loop step, at the indices round((n - 1) j / 5), j = 1..5, n recorded points (the last recorded point is the fifth); ref = the run's own u1, u2, t",
+    "recorded_points": 306,
+    "indices": [
+     61,
+     122,
+     183,
+     244,
+     305
+    ],
+    "loop_steps": [
+     65,
+     127,
+     189,
+     250,
+     313
+    ],
+    "lam": [
+     0.27214381486783434,
+     0.3519237858192625,
+     0.3901905689249837,
+     0.3940083513501461,
+     0.39531292125039946
+    ],
+    "all_recorded": true,
+    "accepted_steps_before_the_first_one": 62,
+    "of_them_unrecorded": 1,
+    "of_them_with_a_trip": 7,
+    "lam_of_the_first_one": 0.27214381486783434,
+    "lam_turn": 0.23310332680652993
+   },
+   "missed_flags": {
+    "counted_in_the_run_output": 0,
+    "sum_of_the_missedCounted_field_of_the_attempt_records": 0,
+    "attempts_with_the_field_above_zero": [],
+    "missed_stops": 0
+   },
+   "regularised_integrator": {
+    "reg_failures": 0,
+    "bridge_errors": 0,
+    "timeouts": 0
+   }
+  },
+  "t72m": {
+   "attempts": 628,
+   "accepted": 594,
+   "failed": 34,
+   "recorded_accepted_steps": 411,
+   "unrecorded_accepted_steps": 183,
+   "attempts_with_a_trip": {
+    "attempts": 316,
+    "accepted": 285,
+    "failed": 31,
+    "failure_rate": 0.0981012658227848
+   },
+   "attempts_without_a_trip": {
+    "attempts": 312,
+    "accepted": 309,
+    "failed": 3,
+    "failure_rate": 0.009615384615384616
+   },
+   "failed_reasons": [
+    "12 iterations without reaching the tolerance",
+    "line search failed"
+   ],
+   "turn": {
+    "lam": 0.24075938400669045,
+    "loop_step": 21
+   },
+   "first_trip": {
+    "loop_step": 1,
+    "lam_of_the_last_accepted_step_before_it": 0.24119396548922303,
+    "kinds_in_that_attempt": {
+     "G1a": 0,
+     "G1b": 16,
+     "G2": 0,
+     "G3": 0
+    }
+   },
+   "five_reclosed_points": {
+    "rule": "the recorded points of the run sorted by loop step, at the indices round((n - 1) j / 5), j = 1..5, n recorded points (the last recorded point is the fifth); ref = the run's own u1, u2, t",
+    "recorded_points": 411,
+    "indices": [
+     82,
+     164,
+     246,
+     328,
+     410
+    ],
+    "loop_steps": [
+     86,
+     170,
+     254,
+     336,
+     597
+    ],
+    "lam": [
+     0.24765061232195645,
+     0.3038924767092781,
+     0.3820754970754835,
+     0.39228865479564407,
+     0.3959675250175934
+    ],
+    "all_recorded": true,
+    "accepted_steps_before_the_first_one": 84,
+    "of_them_unrecorded": 2,
+    "of_them_with_a_trip": 10,
+    "lam_of_the_first_one": 0.24765061232195645,
+    "lam_turn": 0.24075938400669045
+   },
+   "missed_flags": {
+    "counted_in_the_run_output": 6,
+    "sum_of_the_missedCounted_field_of_the_attempt_records": 0,
+    "attempts_with_the_field_above_zero": [],
+    "missed_stops": 0
+   },
+   "regularised_integrator": {
+    "reg_failures": 0,
+    "bridge_errors": 0,
+    "timeouts": 0
+   },
+   "step_32": {
+    "trip": {
+     "kind": "G2",
+     "step": 32,
+     "piece": 0,
+     "pair": 1,
+     "d1": 1.0723788953219894e-12,
+     "d2": 0.317728489013906,
+     "ratio": 296283795214.4757,
+     "d2close": 0.3172378469046468,
+     "secondMin": 0.005369736932785982
+    },
+    "attempt": {
+     "loop_step": 32,
+     "outcome": "accepted",
+     "iters": 6,
+     "guard_trips_in_the_attempt": 2,
+     "guard_trips_by_kind": {
+      "G1a": 0,
+      "G1b": 0,
+      "G2": 2,
+      "G3": 0
+     },
+     "final_residual": 1.5409895581797173e-13
+    },
+    "accepted": true,
+    "recorded": false,
+    "unrecorded_reason": "perpInfo null",
+    "lam_of_the_step": 0.2408742780473073,
+    "reclosing": {
+     "converged": true,
+     "updates": 1,
+     "residual": 2.5761531691222938e-21,
+     "seconds": 73.3,
+     "same_orbit_as_the_step": true,
+     "relative_difference_to_the_step": {
+      "u1": 7.883122196816766e-13,
+      "u2": 1.387653466615213e-12,
+      "t": 2.3098610186955494e-13
+     }
+    },
+    "witness_w1b": {
+     "status": "done",
+     "dmin": 7.387854615962617e-08,
+     "dmin_parabolic": 7.373148770954815e-08,
+     "dmin_pair": [
+      0,
+      2
+     ],
+     "closure": 8.578439563460009e-14,
+     "dE": 7.397603851198578e-18,
+     "dL": 2.4816348238105937e-17,
+     "inside_the_w1b_acceptance": true,
+     "acceptance": "minimum pair distance at least 1e-10, closure below 1e-6, change of E and L at most 1e-14 (docs/deep.md, tools/witness-acceptance.py)"
+    }
+   }
+  }
+ },
+ "where_trips_are_counted": {
+  "reading": "trip() is called inside the evaluation of the pieces of a corrector call (each call of the piece evaluator, so at every iteration of the corrector and at the final orbit), for G3 on the start of a piece, for G1a, G1b and G2 on the flags of the IAS15 piece; in the default mode it throws and the attempt fails, with guards=record it counts and lists the trip and the evaluation goes on",
+  "lines": {
+   "trip_function": 105,
+   "count": 107,
+   "list": 108,
+   "record_returns": 109,
+   "G3": 121,
+   "G1a": 133,
+   "G1b": 134,
+   "G2": 135
+  }
+ },
+ "cross_check_in_the_stored_traces": {
+  "t35m": {
+   "cross_check_pieces": 2720,
+   "cross_check_replaced": 176
+  },
+  "t44m": {
+   "cross_check_pieces": 21290,
+   "cross_check_replaced": 3022
+  },
+  "t62m": {
+   "cross_check_pieces": 41946,
+   "cross_check_replaced": 10
+  },
+  "t72m": {
+   "cross_check_pieces": 36992,
+   "cross_check_replaced": 2414
+  }
+ }
+}

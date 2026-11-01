@@ -1,0 +1,162 @@
+{
+ "what": "the step in lam of the accepted steps of the replays of t35 - and t44 - to the hand-over step in four blocks of accepted steps: median arclength step h, median |tauLam|, median |dlam|, failed attempts and their best residual, accepted steps with at most 3 corrector iterations, and the ratios first block to last block; the step control of src/shooting.js (huntArclength) and of the driver as the sources have it",
+ "commands": [
+  "python tools/step-limit.py REL REPLAY_T35M REPLAY_T44M OUT.json   (the replays and their .diag.jsonl are in the raw deposit: node tools/reproduce-trace.mjs LABEL OUT.json --stop-after=K)"
+ ],
+ "step_control": {
+  "growth": "h = Math.min(hMax, c.iters <= 3 ? h * 1.4 : h);",
+  "theta_limit": "dth > Math.max(0.03, 0.3 * Math.abs(th))",
+  "tangent_turn_limit": "wdot(tauNew, tau) > Math.cos(0.35)",
+  "unit_tangent": "const wunit = (a) =>",
+  "arc_weight_default": "settings.arcWeight ?? 1",
+  "driver_hMax": "hMax: 0.2",
+  "reading": "h is the pseudo-arclength step; the unit tangent has norm 1 in the norm of (z, lam) with weight 1 on every component when arcWeight is unset (all 3 + 12 x (pieces - 1) node and start components and lam, 280 with 24 pieces), so the step in lam of an accepted step is about h x tauLam; the driver passes hMax = 0.2; after a failed attempt h is halved; h grows by 1.4 only after an accepted step with at most 3 corrector iterations; a step is refused when the unit tangent turns by more than 0.35 rad or theta changes by more than max(0.03, 0.3 |theta|)"
+ },
+ "families": {
+  "t35m": {
+   "accepted_steps": 262,
+   "attempts": 268,
+   "B": 134,
+   "Q": 198,
+   "blocks": {
+    "1-50": {
+     "first": 1,
+     "last": 50,
+     "accepted_steps": 50,
+     "median_h": 0.2,
+     "median_abs_tauLam": 9.933821524424946e-05,
+     "median_abs_dlam": 1.9457795037869374e-05,
+     "failed_attempts": 0,
+     "failed_best_residual_min": null,
+     "failed_best_residual_max": null,
+     "failed_reasons": [],
+     "accepted_with_at_most_3_iterations": 0
+    },
+    "51-B": {
+     "first": 51,
+     "last": 134,
+     "accepted_steps": 84,
+     "median_h": 0.2,
+     "median_abs_tauLam": 1.1763818230010062e-05,
+     "median_abs_dlam": 2.3240107644983965e-06,
+     "failed_attempts": 0,
+     "failed_best_residual_min": null,
+     "failed_best_residual_max": null,
+     "failed_reasons": [],
+     "accepted_with_at_most_3_iterations": 0
+    },
+    "B+1-Q": {
+     "first": 135,
+     "last": 198,
+     "accepted_steps": 64,
+     "median_h": 0.1,
+     "median_abs_tauLam": 2.832779179688905e-06,
+     "median_abs_dlam": 2.8205584229334946e-07,
+     "failed_attempts": 2,
+     "failed_best_residual_min": 1.0615508472255897e-11,
+     "failed_best_residual_max": 2.4066082460194593e-11,
+     "failed_reasons": [
+      "12 iterations without reaching the tolerance",
+      "line search failed"
+     ],
+     "accepted_with_at_most_3_iterations": 0
+    },
+    "Q+1-H": {
+     "first": 199,
+     "last": 262,
+     "accepted_steps": 64,
+     "median_h": 0.023529799999999993,
+     "median_abs_tauLam": 2.2257380424168074e-06,
+     "median_abs_dlam": 5.0817568264527324e-08,
+     "failed_attempts": 4,
+     "failed_best_residual_min": 1.1709744285326451e-11,
+     "failed_best_residual_max": 1.759303813742008e-11,
+     "failed_reasons": [
+      "line search failed"
+     ],
+     "accepted_with_at_most_3_iterations": 6
+    }
+   },
+   "first_over_last": {
+    "abs_dlam": 382.89504402460136,
+    "abs_tauLam": 44.63158437835906,
+    "h": 8.499859752314089
+   },
+   "failed_attempts_in_total": 6
+  },
+  "t44m": {
+   "accepted_steps": 286,
+   "attempts": 288,
+   "B": 116,
+   "Q": 124,
+   "blocks": {
+    "1-50": {
+     "first": 1,
+     "last": 50,
+     "accepted_steps": 50,
+     "median_h": 0.2,
+     "median_abs_tauLam": 0.0001864433562348203,
+     "median_abs_dlam": 3.556585068742457e-05,
+     "failed_attempts": 1,
+     "failed_best_residual_min": 5.429003732793092e-06,
+     "failed_best_residual_max": 5.429003732793092e-06,
+     "failed_reasons": [
+      "line search failed"
+     ],
+     "accepted_with_at_most_3_iterations": 5
+    },
+    "51-B": {
+     "first": 51,
+     "last": 116,
+     "accepted_steps": 66,
+     "median_h": 0.1,
+     "median_abs_tauLam": 1.4763968840187664e-05,
+     "median_abs_dlam": 1.457961235892813e-06,
+     "failed_attempts": 0,
+     "failed_best_residual_min": null,
+     "failed_best_residual_max": null,
+     "failed_reasons": [],
+     "accepted_with_at_most_3_iterations": 0
+    },
+    "B+1-Q": {
+     "first": 117,
+     "last": 124,
+     "accepted_steps": 8,
+     "median_h": 0.1,
+     "median_abs_tauLam": 6.415464450874224e-06,
+     "median_abs_dlam": 6.351460200837433e-07,
+     "failed_attempts": 0,
+     "failed_best_residual_min": null,
+     "failed_best_residual_max": null,
+     "failed_reasons": [],
+     "accepted_with_at_most_3_iterations": 0
+    },
+    "Q+1-H": {
+     "first": 125,
+     "last": 286,
+     "accepted_steps": 162,
+     "median_h": 0.1,
+     "median_abs_tauLam": 1.5865510378607103e-06,
+     "median_abs_dlam": 1.5761710564499154e-07,
+     "failed_attempts": 1,
+     "failed_best_residual_min": 3.5600251635514724e-09,
+     "failed_best_residual_max": 3.5600251635514724e-09,
+     "failed_reasons": [
+      "12 iterations without reaching the tolerance"
+     ],
+     "accepted_with_at_most_3_iterations": 1
+    }
+   },
+   "first_over_last": {
+    "abs_dlam": 225.6471500468434,
+    "abs_tauLam": 117.51488088666764,
+    "h": 2.0
+   },
+   "failed_attempts_in_total": 2
+  }
+ },
+ "inputs": {
+  "t35m": "out-R12-replay-t35m-241.json and .diag.jsonl",
+  "t44m": "out-R12-replay-t44m-268.json and .diag.jsonl"
+ }
+}

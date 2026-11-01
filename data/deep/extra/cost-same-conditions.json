@@ -1,0 +1,581 @@
+{
+ "what": "PeriCont and the 50 digit natural continuation counted the same way on the same stretch of lam, t35 - and t44 -: (i) without bookkeeping, (ii) the whole run; the 50 digit side is the run with the largest step at which every step converged, the PeriCont side the replay of the stored trace to the hand-over step H, run one after the other with the 50 digit jobs on one machine, the load recorded every 60 s. Also orbits per second, the route of the hand-over as measured in handover.json, and the break-even P100 of the hand-over rule.",
+ "commands": [
+  "python tools/reclose.py JOB OUT.json   (the start orbit: accepted step 1 of the stored trace)",
+  "python tools/reclose-continue.py LABEL START.json LAM0 OUTDIR --steps N --dlam STEP --no-witness",
+  "node tools/reproduce-trace.mjs LABEL OUT.json --stop-after=K   (K = recorded point of the hand-over step: 241 and 268)",
+  "python tools/cost-same-conditions.py REL INPUTS.json OUT.json   (the files of the runs are in the raw deposit)"
+ ],
+ "inputs": {
+  "t35m": {
+   "trace": "data/deep/traces/t35m.json",
+   "replay": "out-R12-replay-t35m-241.json",
+   "replay_attempts": "out-R12-replay-t35m-241.json.diag.jsonl",
+   "replay_time": "out-R12-replay-t35m.time",
+   "start": "out-R12-start-t35m.json",
+   "runs": [
+    "out-R12-t35m-d7.5e-4",
+    "out-R12-t35m-d1.5e-3"
+   ]
+  },
+  "t44m": {
+   "trace": "data/deep/traces/t44m.json",
+   "replay": "out-R12-replay-t44m-268.json",
+   "replay_attempts": "out-R12-replay-t44m-268.json.diag.jsonl",
+   "replay_time": "out-R12-replay-t44m.time",
+   "start": "out-R12-start-t44m.json",
+   "runs": [
+    "out-R12-t44m-d2e-3",
+    "out-R12-t44m-d4e-3"
+   ]
+  }
+ },
+ "families": {
+  "t35m": {
+   "start_reclosing": {
+    "converged": true,
+    "residual": 1.0515463256391903e-25,
+    "updates": 1,
+    "seconds_in_the_tool": 98.0,
+    "clock": {
+     "seconds": 98.0,
+     "exit": 0,
+     "start": "2026-11-01 15:56:00",
+     "end": "2026-11-01 15:57:39"
+    }
+   },
+   "fifty_digit_runs": [
+    {
+     "step_dlam": -0.00075,
+     "steps_asked": 2,
+     "steps_run": 2,
+     "steps_converged": 2,
+     "complete": true,
+     "updates_per_step": [
+      4,
+      3
+     ],
+     "residual_per_step": [
+      6.841351912622946e-18,
+      3.1123749085573684e-28
+     ],
+     "seconds_per_step": [
+      140.4,
+      101.6
+     ],
+     "seconds_of_the_steps": 242.0,
+     "lam_start": 0.6652898293497149,
+     "lam_last": 0.6637898293497149,
+     "lam_covered": 0.0015,
+     "path_length": 0.011562998016349108,
+     "clock": {
+      "seconds": 242.0,
+      "exit": 0,
+      "start": "2026-11-01 15:57:39",
+      "end": "2026-11-01 16:01:41"
+     },
+     "first_orbit_against_the_stored_trace": {
+      "lam": 0.6645398293497149,
+      "relative_difference": [
+       7.482801556338007e-10,
+       1.900360957950112e-09,
+       1.8448539456162458e-10
+      ]
+     },
+     "last_orbit_against_the_handover_steps": {
+      "lam": 0.6637898293497149,
+      "relative_difference": [
+       2.6426872449419105e-14,
+       5.472336419838487e-15,
+       1.0587761896110196e-14
+      ]
+     }
+    },
+    {
+     "step_dlam": -0.0015,
+     "steps_asked": 1,
+     "steps_run": 1,
+     "steps_converged": 1,
+     "complete": true,
+     "updates_per_step": [
+      5
+     ],
+     "residual_per_step": [
+      2.1634143481088022e-26
+     ],
+     "seconds_per_step": [
+      157.1
+     ],
+     "seconds_of_the_steps": 157.1,
+     "lam_start": 0.6652898293497149,
+     "lam_last": 0.6637898293497149,
+     "lam_covered": 0.0015,
+     "path_length": 0.011562995863109365,
+     "clock": {
+      "seconds": 157.0,
+      "exit": 0,
+      "start": "2026-11-01 16:01:41",
+      "end": "2026-11-01 16:04:18"
+     },
+     "first_orbit_against_the_stored_trace": {
+      "lam": 0.6637898293497149,
+      "relative_difference": null
+     },
+     "last_orbit_against_the_handover_steps": {
+      "lam": 0.6637898293497149,
+      "relative_difference": [
+       2.6426872449419105e-14,
+       5.472336419838487e-15,
+       1.0587761896110196e-14
+      ]
+     }
+    }
+   ],
+   "chosen_fifty_digit_run": {
+    "step_dlam": -0.0015,
+    "steps": 1,
+    "load": {
+     "samples": 3,
+     "load_median": 66.0,
+     "load_max": 73.0,
+     "processes_cpu_seconds_gained_in_the_window": [
+      {
+       "pid": 67276,
+       "name": "find.exe",
+       "seconds": 180.6
+      },
+      {
+       "pid": 18748,
+       "name": "python.exe",
+       "seconds": 180.0
+      },
+      {
+       "pid": 67428,
+       "name": "python.exe",
+       "seconds": 146.7
+      }
+     ]
+    }
+   },
+   "load_during_the_start_reclosing": {
+    "samples": 1,
+    "load_median": 34.0,
+    "load_max": 34.0,
+    "processes_cpu_seconds_gained_in_the_window": [
+     {
+      "pid": 67276,
+      "name": "find.exe",
+      "seconds": 59.5
+     },
+     {
+      "pid": 18748,
+      "name": "python.exe",
+      "seconds": 59.0
+     },
+     {
+      "pid": 39356,
+      "name": "python.exe",
+      "seconds": 55.6
+     },
+     {
+      "pid": 4,
+      "name": "System",
+      "seconds": 14.0
+     }
+    ]
+   },
+   "pericont_replay": {
+    "accepted_steps": 262,
+    "loop_steps_equal_to_the_stored_trace": true,
+    "attempts": 268,
+    "failed_attempts": 6,
+    "corrector_seconds_of_steps_1_to_H": 468.114,
+    "wall_seconds": 604.0,
+    "clock": {
+     "seconds": 604.0,
+     "exit": 0,
+     "start": "2026-11-01 16:04:18",
+     "end": "2026-11-01 16:14:22"
+    },
+    "load": {
+     "samples": 9,
+     "load_median": 37.0,
+     "load_max": 76.0,
+     "processes_cpu_seconds_gained_in_the_window": [
+      {
+       "pid": 67276,
+       "name": "find.exe",
+       "seconds": 536.8
+      },
+      {
+       "pid": 18748,
+       "name": "python.exe",
+       "seconds": 536.4
+      },
+      {
+       "pid": 13424,
+       "name": "node.exe",
+       "seconds": 445.2
+      },
+      {
+       "pid": 4,
+       "name": "System",
+       "seconds": 95.8
+      },
+      {
+       "pid": 68332,
+       "name": "python.exe",
+       "seconds": 29.1
+      },
+      {
+       "pid": 2152,
+       "name": "msedge.exe",
+       "seconds": 18.8
+      }
+     ]
+    },
+    "lam_0": 0.6653529332738678,
+    "lam_1": 0.6652898293497149,
+    "lam_H": 0.6638518766920942,
+    "path_length_1_to_H": 0.011083696756445901,
+    "corrector_seconds_in_the_stored_run": 574.217,
+    "seconds_double_precision_part_of_handover_json": 1048.687
+   },
+   "counts": {
+    "i_without_bookkeeping": {
+     "fifty_digit_seconds": 157.1,
+     "fifty_digit_lam_covered": 0.0015,
+     "fifty_digit_seconds_per_unit_lam": 104733.33333333333,
+     "fifty_digit_seconds_per_unit_arclength": 13586.444366136337,
+     "pericont_corrector_seconds": 468.114,
+     "pericont_lam_covered": 0.0014379526576207002,
+     "pericont_seconds_per_unit_lam": 325542.0110802271,
+     "pericont_seconds_per_unit_arclength": 42234.464753626606
+    },
+    "ii_whole_run": {
+     "fifty_digit_seconds": 255.0,
+     "fifty_digit_lam_covered": 0.0015000000000000568,
+     "fifty_digit_seconds_per_unit_lam": 169999.99999999357,
+     "pericont_wall_seconds": 604.0,
+     "pericont_lam_covered": 0.0015010565817735744,
+     "pericont_seconds_per_unit_lam": 402383.23280681623
+    }
+   },
+   "ratios_fifty_digit_over_pericont": {
+    "count_i_per_unit_lam": 0.3217198695363551,
+    "count_i_per_unit_arclength": 0.32169093287656003,
+    "count_ii_per_unit_lam": 0.4224828127508245
+   },
+   "orbits_per_second": {
+    "pericont_accepted_steps_per_wall_second": 0.4337748344370861,
+    "fifty_digit_converged_orbits_per_continuation_wall_second": 0.006369426751592357
+   },
+   "same_branch_checks": {
+    "first_orbit_of_the_two_step_run_vs_stored_trace": {
+     "largest": 1.900360957950112e-09,
+     "limit": 0.0001,
+     "ok": true
+    },
+    "last_orbit_step_0.00075_vs_handover_steps": {
+     "largest": 2.6426872449419105e-14,
+     "limit": 1e-08,
+     "ok": true
+    },
+    "last_orbit_step_0.0015_vs_handover_steps": {
+     "largest": 2.6426872449419105e-14,
+     "limit": 1e-08,
+     "ok": true
+    }
+   },
+   "route": {
+    "handover_json_seconds_until_lam_last_is_passed": 1556.3179999999998,
+    "lam_last_of_the_stored_trace": 0.6638406030628946,
+    "chosen_run_passes_lam_last": true,
+    "fifty_digit_alone_seconds_count_ii": 255.0,
+    "route_over_alone": 6.103207843137254
+   },
+   "break_even": {
+    "fifty_digit_lam_per_second": 9.548058561425844e-06,
+    "pericont_wall_seconds_per_accepted_step": 2.3053435114503817,
+    "p100_break_even": 2.2011554851531335e-05,
+    "p100_break_even_over_default_1e_7": 220.11554851531335,
+    "p100_break_even_with_corrector_seconds": 1.7059465211539305e-05,
+    "mean_step_in_lam_of_the_first_100_accepted_steps": 1.4269796947510294e-05
+   }
+  },
+  "t44m": {
+   "start_reclosing": {
+    "converged": true,
+    "residual": 2.5087020199727175e-27,
+    "updates": 1,
+    "seconds_in_the_tool": 63.1,
+    "clock": {
+     "seconds": 63.0,
+     "exit": 0,
+     "start": "2026-11-01 16:14:22",
+     "end": "2026-11-01 16:15:25"
+    }
+   },
+   "fifty_digit_runs": [
+    {
+     "step_dlam": -0.002,
+     "steps_asked": 2,
+     "steps_run": 2,
+     "steps_converged": 2,
+     "complete": true,
+     "updates_per_step": [
+      5,
+      4
+     ],
+     "residual_per_step": [
+      2.644641224919319e-28,
+      3.045189886972846e-21
+     ],
+     "seconds_per_step": [
+      255.0,
+      261.0
+     ],
+     "seconds_of_the_steps": 516.0,
+     "lam_start": 0.23301529280288558,
+     "lam_last": 0.22901529280288557,
+     "lam_covered": 0.004,
+     "path_length": 0.04915163297653445,
+     "clock": {
+      "seconds": 516.0,
+      "exit": 0,
+      "start": "2026-11-01 16:15:25",
+      "end": "2026-11-01 16:24:02"
+     },
+     "first_orbit_against_the_stored_trace": {
+      "lam": 0.23101529280288557,
+      "relative_difference": [
+       8.708042976842267e-07,
+       1.4920975357936044e-06,
+       1.4359661716712518e-07
+      ]
+     },
+     "last_orbit_against_the_handover_steps": {
+      "lam": 0.22901529280288557,
+      "relative_difference": [
+       1.929341901031465e-11,
+       3.091509092869203e-11,
+       8.515434736944559e-13
+      ]
+     }
+    },
+    {
+     "step_dlam": -0.004,
+     "steps_asked": 1,
+     "steps_run": 1,
+     "steps_converged": 1,
+     "complete": true,
+     "updates_per_step": [
+      5
+     ],
+     "residual_per_step": [
+      3.786370336258466e-19
+     ],
+     "seconds_per_step": [
+      267.0
+     ],
+     "seconds_of_the_steps": 267.0,
+     "lam_start": 0.23301529280288558,
+     "lam_last": 0.22901529280288557,
+     "lam_covered": 0.004,
+     "path_length": 0.04914301539821609,
+     "clock": {
+      "seconds": 267.0,
+      "exit": 0,
+      "start": "2026-11-01 16:24:02",
+      "end": "2026-11-01 16:28:29"
+     },
+     "first_orbit_against_the_stored_trace": {
+      "lam": 0.22901529280288557,
+      "relative_difference": null
+     },
+     "last_orbit_against_the_handover_steps": {
+      "lam": 0.22901529280288557,
+      "relative_difference": [
+       1.929341901031465e-11,
+       3.091509092869203e-11,
+       8.515434736944559e-13
+      ]
+     }
+    }
+   ],
+   "chosen_fifty_digit_run": {
+    "step_dlam": -0.004,
+    "steps": 1,
+    "load": {
+     "samples": 4,
+     "load_median": 58.0,
+     "load_max": 59.0,
+     "processes_cpu_seconds_gained_in_the_window": [
+      {
+       "pid": 67276,
+       "name": "find.exe",
+       "seconds": 242.5
+      },
+      {
+       "pid": 18748,
+       "name": "python.exe",
+       "seconds": 242.3
+      },
+      {
+       "pid": 58472,
+       "name": "python.exe",
+       "seconds": 230.2
+      },
+      {
+       "pid": 4,
+       "name": "System",
+       "seconds": 55.5
+      }
+     ]
+    }
+   },
+   "load_during_the_start_reclosing": {
+    "samples": 1,
+    "load_median": 54.0,
+    "load_max": 54.0,
+    "processes_cpu_seconds_gained_in_the_window": [
+     {
+      "pid": 67276,
+      "name": "find.exe",
+      "seconds": 60.7
+     },
+     {
+      "pid": 18748,
+      "name": "python.exe",
+      "seconds": 60.5
+     },
+     {
+      "pid": 4,
+      "name": "System",
+      "seconds": 14.9
+     },
+     {
+      "pid": 38432,
+      "name": "python.exe",
+      "seconds": 9.8
+     }
+    ]
+   },
+   "pericont_replay": {
+    "accepted_steps": 286,
+    "loop_steps_equal_to_the_stored_trace": true,
+    "attempts": 288,
+    "failed_attempts": 2,
+    "corrector_seconds_of_steps_1_to_H": 501.491,
+    "wall_seconds": 670.0,
+    "clock": {
+     "seconds": 670.0,
+     "exit": 0,
+     "start": "2026-11-01 16:28:29",
+     "end": "2026-11-01 16:39:38"
+    },
+    "load": {
+     "samples": 11,
+     "load_median": 65.0,
+     "load_max": 81.0,
+     "processes_cpu_seconds_gained_in_the_window": [
+      {
+       "pid": 67276,
+       "name": "find.exe",
+       "seconds": 666.5
+      },
+      {
+       "pid": 18748,
+       "name": "python.exe",
+       "seconds": 666.0
+      },
+      {
+       "pid": 24296,
+       "name": "node.exe",
+       "seconds": 512.5
+      },
+      {
+       "pid": 68992,
+       "name": "python.exe",
+       "seconds": 110.0
+      },
+      {
+       "pid": 4,
+       "name": "System",
+       "seconds": 73.7
+      }
+     ]
+    },
+    "lam_0": 0.23332876562866695,
+    "lam_1": 0.23301529280288558,
+    "lam_H": 0.22907662242111407,
+    "path_length_1_to_H": 0.04818641703802947,
+    "corrector_seconds_in_the_stored_run": 1307.069,
+    "seconds_double_precision_part_of_handover_json": 1821.0199999999995
+   },
+   "counts": {
+    "i_without_bookkeeping": {
+     "fifty_digit_seconds": 267.0,
+     "fifty_digit_lam_covered": 0.004,
+     "fifty_digit_seconds_per_unit_lam": 66750.0,
+     "fifty_digit_seconds_per_unit_arclength": 5433.122038532707,
+     "pericont_corrector_seconds": 501.491,
+     "pericont_lam_covered": 0.0039386703817715085,
+     "pericont_seconds_per_unit_lam": 127324.94760692383,
+     "pericont_seconds_per_unit_arclength": 10407.310417045856
+    },
+    "ii_whole_run": {
+     "fifty_digit_seconds": 330.0,
+     "fifty_digit_lam_covered": 0.0040000000000000036,
+     "fifty_digit_seconds_per_unit_lam": 82499.99999999993,
+     "pericont_wall_seconds": 670.0,
+     "pericont_lam_covered": 0.0042521432075528776,
+     "pericont_seconds_per_unit_lam": 157567.59998344159
+    }
+   },
+   "ratios_fifty_digit_over_pericont": {
+    "count_i_per_unit_lam": 0.5242491848971331,
+    "count_i_per_unit_arclength": 0.522048619750396,
+    "count_ii_per_unit_lam": 0.5235847979449434
+   },
+   "orbits_per_second": {
+    "pericont_accepted_steps_per_wall_second": 0.42686567164179107,
+    "fifty_digit_converged_orbits_per_continuation_wall_second": 0.003745318352059925
+   },
+   "same_branch_checks": {
+    "first_orbit_of_the_two_step_run_vs_stored_trace": {
+     "largest": 1.4920975357936044e-06,
+     "limit": 0.0001,
+     "ok": true
+    },
+    "last_orbit_step_0.002_vs_handover_steps": {
+     "largest": 3.091509092869203e-11,
+     "limit": 1e-08,
+     "ok": true
+    },
+    "last_orbit_step_0.004_vs_handover_steps": {
+     "largest": 3.091509092869203e-11,
+     "limit": 1e-08,
+     "ok": true
+    }
+   },
+   "route": {
+    "handover_json_seconds_until_lam_last_is_passed": 2474.7379999999994,
+    "lam_last_of_the_stored_trace": 0.22906934975198912,
+    "chosen_run_passes_lam_last": true,
+    "fifty_digit_alone_seconds_count_ii": 330.0,
+    "route_over_alone": 7.499206060606059
+   },
+   "break_even": {
+    "fifty_digit_lam_per_second": 1.49812734082397e-05,
+    "pericont_wall_seconds_per_accepted_step": 2.3426573426573425,
+    "p100_break_even": 3.5095990152169926e-05,
+    "p100_break_even_over_default_1e_7": 350.9599015216993,
+    "p100_break_even_with_corrector_seconds": 2.6269139100599774e-05,
+    "mean_step_in_lam_of_the_first_100_accepted_steps": 4.202122008149067e-05
+   }
+  }
+ },
+ "stop_rule_ratios_above_1.25": [],
+ "conditions": "wall seconds on one machine (Windows 11, 12 logical processors); the jobs ran one after the other; the busiest other processes are listed with the load of every job (1 process names of the tool that started the jobs are left out of that list)"
+}
