@@ -197,7 +197,7 @@ res['what'] = ('PeriCont and the 50 digit natural continuation counted the same 
                'the PeriCont side the replay of the stored trace to the hand-over step H, run one after the other with the 50 digit jobs on one machine, the load recorded every 60 s. Also orbits per second, the route of the hand-over as measured in handover.json, and the break-even P100 of the hand-over rule.')
 res['commands'] = ['python tools/reclose.py JOB OUT.json   (the start orbit: accepted step 1 of the stored trace)', 'python tools/reclose-continue.py LABEL START.json LAM0 OUTDIR --steps N --dlam STEP --no-witness',
                    'node tools/reproduce-trace.mjs LABEL OUT.json --stop-after=K   (K = recorded point of the hand-over step: 241 and 268)', 'python tools/cost-same-conditions.py REL INPUTS.json OUT.json   (the files of the runs are in the raw deposit)']
-res['conditions'] = 'wall seconds on one machine (Windows 11, 12 logical processors); the jobs ran one after the other; the busiest other processes are listed with the load of every job' + (' (%d process names of the tool that started the jobs are left out of that list)' % len(LEAVE_OUT) if LEAVE_OUT else '')
+res['conditions'] = 'wall seconds on one machine (Windows 11, 12 logical processors); the jobs ran one after the other; the busiest other processes are listed with the load of every job' + (' (one process of the program that started the jobs is left out of that list)' if LEAVE_OUT else '')
 json.dump(res, open(OUT, 'x', encoding='utf8'), indent=1)
 print('written', OUT)
 for label, f in res['families'].items():

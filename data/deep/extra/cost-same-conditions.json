@@ -577,5 +577,5 @@
   }
  },
  "stop_rule_ratios_above_1.25": [],
- "conditions": "wall seconds on one machine (Windows 11, 12 logical processors); the jobs ran one after the other; the busiest other processes are listed with the load of every job (1 process names of the tool that started the jobs are left out of that list)"
+ "conditions": "wall seconds on one machine (Windows 11, 12 logical processors); the jobs ran one after the other; the busiest other processes are listed with the load of every job (one process of the program that started the jobs is left out of that list)"
 }
