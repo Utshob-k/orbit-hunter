@@ -427,7 +427,8 @@ export function huntArclength(u1, u2, lam0, t0, { m = 8, dir = 1, maxMs = 600000
     if (settings.observer) settings.observer.note({ outcome: 'accepted', lamNew: c.Y[n] });
     Y = c.Y; tau = tauNew; th = thNew;
     lamMin = Math.min(lamMin, Y[n]); lamMax = Math.max(lamMax, Y[n]);
-    h = Math.min(hMax, c.iters <= 3 ? h * 1.4 : h);
+    if (settings.stopLam != null && (Y[n] - settings.stopLam) * dir > 0) return end('stopped by the caller');   // --stop-lam: the accepted step has passed lam in the direction of the run
+    h = Math.min(hMax, c.iters <= (settings.growIters ?? 3) ? h * (settings.growFactor ?? 1.4) : h);
   }
   return end('no convergence');
 }

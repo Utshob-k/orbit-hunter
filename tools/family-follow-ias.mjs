@@ -17,6 +17,8 @@
 //   tol-scale=K: the corrector stops when sup|F| < max(newton-tol, K * 2^-52 * (largest entry of the Jacobian of the iteration) * max(1, largest |Y|)); each line of the diag file has the effective tolerance (tolEff) of its last iteration.
 //   arc-weight=W: weighted arclength: the 276 (with 24 pieces) node components of the pseudo-arclength unknowns have weight W, u1, u2, t and lam weight 1; the weighted norm is in the unit tangent, in the constraint row of the tangent and of the corrector,
 //   in the step length of the predictor, in the orientation test of the tangent and in the branch test dot(tauNew, tau) > cos(0.35) (src/shooting.js, wdot, wunit, wrow).
+//   grow-iters=K: the step h of the pseudo-arclength grows after an accepted step with at most K corrector iterations (unset = 3); grow-factor=F: the factor of that growth (unset = 1.4). Both are read by huntArclength only, and with neither given the step control is the old one.
+//   stop-lam=L: the run stops, as "stopped by the caller", at the first accepted step whose lam has passed L in the direction DIR (that step is recorded); the value is in out.settings.stopLam and out.options.stopLam. huntArclength only.
 //   natural=DL: natural continuation in lam instead of the pseudo-arclength (lam fixed per step, Newton on F alone, first step DL in DIR, doubled after at most 3 iterations, halved on failure, ends below 1e-14); zeros of theta are not looked for.
 //   handover: hand the trace over to the 50 digit continuation where the double precision route has become slower than it. Rule, without wall time (tools/handover-rule.mjs): after at least 100 accepted steps
 //   P100 = |lam_k - lam_(k-100)| / 100 over the last 100 accepted steps (lam_0 = lam of the start); if P100 < --handover-below (1e-7 by default) the driver stops, closes the last accepted point again with tools/reclose.py
@@ -40,20 +42,22 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix', 'pieces-by', 'guards'];
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'grow-iters', 'grow-factor', 'stop-lam', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix', 'pieces-by', 'guards'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outArg, dirArg, u1A, u2A, lamA, tA] = pos;
 const outFile = outArg ? path.resolve(outArg) : outArg;   // the children (reclose.py, the files next to OUT) run in the root of the repository
-if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
+if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl', ...(opt.handover !== undefined ? [outFile + '.handover-reclose.job.json', outFile + '.handover-reclose.json', outFile + '.handover'] : [])]) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
 const pieces = Number(opt.pieces ?? 24), maxDist = opt['max-dist'] === undefined ? 0.03 : Number(opt['max-dist'] === 'inf' ? Infinity : opt['max-dist']);
-for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false })) {
+for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, 'grow-iters': false, 'grow-factor': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false })) {
   if (opt[k] === undefined) continue;
   const v = Number(opt[k]);
   if (typeof opt[k] !== 'string' || opt[k] === '' || !Number.isFinite(v) || (low ? v < 0 : v <= 0)) { console.error('--' + k + ' needs a number' + (low ? ' of at least 0' : ' above 0') + ', as --' + k + '=VALUE, not ' + (opt[k] === true ? 'nothing' : opt[k])); process.exit(2); }
 }
+if (opt['grow-iters'] !== undefined && !Number.isInteger(Number(opt['grow-iters']))) { console.error('--grow-iters needs a whole number, not ' + opt['grow-iters']); process.exit(2); }
+if (opt['stop-lam'] !== undefined && (typeof opt['stop-lam'] !== 'string' || opt['stop-lam'] === '' || !Number.isFinite(Number(opt['stop-lam'])))) { console.error('--stop-lam needs a number, as --stop-lam=VALUE, not ' + (opt['stop-lam'] === true ? 'nothing' : opt['stop-lam'])); process.exit(2); }
 if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece)'); process.exit(2); }
 const stopBelow = Number(opt['stop-below'] ?? 0), stopAfter = opt['stop-after'] === undefined ? Infinity : Number(opt['stop-after']);
 settings.integrator = 'ias';
@@ -68,6 +72,9 @@ if (opt.python !== undefined) settings.ias.python = opt.python;
 if (opt['guard-ratio'] !== undefined) settings.ias.guardRatio = Number(opt['guard-ratio']);
 if (opt['tol-scale'] !== undefined) settings.tolScale = Number(opt['tol-scale']);
 if (opt['arc-weight'] !== undefined) settings.arcWeight = Number(opt['arc-weight']);
+if (opt['grow-iters'] !== undefined) settings.growIters = Number(opt['grow-iters']);
+if (opt['grow-factor'] !== undefined) settings.growFactor = Number(opt['grow-factor']);
+if (opt['stop-lam'] !== undefined) settings.stopLam = Number(opt['stop-lam']);
 const hunt = opt.natural !== undefined ? huntNatural : huntArclength;
 const handover = opt.handover !== undefined, hBelow = Number(opt['handover-below'] ?? 1e-7), hSteps = Number(opt['handover-steps'] ?? 20), hDlam = Number(opt['handover-dlam'] ?? 1e-5);
 if (handover && !(hBelow > 0 && Number.isInteger(hSteps) && hSteps >= 1 && hDlam > 0)) { console.error('--handover-below and --handover-dlam must be positive and --handover-steps a whole number of at least 1'); process.exit(2); }
@@ -76,7 +83,7 @@ const nodesFd = opt['no-nodes'] ? null : fs.openSync(outFile + '.nodes.jsonl', '
 const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
 const s0 = closePerpMS(start.u1, start.u2, start.lam, start.t, { m: pieces });
 const shifted = s0 && s0.res < 1e-9 ? { u1: s0.u1, u2: s0.u2, lam: s0.lam, t: s0.t, m: pieces } : null;
-const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter, ...(opt.natural !== undefined ? { natural: Number(opt.natural), note: 'natural continuation in lam, zeros of theta are not looked for' } : {}) } };
+const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter, ...(opt['stop-lam'] !== undefined ? { stopLam: Number(opt['stop-lam']) } : {}), ...(opt.natural !== undefined ? { natural: Number(opt.natural), note: 'natural continuation in lam, zeros of theta are not looked for' } : {}) } };
 if (!shifted) {
   out.error = 'could not move the start onto the family'; out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.lastBridgeReason = iasStats.lastReason;
   fs.writeFileSync(outFile, JSON.stringify(out));
