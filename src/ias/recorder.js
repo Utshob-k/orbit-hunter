@@ -4,7 +4,7 @@
 // step (loop step), h, tauLam (lam component of the unit tangent), the residual history (sup F at the start of each Newton iteration), iterations, ok, why,
 // outcome, tangentDot, lamNew, smax (largest row sum of the piece matrices at the first iteration), the guard and reg.js counters of the attempt, the bridge calls
 // and IAS15 steps it used, and the seconds (split into IAS15 pass, reg.js and missed-flag check).
-// With --ls-reuse: nReuse = system() calls that used the answer of the accepted trial of the line search. Timers of the parts of the corrector (performance.now): secMono, nMono (monodromy() of system()), secLs, nLs (residual() of the line search), secLsIas, secLsC, secLsMiss, secLsX (the parts of secIas, secC, secMiss, secX inside the line search), lsA (accepted factor per iteration, 0 if none), secSolve, secBefore (from the end of the previous attempt), secX (cross-check reg.js), endDiff, endDiffLast (dp45 end state against the IAS15 end state of the unflagged pieces).
+// With --ls-reuse: nReuse = system() calls that used the answer of the accepted trial of the line search. Timers of the parts of the corrector (performance.now): secMono, nMono (monodromy() of system()), secLs, nLs (residual() of the line search), secLsIas, secLsC, secLsMiss, secLsX, secLsPool (the parts of secIas, secC, secMiss, secX and secPool inside the line search; secPool = the wall seconds of the batches of the reg.js pool, --reg-threads, in which case secC, secMiss and secX hold only the sequential part), lsA (accepted factor per iteration, 0 if none), secSolve, secBefore (from the end of the previous attempt), secX (cross-check reg.js), endDiff, endDiffLast (dp45 end state against the IAS15 end state of the unflagged pieces).
 // Stop rules (TraceStop, ending the trace): 5 consecutive attempts failed with a guard trip (not with settings.ias.guards = 'record', where the trips are only counted), or 10 consecutive attempts failed with a failure of reg.js.
 import fs from 'fs';
 import { stats as bs, gstats, TraceStop } from './bridge.js';
@@ -28,9 +28,9 @@ export function startRecorder(outFile) {
       if (rConsec >= REG_STOP) throw new TraceStop('stopped by reg.js failures (' + REG_STOP + ' consecutive attempts failed with a failure of reg.js)', { consecutive: rConsec });
       id++; this.why = null; gstats.attRatioMin = Infinity; gstats.attD2Close = Infinity;
       cur = { id, step: this.step, h: this.h, tauLam: this.tauLam, resid: [], t0: Date.now(),
-        secBefore: prevEnd === null ? null : (performance.now() - prevEnd) / 1000, nReuse: 0, secMono: 0, nMono: 0, secLs: 0, nLs: 0, secLsIas: 0, secLsC: 0, secLsMiss: 0, secLsX: 0, lsA: [], secSolve: 0, endDiff: 0, endDiffLast: null,
+        secBefore: prevEnd === null ? null : (performance.now() - prevEnd) / 1000, nReuse: 0, secMono: 0, nMono: 0, secLs: 0, nLs: 0, secLsIas: 0, secLsC: 0, secLsMiss: 0, secLsX: 0, secLsPool: 0, lsA: [], secSolve: 0, endDiff: 0, endDiffLast: null,
         b0: { calls: bs.calls, steps: bs.steps, timeouts: bs.timeouts, stepFloor: bs.stepFloor, errors: bs.errors, enc: bs.encounterPieces },
-        g0: { trips: gstats.tripsTotal, byKind: { ...gstats.trips }, reg: gstats.regFailures, miss: gstats.missedCounted, tIas: gstats.tIas, tC: gstats.tC, tMiss: gstats.tMiss, tX: gstats.tX, cm: bs.regMacro } };
+        g0: { trips: gstats.tripsTotal, byKind: { ...gstats.trips }, reg: gstats.regFailures, miss: gstats.missedCounted, tIas: gstats.tIas, tC: gstats.tC, tMiss: gstats.tMiss, tX: gstats.tX, tPool: gstats.tPool, cm: bs.regMacro } };
       records.push(cur);
     },
     iter(it, Fn) {
@@ -44,7 +44,7 @@ export function startRecorder(outFile) {
     note(o) { if (cur) Object.assign(cur, o); },
     add(name, sec) { if (cur) cur[name] += sec; },
     cnt(name, k = 1) { if (cur) cur[name] += k; },
-    lsDone(sec, dIas, dC, dMiss, dX) { if (cur) { cur.secLs += sec; cur.nLs++; cur.secLsIas += dIas / 1000; cur.secLsC += dC / 1000; cur.secLsMiss += dMiss / 1000; cur.secLsX += dX / 1000; } },
+    lsDone(sec, dIas, dC, dMiss, dX, dPool) { if (cur) { cur.secLs += sec; cur.nLs++; cur.secLsIas += dIas / 1000; cur.secLsC += dC / 1000; cur.secLsMiss += dMiss / 1000; cur.secLsX += dX / 1000; cur.secLsPool += (dPool || 0) / 1000; } },
     lsA(a) { if (cur) cur.lsA.push(a); },
     endDiffCall(ed) { if (cur) { cur.endDiff = Math.max(cur.endDiff, ed); cur.endDiffLast = ed; } },
     lastResidual() { return cur && cur.resid.length ? cur.resid[cur.resid.length - 1] : null; },
@@ -55,7 +55,7 @@ export function startRecorder(outFile) {
       const g0 = cur.g0;
       cur.guardTrips = gstats.tripsTotal - g0.trips; cur.guardByKind = Object.fromEntries(Object.keys(gstats.trips).map((k) => [k, gstats.trips[k] - g0.byKind[k]]));
       cur.regFail = gstats.regFailures - g0.reg; cur.missedCounted = gstats.missedCounted - g0.miss;
-      cur.secIas = (gstats.tIas - g0.tIas) / 1000; cur.secC = (gstats.tC - g0.tC) / 1000; cur.secMiss = (gstats.tMiss - g0.tMiss) / 1000; cur.secX = (gstats.tX - g0.tX) / 1000; cur.cMacro = bs.regMacro - g0.cm;
+      cur.secIas = (gstats.tIas - g0.tIas) / 1000; cur.secC = (gstats.tC - g0.tC) / 1000; cur.secMiss = (gstats.tMiss - g0.tMiss) / 1000; cur.secX = (gstats.tX - g0.tX) / 1000; cur.secPool = (gstats.tPool - g0.tPool) / 1000; cur.cMacro = bs.regMacro - g0.cm;
       cur.ratioMin = Number.isFinite(gstats.attRatioMin) ? gstats.attRatioMin : null; cur.d2CloseMin = Number.isFinite(gstats.attD2Close) ? gstats.attD2Close : null;
       cur.finalResid = cur.resid.length ? cur.resid[cur.resid.length - 1] : null;
       delete cur.g0; delete cur.b0; delete cur.t0;

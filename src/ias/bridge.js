@@ -11,6 +11,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { flowEnc } from './reg.js';
+import { regBatch } from './reg-pool.js';
 import { settings } from '../settings.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -38,7 +39,7 @@ function getWorker() {
 
 export const stats = { regPieces: 0, regMacro: 0, regSub: 0, regEndTrials: 0, regStagnation: 0, lastReason: null, calls: 0, pieces: 0, steps: 0, timeouts: 0, errors: 0, stepFloor: 0, encounterPieces: 0 };
 export const gstats = { trips: { G1a: 0, G1b: 0, G2: 0, G3: 0 }, tripsTotal: 0, tripList: [], ratioMin: Infinity, d2CloseMin: Infinity, attRatioMin: Infinity, attD2Close: Infinity, samePair: 0,
-  missChecks: 0, missedCounted: 0, missedStops: 0, missFailed: 0, regFailures: 0, cMinSeen: Infinity, cRatioMin: Infinity, tIas: 0, tC: 0, tMiss: 0, xchk: 0, xchkMaxDiff: 0, replaced: 0, replList: [], tX: 0 };
+  missChecks: 0, missedCounted: 0, missedStops: 0, missFailed: 0, regFailures: 0, cMinSeen: Infinity, cRatioMin: Infinity, tIas: 0, tC: 0, tMiss: 0, xchk: 0, xchkMaxDiff: 0, replaced: 0, replList: [], tX: 0, tPool: 0 };
 let nextId = 1;
 export class BridgeError extends Error { constructor(msg, reason) { super(msg); this.reason = reason; } }
 export class GuardError extends BridgeError { constructor(kind, info) { super('guard ' + kind, 'guard ' + kind); this.kind = kind; this.info = info; } }
@@ -87,10 +88,32 @@ const piecesBy = () => (settings.ias.piecesBy === 'ias' || settings.ias.piecesBy
 
 const pairMin = (s) => Math.min(...PAIRS.map(([i, j]) => Math.hypot(s[2 * j] - s[2 * i], s[2 * j + 1] - s[2 * i + 1])));
 
+// one reg.js call of iasPieces: the result computed in advance by the pool of settings.ias.regThreads (regPrecompute) for (piece, jac) when there is one, else the call itself
+function regCall(pre, i, jac, x, tau) {
+  const r = pre && pre.get(2 * i + (jac ? 1 : 0));
+  if (r) { if (r.error) throw new Error(r.error); return r; }
+  return flowEnc(x, tau, { jac, settings: REG_SETTINGS });
+}
+// every reg.js call the sequential code below can make for this request, in one batch in the pool: the flagged pieces and the unflagged pieces below crossCheckBelow with the tangent, every unflagged piece without it (missed-flag check).
+// The sequential code then runs as always and takes the results from the map; a result it never reaches is dropped.
+function regPrecompute(starts, tau, out) {
+  const calls = [], keys = [], ias = settings.ias;
+  for (let i = 0; i < starts.length; i++) if (out.enc[i]) { calls.push({ x: starts[i], jac: true }); keys.push(2 * i + 1); }
+  for (let i = 0; i < starts.length; i++) if (!out.enc[i]) {
+    const a = out.ana[i];
+    if (Math.min(a[0], a[1], a[2]) < ias.crossCheckBelow) { calls.push({ x: starts[i], jac: true }); keys.push(2 * i + 1); }
+    calls.push({ x: starts[i], jac: false }); keys.push(2 * i);
+  }
+  if (!calls.length) return null;
+  const t0 = Date.now(); const res = regBatch(calls, tau, ias.regThreads, REG_SETTINGS); gstats.tPool += Date.now() - t0;
+  const pre = new Map(); for (let k = 0; k < keys.length; k++) pre.set(keys[k], res[k]);
+  return pre;
+}
+
 // missed flag: reg.js without the tangent on every unflagged piece
-function missedFlagCheck(starts, enc, tau, ana) {
+function missedFlagCheck(starts, enc, tau, ana, pre) {
   for (let i = 0; i < starts.length; i++) if (!enc[i]) {
-    const t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: false, settings: REG_SETTINGS }); gstats.tMiss += Date.now() - t0; gstats.missChecks++;
+    const t0 = Date.now(); const r = regCall(pre, i, false, starts[i], tau); gstats.tMiss += Date.now() - t0; gstats.missChecks++;
     if (!r.ok) { gstats.missFailed++; continue; }
     missedFromResult(i, r, ana);
   }
@@ -143,8 +166,9 @@ export function iasPieces(starts, tau, opts) {   // opts.noBatchG2: the G2 check
     stats.pieces += m; stats.steps += ctrl[2]; stats.encounterPieces += nFlag;
     return out;
   }
+  const pre = !FD && !PB && ias.regThreads > 1 ? regPrecompute(starts, tau, out) : null;
   for (let i = 0; i < m; i++) if (out.enc[i]) {
-    t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: !FD, settings: REG_SETTINGS }); gstats.tC += Date.now() - t0;
+    t0 = Date.now(); const r = regCall(pre, i, !FD, starts[i], tau); gstats.tC += Date.now() - t0;
     if (!r.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + r.reason, 'reg failure'); }
     out[i] = Float64Array.from(r.end); out.mats[i] = FD ? fdOrThrow(starts[i], tau, r.end, FD, 'tC', '') : r.M; stats.regPieces++; stats.regMacro += r.macro; stats.regSub += r.subSteps; stats.regEndTrials += r.endTrials; if (r.stagnation) stats.regStagnation++;
     const cr = r.d2AtMinD1 / r.minD1; if (cr < gstats.cRatioMin) gstats.cRatioMin = cr;
@@ -166,7 +190,7 @@ export function iasPieces(starts, tau, opts) {   // opts.noBatchG2: the G2 check
   // dp45 matrix; a failure of reg.js fails the evaluation as for a flagged piece; every replacement is logged
   for (let i = 0; i < m; i++) if (!out.enc[i]) {
     const a = out.ana[i]; const pm = Math.min(a[0], a[1], a[2]); if (!(pm < ias.crossCheckBelow)) continue;
-    gstats.xchk++; t0 = Date.now(); const r = flowEnc(starts[i], tau, { jac: !FD, settings: REG_SETTINGS }); gstats.tX += Date.now() - t0;
+    gstats.xchk++; t0 = Date.now(); const r = regCall(pre, i, !FD, starts[i], tau); gstats.tX += Date.now() - t0;
     if (!r.ok) { gstats.regFailures++; throw new BridgeError('reg: ' + r.reason + ' (cross-check, piece ' + i + ')', 'reg failure'); }
     let diff = 0; for (let k = 0; k < 12; k++) diff = Math.max(diff, Math.abs(r.end[k] - out[i][k]) / Math.max(1, Math.abs(r.end[k])));
     if (diff > gstats.xchkMaxDiff) gstats.xchkMaxDiff = diff;
@@ -175,7 +199,7 @@ export function iasPieces(starts, tau, opts) {   // opts.noBatchG2: the G2 check
       if (gstats.replList.length < 5000) gstats.replList.push({ call: stats.calls, step: obs ? obs.step : null, piece: i, pairMin: pm, diff });
     }
   }
-  missedFlagCheck(starts, out.enc, tau, out.ana);
+  missedFlagCheck(starts, out.enc, tau, out.ana, pre);
   stats.pieces += m; stats.steps += ctrl[2]; stats.encounterPieces += out.enc.reduce((a, b) => a + b, 0);
   return out;
 }

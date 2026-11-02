@@ -19,6 +19,7 @@ export const settings = {
     // matrix (optional, absent = the derivative of reg.js): 'fd-forward' or 'fd-central' makes src/ias/bridge.js build the 12 x 12 matrix of a flagged piece by finite differences of reg.js instead (tools/family-follow-ias.mjs --matrix=...)
     // piecesBy (optional, absent = the flagged pieces by reg.js, the others by IAS15 with the cross-check): 'ias' takes every piece from IAS15 with the Dormand-Prince variational matrix (no reg.js), 'reg' takes every piece from reg.js (tools/family-follow-ias.mjs --pieces-by=...)
     // guards (optional, absent = a guard trip fails the attempt, and ends the trace after five in a row): 'record' counts and lists the trips and goes on (tools/family-follow-ias.mjs --guards=record)
+    // regThreads (optional, absent or 1 = the reg.js calls of a request one after the other): K > 1 computes all the reg.js calls a request can need in one batch in K worker threads (src/ias/reg-pool.js), then runs the sequential code on the results; only with the default matrix and pieces (tools/family-follow-ias.mjs --reg-threads=K)
     python: env.ORBIT_PYTHON || (typeof process !== 'undefined' && process.platform === 'win32' ? 'python' : 'python3'),
     timeoutMs: 1800000,                   // longest wait for one answer of the Python process (30 minutes); a timeout is a failed attempt
     guardRatio: 390,                      // guard G1b trips if d2 < guardRatio * d1 at the pericentre of an encounter piece (d1, d2: the two smaller pair distances)

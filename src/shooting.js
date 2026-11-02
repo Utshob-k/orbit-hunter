@@ -76,9 +76,9 @@ dLam[0] = -1 / 3; dLam[2] = 2 / 3; dLam[4] = -1 / 3;
 function timed(obs, name, fn) { const t0 = performance.now(); const r = fn(); obs.add(name, (performance.now() - t0) / 1000); return r; }
 // residual() as called by the line search: its seconds, and the parts of the bridge timers (ms) that fall inside it
 function lsResidual(obs, z, lam, m) {
-  const t0 = performance.now(), a0 = gstats.tIas, c0 = gstats.tC, m0 = gstats.tMiss, x0 = gstats.tX;
+  const t0 = performance.now(), a0 = gstats.tIas, c0 = gstats.tC, m0 = gstats.tMiss, x0 = gstats.tX, p0 = gstats.tPool;
   const r = residual(z, lam, m);
-  obs.lsDone((performance.now() - t0) / 1000, gstats.tIas - a0, gstats.tC - c0, gstats.tMiss - m0, gstats.tX - x0);
+  obs.lsDone((performance.now() - t0) / 1000, gstats.tIas - a0, gstats.tC - c0, gstats.tMiss - m0, gstats.tX - x0, gstats.tPool - p0);
   return r;
 }
 // largest |dp45 end - IAS15 end| / max(1, |IAS15 component|) over the 12 components
@@ -101,9 +101,9 @@ function residualTrial(z, lam, m) {
   return { F, tr: { starts, tau, out } };
 }
 function lsTrial(obs, z, lam, m) {
-  const t0 = performance.now(), a0 = gstats.tIas, c0 = gstats.tC, m0 = gstats.tMiss, x0 = gstats.tX;
+  const t0 = performance.now(), a0 = gstats.tIas, c0 = gstats.tC, m0 = gstats.tMiss, x0 = gstats.tX, p0 = gstats.tPool;
   const r = residualTrial(z, lam, m);
-  obs.lsDone((performance.now() - t0) / 1000, gstats.tIas - a0, gstats.tC - c0, gstats.tMiss - m0, gstats.tX - x0);
+  obs.lsDone((performance.now() - t0) / 1000, gstats.tIas - a0, gstats.tC - c0, gstats.tMiss - m0, gstats.tX - x0, gstats.tPool - p0);
   return r;
 }
 const sameStarts = (a, b) => { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) for (let k = 0; k < N; k++) if (a[i][k] !== b[i][k]) return false; return true; };
