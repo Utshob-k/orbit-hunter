@@ -1,8 +1,10 @@
 # SPDX-License-Identifier: MIT
 # REBOUND IAS15 process for src/ias/bridge.js: one long-lived process, line-delimited JSON on stdin and stdout, each answer flushed at once.
-# python ias-bridge.py MODE RATIO [FIRST [FACTOR]]      MODE: IAS15 adaptive_mode; RATIO: the ratio of guard G1b (see guards.py)
+# python ias-bridge.py MODE RATIO [FIRST [FACTOR [K]]]      MODE: IAS15 adaptive_mode; RATIO: the ratio of guard G1b (see guards.py)
 #   FIRST: 'legacy' (the default when it is not given: sim.dt is not set, so IAS15 starts with REBOUND's default 0.001, as in every stored run) or 'timescale'
 #   (sim.dt = FACTOR * the smallest d / |v_rel| over the three pairs at the start of the piece, at most tau and at least 1e-12; FACTOR is 0.01 when not given)
+#   K (optional, a whole number; src/ias/bridge-worker.mjs gives it only for K > 1): the pieces of a request are integrated in a pool of K processes made at the start, each piece by piece() in a fresh simulation, the answer in the order of
+#   the starts and in the same form; the pool processes end when this process ends (they watch it), at the end of stdin or when it is killed.
 # request  {"id": n, "starts": [[12 numbers], ...], "tau": float}    state = x0,y0,x1,y1,x2,y2,vx0,vy0,vx1,vy1,vx2,vy2; G = 1, three masses 1
 #   Each start is integrated for the time tau in a fresh IAS15 simulation. The three pair distances are sampled at the start and at every step end;
 #   a piece whose smallest sampled pair distance is below 1e-3 is flagged as an encounter piece (the end state of IAS15 is returned anyway, bridge.js
@@ -10,8 +12,9 @@
 # answer   {"id": n, "ends": [[12]...], "steps": total IAS15 steps, "enc": [0/1 per piece], "ana": [[11 numbers]...]}
 #   ana per piece: the three pair minima, the smallest sampled pair distance, d1 and d2 at the pericentre, the smallest d2 while d1 < 1e-3 (-1 where
 #   not defined for an unflagged piece), the number of the pair with the smallest minimum, and the flags of G1a, G1b, G2 as 0/1.
-import sys, json, math
+import sys, json, math, os, threading
 sys.dont_write_bytecode = True
+import multiprocessing as mp
 import rebound
 import guards
 
@@ -46,17 +49,41 @@ def piece(st, tau, mode, ratio, first='legacy', factor=0.01):
     return [p[0].x, p[0].y, p[1].x, p[1].y, p[2].x, p[2].y, p[0].vx, p[0].vy, p[1].vx, p[1].vy, p[2].vx, p[2].vy], int(sim.steps_done), guards.analyse(samples, ratio)
 
 
+def pool_init():
+    # a pool process ends as soon as the bridge process (its parent) is gone, however that happens (end of stdin, kill)
+    from multiprocessing.connection import wait
+    parent = mp.parent_process()
+    def watch():
+        wait([parent.sentinel]); os._exit(0)
+    threading.Thread(target=watch, daemon=True).start()
+
+
+def pool_piece(args):
+    return piece(*args)
+
+
 def main():
     mode = int(sys.argv[1]); ratio = float(sys.argv[2]) if len(sys.argv) > 2 else guards.DEFAULT_RATIO
     first = sys.argv[3] if len(sys.argv) > 3 else 'legacy'; factor = float(sys.argv[4]) if len(sys.argv) > 4 else 0.01
     if first not in ('legacy', 'timescale'): sys.exit('FIRST must be legacy or timescale, not ' + first)
+    K = int(sys.argv[5]) if len(sys.argv) > 5 else 1
+    pool = mp.Pool(K, initializer=pool_init) if K > 1 else None
+    try:
+        serve(mode, ratio, first, factor, pool)
+    finally:
+        if pool is not None: pool.terminate()
+
+
+def serve(mode, ratio, first, factor, pool):
     for line in sys.stdin:
         line = line.strip()
         if not line: continue
         req = json.loads(line)
         ends = []; steps = 0; enc = []; ana = []
-        for st in req['starts']:
-            e, k, a = piece(st, req['tau'], mode, ratio, first, factor); steps += k
+        if pool is None: done = [piece(st, req['tau'], mode, ratio, first, factor) for st in req['starts']]
+        else: done = pool.map(pool_piece, [(st, req['tau'], mode, ratio, first, factor) for st in req['starts']], chunksize=1)
+        for e, k, a in done:
+            steps += k
             enc.append(1 if a['flagged'] else 0)
             ends.append(e); ana.append(ana_vec(a))
         sys.stdout.write(json.dumps({'id': req['id'], 'ends': ends, 'steps': steps, 'enc': enc, 'ana': ana}) + '\n'); sys.stdout.flush()
