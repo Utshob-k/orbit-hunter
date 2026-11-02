@@ -4,6 +4,7 @@
 // perpendicular.
 import { deriv, dp45Step } from './physics.js';
 import { monodromy } from './stability.js';
+import { monoBatch } from './mono-pool.js';
 import { solve } from './newton.js';
 import { perpInitial, symResidual, perpInfo } from './perp.js';
 import { settings } from './settings.js';
@@ -120,7 +121,7 @@ function system(z, lam, m) {
   let end = null;
   const ias = settings.integrator === 'ias';
   let ends = null;
-  const encMats = new Array(m).fill(null);
+  const encMats = new Array(m).fill(null), monoRes = new Array(m).fill(null);
   if (ias) {
     // all pieces by IAS15 through the bridge; the pieces with a close approach come from reg.js with their 12 x 12 matrices (a bridge failure throws BridgeError)
     const starts = [perpInitial(z[0], z[1], lam)]; for (let i = 1; i < m; i++) starts.push(z.subarray(3 + N * (i - 1), 3 + N * i));
@@ -129,12 +130,22 @@ function system(z, lam, m) {
     else ends = iasPieces(starts, tau);
     if (settings.observer) settings.observer.starts(starts, tau);
     ends.enc.forEach((f, i) => { if (ends.mats[i]) encMats[i] = Array.from({ length: 12 }, (_, k) => ends.mats[i].subarray(12 * k, 12 * k + 12)); });
+    if (settings.monoThreads > 1) {   // --mono-threads: the pieces without a reg.js matrix in one batch for the worker threads (src/mono-pool.js)
+      const idx = []; for (let i = 0; i < m; i++) if (!encMats[i]) idx.push(i);
+      if (idx.length) {
+        const t0 = performance.now();
+        const res = monoBatch(idx.map((i) => starts[i]), tau, settings.monoThreads);
+        if (obs) { obs.add('secMono', (performance.now() - t0) / 1000); obs.cnt('nMono', idx.length); }
+        idx.forEach((i, k) => { monoRes[i] = res[k]; if (obs) edCall = Math.max(edCall, endDiffOf(res[k].end, ends[i])); });
+      }
+    }
   }
   for (let i = 0; i < m; i++) {
     const start = i === 0 ? perpInitial(z[0], z[1], lam) : z.subarray(3 + N * (i - 1), 3 + N * i);
     let e, M;
     if (ias) {
       if (encMats[i]) M = encMats[i];
+      else if (monoRes[i]) M = monoRes[i].M;
       else if (obs) { const mo = timed(obs, 'secMono', () => monodromy(start, tau)); obs.cnt('nMono'); edCall = Math.max(edCall, endDiffOf(mo.end, ends[i])); M = mo.M; }
       else M = monodromy(start, tau).M;
       if (settings.observer) settings.observer.mono(i, M);

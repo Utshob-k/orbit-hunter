@@ -43,7 +43,7 @@ export function startRecorder(outFile) {
     },
     note(o) { if (cur) Object.assign(cur, o); },
     add(name, sec) { if (cur) cur[name] += sec; },
-    cnt(name) { if (cur) cur[name]++; },
+    cnt(name, k = 1) { if (cur) cur[name] += k; },
     lsDone(sec, dIas, dC, dMiss, dX) { if (cur) { cur.secLs += sec; cur.nLs++; cur.secLsIas += dIas / 1000; cur.secLsC += dC / 1000; cur.secLsMiss += dMiss / 1000; cur.secLsX += dX / 1000; } },
     lsA(a) { if (cur) cur.lsA.push(a); },
     endDiffCall(ed) { if (cur) { cur.endDiff = Math.max(cur.endDiff, ed); cur.endDiffLast = ed; } },
