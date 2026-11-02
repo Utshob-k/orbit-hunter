@@ -109,13 +109,14 @@ export function perpEL(u1, u2, lam, t) {
 
 // everything we want to know about a closed one: energy, angular momentum, rotation after a full
 // period, and an independent check that it really repeats (integrate 2t, compare with start)
-export function perpInfo(u1, u2, lam, t) {
+// capScale below 1 makes it give up (return null) after that share of the usual number of steps; the result of a call that finishes does not depend on it
+export function perpInfo(u1, u2, lam, t, capScale = 1) {
   const s0 = perpInitial(u1, u2, lam);
   const T = 2 * t;
   const s = Float64Array.from(s0);
   let tt = 0, h = 1e-3, minDist = Infinity, extent = 0;
   for (let n = 0; tt < T - 1e-15; n++) {
-    if (n > 20 * (4000 + 3000 * T)) return null;
+    if (n > capScale * 20 * (4000 + 3000 * T)) return null;
     const [dt, hn] = dp45Step(s, Math.min(h, T - tt), settings.rtol, settings.atol, settings.hMax);
     tt += dt;
     h = hn;

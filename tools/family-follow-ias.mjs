@@ -21,6 +21,7 @@
 //   stop-lam=L: the run stops, as "stopped by the caller", at the first accepted step whose lam has passed L in the direction DIR (that step is recorded); the value is in out.settings.stopLam and out.options.stopLam. huntArclength only.
 //   ls-reuse: the line search of the corrector evaluates the pieces of a trial in ONE request of the bridge (not one request per piece) and the next system() call uses the end states, flags and reg.js matrices of the accepted trial (when its starts are bit-equal); off by default. The diag file has nReuse per attempt. huntArclength only.
 //   mono-threads=K: the monodromy (dp45 variational equations) of the pieces without a reg.js matrix is computed in K worker threads, one batch per system() call (src/mono-pool.js, src/mono-worker.mjs); K a whole number of at least 1, unset or 1 = in the main thread, as before; ias route only. The value is in out.settings.monoThreads.
+//   perp-cap=F: perpInfo of the trace (closest approach and closure of an accepted step) gives up after the share F of its usual limit of dp45 steps, 20*(4000+3000T); 0 < F <= 1, unset = 1. A step for which it gives up is listed in `unrec` as always; only the time it takes to give up changes. The value is in out.settings.perpCap.
 //   natural=DL: natural continuation in lam instead of the pseudo-arclength (lam fixed per step, Newton on F alone, first step DL in DIR, doubled after at most 3 iterations, halved on failure, ends below 1e-14); zeros of theta are not looked for.
 //   handover: hand the trace over to the 50 digit continuation where the double precision route has become slower than it. Rule, without wall time (tools/handover-rule.mjs): after at least 100 accepted steps
 //   P100 = |lam_k - lam_(k-100)| / 100 over the last 100 accepted steps (lam_0 = lam of the start); if P100 < --handover-below (1e-7 by default) the driver stops, closes the last accepted point again with tools/reclose.py
@@ -44,20 +45,21 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'grow-iters', 'grow-factor', 'stop-lam', 'ls-reuse', 'mono-threads', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix', 'pieces-by', 'guards'];
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'grow-iters', 'grow-factor', 'stop-lam', 'ls-reuse', 'mono-threads', 'perp-cap', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix', 'pieces-by', 'guards'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outArg, dirArg, u1A, u2A, lamA, tA] = pos;
 const outFile = outArg ? path.resolve(outArg) : outArg;   // the children (reclose.py, the files next to OUT) run in the root of the repository
-if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--ls-reuse] [--mono-threads=K] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
+if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--ls-reuse] [--mono-threads=K] [--perp-cap=F] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl', ...(opt.handover !== undefined ? [outFile + '.handover-reclose.job.json', outFile + '.handover-reclose.json', outFile + '.handover'] : [])]) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
 const pieces = Number(opt.pieces ?? 24), maxDist = opt['max-dist'] === undefined ? 0.03 : Number(opt['max-dist'] === 'inf' ? Infinity : opt['max-dist']);
-for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, 'grow-iters': false, 'grow-factor': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false })) {
+for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, 'grow-iters': false, 'grow-factor': false, 'perp-cap': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false })) {
   if (opt[k] === undefined) continue;
   const v = Number(opt[k]);
   if (typeof opt[k] !== 'string' || opt[k] === '' || !Number.isFinite(v) || (low ? v < 0 : v <= 0)) { console.error('--' + k + ' needs a number' + (low ? ' of at least 0' : ' above 0') + ', as --' + k + '=VALUE, not ' + (opt[k] === true ? 'nothing' : opt[k])); process.exit(2); }
 }
+if (opt['perp-cap'] !== undefined && Number(opt['perp-cap']) > 1) { console.error('--perp-cap needs a number above 0 and at most 1, not ' + opt['perp-cap']); process.exit(2); }
 if (opt['grow-iters'] !== undefined && !Number.isInteger(Number(opt['grow-iters']))) { console.error('--grow-iters needs a whole number, not ' + opt['grow-iters']); process.exit(2); }
 if (opt['stop-lam'] !== undefined && (typeof opt['stop-lam'] !== 'string' || opt['stop-lam'] === '' || !Number.isFinite(Number(opt['stop-lam'])))) { console.error('--stop-lam needs a number, as --stop-lam=VALUE, not ' + (opt['stop-lam'] === true ? 'nothing' : opt['stop-lam'])); process.exit(2); }
 if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece)'); process.exit(2); }
@@ -75,6 +77,7 @@ if (opt['guard-ratio'] !== undefined) settings.ias.guardRatio = Number(opt['guar
 if (opt['tol-scale'] !== undefined) settings.tolScale = Number(opt['tol-scale']);
 if (opt['mono-threads'] !== undefined) { const K = Number(opt['mono-threads']); if (typeof opt['mono-threads'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--mono-threads needs a whole number of at least 1, as --mono-threads=K, not ' + (opt['mono-threads'] === true ? 'nothing' : opt['mono-threads'])); process.exit(2); } settings.monoThreads = K; }
 if (opt['ls-reuse'] !== undefined) { if (opt['ls-reuse'] !== true) { console.error('--ls-reuse takes no value'); process.exit(2); } settings.lsReuse = true; }
+if (opt['perp-cap'] !== undefined) settings.perpCap = Number(opt['perp-cap']);
 if (opt['arc-weight'] !== undefined) settings.arcWeight = Number(opt['arc-weight']);
 if (opt['grow-iters'] !== undefined) settings.growIters = Number(opt['grow-iters']);
 if (opt['grow-factor'] !== undefined) settings.growFactor = Number(opt['grow-factor']);
@@ -110,7 +113,7 @@ const traceBase = (step, lam, th, h, it, Y) => {
     }
     keys.push({ k: key, cum });
     const el = perpEL(u1, u2, Y[n], t);
-    const info = perpInfo(u1, u2, Y[n], t);
+    const info = perpInfo(u1, u2, Y[n], t, settings.perpCap ?? 1);
     if (!info) { unrec.push({ step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), reason: 'perpInfo null' }); return false; }
     const p = { step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), theta: th, turns: th / (2 * Math.PI), minDist: info.minDist, closure: info.repeatErr };
     if (pts.length % 5 === 0) {
