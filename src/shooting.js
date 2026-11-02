@@ -7,7 +7,7 @@ import { monodromy } from './stability.js';
 import { solve } from './newton.js';
 import { perpInitial, symResidual, perpInfo } from './perp.js';
 import { settings } from './settings.js';
-import { iasPieces, iasFlow, BridgeError, gstats } from './ias/bridge.js';
+import { iasPieces, iasFlow, BridgeError, gstats, batchG2 } from './ias/bridge.js';
 
 const N = 12;
 
@@ -83,6 +83,30 @@ function lsResidual(obs, z, lam, m) {
 // largest |dp45 end - IAS15 end| / max(1, |IAS15 component|) over the 12 components
 const endDiffOf = (a, b) => { let d = 0; for (let k = 0; k < N; k++) d = Math.max(d, Math.abs(a[k] - b[k]) / Math.max(1, Math.abs(b[k]))); return d; };
 
+// --ls-reuse (settings.lsReuse): the line search evaluates the pieces of a trial in one bridge request and keeps the answer of the accepted trial for the next system() call
+let pendingTrial = null;
+function residualTrial(z, lam, m) {
+  const tau = z[2] / m;
+  if (!(tau > 0)) return null;
+  const starts = [perpInitial(z[0], z[1], lam)]; for (let i = 1; i < m; i++) starts.push(z.subarray(3 + N * (i - 1), 3 + N * i));
+  let out;
+  try { out = iasPieces(starts, tau, { noBatchG2: true }); } catch (e) { if (e instanceof BridgeError) return null; throw e; }
+  const F = new Float64Array(N * (m - 1) + 3);
+  for (let i = 0; i < m; i++) {
+    const e = out[i];
+    if (i < m - 1) { const nxt = z.subarray(3 + N * i, 3 + N * (i + 1)); for (let k = 0; k < N; k++) F[N * i + k] = e[k] - nxt[k]; }
+    else F.set(symResidual(e), N * (m - 1));
+  }
+  return { F, tr: { starts, tau, out } };
+}
+function lsTrial(obs, z, lam, m) {
+  const t0 = performance.now(), a0 = gstats.tIas, c0 = gstats.tC, m0 = gstats.tMiss, x0 = gstats.tX;
+  const r = residualTrial(z, lam, m);
+  obs.lsDone((performance.now() - t0) / 1000, gstats.tIas - a0, gstats.tC - c0, gstats.tMiss - m0, gstats.tX - x0);
+  return r;
+}
+const sameStarts = (a, b) => { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) for (let k = 0; k < N; k++) if (a[i][k] !== b[i][k]) return false; return true; };
+
 // residual, jacobian wrt z, and dF/dlam
 function system(z, lam, m) {
   const obs = settings.observer;
@@ -100,7 +124,9 @@ function system(z, lam, m) {
   if (ias) {
     // all pieces by IAS15 through the bridge; the pieces with a close approach come from reg.js with their 12 x 12 matrices (a bridge failure throws BridgeError)
     const starts = [perpInitial(z[0], z[1], lam)]; for (let i = 1; i < m; i++) starts.push(z.subarray(3 + N * (i - 1), 3 + N * i));
-    ends = iasPieces(starts, tau);
+    const reuse = pendingTrial; pendingTrial = null;
+    if (reuse && reuse.tau === tau && sameStarts(reuse.starts, starts)) { ends = reuse.out; batchG2(ends); if (obs) obs.cnt('nReuse'); }
+    else ends = iasPieces(starts, tau);
     if (settings.observer) settings.observer.starts(starts, tau);
     ends.enc.forEach((f, i) => { if (ends.mats[i]) encMats[i] = Array.from({ length: 12 }, (_, k) => ends.mats[i].subarray(12 * k, 12 * k + 12)); });
   }
@@ -359,6 +385,7 @@ function correct(Yp, tau, m, t0) {
 }
 function correct0(Yp, tau, m, t0) {
   const obs = settings.observer;
+  pendingTrial = null;
   const n = Yp.length - 1;
   let Y = Float64Array.from(Yp);
   for (let it = 0; it < 12; it++) {
@@ -380,8 +407,10 @@ function correct0(Yp, tau, m, t0) {
       const Yn = Float64Array.from(Y, (v, i) => v + a * d[i]);
       // the bound on t guards against a jump to another orbit within one Newton solve, not against the family changing its period
       if (Yn[2] < 0.3 * Yp[2] || Yn[2] > 3 * Yp[2] || Math.abs(Yn[n]) > 1.2) continue;
-      const Fnew = obs ? lsResidual(obs, Yn.subarray(0, n), Yn[n], m) : residual(Yn.subarray(0, n), Yn[n], m);
-      if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; if (obs) obs.lsA(a); break; }
+      let Fnew, tr = null;
+      if (settings.lsReuse) { const r = obs ? lsTrial(obs, Yn.subarray(0, n), Yn[n], m) : residualTrial(Yn.subarray(0, n), Yn[n], m); Fnew = r && r.F; tr = r && r.tr; }
+      else Fnew = obs ? lsResidual(obs, Yn.subarray(0, n), Yn[n], m) : residual(Yn.subarray(0, n), Yn[n], m);
+      if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; if (obs) obs.lsA(a); pendingTrial = tr; break; }
     }
     if (!accepted) { if (obs) obs.lsA(0); if (settings.observer) settings.observer.why = 'line search failed'; return { ok: false }; }
   }

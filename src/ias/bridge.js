@@ -114,7 +114,7 @@ function trip(kind, info) {
 
 // starts: array of 12-vectors; returns the end states (those of the encounter pieces from reg.js) with the properties
 // enc (0/1 per piece), ana (11 numbers per piece, see ias-bridge.py) and mats (the 12 x 12 matrices from reg.js of the flagged and of the replaced pieces, else null)
-export function iasPieces(starts, tau) {
+export function iasPieces(starts, tau, opts) {   // opts.noBatchG2: the G2 check of two flagged pieces of different pairs is not made (the line search of --ls-reuse, as one request per piece never had it)
   if (PER_PIECE * starts.length > BUF_NUMBERS) throw new Error('too many pieces for the shared buffer: ' + starts.length + ' pieces need ' + PER_PIECE * starts.length + ' numbers, there is room for ' + BUF_NUMBERS + ' (at most ' + Math.floor(BUF_NUMBERS / PER_PIECE) + ' pieces)');
   stats.calls++;
   const ias = settings.ias, obs = settings.observer, FD = fdMode(), PB = piecesBy();
@@ -134,7 +134,7 @@ export function iasPieces(starts, tau) {
     if (a[9]) trip('G1b', info);
     if (a[10]) trip('G2', info);
   }
-  if (pairs.length > 1) { if (new Set(pairs).size > 1) trip('G2', { reason: 'two flagged pieces of different pairs', pairs }); else gstats.samePair++; }
+  if (pairs.length > 1 && !(opts && opts.noBatchG2)) { if (new Set(pairs).size > 1) trip('G2', { reason: 'two flagged pieces of different pairs', pairs }); else gstats.samePair++; }
   // the flagged pieces by reg.js (end state and the 12 x 12 matrix); a failure of reg.js fails the evaluation, there is no fallback
   out.mats = new Array(m).fill(null);
   if (PB === 'ias') {   // every piece is an unflagged piece: the end state of IAS15, the matrix from src/shooting.js; the guards above stay, the missed-flag check (reg.js on every piece) does not run
@@ -178,6 +178,12 @@ export function iasPieces(starts, tau) {
   missedFlagCheck(starts, out.enc, tau, out.ana);
   stats.pieces += m; stats.steps += ctrl[2]; stats.encounterPieces += out.enc.reduce((a, b) => a + b, 0);
   return out;
+}
+
+// the batch level G2 check of iasPieces on an answer that was made without it (--ls-reuse: the end states of an accepted trial of the line search are used by the next system() call)
+export function batchG2(out) {
+  const pairs = []; for (let i = 0; i < out.length; i++) if (out.enc[i]) pairs.push(out.ana[i][7]);
+  if (pairs.length > 1) { if (new Set(pairs).size > 1) trip('G2', { reason: 'two flagged pieces of different pairs', pairs }); else gstats.samePair++; }
 }
 
 // one piece; null when the bridge fails (a failed evaluation, as flow() returns null when its step limit is exceeded)
