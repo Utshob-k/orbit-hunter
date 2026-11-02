@@ -7,7 +7,7 @@ import { monodromy } from './stability.js';
 import { solve } from './newton.js';
 import { perpInitial, symResidual, perpInfo } from './perp.js';
 import { settings } from './settings.js';
-import { iasPieces, iasFlow, BridgeError } from './ias/bridge.js';
+import { iasPieces, iasFlow, BridgeError, gstats } from './ias/bridge.js';
 
 const N = 12;
 
@@ -71,8 +71,22 @@ function residual(z, lam, m) {
 const dLam = new Float64Array(N);
 dLam[0] = -1 / 3; dLam[2] = 2 / 3; dLam[4] = -1 / 3;
 
+// timers for the diag file (only with settings.observer): the seconds of a call go to the record of the attempt (src/ias/recorder.js)
+function timed(obs, name, fn) { const t0 = performance.now(); const r = fn(); obs.add(name, (performance.now() - t0) / 1000); return r; }
+// residual() as called by the line search: its seconds, and the parts of the bridge timers (ms) that fall inside it
+function lsResidual(obs, z, lam, m) {
+  const t0 = performance.now(), a0 = gstats.tIas, c0 = gstats.tC, m0 = gstats.tMiss, x0 = gstats.tX;
+  const r = residual(z, lam, m);
+  obs.lsDone((performance.now() - t0) / 1000, gstats.tIas - a0, gstats.tC - c0, gstats.tMiss - m0, gstats.tX - x0);
+  return r;
+}
+// largest |dp45 end - IAS15 end| / max(1, |IAS15 component|) over the 12 components
+const endDiffOf = (a, b) => { let d = 0; for (let k = 0; k < N; k++) d = Math.max(d, Math.abs(a[k] - b[k]) / Math.max(1, Math.abs(b[k]))); return d; };
+
 // residual, jacobian wrt z, and dF/dlam
 function system(z, lam, m) {
+  const obs = settings.observer;
+  let edCall = 0;
   const n = 3 + N * (m - 1);
   const tau = z[2] / m;
   const F = new Float64Array(n);
@@ -94,10 +108,13 @@ function system(z, lam, m) {
     const start = i === 0 ? perpInitial(z[0], z[1], lam) : z.subarray(3 + N * (i - 1), 3 + N * i);
     let e, M;
     if (ias) {
-      M = encMats[i] || monodromy(start, tau).M;
+      if (encMats[i]) M = encMats[i];
+      else if (obs) { const mo = timed(obs, 'secMono', () => monodromy(start, tau)); obs.cnt('nMono'); edCall = Math.max(edCall, endDiffOf(mo.end, ends[i])); M = mo.M; }
+      else M = monodromy(start, tau).M;
       if (settings.observer) settings.observer.mono(i, M);
       e = ends[i];
-    } else ({ end: e, M } = monodromy(start, tau));
+    } else if (obs) { ({ end: e, M } = timed(obs, 'secMono', () => monodromy(start, tau))); obs.cnt('nMono'); }
+    else ({ end: e, M } = monodromy(start, tau));
     end = e;
     deriv(e, f);
     if (i < m - 1) {
@@ -141,6 +158,7 @@ function system(z, lam, m) {
       }
     }
   }
+  if (obs) obs.endDiffCall(edCall);
   return { F, J, Flam, end };
 }
 
@@ -340,6 +358,7 @@ function correct(Yp, tau, m, t0) {
   obs.begin(); const r = correct0(Yp, tau, m, t0); obs.end(r); return r;
 }
 function correct0(Yp, tau, m, t0) {
+  const obs = settings.observer;
   const n = Yp.length - 1;
   let Y = Float64Array.from(Yp);
   for (let it = 0; it < 12; it++) {
@@ -354,17 +373,17 @@ function correct0(Yp, tau, m, t0) {
     const A = sys.J.map((row, i) => [...Array.from(row), sys.Flam[i]]);
     A.push(wrow(tau));
     const rhs = [...Array.from(sys.F, (v) => -v), -wdot(tau, Y.map((v, i) => v - Yp[i]))];
-    const d = solve(A, rhs);
+    const d = obs ? timed(obs, 'secSolve', () => solve(A, rhs)) : solve(A, rhs);
     if (!d) { if (settings.observer) settings.observer.why = 'solve null'; return { ok: false }; }
     let accepted = false;
     for (let a = 1; a > 1 / 16; a /= 2) {
       const Yn = Float64Array.from(Y, (v, i) => v + a * d[i]);
       // the bound on t guards against a jump to another orbit within one Newton solve, not against the family changing its period
       if (Yn[2] < 0.3 * Yp[2] || Yn[2] > 3 * Yp[2] || Math.abs(Yn[n]) > 1.2) continue;
-      const Fnew = residual(Yn.subarray(0, n), Yn[n], m);
-      if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; break; }
+      const Fnew = obs ? lsResidual(obs, Yn.subarray(0, n), Yn[n], m) : residual(Yn.subarray(0, n), Yn[n], m);
+      if (Fnew && sup(Fnew) < Fn) { Y = Yn; accepted = true; if (obs) obs.lsA(a); break; }
     }
-    if (!accepted) { if (settings.observer) settings.observer.why = 'line search failed'; return { ok: false }; }
+    if (!accepted) { if (obs) obs.lsA(0); if (settings.observer) settings.observer.why = 'line search failed'; return { ok: false }; }
   }
   return { ok: false };
 }
