@@ -1,0 +1,211 @@
+{
+ "what": "speed options of tools/family-follow-ias.mjs (--ls-reuse, --mono-threads=K, --perp-cap=F, --reg-threads=K, --ias-procs=K, --fast=K): the checks that they give the same accepted steps, and the measurements on t35 - and t44 -",
+ "machine": "one machine, 4 performance cores (8 logical processors), the runs pinned to them; wall seconds vary by up to 30 percent between hours on it, so only runs of one chain, interleaved, were compared",
+ "settings": {
+  "S": "--ls-reuse --perp-cap=0.2 (no threads)",
+  "P": "--ls-reuse --mono-threads=4 --perp-cap=0.2",
+  "X": "--fast=4 --perp-cap=0.2 (= --ls-reuse --mono-threads=4 --reg-threads=4 --ias-procs=4, with --perp-cap=0.2)",
+  "base": "no speed option"
+ },
+ "perp_cap": {
+  "F": 0.2,
+  "stored_points_checked": 10534,
+  "largest_share_of_limit_percent": 7.44
+ },
+ "replays_to_hand_over": {
+  "t35m": {
+   "accepted_steps": 262,
+   "bit_identical": true
+  },
+  "t44m": {
+   "accepted_steps": 286,
+   "bit_identical": true
+  }
+ },
+ "first_60_recorded_points_base_against_fast4": [
+  {
+   "label": "t12p",
+   "points": 14,
+   "unrec": 1,
+   "why": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t14p",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t28m",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t28p",
+   "points": 13,
+   "unrec": 0,
+   "why": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t35m",
+   "points": 60,
+   "unrec": 21,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t35p",
+   "points": 9,
+   "unrec": 0,
+   "why": "triple-approach guard (5 consecutive attempts failed with a guard trip)",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t44m",
+   "points": 60,
+   "unrec": 18,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t44p",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t62m",
+   "points": 60,
+   "unrec": 3,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t62p",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t72m",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t72p",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t81m",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  },
+  {
+   "label": "t81p",
+   "points": 60,
+   "unrec": 0,
+   "why": "stopped after 60 recorded points",
+   "verdict": "EQUAL",
+   "reproduce_trace_against_stored": "PASS/PASS"
+  }
+ ],
+ "all_pairs_equal": true,
+ "hand_over_runs": {
+  "t35m": {
+   "name": "t35 -",
+   "accepted_steps_to_hand_over": 262,
+   "wall_seconds": {
+    "S": 309.0,
+    "P": [
+     225.0,
+     222.0
+    ],
+    "X": [
+     168.0,
+     171.0
+    ]
+   },
+   "saving_X_against_P_percent": 24.3,
+   "fifty_digit_seconds_minimum": {
+    "start": 38.0,
+    "step": 137.0
+   },
+   "fifty_digit_seconds_largest": {
+    "start": 98.0,
+    "step": 185.0
+   },
+   "ratio_fifty_digit_over_pericont_smallest_fifty_digit_seconds": {
+    "S": 0.57,
+    "P": 0.79,
+    "X": 1.04
+   },
+   "ratio_with_largest_fifty_digit_seconds": {
+    "S": 0.92,
+    "P": 1.28,
+    "X": 1.69
+   }
+  },
+  "t44m": {
+   "name": "t44 -",
+   "accepted_steps_to_hand_over": 286,
+   "wall_seconds": {
+    "S": 394.0,
+    "P": [
+     318.0,
+     321.0
+    ],
+    "X": [
+     213.0,
+     212.0
+    ]
+   },
+   "saving_X_against_P_percent": 33.3,
+   "fifty_digit_seconds_minimum": {
+    "start": 56.0,
+    "step": 267.0
+   },
+   "fifty_digit_seconds_largest": {
+    "start": 76.0,
+    "step": 363.0
+   },
+   "ratio_fifty_digit_over_pericont_smallest_fifty_digit_seconds": {
+    "S": 0.87,
+    "P": 1.08,
+    "X": 1.62
+   },
+   "ratio_with_largest_fifty_digit_seconds": {
+    "S": 1.18,
+    "P": 1.47,
+    "X": 2.2
+   }
+  }
+ },
+ "note": "ratio = cost of the 50 digit continuation (one core) divided by the cost of the PeriCont stretch; above 1 PeriCont is cheaper. The 50 digit seconds of the same work varied by up to 1.6 times between hours."
+}
