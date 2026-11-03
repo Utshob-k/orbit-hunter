@@ -53,6 +53,6 @@ const lamAt = (d) => F(z, p.lam + d);
 const h = 1e-7, a = lamAt(h), b = lamAt(-h), c = lamAt(2 * h), d2 = lamAt(-2 * h);
 let dl = 0; for (let i = 0; i < n; i++) dl = Math.max(dl, Math.abs(base.Flam[i] - (4 * (a[i] - b[i]) / (2 * h) - (c[i] - d2[i]) / (4 * h)) / 3 ));
 check('dF/dlam equals central differences with Richardson', dl <= 1e-8 * Math.max(maxFl, 1), `largest difference ${dl.toExponential(2)} (max|dF/dlam| ${maxFl.toExponential(2)})`);
-check('no guard tripped, no piece replaced by the cross-check', gstats.tripsTotal === 0, `trips ${gstats.tripsTotal}, replaced ${gstats.replaced}`);
+check('no guard tripped, no piece replaced by the cross-check', gstats.tripsTotal === 0 && gstats.replaced === 0, `trips ${gstats.tripsTotal}, replaced ${gstats.replaced}`);
 console.log(`time ${((Date.now() - t0) / 1000).toFixed(0)} s`);
 process.exit(fail ? 1 : 0);

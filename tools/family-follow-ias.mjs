@@ -7,6 +7,8 @@
 // OUT.json.diag.jsonl (one line per attempt of the corrector, src/ias/recorder.js).
 // node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]] [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N]
 //                                  [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390]
+//                                  [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--ls-reuse] [--mono-threads=K] [--perp-cap=F] [--reg-threads=K] [--ias-procs=K] [--fast=K]
+//                                  [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record]
 //   DIR = 1 or -1 in lam (anything else stops the driver with exit 2, as does an unknown option); t = half the period. pieces: the number of pieces of the multiple shooting, at most 250. max-dist: stop when the closest approach is above it (inf for never). stop-below: stop
 //   when the closest approach is below it (0: never). stop-after: stop after that many recorded points (the message is "stopped after N recorded points"). The other options set src/settings.js: IAS15 adaptive_mode, the longest wait for
 //   the Python process, the python executable PY (the default is that of src/settings.js: ORBIT_PYTHON, else python on Windows and python3 elsewhere), the ratio of guard G1b.

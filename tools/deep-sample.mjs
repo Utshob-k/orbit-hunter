@@ -7,7 +7,7 @@
 //   (6 minutes in all) on the machine of the stored run (needs node, python with rebound and mpmath). DIR keeps the trace, the points, the witness results and the summary; without --dir it is a new folder
 //   orbit-hunter-sample-XXXXXX in the temporary folder of the operating system (os.tmpdir()), which is not deleted. The trace is run with the guard ratio 400 of the stored t35 - trace.
 //   The test compares numbers with tolerances (data/deep/sample/expected-summary.json): recorded points and accepted steps, witnessed points, the strict depth (relative 1e-3), lam of the last point (relative 1e-9),
-//   the closure of every witness below 1e-6, no guard trip; the text of the summary is compared with expected-summary.txt as information only.
+//   the closure of one witness per row (that of w1, else that of w1b) below 1e-6, no guard trip; the text of the summary is compared with expected-summary.txt as information only.
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
@@ -65,7 +65,7 @@ check('witnessed points', sum.rows.length === exp.points_to_witness && sum.rows.
 check('strict witnessed depth', typeof sum.strict_depth === 'number' && rel(sum.strict_depth, exp.strict_depth) <= exp.strict_depth_relative_tolerance && sum.turn && sum.turn.step === exp.strict_depth_step, `${sum.strict_depth} at step ${sum.turn && sum.turn.step} (expected ${exp.strict_depth} at step ${exp.strict_depth_step}, relative tolerance ${exp.strict_depth_relative_tolerance})`);
 const last = sum.rows[sum.rows.length - 1];
 check('lam of the last point', rel(last.lam, exp.lam_last_point) <= exp.lam_last_point_relative_tolerance, `${last.lam} (expected ${exp.lam_last_point}, relative tolerance ${exp.lam_last_point_relative_tolerance})`);
-check('closure of every witness below the limit', sum.rows.every((r) => typeof r.closure === 'number' && r.closure < exp.closure_limit_of_a_witness), `largest ${Math.max(...sum.rows.map((r) => r.closure)).toExponential(2)} (limit ${exp.closure_limit_of_a_witness})`);
+check('closure of one witness per row (w1, else w1b) below the limit', sum.rows.every((r) => typeof r.closure === 'number' && r.closure < exp.closure_limit_of_a_witness), `largest ${Math.max(...sum.rows.map((r) => r.closure)).toExponential(2)} (limit ${exp.closure_limit_of_a_witness})`);
 check('the closest approach turns', sum.turned === exp.turned);
 check('no guard tripped, nothing replaced by the cross-check', res.guards.tripsTotal === exp.guard_trips && res.guards.replaced === exp.cross_check_replaced, `trips ${res.guards.tripsTotal}, replaced ${res.guards.replaced}`);
 console.log(`time ${((Date.now() - t0) / 1000).toFixed(0)} s, files in ${dir}`);
