@@ -15,7 +15,7 @@ process.env.ORBIT_INTEGRATOR = 'ias';
 process.env.PYTHONDONTWRITEBYTECODE = '1';
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const [k, v] = a.slice(2).split('='); if (!['k', 'seed'].includes(k)) { console.error('unknown option --' + k); process.exit(2); } opt[k] = v; }
+for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const eq = a.indexOf('='), k = eq < 0 ? a.slice(2) : a.slice(2, eq), v = eq < 0 ? undefined : a.slice(eq + 1); if (!['k', 'seed'].includes(k)) { console.error('unknown option --' + k); process.exit(2); } opt[k] = v; }
 const [outFile, ...specs] = pos;
 if (!outFile || !specs.length) { console.error('usage: node tools/residual-floor.mjs OUT.json LABEL=TRACE.json:I,J,K [...] [--k=30] [--seed=1]'); process.exit(2); }
 if (fs.existsSync(outFile)) { console.error('exists, not overwriting: ' + outFile); process.exit(2); }

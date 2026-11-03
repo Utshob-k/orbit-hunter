@@ -10,7 +10,7 @@ import { flowEnc } from '../src/ias/reg.js';
 import { perpInitial } from '../src/perp.js';
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-const opt = Object.fromEntries(process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => { const [k, v] = a.slice(2).split('='); return [k, v]; }));
+const opt = Object.fromEntries(process.argv.slice(2).filter((a) => a.startsWith('--')).map((a) => { const eq = a.indexOf('='); return eq < 0 ? [a.slice(2), undefined] : [a.slice(2, eq), a.slice(eq + 1)]; }));
 const [outFile, traceFile, stepArg] = args;
 if (!outFile || !traceFile || !stepArg || fs.existsSync(outFile)) { console.error('usage: node tools/orbit-track.mjs OUT.json TRACE.json STEP [--samples=600] [--window=0.2] (OUT.json must be new)'); process.exit(2); }
 const samples = Number(opt.samples || 600), win = Number(opt.window || 0.2);

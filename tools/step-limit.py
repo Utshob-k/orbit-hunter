@@ -20,7 +20,7 @@ cbf = L(D + 'extra/cost-before-floor.json')
 sh = open(REL + 'src/shooting.js', encoding='utf8').read()
 ff = open(REL + 'tools/family-follow-ias.mjs', encoding='utf8').read()
 facts = {}
-for key, src, text in (('growth', sh, 'h = Math.min(hMax, c.iters <= 3 ? h * 1.4 : h);'),
+for key, src, text in (('growth', sh, 'h = Math.min(hMax, c.iters <= (settings.growIters ?? 3) ? h * (settings.growFactor ?? 1.4) : h);'),
                        ('theta_limit', sh, 'dth > Math.max(0.03, 0.3 * Math.abs(th))'),
                        ('tangent_turn_limit', sh, 'wdot(tauNew, tau) > Math.cos(0.35)'),
                        ('unit_tangent', sh, 'const wunit = (a) =>'),
