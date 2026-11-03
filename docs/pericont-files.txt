@@ -16,6 +16,8 @@ CHANGELOG.md
 src/ias/
 src/settings.js
 src/shooting.js
+src/mono-pool.js
+src/mono-worker.mjs
 src/perp.js
 src/physics.js
 src/stability.js
