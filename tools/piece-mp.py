@@ -53,7 +53,9 @@ def run(d, files, jobs):
     def go(t):
         r = subprocess.run([sys.executable, '-B', os.path.abspath(__file__), '--one', t[0], str(t[1]), t[2]], capture_output=True, text=True)
         print(os.path.basename(t[2]), r.stdout[-200:].strip(), r.stderr[-300:].strip(), flush=True)
-    with ThreadPoolExecutor(jobs) as ex: list(ex.map(go, todo))
+        return r.returncode
+    with ThreadPoolExecutor(jobs) as ex: codes = list(ex.map(go, todo))
+    if any(codes): sys.exit('%d of %d children failed' % (sum(1 for c in codes if c), len(codes)))
 
 
 def summary(d, out, files):

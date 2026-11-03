@@ -7,7 +7,7 @@
 # Also importable (kepler_ref): setup_rel(q, u0=None), prop(r0, v0, tau, dps=60).
 import sys, os, json
 sys.dont_write_bytecode = True
-from mpmath import mp, mpf, sqrt, sin, cos, atan2, nstr, pi, factorial
+from mpmath import mp, mpf, sqrt, sin, atan2, nstr
 
 MU = mpf(2)
 

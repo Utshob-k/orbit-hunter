@@ -19,6 +19,8 @@ def option(name, default):
     return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else default
 
 
+if len(sys.argv) < 5 or sys.argv[1].startswith('--'):
+    sys.stderr.write('usage: python tools/reclose-continue.py LABEL START.json LAM0 OUTDIR [--steps 10] [--dlam -1e-5] [--minutes 60] [--witness-minutes 30] [--compare-first F.json] [--compare-last F.json] [--no-witness]\n'); sys.exit(2)
 label, startfile, lam0s, outdir = sys.argv[1:5]
 steps, dlam, minutes, wmin = int(option('--steps', 10)), mpf(option('--dlam', '-1e-5')), option('--minutes', '60'), option('--witness-minutes', '30')
 if os.path.exists(outdir): sys.exit('exists, not overwriting: ' + outdir)
@@ -94,7 +96,9 @@ if len(sol) == steps + 1 and '--no-witness' not in sys.argv:
     wj = dict(id=label + '_w1', u1=float(last['v'][0]), u2=float(last['v'][1]), lam=float(last['lam']), t=float(last['v'][2]))
     jf, of = os.path.join(outdir, label + '_w1.job.json'), os.path.join(outdir, label + '_w1.out.json')
     json.dump(wj, open(jf, 'x'))
-    sec, _ = run([os.path.join(here, 'witness.py'), jf, of, '--preset', 'w1', '--minutes', wmin], label + '_w1')
+    sec, wcode = run([os.path.join(here, 'witness.py'), jf, of, '--preset', 'w1', '--minutes', wmin], label + '_w1')
     res['witness'] = dict(file=os.path.basename(of), seconds=round(sec, 1), exists=os.path.exists(of))
     dump()
 print(label, 'done', len(res['steps']), 'steps', flush=True)
+# exit status 1 when a step did not converge, reclose.py gave no output, or the witness failed (the JSON says which)
+if res.get('stopped') or (res['witness'] is not None and (wcode != 0 or not res['witness']['exists'])): sys.exit(1)

@@ -12,6 +12,7 @@
 #   python tools/cost-same-conditions.py REL INPUTS.json OUT.json       REL = the repository folder; OUT.json must be new
 # INPUTS.json: {"load_log": PATH, "leave_out_process_names": [NAMES] (optional: processes of the tool that started the jobs are not listed in the load), "families": {"t35m": {"start": PATH, "start_time": PATH, "runs": [{"dir": FOLDER, "time": PATH, "step": -7.5e-4, "steps_asked": 2}, ...], "replay": PATH, "replay_time": PATH}, "t44m": {...}}}
 import sys, os, json, math, bisect, statistics
+if len(sys.argv) < 4: sys.stderr.write('usage: python tools/cost-same-conditions.py REL INPUTS.json OUT.json\n'); sys.exit(2)
 BS = chr(92)
 REL = sys.argv[1].replace(BS, '/').rstrip('/') + '/'
 INP, OUT = sys.argv[2], sys.argv[3]

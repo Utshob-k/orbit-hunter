@@ -68,8 +68,10 @@ def run(d, pefile, pieces, hs, jobs, base, resume):
     def go(t):
         r = subprocess.run([sys.executable, '-B', os.path.abspath(__file__), 'one', pefile, str(t[1]), t[0], str(t[2]), str(t[3]), t[4]], capture_output=True, text=True)
         print(os.path.basename(t[0]), r.stdout[-160:].strip(), r.stderr[-300:].strip(), flush=True)
+        return r.returncode
 
-    with ThreadPoolExecutor(jobs) as ex: list(ex.map(go, todo))
+    with ThreadPoolExecutor(jobs) as ex: codes = list(ex.map(go, todo))
+    if any(codes): sys.exit('%d of %d children failed' % (sum(1 for c in codes if c), len(codes)))
 
 
 def matrix(d, tag, piece, h):

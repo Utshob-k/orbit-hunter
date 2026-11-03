@@ -6,6 +6,7 @@
 # Gate: the result for t35 - must equal data/deep/henon-t35m.json (median and largest) to 1e-9 relative; if not, the script stops without writing.
 #   python tools/henon-relation.py REL OUT.json        REL = the repository folder; OUT.json must be new. Reads only data/deep/traces/<label>.json and data/deep/henon-t35m.json.
 import sys, os, json, math
+if len(sys.argv) < 3: sys.stderr.write('usage: python tools/henon-relation.py REL OUT.json\n'); sys.exit(2)
 BS = chr(92)
 REL = sys.argv[1].replace(BS, '/').rstrip('/') + '/'
 OUT = sys.argv[2]

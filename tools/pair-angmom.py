@@ -107,8 +107,11 @@ def run(d, jobs, only, ids_arg=None, extra=None):
     def go(i):
         r = subprocess.run([sys.executable, '-B', os.path.abspath(__file__), '--one', i, '%s/%s.json' % (d, i)] + ([extra] if extra else []), capture_output=True, text=True)
         print(i, r.stdout[-300:], r.stderr[-300:], flush=True)
+        return r.returncode
     with ThreadPoolExecutor(jobs) as ex:
-        list(ex.map(go, ids))
+        codes = list(ex.map(go, ids))
+    if any(codes):
+        sys.exit('%d of %d children failed' % (sum(1 for c in codes if c), len(codes)))
 
 
 def summary(d, out):

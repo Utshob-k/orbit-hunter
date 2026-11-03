@@ -12,7 +12,7 @@
 #   --inputs FILE  the file with the key inputs (default data/deep/extra/satellite-words.json)
 #   --words FILE   take the words from the key words of that file instead of computing them with node
 #   --check        compare OUT.json with the default file after writing it (exit 1 if they differ)
-import json, math, os, subprocess, sys, tempfile
+import json, os, subprocess, sys, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE) + '/'
 R = ROOT + 'data/deep/'; STORED = R + 'extra/satellite-words.json'
 args = sys.argv[1:]

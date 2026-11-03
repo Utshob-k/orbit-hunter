@@ -6,6 +6,7 @@
 # Inputs: REL (the repository) and the outputs of tools/reproduce-trace.mjs for the two replays, with their .diag.jsonl; those are in the raw deposit, not in the package.
 #   python tools/step-limit.py REL REPLAY_T35M REPLAY_T44M OUT.json       OUT.json must be new
 import sys, os, json, statistics
+if len(sys.argv) < 5: sys.stderr.write('usage: python tools/step-limit.py REL REPLAY_T35M REPLAY_T44M OUT.json\n'); sys.exit(2)
 BS = chr(92)
 REL = sys.argv[1].replace(BS, '/').rstrip('/') + '/'
 REPLAY = {'t35m': sys.argv[2], 't44m': sys.argv[3]}

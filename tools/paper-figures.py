@@ -3,7 +3,7 @@
 # figure3.svg = sqrt(d) against lam for t35 - with the fitted lines, figure4.svg = progress in lam against the accepted steps. Every plotted point is an element with data-x, data-y and data-cx, data-cy and every tick has data-value and
 # data-px or data-py, so that the drawing can be read back against the data files.
 #   python tools/paper-figures.py OUTDIR      OUTDIR must exist; the four files must not
-import sys, os, json, re, math
+import sys, os, json, math
 sys.stdout.reconfigure(encoding='utf-8')
 if len(sys.argv) < 2: sys.exit('usage: python tools/paper-figures.py OUTDIR')
 HERE = sys.argv[1].replace(chr(92), '/').rstrip('/') + '/'

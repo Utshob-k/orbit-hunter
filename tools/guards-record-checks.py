@@ -7,13 +7,15 @@
 # tools/family-follow-ias.mjs --guards=record with its .diag.jsonl) and the re-closing and the witness of step 32 of t72 -.
 #   python tools/guards-record-checks.py REL BEYOND_T62M BEYOND_T72M STEP32_JOB STEP32_RECLOSE STEP32_WITNESS_JOB STEP32_WITNESS OUT.json       OUT.json must be new
 #   (STEP32_WITNESS_JOB holds the re-closed orbit that the witness integrated; E and L of its start are the reference of the check)
-import sys, os, json, math
+#   (STEP32_JOB is not read; it stays in the command so that the commands that were run before still work)
+import sys, os, json
+if len(sys.argv) < 9: sys.stderr.write('usage: python tools/guards-record-checks.py REL BEYOND_T62M BEYOND_T72M STEP32_JOB STEP32_RECLOSE STEP32_WITNESS_JOB STEP32_WITNESS OUT.json\n'); sys.exit(2)
 from mpmath import mp, mpf, sqrt
 mp.dps = 50
 BS = chr(92)
 REL = sys.argv[1].replace(BS, '/').rstrip('/') + '/'
 BEYOND = {'t62m': sys.argv[2], 't72m': sys.argv[3]}
-JOB, REC, WJOB, WIT, OUT = sys.argv[4:9]
+_job, REC, WJOB, WIT, OUT = sys.argv[4:9]   # STEP32_JOB (the fourth) is not read
 if os.path.exists(OUT): sys.exit('exists, not overwriting: ' + OUT)
 L = lambda p: json.load(open(p, encoding='utf8'))
 D = REL + 'data/deep/'

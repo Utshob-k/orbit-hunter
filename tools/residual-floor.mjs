@@ -63,7 +63,8 @@ const parsed = specs.map((s) => { const mm = s.match(/^([^=]+)=(.+):([0-9,]+)$/)
 const traces = parsed.map((p) => ({ ...p, tr: JSON.parse(fs.readFileSync(p.file, 'utf8')) }));
 const ref = traces[0].tr.settings.ias;
 for (const t of traces) if (t.tr.settings.ias.firstStep !== ref.firstStep || t.tr.settings.ias.guardRatio !== ref.guardRatio) { console.error('the traces differ in first step or guard ratio; run them in separate calls'); process.exit(2); }
-Object.assign(settings.ias, ref); settings.integrator = 'ias';
+for (const k of ['adaptiveMode', 'firstStep', 'firstStepFactor', 'guardRatio', 'crossCheckBelow', 'crossCheckDiff', 'matrix', 'piecesBy']) if (ref[k] !== undefined) settings.ias[k] = ref[k];   // not python or timeoutMs of the machine that made the trace
+settings.integrator = 'ias';
 const res = { what: 'resolution of the corrector residual F at accepted steps; see the header of tools/residual-floor.mjs', K, seed: Number(opt.seed ?? 1), ias_settings: ref, tolerance: settings.newton, items: [] };
 for (const t of traces) {
   const lines = fs.readFileSync(t.file + '.nodes.jsonl', 'utf8').trim().split('\n');
@@ -100,4 +101,6 @@ for (const t of traces) {
 }
 res.gstats = { trips: gstats.trips, missChecks: gstats.missChecks, xchk: gstats.xchk, replaced: gstats.replaced };
 fs.writeFileSync(outFile, JSON.stringify(res, null, 1));
-process.exit(0);
+const failedItems = res.items.filter((it) => it.error).length;
+if (failedItems) console.error(failedItems + ' of ' + res.items.length + ' items failed (field error in ' + outFile + ')');
+process.exit(failedItems ? 1 : 0);

@@ -6,7 +6,8 @@
 # RAW/traces/<label>.diag.jsonl (the per-attempt records of the stored runs) and the *_continue.json of the larger-step 50 digit runs (they hold the change of (u1, u2, t) of every step, from which the arclength is taken). Needs node.
 #   python tools/cost-before-floor.py REL RAW CONT_T35M CONT_T44M OUT.json      OUT.json must be new. First check: the corrector seconds of the accepted steps 1..1220 and 1..623, counted as tools/creep-attempts.py counts
 #   them, must reproduce extra/cost-comparison.json to 0.1 s; if not the script prints both numbers and stops without writing.
-import sys, os, json, math, subprocess, tempfile
+import sys, os, json, math, subprocess, tempfile, pathlib
+if len(sys.argv) < 6: sys.stderr.write('usage: python tools/cost-before-floor.py REL RAW CONT_T35M CONT_T44M OUT.json\n'); sys.exit(2)
 BS = chr(92)
 REL, RAW = [os.path.abspath(x).replace(BS, '/').rstrip('/') + '/' for x in sys.argv[1:3]]
 C35, C44, OUT = sys.argv[3:6]
@@ -49,10 +50,12 @@ print('CHECK OK: the corrector seconds of the accepted steps 1..1220 and 1..623,
 # ---------------------------------------------------------------- node: the rule exactly as the file says
 def node_first_fire(lams):
     js = ("import { handoverFires } from %s; import fs from 'fs'; const lams = JSON.parse(fs.readFileSync(process.argv[2], 'utf8')); let first = null;"
-          " for (let K = 1; K <= lams.length - 1; K++) { if (handoverFires(lams.slice(0, K + 1), %r)) { first = K; break; } } console.log(JSON.stringify(first));") % (json.dumps('file:///' + REL + 'tools/handover-rule.mjs'), BELOW)
-    d = tempfile.mkdtemp(); jf, lf = os.path.join(d, 'f.mjs'), os.path.join(d, 'l.json')
-    open(jf, 'w').write(js); json.dump(lams, open(lf, 'w'))
-    return json.loads(subprocess.run(['node', jf, lf], capture_output=True, text=True, check=True).stdout)
+          " for (let K = 1; K <= lams.length - 1; K++) { if (handoverFires(lams.slice(0, K + 1), %r)) { first = K; break; } } console.log(JSON.stringify(first));") % (json.dumps(pathlib.Path(REL + 'tools/handover-rule.mjs').as_uri()), BELOW)
+    with tempfile.TemporaryDirectory() as d:
+        jf, lf = os.path.join(d, 'f.mjs'), os.path.join(d, 'l.json')
+        with open(jf, 'w') as fh: fh.write(js)
+        with open(lf, 'w') as fh: json.dump(lams, fh)
+        return json.loads(subprocess.run(['node', jf, lf], capture_output=True, text=True, check=True).stdout)
 
 def p100(lams, k): return abs(lams[k] - lams[k - 100]) / 100 if k >= 100 else None
 
