@@ -86,7 +86,7 @@ tools/orbit-track.mjs
 tools/db82-families.py
 tools/fd-reference.py
 
-# tests: npm test (11 files) and npm run test:ias (14 files), and the diagnostic of REBOUND's first step
+# tests: npm test (11 files) and npm run test:ias (15 files), and the diagnostic of REBOUND's first step
 test/figure8.test.js
 test/known.test.js
 test/stability.test.js
@@ -112,6 +112,7 @@ test/handover-rule.test.js
 test/t-bound.test.js
 test/handover-fail.test.js
 test/relative-out.test.js
+test/fast-option.test.js
 test/ias-first-step.test.js
 
 # data: everything of data/deep (traces, witnesses, re-closed stretches, extra/, sample/), and the files that npm test reads
