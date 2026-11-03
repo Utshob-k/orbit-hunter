@@ -65,12 +65,15 @@ for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-bel
 if (opt['perp-cap'] !== undefined && Number(opt['perp-cap']) > 1) { console.error('--perp-cap needs a number above 0 and at most 1, not ' + opt['perp-cap']); process.exit(2); }
 if (opt['grow-iters'] !== undefined && !Number.isInteger(Number(opt['grow-iters']))) { console.error('--grow-iters needs a whole number, not ' + opt['grow-iters']); process.exit(2); }
 if (opt['stop-lam'] !== undefined && (typeof opt['stop-lam'] !== 'string' || opt['stop-lam'] === '' || !Number.isFinite(Number(opt['stop-lam'])))) { console.error('--stop-lam needs a number, as --stop-lam=VALUE, not ' + (opt['stop-lam'] === true ? 'nothing' : opt['stop-lam'])); process.exit(2); }
-if (pieces > 250) { console.error('pieces is at most 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece)'); process.exit(2); }
+if (!Number.isInteger(pieces) || pieces < 1 || pieces > 250) { console.error('--pieces needs a whole number from 1 to 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece), not ' + opt.pieces); process.exit(2); }
+if (opt['stop-after'] !== undefined && (!Number.isInteger(Number(opt['stop-after'])) || Number(opt['stop-after']) < 1)) { console.error('--stop-after needs a whole number of at least 1, not ' + opt['stop-after']); process.exit(2); }
+if (opt['ias-mode'] !== undefined && (!Number.isInteger(Number(opt['ias-mode'])) || Number(opt['ias-mode']) > 3)) { console.error('--ias-mode needs a whole number from 0 to 3, not ' + opt['ias-mode']); process.exit(2); }
 const stopBelow = Number(opt['stop-below'] ?? 0), stopAfter = opt['stop-after'] === undefined ? Infinity : Number(opt['stop-after']);
 settings.integrator = 'ias';
 if (opt['ias-mode'] !== undefined) settings.ias.adaptiveMode = Number(opt['ias-mode']);
 if (opt.matrix !== undefined) { if (!['exact', 'fd-forward', 'fd-central'].includes(opt.matrix)) { console.error('--matrix must be exact, fd-forward or fd-central, not ' + opt.matrix); process.exit(2); } if (opt.matrix !== 'exact') settings.ias.matrix = opt.matrix; }
 if (opt['pieces-by'] !== undefined) { if (!['ias', 'reg'].includes(opt['pieces-by'])) { console.error('--pieces-by must be ias or reg, not ' + opt['pieces-by']); process.exit(2); } settings.ias.piecesBy = opt['pieces-by']; }
+if (opt['pieces-by'] === 'ias' && (opt.matrix === 'fd-forward' || opt.matrix === 'fd-central')) { console.error('--matrix=' + opt.matrix + ' cannot be used together with --pieces-by=ias (no reg.js matrix is built then)'); process.exit(2); }
 if (opt.guards !== undefined) { if (opt.guards !== 'record') { console.error('--guards must be record, not ' + opt.guards); process.exit(2); } settings.ias.guards = 'record'; }
 if (opt['ias-first-step'] !== undefined) { if (opt['ias-first-step'] !== 'legacy' && opt['ias-first-step'] !== 'timescale') { console.error('--ias-first-step must be legacy or timescale, not ' + opt['ias-first-step']); process.exit(2); } settings.ias.firstStep = opt['ias-first-step']; }
 if (opt['newton-tol'] !== undefined) settings.newton = Number(opt['newton-tol']);

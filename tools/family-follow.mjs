@@ -20,6 +20,7 @@ if (newtonTol !== undefined && !(newtonTol > 0 && Number.isFinite(newtonTol))) {
 if (!(stopBelow >= 0 && Number.isFinite(stopBelow))) { console.error('--stop-below needs a number of at least 0'); process.exit(2); }
 if (newtonTol !== undefined) settings.newton = newtonTol;
 if (!outFile || !tA) { console.error('usage: node tools/family-follow.mjs out.json DIR minutes u1 u2 lam t [label] [pieces] [--newton-tol=X] [--stop-below=X]'); process.exit(2); }
+if (fs.existsSync(outFile)) { console.error('exists, not overwriting: ' + outFile); process.exit(2); }
 const dir = Number(dirArg) >= 0 ? 1 : -1, maxMs = (Number(minArg) || 30) * 60000;
 const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
 let shifted = null;

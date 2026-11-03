@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 // builds the package of PeriCont (version 0.3.0) from the file list docs/pericont-files.txt: pericont-0.3.0.zip, with the top folder pericont-0.3.0/ inside.
-// node tools/pack-pericont.mjs OUTDIR [--list docs/pericont-files.txt]
+// node tools/pack-pericont.mjs OUTDIR [--list docs/pericont-files.txt | --list=docs/pericont-files.txt]
 //   OUTDIR: a folder outside the repository (it is created if it does not exist); the zip must not exist there. The list has one path per line, relative to the top folder of the repository; a path that ends
 //   with / is a folder and takes every file below it; a line "SOURCE => NAME" puts the file SOURCE into the package as NAME (the README of the package); lines that start with # and empty lines are skipped. A path that does not exist stops the tool. The zip is written by this tool (deflate, fixed time stamps, files
 //   in the order of the list and of the names within a folder), so the same files give the same zip. It prints the number of files, the size and the sha256 of the zip.
@@ -12,9 +12,19 @@ import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const args = process.argv.slice(2).filter((a, i, all) => !a.startsWith('--') && all[i - 1] !== '--list');
-const li = process.argv.indexOf('--list'), listFile = path.resolve(root, li >= 0 ? process.argv[li + 1] : 'docs/pericont-files.txt');
-if (args.length !== 1) { console.error('usage: node tools/pack-pericont.mjs OUTDIR [--list docs/pericont-files.txt]'); process.exit(2); }
+const USAGE = 'usage: node tools/pack-pericont.mjs OUTDIR [--list FILE | --list=FILE]';
+const args = []; let listArg = 'docs/pericont-files.txt';
+const argv = process.argv.slice(2);
+for (let i = 0; i < argv.length; i++) {
+  const a = argv[i];
+  if (a === '--list') { if (i + 1 >= argv.length || argv[i + 1].startsWith('--')) { console.error('--list needs a file\n' + USAGE); process.exit(2); } listArg = argv[++i]; }
+  else if (a.startsWith('--list=')) { listArg = a.slice('--list='.length); if (listArg === '') { console.error('--list needs a file\n' + USAGE); process.exit(2); } }
+  else if (a.startsWith('--')) { console.error('unknown option ' + a + '\n' + USAGE); process.exit(2); }
+  else args.push(a);
+}
+const listFile = path.resolve(root, listArg);
+if (!fs.existsSync(listFile)) { console.error('the list file does not exist: ' + listFile); process.exit(2); }
+if (args.length !== 1) { console.error(USAGE); process.exit(2); }
 const outDir = path.resolve(args[0]), rel = path.relative(root, outDir);
 if (rel === '' || (!rel.startsWith('..') && !path.isAbsolute(rel))) { console.error('OUTDIR must be outside the repository: ' + outDir); process.exit(2); }
 const VERSION = '0.3.0', top = `pericont-${VERSION}`, zipFile = path.join(outDir, top + '.zip');

@@ -26,7 +26,7 @@ if (fs.existsSync(outFile)) { console.error('exists, not overwriting: ' + outFil
 const s = shift.command_line_start;
 const opts = new Map([['pieces', '24'], ['guard-ratio', String(row.guard_ratio)], ['ias-first-step', 'legacy']]);
 const extra = [];
-for (const a of rest) { const m = a.match(/^--([^=]+)(=.*)?$/); if (m && opts.has(m[1])) opts.set(m[1], a.includes('=') ? a.split('=')[1] : ''); else extra.push(a); }
+for (const a of rest) { const m = a.match(/^--([^=]+)(=.*)?$/); if (m && opts.has(m[1])) opts.set(m[1], a.includes('=') ? a.slice(a.indexOf('=') + 1) : ''); else extra.push(a); }
 const args = [path.join('tools', 'family-follow-ias.mjs'), outFile, String(row.direction), String(s.u1), String(s.u2), String(s.lam), String(s.t), ...[...opts].map(([k, v]) => `--${k}=${v}`), ...extra];
 console.log('node ' + args.join(' '));
 const t0 = Date.now();
@@ -47,7 +47,7 @@ for (let k = 0; k < n; k++) {
 }
 console.log(`stored ${label}: ${ref.length} accepted steps (${stored.points.length} recorded); run: ${got.length} accepted steps (${(res.points || []).length} recorded), stopped: ${res.why}; compared the first ${n}`);
 console.log(`bit-identical (lam, u1, u2, t): ${equal} of ${n}; step numbers that differ: ${stepDiff}; steps without values: ${missing}; largest relative difference ${maxRel.toExponential(2)}`);
-const stopOpt = rest.find((a) => a.startsWith('--stop-after=')), stopAfter = stopOpt ? Number(stopOpt.split('=')[1]) : null;
+const stopOpt = rest.find((a) => a.startsWith('--stop-after=')), stopAfter = stopOpt ? Number(stopOpt.slice(stopOpt.indexOf('=') + 1)) : null;
 // without --stop-after the run must have as many accepted steps as the stored trace and stop for the same reason (a run that ends early, by the time limit on a slower machine or by a timeout, is a FAIL);
 // with --stop-after N it must have stopped at N recorded points, or where the stored trace stops; with --handover it must have handed over
 const handover = rest.includes('--handover');   // the run ends where the rule fires; the hand-over must have worked
