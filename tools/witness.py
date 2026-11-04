@@ -3,8 +3,10 @@
 # first over the time t (the end state of the half orbit, where all bodies should be on one line with velocities perpendicular to it) and then over a second t (the closure of the
 # full period, best rotation removed). The smallest pair distance over the whole orbit is recorded: sampled at the start and at every accepted step end, the pair, the distance of the
 # third body to the middle of that pair, the time, and a parabolic estimate of the minimum of the squared distance through three consecutive samples (dmin_parabolic).
-# python tools/witness.py JOB.json OUT.json [--preset w1|w1b] [--minutes 30] [--digits 40] [--tol 26] [--floor 1e-14]
+# python tools/witness.py JOB.json OUT.json [--preset w1|w1b] [--minutes 30] [--digits 40] [--tol 26] [--floor 1e-14] [--exact-start]
 #   JOB.json: {"id", "u1", "u2", "lam", "t"}. OUT.json must be new; a self-timer ends the job at the limit and writes "over limit".
+#   --exact-start: the start values are read as mpf(str(value)), so a job with 40 digit strings is integrated from exactly those numbers. Without it they are rounded to double precision first (mpf(float(value))), as for
+#   all stored witnesses, which stay reproducible; a witness of rounded values can show a large closure on a sensitive orbit (the hand-over, tools/handover-continue.py, uses the option).
 #   w1 (the default): 40 digits, tolerance 1e-26, step floor 1e-14: accepted for minima of the pair distance down to 1e-7.
 #   w1b: 50 digits, tolerance 1e-30, step floor 1e-20: accepted down to 1e-10 (tools/witness-acceptance.py).
 import sys, os, json, time, threading, importlib.util
@@ -119,7 +121,7 @@ def sym_residual(s):
     return [c, s[6] * dx + s[7] * dy, s[8] * dx + s[9] * dy]
 
 
-u1, u2, lam, t = [mpf(float(job[k])) for k in ('u1', 'u2', 'lam', 't')]
+u1, u2, lam, t = [(mpf(str(job[k])) if '--exact-start' in sys.argv else mpf(float(job[k]))) for k in ('u1', 'u2', 'lam', 't')]
 x0 = R.start(u1, u2, lam)
 sample(x0, mpf(0))
 try:

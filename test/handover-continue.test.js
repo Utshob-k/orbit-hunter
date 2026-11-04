@@ -4,7 +4,7 @@
 // e5 (first residual above limit, exit 5), noconv, neg (converged with t < 0), none (no output, exit 7); "*" = every job; "return": retfail = a return solution 1e-5 off) and to jump in t beyond a lam (FAKE_JUMP).
 // Checked: the first guess is z + d T and the second the secant; a jump beyond a lam is rejected by the ratio and d / 10 is accepted (and kept: no step growth); exit 4 and exit 5 jobs are rejected and the run goes on; a
 // run that never converges stops at --min-dlam; a missing output stops the run; a failed return test is not a hand-over; |lam| >= 1 stops without a job; an existing OUTDIR, --steps 1 and an unconverged Z.json are refused
-// with exit status 2; the witness runs only when handed over and not with --no-witness. needs python with mpmath (settings.ias.python), takes a few seconds.
+// with exit status 2; the witness runs only when handed over and not with --no-witness, from a job of 40 digit strings with --preset w1b --exact-start. needs python with mpmath (settings.ias.python), takes a few seconds.
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
@@ -42,7 +42,7 @@ write(d)
 `);
 fs.writeFileSync(path.join(tools, 'witness.py'), `
 import sys, json
-json.dump(dict(status='done', dmin=0.1), open(sys.argv[2], 'w'))
+json.dump(dict(status='done', dmin=0.1, argv=sys.argv[3:]), open(sys.argv[2], 'w'))
 `);
 const curve = (l) => [0.5 + l, 2 - 3 * l + l * l, 10 + 5 * l + 4 * l * l];
 const strs = (v) => ({ status: 'done', converged: true, u1: String(v[0]), u2: String(v[1]), t: String(v[2]) });
@@ -69,6 +69,8 @@ const want2 = s1.map((x, i) => x + (x - z[i]));
 check('the second guess is the secant through z and the first solution', Math.max(...g2.map((x, i) => rel(x, want2[i]))) < 1e-10, `largest relative difference ${Math.max(...g2.map((x, i) => rel(x, want2[i]))).toExponential(1)}`);
 check('job files: ref null, lam of the attempt, names LABEL_aNN', j1.ref === null && Math.abs(Number(j1.lam) - 0.301) < 1e-12 && r.has('c_a03.out.json') && r.has('c_a03.stdout'));
 check('3 steps accepted, 3 attempts, handed over, return PASS, witness done, exit status 0', r.exit === 0 && r.res.steps.length === 3 && r.res.attempts.length === 3 && r.res.attempts.every((a) => a.accepted) && r.res.handed_over && r.res.return.pass && r.res.witness.exists && r.has('c_w1.out.json') && r.res.stopped === null, `exit ${r.exit}`);
+const wjob = r.job('c_w1.job.json'), wout = r.job('c_w1.out.json');
+check('the witness job holds u1, u2, lam, t as strings (nstr, 40 digits) and runs with --preset w1b --exact-start', ['u1', 'u2', 'lam', 't'].every((k) => typeof wjob[k] === 'string') && Math.abs(Number(wjob.lam) - 0.303) < 1e-12 && Math.abs(Number(wjob.t) - curve(0.303)[2]) < 1e-9 && wout.argv.join(' ') === '--preset w1b --exact-start --minutes 30', JSON.stringify(wout.argv) + ' lam ' + wjob.lam);
 check('the return job has z as reference and no --max-first', r.job('c_return.job.json').ref.t === String(z[2]) && r.res.return.max_rel_diff_ref < 1e-9);
 check('the steps list has the file, predicted, miss and ratio', r.res.steps[0].file === 'c_a01.out.json' && r.res.steps[0].predicted > 0 && r.res.steps[0].miss >= 0 && r.res.steps[0].ratio < 0.1 && r.res.dlam_requested === '0.001' && r.res.tangent.length === 3);
 

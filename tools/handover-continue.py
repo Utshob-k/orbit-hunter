@@ -7,7 +7,7 @@
 # reason is recorded, d is divided by 10 and the attempt is made again from b; below --min-dlam the run stops. There is no step growth. If |lam| would reach 1 the run stops without a job. Reclose.py
 # without any output stops the run.
 # RETURN (after at least 2 accepted steps): the guess is the line through the first two accepted solutions evaluated at LAMZ, the job has z as its reference and no --max-first. PASS only if it is done,
-# converged, t > 0 and the largest relative difference from z is at most 1e-9. HANDED OVER = at least 2 accepted steps and RETURN PASS. Only then the last orbit gets a w1 witness (tools/witness.py).
+# converged, t > 0 and the largest relative difference from z is at most 1e-9. HANDED OVER = at least 2 accepted steps and RETURN PASS. Only then the last orbit gets a w1b witness from its exact 40 digit start (tools/witness.py --exact-start).
 # python tools/handover-continue.py LABEL Z.json LAMZ BACK.json LAMBACK OUTDIR [--steps 5] [--dlam 1e-5] [--min-dlam 1e-7] [--minutes 20] [--ratio 0.1] [--max-first 0.1] [--witness-minutes 30] [--no-witness]
 #   Z.json, BACK.json: converged outputs of tools/reclose.py at LAMZ and LAMBACK (decimal strings); OUTDIR must be new. --steps is at least 2. --dlam is signed (the direction of lam).
 #   OUTDIR gets LABEL_aNN.job.json / .out.json / .stdout for the attempts (NN = number of the attempt), LABEL_return.*, LABEL_w1.* and LABEL_continue.json (the result, rewritten after every attempt).
@@ -154,10 +154,10 @@ dump()
 wcode = 0
 if res['handed_over'] and '--no-witness' not in opt:
     last = sols[-1]
-    wj = dict(id=label + '_w1', u1=float(last['v'][0]), u2=float(last['v'][1]), lam=float(last['lam']), t=float(last['v'][2]))
+    wj = dict(id=label + '_w1', u1=nstr(last['v'][0], 40), u2=nstr(last['v'][1], 40), lam=nstr(last['lam'], 40), t=nstr(last['v'][2], 40))
     jf, of = os.path.join(outdir, label + '_w1.job.json'), os.path.join(outdir, label + '_w1.out.json')
     json.dump(wj, open(jf, 'x'))
-    sec, wcode = run([os.path.join(here, 'witness.py'), jf, of, '--preset', 'w1', '--minutes', str(opt.get('--witness-minutes', 30))], label + '_w1')
+    sec, wcode = run([os.path.join(here, 'witness.py'), jf, of, '--preset', 'w1b', '--exact-start', '--minutes', str(opt.get('--witness-minutes', 30))], label + '_w1')
     res['witness'] = dict(file=os.path.basename(of), seconds=round(sec, 1), exists=os.path.exists(of), exit=wcode)
     dump()
 print(label, 'done', len(res['steps']), 'steps, handed over' if res['handed_over'] else 'steps, not handed over', flush=True)
