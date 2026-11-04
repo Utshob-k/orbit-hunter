@@ -40,6 +40,7 @@ tools/dp45-attempts.mjs
 tools/reproduce-trace.mjs
 tools/handover-rule.mjs
 tools/handover-run.mjs
+tools/handover-continue.py
 tools/deep-sample.mjs
 tools/pack-pericont.mjs
 tools/witness.py
@@ -86,7 +87,7 @@ tools/orbit-track.mjs
 tools/db82-families.py
 tools/fd-reference.py
 
-# tests: npm test (11 files) and npm run test:ias (15 files), and the diagnostic of REBOUND's first step
+# tests: npm test (11 files) and npm run test:ias (17 files), and the diagnostic of REBOUND's first step
 test/figure8.test.js
 test/known.test.js
 test/stability.test.js
@@ -107,8 +108,10 @@ test/henon.test.js
 test/system-jacobian.test.js
 test/guards.test.js
 test/reclose.test.js
+test/reclose-guards.test.js
 test/replay.test.js
 test/handover-rule.test.js
+test/handover-continue.test.js
 test/t-bound.test.js
 test/handover-fail.test.js
 test/relative-out.test.js

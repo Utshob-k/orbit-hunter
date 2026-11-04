@@ -13,3 +13,17 @@ export function handoverFires(lams, below = 1e-7) {
   const p = p100(lams);
   return p !== null && p < below;
 }
+
+// The point behind the last one for the tangent of the hand-over: the first index j below K (the last index) with |lams[K] - lams[j]| >= minDlam, reached on a stretch where lam moves in one direction only.
+// null if lam turns (or stands still) on the way back from K, if the start of the list is reached before the distance minDlam, or if the last step of lam is 0.
+export function backIndex(lams, minDlam = 1e-6) {
+  const K = lams.length - 1;
+  if (K < 1) return null;
+  const s = Math.sign(lams[K] - lams[K - 1]);
+  if (s === 0) return null;
+  for (let j = K - 1; j >= 0; j--) {
+    if (Math.sign(lams[j + 1] - lams[j]) !== s) return null;
+    if (Math.abs(lams[K] - lams[j]) >= minDlam) return j;
+  }
+  return null;
+}
