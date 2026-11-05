@@ -27,3 +27,16 @@ export function backIndex(lams, minDlam = 1e-6) {
   }
   return null;
 }
+
+// The hand-over also starts at two stops of the trace: the triple-approach guard and "lost the family" (tools/family-follow-ias.mjs).
+export function handoverAtStop(why) {
+  return typeof why === 'string' && (why.startsWith('triple-approach guard') || why.includes('lost the family'));
+}
+
+// The "fired" object of the hand-over at a stop, from the last accepted step: lams[0] and pars[0] are the start, then every accepted step; steps[k] is the loop step of accepted step k (steps[0] = 0).
+// null if there is no accepted step (lams has fewer than 2 entries). back is null if backIndex gives null (lam turns within the last 1e-6, or the trace is shorter).
+export function firedAtStop(lams, pars, steps, below = 1e-7) {
+  if (!lams || lams.length < 2) return null;
+  const K = lams.length - 1, j = backIndex(lams);
+  return { p100: p100(lams), below, accepted_steps: K, loop_step: steps[K], lam: lams[K], lam_step: lams[K] - lams[K - 1], u1: pars[K].u1, u2: pars[K].u2, t: pars[K].t, back: j === null ? null : { index: j, lam: lams[j], ...pars[j] } };
+}

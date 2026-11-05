@@ -2,7 +2,10 @@
 // the hand-over of --handover (tools/family-follow-ias.mjs): the last accepted point and a point at least 1e-6 behind it in lam (fired.back, tools/handover-rule.mjs backIndex) are closed again with the 50 digit
 // tools/reclose.py (each is the reference of itself) and tools/handover-continue.py goes on from the two: tangent first guess, a test of every step, a return test.
 // runHandover returns the "handover" block of OUT.json, the stop reason and whether the hand-over failed. It has handed over only if both re-closings converged and handover-continue.py says handed_over (at least 2 accepted
-// steps and the return test passed); otherwise the reason is "hand-over failed: ..." and the driver exits with 1. If fired.back is null (lam turns within the last 1e-6) there is no tangent: no process is run and the hand-over fails.
+// steps and the return test passed); otherwise the reason is "hand-over failed: ..." and the driver exits with 1. If fired.back is null (no accepted point at least 1e-6 behind the last one with lam moving one way: lam turns, or the trace is
+// shorter) there is no tangent: no process is run and the hand-over fails.
+// The hand-over starts at the rule of the driver (trigger 'rule', the default) or at a stop of the trace (trigger { kind: 'stop', reason }: the triple-approach guard, "lost the family"); then fired is built from the last accepted step
+// (tools/handover-rule.mjs firedAtStop) and the block has trigger 'stop' and stop_before = the stop reason (null for the rule).
 // same_orbit_as_the_point_itself of the re-closing is recorded and not required: in the creep the double precision point can be off by more than 1e-9 (the closing equations are flat there and one ulp moves F by 3e-11), and the
 // 50 digit point is the better one. The exit status of every process is in hv.exits.
 // The direction of the continuation is that of the last step of lam before the rule fired (fired.lam_step), not the sign of DIR: after a fold in lam the two differ.
@@ -11,13 +14,15 @@ import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'child_process';
 
-export function runHandover({ fired, dir, hBelow, hSteps, hDlam, base, root, python, pyArgs = ['-B'], toolsDir = path.join(root, 'tools'), onStart = () => {} }) {
+export function runHandover({ fired, dir, hBelow, hSteps, hDlam, base, root, python, pyArgs = ['-B'], toolsDir = path.join(root, 'tools'), trigger = { kind: 'rule' }, onStart = () => {} }) {
   const sgn = Math.sign(fired.lam_step) || dir;
-  const hv = { rule: 'after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < ' + hBelow, p100: fired.p100, below: hBelow, accepted_steps: fired.accepted_steps, loop_step: fired.loop_step, lam: fired.lam, u1: fired.u1, u2: fired.u2, t: fired.t,
+  const atStop = trigger.kind === 'stop';
+  const hv = { trigger: atStop ? 'stop' : 'rule', stop_before: atStop ? trigger.reason : null,
+    rule: atStop ? 'at the stop "' + trigger.reason + '": the last accepted step and the point of backIndex behind it' : 'after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < ' + hBelow, p100: fired.p100, below: hBelow, accepted_steps: fired.accepted_steps, loop_step: fired.loop_step, lam: fired.lam, u1: fired.u1, u2: fired.u2, t: fired.t,
     steps_wanted: hSteps, last_lam_step: fired.lam_step, direction_of_lam: sgn, dlam: sgn * hDlam, folder: path.basename(base), back: fired.back || null, reclose: null, back_reclose: null, tangent: null, attempts: [], return: null, steps: [], witness: null, exits: [] };
   onStart(hv);
   const fail = (reason) => { hv.failed = reason; return { hv, failed: true, why: 'hand-over failed: ' + reason }; };
-  if (!fired.back) return fail('lam turns within the last 1e-6 of lam: no tangent');
+  if (!fired.back) return fail('no accepted point at least 1e-6 behind the last one with lam moving one way (lam turns, or the trace is shorter): no tangent');
   const run = (args) => {
     const r = spawnSync(python, [...pyArgs, ...args], { cwd: root, stdio: ['ignore', 'inherit', 'inherit'] });
     hv.exits.push({ script: path.basename(args[0]), exit: r.status, signal: r.signal || null, error: r.error ? String(r.error.message || r.error) : null });

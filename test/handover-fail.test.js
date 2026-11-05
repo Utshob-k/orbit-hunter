@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-// the stop reason and the exit status of --handover (tools/handover-run.mjs, used by tools/family-follow-ias.mjs), with fake re-closing scripts: no point behind the last one (lam turns within the last 1e-6: no process is run),
+// the stop reason and the exit status of --handover (tools/handover-run.mjs, used by tools/family-follow-ias.mjs), with fake re-closing scripts: no point behind the last one (no accepted point at least 1e-6 behind with lam moving one way: no process is run),
 // a re-closing that crashes, that does not converge, a re-closing of the back point that does not converge, a continuation that writes nothing, a continuation that stops at its first attempt, one whose return test fails, and
-// the working case (also with a re-closing that is not the same orbit as the point: that is recorded, not required). No python, takes a moment.
+// the working case (also with a re-closing that is not the same orbit as the point: that is recorded, not required), and the same calls with trigger { kind: 'stop' } (the hand-over at the guard and the lost-family stops) and without a trigger
+// (the rule: trigger 'rule', stop_before null). No python, takes a moment.
 // The fakes are node scripts named reclose.py and handover-continue.py in a temporary folder; the "interpreter" is node, without arguments. The exit status of the driver is 1 if runHandover says failed (checked on its source).
 import fs from 'fs';
 import os from 'os';
@@ -31,13 +32,14 @@ const argsFile = path.join(tmp, 'continue-args.json');
 process.env.FAKE_ARGS = argsFile;
 let n = 0;
 const back = { index: 90, lam: 0.6601, u1: 1.5, u2: 2.5, t: 3.5 };
-const go = (mode, fired) => {
+const go = (mode, fired, trigger) => {
   process.env.FAKE_MODE = mode;
   const base = path.join(tmp, 'out' + (n++) + '.json.handover');
-  return runHandover({ fired: { p100: 5e-8, accepted_steps: 262, loop_step: 268, lam: 0.66, lam_step: -1e-8, u1: 1, u2: 2, t: 3, back, ...fired }, dir: -1, hBelow: 1e-7, hSteps: 2, hDlam: 1e-5, base, root: tmp, python: process.execPath, pyArgs: [], toolsDir: tools });
+  return runHandover({ fired: { p100: 5e-8, accepted_steps: 262, loop_step: 268, lam: 0.66, lam_step: -1e-8, u1: 1, u2: 2, t: 3, back, ...fired }, dir: -1, hBelow: 1e-7, hSteps: 2, hDlam: 1e-5, base, root: tmp, python: process.execPath, pyArgs: [], toolsDir: tools, ...(trigger ? { trigger } : {}) });
 };
 let r = go('ok', { back: null });
-check('no point behind the last one (lam turns within the last 1e-6): hand-over failed, no process run', r.failed && r.why === 'hand-over failed: lam turns within the last 1e-6 of lam: no tangent' && r.hv.exits.length === 0 && r.hv.reclose === null, r.why);
+const NOTANGENT = 'no accepted point at least 1e-6 behind the last one with lam moving one way (lam turns, or the trace is shorter): no tangent';
+check('no point behind the last one (lam turns, or the trace is shorter): hand-over failed, no process run', r.failed && r.why === 'hand-over failed: ' + NOTANGENT && r.hv.exits.length === 0 && r.hv.reclose === null, r.why);
 r = go('crash');
 check('a re-closing that crashes: hand-over failed, with its exit status', r.failed && r.why === 'hand-over failed: reclose produced no output (exit 3)' && r.hv.exits[0].exit === 3 && r.hv.exits.length === 1, r.why);
 r = go('noconv');
@@ -67,9 +69,31 @@ check('the continuation goes in the direction of the last step of lam (DIR -1, l
 r = go('ok');
 const b = JSON.parse(fs.readFileSync(argsFile, 'utf8'));
 check('lam falling, as DIR -1: dlam -1e-5', r.hv.direction_of_lam === -1 && Number(b[b.indexOf('--dlam') + 1]) === -1e-5);
+// the hand-over at a stop of the trace (trigger stop) and by the rule (no trigger)
+const STOP = 'triple-approach guard (5 consecutive attempts failed with a guard trip)';
+const stopRule = 'at the stop "' + STOP + '": the last accepted step and the point of backIndex behind it';
+r = go('ok', {}, { kind: 'stop', reason: STOP });
+check('trigger stop: handed over, the block has trigger stop, stop_before kept and the stop rule text, the three processes exit 0', !r.failed && r.why === 'handed over to the 50 digit continuation' && r.hv.trigger === 'stop' && r.hv.stop_before === STOP && r.hv.rule === stopRule && r.hv.exits.length === 3 && r.hv.exits.every((e) => e.exit === 0), r.hv.rule);
+r = go('ok', { back: null }, { kind: 'stop', reason: STOP });
+check('trigger stop, no point behind the last one: the same failure and no process run as on the rule path, trigger and stop_before in the block', r.failed && r.why === 'hand-over failed: ' + NOTANGENT && r.hv.exits.length === 0 && r.hv.trigger === 'stop' && r.hv.stop_before === STOP, r.why);
+r = go('crash', {}, { kind: 'stop', reason: STOP });
+check('trigger stop, a re-closing that crashes: hand-over failed with its exit status, as on the rule path', r.failed && r.why === 'hand-over failed: reclose produced no output (exit 3)' && r.hv.exits.length === 1 && r.hv.exits[0].exit === 3 && r.hv.stop_before === STOP, r.why);
+r = go('retfail', {}, { kind: 'stop', reason: STOP });
+check('trigger stop, the return test fails: hand-over failed with "return test failed", steps recorded, as on the rule path', r.failed && r.why === 'hand-over failed: return test failed' && r.hv.steps.length === 2 && r.hv.return.pass === false && r.hv.trigger === 'stop', r.why);
+r = go('step1', {}, { kind: 'stop', reason: STOP });
+check('trigger stop, the continuation stops at its first attempt: the reason of the continuation, as on the rule path', r.failed && r.why === 'hand-over failed: attempt 1: status error (exit 2)' && r.hv.steps.length === 0, r.why);
+r = go('ok');
+check('no trigger: trigger rule, stop_before null, rule text unchanged', !r.failed && r.hv.trigger === 'rule' && r.hv.stop_before === null && r.hv.rule === 'after at least 100 accepted steps P100 = |lam_k - lam_(k-100)| / 100 < 1e-7', r.hv.rule);
+r = go('ok', {}, { kind: 'rule' });
+check('trigger { kind: rule }: the same as no trigger', !r.failed && r.hv.trigger === 'rule' && r.hv.stop_before === null && r.hv.rule.startsWith('after at least 100 accepted steps'));
 // the driver ends with exit status 1 if the hand-over failed and writes the reason as the stop reason
 const src = fs.readFileSync(new URL('../tools/family-follow-ias.mjs', import.meta.url), 'utf8');
 check('the driver sets the stop reason from runHandover and exits with 1 when it failed', src.includes('out.why = h.why;') && src.includes('if (h.failed) handoverFailed = h.why;') && src.includes('if (handoverFailed) { console.error(handoverFailed); process.exit(1); }'));
+check('the driver keeps the stop reason in whyBeforeHandover, calls handoverAtStop and firedAtStop and starts the hand-over with trigger stop', src.includes('out.whyBeforeHandover = out.why;') && src.includes('handoverAtStop(out.why)') && src.includes('firedAtStop(lams, pars, steps, hBelow)') && src.includes("trigger = { kind: 'stop', reason: out.whyBeforeHandover };") && src.includes('runHandover({ fired, trigger,'));
+check('the driver with no accepted step before the stop: hand-over failed (no tangent), still exits with 1, no process run', src.includes("failed: 'no accepted step before the stop: no tangent'") && src.includes("out.why = 'hand-over failed: no accepted step before the stop: no tangent'; handoverFailed = out.why;"));
+check('the driver records the loop step of every accepted step (steps) next to lams and pars', src.includes('const steps = [0];') && src.includes('steps.push(step);'));
+const rt = fs.readFileSync(new URL('../tools/reproduce-trace.mjs', import.meta.url), 'utf8');
+check('tools/reproduce-trace.mjs with --handover also accepts whyBeforeHandover equal to the stored reason', rt.includes('res.whyBeforeHandover === stored.why') && rt.includes('res.why === stored.why || res.whyBeforeHandover === stored.why'));
 check('the driver passes the back point of the rule and asks for at least 2 steps', src.includes('const j = backIndex(lams);') && src.includes('fired.back = { index: j, lam: lams[j], ...pars[j] }') && src.includes('hSteps >= 2'));
 fs.rmSync(tmp, { recursive: true, force: true });
 process.exit(fail ? 1 : 0);

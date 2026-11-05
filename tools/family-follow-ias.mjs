@@ -33,7 +33,10 @@
 //   at least 1e-6 behind the last one (backIndex of tools/handover-rule.mjs), both points are closed again with tools/reclose.py (50 digits, each the reference of itself; both must converge) and tools/handover-continue.py goes on from them:
 //   its tangent through the two points is the first guess, a step is accepted only if t > 0 and the solution is near the guess (0.1 of the size of the guess step), otherwise the step in lam is divided by 10 (down to 1e-7),
 //   then the secant through the two last solutions. At least 2 steps (--handover-steps, 20 by default, of --handover-dlam in lam, 1e-5, in the direction of the last step of lam) and a return test (the line through the first two
-//   solutions, evaluated at the lam of the last point, must lead back to that point) are needed, then the w1b witness of the last orbit is made from its exact start (tools/witness.py --exact-start). If lam turns within the last 1e-6 there is no tangent and the hand-over fails.
+//   solutions, evaluated at the lam of the last point, must lead back to that point) are needed, then the w1b witness of the last orbit is made from its exact start (tools/witness.py --exact-start). If there is no accepted point at least 1e-6 behind the last one with lam moving one way (lam turns, or the trace is shorter) there is no tangent and the hand-over fails.
+//   The hand-over also starts at two stops of the trace, the triple-approach guard and "lost the family" (handoverAtStop of tools/handover-rule.mjs), from the last accepted step and the point of backIndex behind it (also with fewer
+//   than 100 accepted steps; with --guards=record there is no guard stop). The original stop reason is then in OUT.json "whyBeforeHandover" and in handover.stop_before, handover.trigger is 'stop' (else 'rule'); the stop reason and the exit
+//   status are as for the rule: "handed over to the 50 digit continuation" (exit 0) or "hand-over failed: <reason>" (exit 1; also if there was no accepted step before the stop: no tangent). The other stops end as before.
 //   OUT.json then has a "handover" block (the rule, the two re-closings, the tangent, every attempt, every accepted step with lam, u1, u2, t as strings, the return test, the witness, the files OUT.json.handover-reclose.json, OUT.json.handover-back.json and the folder OUT.json.handover/); the stop reason is
 //   "handed over to the 50 digit continuation" if the hand-over succeeded, else "hand-over failed: <reason>" and the exit status is 1 (tools/handover-run.mjs; the exit status of every process is in the block). Why 1e-7: the 50 digit continuation makes 1e-5 in lam in 148.6 s (t35 -) and 293.9 s (t44 -) (data/deep/extra/cost-comparison.json), that is 6.7e-8 and 3.4e-8 per second,
 //   and this route takes about 1.8 to 2.9 s per accepted step before the creep, so it makes 1e-7 per step at 3.5e-8 to 5.6e-8 per second; below about 1e-7 per step the 50 digit route is faster. Needs python with rebound and mpmath.
@@ -47,7 +50,7 @@ import { huntArclength, huntNatural, closePerpMS } from '../src/shooting.js';
 import { perpInfo, perpInitial, perpEL } from '../src/perp.js';
 import { syzygyWord } from '../src/topology.js';
 import { relativeStability } from '../src/relative.js';
-import { handoverFires, p100, backIndex } from './handover-rule.mjs';
+import { handoverFires, p100, backIndex, handoverAtStop, firedAtStop } from './handover-rule.mjs';
 import { runHandover } from './handover-run.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -152,10 +155,10 @@ const traceBase = (step, lam, th, h, it, Y) => {
     if (info.minDist > maxDist) { stop = 'left the region (closest approach above ' + maxDist + ')'; return true; }
     return false;
 };
-const lams = [shifted.lam], pars = [{ u1: shifted.u1, u2: shifted.u2, t: shifted.t }]; let fired = null;   // --handover: the lam and (u1, u2, t) of the start and of every accepted step
+const lams = [shifted.lam], pars = [{ u1: shifted.u1, u2: shifted.u2, t: shifted.t }]; const steps = [0]; let fired = null;   // --handover: the lam and (u1, u2, t) of the start and of every accepted step, and the loop step of every accepted step (steps[0] = 0)
 const traceHand = (step, lam, th, h, it, Y) => {
   if (traceBase(step, lam, th, h, it, Y) === true) return true;
-  lams.push(lam); pars.push({ u1: Y[0], u2: Y[1], t: Y[2] });
+  lams.push(lam); pars.push({ u1: Y[0], u2: Y[1], t: Y[2] }); steps.push(step);
   if (!handoverFires(lams, hBelow)) return false;
   fired = { p100: p100(lams), below: hBelow, accepted_steps: lams.length - 1, loop_step: step, lam, lam_step: lam - lams[lams.length - 2], u1: Y[0], u2: Y[1], t: Y[2], back: null };
   const j = backIndex(lams);
@@ -167,10 +170,19 @@ try { r = hunt(shifted.u1, shifted.u2, shifted.lam, shifted.t, { m: shifted.m, d
 const zeros = (r.orbits || (r.ok && r.info ? [r] : [])).map((o) => ({ lam: o.lam, u1: o.u1, u2: o.u2, t: o.t, Tstar: o.info.ts, Lstar: Math.abs(o.info.ls), closure: o.info.repeatErr, minDist: o.info.minDist }));
 out.why = stop || r.why || (zeros.length ? 'zero of theta' : 'unknown');
 out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.traceStop = traceStop; if (settings.ias.piecesBy) out.piecesBy = { mode: settings.ias.piecesBy, ...pbStats }; out.steps = r.steps; out.lamMin = r.lamMin; out.lamMax = r.lamMax; out.points = pts; out.zeros = zeros;
-let handoverFailed = null;
+let handoverFailed = null, trigger = { kind: 'rule' };
+if (handover && !fired && handoverAtStop(out.why)) {   // the guard stop and the "lost the family" stop: hand over from the last accepted step
+  out.whyBeforeHandover = out.why;
+  fired = firedAtStop(lams, pars, steps, hBelow);
+  trigger = { kind: 'stop', reason: out.whyBeforeHandover };
+  if (!fired) {
+    out.handover = { trigger: 'stop', stop_before: out.whyBeforeHandover, failed: 'no accepted step before the stop: no tangent' };
+    out.why = 'hand-over failed: no accepted step before the stop: no tangent'; handoverFailed = out.why;
+  }
+}
 if (fired) {
   const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-  const h = runHandover({ fired, dir, hBelow, hSteps, hDlam, base: outFile + '.handover', root, python: settings.ias.python, onStart: (hv) => { out.handover = hv; fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true })); } });
+  const h = runHandover({ fired, trigger, dir, hBelow, hSteps, hDlam, base: outFile + '.handover', root, python: settings.ias.python, onStart: (hv) => { out.handover = hv; fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true })); } });
   out.why = h.why;
   if (h.failed) handoverFailed = h.why;
   const lamsDone = h.hv.steps.filter((s) => s.converged).map((s) => Number(s.lam));
