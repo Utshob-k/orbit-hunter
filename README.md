@@ -8,6 +8,8 @@ This branch, main, holds version 0.2.33 (2026-10-18), the search before PeriCont
 
 No orbit found here is claimed to be new.
 
+Correction (2026-11-06): the README and docs of versions 0.2.5 to 0.3.0, which stay as they are, say that the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) are not read, and from 0.2.15 on that the 2025 review of Li and Liao could not be read. These sentences date from October 2026 and were not updated later; all three were read in a later literature check (2026-11-03; the review and the paper of Chenciner, Fejoz and Montgomery in part). Reading them changed none of the numbers.
+
 ## License
 
 Up to 0.2.33 (this branch) everything is under Creative Commons Attribution 4.0 (CC BY 4.0), see [LICENSE](LICENSE), except the files marked in [data/README.md](data/README.md) as other people's numbers (including the rows of Davoust and Broucke 1982): they belong to their authors, cite them if you use them. From 0.3.0 the code is under the MIT license and the data and documents under CC BY 4.0, see LICENSE and LICENSE-DATA on release-0.3. To cite the current version, use the CITATION.cff of release-0.3.
