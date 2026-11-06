@@ -8,7 +8,7 @@ This branch, main, holds version 0.2.33 (2026-10-18), the search before PeriCont
 
 No orbit found here is claimed to be new.
 
-Correction (2026-11-06): the README and docs of versions 0.2.5 to 0.3.0, which stay as they are, say that the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) are not read, and from 0.2.15 on that the 2025 review of Li and Liao could not be read. These sentences date from October 2026 and were not updated later; all three were read in a later literature check (2026-11-03; the review and the paper of Chenciner, Fejoz and Montgomery in part). Reading them changed none of the numbers.
+Correction (2026-11-06): the README and docs of versions 0.2.5 to 0.3.0, which stay as they are, say that the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) are not read, and from 0.2.15 on that the 2025 review of Li and Liao could not be read. These sentences date from October 2026 and were not updated later; all three have been read since (the review and the paper of Chenciner, Fejoz and Montgomery in part). Reading them changed none of the numbers.
 
 ## License
 
