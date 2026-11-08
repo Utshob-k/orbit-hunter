@@ -63,7 +63,7 @@ check('handoverAtStop: the guard stop of the recorder', handoverAtStop('triple-a
 check('handoverAtStop: the guard stop of the bridge', handoverAtStop('triple-approach guard G2 (previous Newton residual 1.00e-12)') === true);
 check('handoverAtStop: step length below 1e-9 (lost the family)', handoverAtStop('step length below 1e-9 (lost the family) near lam=0.9986') === true);
 check('handoverAtStop: lost the family near lam', handoverAtStop('lost the family near lam=0.5000') === true);
-for (const why of ['L* reached 0', 'closed loop', 'out of time', 'stopped by reg.js failures (5 consecutive attempts failed with a failure of reg.js)', 'handed over to the 50 digit continuation', 'close approach (closest distance 0.0299)', null, undefined, '']) {
+for (const why of ['L* reached 0', 'closed loop', 'out of time', 'stopped by reg.js failures (10 consecutive attempts failed with a failure of reg.js)', 'handed over to the 50 digit continuation', 'close approach (closest distance 0.0299)', null, undefined, '']) {
   check(`handoverAtStop is false for ${JSON.stringify(why)}`, handoverAtStop(why) === false);
 }
 
