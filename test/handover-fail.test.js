@@ -93,7 +93,7 @@ check('the driver keeps the stop reason in whyBeforeHandover, calls handoverAtSt
 check('the driver with no accepted step before the stop: hand-over failed (no tangent), still exits with 1, no process run', src.includes("failed: 'no accepted step before the stop: no tangent'") && src.includes("out.why = 'hand-over failed: no accepted step before the stop: no tangent'; handoverFailed = out.why;"));
 check('the driver records the loop step of every accepted step (steps) next to lams and pars', src.includes('const steps = [0];') && src.includes('steps.push(step);'));
 const rt = fs.readFileSync(new URL('../tools/reproduce-trace.mjs', import.meta.url), 'utf8');
-check('tools/reproduce-trace.mjs with --handover also accepts whyBeforeHandover equal to the stored reason', rt.includes('res.whyBeforeHandover === stored.why') && rt.includes('res.why === stored.why || res.whyBeforeHandover === stored.why'));
+check('source contains: tools/reproduce-trace.mjs with --handover also accepts whyBeforeHandover equal to the stored reason, with as many accepted steps as the stored trace', rt.includes('res.whyBeforeHandover === stored.why') && rt.includes('res.why === stored.why || (res.whyBeforeHandover === stored.why && got.length === ref.length)'));
 check('the driver passes the back point of the rule and asks for at least 2 steps', src.includes('const j = backIndex(lams);') && src.includes('fired.back = { index: j, lam: lams[j], ...pars[j] }') && src.includes('hSteps >= 2'));
 fs.rmSync(tmp, { recursive: true, force: true });
 process.exit(fail ? 1 : 0);

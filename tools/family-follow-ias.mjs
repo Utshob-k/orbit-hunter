@@ -5,7 +5,10 @@
 // accepted step come from the start values (perpEL), so `unrec` has them too. Stops at a closed loop, L* below 1e-3, a closest approach above --max-dist, a guard,
 // a failure of reg.js, a step collapse, a lost family, the step limit or the time limit; the reason is in the file. Writes OUT.json, OUT.json.partial.json every 5 points and
 // OUT.json.diag.jsonl (one line per attempt of the corrector, src/ias/recorder.js).
-// node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]] [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N]
+// "L* below 1e-3" is tested at every accepted step, recorded or not (an unrecorded step with |L*| < 1e-3 stops the trace too, its unrec entry is kept). Lstar is |L*|; Lstar_signed (points and unrec)
+// is L* with its sign, and OUT.json L_sign_changes lists the two accepted steps around every change of sign of L* between consecutive accepted steps (a crossing of L = 0 with |L*| >= 1e-3 on both
+// sides is not a stop; it is only listed there). Every unrec entry has capped (perpInfo gave up at a --perp-cap below 1) and share (the dp45 steps it made as a share of its usual limit).
+// node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5] [--handover-conv=C] [--handover-safe]] [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N]
 //                                  [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390]
 //                                  [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--ls-reuse] [--mono-threads=K] [--perp-cap=F] [--reg-threads=K] [--ias-procs=K] [--fast=K]
 //                                  [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record]
@@ -22,8 +25,10 @@
 //   grow-iters=K: the step h of the pseudo-arclength grows after an accepted step with at most K corrector iterations (unset = 3); grow-factor=F: the factor of that growth (unset = 1.4). Both are read by huntArclength only, and with neither given the step control is the old one.
 //   stop-lam=L: the run stops, as "stopped by the caller", at the first accepted step whose lam has passed L in the direction DIR (that step is recorded); the value is in out.settings.stopLam and out.options.stopLam. huntArclength only.
 //   ls-reuse: the line search of the corrector evaluates the pieces of a trial in ONE request of the bridge (not one request per piece) and the next system() call uses the end states, flags and reg.js matrices of the accepted trial (when its starts are bit-equal); off by default. The diag file has nReuse per attempt. huntArclength only.
+//   (--ls-reuse, --grow-iters, --grow-factor and --stop-lam are refused together with --natural, exit 2: huntNatural reads none of them.)
 //   mono-threads=K: the monodromy (dp45 variational equations) of the pieces without a reg.js matrix is computed in K worker threads, one batch per system() call (src/mono-pool.js, src/mono-worker.mjs); K a whole number of at least 1, unset or 1 = in the main thread, as before; ias route only. The value is in out.settings.monoThreads.
-//   perp-cap=F: perpInfo of the trace (closest approach and closure of an accepted step) gives up after the share F of its usual limit of dp45 steps, 20*(4000+3000T); 0 < F <= 1, unset = 1. A step for which it gives up is listed in `unrec` as always; only the time it takes to give up changes. The value is in out.settings.perpCap.
+//   (--mono-threads and --fast are refused with --pieces above 64, exit 2: the buffers of src/mono-pool.js hold 64 pieces.)
+//   perp-cap=F: perpInfo of the trace (closest approach and closure of an accepted step) gives up after the share F of its usual limit of dp45 steps, 20*(4000+3000T); 0 < F <= 1, unset = 1. A step that needs more than the share F becomes an unrecorded step (listed in `unrec`, with capped true and its share), so the option can change which steps are recorded, not only the time. The value is in out.settings.perpCap.
 //   reg-threads=K: the reg.js calls a request of the ias route can need (flagged pieces, cross-checks, the missed-flag check) are computed in one batch in K worker threads (src/ias/reg-pool.js, src/ias/reg-worker.mjs) and the bridge then runs its usual code on the results, so counters, replacements and stops are as without it; K a whole number of at least 1, unset or 1 = one after the other; not with --matrix=fd-forward/fd-central or --pieces-by. The value is in out.settings.ias.regThreads; the diag file has secPool and secLsPool.
 //   ias-procs=K: the pieces of a request are integrated by IAS15 in a pool of K processes of src/ias/ias-bridge.py (the end states and the analysis are the same numbers, in the same order); K a whole number of at least 1, unset or 1 = one after the other in one process. The value is in out.settings.ias.procs.
 //   fast=K: the same as --ls-reuse --mono-threads=K --reg-threads=K --ias-procs=K (K a whole number of at least 1); it cannot be given together with any of those four, with --natural, --matrix=fd-forward/fd-central or --pieces-by. --perp-cap is not part of it. 4, the number of performance cores, was the best value measured on the machine of the runs, and 8 was slower. The value is in out.settings.fast, and the four settings are in out.settings as with the separate options.
@@ -31,9 +36,14 @@
 //   handover: hand the trace over to the 50 digit continuation where the double precision route has become slower than it. Rule, without wall time (tools/handover-rule.mjs): after at least 100 accepted steps
 //   P100 = |lam_k - lam_(k-100)| / 100 over the last 100 accepted steps (lam_0 = lam of the start); if P100 < --handover-below (1e-7 by default) the driver stops. If lam moved in one direction over the way back to a point
 //   at least 1e-6 behind the last one (backIndex of tools/handover-rule.mjs), both points are closed again with tools/reclose.py (50 digits, each the reference of itself; both must converge) and tools/handover-continue.py goes on from them:
-//   its tangent through the two points is the first guess, a step is accepted only if t > 0 and the solution is near the guess (0.1 of the size of the guess step), otherwise the step in lam is divided by 10 (down to 1e-7),
-//   then the secant through the two last solutions. At least 2 steps (--handover-steps, 20 by default, of --handover-dlam in lam, 1e-5, in the direction of the last step of lam) and a return test (the line through the first two
-//   solutions, evaluated at the lam of the last point, must lead back to that point) are needed, then the w1b witness of the last orbit is made from its exact start (tools/witness.py --exact-start). If there is no accepted point at least 1e-6 behind the last one with lam moving one way (lam turns, or the trace is shorter) there is no tangent and the hand-over fails.
+//   its tangent through the two points is the first guess, then the secant through the two last solutions. A step is accepted only if reclose.py is done and converged, t > 0 and miss <= 0.1 x predicted, with
+//   predicted = the largest |guess - last solution| / |last solution| and miss = the largest |solution - guess| / |solution|, both per component (u1, u2, t) relative to the values themselves; otherwise the step
+//   in lam is divided by 10; the run stops when the next step would be below 1e-7 (with --handover-safe, which passes --floor-try among others, 1e-7 itself is tried before the stop).
+//   At least 2 steps (--handover-steps, 20 by default, of --handover-dlam in lam, 1e-5, in the direction of the last step of lam) and a return test (the line through the first two
+//   solutions, evaluated at the lam of the last point, must lead back to that point) are needed, then the w1b witness of the last orbit is made from its exact start (tools/witness.py --exact-start). The witness is recorded
+//   (handover.witness, handover.witness_ok) but is not part of the hand-over decision. If there is no accepted point at least 1e-6 behind the last one with lam moving one way (lam turns, or the trace is shorter) there is no tangent and the hand-over fails.
+//   handover-conv=C: passed as --conv C to the two first re-closings and to tools/handover-continue.py (every 50 digit job); unset = no --conv (the convergence limit 1e-16 of reclose.py).
+//   handover-safe: passes --safe to tools/handover-continue.py (--floor-try --miss-norm --return-last --miss-return --edge-shrink, see its header); off by default.
 //   The hand-over also starts at two stops of the trace, the triple-approach guard and "lost the family" (handoverAtStop of tools/handover-rule.mjs), from the last accepted step and the point of backIndex behind it (also with fewer
 //   than 100 accepted steps; with --guards=record there is no guard stop). The original stop reason is then in OUT.json "whyBeforeHandover" and in handover.stop_before, handover.trigger is 'stop' (else 'rule'); the stop reason and the exit
 //   status are as for the rule: "handed over to the 50 digit continuation" (exit 0) or "hand-over failed: <reason>" (exit 1; also if there was no accepted step before the stop: no tangent). The other stops end as before.
@@ -56,16 +66,16 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const pos = process.argv.slice(2).filter((a) => !a.startsWith('--')), opt = {};
-const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'grow-iters', 'grow-factor', 'stop-lam', 'ls-reuse', 'mono-threads', 'perp-cap', 'reg-threads', 'ias-procs', 'fast', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'matrix', 'pieces-by', 'guards'];
+const KNOWN = ['minutes', 'pieces', 'label', 'max-dist', 'stop-below', 'stop-after', 'ias-mode', 'ias-first-step', 'newton-tol', 'no-nodes', 'timeout-min', 'python', 'guard-ratio', 'tol-scale', 'arc-weight', 'grow-iters', 'grow-factor', 'stop-lam', 'ls-reuse', 'mono-threads', 'perp-cap', 'reg-threads', 'ias-procs', 'fast', 'natural', 'handover', 'handover-below', 'handover-steps', 'handover-dlam', 'handover-conv', 'handover-safe', 'matrix', 'pieces-by', 'guards'];
 for (const a of process.argv.slice(2)) if (a.startsWith('--')) { const eq = a.indexOf('='), k = eq < 0 ? a.slice(2) : a.slice(2, eq), v = eq < 0 ? undefined : a.slice(eq + 1); if (!KNOWN.includes(k)) { console.error('unknown option --' + k + '; the options are --' + KNOWN.join(', --')); process.exit(2); } opt[k] = v === undefined ? true : v; }
 const [outArg, dirArg, u1A, u2A, lamA, tA] = pos;
 const outFile = outArg ? path.resolve(outArg) : outArg;   // the children (reclose.py, the files next to OUT) run in the root of the repository
-if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--ls-reuse] [--mono-threads=K] [--perp-cap=F] [--reg-threads=K] [--ias-procs=K] [--fast=K] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5]]'); process.exit(2); }
+if (!outFile || !tA) { console.error('usage: node tools/family-follow-ias.mjs OUT.json DIR u1 u2 lam t [--minutes=120] [--pieces=24] [--label=name] [--max-dist=0.03] [--stop-below=0] [--stop-after=N] [--ias-mode=2] [--ias-first-step=timescale|legacy] [--newton-tol=1e-11] [--no-nodes] [--timeout-min=30] [--python=PY] [--guard-ratio=390] [--tol-scale=K] [--arc-weight=W] [--grow-iters=K] [--grow-factor=F] [--stop-lam=L] [--ls-reuse] [--mono-threads=K] [--perp-cap=F] [--reg-threads=K] [--ias-procs=K] [--fast=K] [--natural=DL] [--matrix=exact|fd-forward|fd-central] [--pieces-by=ias|reg] [--guards=record] [--handover [--handover-below=1e-7] [--handover-steps=20] [--handover-dlam=1e-5] [--handover-conv=C] [--handover-safe]]'); process.exit(2); }
 for (const f of [outFile, outFile + '.partial.json', outFile + '.diag.jsonl', outFile + '.crash.json', outFile + '.nodes.jsonl', ...(opt.handover !== undefined ? [outFile + '.handover-reclose.job.json', outFile + '.handover-reclose.json', outFile + '.handover-back.job.json', outFile + '.handover-back.json', outFile + '.handover'] : [])]) if (fs.existsSync(f)) { console.error('exists, not overwriting: ' + f); process.exit(2); }
 if (dirArg !== '1' && dirArg !== '-1') { console.error('DIR must be 1 or -1, not ' + dirArg); process.exit(2); }
 const dir = Number(dirArg), minutes = Number(opt.minutes ?? 120), maxMs = minutes * 60000;
 const pieces = Number(opt.pieces ?? 24), maxDist = opt['max-dist'] === undefined ? 0.03 : Number(opt['max-dist'] === 'inf' ? Infinity : opt['max-dist']);
-for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, 'grow-iters': false, 'grow-factor': false, 'perp-cap': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false })) {
+for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-below': true, 'stop-after': false, 'ias-mode': true, 'newton-tol': false, 'timeout-min': false, 'guard-ratio': false, 'tol-scale': false, 'arc-weight': false, 'grow-iters': false, 'grow-factor': false, 'perp-cap': false, natural: false, 'handover-below': false, 'handover-steps': false, 'handover-dlam': false, 'handover-conv': false })) {
   if (opt[k] === undefined) continue;
   const v = Number(opt[k]);
   if (typeof opt[k] !== 'string' || opt[k] === '' || !Number.isFinite(v) || (low ? v < 0 : v <= 0)) { console.error('--' + k + ' needs a number' + (low ? ' of at least 0' : ' above 0') + ', as --' + k + '=VALUE, not ' + (opt[k] === true ? 'nothing' : opt[k])); process.exit(2); }
@@ -102,6 +112,9 @@ if (opt['mono-threads'] !== undefined) { const K = Number(opt['mono-threads']); 
 if (opt['reg-threads'] !== undefined) { const K = Number(opt['reg-threads']); if (typeof opt['reg-threads'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--reg-threads needs a whole number of at least 1, as --reg-threads=K, not ' + (opt['reg-threads'] === true ? 'nothing' : opt['reg-threads'])); process.exit(2); } settings.ias.regThreads = K; }
 if (opt['ias-procs'] !== undefined) { const K = Number(opt['ias-procs']); if (typeof opt['ias-procs'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--ias-procs needs a whole number of at least 1, as --ias-procs=K, not ' + (opt['ias-procs'] === true ? 'nothing' : opt['ias-procs'])); process.exit(2); } settings.ias.procs = K; }
 if (opt['ls-reuse'] !== undefined) { if (opt['ls-reuse'] !== true) { console.error('--ls-reuse takes no value'); process.exit(2); } settings.lsReuse = true; }
+if (opt.pieces !== undefined && pieces > 64) for (const o of ['mono-threads', 'fast']) if (opt[o] !== undefined) { console.error('--' + o + ' cannot be used together with --pieces above 64 (the buffers of src/mono-pool.js hold 64 pieces), not --pieces=' + opt.pieces); process.exit(2); }
+if (opt.natural !== undefined) for (const o of ['ls-reuse', 'grow-iters', 'grow-factor', 'stop-lam']) if (opt[o] !== undefined) { console.error('--' + o + ' cannot be used together with --natural (huntNatural does not read it)'); process.exit(2); }
+if (opt['handover-safe'] !== undefined && opt['handover-safe'] !== true) { console.error('--handover-safe takes no value'); process.exit(2); }
 if (opt['perp-cap'] !== undefined) settings.perpCap = Number(opt['perp-cap']);
 if (opt['arc-weight'] !== undefined) settings.arcWeight = Number(opt['arc-weight']);
 if (opt['grow-iters'] !== undefined) settings.growIters = Number(opt['grow-iters']);
@@ -109,13 +122,14 @@ if (opt['grow-factor'] !== undefined) settings.growFactor = Number(opt['grow-fac
 if (opt['stop-lam'] !== undefined) settings.stopLam = Number(opt['stop-lam']);
 const hunt = opt.natural !== undefined ? huntNatural : huntArclength;
 const handover = opt.handover !== undefined, hBelow = Number(opt['handover-below'] ?? 1e-7), hSteps = Number(opt['handover-steps'] ?? 20), hDlam = Number(opt['handover-dlam'] ?? 1e-5);
+const hConv = opt['handover-conv'] === undefined ? null : opt['handover-conv'], hSafe = opt['handover-safe'] !== undefined;
 if (handover && !(hBelow > 0 && Number.isInteger(hSteps) && hSteps >= 2 && hDlam > 0)) { console.error('--handover-below and --handover-dlam must be positive and --handover-steps a whole number of at least 2'); process.exit(2); }
 const recorder = startRecorder(outFile);
 const nodesFd = opt['no-nodes'] ? null : fs.openSync(outFile + '.nodes.jsonl', 'wx');
 const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
 const s0 = closePerpMS(start.u1, start.u2, start.lam, start.t, { m: pieces });
 const shifted = s0 && s0.res < 1e-9 ? { u1: s0.u1, u2: s0.u2, lam: s0.lam, t: s0.t, m: pieces } : null;
-const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter, ...(opt['stop-lam'] !== undefined ? { stopLam: Number(opt['stop-lam']) } : {}), ...(opt.natural !== undefined ? { natural: Number(opt.natural), note: 'natural continuation in lam, zeros of theta are not looked for' } : {}) } };
+const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter, ...(opt['stop-lam'] !== undefined ? { stopLam: Number(opt['stop-lam']) } : {}), ...(opt.natural !== undefined ? { natural: Number(opt.natural), note: 'natural continuation in lam, zeros of theta are not looked for' } : {}), ...(hConv !== null ? { handoverConv: hConv } : {}), ...(hSafe ? { handoverSafe: true } : {}) } };
 if (!shifted) {
   out.error = 'could not move the start onto the family'; out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.lastBridgeReason = iasStats.lastReason;
   fs.writeFileSync(outFile, JSON.stringify(out));
@@ -124,6 +138,7 @@ if (!shifted) {
 }
 const pts = [], keys = [];
 const unrec = []; out.unrec = unrec;   // accepted steps that are not recorded as points
+const lsign = []; out.L_sign_changes = lsign; let lastL = null;   // the two accepted steps around every change of sign of L*
 process.on('uncaughtException', (e) => { try { fs.writeFileSync(outFile + '.crash.json', JSON.stringify({ ...out, error: String(e && e.stack), points: pts })); recorder.flush(); } catch (e2) {} process.exit(3); });
 let stop = null;
 let traceStop = null, r;
@@ -138,9 +153,17 @@ const traceBase = (step, lam, th, h, it, Y) => {
     }
     keys.push({ k: key, cum });
     const el = perpEL(u1, u2, Y[n], t);
-    const info = perpInfo(u1, u2, Y[n], t, settings.perpCap ?? 1);
-    if (!info) { unrec.push({ step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), reason: 'perpInfo null' }); return false; }
-    const p = { step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), theta: th, turns: th / (2 * Math.PI), minDist: info.minDist, closure: info.repeatErr };
+    const here = { step, lam: Y[n], Lstar_signed: el.ls };
+    if (lastL !== null && lastL.Lstar_signed * el.ls < 0) lsign.push({ before: lastL, after: here });
+    lastL = here;
+    const rep = {};
+    const info = perpInfo(u1, u2, Y[n], t, settings.perpCap ?? 1, rep);
+    if (!info) {
+      unrec.push({ step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), reason: 'perpInfo null', Lstar_signed: el.ls, capped: rep.capped, share: rep.share });
+      if (Math.abs(el.ls) < 1e-3) { stop = 'L* reached 0'; return true; }   // L* needs no integration: tested at an unrecorded step too
+      return false;
+    }
+    const p = { step, lam: Y[n], u1, u2, t, Tstar: el.ts, Lstar: Math.abs(el.ls), theta: th, turns: th / (2 * Math.PI), minDist: info.minDist, closure: info.repeatErr, Lstar_signed: el.ls };
     if (pts.length % 5 === 0) {
       const w = syzygyWord(perpInitial(u1, u2, Y[n]), 2 * t);
       let st = null;
@@ -182,7 +205,7 @@ if (handover && !fired && handoverAtStop(out.why)) {   // the guard stop and the
 }
 if (fired) {
   const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-  const h = runHandover({ fired, trigger, dir, hBelow, hSteps, hDlam, base: outFile + '.handover', root, python: settings.ias.python, onStart: (hv) => { out.handover = hv; fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true })); } });
+  const h = runHandover({ fired, trigger, dir, hBelow, hSteps, hDlam, conv: hConv, safe: hSafe, base: outFile + '.handover', root, python: settings.ias.python, onStart: (hv) => { out.handover = hv; fs.writeFileSync(outFile + '.partial.json', JSON.stringify({ ...out, points: pts, partial: true })); } });
   out.why = h.why;
   if (h.failed) handoverFailed = h.why;
   const lamsDone = h.hv.steps.filter((s) => s.converged).map((s) => Number(s.lam));

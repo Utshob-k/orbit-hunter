@@ -109,14 +109,20 @@ export function perpEL(u1, u2, lam, t) {
 
 // everything we want to know about a closed one: energy, angular momentum, rotation after a full
 // period, and an independent check that it really repeats (integrate 2t, compare with start)
-// capScale below 1 makes it give up (return null) after that share of the usual number of steps; the result of a call that finishes does not depend on it
-export function perpInfo(u1, u2, lam, t, capScale = 1) {
+// capScale below 1 makes it give up (return null) after that share of the usual number of steps; the result of a call that finishes does not depend on it.
+// report (optional, an object): filled with capped (true if it gave up at a cap below 1, false otherwise), gaveUp, share (the dp45 steps it made as a share of the usual
+// limit 20*(4000+3000T)) and capScale; what perpInfo returns does not depend on it (null stays null)
+export function perpInfo(u1, u2, lam, t, capScale = 1, report = null) {
   const s0 = perpInitial(u1, u2, lam);
   const T = 2 * t;
   const s = Float64Array.from(s0);
-  let tt = 0, h = 1e-3, minDist = Infinity, extent = 0;
-  for (let n = 0; tt < T - 1e-15; n++) {
-    if (n > capScale * 20 * (4000 + 3000 * T)) return null;
+  const limit = 20 * (4000 + 3000 * T);
+  let tt = 0, h = 1e-3, minDist = Infinity, extent = 0, n = 0;
+  for (; tt < T - 1e-15; n++) {
+    if (n > capScale * 20 * (4000 + 3000 * T)) {
+      if (report) Object.assign(report, { capped: capScale < 1, gaveUp: true, share: n / limit, capScale });
+      return null;
+    }
     const [dt, hn] = dp45Step(s, Math.min(h, T - tt), settings.rtol, settings.atol, settings.hMax);
     tt += dt;
     h = hn;
@@ -135,6 +141,7 @@ export function perpInfo(u1, u2, lam, t, capScale = 1) {
       S += ax * by - ay * bx;
     }
   }
+  if (report) Object.assign(report, { capped: false, gaveUp: false, share: n / limit, capScale });
   const theta = Math.atan2(S, C);
   const co = Math.cos(theta), si = Math.sin(theta);
   let err = 0;
