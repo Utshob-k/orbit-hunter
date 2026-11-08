@@ -4,12 +4,17 @@
 # repeats after 2t up to that rotation). With s the state at time t and d the unit vector along the longest of the three pair vectors:
 #   r1 = ((x2 - x1)(y3 - y1) - (y2 - y1)(x3 - x1)) / (squared length of the longest pair),  r2 = v1 . d,  r3 = v2 . d      (bodies 1, 2, 3 are indices 0, 1, 2)
 # The Jacobian is by forward differences in u1 and u2 (step 10^-(digits // 2)) and, for t, from the time derivative of the end state: (r(s + h f(s)) - r(s)) / h. Plain Newton step, at most 10 updates.
-# python tools/reclose.py JOB.json OUT.json [--minutes 60] [--digits 50] [--tol 30] [--floor 1e-20] [--max-first R]
+# python tools/reclose.py JOB.json OUT.json [--minutes 60] [--digits 50] [--tol 30] [--floor 1e-20] [--max-first R] [--conv 1e-16]
+#   --conv C: Newton stops at the first evaluation with largest |r| <= C (default 1e-16, the value of all stored runs). It does not follow --digits: at 50 digits and --tol 30
+#   the flow allows about 1e-24 (below that the floor of about 1e-27 can keep it from converging within 10 updates). C is written into the output as conv.
 #   --max-first R: if the largest |r| of iteration 0 (the start values) is above R the job stops there (status 'first residual above limit', exit 5); without it nothing is checked.
 #   If t is not positive at the top of an iteration the job stops before any flow (status 't not positive', exit 4); exit 3 is "over limit", exit 2 an error.
+#   Exit 0 is status 'done', converged or not: after 10 updates without reaching CONV the job ends with 'done' and converged false (callers test converged).
 #   JOB.json: {"id", "u1", "u2", "lam", "t", "ref": {"u1", "u2", "t"} or null}, the start values (strings or numbers) and, if given, the values to compare with. OUT.json must be new.
-#   CONVERGED: the largest |r| is at most 1e-16 at an evaluation. SAME ORBIT (only with "ref"): the relative differences of u1, u2 and t from the ref values are at most 1e-9 (it was 1e-6 before; the re-closing of the 854 witnessed points changes u1, u2, t by at most 8.2e-11).
+#   CONVERGED: the largest |r| is at most CONV (--conv, 1e-16) at an evaluation. SAME ORBIT (only with "ref"): the relative differences of u1, u2 and t from the ref values are at most 1e-9 (it was 1e-6 before; the re-closing of the 854 witnessed points changes u1, u2, t by at most 8.2e-11).
 #   The output holds every iteration (residual, its three components, the relative step, the unknowns); a self-timer ends the job at the limit ("over limit").
+#   lam is written with 25 digits as before; lam_job is the lam of the job as given (a string stays the same string). The timer is cancelled before the last write and
+#   both threads write under one lock, so a finished job is never overwritten by 'over limit'.
 import sys, os, json, time, threading, importlib.util
 sys.dont_write_bytecode = True
 from mpmath import mp, mpf, sqrt, matrix, lu_solve, nstr
@@ -24,13 +29,18 @@ def option(name, default):
 jobfile, outfile = sys.argv[1], sys.argv[2]
 limit, DIGITS, TOL, FLOOR = float(option('--minutes', 60)), int(option('--digits', 50)), int(option('--tol', 30)), option('--floor', '1e-20')
 MAXFIRST = float(option('--max-first', 'nan')) if '--max-first' in sys.argv else None
+CONVS = option('--conv', '1e-16')
+try: ok = float(CONVS) > 0 and float(CONVS) < float('inf')
+except ValueError: ok = False
+if not ok: print('--conv needs a positive number, got ' + CONVS, file=sys.stderr); sys.exit(2)
 if os.path.exists(outfile): sys.exit('exists, not overwriting: ' + outfile)
 spec = importlib.util.spec_from_file_location('refine_mp', os.path.join(here, 'refine-mp.py'))
 R = importlib.util.module_from_spec(spec); spec.loader.exec_module(R)
 R.STEP_FLOOR = mpf(FLOOR)
-mp.dps = DIGITS; TOLERANCE = mpf(10) ** (-TOL); H = mpf(10) ** (-(DIGITS // 2)); CONV = mpf(10) ** (-16); MAXUPD = 10
+mp.dps = DIGITS; TOLERANCE = mpf(10) ** (-TOL); H = mpf(10) ** (-(DIGITS // 2)); MAXUPD = 10
+CONV = mpf(CONVS) if '--conv' in sys.argv else mpf(10) ** (-16)
 job = json.load(open(jobfile)); u1, u2, t = [mpf(str(job[k])) for k in ('u1', 'u2', 't')]; lam = mpf(str(job['lam'])); ref = job.get('ref')
-rec = dict(iterations=[], flows=0); t0 = time.time()
+rec = dict(iterations=[], flows=0, finished=False); t0 = time.time(); lock = threading.Lock()
 
 
 def put(path, d):
@@ -44,13 +54,26 @@ def put(path, d):
 
 
 def write(d):
-    d.update(id=job['id'], lam=nstr(lam, 25), start=dict(u1=nstr(mpf(str(job['u1'])), 25), u2=nstr(mpf(str(job['u2'])), 25), t=nstr(mpf(str(job['t'])), 25)), digits=DIGITS, tol=TOL, floor=FLOOR, h=nstr(H, 3), limit_minutes=limit,
+    d.update(id=job['id'], lam=nstr(lam, 25), lam_job=str(job['lam']), start=dict(u1=nstr(mpf(str(job['u1'])), 25), u2=nstr(mpf(str(job['u2'])), 25), t=nstr(mpf(str(job['t'])), 25)), digits=DIGITS, tol=TOL, floor=FLOOR, conv=CONVS, h=nstr(H, 3), limit_minutes=limit,
              flows=rec['flows'], iterations=rec['iterations'], elapsed_s=round(time.time() - t0, 1))
     put(outfile, d)
 
 
+def running(d):
+    with lock:
+        if not rec['finished']: write(d)
+
+
+def final(d):
+    # the last write: the timer is stopped first, so 'over limit' can no longer come after it
+    with lock:
+        timer.cancel(); rec['finished'] = True; write(d)
+
+
 def timeout():
-    write(dict(status='over limit', converged=False)); os._exit(3)
+    with lock:
+        if rec['finished']: return
+        write(dict(status='over limit', converged=False)); os._exit(3)
 
 
 timer = threading.Timer(limit * 60, timeout); timer.daemon = True; timer.start()
@@ -73,11 +96,11 @@ def F(a, b, tt):
 try:
     converged = False; res = None
     for it in range(MAXUPD + 1):
-        if t <= 0: write(dict(status='t not positive', converged=False, t=nstr(t, 30))); sys.exit(4)
+        if t <= 0: final(dict(status='t not positive', converged=False, t=nstr(t, 30))); sys.exit(4)
         r0, s0 = F(u1, u2, t); res = max(abs(v) for v in r0)
         item = dict(it=it, residual=float(res), components=[float(v) for v in r0], u1=nstr(u1, 30), u2=nstr(u2, 30), t=nstr(t, 30))
         rec['iterations'].append(item)
-        if it == 0 and MAXFIRST is not None and res > MAXFIRST: write(dict(status='first residual above limit', converged=False, residual=float(res))); sys.exit(5)
+        if it == 0 and MAXFIRST is not None and res > MAXFIRST: final(dict(status='first residual above limit', converged=False, residual=float(res))); sys.exit(5)
         if res <= CONV: converged = True; break
         if it == MAXUPD: break
         J = matrix(3, 3)
@@ -89,12 +112,12 @@ try:
         d = lu_solve(J, matrix([-v for v in r0]))
         item['step_rel'] = [float(abs(d[0]) / abs(u1)), float(abs(d[1]) / abs(u2)), float(abs(d[2]) / abs(t))]
         u1, u2, t = u1 + d[0], u2 + d[1], t + d[2]
-        write(dict(status='running', converged=False))
+        running(dict(status='running', converged=False))
 except Exception as e:
-    write(dict(status='error', converged=False, error=str(e))); sys.exit(2)
+    final(dict(status='error', converged=False, error=str(e))); sys.exit(2)
 out = dict(status='done', converged=converged, residual=float(res), u1=nstr(u1, 40), u2=nstr(u2, 40), t=nstr(t, 40), u1_float=float(u1), u2_float=float(u2), t_float=float(t), same_orbit=None)
 if ref:
     d1, d2, dt = [abs(a - mpf(str(ref[k]))) / abs(mpf(str(ref[k]))) for a, k in ((u1, 'u1'), (u2, 'u2'), (t, 't'))]
     out.update(rel_diff_ref=dict(u1=float(d1), u2=float(d2), t=float(dt)), same_orbit=bool(converged and max(d1, d2, dt) <= mpf(10) ** (-9)))
-write(out)
+final(out)
 print('done', job['id'], 'converged', converged, 'residual', float(res), 'iterations', len(rec['iterations']), 'flows', rec['flows'], 'seconds', round(time.time() - t0, 1), flush=True)

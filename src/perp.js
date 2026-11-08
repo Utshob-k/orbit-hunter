@@ -125,7 +125,8 @@ export function perpInfo(u1, u2, lam, t, capScale = 1) {
       for (let j = i + 1; j < 3; j++) minDist = Math.min(minDist, Math.hypot(s[2 * i] - s[2 * j], s[2 * i + 1] - s[2 * j + 1]));
     }
   }
-  // best rotation taking the end state onto the start state
+  // best rotation taking the end state onto the start state (R x(2t) = x(0)), in (-pi, pi]: minus the forward rotation, so minus quickTheta above and thetaOf of
+  // src/shooting.js (the theta of the trace points), and the same as the rotation of tools/witness.py; compare rotations mod 2 pi
   let C = 0, S = 0;
   for (let i = 0; i < 3; i++) {
     for (const off of [0, 6]) {

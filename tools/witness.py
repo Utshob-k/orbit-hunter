@@ -5,10 +5,15 @@
 # third body to the middle of that pair, the time, and a parabolic estimate of the minimum of the squared distance through three consecutive samples (dmin_parabolic).
 # python tools/witness.py JOB.json OUT.json [--preset w1|w1b] [--minutes 30] [--digits 40] [--tol 26] [--floor 1e-14] [--exact-start]
 #   JOB.json: {"id", "u1", "u2", "lam", "t"}. OUT.json must be new; a self-timer ends the job at the limit and writes "over limit".
-#   --exact-start: the start values are read as mpf(str(value)), so a job with 40 digit strings is integrated from exactly those numbers. Without it they are rounded to double precision first (mpf(float(value))), as for
+#   --exact-start: the start values are read as mpf(str(value)), so a job with 40 digit strings is integrated from exactly those numbers (a decimal string is used exactly; a JSON number is used
+#   as its shortest decimal, str(float), not as the binary value of the double). Without it they are rounded to double precision first (mpf(float(value))), as for
 #   all stored witnesses, which stay reproducible; a witness of rounded values can show a large closure on a sensitive orbit (the hand-over, tools/handover-continue.py, uses the option).
 #   w1 (the default): 40 digits, tolerance 1e-26, step floor 1e-14: accepted for minima of the pair distance down to 1e-7.
 #   w1b: 50 digits, tolerance 1e-30, step floor 1e-20: accepted down to 1e-10 (tools/witness-acceptance.py).
+#   rotation: the rotation R that takes the END state onto the START state (R x(2t) = x(0), least squares over positions and velocities), in (-pi, pi]. That is minus the forward
+#   rotation of the orbit over the period, so minus the theta of the trace tools (thetaOf in src/shooting.js, quickTheta in src/perp.js); compare rotations mod 2 pi (near +-pi
+#   two nearly equal orbits can come out about 2 pi apart).
+#   The self-timer is cancelled before the last write and both threads write under one lock, so a finished job is never overwritten by 'over limit'.
 import sys, os, json, time, threading, importlib.util
 sys.dont_write_bytecode = True
 from mpmath import mp, mpf, sqrt, atan2, cos, sin, nstr
@@ -31,7 +36,8 @@ R = importlib.util.module_from_spec(spec); spec.loader.exec_module(R)
 R.STEP_FLOOR = mpf(FLOOR)
 job = json.load(open(jobfile))
 mp.dps = DIGITS; tol = mpf(10) ** (-TOL)
-state = dict(phase='half', tacc=mpf(0), steps=0, t0=time.time(), minH=None, rejected=0)
+state = dict(phase='half', tacc=mpf(0), steps=0, t0=time.time(), minH=None, rejected=0, finished=False)
+lock = threading.Lock()
 PAIRS = [(0, 1), (0, 2), (1, 2)]
 
 
@@ -101,9 +107,17 @@ def extra():
                 dmin_parabolic=(float(sqrt(best['parab'])) if best['parab'] is not None else None), dmin_parabolic_pair=(list(PAIRS[best['parab_pair']]) if best['parab_pair'] is not None else None))
 
 
+def final(d):
+    # the last write: the timer is stopped first, so 'over limit' can no longer come after it
+    with lock:
+        timer.cancel(); state['finished'] = True; write(d)
+
+
 def timeout():
-    write(dict(status='over limit', elapsed_s=round(time.time() - state['t0']), phase=state['phase'], t_reached=float(state['tacc']), steps=state['steps'], partial=extra()))
-    os._exit(3)
+    with lock:
+        if state['finished']: return
+        write(dict(status='over limit', elapsed_s=round(time.time() - state['t0']), phase=state['phase'], t_reached=float(state['tacc']), steps=state['steps'], partial=extra()))
+        os._exit(3)
 
 
 timer = threading.Timer(limit * 60, timeout); timer.daemon = True; timer.start()
@@ -133,14 +147,14 @@ try:
     xf = R.flow(xh, t, tol)
     tt = time.time() - T0
 except Exception as e:
-    write(dict(status='error', error=str(e), elapsed_s=round(time.time() - state['t0']), t_reached=float(state['tacc']), steps=state['steps'], partial=extra()))
+    final(dict(status='error', error=str(e), elapsed_s=round(time.time() - state['t0']), t_reached=float(state['tacc']), steps=state['steps'], partial=extra()))
     sys.exit(2)
 A = [(xf[2 * i], xf[2 * i + 1]) for i in range(6)]; B = [(x0[2 * i], x0[2 * i + 1]) for i in range(6)]
 C = sum(a[0] * b[0] + a[1] * b[1] for a, b in zip(A, B)); S = sum(a[0] * b[1] - a[1] * b[0] for a, b in zip(A, B))
 rot = atan2(S, C); c, s = cos(rot), sin(rot)
 clo = max(max(abs(c * a[0] - s * a[1] - b[0]), abs(s * a[0] + c * a[1] - b[1])) for a, b in zip(A, B))
 raw = max(max(abs(a[0] - b[0]), abs(a[1] - b[1])) for a, b in zip(A, B))
-write(dict(status='done', e_half=float(max(abs(v) for v in res)), e_half_components=[float(v) for v in res], closure=float(clo), closure_raw=float(raw), rotation=float(rot),
+final(dict(status='done', e_half=float(max(abs(v) for v in res)), e_half_components=[float(v) for v in res], closure=float(clo), closure_raw=float(raw), rotation=float(rot),
            seconds_half=round(th, 1), seconds_total=round(tt, 1), steps=state['steps'], elapsed_s=round(time.time() - state['t0']), min_accepted_step=(float(state['minH']) if state['minH'] is not None else None), rejected_tries=state['rejected'],
            x_half=[nstr(v, 40) for v in xh], x_full=[nstr(v, 40) for v in xf], residual_half=[nstr(v, 40) for v in res], **extra()))
 print('done', job['id'], 'e_half', float(max(abs(v) for v in res)), 'closure', float(clo), 'seconds', round(tt, 1), flush=True)
