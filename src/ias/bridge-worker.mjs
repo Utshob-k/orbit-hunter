@@ -5,12 +5,13 @@
 // procs (settings.ias.procs, --ias-procs=K): when above 1 the python process gets K as its fifth argument and integrates the pieces of a request in a pool of K processes.
 // Messages from the main thread: {id, starts, tau} or {kill: true} (kill the child and start a new one, after a timeout or an error).
 // When the child cannot be started (spawn error) or exits, at any time, the pending request is answered at once with code 2 and the reason; so is every later request until a new child has been started (the main thread asks for it after an error).
+// Each child has its own line buffer, and the output of a child that is no longer the current one (killed after a timeout or an error) is ignored.
 import { parentPort, workerData } from 'worker_threads';
 import { spawn } from 'child_process';
 
 const { ctrlBuf, dataBuf, python, script, mode, guardRatio, firstStep, firstStepFactor, procs } = workerData;
 const ctrl = new Int32Array(ctrlBuf), data = new Float64Array(dataBuf);
-let child = null, buf = '', current = -1, pending = false, alive = false, why = '';
+let child = null, current = -1, pending = false, alive = false, why = '';
 
 // answer the pending request with an error (code 2 unless given) and its text
 function fail(text, code = 2) {
@@ -22,9 +23,10 @@ function start() {
   alive = true; why = '';
   child = spawn(python, [script, String(mode), String(guardRatio), String(firstStep), String(firstStepFactor), ...(procs > 1 ? [String(procs)] : [])], { stdio: ['pipe', 'pipe', 'inherit'], windowsHide: true });
   const me = child;
-  buf = '';
+  let buf = '';   // the line buffer of this child
   child.stdout.setEncoding('utf8');
   child.stdout.on('data', (d) => {
+    if (child !== me) return;   // a child that was killed: its late output is ignored
     buf += d; let i;
     while ((i = buf.indexOf('\n')) >= 0) {
       const line = buf.slice(0, i); buf = buf.slice(i + 1);

@@ -2,10 +2,14 @@
 // pool of worker threads for the reg.js calls of one request of src/ias/bridge.js (--reg-threads=K of tools/family-follow-ias.mjs). The main thread stays synchronous, as with the IAS15 bridge: regBatch() writes the starts and tau to shared
 // memory, wakes the workers (src/ias/reg-worker.mjs), which take the calls from a shared counter, and blocks with Atomics.wait until every worker has left the batch. The results come back in shared memory, number for number.
 // The pool starts at the first call with K workers (unref'd, like the bridge worker) and stays; it holds at most MAXT calls per batch.
+// A batch that takes longer than settings.ias.timeoutMs throws a BridgeError (reason 'reg pool timeout', a failed attempt for correct0, as a bridge timeout); the workers are then terminated and the next
+// call starts a new pool. A worker thread that ended or failed (its 'exit' or 'error' event, seen before the next batch) gives a BridgeError 'reg pool error' and a new pool too; a worker that dies inside a
+// batch is seen as a timeout. A reg.js call that throws inside a worker comes back as { error } and is thrown by the bridge as the sequential call would throw it.
 import { Worker } from 'worker_threads';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { settings } from '../settings.js';
+import { BridgeError } from './errors.js';
 
 const MAXT = 512, ERR = 160, NIN = 13, NOUT = 162;   // calls per batch, characters of a text, numbers of a call (12 + jac flag), numbers of a result (12 end, 144 M, macro, subSteps, endTrials, stagnation, minD1, d2AtMinD1)
 let pool = null;
@@ -14,16 +18,29 @@ function start(K, regSettings) {
   const ctrlBuf = new SharedArrayBuffer(4 * 16), inBuf = new SharedArrayBuffer(8 * (1 + NIN * MAXT)), outBuf = new SharedArrayBuffer(8 * NOUT * MAXT), statBuf = new SharedArrayBuffer(4 * MAXT), errBuf = new SharedArrayBuffer(8 * ERR * MAXT);
   const file = path.join(path.dirname(fileURLToPath(import.meta.url)), 'reg-worker.mjs');
   const workers = [];
-  for (let k = 0; k < K; k++) { const w = new Worker(file, { workerData: { ctrlBuf, inBuf, outBuf, statBuf, errBuf, K, regSettings } }); w.unref(); workers.push(w); }
-  return { K, workers, ctrl: new Int32Array(ctrlBuf), inp: new Float64Array(inBuf), out: new Float64Array(outBuf), stat: new Int32Array(statBuf), err: new Float64Array(errBuf), dead: false };
+  const p = { K, workers, ctrl: new Int32Array(ctrlBuf), inp: new Float64Array(inBuf), out: new Float64Array(outBuf), stat: new Int32Array(statBuf), err: new Float64Array(errBuf), dead: false, broken: null, closing: false };
+  for (let k = 0; k < K; k++) {
+    const w = new Worker(file, { workerData: { ctrlBuf, inBuf, outBuf, statBuf, errBuf, K, regSettings } }); w.unref(); workers.push(w);
+    w.on('error', (e) => { if (!p.closing) p.broken = 'worker error: ' + (e && e.message); });
+    w.on('exit', (code) => { if (!p.closing && !p.broken) p.broken = 'worker exited (code ' + code + ')'; });
+  }
+  return p;
+}
+
+// end the pool (its workers are terminated; the next call starts a new one) and throw the BridgeError
+function drop(msg, reason) {
+  const p = pool; pool = null;
+  if (p) { p.closing = true; p.dead = true; for (const w of p.workers) { try { w.terminate(); } catch (e) {} } }
+  throw new BridgeError(msg, reason);
 }
 
 // calls: [{ x (12 numbers), jac }]; returns one entry per call, in the order of the calls: the result of flowEnc(x, tau, { jac, settings: regSettings }) with the fields the bridge reads
 // ({ ok, end, M (null without jac), macro, subSteps, endTrials, stagnation, minD1, d2AtMinD1 }, or { ok: false, reason }), or { error: text } where flowEnc threw
 export function regBatch(calls, tau, K, regSettings) {
   if (calls.length > MAXT) throw new Error('too many calls for the reg.js pool: ' + calls.length + ', at most ' + MAXT);
+  if (pool && pool.dead) drop('reg pool error: the pool is dead', 'reg pool error');
+  if (pool && pool.broken) drop('reg pool error: ' + pool.broken, 'reg pool error');
   if (!pool) pool = start(K, regSettings);
-  if (pool.dead) throw new Error('reg pool timeout');
   if (pool.K !== K) throw new Error('the reg.js pool has ' + pool.K + ' threads, not ' + K);
   const { ctrl, inp, out, stat, err } = pool, n = calls.length;
   inp[0] = tau;
@@ -33,7 +50,7 @@ export function regBatch(calls, tau, K, regSettings) {
   const limit = Date.now() + settings.ias.timeoutMs;
   for (let c = Atomics.load(ctrl, 3); c < K; c = Atomics.load(ctrl, 3)) {
     const left = limit - Date.now();
-    if (left <= 0 || Atomics.wait(ctrl, 3, c, left) === 'timed-out') { pool.dead = true; throw new Error('reg pool timeout'); }
+    if (left <= 0 || Atomics.wait(ctrl, 3, c, left) === 'timed-out') drop('reg pool timeout', 'reg pool timeout');
   }
   const text = (i) => { let s = ''; for (let k = 0; k < ERR && err[ERR * i + k] !== 0; k++) s += String.fromCharCode(err[ERR * i + k]); return s; };
   const res = [];

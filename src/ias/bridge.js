@@ -13,6 +13,8 @@ import { fileURLToPath } from 'url';
 import { flowEnc } from './reg.js';
 import { regBatch } from './reg-pool.js';
 import { settings } from '../settings.js';
+import { BridgeError } from './errors.js';
+export { BridgeError };
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const REG_SETTINGS = JSON.parse(fs.readFileSync(path.join(here, 'reg-settings.json'), 'utf8'));
@@ -41,7 +43,6 @@ export const stats = { regPieces: 0, regMacro: 0, regSub: 0, regEndTrials: 0, re
 export const gstats = { trips: { G1a: 0, G1b: 0, G2: 0, G3: 0 }, tripsTotal: 0, tripList: [], ratioMin: Infinity, d2CloseMin: Infinity, attRatioMin: Infinity, attD2Close: Infinity, samePair: 0,
   missChecks: 0, missedCounted: 0, missedStops: 0, missFailed: 0, regFailures: 0, cMinSeen: Infinity, cRatioMin: Infinity, tIas: 0, tC: 0, tMiss: 0, xchk: 0, xchkMaxDiff: 0, replaced: 0, replList: [], tX: 0, tPool: 0 };
 let nextId = 1;
-export class BridgeError extends Error { constructor(msg, reason) { super(msg); this.reason = reason; } }
 export class GuardError extends BridgeError { constructor(kind, info) { super('guard ' + kind, 'guard ' + kind); this.kind = kind; this.info = info; } }
 // not a BridgeError: it ends the trace (the driver catches it)
 export class TraceStop extends Error { constructor(reason, info) { super(reason); this.reason = reason; this.info = info || null; this.isTraceStop = true; } }
