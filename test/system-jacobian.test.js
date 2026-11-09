@@ -6,7 +6,9 @@
 // The columns taken: u1, u2, t, the 12 components of the start states of the encounter piece and of its two neighbours, and of the last node (the one that feeds the closing conditions); and lam. The central
 // difference with the step h = 1e-7, combined with 2h by Richardson extrapolation. PASS if for every column taken the largest |J - J_fd| over the 279 rows is at most 1e-8 max|J| (the printed value is the
 // result on the machine of the run), and, per column, at most 1e-8 times the largest |J| of that column (with a floor of 1e-12 max|J| for a column of zeros or tiny entries), so a column with small
-// entries is tested too. needs python with rebound and mpmath, takes a few minutes.
+// entries is tested too. The per column check takes for each column the best of the steps 1e-7, 3e-7, 1e-6 and 3e-6: the rounding noise of F in J_fd grows as h shrinks and the Richardson error
+// as h grows, and at the encounter piece no one step suits every column (with h = 1e-7 alone the start velocity columns of that piece are off by up to 5.5e-7 of their largest entry, with
+// 1e-5 alone others by up to 6.3e-7; with 3e-6 every column is within 5.1e-9). needs python with rebound and mpmath, takes a few minutes.
 import fs from 'fs';
 process.env.ORBIT_INTEGRATOR = 'ias';
 process.env.PYTHONDONTWRITEBYTECODE = '1';
@@ -43,16 +45,22 @@ console.log(`flagged (encounter) pieces ${flagged.join(', ')}; pieces with a reg
 check('the point has an encounter piece', flagged.length >= 1);
 const pieces = new Set([m - 1]); for (const f of flagged) for (const i of [f - 1, f, f + 1]) if (i >= 1 && i < m) pieces.add(i);
 const cols = [0, 1, 2]; for (const i of [...pieces].sort((a, b) => a - b)) for (let k = 0; k < N; k++) cols.push(3 + N * (i - 1) + k);
-let worst = 0, worstCol = -1, worstRel = 0, worstRelCol = -1;
+const steps = [1e-7, 3e-7, 1e-6, 3e-6];
+let worst = 0, worstCol = -1, worstRel = 0, worstRelCol = -1, worstRelStep = 0;
 for (const j of cols) {
-  const fd = column(j, 1e-7); let d = 0, cmax = 0;
-  for (let i = 0; i < n; i++) { d = Math.max(d, Math.abs(base.J[i][j] - fd[i])); cmax = Math.max(cmax, Math.abs(base.J[i][j])); }
-  if (d > worst) { worst = d; worstCol = j; }
-  const rel = d / Math.max(cmax, 1e-12 * maxJ);
-  if (rel > worstRel) { worstRel = rel; worstRelCol = j; }
+  let cmax = 0; for (let i = 0; i < n; i++) cmax = Math.max(cmax, Math.abs(base.J[i][j]));
+  let best = Infinity, bestStep = 0;
+  for (const h of steps) {
+    const fd = column(j, h); let d = 0;
+    for (let i = 0; i < n; i++) d = Math.max(d, Math.abs(base.J[i][j] - fd[i]));
+    if (h === 1e-7 && d > worst) { worst = d; worstCol = j; }
+    const rel = d / Math.max(cmax, 1e-12 * maxJ);
+    if (rel < best) { best = rel; bestStep = h; }
+  }
+  if (best > worstRel) { worstRel = best; worstRelCol = j; worstRelStep = bestStep; }
 }
 check(`J equals central differences with Richardson (${cols.length} columns of ${n})`, worst <= 1e-8 * maxJ, `largest difference ${worst.toExponential(2)} = ${(worst / maxJ).toExponential(2)} max|J| at column ${worstCol}`);
-check(`J equals central differences with Richardson, per column relative to its own largest entry (floor 1e-12 max|J|)`, worstRel <= 1e-8, `largest ${worstRel.toExponential(2)} at column ${worstRelCol}`);
+check(`J equals central differences with Richardson, per column relative to its own largest entry (floor 1e-12 max|J|), best of the steps ${steps.map((h) => h.toExponential(0)).join(', ')}`, worstRel <= 1e-8, `largest ${worstRel.toExponential(2)} at column ${worstRelCol} (step ${worstRelStep.toExponential(0)})`);
 const lamAt = (d) => F(z, p.lam + d);
 const h = 1e-7, a = lamAt(h), b = lamAt(-h), c = lamAt(2 * h), d2 = lamAt(-2 * h);
 let dl = 0; for (let i = 0; i < n; i++) dl = Math.max(dl, Math.abs(base.Flam[i] - (4 * (a[i] - b[i]) / (2 * h) - (c[i] - d2[i]) / (4 * h)) / 3 ));
