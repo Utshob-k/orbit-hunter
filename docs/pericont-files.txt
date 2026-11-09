@@ -1,7 +1,7 @@
 # The files of PeriCont (version 0.3.0), the Library package. tools/pack-pericont.mjs reads this list: one path per line, relative to the top folder of the repository; a path that ends with / is a
 # folder with everything below it; a line SOURCE => NAME puts the file SOURCE into the package as NAME. The package is pericont-0.3.0.zip (top folder pericont-0.3.0/). Licences: the code (src, tools, test) is MIT (LICENSE; every file under src/ and every tool named here, and the
 # tests of npm run test:ias, carry SPDX-License-Identifier: MIT in the first line); the data, the documents and the README are CC BY 4.0 (LICENSE-DATA).
-# The package is self-contained: after unpacking, set ORBIT_PYTHON (README.md) and run  npm test  (the Dormand-Prince tests, about 20 seconds),  npm run test:ias  (the tests of the ias route, 4 to 10 minutes)
+# The package is self-contained: after unpacking, set ORBIT_PYTHON (README.md) and run  npm test  (the Dormand-Prince tests, about 20 seconds),  npm run test:ias  (the tests of the ias route, 4 to 15 minutes)
 # and  node tools/deep-sample.mjs  (the sample run, whose PASS compares numbers with tolerances).
 
 # the top folder (README.md of the package is docs/pericont-readme.md)
