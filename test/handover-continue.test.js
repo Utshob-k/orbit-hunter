@@ -145,11 +145,11 @@ check('a failed witness (exit 1): handed over, witness exit 1 recorded, exit sta
 r = go(LZ, LB, ['--steps', '3', '--dlam', '1e-3', '--min-dlam', '1e-4', '--no-witness'], { FAKE_PLAN: JSON.stringify({ a03: 'noconv', a04: 'noconv' }) });
 check('a stop after exactly 2 accepted steps: return run, handed over, steps_done 2 of steps_wanted 3, stopped set, dlam_last the rejected d, dlam_accepted 1e-3', r.exit === 0 && r.res.steps.length === 2 && r.res.steps_done === 2 && r.res.steps_wanted === 3 && r.res.return && r.res.return.pass && r.res.handed_over && /min-dlam/.test(r.res.stopped) && r.res.dlam_last === '0.0001' && r.res.dlam_accepted === '0.001', `stopped: ${r.res.stopped} dlam_last ${r.res.dlam_last}`);
 
-// --miss-norm: predicted is the Euclidean norm |g - b| / |b|
+// --miss-norm: predicted is the root mean square of the per component relative values (g_k - b_k) / b_k
 r = go(LZ, LB, ['--steps', '2', '--dlam', '1e-3', '--no-witness', '--miss-norm']);
 {
-  const j = r.job('c_a01.job.json'), g = [j.u1, j.u2, j.t].map(Number), nrm = (v) => Math.hypot(...v), want = nrm(g.map((x, i) => x - z[i])) / nrm(z);
-  check('--miss-norm: predicted = |g - z| / |z| (Euclidean), measure recorded, handed over', rel(r.res.attempts[0].predicted, want) < 1e-9 && r.res.measure === 'euclidean norm' && r.res.handed_over, `predicted ${r.res.attempts[0].predicted} want ${want}`);
+  const j = r.job('c_a01.job.json'), g = [j.u1, j.u2, j.t].map(Number), want = Math.sqrt(g.reduce((s, x, i) => s + ((x - z[i]) / z[i]) ** 2, 0) / 3);
+  check('--miss-norm: predicted = the rms of (g_k - z_k) / z_k, measure recorded, handed over', rel(r.res.attempts[0].predicted, want) < 1e-9 && r.res.measure === 'rms of the per component relative values' && r.res.handed_over, `predicted ${r.res.attempts[0].predicted} want ${want}`);
 }
 
 // --return-last: pass, and fail with a wrong solution of that job
@@ -185,7 +185,7 @@ check('LAMZ that does not match the lam of Z.json: exit status 2, nothing writte
 r = go(LZ, LB, ['--steps', '2', '--dlam', '1e-3', '--no-witness'], {}, { ...strs(z), lam: '0.3000000000000000000000000' });
 check('a lam of Z.json with 25 digits that agrees: accepted, lam_check recorded', r.exit === 0 && r.res.lam_check.z === 'agrees to 1e-24' && r.res.lam_check.back === 'no lam in file');
 r = go(LZ, LB, ['--steps', '2', '--dlam', '1e-3', '--no-witness'], { FAKE_PLAN: JSON.stringify({ a01: 'badjson' }) });
-check('an output that is not valid JSON is a rejected attempt, d / 10 and the run goes on', r.exit === 0 && r.res.attempts[0].reason === 'output not valid JSON' && !r.res.attempts[0].accepted && r.res.attempts[1].accepted && Math.abs(Number(r.res.attempts[1].d) - 1e-4) < 1e-15 && r.res.handed_over, JSON.stringify(r.res.attempts[0]));
+check('an attempt output that is not valid JSON stops the run with that reason, no further attempt, not handed over, exit status 1', r.exit === 1 && r.res.attempts.length === 1 && r.res.attempts[0].reason === 'output of c_a01 not valid JSON (exit 0)' && !r.res.attempts[0].accepted && r.res.stopped === 'attempt 1: output of c_a01 not valid JSON (exit 0)' && !r.res.handed_over && r.res.return === null && !r.has('c_a02.job.json'), JSON.stringify(r.res.attempts[0]) + ' stopped: ' + r.res.stopped);
 r = go(LZ, LB, ['--steps', '2', '--dlam', '1e-3', '--no-witness'], { FAKE_PLAN: JSON.stringify({ return: 'badjson' }) });
 check('a return output that is not valid JSON: return failed with that reason, not handed over', r.exit === 1 && r.res.return && r.res.return.pass === false && r.res.return.reason === 'output not valid JSON' && !r.res.handed_over);
 r = go(-0.5, -0.5001, ['--steps', '2', '--dlam', '1e-3', '--no-witness']);
