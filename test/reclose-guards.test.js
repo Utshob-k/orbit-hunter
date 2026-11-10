@@ -4,6 +4,9 @@
 // (an orbit of the family t35 -, lam 0.5879788380024298). needs python with mpmath, takes about 20 s.
 // --conv C is written into the output as conv (1e-16 without it), and lam_job is the lam of the job as given. t <= 0 after a Newton update: the real reclose.py in a temporary tools folder with a fake
 // refine-mp.py whose flow is linear (r1 = -(u2 - 2) / 2, r2 = u1 - 1, r3 = t + 5), so the first update sets t = -5 and the next iteration stops with 't not positive' (exit 4) after one iteration and 3 flows.
+// --conv is used, not only written: a second fake flow with a quadratic term (r2 = e + e^2 with e = u1 - 1, r1 = -(u2 - 2) / 2, r3 = t - 1) from e = 5e-4 gives the largest |r| 5e-4, about 2.5e-7, 6.2e-14,
+// 3.9e-27 at the iterations 0 to 3, so --conv 1e-12 converges after 2 updates and the default 1e-16 after 3. --conv 0x10, 1e-5 and abc are refused (exit 2, no output; the value must be a plain decimal
+// number of at most 1e-12). A ref with u1 "0" (fake flow): the job ends 'done' with exit 0 and the absolute difference for that component.
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
@@ -49,6 +52,35 @@ for (const t of [-1, 0]) {
   const q = spawnSync(python, ['-B', path.join(ftools, 'reclose.py'), job, out, '--minutes', '10'], { cwd: root, encoding: 'utf8' });
   const o = fs.existsSync(out) ? JSON.parse(fs.readFileSync(out, 'utf8')) : null;
   check('t <= 0 after a Newton update (fake flow): status \'t not positive\', exit status 4, after one iteration and 3 flows', q.status === 4 && o && o.status === 't not positive' && o.converged === false && o.iterations.length === 1 && o.flows === 3 && Number(o.t) < 0, `exit ${q.status} status ${o && o.status} t ${o && o.t} iterations ${o && o.iterations.length} ${(q.stderr || '').slice(-200)}`);
+}
+{
+  // --conv in use, with the quadratic fake flow; refused values; a zero ref component
+  const qtools = path.join(dir, 'tools2'); fs.mkdirSync(qtools);
+  fs.copyFileSync(path.join(root, 'tools', 'reclose.py'), path.join(qtools, 'reclose.py'));
+  fs.writeFileSync(path.join(qtools, 'refine-mp.py'), [
+    'from mpmath import mpf',
+    'STEP_FLOOR = None',
+    'def start(a, b, lam): return [a, b, lam]',
+    'def flow(x, t, tol): return [mpf(-1), mpf(0), mpf(0), x[1] - 2, mpf(1), mpf(0), (x[0] - 1) + (x[0] - 1) ** 2, mpf(0), t - 1, mpf(0), mpf(0), mpf(0)]',
+    'def deriv(s): return [mpf(0)] * 8 + [mpf(1)] + [mpf(0)] * 3', ''].join('\n'));
+  let k = 0;
+  const q = (extra, ref = null) => {
+    const job = path.join(dir, 'q' + k + '.json'), out = path.join(dir, 'q' + k++ + '.out.json');
+    fs.writeFileSync(job, JSON.stringify({ id: 'q', u1: '1.0005', u2: '2', lam: '0.3', t: '1', ref }));
+    const s = spawnSync(python, ['-B', path.join(qtools, 'reclose.py'), job, out, '--minutes', '10', ...extra], { cwd: root, encoding: 'utf8' });
+    return { exit: s.status, stderr: s.stderr || '', out: fs.existsSync(out) ? JSON.parse(fs.readFileSync(out, 'utf8')) : null };
+  };
+  const a = q([]), b = q(['--conv', '1e-12']);
+  const ra = a.out ? a.out.iterations.map((x) => x.residual) : [], rb = b.out ? b.out.iterations.map((x) => x.residual) : [];
+  check('--conv 1e-12 is used: with the quadratic fake flow it converges after 2 updates, the default 1e-16 after 3 (one more)', a.exit === 0 && b.exit === 0 && a.out.converged && b.out.converged && a.out.iterations.length === 4 && b.out.iterations.length === 3 && rb[2] > 1e-16 && rb[2] <= 1e-12 && ra[3] <= 1e-16,
+    `updates ${a.out && a.out.iterations.length - 1} / ${b.out && b.out.iterations.length - 1}, residuals ${ra.map((x) => x.toExponential(1)).join(' ')}`);
+  for (const v of ['0x10', '1e-5', 'abc']) {
+    const c = q(['--conv', v]);
+    check(`--conv ${v}: exit 2, no output`, c.exit === 2 && c.out === null && /--conv/.test(c.stderr), `exit ${c.exit}`);
+  }
+  const z = q([], { u1: '0', u2: '2', t: '1' });
+  check('a ref with u1 "0": done, exit 0, the absolute difference for u1 (about 1), not the same orbit', z.exit === 0 && z.out && z.out.status === 'done' && z.out.converged && Math.abs(z.out.rel_diff_ref.u1 - 1) < 1e-9 && z.out.rel_diff_ref.u2 < 1e-30 && z.out.same_orbit === false,
+    `exit ${z.exit} ${z.out && JSON.stringify(z.out.rel_diff_ref)} ${z.stderr.slice(-200)}`);
 }
 let r = go(pt.t, pt, ['--max-first', '1e-30']);
 check('--max-first 1e-30: status \'first residual above limit\', exit status 5, one iteration', r.exit === 5 && r.out && r.out.status === 'first residual above limit' && r.out.converged === false && r.out.iterations.length === 1 && r.out.residual > 1e-30, `exit ${r.exit} residual ${r.out && r.out.residual}`);

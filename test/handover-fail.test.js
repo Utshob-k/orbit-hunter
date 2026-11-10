@@ -7,6 +7,10 @@
 // names the failed return first), witness_ok (true, false, null; the witness is not part of the decision), and the options conv and safe (the arguments reach the fake tools; without them none is passed).
 // The checks named "source contains" only search the source of the driver for strings (the driver itself needs a real flow).
 // The fakes are node scripts named reclose.py and handover-continue.py in a temporary folder; the "interpreter" is node, without arguments. The exit status of the driver is 1 if runHandover says failed (checked on its source).
+// Since FIX06: a continuation that ends after a dump without a return test and without a stop reason (fake mode noresult, exit 9) fails with "handover-continue ended without a result (exit 9)"; and
+// traceVerdict of tools/trace-verdict.mjs (the verdict of tools/reproduce-trace.mjs) on made-up cases: with --handover the same stop reason with fewer accepted steps than the stored trace and a
+// hand-over beyond the stored length are FAIL, the cases that passed before still PASS.
+import { traceVerdict } from '../tools/trace-verdict.mjs';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -28,6 +32,7 @@ const fs = require('fs'); const path = require('path'); const a = process.argv.s
 fs.writeFileSync(process.env.FAKE_ARGS, JSON.stringify(a));
 if (mode === 'nocont') process.exit(5);
 fs.mkdirSync(outdir);
+if (mode === 'noresult') { fs.writeFileSync(path.join(outdir, 'handover_continue.json'), JSON.stringify({ tangent: ['1', '2', '3'], steps: [], attempts: [{ tag: 'a1', accepted: false }], return: null, handed_over: false, stopped: null, witness: null })); process.exit(9); }
 const ok = mode !== 'step1', handed = ok && mode !== 'retfail' && mode !== 'stopret';
 const steps = ok ? [1, 2].map((k) => ({ step: k, lam: '0.5' + k, file: 'handover_a0' + k + '.out.json', converged: true, updates: 2, first_residual: 1e-9, residual: 1e-20, seconds: 1, predicted: 1e-4, miss: 1e-9, ratio: 1e-5 })) : [];
 for (const s of steps) fs.writeFileSync(path.join(outdir, s.file), JSON.stringify({ u1: '1.' + s.step, u2: '2.' + s.step, t: '3.' + s.step }));
@@ -110,6 +115,9 @@ r = go('contbad');
 check('a continue file that is not valid JSON: hand-over failed with that reason', r.failed && r.why === 'hand-over failed: handover-continue output not valid JSON (exit 0)' && r.hv.exits.length === 3, r.why);
 r = go('stepbad');
 check('the output of an accepted step not valid JSON: hand-over failed with that reason', r.failed && r.why === 'hand-over failed: the output handover_a02.out.json of an accepted step is not valid JSON', r.why);
+// a continuation that ended after a dump, without a return test and without a stop reason
+r = go('noresult');
+check('a continuation that ended without a result (no return test, no stop reason): hand-over failed, "handover-continue ended without a result (exit 9)"', r.failed && r.why === 'hand-over failed: handover-continue ended without a result (exit 9)' && r.hv.exits.length === 3 && r.hv.exits[2].exit === 9, r.why);
 // the reason when the continuation stopped after 2 steps and the return test failed
 r = go('stopret');
 check('stopped after 2 steps and the return test failed: the reason names the failed return first, then the stop', r.failed && r.why === 'hand-over failed: return test failed; the continuation had stopped: dlam 1e-8 is below --min-dlam 1e-7 after attempt 5 (not converged)' && r.hv.stopped !== null, r.why);
@@ -143,5 +151,19 @@ check('source contains: the driver records the loop step of every accepted step 
 const rt = fs.readFileSync(new URL('../tools/reproduce-trace.mjs', import.meta.url), 'utf8'), tv = fs.readFileSync(new URL('../tools/trace-verdict.mjs', import.meta.url), 'utf8');
 check('source contains: tools/reproduce-trace.mjs takes its verdict from tools/trace-verdict.mjs, which with --handover also accepts whyBeforeHandover equal to the stored reason, with as many accepted steps as the stored trace', rt.includes("import { traceVerdict } from './trace-verdict.mjs';") && rt.includes('whyBeforeHandover: res.whyBeforeHandover, storedWhy: stored.why') && tv.includes('(whyBeforeHandover === storedWhy && gotLength === refLength)'));
 check('source contains: the driver passes the back point of the rule and asks for at least 2 steps', src.includes('const j = backIndex(lams);') && src.includes('fired.back = { index: j, lam: lams[j], ...pars[j] }') && src.includes('hSteps >= 2'));
+// the verdict of tools/reproduce-trace.mjs on made-up cases (the stored trace has 1711 accepted steps, as t35 -)
+{
+  const base = { n: 262, stepDiff: 0, missing: 0, maxRel: 0, refLength: 1711, storedWhy: 'out of time', whyBeforeHandover: undefined, stopAfter: null, handover: true };
+  const V = (o) => traceVerdict({ ...base, ...o }).ok;
+  const HO = 'handed over to the 50 digit continuation';
+  check('verdict --handover: handed over at step 262 of 1711: PASS', V({ gotLength: 262, why: HO }));
+  check('verdict --handover: handed over beyond the stored length (1800 of 1711): FAIL', !V({ gotLength: 1800, n: 1711, why: HO }));
+  check('verdict --handover: the stored reason at the stored length: PASS; the stored reason with fewer steps (1500 of 1711): FAIL', V({ gotLength: 1711, n: 1711, why: 'out of time' }) && !V({ gotLength: 1500, n: 1500, why: 'out of time' }));
+  check('verdict --handover: stopped where the stored trace stops and the hand-over tried (whyBeforeHandover the stored reason, 1711 steps): PASS, also when the hand-over failed; with fewer steps: FAIL',
+    V({ gotLength: 1711, n: 1711, why: 'hand-over failed: return test failed', whyBeforeHandover: 'out of time' }) && !V({ gotLength: 1700, n: 1700, why: 'hand-over failed: return test failed', whyBeforeHandover: 'out of time' }));
+  check('verdict without --handover: the stored length and reason PASS, fewer steps FAIL; --stop-after=5: "stopped after 5 recorded points" PASS',
+    V({ handover: false, gotLength: 1711, n: 1711, why: 'out of time' }) && !V({ handover: false, gotLength: 1700, n: 1700, why: 'out of time' }) && V({ handover: false, stopAfter: 5, gotLength: 7, n: 7, why: 'stopped after 5 recorded points' }));
+  check('verdict: no compared step, a step number that differs or a relative difference of 1e-9 is FAIL', !V({ n: 0, gotLength: 262, why: HO }) && !V({ stepDiff: 1, gotLength: 262, why: HO }) && !V({ maxRel: 1e-9, gotLength: 262, why: HO }));
+}
 fs.rmSync(tmp, { recursive: true, force: true });
 process.exit(fail ? 1 : 0);

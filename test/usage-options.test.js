@@ -2,6 +2,8 @@
 // usage errors of the options added for 0.4.0: every case must end with exit status 2 before anything is run or written.
 // tools/family-follow-ias.mjs: --mono-threads and --fast with --pieces above 64, --ls-reuse, --grow-iters, --grow-factor and --stop-lam with --natural, bad values of --handover-conv and a value for --handover-safe.
 // tools/handover-continue.py: bad values of --conv (the file names are not read before the options are checked). tools/reclose.py: bad values of --conv.
+// Since FIX06: --handover-conv=0x10 and 1e-5 (a plain decimal number of at most 1e-12 is needed), --handover-safe and --handover-conv without --handover; on Windows only, --ias-procs=62 and --fast=62
+// (a ProcessPoolExecutor holds at most 61 processes there; elsewhere these two cases are skipped with a note).
 // Checked: exit status 2, a message that names the option, and no file in the new temp folder of the case. No flow is run; the python cases need python with mpmath (settings.ias.python), takes a few seconds.
 import fs from 'fs';
 import os from 'os';
@@ -33,7 +35,13 @@ const driver = [
   [['--handover', '--handover-conv'], ['--handover-conv']],
   [['--handover', '--handover-conv='], ['--handover-conv']],
   [['--handover', '--handover-safe=1'], ['--handover-safe']],
+  [['--handover', '--handover-conv=0x10'], ['--handover-conv']],
+  [['--handover', '--handover-conv=1e-5'], ['--handover-conv']],
+  [['--handover-safe'], ['--handover-safe', '--handover']],
+  [['--handover-conv=1e-24'], ['--handover-conv', '--handover']],
+  ...(process.platform === 'win32' ? [[['--ias-procs=62'], ['--ias-procs', '61']], [['--fast=62'], ['--fast', '61']]] : []),
 ];
+if (process.platform !== 'win32') console.log('note: --ias-procs=62 and --fast=62 are refused on Windows only; skipped on ' + process.platform);
 for (const [args, words] of driver) {
   const d = path.join(tmp, 'd' + n++); fs.mkdirSync(d);
   const r = spawnSync(process.execPath, [path.join(root, 'tools', 'family-follow-ias.mjs'), path.join(d, 'out.json'), '1', '0.1', '0.2', '0.3', '4', ...args], { cwd: root, encoding: 'utf8', timeout: 60000 });

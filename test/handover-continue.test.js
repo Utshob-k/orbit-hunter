@@ -10,6 +10,9 @@
 // FAKE_WEXIT is the exit status of the fake witness): --max-first 0.1 for the attempts only, --conv only when given, the guess of the return job, a start step that is not a decade multiple of --min-dlam
 // (and --floor-try), a failed witness, a stop after exactly 2 accepted steps, --miss-norm, --return-last, --miss-return, a LAMZ that does not match Z.json, an output that is not valid JSON, an exact zero
 // component, --edge-shrink, dz_cos and reversed.
+// Since FIX06: an attempt output that is not valid JSON stops the run (stopped 'attempt N: output of LABEL_aNN not valid JSON (exit E)'); a Z.json that is a JSON list, a u1 that is not a number and bad
+// --conv values (0x10, 1e-5, abc) are refused with exit 2 and no OUTDIR; --miss-norm is the rms of the per component relative values (also with a zero component left out); the --miss-return check job
+// gets the line through b and the rejected solution at the lam of a as its guess (compared in its job file), and records guess_dist and first_residual (so does the return job).
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
@@ -174,6 +177,15 @@ r = go(LZ, LB, ['--steps', '3', '--dlam', '1e-3', '--min-dlam', '1e-6', '--no-wi
   const a5 = r.res.attempts[4] || {};
   check('--miss-return: no check at d = D and D / 10, at D / 100 the check job c_mr05 comes back to step 1 and the attempt is accepted; handed over', r.exit === 0 && r.res.handed_over && r.res.steps.length === 3 && r.res.attempts.length === 5 && !r.res.attempts[2].miss_return && !r.res.attempts[3].miss_return && a5.accepted && a5.accepted_by === 'miss-return check' && a5.miss_return && a5.miss_return.pass && a5.miss_return.file === 'c_mr05.out.json' && r.res.steps[2].accepted_by === 'miss-return check' && r.job('c_mr05.job.json').ref.t === r.job('c_a01.out.json').t && Math.abs(Number(r.job('c_mr05.job.json').lam) - (LZ + 1e-3)) < 1e-15 && !/max-first/.test(r.job('c_mr05.out.json').argv.join(' ')), JSON.stringify(r.res.attempts.map((a) => [a.d, a.accepted, a.accepted_by || null])));
 }
+{
+  // the guess of the check job c_mr05: the line through b (step 2, c_a02) and the rejected solution of attempt 5 at the lam of a (step 1, c_a01); guess_dist and first_residual
+  const num = (f) => { const o = r.job(f); return [o.u1, o.u2, o.t].map(Number); };
+  const va = num('c_a01.out.json'), vb = num('c_a02.out.json'), vs = num('c_a05.out.json'), la = LZ + 1e-3, lb = LZ + 2e-3, ls = lb + 1e-5, k = (la - lb) / (ls - lb);
+  const want = vb.map((x, i) => x + k * (vs[i] - x)), got = num('c_mr05.job.json'), dev = Math.max(...got.map((x, i) => rel(x, want[i])));
+  const mr = (r.res.attempts[4] || {}).miss_return || {}, gd = Math.max(...want.map((x, i) => rel(x, va[i])));
+  check('--miss-return: the check job guess is the line through b and the rejected solution at the lam of a; guess_dist and first_residual recorded (first_residual on the return too)', dev < 1e-9 && Math.abs(Number(r.job('c_mr05.job.json').lam) - la) < 1e-15 && typeof mr.guess_dist === 'number' && rel(mr.guess_dist, gd) < 1e-6 && mr.first_residual === 0.01 && r.res.return.first_residual === 0.01,
+    `dev ${dev.toExponential(1)} guess_dist ${mr.guess_dist} want ${gd} first_residual ${mr.first_residual}`);
+}
 r = go(LZ, LB, ['--steps', '3', '--dlam', '1e-3', '--min-dlam', '1e-6', '--no-witness', '--miss-return'], { ...MISS, FAKE_PLAN: JSON.stringify({ mr: 'retfail' }) });
 check('--miss-return with a check job that returns a different orbit: the attempt stays rejected (check recorded), the run stops as without the option', r.res.steps.length === 2 && /min-dlam/.test(r.res.stopped) && r.res.attempts[4] && !r.res.attempts[4].accepted && r.res.attempts[4].miss_return && r.res.attempts[4].miss_return.pass === false && /miss/.test(r.res.attempts[4].reason), JSON.stringify(r.res.attempts.map((a) => [a.d, a.accepted])));
 r = go(LZ, LB, ['--steps', '2', '--dlam', '1e-3', '--no-witness', '--safe']);
@@ -190,6 +202,12 @@ r = go(LZ, LB, ['--steps', '2', '--dlam', '1e-3', '--no-witness'], { FAKE_PLAN: 
 check('a return output that is not valid JSON: return failed with that reason, not handed over', r.exit === 1 && r.res.return && r.res.return.pass === false && r.res.return.reason === 'output not valid JSON' && !r.res.handed_over);
 r = go(-0.5, -0.5001, ['--steps', '2', '--dlam', '1e-3', '--no-witness']);
 check('an exact zero component of z (u1 = 0 at lam -0.5): no crash, that component left out (measure_note), handed over', r.exit === 0 && r.res.attempts[0].measure_note === 'zero component left out' && r.res.handed_over && r.res.attempts[0].predicted > 0, `exit ${r.exit} ${r.stderr.slice(-200)}`);
+
+r = go(-0.5, -0.5001, ['--steps', '2', '--dlam', '1e-3', '--no-witness', '--miss-norm']);
+{
+  const j = r.job('c_a01.job.json'), g = [j.u1, j.u2, j.t].map(Number), z0 = curve(-0.5), want = Math.sqrt(((g[1] - z0[1]) / z0[1]) ** 2 / 2 + ((g[2] - z0[2]) / z0[2]) ** 2 / 2);
+  check('--miss-norm with an exact zero component (u1 = 0 at lam -0.5): the rms over the other two, measure_note "zero component left out", handed over', r.exit === 0 && r.res.attempts[0].measure_note === 'zero component left out' && rel(r.res.attempts[0].predicted, want) < 1e-9 && r.res.handed_over, `predicted ${r.res.attempts[0].predicted} want ${want}`);
+}
 
 // --edge-shrink near |lam| = 1
 r = go(0.9999, 0.9998, ['--steps', '2', '--dlam', '1e-3', '--no-witness', '--edge-shrink']);
@@ -210,6 +228,17 @@ q = spawnSync(python, ['-B', path.join(tools, 'handover-continue.py'), 'c', zf +
 check('Z.json not converged: exit status 2', q.status === 2 && !fs.existsSync(path.join(tmp, 'new2')), `exit ${q.status}`);
 q = spawnSync(python, ['-B', path.join(tools, 'handover-continue.py'), 'c', zf], { encoding: 'utf8' });
 check('too few arguments: usage, exit status 2', q.status === 2 && /usage/.test(q.stderr), `exit ${q.status}`);
+fs.writeFileSync(zf + '3', '[1, 2]');
+q = spawnSync(python, ['-B', path.join(tools, 'handover-continue.py'), 'c', zf + '3', String(LZ), bf, String(LB), path.join(tmp, 'new3')], { encoding: 'utf8' });
+check('Z.json that is a JSON list: exit status 2, no OUTDIR', q.status === 2 && !fs.existsSync(path.join(tmp, 'new3')), `exit ${q.status} ${(q.stderr || '').split('\n')[0]}`);
+fs.writeFileSync(zf + '4', JSON.stringify({ ...strs(z), u1: 'x' }));
+q = spawnSync(python, ['-B', path.join(tools, 'handover-continue.py'), 'c', zf + '4', String(LZ), bf, String(LB), path.join(tmp, 'new4')], { encoding: 'utf8' });
+check('Z.json with u1 "x": exit status 2, no OUTDIR', q.status === 2 && /must be numbers/.test(q.stderr) && !fs.existsSync(path.join(tmp, 'new4')), `exit ${q.status} ${(q.stderr || '').split('\n')[0]}`);
+for (const v of ['0x10', '1e-5', 'abc']) {
+  const od = path.join(tmp, 'new-conv-' + v);
+  q = spawnSync(python, ['-B', path.join(tools, 'handover-continue.py'), 'c', zf, String(LZ), bf, String(LB), od, '--conv', v], { encoding: 'utf8' });
+  check(`--conv ${v}: exit status 2, no OUTDIR`, q.status === 2 && /--conv/.test(q.stderr) && !fs.existsSync(od), `exit ${q.status}`);
+}
 
 fs.rmSync(tmp, { recursive: true, force: true });
 process.exit(fail ? 1 : 0);
