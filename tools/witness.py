@@ -13,7 +13,8 @@
 #   rotation: the rotation R that takes the END state onto the START state (R x(2t) = x(0), least squares over positions and velocities), in (-pi, pi]. That is minus the forward
 #   rotation of the orbit over the period, so minus the theta of the trace tools (thetaOf in src/shooting.js, quickTheta in src/perp.js); compare rotations mod 2 pi (near +-pi
 #   two nearly equal orbits can come out about 2 pi apart).
-#   The self-timer is cancelled before the last write and both threads write under one lock, so a finished job is never overwritten by 'over limit'.
+#   The self-timer is cancelled before the last write and both threads write under one lock, so a finished job is never overwritten by 'over limit'. The main thread changes what the
+#   timer reads (state, best: the phase, the time reached, the step counts and the smallest pair distance) only under that lock, so an 'over limit' write is one consistent snapshot.
 import sys, os, json, time, threading, importlib.util
 sys.dont_write_bytecode = True
 from mpmath import mp, mpf, sqrt, atan2, cos, sin, nstr
@@ -76,10 +77,11 @@ orig = R.bs_step
 
 def counted(x0, H, tol_):
     r, order = orig(x0, H, tol_)
-    if r is None: state['rejected'] += 1
-    if r is not None:
-        state['tacc'] += H; state['steps'] += 1; sample(r, state['tacc'])
-        state['minH'] = H if state['minH'] is None or H < state['minH'] else state['minH']
+    with lock:
+        if r is None: state['rejected'] += 1
+        if r is not None:
+            state['tacc'] += H; state['steps'] += 1; sample(r, state['tacc'])
+            state['minH'] = H if state['minH'] is None or H < state['minH'] else state['minH']
     return r, order
 
 
@@ -137,13 +139,13 @@ def sym_residual(s):
 
 u1, u2, lam, t = [(mpf(str(job[k])) if '--exact-start' in sys.argv else mpf(float(job[k]))) for k in ('u1', 'u2', 'lam', 't')]
 x0 = R.start(u1, u2, lam)
-sample(x0, mpf(0))
+with lock: sample(x0, mpf(0))
 try:
     T0 = time.time()
     xh = R.flow(x0, t, tol)
     th = time.time() - T0
     res = sym_residual(xh)
-    state['phase'] = 'second half'
+    with lock: state['phase'] = 'second half'
     xf = R.flow(xh, t, tol)
     tt = time.time() - T0
 except Exception as e:
