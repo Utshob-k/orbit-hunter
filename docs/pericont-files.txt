@@ -122,13 +122,14 @@ test/pool-failures.test.js
 test/lstar-unrec.test.js
 test/ias-first-step.test.js
 
-# data: everything of data/deep (traces, witnesses, re-closed stretches, extra/, sample/), and the files that npm test reads
+# data: everything of data/deep (traces, witnesses, re-closed stretches, extra/, sample/), and the files that npm test and npm run test:ias read
 data/deep/
 data/stability-perp-3.json
 data/r-family-trace.json
 data/r-family-trace-iso.json
 data/cpc-converted.json
 data/class-i/refined/n5.json
+data/orbit-table.json
 
 # documents
 docs/deep.md
