@@ -7,6 +7,7 @@
 #   the starts and in the same form; the pool processes end when this process ends (they watch it), at the end of stdin or when it is killed. The pool is a concurrent.futures.ProcessPoolExecutor: if one of its
 #   processes dies (a crash inside REBOUND), the request is answered at once with {"id": n, "error": text} (the bridge then fails the request, as with one process) and a new pool is made for the next request.
 #   On Windows K is at most 61 (the limit of ProcessPoolExecutor there); a larger K ends the process at the start with an error. Needs Python 3.9 or later (shutdown(cancel_futures=True)).
+#   Test hook (test/pool-failures.test.js), inert unless set: with the environment variable ORBIT_TEST_IAS_DIE_TAU a pool process that gets a piece with exactly that tau ends at once (os._exit).
 # request  {"id": n, "starts": [[12 numbers], ...], "tau": float}    state = x0,y0,x1,y1,x2,y2,vx0,vy0,vx1,vy1,vx2,vy2; G = 1, three masses 1
 #   Each start is integrated for the time tau in a fresh IAS15 simulation. The three pair distances are sampled at the start and at every step end;
 #   a piece whose smallest sampled pair distance is below 1e-3 is flagged as an encounter piece (the end state of IAS15 is returned anyway, bridge.js
@@ -62,7 +63,11 @@ def pool_init():
     threading.Thread(target=watch, daemon=True).start()
 
 
+DIE_TAU = float(os.environ['ORBIT_TEST_IAS_DIE_TAU']) if os.environ.get('ORBIT_TEST_IAS_DIE_TAU') else None
+
+
 def pool_piece(args):
+    if DIE_TAU is not None and args[1] == DIE_TAU: os._exit(1)
     return piece(*args)
 
 

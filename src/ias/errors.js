@@ -2,3 +2,7 @@
 // the error of a failed request of the ias route (a bridge timeout or error, a guard, a failure of reg.js, a pool timeout or a dead pool worker): correct0 of src/shooting.js counts it as a failed
 // attempt. In its own file so that src/ias/bridge.js and the pools (src/ias/reg-pool.js, src/mono-pool.js) can all import it without an import cycle; bridge.js exports it too.
 export class BridgeError extends Error { constructor(msg, reason) { super(msg); this.reason = reason; } }
+// the pools report every BridgeError they throw (a pool timeout, a dead worker) to poolFailed; src/ias/bridge.js registers the counter of its stats (poolTimeouts, poolErrors) with onPoolFailure
+const listeners = [];
+export function onPoolFailure(fn) { listeners.push(fn); }
+export function poolFailed(e) { for (const f of listeners) f(e); }

@@ -6,6 +6,8 @@
 // The pieces that are encounter pieces (smallest sampled pair distance below 1e-3) are recomputed by reg.js, which also gives their 12 x 12 matrices;
 // unflagged pieces with a pair distance below settings.ias.crossCheckBelow are cross-checked with reg.js and replaced where the end states differ.
 // The Python process and the worker are started at the first request, so importing this file costs nothing when the dp45 integrator is used.
+// stats counts the bridge timeouts and errors (timeouts, errors) and the failures of the thread pools of --reg-threads and --mono-threads (poolTimeouts, poolErrors; also one inside a line-search
+// trial of --ls-reuse, which is then a failed trial); each sets lastReason. tools/family-follow-ias.mjs writes stats as out.bridge.
 import { Worker } from 'worker_threads';
 import path from 'path';
 import fs from 'fs';
@@ -13,7 +15,7 @@ import { fileURLToPath } from 'url';
 import { flowEnc } from './reg.js';
 import { regBatch } from './reg-pool.js';
 import { settings } from '../settings.js';
-import { BridgeError } from './errors.js';
+import { BridgeError, onPoolFailure } from './errors.js';
 export { BridgeError };
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -39,7 +41,14 @@ function getWorker() {
   return worker;
 }
 
-export const stats = { regPieces: 0, regMacro: 0, regSub: 0, regEndTrials: 0, regStagnation: 0, lastReason: null, calls: 0, pieces: 0, steps: 0, timeouts: 0, errors: 0, stepFloor: 0, encounterPieces: 0 };
+export const stats = { regPieces: 0, regMacro: 0, regSub: 0, regEndTrials: 0, regStagnation: 0, lastReason: null, calls: 0, pieces: 0, steps: 0, timeouts: 0, errors: 0, stepFloor: 0, encounterPieces: 0, poolTimeouts: 0, poolErrors: 0 };
+// a BridgeError of a thread pool (src/ias/reg-pool.js, src/mono-pool.js): counted as a pool timeout or a pool error, its text kept as lastReason
+export function countPoolFailure(e) {
+  if (!(e instanceof BridgeError)) return;
+  if (/timeout$/.test(e.reason || '')) stats.poolTimeouts++; else stats.poolErrors++;
+  stats.lastReason = e.message;
+}
+onPoolFailure(countPoolFailure);
 export const gstats = { trips: { G1a: 0, G1b: 0, G2: 0, G3: 0 }, tripsTotal: 0, tripList: [], ratioMin: Infinity, d2CloseMin: Infinity, attRatioMin: Infinity, attD2Close: Infinity, samePair: 0,
   missChecks: 0, missedCounted: 0, missedStops: 0, missFailed: 0, regFailures: 0, cMinSeen: Infinity, cRatioMin: Infinity, tIas: 0, tC: 0, tMiss: 0, xchk: 0, xchkMaxDiff: 0, replaced: 0, replList: [], tX: 0, tPool: 0 };
 let nextId = 1;
