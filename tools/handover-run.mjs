@@ -6,7 +6,8 @@
 // shorter) there is no tangent: no process is run and the hand-over fails.
 // The w1b witness of the last orbit is recorded (hv.witness, and hv.witness_ok: true if it ran and wrote status done with exit status 0, false if it ran and did not, null if no witness ran); it is not part of
 // the decision. An output that cannot be read as JSON is a failed hand-over with that reason (for the witness: witness_ok false). When handover-continue.py stopped after 2 or more accepted steps and the return
-// test then failed, the reason names the failed return first and the stop after it.
+// test then failed, the reason names the failed return first and the stop after it. When the continuation did not hand over and its continue file has neither a return test nor a stop reason
+// (it ended without a result, for example killed after a dump), the reason is "handover-continue ended without a result (exit N)".
 // conv (a string, optional): passed as --conv to the two re-closings and to handover-continue.py; safe: passes --safe to handover-continue.py. Both are unset by default (the jobs are those of earlier versions).
 // The hand-over starts at the rule of the driver (trigger 'rule', the default) or at a stop of the trace (trigger { kind: 'stop', reason }: the triple-approach guard, "lost the family"); then fired is built from the last accepted step
 // (tools/handover-rule.mjs firedAtStop) and the block has trigger 'stop' and stop_before = the stop reason (null for the rule).
@@ -83,6 +84,7 @@ export function runHandover({ fired, dir, hBelow, hSteps, hDlam, base, root, pyt
     const ret = cont.return, last = cont.return_last;
     if (ret && ret.pass === false) return fail('return test failed' + (cont.stopped ? '; the continuation had stopped: ' + cont.stopped : ''));
     if (ret && ret.pass && last && last.pass === false) return fail('second return test (return_last) failed' + (cont.stopped ? '; the continuation had stopped: ' + cont.stopped : ''));
+    if (!ret && !cont.stopped) return fail('handover-continue ended without a result (exit ' + cr.status + ')');
     return fail(cont.stopped || 'return test failed');
   }
   return { hv, failed: false, why: 'handed over to the 50 digit continuation' };

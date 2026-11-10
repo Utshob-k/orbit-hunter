@@ -6,6 +6,7 @@
 #   K (optional, a whole number; src/ias/bridge-worker.mjs gives it only for K > 1): the pieces of a request are integrated in a pool of K processes made at the start, each piece by piece() in a fresh simulation, the answer in the order of
 #   the starts and in the same form; the pool processes end when this process ends (they watch it), at the end of stdin or when it is killed. The pool is a concurrent.futures.ProcessPoolExecutor: if one of its
 #   processes dies (a crash inside REBOUND), the request is answered at once with {"id": n, "error": text} (the bridge then fails the request, as with one process) and a new pool is made for the next request.
+#   On Windows K is at most 61 (the limit of ProcessPoolExecutor there); a larger K ends the process at the start with an error. Needs Python 3.9 or later (shutdown(cancel_futures=True)).
 # request  {"id": n, "starts": [[12 numbers], ...], "tau": float}    state = x0,y0,x1,y1,x2,y2,vx0,vy0,vx1,vy1,vx2,vy2; G = 1, three masses 1
 #   Each start is integrated for the time tau in a fresh IAS15 simulation. The three pair distances are sampled at the start and at every step end;
 #   a piece whose smallest sampled pair distance is below 1e-3 is flagged as an encounter piece (the end state of IAS15 is returned anyway, bridge.js
@@ -70,6 +71,7 @@ def main():
     first = sys.argv[3] if len(sys.argv) > 3 else 'legacy'; factor = float(sys.argv[4]) if len(sys.argv) > 4 else 0.01
     if first not in ('legacy', 'timescale'): sys.exit('FIRST must be legacy or timescale, not ' + first)
     K = int(sys.argv[5]) if len(sys.argv) > 5 else 1
+    if K > 61 and sys.platform == 'win32': sys.exit('K = %d: on Windows a ProcessPoolExecutor holds at most 61 processes' % K)
     box = dict(pool=make_pool(K) if K > 1 else None, K=K)
     try:
         serve(mode, ratio, first, factor, box)

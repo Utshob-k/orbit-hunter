@@ -85,10 +85,9 @@ function lsResidual(obs, z, lam, m) {
 const endDiffOf = (a, b) => { let d = 0; for (let k = 0; k < N; k++) d = Math.max(d, Math.abs(a[k] - b[k]) / Math.max(1, Math.abs(b[k]))); return d; };
 
 // --ls-reuse (settings.lsReuse): the line search evaluates the pieces of a trial in one bridge request and keeps the answer of the accepted trial for the next system() call.
-// Only on the ias route (settings.integrator 'ias'; tools/family-follow-ias.mjs always sets it): the trial is integrated by IAS15, so with dp45 it is a usage error.
+// Only on the ias route (settings.integrator 'ias'; tools/family-follow-ias.mjs always sets it): the trial is integrated by IAS15, so with dp45 it is a usage error (thrown at the start of correct0).
 let pendingTrial = null;
 function residualTrial(z, lam, m) {
-  if (settings.integrator !== 'ias') throw new Error('settings.lsReuse (--ls-reuse) needs settings.integrator = \'ias\': the trial of the line search is integrated by IAS15, not by ' + settings.integrator);
   const tau = z[2] / m;
   if (!(tau > 0)) return null;
   const starts = [perpInitial(z[0], z[1], lam)]; for (let i = 1; i < m; i++) starts.push(z.subarray(3 + N * (i - 1), 3 + N * i));
@@ -397,6 +396,7 @@ function correct(Yp, tau, m, t0) {
   obs.begin(); const r = correct0(Yp, tau, m, t0); obs.end(r); return r;
 }
 function correct0(Yp, tau, m, t0) {
+  if (settings.lsReuse && settings.integrator !== 'ias') throw new Error('settings.lsReuse (--ls-reuse) needs settings.integrator = \'ias\': the trial of the line search is integrated by IAS15, not by ' + settings.integrator);
   const obs = settings.observer;
   pendingTrial = null;
   const n = Yp.length - 1;

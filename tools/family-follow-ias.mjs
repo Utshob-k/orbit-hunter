@@ -31,6 +31,7 @@
 //   perp-cap=F: perpInfo of the trace (closest approach and closure of an accepted step) gives up after the share F of its usual limit of dp45 steps, 20*(4000+3000T); 0 < F <= 1, unset = 1. A step that needs more than the share F becomes an unrecorded step (listed in `unrec`, with capped true and its share), so the option can change which steps are recorded, not only the time. The value is in out.settings.perpCap.
 //   reg-threads=K: the reg.js calls a request of the ias route can need (flagged pieces, cross-checks, the missed-flag check) are computed in one batch in K worker threads (src/ias/reg-pool.js, src/ias/reg-worker.mjs) and the bridge then runs its usual code on the results, so counters, replacements and stops are as without it; K a whole number of at least 1, unset or 1 = one after the other; not with --matrix=fd-forward/fd-central or --pieces-by. The value is in out.settings.ias.regThreads; the diag file has secPool and secLsPool.
 //   ias-procs=K: the pieces of a request are integrated by IAS15 in a pool of K processes of src/ias/ias-bridge.py (the end states and the analysis are the same numbers, in the same order); K a whole number of at least 1, unset or 1 = one after the other in one process. The value is in out.settings.ias.procs.
+//   On Windows K is at most 61 (the limit of ProcessPoolExecutor there), for --ias-procs and for --fast; a larger K is refused (exit 2).
 //   fast=K: the same as --ls-reuse --mono-threads=K --reg-threads=K --ias-procs=K (K a whole number of at least 1); it cannot be given together with any of those four, with --natural, --matrix=fd-forward/fd-central or --pieces-by. --perp-cap is not part of it. 4, the number of performance cores, was the best value measured on the machine of the runs, and 8 was slower. The value is in out.settings.fast, and the four settings are in out.settings as with the separate options.
 //   natural=DL: natural continuation in lam instead of the pseudo-arclength (lam fixed per step, Newton on F alone, first step DL in DIR, doubled after at most 3 iterations, halved on failure, ends below 1e-14); zeros of theta are not looked for.
 //   handover: hand the trace over to the 50 digit continuation where the double precision route has become slower than it. Rule, without wall time (tools/handover-rule.mjs): after at least 100 accepted steps
@@ -42,8 +43,10 @@
 //   At least 2 steps (--handover-steps, 20 by default, of --handover-dlam in lam, 1e-5, in the direction of the last step of lam) and a return test (the line through the first two
 //   solutions, evaluated at the lam of the last point, must lead back to that point) are needed, then the w1b witness of the last orbit is made from its exact start (tools/witness.py --exact-start). The witness is recorded
 //   (handover.witness, handover.witness_ok) but is not part of the hand-over decision. If there is no accepted point at least 1e-6 behind the last one with lam moving one way (lam turns, or the trace is shorter) there is no tangent and the hand-over fails.
-//   handover-conv=C: passed as --conv C to the two first re-closings and to tools/handover-continue.py (every 50 digit job); unset = no --conv (the convergence limit 1e-16 of reclose.py).
+//   handover-conv=C: passed as --conv C to the two first re-closings and to tools/handover-continue.py (every 50 digit job); unset = no --conv (the convergence limit 1e-16 of reclose.py). C must be a plain
+//   decimal number (^[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$, as reclose.py reads it) above 0 and at most 1e-12.
 //   handover-safe: passes --safe to tools/handover-continue.py (--floor-try --miss-norm --return-last --miss-return --edge-shrink, see its header); off by default.
+//   --handover-conv and --handover-safe without --handover are refused (exit 2), as are bad values; nothing is written then.
 //   The hand-over also starts at two stops of the trace, the triple-approach guard and "lost the family" (handoverAtStop of tools/handover-rule.mjs), from the last accepted step and the point of backIndex behind it (also with fewer
 //   than 100 accepted steps; with --guards=record there is no guard stop). The original stop reason is then in OUT.json "whyBeforeHandover" and in handover.stop_before, handover.trigger is 'stop' (else 'rule'); the stop reason and the exit
 //   status are as for the rule: "handed over to the 50 digit continuation" (exit 0) or "hand-over failed: <reason>" (exit 1; also if there was no accepted step before the stop: no tangent). The other stops end as before.
@@ -52,6 +55,7 @@
 //   and this route takes about 1.8 to 2.9 s per accepted step before the creep, so it makes 1e-7 per step at 3.5e-8 to 5.6e-8 per second; below about 1e-7 per step the 50 digit route is faster. Needs python with rebound and mpmath.
 //   newton-tol: settings.newton, the stopping tolerance of the corrector residual (1e-11 by default). The 279 components of every accepted step (u1, u2, t and the 23 node states) are written
 //   to OUT.json.nodes.jsonl, one line {step, z} per accepted step, unless --no-nodes is given.
+// A crash (an exception nobody catches, a BridgeError of the first closing of the start included) writes OUT.json.crash.json (what is known so far, the error, the points) and ends with exit status 3.
 import fs from 'fs';
 import { settings } from '../src/settings.js';
 import { startRecorder } from '../src/ias/recorder.js';
@@ -81,6 +85,8 @@ for (const [k, low] of Object.entries({ minutes: false, pieces: false, 'stop-bel
   if (typeof opt[k] !== 'string' || opt[k] === '' || !Number.isFinite(v) || (low ? v < 0 : v <= 0)) { console.error('--' + k + ' needs a number' + (low ? ' of at least 0' : ' above 0') + ', as --' + k + '=VALUE, not ' + (opt[k] === true ? 'nothing' : opt[k])); process.exit(2); }
 }
 if (opt['perp-cap'] !== undefined && Number(opt['perp-cap']) > 1) { console.error('--perp-cap needs a number above 0 and at most 1, not ' + opt['perp-cap']); process.exit(2); }
+if (opt['handover-conv'] !== undefined && !(/^[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/.test(opt['handover-conv']) && Number(opt['handover-conv']) <= 1e-12)) { console.error('--handover-conv needs a plain decimal number above 0 and at most 1e-12, not ' + opt['handover-conv']); process.exit(2); }
+for (const o of ['handover-conv', 'handover-safe']) if (opt[o] !== undefined && opt.handover === undefined) { console.error('--' + o + ' needs --handover'); process.exit(2); }
 if (opt['grow-iters'] !== undefined && !Number.isInteger(Number(opt['grow-iters']))) { console.error('--grow-iters needs a whole number, not ' + opt['grow-iters']); process.exit(2); }
 if (opt['stop-lam'] !== undefined && (typeof opt['stop-lam'] !== 'string' || opt['stop-lam'] === '' || !Number.isFinite(Number(opt['stop-lam'])))) { console.error('--stop-lam needs a number, as --stop-lam=VALUE, not ' + (opt['stop-lam'] === true ? 'nothing' : opt['stop-lam'])); process.exit(2); }
 if (!Number.isInteger(pieces) || pieces < 1 || pieces > 250) { console.error('--pieces needs a whole number from 1 to 250 (the shared buffer of src/ias/bridge.js holds 24 numbers per piece), not ' + opt.pieces); process.exit(2); }
@@ -104,13 +110,14 @@ if (opt['reg-threads'] !== undefined && opt.matrix !== undefined && opt.matrix !
 if (opt.fast !== undefined) {
   const K = Number(opt.fast);
   if (typeof opt.fast !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--fast needs a whole number of at least 1, as --fast=K, not ' + (opt.fast === true ? 'nothing' : opt.fast)); process.exit(2); }
+  if (process.platform === 'win32' && K > 61) { console.error('--fast=' + K + ': on Windows the pool of IAS15 processes (--ias-procs) holds at most 61 processes (ProcessPoolExecutor)'); process.exit(2); }
   for (const o of ['ls-reuse', 'mono-threads', 'reg-threads', 'ias-procs', 'natural', 'pieces-by']) if (opt[o] !== undefined) { console.error('--fast cannot be used together with --' + o + ' (--fast sets --ls-reuse, --mono-threads, --reg-threads and --ias-procs itself)'); process.exit(2); }
   if (opt.matrix === 'fd-forward' || opt.matrix === 'fd-central') { console.error('--fast cannot be used together with --matrix=' + opt.matrix); process.exit(2); }
   settings.fast = K; settings.lsReuse = true; settings.monoThreads = K; settings.ias.regThreads = K; settings.ias.procs = K;
 }
 if (opt['mono-threads'] !== undefined) { const K = Number(opt['mono-threads']); if (typeof opt['mono-threads'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--mono-threads needs a whole number of at least 1, as --mono-threads=K, not ' + (opt['mono-threads'] === true ? 'nothing' : opt['mono-threads'])); process.exit(2); } settings.monoThreads = K; }
 if (opt['reg-threads'] !== undefined) { const K = Number(opt['reg-threads']); if (typeof opt['reg-threads'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--reg-threads needs a whole number of at least 1, as --reg-threads=K, not ' + (opt['reg-threads'] === true ? 'nothing' : opt['reg-threads'])); process.exit(2); } settings.ias.regThreads = K; }
-if (opt['ias-procs'] !== undefined) { const K = Number(opt['ias-procs']); if (typeof opt['ias-procs'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--ias-procs needs a whole number of at least 1, as --ias-procs=K, not ' + (opt['ias-procs'] === true ? 'nothing' : opt['ias-procs'])); process.exit(2); } settings.ias.procs = K; }
+if (opt['ias-procs'] !== undefined) { const K = Number(opt['ias-procs']); if (typeof opt['ias-procs'] !== 'string' || !Number.isInteger(K) || K < 1) { console.error('--ias-procs needs a whole number of at least 1, as --ias-procs=K, not ' + (opt['ias-procs'] === true ? 'nothing' : opt['ias-procs'])); process.exit(2); } if (process.platform === 'win32' && K > 61) { console.error('--ias-procs=' + K + ': on Windows the pool of IAS15 processes holds at most 61 processes (ProcessPoolExecutor)'); process.exit(2); } settings.ias.procs = K; }
 if (opt['ls-reuse'] !== undefined) { if (opt['ls-reuse'] !== true) { console.error('--ls-reuse takes no value'); process.exit(2); } settings.lsReuse = true; }
 if (opt.pieces !== undefined && pieces > 64) for (const o of ['mono-threads', 'fast']) if (opt[o] !== undefined) { console.error('--' + o + ' cannot be used together with --pieces above 64 (the buffers of src/mono-pool.js hold 64 pieces), not --pieces=' + opt.pieces); process.exit(2); }
 if (opt.natural !== undefined) for (const o of ['ls-reuse', 'grow-iters', 'grow-factor', 'stop-lam']) if (opt[o] !== undefined) { console.error('--' + o + ' cannot be used together with --natural (huntNatural does not read it)'); process.exit(2); }
@@ -127,19 +134,23 @@ if (handover && !(hBelow > 0 && Number.isInteger(hSteps) && hSteps >= 2 && hDlam
 const recorder = startRecorder(outFile);
 const nodesFd = opt['no-nodes'] ? null : fs.openSync(outFile + '.nodes.jsonl', 'wx');
 const start = { u1: +u1A, u2: +u2A, lam: +lamA, t: +tA };
+// the crash handler is there before the first closing: a BridgeError of closePerpMS ends as a later crash does (OUT.json.crash.json, exit 3); until out is built it writes what is known then
+let crashOut = { label: opt.label || null, dir, start, shifted: null, minutesLimit: minutes, settings: { ...settings, observer: undefined }, crashedIn: 'the first closing of the start (closePerpMS)' };
+const pts = [];
+process.on('uncaughtException', (e) => { try { fs.writeFileSync(outFile + '.crash.json', JSON.stringify({ ...crashOut, ...(crashOut.crashedIn ? { bridge: { ...iasStats } } : {}), error: String(e && e.stack), points: pts })); recorder.flush(); } catch (e2) {} process.exit(3); });
 const s0 = closePerpMS(start.u1, start.u2, start.lam, start.t, { m: pieces });
 const shifted = s0 && s0.res < 1e-9 ? { u1: s0.u1, u2: s0.u2, lam: s0.lam, t: s0.t, m: pieces } : null;
 const out = { label: opt.label || null, dir, start, shifted, minutesLimit: minutes, settings: { ...settings, observer: undefined }, options: { pieces, maxDist, stopBelow, stopAfter, ...(opt['stop-lam'] !== undefined ? { stopLam: Number(opt['stop-lam']) } : {}), ...(opt.natural !== undefined ? { natural: Number(opt.natural), note: 'natural continuation in lam, zeros of theta are not looked for' } : {}), ...(hConv !== null ? { handoverConv: hConv } : {}), ...(hSafe ? { handoverSafe: true } : {}) } };
+crashOut = out;
 if (!shifted) {
   out.error = 'could not move the start onto the family'; out.bridge = { ...iasStats }; out.guards = { ...gstats, tripList: gstats.tripList }; out.lastBridgeReason = iasStats.lastReason;
   fs.writeFileSync(outFile, JSON.stringify(out));
   console.error(out.error + '; bridge: ' + iasStats.calls + ' calls, ' + iasStats.errors + ' errors, ' + iasStats.timeouts + ' timeouts, last reason: ' + (iasStats.lastReason || 'none') + '; guard trips ' + gstats.tripsTotal);
   process.exit(1);
 }
-const pts = [], keys = [];
+const keys = [];
 const unrec = []; out.unrec = unrec;   // accepted steps that are not recorded as points
 const lsign = []; out.L_sign_changes = lsign; let lastL = null;   // the two accepted steps around every change of sign of L*
-process.on('uncaughtException', (e) => { try { fs.writeFileSync(outFile + '.crash.json', JSON.stringify({ ...out, error: String(e && e.stack), points: pts })); recorder.flush(); } catch (e2) {} process.exit(3); });
 let stop = null;
 let traceStop = null, r;
 const traceBase = (step, lam, th, h, it, Y) => {

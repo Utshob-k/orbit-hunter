@@ -7,11 +7,12 @@
 //   steps, by step number) are compared with the first accepted steps of the stored trace: step numbers, and lam, u1, u2, t exactly and as the largest relative difference. For t35 - the start is the replay start of
 //   data/deep/t35m-replay.json (test/replay.test.js uses the same one) and the guard ratio is 400, as in the table.
 //   PASS: all compared steps have the stored step numbers, the largest relative difference is below 1e-9 (the line says "bit-identical" if every value is equal), and, without --stop-after, the run has as many accepted steps as the stored trace and stops for the same
-//   reason (with --stop-after=N it must stop at N recorded points or where the stored trace stops; with --handover it must have handed over, or have been stopped where the stored trace stops and then tried the hand-over there: whyBeforeHandover equal to the stored reason and as many accepted steps as the stored trace). OUT.json must be new (a relative OUT is taken relative to the folder the command is run in). Takes seconds to minutes (t62 -: 45 minutes).
+//   reason (with --stop-after=N it must stop at N recorded points or where the stored trace stops; with --handover it must have handed over at a step inside the stored trace (no more accepted steps than the stored trace), or have stopped with the stored reason at the stored length, or have been stopped where the stored trace stops and then tried the hand-over there: whyBeforeHandover equal to the stored reason and as many accepted steps as the stored trace; the verdict is traceVerdict of tools/trace-verdict.mjs). OUT.json must be new (a relative OUT is taken relative to the folder the command is run in). Takes seconds to minutes (t62 -: 45 minutes).
 import fs from 'fs';
 import path from 'path';
 import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
+import { traceVerdict } from './trace-verdict.mjs';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const [label, outArg, ...rest] = process.argv.slice(2);
@@ -49,13 +50,12 @@ console.log(`stored ${label}: ${ref.length} accepted steps (${stored.points.leng
 console.log(`bit-identical (lam, u1, u2, t): ${equal} of ${n}; step numbers that differ: ${stepDiff}; steps without values: ${missing}; largest relative difference ${maxRel.toExponential(2)}`);
 const stopOpt = rest.find((a) => a.startsWith('--stop-after=')), stopAfter = stopOpt ? Number(stopOpt.slice(stopOpt.indexOf('=') + 1)) : null;
 // without --stop-after the run must have as many accepted steps as the stored trace and stop for the same reason (a run that ends early, by the time limit on a slower machine or by a timeout, is a FAIL);
-// with --stop-after N it must have stopped at N recorded points, or where the stored trace stops; with --handover it must have handed over, or (the hand-over also starts at the guard and the lost-family stops) the trace must have been
-// reproduced up to the stored stop (whyBeforeHandover equal to the stored reason, and as many accepted steps as the stored trace) and the hand-over tried there, whatever its result
+// with --stop-after N it must have stopped at N recorded points, or where the stored trace stops; with --handover it must have handed over inside the stored trace, or stopped with the stored reason at the
+// stored length, or (the hand-over also starts at the guard and the lost-family stops) the trace must have been reproduced up to the stored stop (whyBeforeHandover equal to the stored reason, and as many
+// accepted steps as the stored trace) and the hand-over tried there, whatever its result (tools/trace-verdict.mjs)
 const handover = rest.includes('--handover');   // the run ends where the rule fires; the hand-over must have worked
-const lenOk = stopAfter === null && !handover ? got.length === ref.length : true;
-const whyOk = handover ? (res.why === 'handed over to the 50 digit continuation' || res.why === stored.why || (res.whyBeforeHandover === stored.why && got.length === ref.length)) : stopAfter === null ? res.why === stored.why : (res.why === 'stopped after ' + stopAfter + ' recorded points' || res.why === stored.why);
+const { lenOk, whyOk, ok } = traceVerdict({ n, stepDiff, missing, maxRel, gotLength: got.length, refLength: ref.length, why: res.why, whyBeforeHandover: res.whyBeforeHandover, storedWhy: stored.why, stopAfter, handover });
 if (!lenOk) console.log(`the run has ${got.length} accepted steps, the stored trace ${ref.length}`);
 if (!whyOk) console.log(`the run stopped: ${res.why}; the stored trace: ${stored.why}`);
-const ok = n > 0 && stepDiff === 0 && missing === 0 && maxRel < 1e-9 && lenOk && whyOk;
 console.log(`${ok ? 'PASS' : 'FAIL'}  the accepted steps follow the stored trace (n = ${n})${equal === n && n > 0 ? ', bit-identical' : ''}   time ${((Date.now() - t0) / 1000).toFixed(0)} s`);
 process.exit(ok ? 0 : 1);
