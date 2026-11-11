@@ -42,8 +42,8 @@ depends on its step rules. Davoust and Broucke 1982 followed the satellites of R
 E, Corrections, 2026-10-10) and the atlas lists satellites of the BHH family coded R or A (family bhhsat). For n = 5, 6, 8 and 9 to 12 none of the
 sources that could be read has these orbits with rotation 0 (the papers named above, the atlas, Broucke 1975, Davoust and Broucke 1982); a rotating
 member of the satellite curve for n = 39 is in a source that was added later, see the paragraph below. The review "A review on periodic orbits of the
-general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi 10.1007/s11433-024-2686-6) could not be
-read (it is not open access and there is no preprint), so "not found" is all that can be said.
+general planar three-body problem" of Li and Liao (Sci. China Phys. Mech. Astron. 68(8), 289501, 2025, doi 10.1007/s11433-024-2686-6) was read
+later, in part (it changed none of the numbers); "not found" is all that can be said.
 
 **A rotating member of the satellite curve for n = 39 was found before (2026-10-11).** The sentence above was incomplete. The master thesis of M.
 Janković (Belgrade 2016, appendix A, Table 3; it is not part of this repository and not public; a copy was provided by the author, and the thesis is cited with her permission) gives six orbits of a preliminary search,
@@ -79,8 +79,8 @@ settings) closes them to 2.6e-14 to 9.5e-14 from the double precision values and
 the digits of the entry); the atlas lists its satellites of the BHH family, this one as R7 1/1, from its own search of September 2026 and cites no
 paper. The orbits for n = 9, 10, 11 and 12 match nothing in the sources checked so far: none of my 85 and 17, the 99 satellites of the CPC table, the
 9 rows of Davoust and Broucke with a rotation angle of 2 pi, the orbits of Hénon 1976, the 18 rows of Li et al. 2025 or the atlas (T* and L* to 1e-5
-and to 5e-3, repeats up to 12 either way, the same alignments where the list has them; fixed before the comparison). The review of Li and Liao could
-not be read, and this says nothing about whether they are known.
+and to 5e-3, repeats up to 12 either way, the same alignments where the list has them; fixed before the comparison). This says nothing about
+whether they are known (the review of Li and Liao was read later, in part; it changed none of the numbers).
 
 **Satellites with k > 1.** The 21 members with nu = k/n and k > 1 were followed in the same way (`tools/branch-point.mjs` with `--k=K`; the upper nu
 crosses the same k/n twice for 3/7, 4/9, 5/11 and 5/12, so the theta is in the name of the file). At all 21 the second smallest singular value is
@@ -115,8 +115,8 @@ stable. So the sequence of linearly stable orbits ends at n = 12. The closure of
 all); refined to 30 digits the closure of the full period on the stored values is 4e-25 to 1.6e-23 and REBOUND closes them to 1.6e-14 to 6e-13 from
 the double precision values (`data/satellite-candidates.json`, `data/satellite-check.json`). None of the 24 orbits matches the atlas, the CPC table,
 my 102, the periodic rows of Davoust and Broucke, Hénon 1976 or the rows of Li et al. (hits at 1e-5 with the alignments, repeats up to 12, pairs at
-the same period by the start values, `tools/satellite-candidates.mjs`): not found in the sources checked, and the review of Li and Liao could not be
-read. The predictions written down before the runs: the T* of the zero from the member (T*(n) = n T*_R(n) - delta(n), delta = a + b / n fitted on n =
+the same period by the start values, `tools/satellite-candidates.mjs`): not found in the sources checked (the review of Li and Liao was read later, in
+part; it changed none of the numbers). The predictions written down before the runs: the T* of the zero from the member (T*(n) = n T*_R(n) - delta(n), delta = a + b / n fitted on n =
 8 to 20) holds to 0.0031 for all n = 13 to 36 (the differences are -0.0013 to +0.0031, for n = 21 to 36 +0.0011 to +0.0031; a version with delta
 linear in n is off by up to 0.02), while the extrapolation of the steps in T* of n = 5 to 12 fails from n = 18; the multiplier 7.621 + 0.85 (n - 20)
 holds within 5 % up to n = 26 and fails from n = 27 (+5.9 % at n = 27, +16 % at n = 36); the closest approach of the zero in the units of its start

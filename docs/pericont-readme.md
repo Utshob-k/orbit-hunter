@@ -40,7 +40,7 @@ npm run test:ias         # the tests of the ias route, 4 to 15 minutes
 node tools/deep-sample.mjs   # the sample run: a short trace of the family t35 -, its witnesses and a summary, 5 to 15 minutes
 ```
 
-`npm test` and `npm run test:ias` print one PASS or FAIL line per check and exit with 0 if there is no FAIL. The PASS or FAIL of the sample run compares numbers with tolerances (`data/deep/sample/expected-summary.json`). Run times depend on the machine; the longest tests of `test:ias` are `test/fast-option.test.js` (the stored trace of t35 - run twice, without and with `--fast=2`), `test/replay.test.js` and `test/reclose.test.js` (the 50 digit re-closing), about 2 to 4 minutes each on the machine of the stored runs.
+`npm test` and `npm run test:ias` print one PASS or FAIL line per check and exit with 0 if there is no FAIL. The PASS or FAIL of the sample run compares numbers with tolerances (`data/deep/sample/expected-summary.json`). Run times depend on the machine; the longest tests of `test:ias` are `test/fast-option.test.js` (the first 5 recorded points of the stored trace of t35 -, run twice, without and with `--fast=2`), `test/replay.test.js` and `test/reclose.test.js` (the 50 digit re-closing), about 2 to 4.5 minutes each on the machine of the stored runs.
 
 ## What is in the package
 
