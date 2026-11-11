@@ -1,10 +1,10 @@
 # Orbit Hunter
 
-Version 0.3.0 added PeriCont (the ias route): continuation of families of periodic orbits through close approaches of two bodies, with multiple precision witnesses. Version 0.4.0 adds options that make its driver faster or change its step control (all off by default), a stricter hand-over to the 50 digit continuation and fixes from reviews ([CHANGELOG.md](CHANGELOG.md), [docs/deep.md](docs/deep.md)).
-See [The ias route](#the-ias-route-pericont-version-040).
-
 A search for periodic orbits of the planar three-body problem with equal masses and non-zero angular momentum. A GPU does the rough search in the
 browser (WebGPU). Double precision code on the CPU closes and checks every candidate.
+
+This is version 0.4.0. Version 0.3.0 added PeriCont (the ias route): continuation of families of periodic orbits through close approaches of two bodies, with multiple precision witnesses. Version 0.4.0 adds options that make its driver faster or change its step control (all off by default), a stricter hand-over to the 50 digit continuation and fixes from reviews ([CHANGELOG.md](CHANGELOG.md), [docs/deep.md](docs/deep.md)).
+See [The ias route](#the-ias-route-pericont-version-040).
 
 ## Where it stands
 
@@ -60,40 +60,60 @@ One of the 77 orbits (T* = 33.745) lies on Broucke's family R. Satellites leave 
 
 The orbits for n = 5 to 12 are all linearly stable; from n = 13 on they are unstable, so the sequence of stable orbits ends at n = 12. The satellite
 curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refined to 30 digits, unstable). "Not found in the sources checked" says
-nothing about whether an orbit is known. The thesis of Janković (2016) has a rotating member of the satellite curve for n = 39 and, among the six
+nothing about whether an orbit is known.
+
+The thesis of Janković (2016) has a rotating member of the satellite curve for n = 39 and, among the six
 orbits of its preliminary search, a 45 fold repeat of an R orbit; k = 12, 58 and 84 of that search are undecided (details in
 `docs/r-family-satellites.md`). The orbits with rotation 0 and the sequence for n = 5 to 56 were not found in the sources checked. The 2025 review of
-Li and Liao was read later, in part; it changed none of the numbers. Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided,
-not results. Satellites with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, a
+Li and Liao was read later, in part; it changed none of the numbers.
+
+Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided,
+not results.
+
+Satellites with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, a
 different orbit from t41 and t42, see docs; 37.624249; 51.383330) match nothing in the sources checked, three of the 77 (t37, t42, t59: rows 37, 42
 and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 of the zeros are not established. Details:
 [docs/r-family-satellites.md](docs/r-family-satellites.md).
 
+### Stability and the second class of satellites
+
 Since version 0.2.28: the linear stability of the satellites for n = 5 to 12 was computed again in multiple precision, with the time shift and the rotation taken
 out analytically (the four nontrivial multipliers are on the unit circle within 3.6e-24 for the 30 digit orbits); from n = 13 on the orbits are unstable: the
 largest multiplier is real and negative for n = 13 to 56 (the sign was computed in multiple precision, tier A, for n = 13 to 20 in version 0.2.29, and in double precision, by the reduction, for n = 21 to 56 in version 0.2.32) and grows in modulus from 1.71 (n = 13) to 53.2 (n = 56). The second
-pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter). For n = 5 to 12 a second
-family of satellites leaves the same branch points on the same side, in the class of orbits that are symmetric under a second reversing symmetry of R (the
+pair of multipliers reaches -1 between n = 12 and 13 (n is a label, not a parameter).
+
+For n = 5 to 12 a second family of satellites leaves the same branch points on the same side, in the class of orbits that are symmetric under a second reversing symmetry of R (the
 isosceles class, `src/iso.js`). Its end orbits are unstable (a real pair of multipliers of 1.025 to 1.062) next to the stable orbit of the first class, so each
 n has a stable and an unstable orbit; T* of the unstable one is larger by 3e-7 to 1.1e-5 and L* smaller by 6e-5 to 1.7e-3. This is a numerical result. It
 looks like the pair of an elliptic and a hyperbolic orbit that a generic period-k bifurcation of a two dimensional area preserving map gives (Meyer 1970), but
 that theorem is for maps without symmetry on a two dimensional manifold and does not apply directly here (four dimensions, reversible). None of the eight orbits
-matches an entry of the atlas list (415 entries, the copy of 2026-10-09) or a row of the CPC tables at 1e-5: not found in the sources checked. The family R was
-also followed beyond the end of its stored trace (L* up to 7.25; the end of the stored trace was a limit of the tracing code); the crossings of nu = 1/n for n = 59
-to 439 along it are brackets between consecutive points and not computed branch points, and no satellite was computed beyond n = 56. The relation of Hénon
+matches an entry of the atlas list (415 entries, the copy of 2026-10-09) or a row of the CPC tables at 1e-5: not found in the sources checked.
+
+The family R was also followed beyond the end of its stored trace (L* up to 7.25; the end of the stored trace was a limit of the tracing code); the crossings of nu = 1/n for n = 59
+to 439 along it are brackets between consecutive points and not computed branch points, and no satellite was computed beyond n = 56.
+
+The relation of Hénon
 between the period and the angular momentum (dT* = -(L*/2) dtheta with theta = -Phi) is checked on the stored curves. Details, files and commands:
 [docs/r-family-satellites.md](docs/r-family-satellites.md), [docs/reproducing.md](docs/reproducing.md), [data/README.md](data/README.md).
+
+### The second class (class I) for n = 13 to 20
 
 Since version 0.2.29: the satellites of class I were followed for n = 13 to 20 as well, and the multipliers of the class C orbits for n = 13 to 20 were computed in multiple
 precision (tier A; rules and predictions written before the runs: `docs/rules/rules-class-i-13-20.txt`, results: `docs/rules/results-class-i-13-20.txt`). For every n the
 member is found, the matrix of the n fold repeat has a two dimensional null space and the bifurcation equation two real roots, as for n = 5 to 12; the curve of the other
-root reaches a rotation 0 in both senses for n = 13 and 14 and in one sense for n = 15 to 20 (in the stored files; the other sense stopped by a "collapse of the step", which was the bound on t in the line search of the corrector and not a property of the curve: with the code of version 0.3.0 it reaches the same orbit, `data/rerun-0.3.0/`). The 30
-digit end orbits are established (closure 5.7e-25 to 3.6e-24, REBOUND after one period 9e-15 to 3e-13), have an isosceles state and no collinear one (the class C orbit
-the reverse), and differ from the class C orbit of the same n by 3.3e-7 to 3.6e-7 in T* and 7.2e-4 to 1.07e-3 in L* (relative). For n >= 13 both orbits are unstable, so there is no
+root reaches a rotation 0 in both senses for n = 13 and 14 and in one sense for n = 15 to 20 (in the stored files; the other sense stopped by a "collapse of the step", which was the bound on t in the line search of the corrector and not a property of the curve: with the code of version 0.3.0 it reaches the same orbit, `data/rerun-0.3.0/`).
+
+The 30 digit end orbits are established (closure 5.7e-25 to 3.6e-24, REBOUND after one period 9e-15 to 3e-13), have an isosceles state and no collinear one (the class C orbit
+the reverse), and differ from the class C orbit of the same n by 3.3e-7 to 3.6e-7 in T* and 7.2e-4 to 1.07e-3 in L* (relative).
+
+For n >= 13 both orbits are unstable, so there is no
 pair of a stable and an unstable orbit there: the class C orbit has a real negative pair of multipliers (modulus 1.712 at n = 13 to 7.621 at n = 20) and an elliptic pair with a
-small angle (0.0082 to 0.0071 turns); the class I orbit has a real positive pair (1.053 to 1.046), a real negative pair (2.164 to 8.426) and no pair on the unit circle. None of the 16
-end orbits of class I (n = 5 to 20) matches an atlas entry or a CPC row at 1e-5: not found in the sources checked (for n = 17 two CPC rows are within 5e-3 in (T*, L*) at twice T*,
-a coincidence of two numbers, see the results file). The summary table is printed by `node tools/class-i-summary.mjs`; the supplement `data/supplement-initial-conditions.json`
+small angle (0.0082 to 0.0071 turns); the class I orbit has a real positive pair (1.053 to 1.046), a real negative pair (2.164 to 8.426) and no pair on the unit circle.
+
+None of the 16 end orbits of class I (n = 5 to 20) matches an atlas entry or a CPC row at 1e-5: not found in the sources checked (for n = 17 two CPC rows are within 5e-3 in (T*, L*) at twice T*,
+a coincidence of two numbers, see the results file).
+
+The summary table is printed by `node tools/class-i-summary.mjs`; the supplement `data/supplement-initial-conditions.json`
 has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower nu, orbits without these symmetries.
 
 ## Install and reproduce
@@ -119,9 +139,9 @@ Which integrator gives which number: the corrector (the multiple shooting) takes
 
 Two limits to read first: a stored point can be off the orbit by more than the corrector tolerance (piece 18 of an earlier point of t35 - was wrong by 1.18e-7 while the residual of the corrector was 6.7e-14), and 15 stored points of t28 - and t81 + fail the witness closure; both are described in the section "The ias route" of [docs/methods-and-limits.md](docs/methods-and-limits.md).
 
-The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository was written for Node 18 or newer (no run with Node 18 is recorded; the tests are run with v24.15.0).
+The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`, and it was tested with Node v24.15.0 only.
 
-Python 3.14 with REBOUND 5.2.2, mpmath 1.4.1 and numpy 2.5.3 in a venv in the top folder of the repository (Python 3.15 does not build REBOUND 5.2.2; on Windows `python` may be 3.15, so name the version). `ORBIT_PYTHON` is the python of that venv; the node commands use it, and the python tools can be run with it directly.
+Use Python 3.14 with REBOUND 5.2.2, mpmath 1.4.1 and numpy 2.5.3 in a venv in the top folder of the repository (Python 3.15 does not build REBOUND 5.2.2; on Windows `python` may be 3.15, so name the version). `ORBIT_PYTHON` is the python of that venv; the node commands use it, and the python tools can be run with it directly.
 
 Windows, PowerShell:
 

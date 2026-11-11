@@ -2,6 +2,8 @@
 
 PeriCont follows families of relative periodic orbits of the planar equal-mass three-body problem (the perpendicular start) through close approaches of two bodies, to witnessed pair distances of 7.3e-10 to 1.6e-8 on four families, where an ordinary Dormand-Prince integrator does not follow. This folder is the program package of version 0.4.0 of Orbit Hunter: the code of the ias route (`src/ias/` and the modules it uses), the drivers and checking tools in `tools/`, the tests in `test/`, and the data that the tests and the sample run read (`data/deep/` and six files of `data/`). The rest of Orbit Hunter (the search, the R family and its satellites, the other data) is in the repository https://github.com/Utshob-k/orbit-hunter and is not in this package.
 
+New in version 0.4.0: options that make the driver faster or change its step control (all off by default), a stricter hand-over to the 50 digit continuation and fixes from reviews (`CHANGELOG.md`, `docs/deep.md`).
+
 ## Install
 
 Node version: the ias route was tested with Node v24.15.0 only. There is nothing to install for the JavaScript code. The ias route needs python with `rebound` and `mpmath`: Python 3.14 with REBOUND 5.2.2, mpmath 1.4.1 and numpy 2.5.3, in a venv in this folder (Python 3.15 does not build REBOUND 5.2.2; on Windows `python` may be 3.15, so name the version). `ORBIT_PYTHON` is the python of that venv; the node commands use it.
