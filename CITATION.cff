@@ -1,16 +1,16 @@
 cff-version: 1.2.0
 message: "If you use this code or these orbits, please cite it like this."
-title: "Orbit Hunter 0.3.0, with PeriCont: continuation of relative periodic orbits of the planar equal-mass three-body problem through close two-body approaches"
+title: "Orbit Hunter 0.4.0, with PeriCont: continuation of relative periodic orbits of the planar equal-mass three-body problem through close two-body approaches"
 authors:
   - given-names: Utshob
     family-names: Kandel
-abstract: "Search for periodic orbits of the planar equal-mass three-body problem. Version 0.3.0 adds PeriCont, the continuation of families of relative periodic orbits through close two-body approaches."
+abstract: "Search for periodic orbits of the planar equal-mass three-body problem. Version 0.3.0 added PeriCont, the continuation of families of relative periodic orbits through close two-body approaches; version 0.4.0 adds options that make its driver faster or change its step control (all off by default), a stricter hand-over to the 50 digit continuation and fixes from reviews."
 repository-code: "https://github.com/Utshob-k/orbit-hunter"
 license:
   - MIT
   - CC-BY-4.0
-version: 0.3.0
-date-released: 2026-11-02
+version: 0.4.0
+date-released: TAGDATE
 keywords:
   - three-body problem
   - periodic orbits

@@ -1,7 +1,7 @@
 # Orbit Hunter
 
-Version 0.3.0 adds PeriCont (the ias route): continuation of families of periodic orbits through close approaches of two bodies, with multiple precision witnesses.
-See [The ias route](#the-ias-route-pericont-version-030).
+Version 0.3.0 added PeriCont (the ias route): continuation of families of periodic orbits through close approaches of two bodies, with multiple precision witnesses. Version 0.4.0 adds options that make its driver faster or change its step control (all off by default), a stricter hand-over to the 50 digit continuation and fixes from reviews ([CHANGELOG.md](CHANGELOG.md), [docs/deep.md](docs/deep.md)).
+See [The ias route](#the-ias-route-pericont-version-040).
 
 A search for periodic orbits of the planar three-body problem with equal masses and non-zero angular momentum. A GPU does the rough search in the
 browser (WebGPU). Double precision code on the CPU closes and checks every candidate.
@@ -20,8 +20,8 @@ The code reproduces published orbits to about nine digits. The perpendicular sea
 
 Three families were tested as well: Hénon's family (the BHH family), the rotating eights (a choreography test) and IA-3 (in the range of the Li et al. rows).
 
-Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 are not read yet. The rotating-eight branch of the figure-eight, which both papers are about,
-was traced and compared (see [docs/results.md](docs/results.md)). The 2025 review of Li and Liao could not be read.
+Nauenberg 2001, Chenciner, Fejoz and Montgomery 2005 and the 2025 review of Li and Liao were read later (the last two in part); reading them
+changed none of the numbers. The rotating-eight branch of the figure-eight, which the first two are about, was traced and compared (see [docs/results.md](docs/results.md)).
 
 ## The numbers
 
@@ -30,7 +30,7 @@ was traced and compared (see [docs/results.md](docs/results.md)). The 2025 revie
 | perpendicular search | 85 | 6 are atlas orbits, 2 have L = 0, 77 match none of the sources above |
 | arclength list | 17 | reached by continuation from the CPC satellites: 2 are atlas orbits, 1 (a08) is unresolved because it is close to Sheen's Three ovals, a16 is the shortest orbit of t80, the other 13 match none of the sources |
 
-Since a16 is the shortest orbit of t80, the two lists hold 100 distinct orbits, 91 of them unmatched. Whether they are already published is open.
+Since a00 is t02 and a16 is the shortest orbit of t80, the two lists hold 100 distinct orbits, 91 of them unmatched. Whether they are already published is open.
 
 Two of the 77 lie on published families (T* = 11.652 and 33.745) and six lie on satellites of Broucke's R family (see below). So "match none" means
 not a listed orbit. It does not mean unrelated to published ones.
@@ -63,7 +63,7 @@ curves of n = 5 and 6 each have a second orbit (T* = 17.7208 and 19.6472, refine
 nothing about whether an orbit is known. The thesis of Janković (2016) has a rotating member of the satellite curve for n = 39 and, among the six
 orbits of its preliminary search, a 45 fold repeat of an R orbit; k = 12, 58 and 84 of that search are undecided (details in
 `docs/r-family-satellites.md`). The orbits with rotation 0 and the sequence for n = 5 to 56 were not found in the sources checked. The 2025 review of
-Li and Liao could not be read. Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided,
+Li and Liao was read later, in part; it changed none of the numbers. Several continuations stopped at a limit of the method (close approach, step size, step count); those are undecided,
 not results. Satellites with a rotation number k/n, k > 1, were followed too (21 more members): three more linearly stable orbits (T* = 33.745149, a
 different orbit from t41 and t42, see docs; 37.624249; 51.383330) match nothing in the sources checked, three of the 77 (t37, t42, t59: rows 37, 42
 and 59 of data/orbit-table.csv, counting from 0) lie on such satellites, and 12 of the zeros are not established. Details:
@@ -98,10 +98,10 @@ has the 52 orbits of class C and the 16 of class I. Not done: n >= 21, the lower
 
 ## Install and reproduce
 
-Nothing to install for the JavaScript code. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository needs Node 18 or newer. Some Python scripts need `rebound`, `numpy` or `mpmath` (the ias route below: exact commands there).
+Nothing to install for the JavaScript code. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository was written for Node 18 or newer (no run with Node 18 is recorded; the tests are run with v24.15.0). Some Python scripts need `rebound`, `numpy` or `mpmath` (the ias route below: exact commands there).
 
 ```
-npm test                              # the tests of the default route (Dormand-Prince), about 20 seconds
+npm test                              # the tests of the default route (Dormand-Prince), about 10 seconds
 python -m http.server                 # then open http://localhost:8000 (needs WebGPU)
 node tools/nu-map.mjs                 # the 41 places where satellites can leave the R family
 node tools/branch-summary.mjs         # how every satellite continuation ended
@@ -111,15 +111,15 @@ node tools/tables.mjs                 # Tables 1 and 2 of the satellites of R (m
 
 The scripts behind the numbers are in `tools/`. How to rerun them: [docs/reproducing.md](docs/reproducing.md).
 
-## The ias route (PeriCont, version 0.3.0)
+## The ias route (PeriCont, version 0.4.0)
 
-This close-approach route is called PeriCont (version 0.3.0); in the code and in the settings it is the ias route. It follows the families of the perpendicular start through close approaches of two bodies, to witnessed pair distances of 7.320e-10, 1.907e-9, 8.573e-9 and 1.611e-8 on four families (stored parabolic estimates to four digits; the osculating pericentre at the closest sample is 7.319e-10 for t35 - and the same four digits for the other three; `data/deep/extra/pericentres.json`), where the Dormand-Prince code of `src/physics.js` does not follow.
+This close-approach route is called PeriCont (version 0.4.0); in the code and in the settings it is the ias route. It follows the families of the perpendicular start through close approaches of two bodies, to witnessed pair distances of 7.320e-10, 1.907e-9, 8.573e-9 and 1.611e-8 on four families (stored parabolic estimates to four digits; the osculating pericentre at the closest sample is 7.319e-10 for t35 - and the same four digits for the other three; `data/deep/extra/pericentres.json`), where the Dormand-Prince code of `src/physics.js` does not follow.
 
 Which integrator gives which number: the corrector (the multiple shooting) takes the end state of every piece from REBOUND IAS15, and the pieces with a close pair are recomputed with the regularised integrator `src/ias/reg.js`; the rotation angle theta of a point is made from these end states. The numbers recorded for every point of a trace, T*, L*, the closest approach (`minDist`) and the closure, and for every fifth point the syzygy word and `maxMod`, come from the Dormand-Prince code (`perpInfo` integrates the whole orbit), and so do the 12 x 12 matrices of the pieces that are neither flagged nor replaced by the cross-check. An accepted step is unrecorded when that integration exceeds its step limit, which is why the recording can differ between machines. The points of a trace are checked afterwards with a multiple precision flow (`tools/witness.py`) that uses none of this code. The smallest witnessed value of the trace of t35 - is 7.320e-10 (accepted step 10); the re-closed midpoint between steps 10 and 11 gives 6.562e-11, which is below the range of the witness and is not witnessed.
 
 Two limits to read first: a stored point can be off the orbit by more than the corrector tolerance (piece 18 of an earlier point of t35 - was wrong by 1.18e-7 while the residual of the corrector was 6.7e-14), and 15 stored points of t28 - and t81 + fail the witness closure; both are described in the section "The ias route" of [docs/methods-and-limits.md](docs/methods-and-limits.md).
 
-The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository needs Node 18 or newer.
+The route is off by default (`npm test` does not use it); `ORBIT_INTEGRATOR=ias` or `settings.integrator = 'ias'` turns it on. It needs python with `rebound` and `mpmath`. Node version: the ias route (PeriCont) was tested with Node v24.15.0 only; the rest of the repository was written for Node 18 or newer (no run with Node 18 is recorded; the tests are run with v24.15.0).
 
 Python 3.14 with REBOUND 5.2.2, mpmath 1.4.1 and numpy 2.5.3 in a venv in the top folder of the repository (Python 3.15 does not build REBOUND 5.2.2; on Windows `python` may be 3.15, so name the version). `ORBIT_PYTHON` is the python of that venv; the node commands use it, and the python tools can be run with it directly.
 
@@ -151,10 +151,10 @@ Then, from the top folder:
 
 ```
 npm run test:ias                      # the tests of the ias route, 4 to 15 minutes
-node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 6 to 15 minutes (its PASS or FAIL compares numbers with tolerances, see docs/deep.md)
+node tools/deep-sample.mjs            # a short trace of the family t35 -, its witnesses and a summary, 5 to 15 minutes (its PASS or FAIL compares numbers with tolerances, see docs/deep.md)
 ```
 
-The files of PeriCont are listed in `docs/pericont-files.txt`; `node tools/pack-pericont.mjs OUTDIR` builds the package `pericont-0.3.0.zip` from that list (docs/deep.md, section "The package").
+The files of PeriCont are listed in `docs/pericont-files.txt`; `node tools/pack-pericont.mjs OUTDIR` builds the package `pericont-0.4.0.zip` from that list (docs/deep.md, section "The package").
 
 The stored traces and witnesses of the families t35 -, t44 -, t62 - and t72 - and the table of the 19 traces that were started are in `data/deep/`. What the route does not cover is in [docs/methods-and-limits.md](docs/methods-and-limits.md) (section "The ias route"), the commands and run times in [docs/deep.md](docs/deep.md).
 

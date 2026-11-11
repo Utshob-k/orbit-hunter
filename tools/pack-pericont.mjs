@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// builds the package of PeriCont (version 0.3.0) from the file list docs/pericont-files.txt: pericont-0.3.0.zip, with the top folder pericont-0.3.0/ inside.
+// builds the package of PeriCont (version 0.4.0) from the file list docs/pericont-files.txt: pericont-0.4.0.zip, with the top folder pericont-0.4.0/ inside.
 // node tools/pack-pericont.mjs OUTDIR [--list docs/pericont-files.txt | --list=docs/pericont-files.txt]
 //   OUTDIR: a folder outside the repository (it is created if it does not exist); the zip must not exist there. The list has one path per line, relative to the top folder of the repository; a path that ends
 //   with / is a folder and takes every file below it; a line "SOURCE => NAME" puts the file SOURCE into the package as NAME (the README of the package); lines that start with # and empty lines are skipped. A path that does not exist stops the tool. The zip is written by this tool (deflate, fixed time stamps, files
@@ -27,7 +27,7 @@ if (!fs.existsSync(listFile)) { console.error('the list file does not exist: ' +
 if (args.length !== 1) { console.error(USAGE); process.exit(2); }
 const outDir = path.resolve(args[0]), rel = path.relative(root, outDir);
 if (rel === '' || (!rel.startsWith('..') && !path.isAbsolute(rel))) { console.error('OUTDIR must be outside the repository: ' + outDir); process.exit(2); }
-const VERSION = '0.3.0', top = `pericont-${VERSION}`, zipFile = path.join(outDir, top + '.zip');
+const VERSION = '0.4.0', top = `pericont-${VERSION}`, zipFile = path.join(outDir, top + '.zip');
 if (fs.existsSync(zipFile)) { console.error('exists, not overwriting: ' + zipFile); process.exit(2); }
 
 const files = [];   // { src: the file in the repository, dest: its name in the package }

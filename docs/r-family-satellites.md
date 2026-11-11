@@ -100,7 +100,7 @@ the words (01)^9, (01)^11 and (01)^10. They were refined to 30 digits (closure o
 to 1.2e-5 (`data/satellite-check.json`). The first of them is 5e-9 in T* and 2e-5 in L* from t42 but it is a different orbit: the start values differ
 (the normalised starts by 0.099), t42 is unstable (largest multiplier 1.027) and this one is linearly stable (`tools/satellite-candidates.mjs`); it
 may lie near a bifurcation of t42 (not shown). The other zeros with k > 1 are not refined. That these three match nothing in the sources checked so
-far is all that can be said (the review of Li and Liao could not be read).
+far is all that can be said (the review of Li and Liao was read later, in part; it changed none of the numbers).
 
 **The upper branch beyond n = 12 (2026-10-10).** The members with nu = 1/n for n = 13 to 20 were followed on both branches, with the control direction
 and the limits as for n <= 12 (`data/branch-points/<n>-upper.json` and `<n>-lower.json`); then the upper branch from n = 21 up. The rules, the

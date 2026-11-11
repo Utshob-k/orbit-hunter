@@ -157,7 +157,7 @@ Found in an independent review of the code and in my own checks; what is fixed a
   orbits of `data/satellite-candidates.json` are not affected. A zero taken from `data/branch-points/` should be checked for its rotation (`turns`)
   before its T* and L* are used to more than four digits.
 
-## The ias route (version 0.3.0)
+## The ias route (version 0.4.0)
 
 What the route of [deep.md](deep.md) does not cover and what its results do not show. The default route (Dormand-Prince) is unchanged.
 

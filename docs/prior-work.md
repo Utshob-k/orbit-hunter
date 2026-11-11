@@ -15,7 +15,7 @@ This file holds a part of the former README, moved here on 2026-10-10 (only head
   finite angular momentum (New Astronomy 119, 102407) continues the figure-eight and IA-3 orbits from L = 0 (18 rows in a table, the rest on request).
   In it they write that
   work on L != 0 had so far concentrated on the figure-eight and BHH families. Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 (rotating
-  eights) I have not read.
+  eights) I read later (the second in part); they changed none of the numbers.
 
 So the continuation of satellite branches is not new as a method (Davoust and Broucke did it); what is done here is the systematic search for the
 places where branches leave the

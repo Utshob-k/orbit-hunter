@@ -5,14 +5,14 @@ This file holds a part of the former README, moved here on 2026-10-10 (only head
 ## Running it
 
 ```
-npm test                       # the tests of the default route (Dormand-Prince), about 20 seconds, node 18+ (the ias route was run only with v24.15.0; its tests are `npm run test:ias`)
+npm test                       # the tests of the default route (Dormand-Prince), about 10 seconds, written for node 18+ and run with v24.15.0 (no run with node 18 is recorded; the ias route was run only with v24.15.0; its tests are `npm run test:ias`)
 python -m http.server          # then open http://localhost:8000 (needs WebGPU)
 ```
 
 The page scans a region and draws the map. Click a light spot to refine it, or press "Deep scan" to run the whole pipeline.
 Both families are in the "family" menu.
 
-The ias route of version 0.3.0 (REBOUND IAS15, witnesses in multiple precision) has its own page with the commands and run times of the numbers it gives: [deep.md](deep.md).
+The ias route of version 0.4.0 (REBOUND IAS15, witnesses in multiple precision) has its own page with the commands and run times of the numbers it gives: [deep.md](deep.md).
 
 Useful scripts in `tools/` (all print what they do at the top; run them from the top folder of the repository, many read `data/...` by a relative
 path):

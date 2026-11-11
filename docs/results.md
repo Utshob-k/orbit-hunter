@@ -27,7 +27,7 @@ paper either. One of the 77 (T* = 11.652) lies on the continuous curve of relati
 the row's is 01^2): it is another member of that curve, 3.0 % and 17 % away from the row in T* and L*, so not a match (see Corrections, 2026-10-09).
 The T* = 33.745 orbit lies on the curve of Broucke's family R, as its member with rotation 2/9 of a turn (Corrections, 2026-10-10).
 For them I do not know whether they are known.
-Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 are not read; the rotating-eight branch of the figure-eight, which both papers are about, was traced and compared (the paragraph on the rotating figure-eights below). Šuvakov's gallery: see the table. 35 of the 77 have L* below the range of the CPC table, so
+Nauenberg 2001 and Chenciner, Fejoz and Montgomery 2005 were read later (the second in part) and changed none of the numbers; the rotating-eight branch of the figure-eight, which both papers are about, was traced and compared (the paragraph on the rotating figure-eights below). Šuvakov's gallery: see the table. 35 of the 77 have L* below the range of the CPC table, so
 for them "no match" with its satellites means "nothing to compare with".
 I do not know if any is new, and nothing here should be read as a discovery.
 
@@ -46,7 +46,7 @@ I do not know if any is new, and nothing here should be read as a discovery.
 | Šuvakov gallery (three-body.ipb.ac.rs, archived copies of 2019) | the 57 BHH satellite pages have numbers, the Hénon pages are not archived | checked on 2026-10-10: all 57 satellite pages are rows of the CPC list (tolerance 1e-8, fixed before the comparison); the Hénon detail pages are not archived, so there was nothing to compare there (Hénon 1976 itself was compared). Snapshot URLs, rows and distances, without the page values: `data/suvakov-gallery-check.json` |
 | Li, Tao, Li and Liao 2025, New Astronomy 119, 102407 (doi:10.1016/j.newast.2025.102407) | equal mass, finite L, but only the figure-eight and IA-3 orbits continued in L from L = 0; 18 rows in the table (10 figure-eight, 8 IA-3), 16 of them relatively periodic with rotation angle not 0 | read; not a catalogue; none of my orbits matches a row; the closest is 16.5 % away in (T*, L*), or 1.9 % if repeats are allowed, see below |
 | Broucke and Boggs 1975 (Celest. Mech. 11, 13); Broucke 1975 (Celest. Mech. 12, 439); Hadjidemetriou 1975 (12, 155); Hadjidemetriou and Christides 1975 (12, 175); Hénon 1976 (Celest. Mech. 13, 267) | the first, second and last have equal-mass orbits (5 of 27, 29 absolute periodic orbits of two families, one family of 46 orbits); the two Hadjidemetriou papers have none | transcribed from the ADS scans and compared, see the paragraph below; no hit |
-| Nauenberg 2001 (Phys. Lett. A 292, 93); Chenciner, Fejoz and Montgomery 2005 (Nonlinearity 18, 1407) | finite L, rotating eights | not read, not compared |
+| Nauenberg 2001 (Phys. Lett. A 292, 93); Chenciner, Fejoz and Montgomery 2005 (Nonlinearity 18, 1407) | finite L, rotating eights | read later (the second in part), not compared; reading them changed none of the numbers |
 | Janković, MSc thesis 2016 (Belgrade; copy provided by the author, cited with her permission, not public), the six orbits of the preliminary search mentioned in the CPC 2020 | finite L; four of the six at L = 1.5, not in the CPC tables | read on 2026-10-11, converted and tested (`tools/thesis-orbit-test.mjs`): k = 39 is a rotating member of an R satellite curve, k = 45 a repeat of an R orbit, k = 12, 58, 84 undecided, see `docs/r-family-satellites.md`; the numbers of its orbits are not reproduced here |
 
 So "77 match nothing" means: nothing among the 415 atlas entries (to 1e-5 in T* and L*, with the same number of alignments; repeats up to 12 times)
@@ -149,7 +149,7 @@ up to a rotation (one relative period: T/3; checked with four members of the tra
 17 of the arclength list) has such a return for any n up to 60; the smallest mismatch is 9e-2, a member of the branch has 1e-6 or less
 (`tools/choreo-test.mjs`, `data/choreo-test.json`). So none of my orbits, the 21 above L* = 0.41 included, is a member of this branch or a repeat of
 one. SN.19, SN.20 and SN.21 are atlas
-orbits; the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) on rotating eights are not read yet.
+orbits; the papers of Nauenberg (2001) and of Chenciner, Fejoz and Montgomery (2005) on rotating eights were read later (the second in part); they changed none of the numbers.
 
 **The family of the T* = 29.310 orbit (2026-10-10).** The family of relatively periodic orbits through the stable T* = 29.310 orbit of the arclength
 list was traced in both directions with `tools/family-follow.mjs` (`data/family-29.310-trace.json`: 115 stored points downwards, ending at a closest
